@@ -31,24 +31,31 @@ Thank you to my Supervisors at the University of South Australia: A/Prof Kearney
 ## Selected Figures
 Some figures from the thesis are below:
 
-### Overview flowchart:
+### Overview flowchart
 ![title](images/flowchart.png)
 
-### Network View Abstractions:
+### Network View Abstractions
 ![title](images/fig_4_35.png) 
 ![title](images/fig_4_43.png) 
 
-### Design Functions:
+### Design Functions
 ![title](images/fig_5_21.png) 
-### System Implementation:
+![title](images/fig_5_23.png)
+![title](images/fig_5_57.png) 
+![title](images/ospf.png) 
+
+### Configuration Generation
+![title](images/fig_6_3.png)
+
+### System Implementation
 ![title](images/fig_7_1.png) 
 ![title](images/fig_7_4.png)
-### Case Studies:
+### Case Studies
  ![title](images/fig_8_5.png) 
  ![title](images/fig_8_12.png)
   ![title](images/fig_8_26.png) 
   ![title](images/fig_8_29.png) 
   ![title](images/fig_8_41.png) 
-### Future Workflows:
+### Future Workflows
   ![title](images/fig_9_18.png) 
   

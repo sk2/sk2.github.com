@@ -28,6 +28,16 @@ Thank you to my Supervisors at the University of South Australia: A/Prof Kearney
 
 *We have incorporated this approach into an open-source tool, AutoNetkit, which has been tested on a range of industry-derived network topologies. The test cases show that the approach is extensible to a wide range of protocols and devices, and scalable up to the a size comparable to the core devices of the European academic network. Valid configurations for over a thousand devices can be generated in seconds. AutoNetkit has also been used in peer-reviewed demonstrations and as a component in tools used by network engineers in industry.*
 
+## Overview
+
+The general idea is to capture high-level intent at the "whiteboard" level, transform this into a number of abstract network views (representing topologies), and then compile these to device descriptions. These descriptions can be rendered using simple templates or pushed directly using NETCONF.
+
+![title](images/fig_3_3.png)
+
+
+![title](images/fig_4_11.png)
+
+
 ## Selected Figures
 Some figures from the thesis are below:
 

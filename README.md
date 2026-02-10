@@ -94,13 +94,24 @@ The theme contains a minimal test suite, to ensure a site with the theme would b
 ## Maintenance & Updates
 
 ### Updating Projects
-The list of projects in `projects.md` is automatically generated from project metadata in your development directories. To update it:
+The list of projects in `projects.md` can be generated from project metadata in your development directories. **Caution:** Manual edits for detail and style are often preferred over the raw script output.
 
 ```bash
 python3 update_projects.py
 ```
 
-This script scans `~/dev`, `~/PycharmProjects`, and `~/RustroverProjects` for projects containing `.planning/PROJECT.md` and updates the `projects.md` file accordingly.
+This script scans `~/dev`, `~/PycharmProjects`, and `~/RustroverProjects` for projects containing `.planning/PROJECT.md`. Always review changes against `projects_detailed_backup.md` to ensure no loss of depth.
+
+## Writing Style
+
+All prose on this site follows **The Elements of Style** (Strunk and White).
+
+- **Omit needless words.**
+- **Use the active voice.**
+- **Prefer the specific to the general.**
+- **Avoid a succession of loose sentences.**
+
+When adding or updating project descriptions, ensure they remain information-dense and strictly adhere to these principles.
 
 ### Building and Deploying
 The site is built using Jekyll. To build locally:

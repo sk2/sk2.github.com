@@ -85,8 +85,8 @@ def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
     overview_section = extract_section(content, "Overview") or extract_section(content, "What This Is")
     overview = overview_section or core_value or ""
 
-    # Clean up overview (first paragraph only)
-    overview = overview.split('\n\n')[0].strip()
+    # Clean up overview - keep more detail but strip excessive whitespace
+    overview = overview.strip()
 
     # Extract tech stack from constraints or context
     stack = []
@@ -241,21 +241,9 @@ def generate_project_section(project: ProjectInfo) -> str:
         lines.append(f"**Stack:** {stack_str}")
         lines.append("")
 
-    # Features
-    if project.features:
-        lines.append("**Features:**")
-        for feature in project.features[:5]:  # Limit to 5 features
-            lines.append(f"- {feature}")
-        lines.append("")
-
-    # Current status
+    # Current status (from STATE.md)
     if project.current_status:
-        lines.append(f"**Current:** {project.current_status}")
-        lines.append("")
-
-    # GitHub link if available
-    if project.github_url:
-        lines.append(f"[GitHub]({project.github_url})")
+        lines.append(f"**Current Status:** {project.current_status}")
         lines.append("")
 
     lines.append("---")

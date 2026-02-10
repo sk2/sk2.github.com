@@ -14,17 +14,20 @@ My work focuses on network automation tools, signal processing systems, and mult
 
 <span class="status-badge status-complete">Production Ready</span>
 
-Network topology visualization library for Rust with multiple layout algorithms.
+Library-first network topology visualization engine for Rust. Transforms network topologies into clear, information-dense visualizations using layout algorithms that minimize edge crossings, bundle related connections, and respect hierarchical structure.
 
-**Stack:** Rust, SVG/PNG/PDF export
+**Stack:** Rust, petgraph, SVG/PNG/PDF export
 
-**Features:**
-- Layouts: force-directed, Sugiyama hierarchical, radial tree, multi-layer
-- Edge bundling (FDEB), obstacle-aware routing
-- 582 tests
-- CLI and library API
+**Architecture:**
+- `petgraph`-backed graph wrapper with typed nodes/edges
+- Layout algorithms: force-directed, Sugiyama hierarchical, radial tree
+- Multi-layer support with isometric/starburst layouts
+- Edge refinement: force-directed edge bundling (FDEB), obstacle-aware routing
+- Customizable styling system with type-safe builder pattern
 
-All 10 phases complete.
+**Metrics:** 582 tests (554 unit + 28 integration), 17 example topologies, CLI tool
+
+All 10 phases complete. Production-ready for network topology visualization at scale.
 
 ---
 
@@ -32,16 +35,24 @@ All 10 phases complete.
 
 <span class="status-badge status-active">Active</span>
 
-Type-safe network topology modeling with Pydantic models and Rust graph engine (petgraph).
+Type-safe network topology modeling with Pydantic models backed by Rust graph engine (petgraph). Solves the "type safety vs performance" problem in network topology definition and analysis.
 
-**Stack:** Python, Rust (PyO3), Pydantic
+**Stack:** Python, Rust (PyO3), Pydantic, petgraph
+
+**Problem It Solves:**
+- Graph libraries (NetworkX, rustworkx): fast but untyped, easy to create invalid structures
+- Source-of-truth tools (NetBox, Nautobot): great for inventory but not designed for topology analysis
+- Custom solutions: full control but must build validation, storage, and query layers
 
 **Features:**
-- Type-safe device, interface, relationship models
-- Rust-backed graph operations
-- Multi-vendor config generation (11+ platforms)
-- Rich query API
-- Multi-layer modeling (physical, logical, protocol)
+- Type-safe device, interface, relationship models with Pydantic validation
+- Rust-backed graph operations for performance with Python ergonomics
+- Rich query API: chainable filters and traversals without manual graph walking
+- Multi-layer modeling: separate physical, logical, protocol views
+- Multi-vendor config generation for 11+ platforms
+- Optional API server, CLI, visualization
+
+**Use Cases:** Design validation before deployment, multi-vendor config generation, architecture compliance checking, SDN controller prototyping
 
 ---
 
@@ -49,17 +60,20 @@ Type-safe network topology modeling with Pydantic models and Rust graph engine (
 
 <span class="status-badge status-active">v1.1 Complete</span>
 
-Unified network simulation and visualization platform integrating ANK Pydantic, simulator, and visualization.
+Unified network simulation and visualization platform integrating ANK Pydantic models, simulator, and visualization. Modern alternative to GNS3 and Cisco Modeling Labs emphasizing declarative design and lightweight simulation over VM emulation.
 
 **Stack:** Python (FastAPI), React, TypeScript
 
-**Features:**
-- Declarative network design with Pydantic models
-- Lightweight simulation vs VM emulation
-- Integrated topology, config, behavior visualization
-- Guided tour, sample gallery, contextual help
+**Core Value:** Design, validate, and visualize network changes in one workflow without switching tools or manual integration.
 
-v1.1 (Feb 9, 2026): production-ready onboarding experience
+**v1.1 Features** (Feb 9, 2026):
+- Persistent help system: non-modal drawer, 16 contextual tips, route-aware visibility
+- Sample gallery: 5 offline topologies (2-node starter to 12-node spine-leaf DC)
+- Intelligent empty states: cause-specific, outcome preview pattern
+- Guided tour: 8-step workflow coverage with CSS-only spotlight
+- Production-ready onboarding: 101 files modified, 30 commits, 50/50 audit score
+
+**Workflow:** Declarative Pydantic models → lightweight simulation → integrated topology/config/behavior visualization
 
 ---
 
@@ -67,18 +81,24 @@ v1.1 (Feb 9, 2026): production-ready onboarding experience
 
 <span class="status-badge status-active">v0.10</span>
 
-Network topology generator with Python bindings.
+Network topology generator consolidating scattered generation logic into high-performance Rust library with Python bindings.
 
-**Stack:** Rust, Python (PyO3)
+**Stack:** Rust, Python (PyO3), maturin
 
-**Features:**
-- Data center: fat-tree, leaf-spine
-- WAN: ring, mesh, hierarchical
-- Random: Erdős-Rényi, Barabási-Albert, Watts-Strogatz
-- Three interfaces: CLI, Python API, config YAML
-- Structural validation, design pattern compliance
+**Topology Types:**
+- Data center: fat-tree, leaf-spine with realistic parameters
+- WAN/backbone: ring, mesh, hierarchical
+- Random graphs: Erdős-Rényi, Barabási-Albert, Watts-Strogatz
 
-v0.9 (Feb 5, 2026)
+**Interfaces:**
+- CLI: quick generation from command line
+- Python API: workflow integration
+- Config-driven: YAML for complex/repeatable setups
+- Parity tests ensure interface consistency
+
+**Validation:** Structural correctness, design pattern compliance, realistic parameters (bandwidth, latency, interface naming conventions)
+
+**Latest:** v0.9 User Interfaces (Feb 5, 2026) with mdBook documentation and doc-tests
 
 ---
 
@@ -86,13 +106,24 @@ v0.9 (Feb 5, 2026)
 
 <span class="status-badge status-active">Active</span>
 
-Deterministic network protocol simulator validating configurations before production.
+Deterministic tick-based network protocol simulator validating configurations before production deployment. Protocol-level fidelity with same-topology-same-results guarantees.
 
-**Stack:** Rust, Python bindings
+**Stack:** Rust, Python bindings (PyO3)
 
-**Protocols:** OSPF, IS-IS, BGP, MPLS/LDP, BFD, GRE, VRF, ICMP, ARP
+**Protocols Implemented:**
+- Routing: OSPF (point-to-point, Area 0, LSA Types 1/2, Dijkstra SPF), IS-IS (L1/L2 hierarchical, LSP flooding), BGP (iBGP/eBGP, communities, route propagation)
+- MPLS: LDP label distribution, label push/swap/pop operations, MPLS OAM
+- Resilience: BFD (bidirectional forwarding detection, async mode)
+- Tunneling: GRE encapsulation, VRF isolation (L3VPN foundations)
+- Layer 2/3: ARP request/reply, ICMP echo (ping), Time Exceeded (traceroute)
 
-**Design:** Protocol-level fidelity, deterministic execution, 100+ device topologies in seconds, JSON output for CI/CD
+**Architecture:**
+- Tick-based execution: deterministic, reproducible simulations (~1ms per tick)
+- RIB/FIB separation: mirrors real router behavior
+- Convergence detection: automatically detects network stabilization
+- Scripted commands: diagnostics at specific ticks or after convergence
+
+**Performance:** Simulates 100+ device topologies in seconds. JSON output for CI/CD integration.
 
 ---
 
@@ -102,19 +133,23 @@ Deterministic network protocol simulator validating configurations before produc
 
 <span class="status-badge status-planning">Planning</span>
 
-Astrophotography control system for Linux devices (Raspberry Pi) attached to telescope setups.
+Open-source astrophotography control system for Linux devices (Raspberry Pi) attached to telescope setups. Alternative to proprietary systems like ZWO ASIAir.
 
 **Stack:** Rust
 
-**Goals:**
-- Robust imaging, guiding, mount control
-- Extensible platform for custom logic
-- Smart features: cloud handling, adaptive gain/exposure, data quality analysis
-- Hardware agnostic via INDI/ASCOM Alpaca
+**Mission:**
+- Core competence: rock-solid imaging, guiding, mount control
+- Extensibility: inject custom logic ("Stop imaging if HFR degrades by 20%")
+- Intelligence: automated cloud handling, adaptive gain/exposure, real-time data quality analysis
+- Hardware agnostic: wide hardware support via INDI or ASCOM Alpaca
 
-**Design:** Headless system service, web UI (iPad/laptop/phone), terminal TUI for SSH, real-time image/status push
+**Design:**
+- Headless: runs as system service on telescope computer
+- Remote interface: modern web UI (iPad/laptop/phone browser), no VNC required
+- Terminal TUI: robust local debugging and power-user control via SSH
+- Reactive: real-time push of images and status to client
 
-Alternative to proprietary systems like ZWO ASIAir.
+**Why Build This:** Proprietary systems restrict hardware choices and feature innovation. Full Windows PCs (NINA) require more power/maintenance than headless embedded binary. Advanced users need specific triggers (weather, star safety, custom sequences) that simple appliances don't offer.
 
 ---
 
@@ -122,17 +157,26 @@ Alternative to proprietary systems like ZWO ASIAir.
 
 <span class="status-badge status-active">Phase 4/6 (88%)</span>
 
-Translates HealthyPi hardware biometric data (ECG, PPG, EDA, EEG, IMU) into insights.
+Modular health monitoring ecosystem translating HealthyPi hardware biometric data (ECG, PPG, EDA, EEG, IMU) into insights through agentic intelligence.
 
-**Stack:** Python, NATS, PyArrow, NeuroKit2, NumPy
+**Stack:** Python, NATS, PyArrow/Parquet, NeuroKit2, NumPy, SciPy
 
-**Features:**
-- Virtual Patient simulator with NeuroKit2 signal generation
-- HRV analysis (time/frequency domain), EDA stress detection
-- 286 tests, 6 physiological state scenarios
-- NATS integration with Multi-Agent framework
+**Architecture:**
+- Standardized data models: multi-modal biometric data with JSON/Parquet serialization
+- Virtual Patient simulator: NeuroKit2-based physiological signal generation for hardware-free development
+- Real-time analysis engine: HRV (time/frequency domain), EDA stress detection, activity classification
+- NATS integration: publishes raw signals and processed metrics to agent-framework message bus
 
-**Status:** Foundation ✅ | Virtual Patient ✅ | Analysis Engine ✅ | Agent Integration 🔄
+**Technical Depth:**
+- 286 comprehensive tests validating signal processing and analysis algorithms
+- 6 physiological states with research-backed parameter ranges (WESAD dataset)
+- Frequency-domain HRV: 4 Hz RR resampling, Hann window, rFFT PSD with LF/HF band integration
+- EDA tonic/phasic decomposition using SciPy primitives
+- Modular architecture: agents consume health trends and metrics
+
+**Hardware:** HealthyPi 6 (Pi HAT), HealthyPi Move (wearable)
+
+**Progress:** Foundation ✅ | Virtual Patient ✅ | Analysis Engine ✅ | Agent Integration 🔄
 
 ---
 
@@ -140,15 +184,38 @@ Translates HealthyPi hardware biometric data (ECG, PPG, EDA, EEG, IMU) into insi
 
 <span class="status-badge status-planning">Planning</span>
 
-Autonomous radio spectrum monitoring with ML-based signal classification.
+Autonomous distributed SIGINT system monitoring radio spectrum with ML-based signal classification and spatial RF mapping. Transforms raw RF data into actionable "Signal Census" through automated detection and distributed acquisition.
 
-**Stack:** Python, Rust, Swift, ML
+**Stack:** Python, Rust (planned), Swift (visualization), ML frameworks
 
-**Hardware:**
-- Edge: Airspy R2, HF Discovery, KrakenSDR (5-ch DoA), RTL-SDR
-- Core: Mac mini M-Series (ML inference, visualization)
+**Architecture:**
+- Edge: Raspberry Pi 4/5 with multiple SDRs streaming IQ data
+- Core: Mac mini M-Series for ML inference, storage, visualization (leveraging Neural Engine)
+- Network: low-latency local network for IQ streaming
 
-**Features:** Real-time waterfall, modulation detection, satellite tracking, ADS-B integration
+**Hardware Configuration:**
+
+*SDRs:*
+- Airspy R2 (primary wideband scanner)
+- Airspy HF Discovery (HF/LF coverage)
+- KrakenSDR (5-channel phase-coherent for Direction of Arrival)
+- RTL-SDR (utility/ADS-B reception)
+
+*Antennas:*
+- TA1 Turnstile (satellite/VHF)
+- Diamond D-130 Discone (broadband scanner)
+- MLA-30 Loop (LF/HF)
+- Mini-Kits LNA for satellite reception
+
+**Planned Features:**
+- Real-time waterfall visualization with multi-SDR switching
+- Automated modulation detection with SigIDWiki pattern matching
+- Autonomous frequency band scanning with persistent Signal Census database
+- Automatic NOAA/Meteor satellite recording based on orbital calculations
+- KrakenSDR Direction of Arrival for spatial RF mapping
+- ADS-B aircraft tracking on unified geographical display
+
+**Philosophy:** Edge-first architecture, sustainable always-on monitoring, minimal manual intervention
 
 ---
 
@@ -158,17 +225,24 @@ Autonomous radio spectrum monitoring with ML-based signal classification.
 
 <span class="status-badge status-active">Active Development</span>
 
-Multi-agent system where specialized agents run in isolated containers and communicate through a message broker.
+Multi-agent system where specialized agents run in isolated containers and communicate through a message broker. Zero-trust architecture: agents treated as potentially compromised.
 
-**Stack:** Python, Docker, NATS, Swift, OpenTelemetry
+**Stack:** Python, Docker, NATS, Swift (macOS collectors), OpenTelemetry
+
+**Security Model:**
+- Containerized isolation: each agent runs with seccomp deny-by-default, read-only filesystem, no-new-privileges
+- NATS broker: TLS 1.3, per-subject ACLs, JetStream for durable messaging
+- Capability-based authorization: short-lived signed tokens per action with one-time nonce validation
+- Complete audit trail: all agent actions, message flows, security events logged to SQLite WAL
+- Per-agent network policies: sensitive agents get no internet, API agents get scoped access only
 
 **Architecture:**
-- Containerized agents with seccomp, read-only filesystem, no-new-privileges
-- NATS broker with TLS 1.3 and per-subject ACLs
-- Short-lived capability tokens with nonce validation
-- SQLite audit trail and OpenTelemetry traces
+- Orchestrator: LLM planning (GPT-4/Claude), workflow DAG execution, NATS dispatch
+- Agents: lightweight and deterministic; orchestrator does reasoning
+- macOS collectors: Swift binaries for HealthKit/EventKit (host-only integrations)
+- Observability: structured logs with correlation IDs, OpenTelemetry traces to Jaeger
 
-**Agents:** health monitoring (HealthKit), home automation (Hue), data aggregation (calendar/weather/RSS), backup integrity
+**Current Agents:** health monitoring (HealthKit), home automation (Hue), data aggregation (calendar/weather/RSS), screen time tracking, backup integrity monitoring, financial summaries
 
 [GitHub](https://github.com/sk2/multi-agent-assistant)
 
@@ -178,11 +252,20 @@ Multi-agent system where specialized agents run in isolated containers and commu
 
 <span class="status-badge status-planning">Planning</span>
 
-SwiftUI training app connecting KICKR Core to AI-driven workout logic via NATS.
+Native SwiftUI training app bridging KICKR Core smart trainer with AI-driven workout logic via NATS. Demonstrates "Agent Bridge" pattern for real-time hardware control through message bus coordination.
 
 **Stack:** SwiftUI, SceneKit, FTMS (BLE), NATS
 
-**Design:** Low-latency BLE control, agent-coordinated resistance, 60fps terrain on Apple TV, Apple Watch heart rate integration
+**Architecture:**
+- Low-latency BLE resistance control following FTMS (Fitness Machine Service) standards
+- Real-time telemetry and commands via NATS Agent Bridge
+- Smooth 60fps infinite terrain rendering on Apple TV with SceneKit
+- Apple Watch heart rate relay through iOS/tvOS lifecycle-aware NATS connection
+- NATS connection handles iOS/tvOS backgrounding and lifecycle events
+
+**Target Experience:** Dynamic AI-led training sessions where agents adjust resistance based on real-time performance data, integrated workout planning, and physiological metrics from Apple Health ecosystem.
+
+**Platforms:** Native for iPadOS and tvOS
 
 ---
 
@@ -192,21 +275,24 @@ SwiftUI training app connecting KICKR Core to AI-driven workout logic via NATS.
 
 <span class="status-badge status-complete">Legacy (PhD 2017)</span>
 
-Network configuration automation tool transforming high-level specifications into device configurations.
+Network configuration automation tool transforming high-level specifications into device configurations using compiler-based approach with multi-stage transformations.
 
 **Stack:** Python
 
+**Architecture:** Specification abstraction → intermediate network-wide state representation → low-level device configuration → template assembly
+
 **Impact:**
-- Used in Cisco's VIRL project
-- [GitHub](https://github.com/sk2/autonetkit)
-- [PyCon AU 2013 talk](https://www.youtube.com/watch?v=EGK5jjyUBCQ)
+- Used in Cisco's VIRL project for topology configuration generation
+- Open source: [github.com/sk2/autonetkit](https://github.com/sk2/autonetkit)
+- Presented at PyCon AU 2013: [YouTube recording](https://www.youtube.com/watch?v=EGK5jjyUBCQ)
+- Tested on European academic network scale: valid configs for 1000+ devices generated in seconds
 
-Now superseded by ank-pydantic.
+**Research Contribution:** Demonstrated extensibility to wide range of protocols (OSPF, IS-IS, BGP) and devices, scalability to core-network sizes, and practical utility in industry tools.
 
-Thesis: [Abstractions and Transformations for Automated Data Network Configuration](thesis)
+Now superseded by ank-pydantic (modern Pydantic + Rust implementation with type safety and performance).
+
+**Full thesis:** [Abstractions and Transformations for Automated Data Network Configuration](thesis)
 
 ---
 
-## Development Approach
-
-I plan work in `.planning/` directories with phase-based execution. I verify completeness with formal documents. I use NATS for message coordination. I write comprehensive tests. I document architecture decisions in PROJECT.md and STATE.md.
+**Development:** [Philosophy and approach](development)

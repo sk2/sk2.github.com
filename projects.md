@@ -2,13 +2,15 @@
 layout: default
 ---
 
-# Current Projects
+# Projects
 
-I'm currently working on several projects that explore the intersection of AI agents, security-first architectures, and real-time signal processing. Each project demonstrates production-ready patterns for deploying intelligent systems in security-critical or performance-sensitive environments.
+My work spans **AI agents**, **network engineering**, and **signal processing**—with emphasis on production-ready implementations that demonstrate security-first architectures and systematic development practices.
 
 ---
 
-## Secure Multi-Agent Personal Assistant
+## AI & Agents
+
+### Secure Multi-Agent Personal Assistant
 
 <span class="status-badge status-active">Active Development</span>
 
@@ -16,151 +18,187 @@ A security-first multi-agent system that coordinates specialized containerized a
 
 **Tech Stack:** Python · Docker · NATS · Swift · OpenTelemetry
 
-### Overview
-
-Each agent runs in strict isolation with minimal privileges and communicates only through validated message queues. The orchestrator uses cloud LLM reasoning (GPT-4/Claude) for planning while agents remain lightweight and deterministic. Complete isolation ensures that compromise of one agent cannot cascade to others or the orchestrator.
-
-### Key Features
-
-- **Zero-Trust Architecture**: Agents treated as potentially compromised; runtime constraints enforced through containers, network policies, and capability tokens
-- **Message Broker Communication**: NATS with TLS 1.3, per-subject ACLs, and JetStream for durable messaging
-- **Capability-Based Authorization**: Short-lived, signed tokens per action with one-time nonce validation
-- **Complete Audit Trail**: All agent actions, message flows, and security events logged to SQLite WAL
-- **Containerized Isolation**: Each agent runs with seccomp deny-by-default, read-only filesystem, and no-new-privileges
-- **Observability**: Structured logging with correlation IDs and OpenTelemetry traces exported to Jaeger
-
-### Current Agents
-
-- Health monitoring (Apple HealthKit integration)
-- Home automation (Hue lights)
-- Data aggregation (calendar, weather, RSS)
-- Screen Time tracking
-- Backup integrity monitoring
-- Financial summaries
+**Key Features:**
+- Zero-trust architecture with capability-based authorization
+- NATS message broker with TLS 1.3 and per-subject ACLs
+- Containerized isolation (seccomp, read-only filesystem, no-new-privileges)
+- Complete audit trail and OpenTelemetry observability
+- Agents: health monitoring, home automation, data aggregation, backup integrity
 
 [View on GitHub →](https://github.com/sk2/multi-agent-assistant)
 
 ---
 
-## HealthyPi Ecosystem
+### HealthyPi Ecosystem
 
 <span class="status-badge status-active">Phase 4/6 (88% complete)</span>
 
-A modular, agent-aware health monitoring ecosystem that translates raw biometric data from HealthyPi hardware into actionable insights and automated interventions.
+Modular health monitoring ecosystem translating HealthyPi hardware biometric data into actionable insights through agentic intelligence.
 
 **Tech Stack:** Python · NATS · PyArrow · NeuroKit2 · NumPy
 
-### Overview
+**Key Features:**
+- Multi-modal biometric data models (ECG, PPG, EDA, EEG, IMU)
+- Virtual Patient simulator with NeuroKit2-based signal generation
+- Real-time HRV analysis (time/frequency domain), EDA stress detection
+- 286 comprehensive tests, 6 physiological state scenarios
+- Integrates with Multi-Agent framework via NATS
 
-Bridges the gap between high-fidelity biometric hardware (HealthyPi 6 Pi HAT and HealthyPi Move wearable) and daily health management through synthetic data simulation, advanced analysis, and agentic intelligence. Integrates with the Multi-Agent Personal Assistant framework using NATS for communication.
-
-### Key Features
-
-- **Standardized Data Models**: Multi-modal biometric data (ECG, PPG, EDA, EEG, IMU) with JSON/Parquet serialization
-- **Virtual Patient Simulator**: Hardware-free development with NeuroKit2-based physiological signal generation
-- **Real-Time Analysis Engine**: HRV analysis (time/frequency domain), EDA stress detection, activity classification
-- **NATS Integration**: Publishes both raw signals and processed metrics to agent-framework message bus
-- **Scenario Framework**: Configurable physiological states (resting, stress, sleep) with patient personas
-
-### Technical Highlights
-
-- 286 comprehensive tests validating signal processing and analysis algorithms
-- Supports 6 physiological states with research-backed parameter ranges (WESAD dataset)
-- Frequency-domain HRV with proper 4 Hz RR resampling and Welch PSD estimation
-- EDA tonic/phasic decomposition using SciPy primitives
-- Modular architecture allowing agents to consume health trends and metrics
-
-### Current Progress
-
-- ✅ Phase 1: Foundation & Data Models (complete)
-- ✅ Phase 2: Virtual Patient Simulator (complete)
-- ✅ Phase 3: Core Analysis Engine (complete)
-- 🔄 Phase 4: Agentic Framework Integration (in progress)
+**Progress:** Foundation ✅ | Virtual Patient ✅ | Analysis Engine ✅ | Agent Integration 🔄
 
 ---
 
-## Project Spectra
+### Project Spectra
 
 <span class="status-badge status-planning">Phase 1 Planning</span>
 
-An autonomous, distributed SIGINT system that monitors the radio spectrum, identifies modulations using ML, tracks aircraft and satellites, and maintains a "Signal Census" of all RF activity.
+Autonomous distributed SIGINT system monitoring radio spectrum with ML-based signal classification and spatial RF mapping.
 
 **Tech Stack:** Python · Rust · Swift · ML Frameworks
 
-### Overview
-
-Transforms raw radio spectrum data into an actionable "Signal Census" through automated detection, ML classification, and distributed acquisition. Designed as an edge-to-core architecture with Raspberry Pi SDR servers streaming to Mac mini for processing and visualization.
-
-### Hardware Configuration
-
-**Edge SDRs (Raspberry Pi 4/5):**
-- Airspy R2 (primary wideband scanner)
-- Airspy HF Discovery (HF/LF coverage)
-- KrakenSDR (5-channel phase-coherent for Direction of Arrival)
-- RTL-SDR (utility/ADS-B reception)
-
-**Antennas:**
-- TA1 Turnstile (satellite/VHF)
-- Diamond D-130 Discone (broadband scanner)
-- MLA-30 Loop (LF/HF)
-
-**Core Processing:**
-- Mac mini M-Series (ML inference, storage, visualization)
-- Mini-Kits LNA for satellite reception
-
-### Planned Features
-
-- **Real-Time Streaming**: High-performance waterfall visualization with multi-SDR switching
-- **Automated Classification**: ML-based modulation detection with SigIDWiki pattern matching
-- **Autonomous Scanning**: Designated frequency bands with persistent Signal Census database
-- **Satellite Tracking**: Automatic NOAA/Meteor recording based on orbital pass calculations
-- **Direction Finding**: KrakenSDR integration for spatial RF mapping
-- **ADS-B Integration**: Aircraft tracking on unified geographical display
-
-### Development Philosophy
-
-Edge-first architecture leveraging Raspberry Pi for acquisition and Mac Neural Engine for ML workloads. Focus on sustainable, always-on spectrum monitoring with minimal manual intervention.
+**Architecture:**
+- Edge SDRs: Airspy R2, HF Discovery, KrakenSDR (5-ch DoA), RTL-SDR
+- Core: Mac mini M-Series for ML inference and visualization
+- Features: Real-time waterfall, automated modulation detection, satellite tracking, ADS-B integration
 
 ---
 
-## Cycle Agent
+### Cycle Agent
 
 <span class="status-badge status-planning">Planning</span>
 
-A native SwiftUI training application for iPad and Apple TV that bridges professional cycling hardware (KICKR Core) with dynamic AI-driven workout logic via NATS, visualized in a high-performance SceneKit environment.
+Native SwiftUI training app bridging KICKR Core with AI-driven workout logic via NATS.
 
 **Tech Stack:** SwiftUI · SceneKit · FTMS (BLE) · NATS
 
-### Overview
-
-Brings the Multi-Agent Personal Assistant architecture to indoor cycling by connecting KICKR Core smart trainer to agent-driven workout orchestration. Demonstrates "Agent Bridge" pattern for real-time hardware control through message bus coordination.
-
-### Key Design Goals
-
-- **Low-Latency Control**: Direct BLE resistance control of KICKR Core following FTMS standards
-- **Agent Coordination**: Real-time telemetry and commands via NATS Agent Bridge
-- **High-Performance Visualization**: Smooth 60fps infinite terrain rendering on Apple TV
-- **Apple Watch Integration**: Heart rate relay through iOS/tvOS lifecycle-aware NATS connection
-
-### Technical Architecture
-
-- Native SwiftUI/Swift for tvOS and iPadOS
-- Bluetooth communication using Fitness Machine Service (FTMS) standards
-- NATS connection handling iOS/tvOS backgrounding and lifecycle events
-- SceneKit for procedural terrain generation and camera following
-
-### Target Experience
-
-Dynamic, AI-led training sessions where agents adjust resistance based on real-time performance data, integrated workout planning, and physiological metrics from Apple Health ecosystem.
+**Design:** Low-latency BLE control, agent-coordinated resistance adjustment, 60fps terrain rendering on Apple TV, Apple Watch heart rate integration.
 
 ---
 
-## Development Workflow
+## Network Engineering
 
-My current workflow emphasizes **modular architecture**, **security-first design**, and **systematic development** through the GSD (Get Stuff Done) methodology:
+### NetVis
 
-- **Planning-First**: Each project maintains `.planning/` directories with structured roadmaps, requirements, and phase plans
-- **Verification Loops**: Formal verification documents confirm phase completion against original goals
-- **Message Bus Architecture**: NATS as universal communication layer enables agent coordination across projects
-- **Test-Driven**: Comprehensive test suites validate correctness (286 tests in HealthyPi, security validation in multi-agent)
-- **Documentation as Design**: Architecture decisions captured in PROJECT.md and decision logs in STATE.md
+<span class="status-badge status-complete">Production Ready</span>
+
+Library-first network topology visualization engine for Rust with multiple layout algorithms and export formats.
+
+**Tech Stack:** Rust · SVG/PNG/PDF export
+
+**Features:**
+- Layout algorithms: force-directed, Sugiyama hierarchical, radial tree, multi-layer
+- Edge bundling (FDEB) and obstacle-aware routing
+- 582 tests (554 unit + 28 integration)
+- CLI tool and library API
+
+All 10 phases complete. Production-ready for network topology visualization at scale.
+
+---
+
+### ank-pydantic
+
+<span class="status-badge status-active">Active Development</span>
+
+Network topology modeling with type-safe Pydantic models backed by Rust graph engine (petgraph).
+
+**Tech Stack:** Python · Rust (PyO3) · Pydantic
+
+**Features:**
+- Type-safe device, interface, and relationship models
+- Rust-backed graph operations for performance
+- Multi-vendor configuration generation (11+ platforms)
+- Rich query API for topology analysis
+- Multi-layer modeling (physical, logical, protocol views)
+
+Solves the "type safety vs performance" problem in network topology definition and analysis.
+
+---
+
+### ANK Workbench
+
+<span class="status-badge status-active">v1.1 Complete</span>
+
+Unified network simulation and visualization platform integrating ANK Pydantic models, simulator, and visualization into seamless workflow.
+
+**Tech Stack:** Python (FastAPI) · React · TypeScript
+
+**Features:**
+- Declarative network design with Pydantic models
+- Lightweight simulation (vs heavy VM emulation like GNS3)
+- Integrated topology, config state, and behavior visualization
+- Guided tour system, sample gallery, contextual help
+- Modern web UI with programmatic API access
+
+**Latest:** v1.1 UX Polish + Onboarding (Feb 9, 2026) - production-ready first-run experience.
+
+---
+
+### TopoGen
+
+<span class="status-badge status-active">v0.10 Gap Closure</span>
+
+Network topology generator consolidating scattered generation logic into high-performance Rust library with Python bindings.
+
+**Tech Stack:** Rust · Python (PyO3)
+
+**Features:**
+- Data center: fat-tree, leaf-spine
+- WAN/backbone: ring, mesh, hierarchical
+- Random graphs: Erdős-Rényi, Barabási-Albert, Watts-Strogatz
+- Three interfaces: CLI, Python API, config-driven YAML
+- Structural validation and design pattern compliance
+- Realistic parameters (bandwidth, latency, interface naming)
+
+**Latest:** v0.9 User Interfaces (Feb 5, 2026)
+
+---
+
+### netsim (Network Simulator)
+
+<span class="status-badge status-active">Active Development</span>
+
+Deterministic tick-based network protocol simulator validating configurations at scale before production deployment.
+
+**Tech Stack:** Rust · Python bindings
+
+**Protocols:**
+- Routing: OSPF, IS-IS, BGP
+- MPLS: LDP label distribution, LFIB operations
+- Resilience: BFD fast failure detection
+- Tunneling: GRE, VRF isolation
+- Diagnostics: ICMP (ping/traceroute), ARP
+
+**Design:** Protocol-level fidelity with deterministic execution. Simulate 100+ device topologies in seconds. JSON output for CI/CD integration.
+
+---
+
+## Legacy Projects
+
+### AutoNetkit
+
+<span class="status-badge status-complete">Legacy (PhD 2017)</span>
+
+Original network configuration automation tool from PhD research. Transforms high-level network specifications into device configurations using compiler-based approach.
+
+**Tech Stack:** Python
+
+**Impact:**
+- Used in Cisco's VIRL project
+- Open source on [GitHub](https://github.com/sk2/autonetkit)
+- Presented at PyCon AU 2013 ([YouTube](https://www.youtube.com/watch?v=EGK5jjyUBCQ))
+
+Now superseded by ank-pydantic (modern Pydantic + Rust implementation).
+
+Full thesis available: [Abstractions and Transformations for Automated Data Network Configuration](thesis)
+
+---
+
+## Development Philosophy
+
+My workflow emphasizes **modular architecture**, **security-first design**, and **systematic development**:
+
+- **Planning-First**: Structured roadmaps in `.planning/` directories with phase-based execution
+- **Verification Loops**: Formal verification documents confirm goal achievement
+- **Message Bus Architecture**: NATS enables agent coordination across projects
+- **Test-Driven**: Comprehensive test suites (286 tests in HealthyPi, 582 in netvis)
+- **Documentation as Design**: Architecture decisions captured in PROJECT.md and STATE.md

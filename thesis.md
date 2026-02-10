@@ -70,5 +70,4 @@ Some figures from the thesis are below:
   ![title](images/fig_8_29.png) 
   ![title](images/fig_8_41.png) 
 ### Future Workflows
-  ![title](images/fig_9_18.png) 
-  
+  ![title](images/fig_9_18.png)

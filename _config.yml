@@ -1,5 +1,20 @@
 title: Simon Knight
-description: Simon Knight
+description: Software engineer and researcher focused on intelligent systems, multi-agent architectures, and network automation
+url: https://sk2.github.io
 show_downloads: false
 google_analytics:
-theme: jekyll-theme-minimal
+
+# Build settings
+markdown: kramdown
+kramdown:
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    default_lang: python
+
+# Exclude from build
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - LICENSE
+  - README.md
+  - script/

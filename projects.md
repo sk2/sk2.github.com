@@ -133,9 +133,18 @@ SwiftUI training app connecting KICKR Core to AI-driven workout logic via NATS.
 ### [AutoNetkit](projects/autonetkit)
 <span class="status-badge status-complete">PhD 2017</span>
 
-Network configuration automation tool from PhD research. Used in Cisco's VIRL project.
+Network configuration automation tool from PhD research.
 
 **Stack:** Python
+
+---
+
+### [Internet Topology Zoo](http://www.topology-zoo.org/)
+<span class="status-badge status-complete">Research Dataset</span>
+
+Collection of 261 real-world network topologies from service providers, research networks, and CDNs. Widely used dataset for networking research with 300+ citations.
+
+**Links:** [Website](http://www.topology-zoo.org/) · [Dataset](http://www.topology-zoo.org/dataset.html)
 
 ---
 

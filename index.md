@@ -53,18 +53,6 @@ I completed my PhD at the University of South Australia in 2017. My thesis, *Abs
 
 The work produced AutoNetkit, an open-source Python tool for network configuration automation. I presented this work at PyCon AU 2013 ([recording](https://www.youtube.com/watch?v=EGK5jjyUBCQ)).
 
-## Notable Projects
-
-### Internet Topology Zoo
-
-A collection of 261 network topologies from real-world service providers, research networks, and content delivery networks. The dataset includes topology diagrams, GraphML files, and metadata for each network.
-
-Widely used in networking research for testing protocols, algorithms, and simulation tools. The dataset enables reproducible research with real-world network structures.
-
-- [Website](http://www.topology-zoo.org/)
-- [Dataset](http://www.topology-zoo.org/dataset.html)
-- Over 300 citations in academic literature
-
 ## Research Interests
 
 - Network automation and high-level configuration abstractions

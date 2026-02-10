@@ -4,7 +4,7 @@ layout: default
 
 # Projects
 
-My work focuses on network automation, signal processing, and multi-agent systems.
+Current projects span network automation, signal processing, geospatial visualization, and multi-agent systems.
 
 ---
 

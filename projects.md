@@ -55,6 +55,17 @@ Deterministic network protocol simulator. Implements OSPF, IS-IS, BGP, MPLS/LDP,
 
 ---
 
+## Geospatial & Visualization
+
+### [Vector Tile Server](projects/tileserver)
+<span class="status-badge status-planning">Planning</span>
+
+High-performance MVT server for dynamic vector tiles from large datasets. Datashader-like aggregation with sub-second latency.
+
+**Stack:** Python (FastAPI) · Rust (PyO3) · Polars · Kepler.gl
+
+---
+
 ## Signal Processing & Hardware
 
 ### [Astro](projects/astro)

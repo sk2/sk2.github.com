@@ -119,7 +119,27 @@ Each agent runs in isolated Docker container:
 
 ## Agent Catalog
 
+The system includes 35+ specialized agents organized into 8 functional categories. Each agent runs in its own isolated container with specific network policies and security boundaries.
+
+### Quick Reference
+
+| Category | Agents | Purpose |
+|----------|--------|---------|
+| **Health & Wellness** | 3 agents | Biometric monitoring, posture tracking, health interventions |
+| **Home Automation** | 3 agents | Smart lighting, IoT devices, presence detection |
+| **Productivity & Context** | 4 agents | Screen time, ambient audio, workflow awareness |
+| **Data & Information** | 4 agents | Cross-service queries, knowledge recall, package tracking |
+| **Financial & Productivity** | 3 agents | Transaction summaries, habit tracking, finance data |
+| **System & Infrastructure** | 3 agents | Backup monitoring, updates, agent load balancing |
+| **Communication** | 3 agents | Messaging gateway, push notifications, mobile data |
+| **Security & Privacy** | 2 agents | Anomaly detection, secret scanning, audit monitoring |
+| **Native Apps & UI** | 3 agents | Menu bar app, mobile context, CLI integration |
+
+---
+
 ### Health & Wellness Agents
+
+Biometric monitoring and health interventions integrated with Apple Health and HealthyPi ecosystem.
 
 **Health Monitoring Agent**
 - **Purpose:** Tracks Apple Health metrics and integrates with HealthyPi ecosystem
@@ -150,7 +170,11 @@ Each agent runs in isolated Docker container:
 - **Network Policy:** Isolated (local processing only)
 - **Privacy:** All processing local, no data leaves container
 
+---
+
 ### Home Automation Agents
+
+Control smart home devices with security-conscious integration. All agents use local APIs where possible to minimize cloud dependencies.
 
 **Hue Controller Agent**
 - **Purpose:** Controls Philips Hue smart lighting system
@@ -185,7 +209,11 @@ Each agent runs in isolated Docker container:
   - Security: Alert if unknown BLE devices detected
 - **Network Policy:** Isolated (local Bluetooth only)
 
+---
+
 ### Productivity & Context Agents
+
+Track digital usage and provide workflow awareness without compromising privacy. All processing happens locally with no cloud uploads.
 
 **Screen Time Agent**
 - **Purpose:** Tracks macOS digital usage and focus patterns
@@ -229,7 +257,11 @@ Each agent runs in isolated Docker container:
   - Integration with Health Agent for stress response
 - **Network Policy:** Isolated
 
+---
+
 ### Data & Information Agents
+
+Query multiple services and correlate information across domains. Designed to provide unified access without direct external API exposure.
 
 **Data Aggregation Agent**
 - **Purpose:** Queries multiple services and correlates information
@@ -270,7 +302,11 @@ Each agent runs in isolated Docker container:
   - Generates progress reports
 - **Network Policy:** Isolated (NATS only)
 
+---
+
 ### Financial & Productivity Agents
+
+Financial tracking and habit monitoring with pre-approval workflows for sensitive operations.
 
 **Daily Burn Agent**
 - **Purpose:** Summarizes financial transactions and spending
@@ -305,7 +341,11 @@ Each agent runs in isolated Docker container:
   - Visualizes long-term trends
 - **Network Policy:** Isolated (NATS only)
 
+---
+
 ### System & Infrastructure Agents
+
+Monitor system health and manage infrastructure across distributed nodes. Focus on reliability and automated recovery.
 
 **Backup Integrity Agent**
 - **Purpose:** Monitors local backup systems
@@ -337,7 +377,11 @@ Each agent runs in isolated Docker container:
   - Handles failover if node goes offline
 - **Network Policy:** Scoped LAN (NATS and Docker API)
 
+---
+
 ### Communication Agents
+
+Centralized gateway for external communication services. Reduces attack surface by consolidating internet-facing integrations.
 
 **Unified Notification Agent**
 - **Purpose:** Secure gateway for iMessage/Telegram/Slack
@@ -372,7 +416,11 @@ Each agent runs in isolated Docker container:
 - **Network Policy:** Scoped LAN (mobile devices on local network)
 - **Security:** mTLS client authentication required
 
+---
+
 ### Security & Privacy Agents
+
+Continuous monitoring of agent behavior and data handling. Automated threat detection and privacy compliance.
 
 **Audit Anomaly Agent**
 - **Purpose:** Security monitoring of all agent activity
@@ -397,7 +445,11 @@ Each agent runs in isolated Docker container:
   - Redaction suggestions
 - **Network Policy:** Isolated (local log files only)
 
+---
+
 ### Native Apps & UI Agents
+
+Native applications for direct user interaction and mobile context gathering. SwiftUI apps with NATS integration.
 
 **Mac Menu Bar App**
 - **Purpose:** Native macOS status and approval interface

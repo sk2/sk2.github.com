@@ -95,6 +95,17 @@ Autonomous radio spectrum monitoring with ML-based signal classification. Edge S
 
 ---
 
+## Personal Apps
+
+### [WatchNoise](projects/watchnoise)
+<span class="status-badge status-active">v1.1 Shipped</span>
+
+Apple Watch sleep sounds app with adaptive audio. Frequency calibration, heartbeat sync, and environmental noise monitoring.
+
+**Stack:** Swift (SwiftUI) · watchOS · Procedural Audio
+
+---
+
 ## AI & Agents
 
 ### [Multi-Agent Assistant](projects/multi-agent)

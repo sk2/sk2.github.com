@@ -4,166 +4,150 @@ layout: default
 
 # Projects
 
-Current projects span network automation, signal processing, geospatial visualization, and multi-agent systems.
+My work focuses on network automation tools, signal processing systems, and multi-agent architectures.
 
 ---
 
 ## Network Engineering
 
-### [NetVis](projects/netvis)
-<span class="status-badge status-complete">Production Ready</span>
+### WatchNoise
 
-Network topology visualization library for Rust. Force-directed, hierarchical, and radial layouts. 582 tests passing.
+<span class="status-badge status-active">Phase 6/7 (100%)</span>
 
-**Stack:** Rust · petgraph · SVG/PNG/PDF
-
----
-
-### [ank-pydantic](projects/ank-pydantic)
-<span class="status-badge status-active">Active</span>
-
-Type-safe network topology modeling with Pydantic and Rust-backed graph engine. Multi-vendor config generation for 11+ platforms.
-
-**Stack:** Python · Rust (PyO3) · Pydantic · petgraph
+An Apple Watch app that generates ambient noise (white noise, brown noise, and a blended option) for sleeping through Bluetooth headphones. The app prioritizes simplicity with a single play/pause button on the main screen and noise type selection in settings. When headphones disconnect, playback automatically pauses.
 
 ---
 
-### [ANK Workbench](projects/ank-workbench)
-<span class="status-badge status-active">v1.1 Complete</span>
+### ank_pydantic
 
-Unified network simulation and visualization platform. Declarative design with lightweight mathematical simulation.
+<span class="status-badge status-active">Phase 58/62 (99%)</span>
 
-**Stack:** Python (FastAPI) · React · TypeScript
+A Python library for modeling and querying network topologies, backed by a high-performance Rust core (`ank_nte`). Features a two-stage transformation model (Whiteboard → Plan → Protocol Layers), type-safe Pydantic models for nodes/edges/layers, and a composable lazy query API with Rust-backed execution. Ships with "batteries-included" domain models (ISIS, MPLS, EVPN, L3VPN, IXP) in the blueprints/ module.
 
----
-
-### [TopoGen](projects/topogen)
-<span class="status-badge status-active">v0.10</span>
-
-Network topology generator with CLI, Python API, and config-driven interfaces. Data center, WAN, and random graph topologies.
-
-**Stack:** Rust · Python (PyO3)
+**Stack:** Python · Rust · FastAPI
 
 ---
 
-### [netsim](projects/netsim)
-<span class="status-badge status-active">Active</span>
+### ank_workbench
 
-Deterministic network protocol simulator. Implements OSPF, IS-IS, BGP, MPLS/LDP, BFD, GRE, VRF.
+<span class="status-badge status-active">Active Development</span>
 
-**Stack:** Rust · Python bindings
+A unified network simulation and visualization platform for enterprise network engineers. ANK Workbench integrates existing ANK Pydantic models, simulator, and visualization components into a seamless end-to-end workflow. Engineers can design networks declaratively, run lightweight simulations, and visualize topology, configuration state, and simulation results in one integrated environment. Built as a commercial product offering a modern alternative to traditional emulation-based tools like GNS3 and Cisco Modeling Labs.
 
----
-
-## Geospatial & Visualization
-
-### [Vector Tile Server](projects/tileserver)
-<span class="status-badge status-planning">Planning</span>
-
-High-performance MVT server for dynamic vector tiles from large datasets. Datashader-like aggregation with sub-second latency.
-
-**Stack:** Python (FastAPI) · Rust (PyO3) · Polars · Kepler.gl
+**Stack:** Python backend (FastAPI or Flask) · React or Vue frontend — Leverages existing Python ecosystem for ANK components · meets modern UX expectations
 
 ---
 
-## Signal Processing & Hardware
+### nascleanup
 
-### [OpenAstro Core](projects/open-astro-core)
-<span class="status-badge status-planning">Planning</span>
-
-Rust library providing shared astronomical logic, hardware drivers, and protocols for the OpenAstro ecosystem.
-
-**Stack:** Rust · INDI · ASCOM Alpaca
+<span class="status-badge status-active">Active Development</span>
 
 ---
 
-### [OpenAstro Node](projects/open-astro-node)
-<span class="status-badge status-active">Phase 1 Complete</span>
+### netvis
 
-Headless astrophotography controller for Raspberry Pi/Jetson. Autonomous operation with "Goodnight" protocol and multi-rig sync.
+<span class="status-badge status-active">Active Development</span>
 
-**Stack:** Rust · React · INDI/Alpaca
+A Rust-based network topology layout and visualization engine. Takes complex multi-layer network topologies (via petgraph) and renders them using advanced layout algorithms that reduce visual complexity while preserving structural clarity. Outputs static formats (SVG, PDF, PNG) for v1, with interactive browser embedding planned for future integration with other tooling.
 
----
-
-### [Photo Tour](projects/photo-tour)
-<span class="status-badge status-planning">Planning</span>
-
-iOS photography assistant with classical composition engine, AI wildlife triggering, and Holy Grail timelapses.
-
-**Stack:** Swift (SwiftUI) · CoreML · Edge AI
+**Stack:** Python · Rust
 
 ---
 
-### [HealthyPi Ecosystem](projects/healthypi)
-<span class="status-badge status-active">Phase 4/6 (88%)</span>
+### network-simulator
 
-Biometric data processing ecosystem with virtual patient simulator and real-time analysis engine.
+<span class="status-badge status-active">Active Development</span>
 
-**Stack:** Python · NATS · NeuroKit2 · NumPy
-
----
-
-### [Project Spectra](projects/spectra)
-<span class="status-badge status-planning">Planning</span>
-
-Autonomous radio spectrum monitoring with ML-based signal classification. Edge SDRs to Mac mini core.
-
-**Stack:** Python · Rust · Swift · ML
-
----
-
-## Personal Apps
-
-### [WatchNoise](projects/watchnoise)
-<span class="status-badge status-active">v1.1 Shipped</span>
-
-Apple Watch sleep sounds app with adaptive audio. Frequency calibration, heartbeat sync, and environmental noise monitoring.
-
-**Stack:** Swift (SwiftUI) · watchOS · Procedural Audio
-
----
-
-## AI & Agents
-
-### [Multi-Agent Assistant](projects/multi-agent)
-<span class="status-badge status-active">Active</span>
-
-Security-first multi-agent system with containerized agents and capability-based authorization.
-
-**Stack:** Python · Docker · NATS · Swift · OpenTelemetry
-
-[GitHub](https://github.com/sk2/multi-agent-assistant)
-
----
-
-### [Cycle](projects/cycle)
-<span class="status-badge status-planning">Planning</span>
-
-SwiftUI training app connecting KICKR Core to AI-driven workout logic via NATS.
-
-**Stack:** SwiftUI · SceneKit · FTMS (BLE) · NATS
-
----
-
-## Legacy
-
-### [AutoNetkit](projects/autonetkit)
-<span class="status-badge status-complete">PhD 2017</span>
-
-Network configuration automation tool from PhD research.
+A Rust-based network simulator that models packet-level behavior for routing protocols. It provides a middle ground between pure algorithmic analysis (like C-BGP) and full emulation (like Containerlab) — larger scale and smaller footprint than emulation, higher fidelity than algorithmic simulation. Used for smoke testing and design validation of network configurations.
 
 **Stack:** Python
 
 ---
 
-### [Internet Topology Zoo](http://www.topology-zoo.org/)
-<span class="status-badge status-complete">Research Dataset</span>
+### photo-tour
 
-Collection of 261 real-world network topologies from service providers, research networks, and CDNs. Widely used dataset for networking research with 300+ citations.
+<span class="status-badge status-active">Active Development</span>
 
-**Links:** [Website](http://www.topology-zoo.org/) · [Dataset](http://www.topology-zoo.org/dataset.html)
+Photo Tour is a smart, interactive photography assistant designed for field use.
+It helps you compose shots, automate repeatable workflows, and progressively adds intelligent triggering and transition logic.
 
 ---
 
-**Development:** [Philosophy and approach](development)
+### tileserver
+
+<span class="status-badge status-active">Active Development</span>
+
+Serve dynamic vector tiles (MVT) from massive geospatial datasets (millions of points) with sub-second latency, enabling interactive visualization in Kepler.gl without pre-rendering static tilesets.
+
+---
+
+### topogen
+
+<span class="status-badge status-active">Phase 13/15 (87%)</span>
+
+A Rust-based network topology generator with Python bindings that consolidates scattered topology generation logic from AutoNetKit, simulation tools, and visualization tools. Generates realistic data center, WAN, and random graph topologies with proper structure, design patterns, and realistic parameters. Outputs custom YAML format for use across the network engineering tool ecosystem.
+
+**Stack:** Python
+
+---
+
+## Signal Processing & Hardware
+
+### healthypi
+
+<span class="status-badge status-complete">Production Ready</span>
+
+A modular, agent-aware health monitoring ecosystem that translates raw biometric data from HealthyPi hardware (6 and Move) into actionable insights and automated interventions.
+
+**Current:** 2026-02-10 - Completed 04-07-PLAN.md (Health Context trend window + prompt formatting)
+
+---
+
+### open-astro-core
+
+<span class="status-badge status-active">Active Development</span>
+
+OpenAstro Core is a high-performance Rust library providing shared astronomical logic, hardware drivers, and protocol implementations for the OpenAstro ecosystem.
+It exists to keep coordinate math and device/protocol behavior consistent across downstream OpenAstro apps.
+
+---
+
+### open-astro-node
+
+<span class="status-badge status-active">Active Development</span>
+
+A headless, autonomous astrophotography controller designed for low-power Linux devices (RPi/Jetson). It manages hardware, executes imaging sequences, and ensures rig safety.
+
+---
+
+### signals
+
+<span class="status-badge status-complete">Production Ready</span>
+
+Transform raw radio spectrum data into an actionable "Signal Census" through automated detection, ML classification, and distributed acquisition.
+
+---
+
+## AI & Agents
+
+### cycle
+
+<span class="status-badge status-active">Phase 1/5 (20%)</span>
+
+A native SwiftUI training application for iPad and Apple TV that bridges professional cycling hardware (KICKR Core) with dynamic AI-driven workout logic via NATS, visualized in a high-performance SceneKit environment.
+
+---
+
+### multi-agent-assistant
+
+<span class="status-badge status-active">Phase 17/20 (79%)</span>
+
+A security-first multi-agent system that coordinates specialized containerized agents (health monitoring, home automation, data aggregation, workflow automation) through a message broker architecture. Each agent runs in isolation with minimal privileges and communicates only through validated message queues, demonstrating production-ready patterns for deploying AI agents in security-critical infrastructure environments. The orchestrator uses cloud LLM reasoning (GPT-4/Claude) while agents remain lightweight and deterministic.
+
+**Stack:** Rust · NATS
+
+---
+
+## Development Approach
+
+I plan work in `.planning/` directories with phase-based execution. I verify completeness with formal documents. I use NATS for message coordination. I write comprehensive tests. I document architecture decisions in PROJECT.md and STATE.md.

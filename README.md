@@ -89,4 +89,24 @@ If you'd like to preview the theme locally (for example, in the process of propo
 
 ### Running tests
 
-The theme contains a minimal test suite, to ensure a site with the theme would build successfully. To run the tests, simply run `script/cibuild`. You'll need to run `script/bootstrap` one before the test script will work.
+The theme contains a minimal test suite, to ensure a site with the theme would build successfully. To run the tests, simply run `script/cibuild`. You'll need to run `script/bootstrap` once before the test script will work.
+
+## Maintenance & Updates
+
+### Updating Projects
+The list of projects in `projects.md` is automatically generated from project metadata in your development directories. To update it:
+
+```bash
+python3 update_projects.py
+```
+
+This script scans `~/dev`, `~/PycharmProjects`, and `~/RustroverProjects` for projects containing `.planning/PROJECT.md` and updates the `projects.md` file accordingly.
+
+### Building and Deploying
+The site is built using Jekyll. To build locally:
+
+1. Ensure you have Ruby 3.0+ installed (required for modern Jekyll dependencies).
+2. Install dependencies: `./script/bootstrap` (or `bundle install`).
+3. Build the site: `./script/cibuild`.
+
+Push changes to the `master` branch to deploy to GitHub Pages.

@@ -25,7 +25,7 @@ layout: default
 
 ## Overview
 
-AutoNetkit is a network configuration automation tool developed during PhD research. It transforms high-level topology designs into vendor-specific device configurations through abstract network models and Python-based design logic. Used in Cisco's VIRL (Virtual Internet Routing Lab) project.
+AutoNetkit is a network configuration automation tool developed during PhD research. It transforms high-level topology designs into vendor-specific device configurations through abstract network models and Python-based design logic.
 
 ## Problem It Solves
 
@@ -249,12 +249,12 @@ Python-based network design:
 
 ### Lab Topology Generation
 
-Cisco VIRL integration:
+Network lab integration:
 
 **Workflow:**
 1. Draw topology in yEd
 2. AutoNetkit generates configurations
-3. VIRL loads configs into virtual routers
+3. Load configs into virtual routers
 4. Lab environment ready for testing
 
 **Applications:**
@@ -344,7 +344,6 @@ Modern descendants:
 - Workshop presentations
 
 **Industry Adoption:**
-- Integrated into Cisco VIRL
 - Used for network research and teaching
 - Influenced modern network automation tools
 
@@ -367,6 +366,5 @@ Modern descendants:
 - Generated Cisco IOS configuration
 - Generated Juniper JunOS configuration
 - Network diagram output
-- VIRL integration
 - Abstract model flowchart
 -->

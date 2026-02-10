@@ -2,7 +2,7 @@
 layout: default
 ---
 
-# Cycle Agent
+# Cycle
 
 <span class="status-badge status-planning">Planning Phase</span>
 

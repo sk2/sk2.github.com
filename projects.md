@@ -119,7 +119,7 @@ Security-first multi-agent system with containerized agents and capability-based
 
 ---
 
-### [Cycle Agent](projects/cycle-agent)
+### [Cycle](projects/cycle)
 <span class="status-badge status-planning">Planning</span>
 
 SwiftUI training app connecting KICKR Core to AI-driven workout logic via NATS.

@@ -33,9 +33,9 @@ WatchNoise is a minimalist Apple Watch app that generates ambient noise for slee
 Sleeping in shared or noisy environments presents challenges:
 
 **Shared Spaces:**
-- Snoring in dormitories or retreats
+- Snoring in dormitories or shared accommodations
 - Human-centric noises that disrupt sleep
-- Need for "noble silence" (no light, no speaker)
+- Need for quiet operation (no light, no speaker)
 
 **Commercial Sleep Apps:**
 - Require iPhone with screen on
@@ -222,8 +222,8 @@ AVAudioSession configuration:
 
 ## Use Cases
 
-**Retreat/Dormitory Sleep:**
-Primary use case. Block snoring and environmental noise in shared spaces while maintaining "noble silence" (no light/speaker). Personalized frequency calibration for individual hearing sensitivity.
+**Shared Space Sleep:**
+Primary use case. Block snoring and environmental noise in dormitories and shared accommodations. Silent operation (no light/speaker) with personalized frequency calibration for individual hearing sensitivity.
 
 **Travel Sleep:**
 Airplanes, trains, hotels. Bluetooth-only operation avoids disturbing neighbors. Works without iPhone.

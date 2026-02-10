@@ -4,75 +4,7 @@ layout: default
 
 # Projects
 
-My work spans AI agents, network engineering, and signal processing. I build systems that balance security, performance, and systematic development.
-
----
-
-## AI & Agents
-
-### Secure Multi-Agent Personal Assistant
-
-<span class="status-badge status-active">Active Development</span>
-
-A multi-agent system where specialized agents run in isolated containers and communicate through a message broker. Each agent validates capability-based authorization tokens before executing actions.
-
-**Stack:** Python, Docker, NATS, Swift, OpenTelemetry
-
-**Architecture:**
-- Containerized agents with seccomp, read-only filesystem, no-new-privileges
-- NATS broker with TLS 1.3 and per-subject ACLs
-- Short-lived capability tokens with nonce validation
-- SQLite audit trail and OpenTelemetry traces
-
-**Agents:** health monitoring (HealthKit), home automation (Hue), data aggregation (calendar/weather/RSS), backup integrity
-
-[GitHub](https://github.com/sk2/multi-agent-assistant)
-
----
-
-### HealthyPi Ecosystem
-
-<span class="status-badge status-active">Phase 4/6 (88%)</span>
-
-Translates HealthyPi hardware biometric data (ECG, PPG, EDA, EEG, IMU) into insights through agentic intelligence.
-
-**Stack:** Python, NATS, PyArrow, NeuroKit2, NumPy
-
-**Features:**
-- Virtual Patient simulator with NeuroKit2 signal generation
-- HRV analysis (time/frequency domain), EDA stress detection
-- 286 tests, 6 physiological state scenarios
-- NATS integration with Multi-Agent framework
-
-**Status:** Foundation ✅ | Virtual Patient ✅ | Analysis Engine ✅ | Agent Integration 🔄
-
----
-
-### Project Spectra
-
-<span class="status-badge status-planning">Planning</span>
-
-Autonomous radio spectrum monitoring with ML-based signal classification and spatial RF mapping.
-
-**Stack:** Python, Rust, Swift, ML
-
-**Hardware:**
-- Edge: Airspy R2, HF Discovery, KrakenSDR (5-ch DoA), RTL-SDR
-- Core: Mac mini M-Series (ML inference, visualization)
-
-**Features:** Real-time waterfall, modulation detection, satellite tracking, ADS-B integration
-
----
-
-### Cycle Agent
-
-<span class="status-badge status-planning">Planning</span>
-
-SwiftUI training app connecting KICKR Core to AI-driven workout logic via NATS.
-
-**Stack:** SwiftUI, SceneKit, FTMS (BLE), NATS
-
-**Design:** Low-latency BLE control, agent-coordinated resistance, 60fps terrain on Apple TV, Apple Watch heart rate integration
+My work focuses on network automation tools, signal processing systems, and multi-agent architectures.
 
 ---
 
@@ -161,6 +93,96 @@ Deterministic network protocol simulator validating configurations before produc
 **Protocols:** OSPF, IS-IS, BGP, MPLS/LDP, BFD, GRE, VRF, ICMP, ARP
 
 **Design:** Protocol-level fidelity, deterministic execution, 100+ device topologies in seconds, JSON output for CI/CD
+
+---
+
+## Signal Processing & Hardware
+
+### Astro
+
+<span class="status-badge status-planning">Planning</span>
+
+Astrophotography control system for Linux devices (Raspberry Pi) attached to telescope setups.
+
+**Stack:** Rust
+
+**Goals:**
+- Robust imaging, guiding, mount control
+- Extensible platform for custom logic
+- Smart features: cloud handling, adaptive gain/exposure, data quality analysis
+- Hardware agnostic via INDI/ASCOM Alpaca
+
+**Design:** Headless system service, web UI (iPad/laptop/phone), terminal TUI for SSH, real-time image/status push
+
+Alternative to proprietary systems like ZWO ASIAir.
+
+---
+
+### HealthyPi Ecosystem
+
+<span class="status-badge status-active">Phase 4/6 (88%)</span>
+
+Translates HealthyPi hardware biometric data (ECG, PPG, EDA, EEG, IMU) into insights.
+
+**Stack:** Python, NATS, PyArrow, NeuroKit2, NumPy
+
+**Features:**
+- Virtual Patient simulator with NeuroKit2 signal generation
+- HRV analysis (time/frequency domain), EDA stress detection
+- 286 tests, 6 physiological state scenarios
+- NATS integration with Multi-Agent framework
+
+**Status:** Foundation ✅ | Virtual Patient ✅ | Analysis Engine ✅ | Agent Integration 🔄
+
+---
+
+### Project Spectra
+
+<span class="status-badge status-planning">Planning</span>
+
+Autonomous radio spectrum monitoring with ML-based signal classification.
+
+**Stack:** Python, Rust, Swift, ML
+
+**Hardware:**
+- Edge: Airspy R2, HF Discovery, KrakenSDR (5-ch DoA), RTL-SDR
+- Core: Mac mini M-Series (ML inference, visualization)
+
+**Features:** Real-time waterfall, modulation detection, satellite tracking, ADS-B integration
+
+---
+
+## AI & Agents
+
+### Secure Multi-Agent Personal Assistant
+
+<span class="status-badge status-active">Active Development</span>
+
+Multi-agent system where specialized agents run in isolated containers and communicate through a message broker.
+
+**Stack:** Python, Docker, NATS, Swift, OpenTelemetry
+
+**Architecture:**
+- Containerized agents with seccomp, read-only filesystem, no-new-privileges
+- NATS broker with TLS 1.3 and per-subject ACLs
+- Short-lived capability tokens with nonce validation
+- SQLite audit trail and OpenTelemetry traces
+
+**Agents:** health monitoring (HealthKit), home automation (Hue), data aggregation (calendar/weather/RSS), backup integrity
+
+[GitHub](https://github.com/sk2/multi-agent-assistant)
+
+---
+
+### Cycle Agent
+
+<span class="status-badge status-planning">Planning</span>
+
+SwiftUI training app connecting KICKR Core to AI-driven workout logic via NATS.
+
+**Stack:** SwiftUI, SceneKit, FTMS (BLE), NATS
+
+**Design:** Low-latency BLE control, agent-coordinated resistance, 60fps terrain on Apple TV, Apple Watch heart rate integration
 
 ---
 

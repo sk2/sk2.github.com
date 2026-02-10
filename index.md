@@ -4,18 +4,18 @@ layout: default
 
 # About Me
 
-I build intelligent systems with strong security and performance guarantees. My work focuses on multi-agent architectures, network automation, and real-time signal processing.
+I build network automation tools and intelligent systems. My work focuses on network configuration generation, topology modeling, and multi-agent architectures.
 
 ## Current Work
 
-I develop agent-based systems for personal infrastructure:
+I develop tools for network engineering and agent-based systems:
 
-- A multi-agent system where containerized agents communicate through validated message queues
-- Health monitoring tools that transform HealthyPi biometric data into insights
-- An autonomous platform for radio spectrum monitoring with ML-based signal classification
-- AI-driven training systems connecting hardware to agent orchestration
+- Network topology generators, simulators, and visualization libraries in Rust
+- Type-safe network modeling with Pydantic and Rust-backed graph engines
+- Multi-agent systems with security-first message bus architectures
+- Astrophotography control systems and biometric analysis tools
 
-I emphasize modular architecture, message-bus coordination (NATS), comprehensive testing, and systematic planning through structured roadmaps.
+I work independently on open-source projects. I emphasize systematic planning, comprehensive testing, and clear documentation.
 
 ## Background
 
@@ -25,10 +25,10 @@ The work produced AutoNetkit, an open-source Python tool used in Cisco's VIRL pr
 
 ## Research Interests
 
-- Agent security and zero-trust multi-agent architectures
-- Real-time biometric analysis and virtual patient simulation
-- Network automation with high-level abstractions
-- Autonomous spectrum monitoring and ML-based signal classification
+- Network automation and high-level configuration abstractions
+- Network topology generation, simulation, and visualization
+- Multi-agent architectures and message-based coordination
+- Biometric signal processing and RF spectrum analysis
 
 ## Links
 

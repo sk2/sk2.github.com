@@ -117,67 +117,319 @@ Each agent runs in isolated Docker container:
 - Polling: Periodic queries to external services
 - Reactive: Respond to events on message queue
 
-## Implemented Agents
+## Agent Catalog
 
-### Health Monitoring Agent
-- Tracks Apple Health metrics (steps, heart rate, sleep)
-- Analyzes trends and patterns
-- Sends interventions for health goals
-- Integrates with HealthyPi ecosystem
+### Health & Wellness Agents
 
-### Home Automation Agent
-- Controls Philips Hue lights
-- Schedules automations
-- Responds to conditions (time, occupancy)
-- Part of bedtime routine workflow
+**Health Monitoring Agent**
+- **Purpose:** Tracks Apple Health metrics and integrates with HealthyPi ecosystem
+- **Data Sources:** Apple Health API, HealthyPi NATS streams (ECG, PPG, EDA, EEG)
+- **Capabilities:**
+  - Monitors key metrics: sleep quality, activity levels, heart rate, HRV
+  - Detects anomalies in biometric trends
+  - Analyzes patterns across multiple data sources
+  - Sends interventions for health goals (e.g., "Take a walk, sedentary for 3 hours")
+- **Network Policy:** Scoped internet access (Apple Health API only)
+- **Integration:** Subscribes to `healthypi.*` NATS subjects for real-time biometrics
 
-### Data Aggregation Agent
-- Queries across multiple services
-- Correlates information
-- Provides unified responses
-- No internet access (isolated agent)
+**Bio-Feedback Prompter**
+- **Purpose:** Links health metrics to journaling prompts
+- **Capabilities:**
+  - Correlates physiological data with activities
+  - Generates contextual prompts based on stress/recovery indicators
+  - Tracks mind-body connections over time
+- **Network Policy:** Isolated (no internet)
 
-### Screen Time Agent
-- Tracks macOS usage metrics
-- Application time monitoring
-- Focus session tracking
-- Daily/weekly summaries
+**Ergonomic Sentinel Agent**
+- **Purpose:** Monitors posture and ergonomics using Vision framework
+- **Capabilities:**
+  - Local webcam analysis (no recording, privacy-first)
+  - Detects poor posture patterns
+  - Reminds to adjust seating or take breaks
+  - Integrates with Screen Time for sedentary alerts
+- **Network Policy:** Isolated (local processing only)
+- **Privacy:** All processing local, no data leaves container
 
-### Backup Integrity Agent
-- Monitors Time Machine status
-- Checks Arq backup completion
-- Verifies backup freshness
-- Alerts on failures
+### Home Automation Agents
 
-### Daily Burn Agent
-- Summarizes financial transactions
-- Categorizes spending
-- Budget tracking
-- Trend analysis
+**Hue Controller Agent**
+- **Purpose:** Controls Philips Hue smart lighting system
+- **API Integration:** Hue Bridge local API (HTTP)
+- **Capabilities:**
+  - Set light states (on/off, brightness, color temperature, RGB)
+  - Query current status of all lights and groups
+  - Schedule automations based on time or conditions
+  - Part of bedtime/morning workflows
+- **Example Actions:**
+  - Dim lights at 9 PM for bedtime routine
+  - Set warm colors in morning, cool colors during work hours
+  - Flash lights for notifications (package delivery, important alert)
+- **Network Policy:** Scoped LAN access (Hue Bridge only)
 
-### Readwise Agent
-- Retrieves reading highlights
-- Surfaces relevant quotes
-- Spaced repetition scheduling
-- Knowledge recall
+**IoT Bridge Agent**
+- **Purpose:** Connects ESPHome/MQTT devices to NATS ecosystem
+- **Protocols:** MQTT, ESPHome native API
+- **Capabilities:**
+  - Translate MQTT messages to NATS subjects
+  - Expose ESP32 sensors (temperature, motion, door/window contacts)
+  - Control ESP-based switches and relays
+  - Unified interface for heterogeneous IoT devices
+- **Network Policy:** Scoped LAN access (MQTT broker only)
 
-### Unified Notification Agent
-- Gateway for iMessage/Telegram/Slack
-- Message routing and delivery
-- Notification preferences
-- Rate limiting
+**BLE Presence Agent**
+- **Purpose:** Tracks device proximity via Bluetooth RSSI
+- **Capabilities:**
+  - Detects when paired devices are nearby (phone, watch, keys)
+  - Occupancy detection for automation triggers
+  - "Home/Away" state for lighting and climate control
+  - Security: Alert if unknown BLE devices detected
+- **Network Policy:** Isolated (local Bluetooth only)
 
-### Audit Anomaly Agent
-- Security monitoring of agent activity
-- Detects unusual patterns
-- Privilege escalation attempts
-- Unauthorized access detection
+### Productivity & Context Agents
 
-### Additional Planned Agents
-- Calendar integration
-- Email processing
-- Task management
-- Weather and environment
+**Screen Time Agent**
+- **Purpose:** Tracks macOS digital usage and focus patterns
+- **Data Sources:** macOS Screen Time API, application usage logs
+- **Capabilities:**
+  - Application time tracking (development tools, browsers, entertainment)
+  - Focus session monitoring (Deep Work mode)
+  - Daily/weekly productivity summaries
+  - Detects context switches and distraction patterns
+  - Integration with Habit Engine for streak tracking
+- **Network Policy:** Isolated (no internet)
+- **Privacy:** Stores aggregated metrics only, not screenshots
+
+**Screen Context Agent**
+- **Purpose:** Provides workflow awareness via local OCR
+- **Capabilities:**
+  - On-demand screen text extraction (not continuous monitoring)
+  - Recognizes active project/task context
+  - Suggests relevant agents based on visible content
+  - Example: Detects terminal with SSH session, offers Backup Integrity check
+- **Network Policy:** Isolated (local processing only)
+- **Privacy:** OCR runs locally, never uploads screenshots
+
+**Ambient Audio Agent**
+- **Purpose:** Classifies local sound events without recording
+- **Technology:** CoreML audio classification
+- **Capabilities:**
+  - Detects environmental context (music playing, people talking, silent focus)
+  - No audio recording or storage (classification only)
+  - Adjusts notifications based on audio environment
+  - Example: Suppress non-urgent alerts during meetings
+- **Network Policy:** Isolated (local processing only)
+- **Privacy:** Zero-knowledge audio classification, no recordings
+
+**Soundscape Agent**
+- **Purpose:** Generates procedural ambient noise for focus/relaxation
+- **Inspired By:** WatchNoise app (white/brown/pink noise, rain, ocean)
+- **Capabilities:**
+  - Procedurally generated soundscapes
+  - Adaptive audio based on heart rate variability
+  - Integration with Health Agent for stress response
+- **Network Policy:** Isolated
+
+### Data & Information Agents
+
+**Data Aggregation Agent**
+- **Purpose:** Queries multiple services and correlates information
+- **Architecture:** Isolated agent that queries other agents (not external APIs directly)
+- **Capabilities:**
+  - Unified interface to query Health, Screen Time, Finance, Backup agents
+  - Correlates data across domains (e.g., "Sleep quality vs. productivity")
+  - Generates morning/evening briefings
+  - Natural language query interface
+- **Network Policy:** Isolated (no internet, NATS only)
+- **Security Model:** Cannot directly access external services, must request via other agents
+
+**Readwise Agent**
+- **Purpose:** Surfaces reading highlights for knowledge recall
+- **API Integration:** Readwise API (HTTPS)
+- **Capabilities:**
+  - Retrieves book/article highlights
+  - Spaced repetition scheduling (surface old highlights periodically)
+  - Context-aware suggestions (relevant quotes based on current work)
+  - Daily knowledge review workflow
+- **Network Policy:** Scoped internet (Readwise API only)
+
+**Logistics Tracker**
+- **Purpose:** Polls delivery APIs for package status
+- **Integrations:** USPS, UPS, FedEx, Amazon tracking
+- **Capabilities:**
+  - Unified view of all in-transit packages
+  - Delivery day alerts
+  - Integration with BLE Presence (notify when home for delivery)
+- **Network Policy:** Scoped internet (delivery APIs only)
+
+**GSD Observer Agent**
+- **Purpose:** Monitors NATS results and maps to planning requirements
+- **Capabilities:**
+  - Watches for completed tasks in GSD workflow
+  - Updates `.planning/STATE.md` automatically
+  - Tracks requirement fulfillment
+  - Generates progress reports
+- **Network Policy:** Isolated (NATS only)
+
+### Financial & Productivity Agents
+
+**Daily Burn Agent**
+- **Purpose:** Summarizes financial transactions and spending
+- **Data Source:** Daily Burn API (if available) or Banktivity Bridge
+- **Capabilities:**
+  - Fetches recent transactions
+  - Categorizes spending automatically
+  - Budget tracking and alerts (overspending warnings)
+  - Weekly/monthly trend analysis
+  - Anomaly detection (unusual charges)
+- **Network Policy:** Scoped internet (financial API only)
+- **Security:** Requires pre-approval for transaction queries
+
+**Banktivity Bridge Agent**
+- **Purpose:** Extracts finance data from Banktivity app
+- **Integration:** AppleScript automation or direct SQLite DB access
+- **Capabilities:**
+  - Read account balances
+  - Export transaction history
+  - Query budget categories
+  - Local-first alternative to cloud finance APIs
+- **Network Policy:** Isolated (local filesystem only)
+- **Security:** Read-only filesystem access to Banktivity database
+
+**Habit Engine Agent**
+- **Purpose:** Tracks cross-domain habit streaks
+- **Data Sources:** Health, Screen Time, Finance, Backup agents
+- **Capabilities:**
+  - Tracks multi-faceted habits (e.g., "Healthy day" = 8hr sleep + 10k steps + <2hr screen time)
+  - Maintains streak counters
+  - Sends encouragement/warnings
+  - Visualizes long-term trends
+- **Network Policy:** Isolated (NATS only)
+
+### System & Infrastructure Agents
+
+**Backup Integrity Agent**
+- **Purpose:** Monitors local backup systems
+- **Integrations:** Time Machine API, Arq backup logs
+- **Capabilities:**
+  - Checks Time Machine last successful backup timestamp
+  - Verifies Arq backup completion and upload status
+  - Tests backup freshness (warns if >24 hours old)
+  - Alerts on backup failures or missing destinations
+  - Validates backup integrity (checksums if available)
+- **Network Policy:** Isolated (local filesystem only)
+
+**Update Manager Agent**
+- **Purpose:** Reports on host and container update status
+- **Capabilities:**
+  - Checks macOS system updates
+  - Docker image updates for all agent containers
+  - Homebrew formula updates
+  - Generates update summary without applying changes
+  - Pre-approval required to trigger updates
+- **Network Policy:** Scoped internet (update servers only)
+
+**Infrastructure Balancer**
+- **Purpose:** Manages agent placement across distributed nodes
+- **Capabilities:**
+  - Monitors resource usage per container
+  - Migrates agents between Mac mini hosts based on load
+  - Ensures high-priority agents on primary node
+  - Handles failover if node goes offline
+- **Network Policy:** Scoped LAN (NATS and Docker API)
+
+### Communication Agents
+
+**Unified Notification Agent**
+- **Purpose:** Secure gateway for iMessage/Telegram/Slack
+- **Architecture:** Reduces attack surface by centralizing external communication
+- **Capabilities:**
+  - Send messages via iMessage (AppleScript)
+  - Telegram bot integration
+  - Slack webhook posting
+  - Message routing based on urgency/context
+  - Rate limiting (prevent spam)
+  - Template-based formatting
+- **Network Policy:** Scoped internet (Telegram/Slack APIs only)
+- **Security:** All outbound messages logged to audit trail
+
+**Push Gateway Agent**
+- **Purpose:** Bridges NATS to Apple Push Notification service (APNs)
+- **Capabilities:**
+  - Sends push notifications to iPhone/Apple Watch
+  - Handles APNs authentication and token management
+  - Priority-based delivery (time-sensitive vs. background)
+  - Rich notifications with actions (approve/reject workflows)
+- **Network Policy:** Scoped internet (APNs only)
+
+**Mobile API Agent**
+- **Purpose:** Secure ingestion endpoint for iPhone/Watch data
+- **Capabilities:**
+  - Receives context updates from mobile apps
+  - Ingests real-time Focus mode status
+  - Location updates (when relevant)
+  - Health metrics from Apple Watch
+  - Publishes to NATS for other agents
+- **Network Policy:** Scoped LAN (mobile devices on local network)
+- **Security:** mTLS client authentication required
+
+### Security & Privacy Agents
+
+**Audit Anomaly Agent**
+- **Purpose:** Security monitoring of all agent activity
+- **Data Source:** OpenTelemetry audit logs from all agents
+- **Capabilities:**
+  - Detects unusual agent behavior patterns
+  - Identifies privilege escalation attempts
+  - Alerts on unauthorized NATS subject access
+  - Monitors for excessive resource usage (possible compromise)
+  - Tracks capability token expiration violations
+  - Generates security incident reports
+- **Network Policy:** Isolated (NATS audit stream only)
+- **Response:** Automatically revokes suspicious agent capabilities
+
+**Privacy Auditor Agent**
+- **Purpose:** Continuous secret scanning of logs and notes
+- **Capabilities:**
+  - Scans logs for accidentally leaked credentials
+  - Detects PII in audit trails
+  - Identifies API keys or tokens in plaintext
+  - Alerts on potential GDPR/privacy violations
+  - Redaction suggestions
+- **Network Policy:** Isolated (local log files only)
+
+### Native Apps & UI Agents
+
+**Mac Menu Bar App**
+- **Purpose:** Native macOS status and approval interface
+- **Technology:** Swift + SwiftUI
+- **Capabilities:**
+  - Real-time NATS connection status
+  - Pending approval requests (HITL workflow)
+  - Quick approve/reject with reasoning display
+  - Agent health monitoring (container status)
+  - Manual workflow triggers
+  - OpenTelemetry trace viewer
+- **Network Policy:** Local NATS connection only
+
+**Watch/iPhone Context Apps**
+- **Purpose:** Gather real-time context from mobile devices
+- **Data Collected:**
+  - Focus mode status (Work, Sleep, Driving, etc.)
+  - Coarse location (Home/Office/Away, not GPS)
+  - Apple Watch biometrics (heart rate, HRV)
+  - Activity state (stationary, walking, running)
+- **Network Policy:** Local network (publishes to Mobile API Agent)
+- **Privacy:** Minimal data collection, user-controlled
+
+**Agent Terminal**
+- **Purpose:** Bridge to external CLI agents like Claude Code
+- **Capabilities:**
+  - Spawn Claude Code sessions for complex tasks
+  - Relay NATS messages to CLI tools
+  - Capture tool output and publish to NATS
+  - Integration with GSD workflow
+- **Network Policy:** Scoped internet (Anthropic API)
+- **Security:** Sandboxed execution with read-only access by default
 
 ## Security Model
 

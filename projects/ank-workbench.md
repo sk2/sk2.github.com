@@ -25,17 +25,17 @@ layout: default
 
 ## Overview
 
-ANK Workbench is a unified network simulation and visualization platform for enterprise network engineers. It integrates ANK Pydantic models, simulator, and visualization into a seamless end-to-end workflow. Modern alternative to GNS3 and Cisco Modeling Labs.
+ANK Workbench is a unified network simulation and visualization platform for enterprise network engineers. It integrates ANK Pydantic models, simulator, and visualization into a seamless end-to-end workflow.
 
 ## Problem It Solves
 
-Network engineers need to test designs before production deployment. Current options:
+Network engineers need to test designs before production deployment. Current challenges:
 
-**Traditional Emulation (GNS3, EVE-NG, CML):**
-- VM-based device emulation (slow, resource-intensive)
-- Manual configuration on each device
-- Separate tools for design, simulation, visualization
-- Complex setup and maintenance
+**Fragmented Workflows:**
+- Separate tools for design, simulation, and visualization
+- Manual integration between components
+- Context switching between applications
+- Inconsistent data formats
 
 **Manual Testing:**
 - Error-prone CLI configuration
@@ -45,7 +45,7 @@ Network engineers need to test designs before production deployment. Current opt
 
 **ANK Workbench provides:**
 - Declarative network design with Pydantic models
-- Lightweight mathematical simulation (vs heavy VMs)
+- Lightweight mathematical simulation
 - Integrated visualization (topology, config, behavior)
 - Single unified workflow
 
@@ -191,17 +191,6 @@ Generate network diagrams and configuration documentation from single source of 
 - Troubleshoot and replicate production issues in safe environment
 - Design and plan network changes with validation
 - Learn and experiment with network behavior
-
-## Comparison
-
-| Feature | ANK Workbench | GNS3/EVE-NG | CML |
-|---------|--------------|-------------|-----|
-| Design Approach | Declarative | Imperative CLI | Imperative CLI |
-| Simulation | Lightweight | Full VM emulation | Full VM emulation |
-| Resources | Low | High | High |
-| Speed | Fast | Slow | Slow |
-| Integration | Unified workflow | Separate tools | Some integration |
-| Modern UI | Yes | No (VNC) | Limited |
 
 ## Links
 

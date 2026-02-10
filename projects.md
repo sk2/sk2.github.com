@@ -31,7 +31,7 @@ Type-safe network topology modeling with Pydantic and Rust-backed graph engine. 
 ### [ANK Workbench](projects/ank-workbench)
 <span class="status-badge status-active">v1.1 Complete</span>
 
-Unified network simulation and visualization platform. Modern alternative to GNS3 and Cisco Modeling Labs.
+Unified network simulation and visualization platform. Declarative design with lightweight mathematical simulation.
 
 **Stack:** Python (FastAPI) · React · TypeScript
 

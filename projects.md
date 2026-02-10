@@ -68,12 +68,30 @@ High-performance MVT server for dynamic vector tiles from large datasets. Datash
 
 ## Signal Processing & Hardware
 
-### [Astro](projects/astro)
+### [OpenAstro Core](projects/open-astro-core)
 <span class="status-badge status-planning">Planning</span>
 
-Open-source astrophotography control system for Linux/Raspberry Pi. Alternative to ZWO ASIAir.
+Rust library providing shared astronomical logic, hardware drivers, and protocols for the OpenAstro ecosystem.
 
-**Stack:** Rust
+**Stack:** Rust · INDI · ASCOM Alpaca
+
+---
+
+### [OpenAstro Node](projects/open-astro-node)
+<span class="status-badge status-active">Phase 1 Complete</span>
+
+Headless astrophotography controller for Raspberry Pi/Jetson. Autonomous operation with "Goodnight" protocol and multi-rig sync.
+
+**Stack:** Rust · React · INDI/Alpaca
+
+---
+
+### [Photo Tour](projects/photo-tour)
+<span class="status-badge status-planning">Planning</span>
+
+iOS photography assistant with classical composition engine, AI wildlife triggering, and Holy Grail timelapses.
+
+**Stack:** Swift (SwiftUI) · CoreML · Edge AI
 
 ---
 

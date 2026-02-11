@@ -154,3 +154,21 @@ The site is built using Jekyll. To build locally:
 3. Build the site: `./script/cibuild`.
 
 Push changes to the `master` branch to deploy to GitHub Pages.
+
+## Analytics
+
+The site uses **Plausible Analytics** for privacy-friendly, cookieless tracking.
+
+**Setup:**
+1. Sign up at https://plausible.io (30-day free trial, then $9/month)
+2. Add your domain (e.g., `sk2.github.io` or your custom domain)
+3. Update `_layouts/default.html` line 20:
+   - Change `data-domain="yourdomain.com"` to your actual domain
+4. Deploy and verify tracking in Plausible dashboard
+
+**Why Plausible:**
+- Privacy-friendly, GDPR compliant, no cookies
+- Lightweight (< 1KB script, no performance impact)
+- No cookie consent banner needed
+- Simple, beautiful dashboard
+- Open source

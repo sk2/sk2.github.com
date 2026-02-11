@@ -39,6 +39,9 @@ Developed compiler-based approach to transform high-level network specifications
 **AutoNetkit - Cisco VIRL Integration** (2013-2017)
 Open-source network configuration automation tool developed during PhD research. Integrated into Cisco's Virtual Internet Routing Lab (VIRL) platform for automated multi-vendor network lab provisioning. Presented at PyCon Australia 2013. Supported major vendors including Cisco IOS, IOS-XR, NX-OS, Juniper JunOS, and Arista EOS.
 
+**Internet Topology Zoo** (2010-2013)
+Curated database of real-world network topologies from Internet service providers, research networks, and enterprise deployments. Widely used dataset in academic research for network analysis, algorithm validation, and simulation studies. Provided standardized topology representations (GraphML) and metadata for reproducible networking research.
+
 ## Publications & Links
 
 - [Google Scholar Profile](https://scholar.google.com.au/citations?user=BJ1Efr8AAAAJ)

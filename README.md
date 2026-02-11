@@ -143,6 +143,63 @@ Expand project pages with these sections when available: Overview, What This Is,
 - Each project page should have ONE footer link: `[← Back to Projects](../projects)` at the end
 - NO duplicate footers (bug previously caused 9 duplicates)
 
+## Homepage & Ecosystem Pages
+
+### Homepage (index.md) Content Guidelines
+
+**Research & Background:**
+- Remove presentation mentions (e.g., "presented at PyCon AU") - not substantive
+- Focus on outcomes and impact (e.g., "integrated into Cisco's VIRL platform")
+- Emphasize ongoing work evolution rather than past conference talks
+
+**Areas of Interest (NOT "Technical Competencies"):**
+- Keep honest - list actual experience, not aspirational skills
+- Languages: Only include languages with real experience
+- Technical Domains: Broad areas (distributed computing, simulation, data processing)
+- Product & Innovation: Team structures, product design, problem-solving focus
+- Background: Include educational background (electrical engineering, economics)
+- NO embellished claims (SIMD optimization, zero-copy structures) unless actually implemented
+
+**Active Projects:**
+- Keep concise (4 bullet points max)
+- Link to /projects for full list
+- Biometric tools: "Building agent-based analysis systems on top of the HealthyPi hardware platform" (not "part of HealthyPi")
+
+### Ecosystem Pages
+
+**Created Pages:**
+- `/network-automation` - Network Automation Ecosystem
+- `/data-analytics` - Data Analytics & Visualization Ecosystem
+- `/agentic-systems` - Agentic Systems Ecosystem
+- `/signal-processing` - Signal Processing & RF Ecosystem
+
+**Content Structure:**
+Each ecosystem page follows this format:
+1. Vision & Philosophy (why these tools exist)
+2. Architecture diagram showing integration
+3. Detailed tool sections (What It Is, Key Features, Examples, Use Cases, Current Status, Tech Stack)
+4. Philosophy section (Why This Approach?)
+5. Open Source & Contributions links
+
+**Messaging Guidelines:**
+- **Network Simulator**: Emphasize "rapid prototyping" NOT "protocol-level fidelity"
+  - Goal is quick testing and iteration, catching obvious errors
+  - NOT a replacement for full emulation or production testing
+- **Examples**: Use CLI examples (user-friendly) over Rust API examples where possible
+- **AutoNetkit**: Use `deploy_to_containerlab()` not `deploy_to_virl()`
+- **Images**: Use absolute paths (`/images/...`) not relative paths
+- **Getting Started**: Remove "For Researchers" section (not substantive)
+
+**Navigation:**
+All 4 ecosystem pages are linked in the main navigation header for easy discovery.
+
+**Callout Boxes:**
+Each project category in projects.md has a callout box linking to its ecosystem page:
+```markdown
+> **[View X Ecosystem →](ecosystem-page)**
+> Brief description of what the ecosystem covers.
+```
+
 ## CV Maintenance
 
 The CV page (`cv.md`) is manually maintained with these guidelines:

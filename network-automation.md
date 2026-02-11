@@ -671,11 +671,6 @@ AutoNetkit proved that declarative, intent-based network automation could work a
 2. Explore **netsim** source code for protocol implementation details
 3. Contribute to **NetVis** for visualization algorithms
 
-**For Researchers:**
-1. Review **AutoNetkit** papers and thesis for theoretical foundations
-2. Use **TopoGen** for reproducible topology generation in experiments
-3. Cite the relevant papers (see individual project pages)
-
 ---
 
 ## Philosophy: Why This Approach?

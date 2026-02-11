@@ -390,7 +390,7 @@ def generate_projects_index(projects: list[ProjectInfo]) -> str:
 
             summary = ' '.join(summary_parts) if summary_parts else ""
 
-            # Extract first 4-5 sentences for more detail
+            # Extract first 4-5 sentences with paragraph breaks for readability
             if summary:
                 sentences = re.split(r'(?<=[.!?])\s+', summary)
                 # Take 4-5 sentences depending on length
@@ -400,7 +400,15 @@ def generate_projects_index(projects: list[ProjectInfo]) -> str:
                     num_sentences = min(4, len(sentences))
                 else:
                     num_sentences = min(5, len(sentences))
-                summary = ' '.join(sentences[:num_sentences])
+
+                # Add paragraph breaks every 2-3 sentences
+                selected_sentences = sentences[:num_sentences]
+                paragraphs = []
+                for i in range(0, len(selected_sentences), 2):
+                    # Group 2 sentences per paragraph
+                    para = ' '.join(selected_sentences[i:i+2])
+                    paragraphs.append(para)
+                summary = '\n\n'.join(paragraphs)
 
             lines.append(f"### [{p.name}](projects/{p.slug})\n")
             lines.append(f"{generate_status_badge(p)}")

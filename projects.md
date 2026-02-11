@@ -16,7 +16,9 @@ My work focuses on network automation tools, signal processing systems, and mult
  · **Python backend (FastAPI or Flask) · React or Vue frontend — Leverages existing Python ecosystem for ANK components · meets modern UX expectations**
 
 
-A unified network simulation and visualization platform for enterprise network engineers. ANK Workbench integrates existing ANK Pydantic models, simulator, and visualization components into a seamless end-to-end workflow. Engineers can design networks declaratively, run lightweight simulations, and visualize topology, configuration state, and simulation results in one integrated environment. Built as a commercial product offering a modern alternative to traditional emulation-based tools like GNS3 and Cisco Modeling Labs. Network engineers can design, validate, and visualize network changes in one complete workflow without switching between separate tools or manually gluing components together.
+A unified network simulation and visualization platform for enterprise network engineers. ANK Workbench integrates existing ANK Pydantic models, simulator, and visualization components into a seamless end-to-end workflow.
+
+Network engineers can design, validate, and visualize network changes in one complete workflow without switching between separate tools or manually gluing components together.
 
 
 ### [AutoNetkit](projects/autonetkit)
@@ -31,7 +33,9 @@ A unified network simulation and visualization platform for enterprise network e
 <span class="status-badge status-active">Active Development</span>
 
 
-A Rust-based network topology layout and visualization engine. Takes complex multi-layer network topologies (via petgraph) and renders them using advanced layout algorithms that reduce visual complexity while preserving structural clarity. Outputs static formats (SVG, PDF, PNG) for v1, with interactive browser embedding planned for future integration with other tooling. Transform network topologies into clear, information-dense visualizations using algorithms that minimize edge crossings, bundle related connections, and respect hierarchical/geographic structure — enabling understanding of networks that would otherwise be visual noise.
+A Rust-based network topology layout and visualization engine. Takes complex multi-layer network topologies (via petgraph) and renders them using advanced layout algorithms that reduce visual complexity while preserving structural clarity.
+
+Outputs static formats (SVG, PDF, PNG) for v1, with interactive browser embedding planned for future integration with other tooling. Transform network topologies into clear, information-dense visualizations using algorithms that minimize edge crossings, bundle related connections, and respect hierarchical/geographic structure — enabling understanding of networks that would otherwise be visual noise.
 
 
 ### [Network Simulator](projects/network-simulator)
@@ -39,7 +43,9 @@ A Rust-based network topology layout and visualization engine. Takes complex mul
 <span class="status-badge status-active">Active Development</span>
 
 
-A Rust-based network simulator that models packet-level behavior for routing protocols. It provides a middle ground between pure algorithmic analysis (like C-BGP) and full emulation (like Containerlab) — larger scale and smaller footprint than emulation, higher fidelity than algorithmic simulation. Used for smoke testing and design validation of network configurations. Validate network configurations at scale with protocol-level fidelity before deploying to real infrastructure.
+A Rust-based network simulator that models packet-level behavior for routing protocols. It provides a middle ground between pure algorithmic analysis (like C-BGP) and full emulation (like Containerlab) — larger scale and smaller footprint than emulation, higher fidelity than algorithmic simulation.
+
+Used for smoke testing and design validation of network configurations. Validate network configurations at scale with protocol-level fidelity before deploying to real infrastructure.
 
 
 ### [TopoGen - Network Topology Generator](projects/topogen)
@@ -47,7 +53,9 @@ A Rust-based network simulator that models packet-level behavior for routing pro
 <span class="status-badge status-active">Phase 17/24 (11%)</span>
 
 
-A Rust-based network topology generator with Python bindings that consolidates scattered topology generation logic from AutoNetKit, simulation tools, and visualization tools. Generates realistic data center, WAN, and random graph topologies with proper structure, design patterns, and realistic parameters. Outputs custom YAML format for use across the network engineering tool ecosystem. Network engineers can quickly generate realistic, validated network topologies without implementing complex algorithms from scratch.
+A Rust-based network topology generator with Python bindings that consolidates scattered topology generation logic from AutoNetKit, simulation tools, and visualization tools. Generates realistic data center, WAN, and random graph topologies with proper structure, design patterns, and realistic parameters.
+
+Outputs custom YAML format for use across the network engineering tool ecosystem. Network engineers can quickly generate realistic, validated network topologies without implementing complex algorithms from scratch.
 
 
 ### [ank_pydantic](projects/ank-pydantic)
@@ -55,7 +63,9 @@ A Rust-based network topology generator with Python bindings that consolidates s
 <span class="status-badge status-active">Phase 59/62 (99%)</span>
 
 
-A Python library for modeling and querying network topologies, backed by a high-performance Rust core (`ank_nte`). Features a two-stage transformation model (Whiteboard → Plan → Protocol Layers), type-safe Pydantic models for nodes/edges/layers, and a composable lazy query API with Rust-backed execution. Ships with "batteries-included" domain models (ISIS, MPLS, EVPN, L3VPN, IXP) in the blueprints/ module. A clean, consistent API where there's one obvious way to perform each topology operation — predictable naming, return types, and method signatures across the entire public surface.
+A Python library for modeling and querying network topologies, backed by a high-performance Rust core (`ank_nte`). Features a two-stage transformation model (Whiteboard → Plan → Protocol Layers), type-safe Pydantic models for nodes/edges/layers, and a composable lazy query API with Rust-backed execution.
+
+Ships with "batteries-included" domain models (ISIS, MPLS, EVPN, L3VPN, IXP) in the blueprints/ module. A clean, consistent API where there's one obvious way to perform each topology operation — predictable naming, return types, and method signatures across the entire public surface.
 
 
 ## Signal Processing & SDR
@@ -73,7 +83,9 @@ A modular, agent-aware health monitoring ecosystem that translates raw biometric
 <span class="status-badge status-active">Phase 2/4 (50%)</span>
 
 
-A multi-beam passive radar system based on KrakenSDR hardware, extending an abandoned prototype to reliably track aircraft. Currently focused on establishing a clean, stable foundation before adding advanced multi-beam correlation capabilities. Clean, understandable, stable codebase that reliably tracks aircraft in real-time.
+A multi-beam passive radar system based on KrakenSDR hardware, extending an abandoned prototype to reliably track aircraft. Currently focused on establishing a clean, stable foundation before adding advanced multi-beam correlation capabilities.
+
+Clean, understandable, stable codebase that reliably tracks aircraft in real-time.
 
 
 ### [Project Spectra](projects/signals)
@@ -99,7 +111,9 @@ Passive radar system that utilizes existing Wi-Fi signals for through-wall human
 <span class="status-badge status-active">Phase 1/1 (0%)</span>
 
 
-A Python script that automates post-imaging-session file organization for astrophotography. It batch-imports FITS files from ASIAIR backup locations, organizes them by target and observation night, copies matching calibration frames, and prepares the directory structure for PixInsight's WBPP (Weighted Batch Preprocessing) workflow. Eliminates manual file sorting after imaging sessions - scan hundreds of frames, organize by target/filter/date, validate calibration frame availability, and go straight to PixInsight processing.
+A Python script that automates post-imaging-session file organization for astrophotography. It batch-imports FITS files from ASIAIR backup locations, organizes them by target and observation night, copies matching calibration frames, and prepares the directory structure for PixInsight's WBPP (Weighted Batch Preprocessing) workflow.
+
+Eliminates manual file sorting after imaging sessions - scan hundreds of frames, organize by target/filter/date, validate calibration frame availability, and go straight to PixInsight processing.
 
 
 ### [OpenAstro Core](projects/open-astro-core)
@@ -107,7 +121,9 @@ A Python script that automates post-imaging-session file organization for astrop
 <span class="status-badge status-active">Active Development</span>
 
 
-OpenAstro Core is a high-performance Rust library providing shared astronomical logic, hardware drivers, and protocol implementations for the OpenAstro ecosystem. It exists to keep coordinate math and device/protocol behavior consistent across downstream OpenAstro apps. Downstream apps can rely on correct, consistent coordinate math and device/protocol primitives.
+OpenAstro Core is a high-performance Rust library providing shared astronomical logic, hardware drivers, and protocol implementations for the OpenAstro ecosystem. It exists to keep coordinate math and device/protocol behavior consistent across downstream OpenAstro apps.
+
+Downstream apps can rely on correct, consistent coordinate math and device/protocol primitives.
 
 
 ### [OpenAstro Node](projects/open-astro-node)
@@ -125,7 +141,9 @@ A headless, autonomous astrophotography controller designed for low-power Linux 
 <span class="status-badge status-active">Active Development</span>
 
 
-Photo Tour is a smart, interactive photography assistant designed for field use. It helps you compose shots, automate repeatable workflows, and progressively adds intelligent triggering and transition logic. In the field, you can see what the camera sees and get actionable guidance/control fast enough to improve the shot.
+Photo Tour is a smart, interactive photography assistant designed for field use. It helps you compose shots, automate repeatable workflows, and progressively adds intelligent triggering and transition logic.
+
+In the field, you can see what the camera sees and get actionable guidance/control fast enough to improve the shot.
 
 
 ## AI & Agents
@@ -143,7 +161,9 @@ A native SwiftUI training application for iPad and Apple TV that bridges profess
 <span class="status-badge status-active">Phase 17/20 (79%)</span>
 
 
-A security-first multi-agent system that coordinates specialized containerized agents (health monitoring, home automation, data aggregation, workflow automation) through a message broker architecture. Each agent runs in isolation with minimal privileges and communicates only through validated message queues, demonstrating production-ready patterns for deploying AI agents in security-critical infrastructure environments. The orchestrator uses cloud LLM reasoning (GPT-4/Claude) while agents remain lightweight and deterministic. Complete isolation between agents such that compromise of one agent cannot cascade to others or the orchestrator—demonstrating that secure multi-agent systems are practical for both personal and production infrastructure use cases.
+A security-first multi-agent system that coordinates specialized containerized agents (health monitoring, home automation, data aggregation, workflow automation) through a message broker architecture. Each agent runs in isolation with minimal privileges and communicates only through validated message queues, demonstrating production-ready patterns for deploying AI agents in security-critical infrastructure environments.
+
+The orchestrator uses cloud LLM reasoning (GPT-4/Claude) while agents remain lightweight and deterministic. Complete isolation between agents such that compromise of one agent cannot cascade to others or the orchestrator—demonstrating that secure multi-agent systems are practical for both personal and production infrastructure use cases.
 
 
 ## Data & Utilities
@@ -181,7 +201,9 @@ An Apple Watch sleep sounds application featuring adaptive audio. It uses a cust
 <span class="status-badge status-active">Active Development</span>
 
 
-**Wave** is an evolutionary ambient audio ecosystem designed to manage the user's sensory environment across rest and work. - **StillState:** Reclaiming silence and rest in shared or noisy environments through intelligent, adaptive audio. - **FlowState:** Achieving and maintaining a "Steady State" of focus through task-linked audio and genetic evolution.
+**Wave** is an evolutionary ambient audio ecosystem designed to manage the user's sensory environment across rest and work. - **StillState:** Reclaiming silence and rest in shared or noisy environments through intelligent, adaptive audio.
+
+- **FlowState:** Achieving and maintaining a "Steady State" of focus through task-linked audio and genetic evolution.
 
 
 <style>

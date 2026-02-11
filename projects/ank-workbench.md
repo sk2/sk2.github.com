@@ -27,7 +27,9 @@ Network design, validation, and testing typically occur in fragmented tools. **A
 
 ## What This Is
 
-A unified network simulation and visualization platform for enterprise network engineers. ANK Workbench integrates existing ANK Pydantic models, simulator, and visualization components into a seamless end-to-end workflow. Engineers can design networks declaratively, run lightweight simulations, and visualize topology, configuration state, and simulation results in one integrated environment. Built as a commercial product offering a modern alternative to traditional emulation-based tools like GNS3 and Cisco Modeling Labs.
+A unified network simulation and visualization platform for enterprise network engineers. ANK Workbench integrates existing ANK Pydantic models, simulator, and visualization components into a seamless end-to-end workflow.
+
+Engineers can design networks declaratively, run lightweight simulations, and visualize topology, configuration state, and simulation results in one integrated environment. Complements existing network tools by providing a declarative, intent-based workflow alongside traditional emulation platforms.
 
 ---
 

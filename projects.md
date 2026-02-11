@@ -85,7 +85,7 @@ A modular, agent-aware health monitoring ecosystem that translates raw biometric
 
 ### [Passive Radar - KrakenSDR Multi-Beam System](projects/passive)
 
-<span class="status-badge status-active">Phase 2/4 (50%)</span>
+<span class="status-badge status-active">Phase 2/4 (56%)</span>
 
 
 A multi-beam passive radar system based on KrakenSDR hardware, extending an abandoned prototype to reliably track aircraft. Currently focused on establishing a clean, stable foundation before adding advanced multi-beam correlation capabilities.
@@ -179,6 +179,17 @@ The orchestrator uses cloud LLM reasoning (GPT-4/Claude) while agents remain lig
 
 
 Serve dynamic vector tiles (MVT) from massive geospatial datasets (millions of points) with sub-second latency, enabling interactive visualization in Kepler.gl without pre-rendering static tilesets.
+
+
+### [matrix-profile-rs](projects/matrix-time-series)
+
+<span class="status-badge status-active">Phase 2/5 (16%)</span>
+ · **Rust · ndarray · rayon · Polars integration planned**
+
+
+A high-performance Rust implementation of Matrix Profile algorithms for time series analysis. Enables pattern discovery (motifs), anomaly detection (discords), and similarity search in univariate time series with native performance and Polars integration.
+
+Provides production-quality implementations of STOMP, SCAMP, and SCRIMP++ algorithms with clean APIs (`.motifs(k=3)`) and seamless DataFrame operations for time series pattern analysis.
 
 
 ### [nascleanup](projects/nascleanup)

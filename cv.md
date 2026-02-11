@@ -41,7 +41,7 @@ Open-source network configuration automation tool developed during PhD research.
 
 ## Publications & Links
 
-- [Google Scholar Profile](http://scholar.google.com.au/citations?user=BJ1Efr8AAAAJ)
+- [Google Scholar Profile](https://scholar.google.com.au/citations?user=BJ1Efr8AAAAJ)
 - [PhD Thesis Details](thesis)
 - [GitHub](https://github.com/sk2)
 - [LinkedIn](https://www.linkedin.com/in/simoncknight/)

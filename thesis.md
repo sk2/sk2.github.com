@@ -23,9 +23,9 @@ For my thesis I looked at automatically building configurations for traditional 
 
 These abstractions could be used to build the data-stores used in emerging software automation approaches for managing traditional IP network equipment.
 
-My work produced the AutoNetkit software which is [available](https://github.com/sk2/autonetkit) on GitHub. It is written in Python and used in the [VIRL](http://virl.cisco.com/) project at Cisco. I gave a talk on AutoNetkit at PyCon AU 2013, with a recording available on [YouTube](https://www.youtube.com/watch?v=EGK5jjyUBCQ).
+My work produced the AutoNetkit software which is [available](https://github.com/sk2/autonetkit) on GitHub. It is written in Python and used in the [VIRL](https://virl.cisco.com/) project at Cisco. I gave a talk on AutoNetkit at PyCon AU 2013, with a recording available on [YouTube](https://www.youtube.com/watch?v=EGK5jjyUBCQ).
 
-A copy of my PHD thesis, Abstractions and Transformations for Automated Data Network Configuration, is available on the University of South Australia [website](http://search.ror.unisa.edu.au/record/9916123403601831) or here [Thesis](thesis.pdf).
+A copy of my PHD thesis, Abstractions and Transformations for Automated Data Network Configuration, is available on the University of South Australia [website](https://search.ror.unisa.edu.au/record/9916123403601831) or here [Thesis](thesis.pdf).
 
 ![Thesis](thesis_thumbnail.png)
 

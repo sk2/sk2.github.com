@@ -129,17 +129,149 @@ A deterministic, tick-based network simulator that models packet-level routing p
 - **Comprehensive Testing**: 1,350+ tests validate protocol behavior against RFCs
 - **Parallel Execution**: Multi-core support for large topologies
 
-**Protocol Coverage:**
-- **Layer 2**: Ethernet, ARP
-- **Layer 3**: IPv4, ICMPv4
-- **Routing**: OSPF (full), IS-IS (in progress), BGP (planned)
-- **MPLS**: LDP, RSVP-TE (planned)
+**Detailed Protocol Support:**
 
-**Example Scenarios:**
-- Detect routing loops before deployment
-- Validate convergence behavior during link failures
-- Test traffic engineering policies
-- Smoke test configuration changes
+**Layer 2: Data Link**
+- **Ethernet**: Full IEEE 802.3 frame handling with MAC learning
+- **ARP**: Address Resolution Protocol for IPv4-to-MAC mapping
+- **Switching**: VLAN-aware forwarding with MAC address tables
+
+**Layer 3: Network**
+- **IPv4**: Complete packet forwarding with TTL decrement, fragmentation handling
+- **ICMPv4**: Echo request/reply, destination unreachable, time exceeded
+- **Routing Table**: Longest-prefix-match lookups with administrative distance
+
+**OSPF (RFC 2328 - OSPFv2):**
+- **Neighbor Discovery**: Hello protocol with dead interval detection
+- **Link State Database**: Full LSA flooding with sequence number validation
+- **SPF Calculation**: Dijkstra's algorithm for shortest path computation
+- **Areas**: Single-area and multi-area with ABR support
+- **Network Types**: Broadcast, point-to-point, NBMA
+- **Metrics**: Interface cost calculation and cumulative path costs
+- **Convergence**: Sub-second convergence for typical topologies
+
+**IS-IS (ISO 10589):**
+- **Level 1/Level 2**: Intra-area and inter-area routing
+- **TLV Encoding**: Proper handling of IS-IS TLV structures
+- **Pseudonodes**: LAN representation with designated IS election
+- **Metrics**: Wide metrics (32-bit) and narrow metrics (6-bit) support
+
+**BGP (RFC 4271 - BGP-4) - In Development:**
+- **Session Management**: TCP-based peering with keepalive/hold timers
+- **Path Attributes**: AS_PATH, NEXT_HOP, LOCAL_PREF, MED
+- **Route Selection**: Full BGP decision process implementation
+- **Policy**: Community-based filtering and attribute manipulation
+
+**MPLS - Planned:**
+- **LDP**: Label distribution for IP prefixes
+- **RSVP-TE**: Traffic engineering with explicit paths
+- **Fast Reroute**: Link/node protection with backup tunnels
+
+**Example: OSPF Triangle Topology**
+
+Input topology (`ospf-triangle.yaml`):
+```yaml
+name: ospf-triangle
+description: Three OSPF routers in a triangle with hosts
+
+devices:
+  - name: r1
+    type: router
+    router_id: 1.1.1.1
+    interfaces:
+      - name: eth0
+        ip: 10.0.12.1/24
+        ospf: { area: 0, cost: 10 }
+      - name: eth1
+        ip: 10.0.13.1/24
+        ospf: { area: 0, cost: 10 }
+      - name: eth2
+        ip: 10.0.1.1/24
+        ospf: { area: 0, cost: 1 }
+
+  - name: r2
+    type: router
+    router_id: 2.2.2.2
+    interfaces:
+      - name: eth0
+        ip: 10.0.12.2/24
+        ospf: { area: 0, cost: 10 }
+      - name: eth1
+        ip: 10.0.23.2/24
+        ospf: { area: 0, cost: 10 }
+
+  - name: r3
+    type: router
+    router_id: 3.3.3.3
+    interfaces:
+      - name: eth0
+        ip: 10.0.13.3/24
+        ospf: { area: 0, cost: 10 }
+      - name: eth1
+        ip: 10.0.23.3/24
+        ospf: { area: 0, cost: 10 }
+
+  - name: h1
+    type: host
+    interfaces:
+      - name: eth0
+        ip: 10.0.1.10/24
+        gateway: 10.0.1.1
+
+  - name: h3
+    type: host
+    interfaces:
+      - name: eth0
+        ip: 10.0.3.10/24
+        gateway: 10.0.3.1
+
+links:
+  - endpoints: [r1:eth0, r2:eth0]
+  - endpoints: [r1:eth1, r3:eth0]
+  - endpoints: [r2:eth1, r3:eth1]
+  - endpoints: [r1:eth2, h1:eth0]
+  - endpoints: [r3:eth2, h3:eth0]
+
+script:
+  - at: converged
+    device: r1
+    command: show ip route
+  - at: converged + 100
+    device: h1
+    command: ping 10.0.3.10
+```
+
+Run simulation:
+```bash
+$ netsim run ospf-triangle.yaml
+
+[t=0ms] Network initialized: 5 devices, 5 links
+[t=0ms] OSPF: r1, r2, r3 sending Hello on all interfaces
+[t=10ms] OSPF: Neighbors established (r1<->r2, r1<->r3, r2<->r3)
+[t=15ms] OSPF: LSA flooding in progress
+[t=20ms] OSPF: SPF calculation complete on all routers
+[t=20ms] Network converged
+
+[t=20ms] r1> show ip route
+10.0.1.0/24   directly connected (eth2)
+10.0.3.0/24   via 10.0.13.3 [OSPF/110] metric=11
+10.0.12.0/24  directly connected (eth0)
+10.0.13.0/24  directly connected (eth1)
+10.0.23.0/24  via 10.0.12.2 [OSPF/110] metric=20
+
+[t=120ms] h1> ping 10.0.3.10
+PING 10.0.3.10: 64 bytes from 10.0.3.10: icmp_seq=1 ttl=62 time=2.1ms
+Round-trip path: h1 -> r1 -> r3 -> h3 -> r3 -> r1 -> h1
+
+Simulation complete: 120ms simulated, 0.034s real time (3529x speedup)
+```
+
+**Use Cases:**
+- **Pre-deployment Validation**: Catch routing loops, black holes, and misconfigurations before production
+- **Convergence Analysis**: Measure failover time and validate backup paths
+- **Capacity Planning**: Test network behavior under scaled topologies
+- **Protocol Verification**: Validate RFC compliance for custom implementations
+- **Training**: Safe environment for learning routing protocol behavior
 
 **Current Status:** v1.6 shipped with OSPF support. 126,000 lines of Rust, 122 requirements met (35 MVP + 87 advanced).
 
@@ -165,12 +297,63 @@ A Rust-based network topology layout and visualization engine that transforms co
 - **High-Quality Rendering**: Anti-aliased, publication-ready graphics
 - **Topology Awareness**: Uses `petgraph` for graph analysis
 
+**Example: Quick Start**
+
+Input (Rust API):
+```rust
+use netvis::{EdgeData, ForceDirectedLayout, Layout,
+              NetVisGraph, NodeData, Renderer, SvgRenderer};
+
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    // Create graph with typed nodes
+    let mut graph = NetVisGraph::new();
+
+    let r1 = graph.add_node(NodeData::new("r1").node_type("router"));
+    let r2 = graph.add_node(NodeData::new("r2").node_type("router"));
+    let s1 = graph.add_node(NodeData::new("s1").node_type("switch"));
+    let s2 = graph.add_node(NodeData::new("s2").node_type("switch"));
+    let h1 = graph.add_node(NodeData::new("h1").node_type("host"));
+    let h2 = graph.add_node(NodeData::new("h2").node_type("host"));
+
+    // Add edges with weights
+    graph.add_edge(r1, s1, EdgeData::new(1.0));
+    graph.add_edge(r1, s2, EdgeData::new(1.0));
+    graph.add_edge(r2, s1, EdgeData::new(1.0));
+    graph.add_edge(r2, s2, EdgeData::new(1.0));
+    graph.add_edge(s1, h1, EdgeData::new(1.0));
+    graph.add_edge(s2, h2, EdgeData::new(1.0));
+    graph.add_edge(s1, s2, EdgeData::new(0.5));
+
+    // Apply force-directed layout
+    let layout = ForceDirectedLayout::new().seed(42);
+    let scene = layout.layout(&graph)?;
+
+    // Render to SVG
+    SvgRenderer::default()
+        .render_to_file(&scene, 800.0, 600.0, "output.svg")?;
+
+    Ok(())
+}
+```
+
+**Example Output: Data Center Topology**
+
+A real-world data center spine-leaf topology rendered with NetVis:
+
+![NetVis Data Center Example](images/netvis-datacenter-example.svg)
+
+This visualization shows:
+- **Hierarchical Layout**: Spine layer at top, leaf layer below
+- **Node Differentiation**: Different visual styles for device types
+- **Clean Edge Routing**: Minimal crossings, readable even at scale
+- **Information Density**: Compact representation without cluttering
+
 **Use Cases:**
-- Network documentation
-- Change impact visualization
-- Capacity planning
-- Architectural reviews
-- Incident response (understand blast radius)
+- **Network Documentation**: Auto-generate topology diagrams from inventory
+- **Change Impact Visualization**: Show blast radius of configuration changes
+- **Capacity Planning**: Identify bottlenecks and underutilized links
+- **Architectural Reviews**: Present network designs to stakeholders
+- **Incident Response**: Quickly understand failure domains and dependencies
 
 **Current Status:** Core layout algorithms implemented, refining edge bundling and multi-layer rendering. Interactive browser embedding planned for v2.
 
@@ -195,18 +378,92 @@ A Rust library with Python bindings for generating realistic network topologies.
 - **Custom YAML Output**: Compatible with ank_pydantic and other ecosystem tools
 - **Python Bindings**: Ergonomic API for scripting and integration
 
-**Example Usage:**
+**Example: Data Center Leaf-Spine**
+
+Configuration file (`leaf-spine-lab.yaml`):
+```yaml
+# Title: Leaf-spine lab (2 spines, 4 leaves, 100G)
+# Goal: A compact 2-tier Clos for lab validation
+
+name: dc-lab-leaf-spine-2s-4l-100g
+seed: 42
+
+type: leaf-spine
+spines: 2
+leaves: 4
+full_mesh: true
+spine_bandwidth_gbps: 100.0
+```
+
+Generate topology:
+```bash
+$ topogen generate leaf-spine-lab.yaml --output topology.yaml
+
+Generated topology: dc-lab-leaf-spine-2s-4l-100g
+  Nodes: 6 (2 spines, 4 leaves)
+  Links: 8 (full mesh spine-leaf connectivity)
+  Total bandwidth: 800 Gbps
+  Oversubscription: 2:1 (standard)
+
+Output written to: topology.yaml
+```
+
+Generated output (excerpt):
+```yaml
+name: dc-lab-leaf-spine-2s-4l-100g
+topology_type: leaf-spine
+
+nodes:
+  - name: spine-1
+    type: spine
+    tier: 1
+  - name: spine-2
+    type: spine
+    tier: 1
+  - name: leaf-1
+    type: leaf
+    tier: 2
+  - name: leaf-2
+    type: leaf
+    tier: 2
+  - name: leaf-3
+    type: leaf
+    tier: 2
+  - name: leaf-4
+    type: leaf
+    tier: 2
+
+links:
+  - src: leaf-1
+    dst: spine-1
+    bandwidth_gbps: 100.0
+    latency_ms: 0.1
+  - src: leaf-1
+    dst: spine-2
+    bandwidth_gbps: 100.0
+    latency_ms: 0.1
+  # ... (full mesh: 4 leaves × 2 spines = 8 links)
+```
+
+**Python API:**
 ```python
 from topogen import DataCenter
 
-# Generate 4-pod spine-leaf topology
+# Programmatic generation
 topo = DataCenter.spine_leaf(
-    num_pods=4,
-    spines_per_pod=2,
-    leaves_per_pod=4,
-    servers_per_leaf=8
+    spines=2,
+    leaves=4,
+    full_mesh=True,
+    spine_bandwidth_gbps=100.0
 )
-topo.export_yaml("dc-topology.yaml")
+
+# Export to multiple formats
+topo.export_yaml("topology.yaml")
+topo.export_json("topology.json")
+
+# Integration with ank_pydantic
+from ank_pydantic import Topology
+ank_topo = topo.to_ank_pydantic()
 ```
 
 **Current Status:** Early development, focusing on core algorithms and Python bindings.
@@ -227,6 +484,95 @@ The original compiler-based network automation tool from my PhD research. AutoNe
 - **Industry Adoption**: Integrated into Cisco VIRL (Virtual Internet Routing Lab)
 - **Open Source Pioneer**: Presented at PyCon AU 2013, widely used in academic research
 - **Design Patterns**: Established the Whiteboard → Plan → Build transformation model now used in ank_pydantic
+
+**The Transformation Model:**
+
+AutoNetkit pioneered a multi-stage compilation approach:
+
+**1. Whiteboard Layer** (High-level intent)
+```python
+# Simple topology definition
+router("r1", asn=65000)
+router("r2", asn=65000)
+router("r3", asn=65001)
+
+link(r1, r2, protocol="ospf")
+link(r2, r3, protocol="bgp")
+```
+
+**2. Plan Layer** (Protocol-specific graphs)
+```
+OSPF Graph:
+  r1 [area=0, router_id=1.1.1.1]
+  r2 [area=0, router_id=2.2.2.2]
+  r1 -- r2 [cost=10, network=10.0.12.0/24]
+
+BGP Graph:
+  r2 [asn=65000, router_id=2.2.2.2]
+  r3 [asn=65001, router_id=3.3.3.1]
+  r2 -- r3 [peer_type="ebgp", network=10.0.23.0/24]
+```
+
+**3. Build Layer** (Vendor-specific configuration)
+
+*Cisco IOS (r1):*
+```
+interface GigabitEthernet0/0
+ ip address 10.0.12.1 255.255.255.0
+ no shutdown
+
+router ospf 1
+ router-id 1.1.1.1
+ network 10.0.12.0 0.0.0.255 area 0
+```
+
+*Juniper JunOS (r3):*
+```
+interfaces {
+    ge-0/0/0 {
+        unit 0 {
+            family inet {
+                address 10.0.23.3/24;
+            }
+        }
+    }
+}
+
+protocols {
+    bgp {
+        group ebgp {
+            type external;
+            peer-as 65000;
+            neighbor 10.0.23.2;
+        }
+    }
+}
+```
+
+**Example Workflow:**
+```python
+import autonetkit
+
+# Load topology from GraphML
+topo = autonetkit.load("topology.graphml")
+
+# Apply design rules
+topo.compile(
+    protocols=["ospf", "bgp", "isis"],
+    ip_allocation="hierarchical"
+)
+
+# Generate configurations for multiple vendors
+configs = topo.build(
+    targets=["cisco_ios", "juniper_junos", "arista_eos"]
+)
+
+# Deploy or simulate
+topo.deploy_to_virl()
+```
+
+**Key Innovation:**
+Separating *what* (Whiteboard: "these routers run OSPF") from *how* (Build: vendor-specific OSPF syntax) allows one topology definition to generate configurations for multiple vendors. The Plan layer captures protocol semantics independent of vendor implementation.
 
 **Why It Matters:**
 AutoNetkit proved that declarative, intent-based network automation could work at scale. The lessons learned — graph-based modeling, type safety, vendor abstraction — directly inform the design of the modern ANK ecosystem.

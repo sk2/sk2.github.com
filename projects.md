@@ -10,6 +10,11 @@ My work focuses on network automation tools, signal processing systems, and mult
 
 ## Network Engineering
 
+> **[View Network Automation Ecosystem →](network-automation)**
+> Explore the complete network automation toolchain — from topology modeling to protocol simulation to visualization. See how the tools integrate and work together.
+
+---
+
 ### [ANK Workbench](projects/ank-workbench)
 
 <span class="status-badge status-active">Phase 18/19 (98%)</span>

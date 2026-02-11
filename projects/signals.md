@@ -2,7 +2,7 @@
 layout: default
 ---
 
-# healthypi
+# signals
 
 <span class="status-badge status-complete">Production Ready</span>
 
@@ -22,11 +22,7 @@ layout: default
 
 ## Core Value
 
-A modular, agent-aware health monitoring ecosystem that translates raw biometric data from HealthyPi hardware (6 and Move) into actionable insights and automated interventions.
-
-## Current Status
-
-2026-02-10 - Completed 05-03-PLAN.md (Quick Glance dropdown + notifications + UX verified)
+Transform raw radio spectrum data into an actionable "Signal Census" through automated detection, ML classification, and distributed acquisition.
 
 ---
 

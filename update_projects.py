@@ -1,15 +1,13 @@
 #!/usr/bin/env python3
 """
-Update website projects page from project metadata.
+Update website projects page and individual project pages from project metadata.
 
 Scans project directories for .planning/PROJECT.md, STATE.md, ROADMAP.md
-and generates the projects.md page with current status and details.
+and generates:
+1. projects.md (Summary index)
+2. projects/*.md (Detailed project pages)
 
-Enforces "Strunk and White" style: omit needless words, use active voice.
-
-Usage:
-    python update_projects.py
-    python update_projects.py --dry-run
+Enforces "Strunk and White" style.
 """
 
 import argparse
@@ -23,6 +21,7 @@ from typing import Optional, Dict
 class ProjectInfo:
     """Metadata extracted from project planning documents."""
     name: str
+    slug: str
     path: Path
     category: str
     status: str
@@ -36,7 +35,6 @@ class ProjectInfo:
 def extract_sections(content: str) -> Dict[str, str]:
     """Extract all ## sections from markdown."""
     sections = {}
-    # Find all ## headers and their content until the next header or end of file
     matches = re.finditer(r'^##\s+(.*?)\s*$(.*?)(?=^##\s|\Z)', content, re.MULTILINE | re.DOTALL)
     for match in matches:
         header = match.group(1).strip()
@@ -59,7 +57,10 @@ def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
     content = project_md.read_text()
     all_sections = extract_sections(content)
 
-    # Extract tech stack from "Constraints" or "Context"
+    # Slug for filenames
+    slug = project_path.name.lower().replace("_", "-").replace(" ", "-")
+
+    # Extract tech stack
     stack = []
     constraints = all_sections.get("Constraints", "")
     if "Tech Stack" in constraints:
@@ -68,7 +69,7 @@ def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
             stack_str = tech_match.group(1).split('\n')[0]
             stack = [s.strip() for s in re.split(r'[,;]', stack_str) if s.strip()]
 
-    # Determine status from STATE.md
+    # Status from STATE.md
     status = "active"
     status_detail = None
     current_status = ""
@@ -102,8 +103,9 @@ def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
 
     return ProjectInfo(
         name=project_path.name,
+        slug=slug,
         path=project_path,
-        category="network",  # Default, categorized later
+        category="network",  # categorized later
         status=status,
         status_detail=status_detail,
         stack=stack,
@@ -113,76 +115,71 @@ def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
 
 
 def categorize_project(project: ProjectInfo) -> str:
-    """Categorize project based on name and content."""
     name_lower = project.name.lower()
     overview = str(project.sections).lower()
-
-    if any(x in name_lower for x in ['netvis', 'ank', 'topogen', 'netsim', 'autonetkit']):
-        return "network"
-    if any(x in name_lower for x in ['astro', 'healthypi', 'spectra']):
-        return "signal"
-    if any(x in name_lower for x in ['agent', 'cycle']):
-        return "agents"
-    
-    if 'network' in overview or 'topology' in overview:
-        return "network"
-    if any(x in overview for x in ['signal', 'biometric', 'spectrum']):
-        return "signal"
-    if 'agent' in overview:
-        return "agents"
-
+    if any(x in name_lower for x in ['netvis', 'ank', 'topogen', 'netsim', 'autonetkit']): return "network"
+    if any(x in name_lower for x in ['astro', 'healthypi', 'spectra']): return "signal"
+    if any(x in name_lower for x in ['agent', 'cycle']): return "agents"
+    if 'network' in overview or 'topology' in overview: return "network"
+    if any(x in overview for x in ['signal', 'biometric', 'spectrum']): return "signal"
     return "network"
 
 
 def generate_status_badge(project: ProjectInfo) -> str:
-    """Generate status badge HTML."""
     if project.status == "complete":
         return '<span class="status-badge status-complete">Production Ready</span>'
-    detail = project.status_detail or ("Planning" if project.status == "planning" else "Active Development")
+    detail = project.status_detail or "Active Development"
     cls = "status-planning" if project.status == "planning" else "status-active"
     return f'<span class="status-badge {cls}">{detail}</span>'
 
 
-def generate_project_section(project: ProjectInfo) -> str:
-    """Generate markdown for a single project, preserving detail and structure."""
-    lines = [f"### {project.name}", "", generate_status_badge(project), ""]
+def generate_detailed_page(project: ProjectInfo) -> str:
+    """Generate the full markdown for an individual project page."""
+    lines = [
+        "---", "layout: default", "---", "",
+        f"# {project.name}", "",
+        generate_status_badge(project), "",
+        "[← Back to Projects](../projects)", "", "---", "",
+        "## Quick Facts", "",
+        "| | |", "|---|---|",
+        f"| **Status** | {project.status_detail or project.status.capitalize()} |",
+        f"| **Language** | {', '.join(project.stack) if project.stack else 'N/A'} |",
+        "| **Started** | 2025 |", "", "---", ""
+    ]
 
-    # Interesting sections to include if they exist
+    # Include all relevant sections from PROJECT.md
     priority_sections = [
         "Core Value", "Overview", "What This Is", "Problem It Solves",
         "Architecture", "Technical Depth", "Security Model", "Features",
-        "Protocols Implemented", "Performance", "Metrics"
+        "Protocols Implemented", "Performance", "Metrics", "Usage Examples"
     ]
 
-    included_count = 0
     for sec_name in priority_sections:
         content = project.sections.get(sec_name)
         if content:
-            # For "Overview" type sections, just include the text
-            if sec_name in ["Core Value", "Overview", "What This Is"]:
-                lines.append(content)
-            else:
-                # For others, include the header as bold
-                lines.append(f"**{sec_name}:**")
-                lines.append(content)
-            lines.append("")
-            included_count += 1
-
-    if project.stack:
-        lines.append(f"**Stack:** {' · '.join(project.stack)}")
-        lines.append("")
+            lines.append(f"## {sec_name}\n")
+            lines.append(content + "\n")
 
     if project.current_status:
-        lines.append(f"**Current Status:** {project.current_status}")
-        lines.append("")
+        lines.append("## Current Status\n")
+        lines.append(f"{project.current_status}\n")
 
-    lines.append("---")
-    lines.append("")
+    lines.append("---\n")
+    lines.append("[← Back to Projects](../projects) | [Development Philosophy](../development)\n")
+    
     return "\n".join(lines)
 
 
-def generate_projects_page(projects: list[ProjectInfo]) -> str:
-    """Generate complete projects.md content."""
+def generate_summary_section(project: ProjectInfo) -> str:
+    """Generate a brief summary for the main projects.md index."""
+    # Try to get the first paragraph of Overview or Core Value
+    overview = project.sections.get("Overview") or project.sections.get("Core Value") or project.sections.get("What This Is") or ""
+    summary = overview.split('\n\n')[0]
+    
+    return f"### [{project.name}](projects/{project.slug})\n\n{generate_status_badge(project)}\n\n{summary}\n\n---\n"
+
+
+def generate_projects_index(projects: list[ProjectInfo]) -> str:
     lines = [
         "---", "layout: default", "---", "",
         "# Projects", "",
@@ -190,33 +187,24 @@ def generate_projects_page(projects: list[ProjectInfo]) -> str:
         "", "---", ""
     ]
 
-    categories = {
-        "network": ("Network Engineering", []),
-        "signal": ("Signal Processing & Hardware", []),
-        "agents": ("AI & Agents", []),
-        "legacy": ("Legacy", [])
-    }
-
-    for project in projects:
-        project.category = categorize_project(project)
-        categories[project.category][1].append(project)
+    categories = {"network": ("Network Engineering", []), "signal": ("Signal Processing & Hardware", []), "agents": ("AI & Agents", [])}
+    for p in projects:
+        p.category = categorize_project(p)
+        if p.category in categories: categories[p.category][1].append(p)
 
     for cat_id, (title, cat_projects) in categories.items():
         if not cat_projects: continue
         lines.append(f"## {title}\n")
-        for project in sorted(cat_projects, key=lambda p: p.name):
-            lines.append(generate_project_section(project))
+        for p in sorted(cat_projects, key=lambda x: x.name):
+            lines.append(generate_summary_section(p))
 
-    lines.append("## Development Approach\n")
-    lines.append("I plan work in `.planning/` directories with phase-based execution. I verify completeness with formal documents. I use NATS for message coordination. I write comprehensive tests. I document architecture decisions in PROJECT.md and STATE.md.\n")
-    
+    lines.append("## Development Approach\n\nI plan work in `.planning/` directories with phase-based execution. I document architecture decisions in PROJECT.md and STATE.md.\n")
     return "\n".join(lines)
 
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--dry-run", action="store_true")
-    parser.add_argument("--output", type=Path, default=Path("projects.md"))
     args = parser.parse_args()
 
     base_dirs = [Path.home() / "dev", Path.home() / "PycharmProjects", Path.home() / "RustroverProjects"]
@@ -228,12 +216,21 @@ def main():
                 info = parse_project_metadata(p_dir)
                 if info: projects.append(info)
 
-    content = generate_projects_page(projects)
     if args.dry_run:
-        print(content)
+        print("Summary Index Preview:")
+        print(generate_projects_index(projects)[:500] + "...")
     else:
-        args.output.write_text(content)
-        print(f"✓ Updated {args.output}")
+        # 1. Update projects.md
+        Path("projects.md").write_text(generate_projects_index(projects))
+        
+        # 2. Update projects/*.md
+        projects_dir = Path("projects")
+        projects_dir.mkdir(exist_ok=True)
+        for p in projects:
+            file_path = projects_dir / f"{p.slug}.md"
+            file_path.write_text(generate_detailed_page(p))
+            
+        print(f"✓ Updated projects.md and {len(projects)} detailed pages in projects/")
 
 
 if __name__ == "__main__":

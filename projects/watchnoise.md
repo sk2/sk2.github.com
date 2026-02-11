@@ -29,14 +29,6 @@ Sleep sound applications typically rely on static loops and phone dependency. **
 
 An Apple Watch sleep sounds application featuring adaptive audio. It uses a custom audio unit graph for real-time synthesis and integrates with HealthKit for heart rate synchronization.
 
-## Architecture
-
-- **Audio Engine**: Custom audio unit graph for real-time synthesis and mixing.
-- **Ambient Noise Generation**: White, brown, and blended noise via procedural audio synthesis.
-- **Bluetooth Event Handling**: Monitors headphone connection/disconnection for auto-pause.
-- **HealthKit Integration**: Accesses heart rate for adaptive audio modulation.
-- **User Interface**: SwiftUI for intuitive watchOS experience.
-
 ## Features
 
 - **Procedural Audio Synthesis**: Generates high-quality ambient sounds without large audio files.
@@ -47,6 +39,26 @@ An Apple Watch sleep sounds application featuring adaptive audio. It uses a cust
 ---
 
 [← Back to Projects](../projects)
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)
+
+## Architecture
+
+- **Audio Engine**: Custom audio unit graph for real-time synthesis and mixing.
+- **Ambient Noise Generation**: White, brown, and blended noise via procedural audio synthesis.
+- **Bluetooth Event Handling**: Monitors headphone connection/disconnection for auto-pause.
+- **HealthKit Integration**: Accesses heart rate for adaptive audio modulation.
+- **User Interface**: SwiftUI for intuitive watchOS experience.
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)
 
 ---
 

@@ -2,7 +2,7 @@
 layout: default
 ---
 
-# Wave (StillState & FlowState)
+# Wave
 
 <span class="status-badge status-active">Active Development</span>
 

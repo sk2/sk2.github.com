@@ -60,6 +60,62 @@ AI agent systems need strong security boundaries to prevent compromise from casc
 - Pre-approval workflow for sensitive actions
 - Lightweight deterministic agents with cloud LLM orchestrator
 
+## Features
+
+### Pre-Approval Workflow
+
+Sensitive actions require user confirmation:
+
+```
+1. Agent requests capability token for sensitive action
+2. Orchestrator prompts user via macOS notification
+3. User approves/denies with reason
+4. Orchestrator issues token or rejects request
+5. Action logged to audit trail
+```
+
+**Sensitive Actions:**
+- Financial transactions
+- Home automation commands
+- Message sending
+- Data deletion
+
+### Real-Time Monitoring
+
+macOS-native dashboard shows agent activity:
+
+**Displayed Information:**
+- Active agents and container status
+- Message throughput on NATS
+- Recent agent actions
+- Pending approvals
+- Anomaly alerts
+
+**Controls:**
+- Start/stop individual agents
+- View logs per agent
+- Revoke capability tokens
+- Manual workflow triggers
+
+### Explanation of Actions
+
+Agents provide reasoning for proposed actions:
+
+```
+Health Agent: "Suggesting 10-minute walk break"
+Reason: "Sedentary for 3 hours, heart rate variability declining"
+Data: { sitting_time: 180, hrv_trend: -15%, step_count: 450 }
+Confidence: 0.85
+```
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)
+
 ## Architecture
 
 ### Message Broker: NATS
@@ -170,53 +226,34 @@ OpenTelemetry tracing for all operations:
 - Security incident investigation
 - Compliance reporting
 
-## Features
+## Individual Agents
 
-### Pre-Approval Workflow
+The system coordinates specialized agents, each designed for a specific domain with minimal privileges:
 
-Sensitive actions require user confirmation:
+### Health & Biometrics
+- **HealthKit Agent** (Swift): Extracts metrics from Apple Health (heart rate, sleep, activity). Runs on macOS host only (no container) due to HealthKit framework requirements.
+- **HealthyPi Agent** (Python): Processes real-time biometric signals (ECG, PPG, EDA) from HealthyPi hardware, performs HRV analysis, and publishes health events.
 
-```
-1. Agent requests capability token for sensitive action
-2. Orchestrator prompts user via macOS notification
-3. User approves/denies with reason
-4. Orchestrator issues token or rejects request
-5. Action logged to audit trail
-```
+### Home & Environment
+- **Hue Agent** (Python): Controls Philips Hue lights based on time of day, presence detection, and automation rules. Scoped network access to Hue Bridge API only.
+- **Climate Agent** (Python): Monitors temperature, humidity, and adjusts HVAC settings. Isolated network tier.
 
-**Sensitive Actions:**
-- Financial transactions
-- Home automation commands
-- Message sending
-- Data deletion
+### Data Aggregation
+- **Calendar Agent** (Swift): Reads upcoming events from Apple Calendar/EventKit. macOS host execution only.
+- **Weather Agent** (Python): Fetches forecasts and current conditions. Scoped to weather API endpoints.
+- **RSS Agent** (Python): Aggregates news feeds and notifies on keywords. Full internet tier with content filtering.
 
-### Real-Time Monitoring
+### Monitoring & Maintenance
+- **Backup Monitor** (Rust): Verifies Time Machine and NAS backup integrity. Checks disk usage and staleness. Alerts on failures.
+- **Screen Time Agent** (Swift): Tracks application usage patterns from macOS. Host-only execution.
+- **Network Monitor** (Rust): Tracks bandwidth, latency, and detects anomalies in local network traffic.
 
-macOS-native dashboard shows agent activity:
+### Automation & Coordination
+- **Workflow Engine** (Python): Executes multi-step workflows involving multiple agents. Coordinates approval flow for sensitive actions.
+- **Notification Gateway** (Python): Sends notifications via multiple channels (iOS, email, Slack). Full internet access.
+- **Audit Anomaly Agent** (Python): Monitors OpenTelemetry logs for security events and unusual patterns.
 
-**Displayed Information:**
-- Active agents and container status
-- Message throughput on NATS
-- Recent agent actions
-- Pending approvals
-- Anomaly alerts
-
-**Controls:**
-- Start/stop individual agents
-- View logs per agent
-- Revoke capability tokens
-- Manual workflow triggers
-
-### Explanation of Actions
-
-Agents provide reasoning for proposed actions:
-
-```
-Health Agent: "Suggesting 10-minute walk break"
-Reason: "Sedentary for 3 hours, heart rate variability declining"
-Data: { sitting_time: 180, hrv_trend: -15%, step_count: 450 }
-Confidence: 0.85
-```
+All agents communicate exclusively via NATS with subject-based ACLs. Each agent's capabilities are explicitly defined, and actions requiring elevated privileges trigger the pre-approval workflow.
 
 ---
 

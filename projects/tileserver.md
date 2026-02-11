@@ -2,7 +2,7 @@
 layout: default
 ---
 
-# PROJECT: Tileserver Polars (Rust Optimized)
+# Tileserver Polars
 
 <span class="status-badge status-active">Active Development</span>
 

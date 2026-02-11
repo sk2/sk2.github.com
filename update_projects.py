@@ -61,8 +61,19 @@ def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
     name_match = re.search(r'^#\s+(.+)$', content, re.MULTILINE)
     project_name = name_match.group(1).strip() if name_match else project_path.name
 
-    # Slug for filenames
+    # Clean up project names (remove verbose prefixes)
+    project_name = re.sub(r'^PROJECT:\s*', '', project_name, flags=re.IGNORECASE)
+    project_name = re.sub(r'^Project:\s*', '', project_name, flags=re.IGNORECASE)
+    project_name = re.sub(r'\s*\([^)]+\)$', '', project_name)  # Remove trailing parentheticals like (KrakenSDR)
+
+    # Slug for filenames with special mappings
     slug = project_path.name.lower().replace("_", "-").replace(" ", "-")
+
+    # Special slug mappings to consolidate duplicates
+    slug_mappings = {
+        "multi-agent-assistant": "multi-agent",
+    }
+    slug = slug_mappings.get(slug, slug)
 
     # Extract tech stack
     stack = []
@@ -98,12 +109,8 @@ def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
         if last_activity:
             current_status = last_activity.group(1).strip()
 
-    roadmap_md = planning_dir / "ROADMAP.md"
-    if roadmap_md.exists():
-        roadmap_content = roadmap_md.read_text()
-        if "All phases complete" in roadmap_content or "100%" in roadmap_content:
-            status = "complete"
-            status_detail = "Production Ready"
+    # Note: Don't assume production readiness based on phase completion
+    # Just use the phase progress as the status detail
 
     return ProjectInfo(
         name=project_name,
@@ -119,29 +126,9 @@ def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
 
 
 def categorize_project(project: ProjectInfo) -> str:
-    name_lower = project.name.lower()
-    sections_lower = str(project.sections).lower()
-
-    # Explicit assignments based on user feedback
-    if "watchnoise" in name_lower: return "personal-apps"
-    if "nascleanup" in name_lower: return "data-utilities"
-    if "photo-tour" in name_lower: return "personal-apps"
-    if "open-astro-core" in name_lower or "open-astro-node" in name_lower: return "astrophotography"
-
-    # Keyword-based assignments
-    if any(x in name_lower for x in ['netvis', 'ank', 'topogen', 'netsim', 'autonetkit']): return "network"
-    if any(x in name_lower for x in ['healthypi', 'spectra']): return "signal"
-    if any(x in name_lower for x in ['agent', 'cycle', 'multi-agent-assistant']): return "agents"
-
-    # Fallback to content-based (less specific, ordered by preference)
-    if 'network' in sections_lower or 'topology' in sections_lower: return "network"
-    if any(x in sections_lower for x in ['signal', 'biometric', 'spectrum', 'radio']): return "signal"
-    if any(x in sections_lower for x in ['astro', 'telescope', 'astrophotography']): return "astrophotography"
-    if 'data' in sections_lower or 'geospatial' in sections_lower or 'utilities' in sections_lower: return "data-utilities"
-    if 'agent' in sections_lower or 'ai' in sections_lower: return "agents"
-    if 'personal' in sections_lower or 'app' in sections_lower or 'watch' in sections_lower: return "personal-apps"
-    
-    return "other" # New default category for anything uncategorized
+    # Note: Categorization disabled per user feedback - using simple list instead
+    # This function kept for potential future use but returns empty string
+    return ""
 
 
 def generate_status_badge(project: ProjectInfo) -> str:
@@ -183,19 +170,21 @@ def generate_detailed_page(project: ProjectInfo) -> str:
         "| **Started** | 2025 |", "", "---", ""
     ])
 
-    # Include all relevant sections from PROJECT.md
+    # Include all relevant sections from PROJECT.md (expanded for more detail)
     priority_sections = [
-        "Overview", "What This Is", "Problem It Solves",
-        "Architecture", "Technical Depth", "Security Model", "Features",
-        "Protocols Implemented", "Performance", "Metrics"
+        "Overview", "What This Is", "Problem It Solves", "Core Value",
+        "Features", "Key Capabilities", "Technical Features",
+        "Architecture", "Technical Depth", "Security Model",
+        "Implementation Details", "Design Decisions",
+        "Protocols Implemented", "Performance", "Metrics",
+        "Use Cases", "Integration", "Hardware", "Agents", "Components"
     ]
 
     for sec_name in priority_sections:
-        if sec_name == "Core Value" and (existing_insight or "Core Value" in project.sections): 
-            # Skip Core Value if we already used it or have an insight
-            if sec_name in project.sections and not existing_insight and project.sections[sec_name] == existing_insight:
-                 continue
-        
+        # Skip Core Value if we already used it in The Insight section
+        if sec_name == "Core Value" and existing_insight:
+            continue
+
         content = project.sections.get(sec_name)
         if content:
             lines.append(f"## {sec_name}\n")
@@ -294,8 +283,21 @@ def main():
     projects_dir.mkdir(exist_ok=True)
 
     for project in projects:
-        page_content = generate_detailed_page(project)
         page_path = projects_dir / f"{project.slug}.md"
+        page_content = generate_detailed_page(project)
+
+        # Preserve existing detailed content if it's substantially longer
+        # (indicates manual enrichment that shouldn't be lost)
+        if page_path.exists():
+            existing_content = page_path.read_text()
+            existing_lines = len(existing_content.split('\n'))
+            new_lines = len(page_content.split('\n'))
+
+            # If existing file has 3x more content, it's likely manually enriched
+            if existing_lines > new_lines * 3:
+                print(f"  Preserving detailed content: {page_path} ({existing_lines} vs {new_lines} lines)")
+                continue
+
         page_path.write_text(page_content)
         print(f"  Generated {page_path}")
 
@@ -313,80 +315,30 @@ def generate_projects_index(projects: list[ProjectInfo]) -> str:
         "", "---", ""
     ]
 
-    categories = {
-        "network": ("Network Engineering", []),
-        "signal": ("Signal Processing & Hardware", []),
-        "astrophotography": ("Astrophotography", []),
-        "agents": ("AI & Agents", []),
-        "data-utilities": ("Data & Utilities", []),
-        "personal-apps": ("Personal Apps", []),
-        "other": ("Other Projects", []) # For any uncategorized
-    }
-    for p in projects:
-        p.category = categorize_project(p)
-        if p.category in categories: categories[p.category][1].append(p)
-        else: categories["other"][1].append(p) # Assign to 'other' if category not defined
+    # Simple list format (no categories per user preference)
+    for p in sorted(projects, key=lambda x: x.name):
+        overview = p.sections.get("Overview") or p.sections.get("Core Value") or p.sections.get("What This Is") or ""
+        summary = overview.split('\n\n')[0] if overview else ""
+        if len(summary) > 200:
+            summary = summary[:197] + "..."
 
-    for cat_id, (title, cat_projects) in categories.items():
-        if not cat_projects:
-            continue
-        lines.append(f"## {title}\n")
-        lines.append('<div class="projects-grid">\n') # Start grid for category
-        for p in sorted(cat_projects, key=lambda x: x.name):
-            overview = p.sections.get("Overview") or p.sections.get("Core Value") or p.sections.get("What This Is") or ""
-            summary = overview.split('\n\n')[0]
-            if len(summary) > 200:
-                summary = summary[:197] + "..."
+        lines.append(f"## [{p.name}](projects/{p.slug})\n")
+        lines.append(f"{generate_status_badge(p)}\n")
 
-            lines.append(f'  <div class="project-card">')
-            lines.append(f'    <div class="project-header">')
-            lines.append(f'      {generate_status_badge(p)}')
-            lines.append(f'      <h2>{p.name}</h2>')
-            lines.append(f'    </div>')
-            lines.append(f'    <div class="project-meta">')
-            for tech in p.stack[:3]: # Show top 3 techs
-                lines.append(f'      <span class="project-badge">{tech}</span>')
-            lines.append(f'    </div>')
-            lines.append(f'    <p>{summary}</p>')
-            lines.append(f'    <a href="projects/{p.slug}" class="btn">View Details →</a>')
-            lines.append(f'  </div>\n')
-        lines.append('</div>\n') # End grid for category
+        if p.stack:
+            tech_str = " · ".join(p.stack[:4])
+            lines.append(f"**Stack:** {tech_str}\n")
 
+        if summary:
+            lines.append(f"{summary}\n")
 
-    # Extract principles from development.md if it exists
-    principles = []
-    dev_md_path = Path("development.md")
-    if dev_md_path.exists():
-        dev_content = dev_md_path.read_text()
-        principles_match = re.search(r'## Principles\s*\n(.*?)(?=\n##|\Z)', dev_content, re.DOTALL | re.MULTILINE)
-        if principles_match:
-            for line in principles_match.group(1).strip().split('\n'):
-                if line.strip().startswith(('1.', '2.', '3.', '4.', '5.', '6.', '7.', '8.', '9.')):
-                    # Clean up the numbered list item, convert to bullet point
-                    # Ensure each principle starts with a dash and is properly formatted
-                    principle = re.sub(r'^\d+\.\s*\*\*(.*?)\*\*[:\-]?\s*(.*)', r'- **\1**: \2', line.strip())
-                    principles.append(principle)
-
-    lines.append("## Development Approach\n")
-    lines.append("I build tools with a **planning-first** approach. Every project lives in a `.planning/` directory, where I define core values in `PROJECT.md`, track execution in `STATE.md`, and verify progress through rigorous phase-based goals.\n")
-    
-    if principles:
-        lines.append("### Core Principles\n")
-        lines.extend(principles)
         lines.append("")
 
-    lines.append("[Detailed Development Philosophy](development)\n")
+
+    # Note: Development philosophy section removed per user preference
+    # Simple list layout - minimal CSS needed
     lines.append('<style>')
-    lines.append('.projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: var(--space-lg); margin-top: var(--space-xl); }')
-    lines.append('.project-card { display: flex; flex-direction: column; justify-content: space-between; padding: var(--space-xl); border: 1px solid var(--border-color); border-radius: 8px; background-color: var(--bg-secondary); }')
-    lines.append('.project-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--space-sm); }')
-    lines.append('.project-header h2 { margin: 0; font-size: 1.5rem; }')
-    lines.append('.project-meta { margin-bottom: var(--space-sm); }')
-    lines.append('.project-badge { display: inline-block; padding: 0.25rem 0.6rem; margin-right: 0.5rem; border-radius: 4px; background-color: var(--code-bg); color: var(--text-secondary); font-size: 0.75rem; }')
-    lines.append('.btn { display: inline-block; margin-top: var(--space-md); padding: 0.5rem 1rem; background-color: var(--bg-tertiary); color: var(--text-primary); border-radius: 6px; font-weight: 600; font-size: 0.875rem; transition: all var(--transition-fast); text-decoration: none; }')
-    lines.append('.btn:hover { background-color: var(--accent); color: white; }')
-    lines.append('.status-badge { display: inline-block; padding: 0.2em 0.6em; border-radius: 4px; font-size: 0.75em; font-weight: 600; line-height: 1; text-align: center; white-space: nowrap; vertical-align: baseline; }')
-    lines.append('.status-complete { background-color: #28a745; color: white; }')
+    lines.append('.status-badge { display: inline-block; padding: 0.3em 0.8em; margin: 0.5em 0; border-radius: 4px; font-size: 0.85em; font-weight: 600; }')
     lines.append('.status-active { background-color: #007bff; color: white; }')
     lines.append('.status-planning { background-color: #ffc107; color: #343a40; }')
     lines.append('</style>')

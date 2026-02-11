@@ -2,7 +2,7 @@
 layout: default
 ---
 
-# Project: Cycle Agent
+# Cycle Agent
 
 <span class="status-badge status-active">Phase 1/5 (80%)</span>
 

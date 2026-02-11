@@ -94,13 +94,20 @@ The theme contains a minimal test suite, to ensure a site with the theme would b
 ## Maintenance & Updates
 
 ### Updating Projects
-The list of projects in `projects.md` can be generated from project metadata in your development directories. **Caution:** Manual edits for detail and style are often preferred over the raw script output.
+The list of projects in `projects.md` can be generated from project metadata in your development directories.
 
 ```bash
 python3 update_projects.py
 ```
 
-This script scans `~/dev`, `~/PycharmProjects`, and `~/RustroverProjects` for projects containing `.planning/PROJECT.md`. Always review changes against `projects_detailed_backup.md` to ensure no loss of depth.
+This script scans `~/dev`, `~/PycharmProjects`, and `~/RustroverProjects` for projects containing `.planning/PROJECT.md`.
+
+**Important Preferences:**
+- **No "Production Ready" assumptions**: The script should NEVER mark projects as "Production Ready" based on phase completion. Projects are not production ready just because phases are complete.
+- **No Development Philosophy section**: The projects.md index should NOT include a "Development Approach" or "Development Philosophy" section at the bottom.
+- **Detailed project pages**: Each project page should include comprehensive information about features, capabilities, architecture, and what the project actually does. Brief summaries are not sufficient.
+- **Extract actual project names**: Use the project name from the `# Header` in PROJECT.md, not the directory name.
+- **Preserve legacy projects**: Keep existing project .md files that don't have .planning directories (e.g., autonetkit).
 
 ## Writing Style
 

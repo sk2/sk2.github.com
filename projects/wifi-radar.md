@@ -2,9 +2,9 @@
 layout: default
 ---
 
-# Project: Wi-Fi Radar (KrakenSDR)
+# Wi-Fi Radar
 
-<span class="status-badge status-complete">Production Ready</span>
+<span class="status-badge status-active">Active Development</span>
 
 [← Back to Projects](../projects)
 
@@ -19,7 +19,7 @@ Passive radar system that utilizes existing Wi-Fi signals for through-wall human
 
 | | |
 |---|---|
-| **Status** | Production Ready |
+| **Status** | Active |
 | **Language** | N/A |
 | **Started** | 2025 |
 

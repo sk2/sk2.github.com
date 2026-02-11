@@ -4,7 +4,7 @@ layout: default
 
 # Passive Radar - KrakenSDR Multi-Beam System
 
-<span class="status-badge status-active">Phase 1/3 (0%)</span>
+<span class="status-badge status-active">Phase 1/3 (5%)</span>
 
 [← Back to Projects](../projects)
 
@@ -19,7 +19,7 @@ Clean, understandable, stable codebase that reliably tracks aircraft in real-tim
 
 | | |
 |---|---|
-| **Status** | Phase 1/3 (0%) |
+| **Status** | Phase 1/3 (5%) |
 | **Language** | N/A |
 | **Started** | 2025 |
 

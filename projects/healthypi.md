@@ -4,7 +4,7 @@ layout: default
 
 # HealthyPi Ecosystem
 
-<span class="status-badge status-complete">Production Ready</span>
+<span class="status-badge status-active">Active Development</span>
 
 [← Back to Projects](../projects)
 
@@ -19,7 +19,7 @@ Health monitoring typically relies on siloed apps that provide opaque "scores." 
 
 | | |
 |---|---|
-| **Status** | Production Ready |
+| **Status** | Active |
 | **Language** | N/A |
 | **Started** | 2025 |
 

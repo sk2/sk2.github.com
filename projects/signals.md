@@ -4,7 +4,7 @@ layout: default
 
 # Project Spectra
 
-<span class="status-badge status-complete">Production Ready</span>
+<span class="status-badge status-active">Active Development</span>
 
 [← Back to Projects](../projects)
 
@@ -19,7 +19,7 @@ Transform raw radio spectrum data into an actionable "Signal Census" through aut
 
 | | |
 |---|---|
-| **Status** | Production Ready |
+| **Status** | Active |
 | **Language** | N/A |
 | **Started** | 2025 |
 

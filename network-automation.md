@@ -364,48 +364,59 @@ A Rust-based network topology layout and visualization engine that transforms co
 
 **Example: Quick Start**
 
-Input (Rust API):
-```rust
-use netvis::{EdgeData, ForceDirectedLayout, Layout,
-              NetVisGraph, NodeData, Renderer, SvgRenderer};
+Input topology (`simple-network.yaml`):
+```yaml
+nodes:
+  - name: r1
+    type: router
+  - name: r2
+    type: router
+  - name: s1
+    type: switch
+  - name: s2
+    type: switch
+  - name: h1
+    type: host
+  - name: h2
+    type: host
 
-fn main() -> Result<(), Box<dyn std::error::Error>> {
-    // Create graph with typed nodes
-    let mut graph = NetVisGraph::new();
+edges:
+  - src: r1
+    dst: s1
+  - src: r1
+    dst: s2
+  - src: r2
+    dst: s1
+  - src: r2
+    dst: s2
+  - src: s1
+    dst: h1
+  - src: s2
+    dst: h2
+  - src: s1
+    dst: s2
+```
 
-    let r1 = graph.add_node(NodeData::new("r1").node_type("router"));
-    let r2 = graph.add_node(NodeData::new("r2").node_type("router"));
-    let s1 = graph.add_node(NodeData::new("s1").node_type("switch"));
-    let s2 = graph.add_node(NodeData::new("s2").node_type("switch"));
-    let h1 = graph.add_node(NodeData::new("h1").node_type("host"));
-    let h2 = graph.add_node(NodeData::new("h2").node_type("host"));
+Render with CLI:
+```bash
+$ netvis render simple-network.yaml \
+    --layout force-directed \
+    --output output.svg \
+    --width 800 \
+    --height 600
 
-    // Add edges with weights
-    graph.add_edge(r1, s1, EdgeData::new(1.0));
-    graph.add_edge(r1, s2, EdgeData::new(1.0));
-    graph.add_edge(r2, s1, EdgeData::new(1.0));
-    graph.add_edge(r2, s2, EdgeData::new(1.0));
-    graph.add_edge(s1, h1, EdgeData::new(1.0));
-    graph.add_edge(s2, h2, EdgeData::new(1.0));
-    graph.add_edge(s1, s2, EdgeData::new(0.5));
-
-    // Apply force-directed layout
-    let layout = ForceDirectedLayout::new().seed(42);
-    let scene = layout.layout(&graph)?;
-
-    // Render to SVG
-    SvgRenderer::default()
-        .render_to_file(&scene, 800.0, 600.0, "output.svg")?;
-
-    Ok(())
-}
+Loaded topology: 6 nodes, 7 edges
+Applying force-directed layout...
+Layout converged in 245 iterations
+Rendering to SVG...
+Written: output.svg (6.5 KB)
 ```
 
 **Example Output: Data Center Topology**
 
 A real-world data center spine-leaf topology rendered with NetVis:
 
-![NetVis Data Center Example](images/netvis-datacenter-example.svg)
+![NetVis Data Center Example](/images/netvis-datacenter-example.svg)
 
 This visualization shows:
 - **Hierarchical Layout**: Spine layer at top, leaf layer below
@@ -632,8 +643,8 @@ configs = topo.build(
     targets=["cisco_ios", "juniper_junos", "arista_eos"]
 )
 
-# Deploy or simulate
-topo.deploy_to_virl()
+# Deploy to Containerlab
+topo.deploy_to_containerlab()
 ```
 
 **Key Innovation:**

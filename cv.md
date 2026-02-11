@@ -15,10 +15,7 @@ University of South Australia, 2017
 
 Thesis: *Abstractions and Transformations for Automated Data Network Configuration*
 
-Developed compiler-based approach to transform high-level network specifications into multi-platform device configurations. Created AutoNetkit, used in Cisco's VIRL project.
-
-Supervisors: A/Prof Kearney, Dr Wigley
-Examiners: Prof Bonaventure, Prof Bergmann
+Developed compiler-based approach to transform high-level network specifications into multi-platform device configurations. Research focused on graph transformations, declarative network modeling, and automated configuration generation across heterogeneous vendors. Created AutoNetkit, which was integrated into Cisco's VIRL network simulation platform and presented at PyCon Australia 2013.
 
 ## Technical Skills
 
@@ -30,24 +27,17 @@ Examiners: Prof Bonaventure, Prof Bergmann
 - Real-time signal processing (biometrics, RF)
 - High-performance visualization and simulation
 
-**Tools & Frameworks:** NATS, Docker, FastAPI, React, PyO3, petgraph, NeuroKit2
+**Tools & Frameworks:**
+- **Infrastructure:** Docker, NATS, OpenTelemetry, Tokio
+- **Web:** FastAPI, Flask, React, Vue, Axum
+- **Data & ML:** Polars, Pydantic, NeuroKit2, PyTorch
+- **Rust Ecosystem:** PyO3, petgraph, serde, tracing
+- **Network:** INDI/ASCOM protocols, MPLS, BGP, OSPF
 
-## Notable Projects
+## Professional Work
 
-**AutoNetkit** (2013-2017)
-Open-source network configuration automation tool. Used in Cisco's VIRL project. Presented at PyCon AU 2013.
-
-**ank-pydantic** (Current)
-Type-safe network topology modeling with Pydantic and Rust graph engine. Multi-vendor configuration generation for 11+ platforms.
-
-**NetVis** (2026)
-Production-ready network topology visualization library in Rust. 582 tests, multiple layout algorithms, SVG/PNG/PDF export.
-
-**netsim** (Current)
-Deterministic network protocol simulator in Rust. Implements OSPF, IS-IS, BGP, MPLS/LDP, BFD. Validates configurations before production deployment.
-
-**ANK Workbench** (Current)
-Unified network simulation and visualization platform. FastAPI + React. Production-ready v1.1 shipped February 2026.
+**AutoNetkit - Cisco VIRL Integration** (2013-2017)
+Open-source network configuration automation tool developed during PhD research. Integrated into Cisco's Virtual Internet Routing Lab (VIRL) platform for automated multi-vendor network lab provisioning. Presented at PyCon Australia 2013. Supported major vendors including Cisco IOS, IOS-XR, NX-OS, Juniper JunOS, and Arista EOS.
 
 ## Publications & Links
 

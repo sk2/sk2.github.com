@@ -12,7 +12,7 @@ My work focuses on network automation tools, signal processing systems, and mult
 
 ### [ANK Workbench](projects/ank-workbench)
 
-<span class="status-badge status-active">Phase 17/19 (99%)</span>
+<span class="status-badge status-active">Phase 18/19 (98%)</span>
  · **Python backend (FastAPI or Flask) · React or Vue frontend — Leverages existing Python ecosystem for ANK components · meets modern UX expectations**
 
 
@@ -44,7 +44,7 @@ Validate network configurations at scale with protocol-level fidelity before dep
 
 ### [TopoGen - Network Topology Generator](projects/topogen)
 
-<span class="status-badge status-active">Active Development</span>
+<span class="status-badge status-active">Phase 17/24 (11%)</span>
 
 
 Network engineers can quickly generate realistic, validated network topologies without implementing complex algorithms from scratch.
@@ -52,7 +52,7 @@ Network engineers can quickly generate realistic, validated network topologies w
 
 ### [ank_pydantic](projects/ank-pydantic)
 
-<span class="status-badge status-active">Phase 58/62 (99%)</span>
+<span class="status-badge status-active">Phase 59/62 (99%)</span>
 
 
 A clean, consistent API where there's one obvious way to perform each topology operation — predictable naming, return types, and method signatures across the entire public surface.
@@ -78,7 +78,7 @@ A modular, agent-aware health monitoring ecosystem that translates raw biometric
 
 ### [Passive Radar - KrakenSDR Multi-Beam System](projects/passive)
 
-<span class="status-badge status-active">Phase 1/3 (5%)</span>
+<span class="status-badge status-active">Phase 1/4 (25%)</span>
 
 
 Clean, understandable, stable codebase that reliably tracks aircraft in real-time.

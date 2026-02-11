@@ -4,7 +4,7 @@ layout: default
 
 # ank_pydantic
 
-<span class="status-badge status-active">Phase 58/62 (99%)</span>
+<span class="status-badge status-active">Phase 59/62 (99%)</span>
 
 [← Back to Projects](../projects)
 
@@ -19,7 +19,7 @@ Network topology modeling typically forces a choice between the speed of untyped
 
 | | |
 |---|---|
-| **Status** | Phase 58/62 (99%) |
+| **Status** | Phase 59/62 (99%) |
 | **Language** | N/A |
 | **Started** | 2025 |
 

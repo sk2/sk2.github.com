@@ -4,7 +4,7 @@ layout: default
 
 # ANK Workbench
 
-<span class="status-badge status-active">Phase 17/19 (99%)</span>
+<span class="status-badge status-active">Phase 18/19 (98%)</span>
 
 [← Back to Projects](../projects)
 
@@ -19,7 +19,7 @@ Network design, validation, and testing typically occur in fragmented tools. **A
 
 | | |
 |---|---|
-| **Status** | Phase 17/19 (99%) |
+| **Status** | Phase 18/19 (98%) |
 | **Language** | Python backend (FastAPI or Flask), React or Vue frontend — Leverages existing Python ecosystem for ANK components, meets modern UX expectations |
 | **Started** | 2025 |
 

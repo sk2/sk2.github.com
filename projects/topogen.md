@@ -4,7 +4,7 @@ layout: default
 
 # TopoGen - Network Topology Generator
 
-<span class="status-badge status-active">Active Development</span>
+<span class="status-badge status-active">Phase 17/24 (11%)</span>
 
 [← Back to Projects](../projects)
 
@@ -19,7 +19,7 @@ Generating realistic, validated network topologies for testing often requires cu
 
 | | |
 |---|---|
-| **Status** | Active |
+| **Status** | Phase 17/24 (11%) |
 | **Language** | N/A |
 | **Started** | 2025 |
 

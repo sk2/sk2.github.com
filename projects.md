@@ -75,6 +75,11 @@ Ships with "batteries-included" domain models (ISIS, MPLS, EVPN, L3VPN, IXP) in 
 
 ## Signal Processing & SDR
 
+> **[View Signal Processing & RF Ecosystem →](signal-processing)**
+> Explore real-time biometric analysis, passive radar systems, and RF spectrum monitoring. Transform raw sensor data into actionable intelligence.
+
+---
+
 ### [HealthyPi Ecosystem](projects/healthypi)
 
 <span class="status-badge status-active">Active Development</span>
@@ -153,6 +158,11 @@ In the field, you can see what the camera sees and get actionable guidance/contr
 
 ## AI & Agents
 
+> **[View Agentic Systems Ecosystem →](agentic-systems)**
+> Explore security-first multi-agent architectures with 13+ specialized agents. Container isolation, capability-based authorization, and comprehensive audit trails.
+
+---
+
 ### [Cycle Agent](projects/cycle)
 
 <span class="status-badge status-active">Phase 1/5 (80%)</span>
@@ -172,6 +182,11 @@ The orchestrator uses cloud LLM reasoning (GPT-4/Claude) while agents remain lig
 
 
 ## Data & Utilities
+
+> **[View Data Analytics & Visualization Ecosystem →](data-analytics)**
+> Explore high-performance tools for geospatial analytics and time series pattern discovery. Process millions of rows interactively with Polars-native implementations.
+
+---
 
 ### [Tileserver Polars](projects/tileserver)
 

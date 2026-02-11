@@ -374,8 +374,13 @@ def generate_projects_index(projects: list[ProjectInfo]) -> str:
         for p in sorted(cat_projects, key=lambda x: x.name):
             overview = p.sections.get("Overview") or p.sections.get("Core Value") or p.sections.get("What This Is") or ""
             summary = overview.split('\n\n')[0] if overview else ""
-            if len(summary) > 150:
-                summary = summary[:147] + "..."
+
+            # Extract first 2-3 sentences instead of hard character limit
+            if summary:
+                sentences = re.split(r'(?<=[.!?])\s+', summary)
+                # Take first 2 sentences, or 3 if they're all short
+                num_sentences = 2 if len(sentences[0]) > 80 else min(3, len(sentences))
+                summary = ' '.join(sentences[:num_sentences])
 
             lines.append(f"### [{p.name}](projects/{p.slug})\n")
             lines.append(f"{generate_status_badge(p)}")

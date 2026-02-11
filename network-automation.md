@@ -15,7 +15,7 @@ Network engineering traditionally fragments across disconnected tools: design in
 **Core Philosophy:**
 - **Declarative over imperative**: Define *what* the network should do, not *how* to configure it
 - **Type-safe modeling**: Catch errors at design time, not deployment time
-- **Protocol-level fidelity**: Simulate routing protocol behavior, not just connectivity
+- **Rapid iteration**: Quick simulation cycles for testing configuration changes
 - **Performance without compromise**: Rust cores with Python bindings where ergonomics matter
 - **Composable components**: Each tool solves one problem well and integrates cleanly with others
 
@@ -184,7 +184,7 @@ NetVis reads the exported topology and applies advanced layout algorithms, produ
 <span class="status-badge status-active">Active Development</span> · [Full Details →](projects/network-simulator)
 
 **What It Is:**
-A deterministic, tick-based network simulator that models packet-level routing protocol behavior. It's the middle ground between pure algorithmic analysis (C-BGP) and full device emulation (Containerlab) — protocol-level fidelity without the resource cost of running actual network operating systems.
+A deterministic, tick-based network simulator for rapid prototyping and testing of network configurations. Enables quick validation of routing protocol behavior before moving to full emulation or production deployment — catch obvious errors early in the design cycle.
 
 **Key Features:**
 - **Deterministic Simulation**: Tick-based execution ensures reproducible results
@@ -686,8 +686,8 @@ Pydantic models catch topology errors at design time. Invalid node types, missin
 ### Rust for Performance-Critical Paths
 Graph algorithms (path finding, centrality, layout) run in Rust with Python bindings. Engineers get Python ergonomics for modeling, Rust speed for computation.
 
-### Protocols, Not Emulation
-Simulating OSPF/BGP logic is 100x faster than running actual network OS instances. For validation and testing, protocol-level fidelity is sufficient — you don't need a full kernel.
+### Simulation for Rapid Prototyping
+Simulating OSPF/BGP logic is 100x faster than running actual network OS instances. The goal is rapid testing and iteration — catch obvious misconfigurations quickly before moving to full emulation or production testing.
 
 ### Declarative Over Imperative
 Define *what* the network should do (all routers run OSPF, advertise loopbacks) rather than *how* to configure it (87 lines of Cisco IOS commands per router). The compiler handles vendor-specific syntax.

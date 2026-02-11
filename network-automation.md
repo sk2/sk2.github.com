@@ -22,36 +22,85 @@ Network engineering traditionally fragments across disconnected tools: design in
 ## How They Work Together
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                      ANK Workbench                          │
-│        (Unified Platform - Web UI + Orchestration)          │
-└────────────────┬───────────────────────────┬────────────────┘
-                 │                           │
-        ┌────────▼─────────┐        ┌────────▼─────────┐
-        │  ank_pydantic    │        │    TopoGen       │
-        │  (Topology API)  │        │  (Generate)      │
-        └────────┬─────────┘        └────────┬─────────┘
-                 │                           │
-                 └──────────┬────────────────┘
-                            │
-              ┌─────────────▼──────────────┐
-              │     Network Simulator      │
-              │   (Protocol Validation)    │
-              └─────────────┬──────────────┘
-                            │
-              ┌─────────────▼──────────────┐
-              │         NetVis             │
-              │   (Visualization Engine)   │
-              └────────────────────────────┘
+┌──────────────────────────────────────────────────────────────────┐
+│                        ANK Workbench                             │
+│         (Orchestration · Web UI · Workflow Management)           │
+│   ┌──────────────┬──────────────┬──────────────┬──────────────┐ │
+│   │   TopoGen    │ ank_pydantic │   Simulator  │    NetVis    │ │
+└───┴──────────────┴──────────────┴──────────────┴──────────────┴─┘
+    │              │              │              │
+    │              │              │              │
+    │   ┌──────────▼──────────┐   │              │
+    │   │     TopoGen         │   │              │
+    │   │  (Generate Topo)    │   │              │
+    │   └──────────┬──────────┘   │              │
+    │              │               │              │
+    │              │               │              │
+    │   ┌──────────▼──────────────────────┐      │
+    │   │       ank_pydantic              │      │
+    │   │   (Topology Modeling API)       │      │
+    │   └──────────┬──────────────────────┘      │
+    │              │                              │
+    │              │                              │
+    │   ┌──────────▼─────────────────────────────────────┐
+    │   │            Analysis Module                      │
+    │   │  ┌─────────────────────┬─────────────────────┐ │
+    │   │  │  ank_pydantic       │ Network Simulator   │ │
+    │   │  │  (Query & Transform)│ (Protocol Behavior) │ │
+    │   │  └─────────────────────┴─────────────────────┘ │
+    │   └──────────┬──────────────────────────────────────┘
+    │              │
+    │              │
+    │   ┌──────────▼──────────┐
+    │   │       NetVis        │
+    │   │   (Visualization)   │
+    │   └─────────────────────┘
+    │
+    └─► ANK Workbench coordinates entire pipeline
 ```
 
-**Typical Workflow:**
-1. **Design**: Use `TopoGen` to generate realistic topologies or `ank_pydantic` to model networks declaratively
-2. **Validate**: Run the `Network Simulator` to verify routing protocol behavior and catch misconfigurations
-3. **Visualize**: Use `NetVis` to render topology layouts with advanced algorithms
-4. **Deploy**: Generate vendor-specific configurations (future ANK Workbench capability)
+**Design-to-Visualization Workflow:**
 
-All orchestrated through **ANK Workbench** — a unified web interface for the complete workflow.
+1. **Generate** (`TopoGen`)
+   - Create realistic topologies (spine-leaf, WAN, random graphs)
+   - Output YAML with nodes, links, and parameters
+
+2. **Model** (`ank_pydantic`)
+   - Load topology into type-safe Python API
+   - Transform through layers (Whiteboard → Plan → Protocol)
+   - Query relationships, compute paths, assign addressing
+
+3. **Analyze** (Analysis Module)
+   - **ank_pydantic**: Query topology structure, compute metrics
+   - **Network Simulator**: Validate protocol behavior, test failover scenarios
+   - Combined analysis identifies issues before deployment
+
+4. **Visualize** (`NetVis`)
+   - Render topology with advanced layout algorithms
+   - Show analysis results (failed routes, bottlenecks, coverage)
+   - Generate documentation-quality diagrams
+
+5. **Orchestrate** (`ANK Workbench`)
+   - Web UI manages entire pipeline
+   - One-click workflow execution
+   - Interactive result exploration
+
+**Example End-to-End:**
+```
+TopoGen: Generate 4-pod spine-leaf topology
+  ↓
+ank_pydantic: Load YAML, apply OSPF+BGP transformations
+  ↓
+Analysis:
+  ├─ ank_pydantic: Verify all leaf-spine links present, compute redundancy
+  └─ Network Simulator: Validate OSPF convergence, test link failure scenarios
+  ↓
+NetVis: Render hierarchical layout with color-coded health status
+  ↓
+ANK Workbench: Display results, allow parameter tweaks, re-run workflow
+```
+
+All orchestrated through **ANK Workbench** — a unified web interface for the complete network automation pipeline.
 
 ---
 
@@ -106,7 +155,23 @@ border_routers = topo.query().filter(role="border").collect()
 
 # Transform to protocol layers
 topo.transform_to_protocol("ospf")
+
+# Export for visualization
+topo.export_for_netvis("topology.json")
 ```
+
+**Integration with NetVis:**
+ank_pydantic topologies export directly to NetVis format:
+```python
+# Export topology with layout hints
+topo.export_for_netvis(
+    "output.json",
+    layout="hierarchical",
+    node_metadata=True  # Include device types, roles for styling
+)
+```
+
+NetVis reads the exported topology and applies advanced layout algorithms, producing publication-quality diagrams that reflect the logical structure captured in ank_pydantic.
 
 **Current Status:** Feature-complete, final polish and documentation before 1.0 release.
 

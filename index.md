@@ -39,14 +39,14 @@ I am currently developing a suite of interconnected tools:
 
 ---
 
-## Technical Competencies
+## Areas of Interest
 
 | Area | Focus |
 | :--- | :--- |
-| **Languages** | Rust, Python, Go, TypeScript, Swift |
-| **High-Performance Computing** | Parallel algorithms, SIMD optimization, zero-copy data structures, streaming execution for datasets larger than RAM |
-| **Data Processing & Analytics** | Large-scale geospatial analytics, time series pattern discovery, graph algorithms, real-time signal processing (DSP, HRV analysis, RF spectrum monitoring) |
-| **Systems Architecture** | Multi-agent coordination, message-driven architectures, container orchestration, type-safe API design, deterministic simulation engines |
+| **Languages** | Rust, Python, Go, JavaScript, Java |
+| **Technical Domains** | Distributed computing, data processing and analytics, simulation, signal processing, graph algorithms, network automation |
+| **Product & Innovation** | Team structures for innovation delivery, cutting-edge product design, building tools that solve real problems |
+| **Background** | Electrical engineering, economics |
 
 ## Development Workflow
 

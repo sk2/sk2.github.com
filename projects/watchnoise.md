@@ -10,6 +10,11 @@ layout: default
 
 ---
 
+
+## The Insight
+
+Sleep sound applications typically rely on static loops and phone dependency. **WatchNoise** implements procedural audio synthesis on watchOS, enabling heartbeat-synced ambient noise and environmental adaptation directly from the wrist without requiring a nearby iPhone.
+
 ## Quick Facts
 
 | | |
@@ -20,13 +25,9 @@ layout: default
 
 ---
 
-## The Insight
-
-Convenient access to sleep sounds from your wrist without needing your phone nearby.
-
 ## What This Is
 
-Apple Watch sleep sounds app with adaptive audio. Frequency calibration, heartbeat sync, and environmental noise monitoring.
+An Apple Watch sleep sounds application featuring adaptive audio. It uses a custom audio unit graph for real-time synthesis and integrates with HealthKit for heart rate synchronization.
 
 ## Architecture
 
@@ -42,6 +43,14 @@ Apple Watch sleep sounds app with adaptive audio. Frequency calibration, heartbe
 - **Adaptive Audio**: Adjusts sound characteristics based on heart rate or environmental noise.
 - **Auto-Pause/Resume**: Seamlessly pauses when headphones disconnect and resumes when reconnected.
 - **Simple Controls**: Focuses on minimal interaction for sleep-focused use.
+
+---
+
+[← Back to Projects](../projects)
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)
 
 ---
 

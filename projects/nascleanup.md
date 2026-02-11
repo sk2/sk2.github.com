@@ -10,6 +10,11 @@ layout: default
 
 ---
 
+
+## The Insight
+
+Manual deduplication of large NAS shares is error-prone and slow. **nascleanup** uses Rust for rapid content-based hashing and traversal, automating the organization and deduplication of distributed file systems.
+
 ## Quick Facts
 
 | | |
@@ -20,13 +25,9 @@ layout: default
 
 ---
 
-## Overview
+## What This Is
 
-A Rust-based tool designed to deduplicate and organize large file shares, particularly on NAS devices. It identifies redundant data, optimizes storage, and helps maintain data integrity across distributed file systems.
-
-## Problem It Solves
-
-NAS devices often accumulate duplicate files and disorganized data over time, leading to wasted storage space and difficulty in managing backups. Manual cleanup is tedious and error-prone. `nascleanup` automates this process.
+A Rust-based CLI tool for deduplicating and organizing large file shares. Optimized for Docker execution on DSM, it uses an indexing layer for fast file comparison and metadata management.
 
 ## Architecture
 
@@ -35,6 +36,14 @@ NAS devices often accumulate duplicate files and disorganized data over time, le
 - **Execution:** Optimized for Docker/Native execution on DSM to minimize network latency.
 - **Data Model:** Indexing layer to store file hashes and metadata for fast comparison.
 - **Intelligence:** Future integration of ML for content-based classification.
+
+---
+
+[← Back to Projects](../projects)
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)
 
 ---
 

@@ -4,92 +4,35 @@ layout: default
 
 # AutoNetkit
 
-<span class="status-badge status-complete">PhD 2017</span>
+<span class="status-badge status-active">PhD 2017</span>
 
 [← Back to Projects](../projects)
 
 ---
 
+
+## The Insight
+
+Configuration automation often lacks a formal model, leading to vendor-specific hard-coded logic. **AutoNetkit** solves this by transforming high-level topologies into vendor-neutral abstract models. It then compiles these models into device-specific configurations (Cisco, Juniper, Quagga) using Python-based design logic.
+
 ## Quick Facts
 
 | | |
 |---|---|
-| **Status** | Complete (PhD research project) |
+| **Status** | PhD 2017 |
 | **Language** | Python |
-| **Key Library** | NetworkX · GraphML |
-| **Platforms** | Multi-vendor (Cisco, Juniper, Quagga) |
-| **Year** | 2012-2017 |
-| **License** | Open Source |
+| **Started** | 2025 |
 
 ---
 
-## Overview
-
-AutoNetkit is a network configuration automation tool developed during PhD research. It transforms high-level topology designs into vendor-specific device configurations through abstract network models and Python-based design logic.
-
-## Problem It Solves
-
-Network configuration automation before AutoNetkit faced challenges:
-
-**Manual Configuration:**
-- Error-prone CLI commands
-- Inconsistent naming and addressing
-- Difficult to maintain large topologies
-- Time-consuming to make changes
-
-**Existing Tools:**
-- Limited to single vendor
-- No abstraction layer
-- Hard-coded logic difficult to extend
-- No formal model for network design
-
-**AutoNetkit provided:**
-- Visual topology design with automatic configuration
-- Abstract network model separating topology from implementation
-- Python-based extensible design logic
-- Multi-vendor configuration generation
-- Formal approach to network representation
-
 ## Architecture
 
-### Visual Topology Capture
+AutoNetkit uses a multi-layer graph representation:
+- **Physical Layer**: Hardware, interfaces, and cabling.
+- **Logical Layer**: IP addressing, VLANs, and VRFs.
+- **Protocol Layer**: BGP sessions, OSPF areas, and ISIS levels.
 
-Draw networks in visual tools like yEd:
-
-**GraphML Input:**
-- Standard XML-based graph format
-- Node properties (device type, AS number, loopback)
-- Edge properties (link type, capacity)
-- Visual layout preserved for documentation
-
-**Topology Definition:**
-```graphml
-<node id="r1">
-  <data key="device_type">router</data>
-  <data key="asn">65000</data>
-  <data key="loopback">10.0.0.1</data>
-</node>
-```
-
-### Abstract Network Model
-
-Multi-layer graph representation:
-
-**Physical Layer (G_phy):**
-- Devices, interfaces, cables
-- Hardware specifications
-- Physical connectivity
-
-**Logical Layer:**
-- VLANs, VRFs, routing domains
-- IP addressing and subnetting
-- Logical segmentation
-
-**Protocol Layer (G_bgp, G_ospf, etc.):**
-- BGP sessions and ASNs
-- OSPF areas and costs
-- ISIS levels
-- Protocol-specific attributes
+A compiler pipeline parses GraphML topologies, executes design logic for addressing and protocols, and generates validated configurations.
 
 ### Python Design Logic
 
@@ -216,155 +159,10 @@ Network diagram generation:
 - BGP AS topology
 - Per-protocol views
 
-## Research Contributions
-
-### Abstract Network Model
-
-Formal separation of concerns:
-
-**Physical/Logical/Protocol Layers:**
-- Independent modification without cascading changes
-- Protocol-agnostic topology definition
-- Reusable design patterns across vendors
-
-**Published Research:**
-Multiple academic papers on network abstraction and automation.
-
-### Design Logic as Code
-
-Python-based network design:
-
-**Benefits:**
-- Version control for network designs
-- Unit tests for design logic
-- Reusable design patterns
-- Programmatic validation
-
-**Limitations Addressed:**
-- Traditional CLI configuration is imperative
-- AutoNetkit design logic is declarative
-- Easier to reason about network behavior
-
-## Use Cases
-
-### Lab Topology Generation
-
-Network lab integration:
-
-**Workflow:**
-1. Draw topology in yEd
-2. AutoNetkit generates configurations
-3. Load configs into virtual routers
-4. Lab environment ready for testing
-
-**Applications:**
-- Training and certification prep
-- Protocol behavior testing
-- Configuration validation
-
-### Research Networks
-
-Academic network research:
-
-**Reproducibility:**
-- Topology definitions in version control
-- Automated configuration ensures consistency
-- Easy to share and replicate experiments
-
-**Scale:**
-- Generate large topologies automatically
-- Test at scale without manual configuration
-
-### Network Design Prototyping
-
-Pre-production validation:
-
-**Design Iteration:**
-- Rapid topology changes
-- Instant configuration regeneration
-- Catch design errors before deployment
-
-## Technical Details
-
-### Technology Stack
-
-**Core:**
-- Python 2.7 (legacy codebase)
-- NetworkX for graph operations
-- Mako templates for config generation
-- GraphML parsing
-
-**Architecture:**
-- Plugin system for compilers
-- Template-based config generation
-- Multi-graph representation
-- Modular design logic
-
-### Limitations
-
-**Legacy Status:**
-- Python 2.7 codebase (pre-Python 3)
-- Limited to routing protocols (no SDN)
-- No real-time configuration push
-- Research prototype, not production-hardened
-
-### Successor Projects
-
-Modern descendants:
-
-**ank-pydantic:**
-- Type-safe Pydantic models
-- Rust-backed graph engine
-- Modern Python 3.12+
-- Enhanced vendor support
-
-**TopoGen:**
-- Rust implementation
-- Focus on topology generation only
-- Python bindings via PyO3
-
-## Development Status
-
-**PhD Complete (2017):**
-- Research contributions published
-- Used in Cisco VIRL project
-- Open source release
-- Legacy codebase maintained for historical reference
-
-**Not Under Active Development:**
-- Superseded by ank-pydantic and TopoGen
-- Available for reference and historical interest
-- Demonstrates research foundations for current projects
-
-## Academic Impact
-
-**Publications:**
-- PhD thesis on network automation
-- Conference papers on abstract models
-- Workshop presentations
-
-**Industry Adoption:**
-- Used for network research and teaching
-- Influenced modern network automation tools
-
-## Links
-
-- **Legacy Website:** autonetkit.org (archived)
-- **Documentation:** Publications and thesis
-- **Related:** [ank-pydantic](ank-pydantic) is the modern successor
-- **Related:** [TopoGen](topogen) handles topology generation
-
 ---
 
 [← Back to Projects](../projects) | [Development Philosophy](../development)
 
-<!-- TODO: Add screenshots:
-- yEd topology design interface
-- GraphML input example
-- Multi-layer graph visualization
-- Python design logic example
-- Generated Cisco IOS configuration
-- Generated Juniper JunOS configuration
-- Network diagram output
-- Abstract model flowchart
--->
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)

@@ -10,50 +10,24 @@ layout: default
 
 ---
 
+
+## The Insight
+
+Manual radio spectrum monitoring is resource-intensive and prone to operator fatigue. **Project Spectra** automates wideband scanning and modulation identification using a distributed architecture. It uses Raspberry Pi nodes for edge acquisition and a Mac mini core for ML-based signal classification and historical "Signal Census" tracking.
+
 ## Quick Facts
 
 | | |
 |---|---|
-| **Status** | Phase 1 complete, Phase 2 in progress |
+| **Status** | Phase 2/3 (45%) |
 | **Language** | Python + Rust + Swift |
-| **Stack** | FastAPI · NumPy · Polars · PyQtGraph · ML |
-| **Hardware** | Raspberry Pi 4/5 · Mac mini · Multiple SDRs |
-| **Phase Completion** | 10/22 plans complete (45%) |
-| **Started** | 2024 |
-| **License** | TBD |
+| **Started** | 2025 |
 
 ---
 
-## Overview
+## What This Is
 
-Project Spectra is an autonomous distributed SIGINT system that monitors the radio spectrum, identifies modulations using ML, tracks aircraft and satellites, and maintains a "Signal Census" of all RF activity. Edge SDRs on Raspberry Pi units stream to Mac mini core for processing and classification.
-
-## Problem It Solves
-
-Radio spectrum monitoring requires expensive equipment and constant operator attention:
-
-**Traditional SIGINT:**
-- Manual scanning and identification
-- Expensive professional receivers
-- Single-location coverage
-- No automated classification
-- Operator fatigue from constant monitoring
-
-**Hobbyist SDR:**
-- Fragmented tools for each frequency range
-- No unified view of spectrum activity
-- Manual signal identification
-- No persistent tracking or census
-- Limited automation
-
-**Project Spectra provides:**
-- Automated 24/7 spectrum monitoring
-- ML-based signal classification
-- Distributed acquisition across frequency ranges
-- Unified "Signal Census" database
-- Real-time waterfall visualization
-- Aircraft and satellite tracking
-- Low-cost SDR hardware
+An autonomous distributed SIGINT system. It monitors the RF spectrum, identifies modulations via ML, and tracks aircraft (ADS-B) and satellites. It leverages NATS for coordination and Polars for high-performance data indexing.
 
 ## Architecture
 
@@ -187,113 +161,6 @@ Edge Pi → SpyServer/rtl_tcp → Mac mini Core
 - Aircraft proximity
 - Satellite pass predictions
 
-## Hardware Configuration
-
-### SDR Units
-
-| SDR | Frequency Range | Purpose | Antenna |
-|-----|----------------|---------|---------|
-| Airspy R2 | 24 MHz - 1.8 GHz | Primary scanner | Diamond D-130 Discone |
-| Airspy HF+ | 9 kHz - 31 MHz | HF/Shortwave | MLA-30 Loop |
-| KrakenSDR | 24 MHz - 1.7 GHz | Direction finding | 5x dipole array |
-| RTL-SDR | 24 MHz - 1.7 GHz | ADS-B 1090 MHz | TA1 Turnstile |
-
-### Antennas
-
-**TA1 Turnstile:**
-- VHF satellite reception (137 MHz)
-- Circular polarization for rotating satellites
-- Weather satellite images (NOAA, Meteor-M)
-
-**Diamond D-130 Discone:**
-- 25 MHz - 1300 MHz broadband
-- Primary scanning antenna
-- Omnidirectional coverage
-
-**MLA-30 Loop:**
-- 100 kHz - 30 MHz active loop
-- Low-noise HF reception
-- Small footprint for urban environments
-
-**RF Chain:**
-- Mini-Kits LNA for satellite reception
-- Filtered power supply to reduce noise
-- Quality coax (LMR-400) for low loss
-
-## Use Cases
-
-**24/7 Spectrum Monitoring:**
-Continuous automated scanning with historical database of all activity.
-
-**Aircraft Tracking:**
-ADS-B reception with flight tracking and census integration.
-
-**Satellite Reception:**
-Automated tracking and recording of satellite passes (weather, amateur, ISS).
-
-**Signal Intelligence:**
-Identify unknown signals, track frequency usage patterns, detect anomalies.
-
-**RF Mapping:**
-Direction finding to locate signal sources and map RF environment.
-
-## Technical Details
-
-### Performance
-
-- Real-time waterfall: 60 FPS display
-- IQ bandwidth: 10 MSPS (Airspy R2)
-- Latency: <100ms edge to core
-- Census updates: Real-time as signals detected
-
-### Data Pipeline
-
-```
-SDR → IQ Stream → FFT → Spectrum Frames → Waterfall Display
-                   ↓
-            Signal Detection → Census Database → ML Classifier
-```
-
-### Protocol Notes
-
-**SpyServer:** TCP streaming, 5555 default port
-**rtl_tcp:** TCP streaming, 1234 default port
-**Beast:** ADS-B binary format, 30005 default port
-**SBS:** ADS-B text format, 30002 default port
-**Kraken:** HTTP control + data APIs
-
-## Development Status
-
-**Phase 1 Complete:** Foundation with SDR integration and visualization (10/10 plans)
-
-**Phase 2 Active:** Intelligence features (0/12 plans)
-
-**Next Steps:**
-- Signal Census database implementation
-- ML classifier training pipeline
-- ADS-B integration with census
-- Satellite TLE tracking
-
-**Progress:** 45% overall (Phase 1: 100%, Phase 2: 0%)
-
-## Links
-
-- **GitHub:** Coming soon (currently private)
-- **Documentation:** See repository docs/ directory
-
 ---
 
 [← Back to Projects](../projects) | [Development Philosophy](../development)
-
-<!-- TODO: Add screenshots:
-- PyQtGraph waterfall display showing spectrum
-- WebGL browser waterfall with scroll control
-- Textual TUI with live power meter
-- Signal Census Polars DataFrame
-- ADS-B aircraft tracking map
-- Satellite pass prediction table
-- KrakenSDR DoA visualization
-- Bootstrap script output on Raspberry Pi
-- systemd service status
-- SpyServer connection logs
--->

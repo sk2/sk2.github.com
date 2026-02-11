@@ -57,6 +57,10 @@ def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
     content = project_md.read_text()
     all_sections = extract_sections(content)
 
+    # Extract project name from # header
+    name_match = re.search(r'^#\s+(.+)$', content, re.MULTILINE)
+    project_name = name_match.group(1).strip() if name_match else project_path.name
+
     # Slug for filenames
     slug = project_path.name.lower().replace("_", "-").replace(" ", "-")
 
@@ -102,7 +106,7 @@ def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
             status_detail = "Production Ready"
 
     return ProjectInfo(
-        name=project_path.name,
+        name=project_name,
         slug=slug,
         path=project_path,
         category="network",  # categorized later
@@ -207,6 +211,100 @@ def generate_detailed_page(project: ProjectInfo) -> str:
     return "\n".join(lines)
 
 
+def main():
+    parser = argparse.ArgumentParser(description="Update projects pages.")
+    parser.add_argument("--scan-dirs", nargs="+",
+                        default=["~/dev", "~/PycharmProjects", "~/RustroverProjects"],
+                        help="Directories to scan for projects with .planning/PROJECT.md")
+    args = parser.parse_args()
+
+    # Scan for projects with .planning/PROJECT.md
+    projects = []
+    for scan_dir in args.scan_dirs:
+        scan_path = Path(scan_dir).expanduser()
+        if not scan_path.exists():
+            continue
+
+        for project_dir in scan_path.iterdir():
+            if not project_dir.is_dir():
+                continue
+            project_info = parse_project_metadata(project_dir)
+            if project_info:
+                projects.append(project_info)
+
+    # Also include legacy projects (existing .md files without .planning dirs)
+    projects_dir = Path("projects")
+    if projects_dir.exists():
+        scanned_slugs = {p.slug for p in projects}
+        scanned_names = {p.name for p in projects}
+        for legacy_md in projects_dir.glob("*.md"):
+            if legacy_md.stem not in scanned_slugs:
+                # Read existing file to preserve it
+                content = legacy_md.read_text()
+                name_match = re.search(r'^#\s+(.+)$', content, re.MULTILINE)
+                if name_match:
+                    name = name_match.group(1).strip()
+
+                    # Skip if a project with this name already exists (from new scan)
+                    if name in scanned_names:
+                        print(f"  Skipping duplicate: {name} (using newly scanned version)")
+                        continue
+
+                    print(f"  Preserving legacy project: {name}")
+
+                    # Extract basic metadata for index generation
+                    status = "active"
+                    status_detail = "Active Development"
+                    badge_match = re.search(r'<span class="status-badge.*?>(.*?)</span>', content)
+                    if badge_match:
+                        status_detail = badge_match.group(1).strip()
+                        if "Complete" in status_detail or "Ready" in status_detail:
+                            status = "complete"
+
+                    stack = []
+                    stack_match = re.search(r'\|\s*\*\*Language\*\*\s*\|\s*(.*?)\s*\|', content)
+                    if stack_match:
+                        stack_str = stack_match.group(1).strip()
+                        stack = [s.strip() for s in re.split(r'[,·]', stack_str) if s.strip() and s.strip() != "N/A"]
+
+                    sections = extract_sections(content)
+
+                    legacy_project = ProjectInfo(
+                        name=name,
+                        slug=legacy_md.stem,
+                        path=legacy_md,
+                        category="other",
+                        status=status,
+                        status_detail=status_detail,
+                        stack=stack,
+                        sections=sections
+                    )
+                    projects.append(legacy_project)
+
+    if not projects:
+        print("No projects found with .planning/PROJECT.md")
+        return
+
+    # Sort projects by name
+    projects.sort(key=lambda x: x.name)
+    print(f"Found {len(projects)} projects: {[p.name for p in projects]}")
+
+    # Generate individual project pages
+    projects_dir = Path("projects")
+    projects_dir.mkdir(exist_ok=True)
+
+    for project in projects:
+        page_content = generate_detailed_page(project)
+        page_path = projects_dir / f"{project.slug}.md"
+        page_path.write_text(page_content)
+        print(f"  Generated {page_path}")
+
+    # Generate index
+    index_content = generate_projects_index(projects)
+    Path("projects.md").write_text(index_content)
+    print("Updated projects.md")
+
+
 def generate_projects_index(projects: list[ProjectInfo]) -> str:
     lines = [
         "---", "layout: default", "---", "",
@@ -292,5 +390,9 @@ def generate_projects_index(projects: list[ProjectInfo]) -> str:
     lines.append('.status-active { background-color: #007bff; color: white; }')
     lines.append('.status-planning { background-color: #ffc107; color: #343a40; }')
     lines.append('</style>')
-    
+
     return "\n".join(lines)
+
+
+if __name__ == "__main__":
+    main()

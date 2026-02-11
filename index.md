@@ -46,9 +46,9 @@ I am currently developing a suite of interconnected tools:
 | **Architecture** | NATS (Messaging), Docker (Isolation), Pydantic (Validation) |
 | **Analysis** | NeuroKit2, NumPy, SciPy, petgraph |
 
-## Development Philosophy
+## Development Workflow
 
-I work in a highly automated, agent-assisted environment that prioritizes deep work and deterministic results. My setup includes `nvim` with `neovide` and a variety of LLM-integrated agents. I follow the GSD (Get Stuff Done) workflow to maintain a high velocity without compromising architectural integrity.
+I maintain a high-velocity development environment focused on deep work and deterministic results. My toolchain centers on `nvim` and a suite of specialized LLM-integrated agents. I employ the GSD (Get Stuff Done) workflow to ensure architectural integrity through systematic planning and automated verification.
 
 ---
 

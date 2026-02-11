@@ -2,7 +2,7 @@
 layout: default
 ---
 
-# Project Spectra
+# Project: Wi-Fi Radar (KrakenSDR)
 
 <span class="status-badge status-complete">Production Ready</span>
 
@@ -13,7 +13,7 @@ layout: default
 
 ## The Insight
 
-Transform raw radio spectrum data into an actionable "Signal Census" through automated detection, ML classification, and distributed acquisition.
+Passive radar system that utilizes existing Wi-Fi signals for through-wall human detection and localization, leveraging the KrakenSDR coherent radio array.
 
 ## Quick Facts
 

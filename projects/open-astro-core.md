@@ -2,44 +2,33 @@
 layout: default
 ---
 
-# open-astro-core
+# OpenAstro Core
 
-<span class="status-badge status-planning">Planning</span>
+<span class="status-badge status-active">Active Development</span>
 
 [← Back to Projects](../projects)
 
 ---
 
+
+## The Insight
+
+Astrophotography software often suffers from inconsistent coordinate math and brittle hardware drivers. **OpenAstro Core** provides a high-performance Rust library for astronomical logic and device primitives, ensuring mathematical and protocol consistency across the ecosystem.
+
 ## Quick Facts
 
 | | |
 |---|---|
-| **Status** | Planning |
-| **Language** | Rust, INDI, ASCOM Alpaca |
+| **Status** | Active |
+| **Language** | N/A |
 | **Started** | 2025 |
 
 ---
 
-## The Insight
-
-Downstream apps can rely on correct, consistent coordinate math and device/protocol primitives.
-
 ## What This Is
 
-OpenAstro Core is a high-performance Rust library providing shared astronomical logic, hardware drivers, and protocol implementations for the OpenAstro ecosystem. It exists to keep coordinate math and device/protocol behavior consistent across downstream OpenAstro apps.
-
-## Mission
-
-- **Core Competence:** Rock-solid imaging, guiding, mount control.
-- **Extensibility:** Inject custom logic ("Stop imaging if HFR degrades by 20%").
-- **Intelligence:** Automated cloud handling, adaptive gain/exposure, real-time data quality analysis.
-- **Hardware Agnostic:** Wide hardware support via INDI or ASCOM Alpaca.
-
-## Design
-
-- **Rust-centric:** Leveraging Rust's performance and safety features for core logic.
-- **Modular:** Clear separation of concerns for easy extension and maintenance.
-- **Protocol Implementations:** INDI (Instrument-Neutral Distributed Interface) and ASCOM Alpaca for broad hardware compatibility.
+OpenAstro Core is a high-performance Rust library providing shared astronomical logic, hardware drivers, and protocol implementations for the OpenAstro ecosystem.
+It exists to keep coordinate math and device/protocol behavior consistent across downstream OpenAstro apps.
 
 ---
 

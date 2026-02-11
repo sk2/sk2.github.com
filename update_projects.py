@@ -372,14 +372,27 @@ def generate_projects_index(projects: list[ProjectInfo]) -> str:
         lines.append(f"## {cat_title}\n")
 
         for p in sorted(cat_projects, key=lambda x: x.name):
-            overview = p.sections.get("Overview") or p.sections.get("Core Value") or p.sections.get("What This Is") or ""
-            summary = overview.split('\n\n')[0] if overview else ""
+            # Build summary from multiple sections to get 4-5 sentences
+            summary_parts = []
+            for section_key in ["Overview", "What This Is", "Core Value", "Problem It Solves"]:
+                content = p.sections.get(section_key)
+                if content:
+                    # Get first paragraph
+                    first_para = content.split('\n\n')[0]
+                    summary_parts.append(first_para)
 
-            # Extract first 2-3 sentences instead of hard character limit
+            summary = ' '.join(summary_parts) if summary_parts else ""
+
+            # Extract first 4-5 sentences for more detail
             if summary:
                 sentences = re.split(r'(?<=[.!?])\s+', summary)
-                # Take first 2 sentences, or 3 if they're all short
-                num_sentences = 2 if len(sentences[0]) > 80 else min(3, len(sentences))
+                # Take 4-5 sentences depending on length
+                if len(sentences) <= 3:
+                    num_sentences = len(sentences)
+                elif len(sentences[0]) > 100:
+                    num_sentences = min(4, len(sentences))
+                else:
+                    num_sentences = min(5, len(sentences))
                 summary = ' '.join(sentences[:num_sentences])
 
             lines.append(f"### [{p.name}](projects/{p.slug})\n")

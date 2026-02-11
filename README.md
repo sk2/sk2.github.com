@@ -114,8 +114,9 @@ This script scans `~/dev`, `~/PycharmProjects`, and `~/RustroverProjects` for pr
 - **No Development Philosophy section**: The projects.md index should NOT include a "Development Approach" section at the bottom.
 
 **Project Summaries:**
-- **Complete sentences**: Show 2-3 full sentences, NOT truncated at character limits.
+- **Complete sentences**: Show 4-5 full sentences, NOT truncated at character limits.
 - **Sentence-aware splitting**: Split on punctuation boundaries (`.`, `!`, `?`) to avoid mid-word cutoffs.
+- **Length-adaptive**: 4 sentences for long first sentences, 5 sentences for shorter ones.
 - **Extract from sections**: Use Overview, Core Value, or "What This Is" sections for summaries.
 
 **Project Names & Slugs:**

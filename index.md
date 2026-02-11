@@ -22,7 +22,7 @@ I focus on building tools that solve the "information noise" problem—transform
 
 I completed my PhD at the University of South Australia in 2017. My thesis, *Abstractions and Transformations for Automated Data Network Configuration*, pioneered a compiler-based approach to transform high-level network specifications into multi-platform device configurations.
 
-This research led to the creation of **AutoNetkit**, an open-source tool used by Cisco's VIRL project for large-scale network simulation. I have presented this work at PyCon AU and continue to evolve these abstractions in my current projects.
+This research led to the creation of **AutoNetkit**, an open-source tool integrated into Cisco's VIRL platform for automated network lab provisioning. I continue to evolve these abstractions in my current projects.
 
 [Explore my PhD Thesis](thesis) | [View Research on Google Scholar](https://scholar.google.com.au/citations?user=BJ1Efr8AAAAJ)
 
@@ -39,13 +39,14 @@ I am currently developing a suite of interconnected tools:
 
 ---
 
-## Technical Skills
+## Technical Competencies
 
-| Domain | Primary Tools & Languages |
+| Area | Focus |
 | :--- | :--- |
-| **Languages** | Rust (System performance), Python (Rapid modeling), Go (Services & tooling), TypeScript |
-| **Architecture** | Docker (Isolation), Message brokers, FastAPI, Tokio |
-| **Data & Analysis** | Polars (High-performance analytics), NumPy, SciPy, petgraph (Graph algorithms) |
+| **Languages** | Rust, Python, Go, TypeScript, Swift |
+| **High-Performance Computing** | Parallel algorithms, SIMD optimization, zero-copy data structures, streaming execution for datasets larger than RAM |
+| **Data Processing & Analytics** | Large-scale geospatial analytics, time series pattern discovery, graph algorithms, real-time signal processing (DSP, HRV analysis, RF spectrum monitoring) |
+| **Systems Architecture** | Multi-agent coordination, message-driven architectures, container orchestration, type-safe API design, deterministic simulation engines |
 
 ## Development Workflow
 

@@ -80,12 +80,12 @@ Ships with "batteries-included" domain models (ISIS, MPLS, EVPN, L3VPN, IXP) in 
 
 ---
 
-### [HealthyPi Ecosystem](projects/healthypi)
+### [HealthyPi Signal Processing](projects/healthypi)
 
-<span class="status-badge status-active">Active Development</span>
+<span class="status-badge status-active">Experimental</span>
 
 
-A modular, agent-aware health monitoring ecosystem that translates raw biometric data from HealthyPi hardware (6 and Move) into actionable insights and automated interventions.
+Experimental signal processing work using the [HealthyPi](https://www.crowdsupply.com/protocentral/healthypi-move) biometric hardware platform by Protocentral. Exploring integration of research-grade algorithms (NeuroKit2) with multi-agent automation systems.
 
 
 ### [Passive Radar - KrakenSDR Multi-Beam System](projects/passive)

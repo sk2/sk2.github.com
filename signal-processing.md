@@ -49,12 +49,12 @@ Signal processing traditionally requires expensive proprietary hardware and clos
 
 ## The Systems
 
-### HealthyPi Ecosystem — Biometric Signal Processing
+### HealthyPi Biometric Signal Processing
 
-<span class="status-badge status-active">Active Development</span> · [Full Details →](projects/healthypi)
+<span class="status-badge status-active">Experimental</span> · [Full Details →](projects/healthypi)
 
 **What It Is:**
-A modular, agent-aware health monitoring ecosystem built on top of the HealthyPi hardware platform (ECG, PPG, SpO2, temperature sensors). Translates raw biometric data into actionable insights and automated interventions through research-grade signal processing.
+Experimental signal processing and agent integration work using the [HealthyPi](https://www.crowdsupply.com/protocentral/healthypi-move) biometric hardware platform (developed by Protocentral). Exploring how to process raw biometric data (ECG, PPG, respiration) through research-grade algorithms (NeuroKit2) and integrate with multi-agent automation systems.
 
 **The Problem:**
 Commercial health monitors provide opaque "scores":
@@ -63,12 +63,12 @@ Commercial health monitors provide opaque "scores":
 - **Limited access**: Proprietary APIs, export-only data
 - **Expensive**: Medical-grade devices cost thousands
 
-**The Solution:**
-Open-source signal processing on affordable hardware:
-- **HealthyPi 6**: $200 for ECG, PPG, respiration, temperature
-- **NeuroKit2 integration**: Research-validated HRV analysis
-- **Real-time streaming**: NATS message bus for agent coordination
-- **Full control**: Access raw signals, customize algorithms
+**Experimental Approach:**
+Using affordable hardware with open-source signal processing:
+- **[HealthyPi 6](https://www.crowdsupply.com/protocentral/healthypi-move)**: $200 hardware platform by Protocentral (ECG, PPG, respiration, temperature)
+- **NeuroKit2 integration**: Experimenting with research-validated HRV analysis algorithms
+- **Real-time streaming**: Testing NATS message bus integration for agent coordination
+- **Open algorithms**: Access to raw signals for custom processing pipelines
 
 **Signal Processing Pipeline:**
 
@@ -396,7 +396,7 @@ Wi-Fi signals reflect off the human body:
 Commercial health monitors give you a "stress score" — but how is it calculated? NeuroKit2 provides peer-reviewed, documented algorithms. You can verify, customize, and improve the processing pipeline.
 
 ### Affordable Hardware Enables Experimentation
-$300 KrakenSDR vs. $10K commercial passive radar. $200 HealthyPi vs. $2K medical ECG. Lower cost enables hobbyists, researchers, and educators to explore signal processing without institutional budgets.
+$300 KrakenSDR vs. $10K commercial passive radar. $200 [HealthyPi](https://www.crowdsupply.com/protocentral/healthypi-move) vs. $2K medical ECG. Lower cost enables hobbyists, researchers, and educators to explore signal processing without institutional budgets.
 
 ### Agent-Aware Architecture
 Treating sensor streams as events (not just data) enables coordination. "Elevated stress" isn't just a number — it triggers workflows: check calendar, suggest break, adjust lighting. This is impossible with traditional "analyze and display" architectures.

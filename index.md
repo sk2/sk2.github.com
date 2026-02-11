@@ -13,7 +13,7 @@ My work centers on building the right abstractions and transformations for compl
 - **Systems Design:** Emphasizing systematic planning, type-safe interfaces, and comprehensive test coverage as first-class citizens. Designing systems that transform high-level intent into executable implementations through well-defined layers of abstraction.
 - **Network Automation:** Developing high-performance Rust engines for topology modeling, protocol simulation, and configuration generation. Building tools that enable declarative network design with multi-vendor support.
 - **Advanced Data Visualization and Analytics:** Creating information-dense visualizations that reduce complexity and reveal structure. Processing large-scale geospatial and network datasets with high-performance analytics pipelines.
-- **Signal Processing:** Building modular ecosystems for real-time RF spectrum monitoring and analysis. Integrating with biometric platforms like HealthyPi for automated health insights.
+- **Signal Processing:** Building modular ecosystems for real-time RF spectrum monitoring and analysis. Experimenting with biometric signal processing using hardware platforms like [HealthyPi](https://www.crowdsupply.com/protocentral/healthypi-move).
 - **Agent Architectures:** Designing secure, message-bus-driven multi-agent systems with strong isolation boundaries and deterministic behavior.
 
 I focus on building tools that solve the "information noise" problem—transforming complex, raw data into clear, actionable visualizations and configurations through well-designed abstractions.
@@ -33,7 +33,7 @@ I am currently developing a suite of interconnected tools:
 - **NetVis:** A high-performance visualization engine for complex network topologies.
 - **ank-pydantic:** Type-safe topology modeling backed by a Rust graph core.
 - **Secure Multi-Agent Assistant:** A containerized agent framework for secure automation.
-- **Biometric Analysis Tools:** Building agent-based analysis systems on top of the HealthyPi hardware platform for automated health insights.
+- **Biometric Signal Processing:** Experimenting with agent-based analysis using the [HealthyPi](https://www.crowdsupply.com/protocentral/healthypi-move) biometric hardware platform.
 
 [View all projects](projects)
 

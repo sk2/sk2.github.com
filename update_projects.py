@@ -142,6 +142,10 @@ def categorize_project(project: ProjectInfo) -> str:
     if any(x in name_lower for x in ['astro', 'asiair']) or 'astro' in sections_lower:
         return "astrophotography"
 
+    # Photography
+    if any(x in name_lower for x in ['photo-tour', 'photo tour']):
+        return "photography"
+
     # AI & Agents
     if any(x in name_lower for x in ['agent', 'multi-agent', 'cycle']):
         return "agents"
@@ -150,9 +154,11 @@ def categorize_project(project: ProjectInfo) -> str:
     if any(x in name_lower for x in ['cleanup', 'tileserver', 'tile']):
         return "data"
 
-    # Personal / Productivity
-    if any(x in name_lower for x in ['watch', 'photo-tour', 'photo']):
-        return "personal"
+    # Wellness & Sound
+    if any(x in name_lower for x in ['watch', 'noise', 'wave', 'sleep', 'health']):
+        # Exclude healthypi (that's signal processing hardware)
+        if 'healthypi' not in name_lower:
+            return "wellness"
 
     return "other"
 
@@ -351,9 +357,10 @@ def generate_projects_index(projects: list[ProjectInfo]) -> str:
         "network": ("Network Engineering", []),
         "signal": ("Signal Processing & SDR", []),
         "astrophotography": ("Astrophotography", []),
+        "photography": ("Photography", []),
         "agents": ("AI & Agents", []),
         "data": ("Data & Utilities", []),
-        "personal": ("Personal Apps", []),
+        "wellness": ("Wellness & Sound", []),
         "other": ("Other", [])
     }
 

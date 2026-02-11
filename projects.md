@@ -70,7 +70,7 @@ A modular, agent-aware health monitoring ecosystem that translates raw biometric
 
 ### [Passive Radar - KrakenSDR Multi-Beam System](projects/passive)
 
-<span class="status-badge status-active">Phase 2/4 (33%)</span>
+<span class="status-badge status-active">Phase 2/4 (50%)</span>
 
 
 A multi-beam passive radar system based on KrakenSDR hardware, extending an abandoned prototype to reliably track aircraft. Currently focused on establishing a clean, stable foundation before adding advanced multi-beam correlation capabilities. Clean, understandable, stable codebase that reliably tracks aircraft in real-time.
@@ -118,6 +118,16 @@ OpenAstro Core is a high-performance Rust library providing shared astronomical 
 A headless, autonomous astrophotography controller designed for low-power Linux devices (RPi/Jetson). It manages hardware, executes imaging sequences, and ensures rig safety.
 
 
+## Photography
+
+### [Photo Tour](projects/photo-tour)
+
+<span class="status-badge status-active">Active Development</span>
+
+
+Photo Tour is a smart, interactive photography assistant designed for field use. It helps you compose shots, automate repeatable workflows, and progressively adds intelligent triggering and transition logic. In the field, you can see what the camera sees and get actionable guidance/control fast enough to improve the shot.
+
+
 ## AI & Agents
 
 ### [Cycle Agent](projects/cycle)
@@ -155,15 +165,7 @@ Serve dynamic vector tiles (MVT) from massive geospatial datasets (millions of p
 A Rust-based CLI tool for deduplicating and organizing large file shares. Optimized for Docker execution on DSM, it uses an indexing layer for fast file comparison and metadata management.
 
 
-## Personal Apps
-
-### [Photo Tour](projects/photo-tour)
-
-<span class="status-badge status-active">Active Development</span>
-
-
-Photo Tour is a smart, interactive photography assistant designed for field use. It helps you compose shots, automate repeatable workflows, and progressively adds intelligent triggering and transition logic. In the field, you can see what the camera sees and get actionable guidance/control fast enough to improve the shot.
-
+## Wellness & Sound
 
 ### [WatchNoise](projects/watchnoise)
 
@@ -173,8 +175,6 @@ Photo Tour is a smart, interactive photography assistant designed for field use.
 
 An Apple Watch sleep sounds application featuring adaptive audio. It uses a custom audio unit graph for real-time synthesis and integrates with HealthKit for heart rate synchronization.
 
-
-## Other
 
 ### [Wave](projects/watch-noise)
 

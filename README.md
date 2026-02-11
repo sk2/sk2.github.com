@@ -102,12 +102,37 @@ python3 update_projects.py
 
 This script scans `~/dev`, `~/PycharmProjects`, and `~/RustroverProjects` for projects containing `.planning/PROJECT.md`.
 
-**Important Preferences:**
-- **No "Production Ready" assumptions**: The script should NEVER mark projects as "Production Ready" based on phase completion. Projects are not production ready just because phases are complete.
-- **No Development Philosophy section**: The projects.md index should NOT include a "Development Approach" or "Development Philosophy" section at the bottom.
-- **Detailed project pages**: Each project page should include comprehensive information about features, capabilities, architecture, and what the project actually does. Brief summaries are not sufficient.
-- **Extract actual project names**: Use the project name from the `# Header` in PROJECT.md, not the directory name.
-- **Preserve legacy projects**: Keep existing project .md files that don't have .planning directories (e.g., autonetkit).
+**Important Configuration & Preferences:**
+
+**Status & Labeling:**
+- **No "Production Ready" assumptions**: NEVER mark projects as "Production Ready" based on phase completion. Show actual phase progress (e.g., "Phase 17/20 (79%)").
+- **No fabricated completion status**: Projects are not production ready just because all phases are complete.
+
+**Layout & Organization:**
+- **Categorized sections**: Group projects into categories (Network Engineering, Signal Processing & SDR, Astrophotography, AI & Agents, Data & Utilities, Personal Apps).
+- **Simple list format**: Use section headers (`##` for category, `###` for project) NOT grid/card layouts.
+- **No Development Philosophy section**: The projects.md index should NOT include a "Development Approach" section at the bottom.
+
+**Project Summaries:**
+- **Complete sentences**: Show 2-3 full sentences, NOT truncated at character limits.
+- **Sentence-aware splitting**: Split on punctuation boundaries (`.`, `!`, `?`) to avoid mid-word cutoffs.
+- **Extract from sections**: Use Overview, Core Value, or "What This Is" sections for summaries.
+
+**Project Names & Slugs:**
+- **Clean project names**: Remove verbose prefixes like "PROJECT:", "Project:", and trailing parentheticals like "(KrakenSDR)".
+- **Extract from headers**: Use the project name from the `# Header` in PROJECT.md, not the directory name.
+- **Slug mappings**: Consolidate duplicates (e.g., `multi-agent-assistant` → `multi-agent`).
+
+**Content Preservation:**
+- **Preserve detailed content**: If existing .md file has 3x more lines than generated version, keep the existing file (indicates manual enrichment).
+- **Extract names from preserved files**: When preserving detailed content, use the project name from the existing file, not PROJECT.md.
+- **Legacy projects**: Keep existing project .md files that don't have .planning directories (e.g., autonetkit, nascleanup).
+
+**Special Cases:**
+- **Multi-Agent Assistant**: The project page includes a comprehensive "Individual Agents" section listing all 13+ agents with their languages, purposes, and security tiers. This is a key feature and should be preserved.
+
+**Page Sections to Include:**
+Expand project pages with these sections when available: Overview, What This Is, Problem It Solves, Features, Key Capabilities, Architecture, Technical Depth, Security Model, Implementation Details, Protocols Implemented, Performance, Use Cases, Integration, Hardware, Agents, Components.
 
 ## Writing Style
 

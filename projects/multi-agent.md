@@ -29,6 +29,8 @@ Multi-agent coordination requires strict security boundaries to prevent lateral 
 
 A security-first framework for coordinating specialized agents. It uses NATS for communication and Docker for isolated execution. The orchestrator handles high-level reasoning and workflow execution, while agents perform deterministic tasks.
 
+The system includes 13+ specialized agents: HealthKit, HealthyPi, Hue (home automation), Climate, Calendar, Weather, RSS, Backup Monitor, Screen Time, Network Monitor, Workflow Engine, Notification Gateway, and Audit Anomaly detection. See [Individual Agents](#individual-agents) section below for details.
+
 ## Problem It Solves
 
 AI agent systems need strong security boundaries to prevent compromise from cascading:
@@ -228,7 +230,7 @@ OpenTelemetry tracing for all operations:
 
 ## Individual Agents
 
-The system coordinates specialized agents, each designed for a specific domain with minimal privileges:
+**The system includes 13+ specialized agents**, each designed for a specific domain with minimal privileges and explicit security boundaries:
 
 ### Health & Biometrics
 - **HealthKit Agent** (Swift): Extracts metrics from Apple Health (heart rate, sleep, activity). Runs on macOS host only (no container) due to HealthKit framework requirements.

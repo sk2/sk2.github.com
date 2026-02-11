@@ -116,9 +116,10 @@ This script scans `~/dev`, `~/PycharmProjects`, and `~/RustroverProjects` for pr
 
 **Project Summaries:**
 - **Complete sentences**: Show 4-5 full sentences, NOT truncated at character limits.
+- **Paragraph breaks**: Add paragraph breaks every 2 sentences for readability (NOT single long blocks).
 - **Sentence-aware splitting**: Split on punctuation boundaries (`.`, `!`, `?`) to avoid mid-word cutoffs.
 - **Length-adaptive**: 4 sentences for long first sentences, 5 sentences for shorter ones.
-- **Extract from sections**: Use Overview, Core Value, or "What This Is" sections for summaries.
+- **Extract from multiple sections**: Combine content from Overview, What This Is, Core Value, and Problem It Solves to build comprehensive summaries.
 
 **Project Names & Slugs:**
 - **Clean project names**: Remove verbose prefixes like "PROJECT:", "Project:", and trailing parentheticals like "(KrakenSDR)".
@@ -132,9 +133,33 @@ This script scans `~/dev`, `~/PycharmProjects`, and `~/RustroverProjects` for pr
 
 **Special Cases:**
 - **Multi-Agent Assistant**: The project page includes a comprehensive "Individual Agents" section listing all 13+ agents with their languages, purposes, and security tiers. This is a key feature and should be preserved.
+- **NetSim**: Should be substantially detailed (250+ lines) with complete protocol lists, features, requirements validated, architecture decisions, and tech stack. Not a brief overview.
+- **ANK Workbench**: Position as "complements existing network tools" NOT "commercial product" or "modern alternative to GNS3". It's a complementary tool with declarative, intent-based workflow.
 
 **Page Sections to Include:**
 Expand project pages with these sections when available: Overview, What This Is, Problem It Solves, Features, Key Capabilities, Architecture, Technical Depth, Security Model, Implementation Details, Protocols Implemented, Performance, Use Cases, Integration, Hardware, Agents, Components.
+
+**Footer:**
+- Each project page should have ONE footer link: `[← Back to Projects](../projects)` at the end
+- NO duplicate footers (bug previously caused 9 duplicates)
+
+## CV Maintenance
+
+The CV page (`cv.md`) is manually maintained with these guidelines:
+
+**Professional Work Section:**
+- Include ONLY professional/academic collaborations (e.g., AutoNetkit/Cisco VIRL)
+- Do NOT duplicate personal projects already on /projects page
+- Focus on work done for companies, institutions, or significant external collaborations
+
+**PhD Section:**
+- Summary of research focus and outcomes
+- NO supervisors/examiners lists (unnecessary detail)
+- Emphasize contributions and results (e.g., "Created AutoNetkit, integrated into Cisco VIRL")
+
+**Technical Skills:**
+- Organize Tools & Frameworks into categories (Infrastructure, Web, Data/ML, Rust Ecosystem, Network)
+- Base on actual technology used across all work, not just current projects
 
 ## Writing Style
 

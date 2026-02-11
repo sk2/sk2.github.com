@@ -161,9 +161,8 @@ The site uses **Plausible Analytics** for privacy-friendly, cookieless tracking.
 
 **Setup:**
 1. Sign up at https://plausible.io (30-day free trial, then $9/month)
-2. Add your domain (e.g., `sk2.github.io` or your custom domain)
-3. Update `_layouts/default.html` line 20:
-   - Change `data-domain="yourdomain.com"` to your actual domain
+2. Add domain: `sk2.id.au`
+3. Script is already configured in `_layouts/default.html` line 20
 4. Deploy and verify tracking in Plausible dashboard
 
 **Why Plausible:**

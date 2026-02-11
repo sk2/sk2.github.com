@@ -135,26 +135,48 @@ def generate_status_badge(project: ProjectInfo) -> str:
 
 def generate_detailed_page(project: ProjectInfo) -> str:
     """Generate the full markdown for an individual project page."""
+    # Try to extract "The Insight" from existing file to preserve it
+    existing_insight = ""
+    file_path = Path("projects") / f"{project.slug}.md"
+    if file_path.exists():
+        content = file_path.read_text()
+        insight_match = re.search(r'## The Insight\n\n(.*?)(?=\n\n##|\n\n---)', content, re.DOTALL)
+        if insight_match:
+            existing_insight = insight_match.group(1).strip()
+
     lines = [
         "---", "layout: default", "---", "",
         f"# {project.name}", "",
         generate_status_badge(project), "",
-        "[← Back to Projects](../projects)", "", "---", "",
+        "[← Back to Projects](../projects)", "", "---", ""
+    ]
+
+    if existing_insight:
+        lines.extend(["", "## The Insight", "", existing_insight, ""])
+    elif "Core Value" in project.sections:
+        lines.extend(["", "## The Insight", "", project.sections["Core Value"], ""])
+
+    lines.extend([
         "## Quick Facts", "",
         "| | |", "|---|---|",
         f"| **Status** | {project.status_detail or project.status.capitalize()} |",
         f"| **Language** | {', '.join(project.stack) if project.stack else 'N/A'} |",
         "| **Started** | 2025 |", "", "---", ""
-    ]
+    ])
 
     # Include all relevant sections from PROJECT.md
     priority_sections = [
-        "Core Value", "Overview", "What This Is", "Problem It Solves",
+        "Overview", "What This Is", "Problem It Solves",
         "Architecture", "Technical Depth", "Security Model", "Features",
-        "Protocols Implemented", "Performance", "Metrics", "Usage Examples"
+        "Protocols Implemented", "Performance", "Metrics"
     ]
 
     for sec_name in priority_sections:
+        if sec_name == "Core Value" and (existing_insight or "Core Value" in project.sections): 
+            # Skip Core Value if we already used it or have an insight
+            if sec_name in project.sections and not existing_insight and project.sections[sec_name] == existing_insight:
+                 continue
+        
         content = project.sections.get(sec_name)
         if content:
             lines.append(f"## {sec_name}\n")
@@ -170,15 +192,6 @@ def generate_detailed_page(project: ProjectInfo) -> str:
     return "\n".join(lines)
 
 
-def generate_summary_section(project: ProjectInfo) -> str:
-    """Generate a brief summary for the main projects.md index."""
-    # Try to get the first paragraph of Overview or Core Value
-    overview = project.sections.get("Overview") or project.sections.get("Core Value") or project.sections.get("What This Is") or ""
-    summary = overview.split('\n\n')[0]
-    
-    return f"### [{project.name}](projects/{project.slug})\n\n{generate_status_badge(project)}\n\n{summary}\n\n---\n"
-
-
 def generate_projects_index(projects: list[ProjectInfo]) -> str:
     lines = [
         "---", "layout: default", "---", "",
@@ -192,15 +205,75 @@ def generate_projects_index(projects: list[ProjectInfo]) -> str:
         p.category = categorize_project(p)
         if p.category in categories: categories[p.category][1].append(p)
 
+    # Adding dynamic content for project cards directly into the lines list.
+    # The existing template seems to suggest a different approach for categories that I need to adapt.
+    # Let's re-think the category handling and grid generation.
+
     for cat_id, (title, cat_projects) in categories.items():
-        if not cat_projects: continue
+        if not cat_projects:
+            continue
         lines.append(f"## {title}\n")
+        lines.append('<div class="projects-grid">\n') # Start grid for category
         for p in sorted(cat_projects, key=lambda x: x.name):
-            lines.append(generate_summary_section(p))
+            overview = p.sections.get("Overview") or p.sections.get("Core Value") or p.sections.get("What This Is") or ""
+            summary = overview.split('\n\n')[0]
+            if len(summary) > 200:
+                summary = summary[:197] + "..."
 
-    lines.append("## Development Approach\n\nI plan work in `.planning/` directories with phase-based execution. I document architecture decisions in PROJECT.md and STATE.md.\n")
+            lines.append(f'  <div class="project-card">')
+            lines.append(f'    <div class="project-header">')
+            lines.append(f'      {generate_status_badge(p)}')
+            lines.append(f'      <h2>{p.name}</h2>')
+            lines.append(f'    </div>')
+            lines.append(f'    <div class="project-meta">')
+            for tech in p.stack[:3]: # Show top 3 techs
+                lines.append(f'      <span class="project-badge">{tech}</span>')
+            lines.append(f'    </div>')
+            lines.append(f'    <p>{summary}</p>')
+            lines.append(f'    <a href="projects/{p.slug}" class="btn">View Details →</a>')
+            lines.append(f'  </div>\n')
+        lines.append('</div>\n') # End grid for category
+
+
+    # Extract principles from development.md if it exists
+    principles = []
+    dev_md_path = Path("development.md")
+    if dev_md_path.exists():
+        dev_content = dev_md_path.read_text()
+        principles_match = re.search(r'## Principles\s*\n(.*?)(?=\n##|\Z)', dev_content, re.DOTALL | re.MULTILINE)
+        if principles_match:
+            for line in principles_match.group(1).strip().split('\n'):
+                if line.strip().startswith(('1.', '2.', '3.', '4.', '5.', '6.', '7.', '8.', '9.')):
+                    # Clean up the numbered list item, convert to bullet point
+                    # Ensure each principle starts with a dash and is properly formatted
+                    principle = re.sub(r'^\d+\.\s*\*\*(.*?)\*\*[:\-]?\s*(.*)', r'- **\1**: \2', line.strip())
+                    principles.append(principle)
+
+    lines.append("## Development Approach\n")
+    lines.append("I build tools with a **planning-first** approach. Every project lives in a `.planning/` directory, where I define core values in `PROJECT.md`, track execution in `STATE.md`, and verify progress through rigorous phase-based goals.\n")
+    
+    if principles:
+        lines.append("### Core Principles\n")
+        lines.extend(principles)
+        lines.append("")
+
+    lines.append("[Detailed Development Philosophy](development)\n")
+    lines.append('<style>')
+    lines.append('.projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: var(--space-lg); margin-top: var(--space-xl); }')
+    lines.append('.project-card { display: flex; flex-direction: column; justify-content: space-between; padding: var(--space-xl); border: 1px solid var(--border-color); border-radius: 8px; background-color: var(--bg-secondary); }')
+    lines.append('.project-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--space-sm); }')
+    lines.append('.project-header h2 { margin: 0; font-size: 1.5rem; }')
+    lines.append('.project-meta { margin-bottom: var(--space-sm); }')
+    lines.append('.project-badge { display: inline-block; padding: 0.25rem 0.6rem; margin-right: 0.5rem; border-radius: 4px; background-color: var(--code-bg); color: var(--text-secondary); font-size: 0.75rem; }')
+    lines.append('.btn { display: inline-block; margin-top: var(--space-md); padding: 0.5rem 1rem; background-color: var(--bg-tertiary); color: var(--text-primary); border-radius: 6px; font-weight: 600; font-size: 0.875rem; transition: all var(--transition-fast); text-decoration: none; }')
+    lines.append('.btn:hover { background-color: var(--accent); color: white; }')
+    lines.append('.status-badge { display: inline-block; padding: 0.2em 0.6em; border-radius: 4px; font-size: 0.75em; font-weight: 600; line-height: 1; text-align: center; white-space: nowrap; vertical-align: baseline; }')
+    lines.append('.status-complete { background-color: #28a745; color: white; }')
+    lines.append('.status-active { background-color: #007bff; color: white; }')
+    lines.append('.status-planning { background-color: #ffc107; color: #343a40; }')
+    lines.append('</style>')
+    
     return "\n".join(lines)
-
 
 def main():
     parser = argparse.ArgumentParser()

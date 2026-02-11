@@ -10,6 +10,11 @@ layout: default
 
 ---
 
+
+## The Insight
+
+Downstream apps can rely on correct, consistent coordinate math and device/protocol primitives.
+
 ## Quick Facts
 
 | | |
@@ -19,10 +24,6 @@ layout: default
 | **Started** | 2025 |
 
 ---
-
-## Core Value
-
-Downstream apps can rely on correct, consistent coordinate math and device/protocol primitives.
 
 ## What This Is
 

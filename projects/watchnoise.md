@@ -10,6 +10,11 @@ layout: default
 
 ---
 
+
+## The Insight
+
+Convenient access to sleep sounds from your wrist without needing your phone nearby.
+
 ## Quick Facts
 
 | | |
@@ -19,10 +24,6 @@ layout: default
 | **Started** | 2025 |
 
 ---
-
-## Core Value
-
-Convenient access to sleep sounds from your wrist without needing your phone nearby.
 
 ## What This Is
 

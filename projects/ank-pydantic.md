@@ -10,6 +10,11 @@ layout: default
 
 ---
 
+
+## The Insight
+
+In network automation, you usually have to choose between the **speed** of untyped graph libraries (like NetworkX) and the **rigidity** of database-backed sources of truth. **ank-pydantic** breaks this trade-off by using Pydantic for strict schema validation at the edge, while offloading heavy graph traversals to a high-performance Rust core (`petgraph`). It brings the safety of modern software engineering to the "wild west" of network topology data.
+
 ## Quick Facts
 
 | | |
@@ -19,10 +24,6 @@ layout: default
 | **Started** | 2025 |
 
 ---
-
-## Core Value
-
-A clean, consistent API where there's one obvious way to perform each topology operation — predictable naming, return types, and method signatures across the entire public surface.
 
 ## What This Is
 

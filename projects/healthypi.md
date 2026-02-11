@@ -10,6 +10,11 @@ layout: default
 
 ---
 
+
+## The Insight
+
+Health monitoring is often trapped in silos—either raw sensor data that is hard to interpret or consumer apps that offer "scores" without transparency. The **HealthyPi Ecosystem** treats biometrics as a stream of events for an intelligent agent. By integrating research-grade signal processing (HRV, EDA, ECG) with a multi-agent message bus, it turns a Raspberry Pi into an autonomous health observer capable of real-time intervention and longitudinal analysis.
+
 ## Quick Facts
 
 | | |
@@ -19,10 +24,6 @@ layout: default
 | **Started** | 2025 |
 
 ---
-
-## Core Value
-
-A modular, agent-aware health monitoring ecosystem that translates raw biometric data from HealthyPi hardware (6 and Move) into actionable insights and automated interventions.
 
 ## Current Status
 

@@ -10,6 +10,11 @@ layout: default
 
 ---
 
+
+## The Insight
+
+Complete isolation between agents such that compromise of one agent cannot cascade to others or the orchestrator—demonstrating that secure multi-agent systems are practical for both personal and production infrastructure use cases.
+
 ## Quick Facts
 
 | | |
@@ -19,10 +24,6 @@ layout: default
 | **Started** | 2025 |
 
 ---
-
-## Core Value
-
-Complete isolation between agents such that compromise of one agent cannot cascade to others or the orchestrator—demonstrating that secure multi-agent systems are practical for both personal and production infrastructure use cases.
 
 ## What This Is
 

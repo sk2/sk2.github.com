@@ -116,13 +116,28 @@ def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
 
 def categorize_project(project: ProjectInfo) -> str:
     name_lower = project.name.lower()
-    overview = str(project.sections).lower()
+    sections_lower = str(project.sections).lower()
+
+    # Explicit assignments based on user feedback
+    if "watchnoise" in name_lower: return "personal-apps"
+    if "nascleanup" in name_lower: return "data-utilities"
+    if "photo-tour" in name_lower: return "personal-apps"
+    if "open-astro-core" in name_lower or "open-astro-node" in name_lower: return "astrophotography"
+
+    # Keyword-based assignments
     if any(x in name_lower for x in ['netvis', 'ank', 'topogen', 'netsim', 'autonetkit']): return "network"
-    if any(x in name_lower for x in ['astro', 'healthypi', 'spectra']): return "signal"
-    if any(x in name_lower for x in ['agent', 'cycle']): return "agents"
-    if 'network' in overview or 'topology' in overview: return "network"
-    if any(x in overview for x in ['signal', 'biometric', 'spectrum']): return "signal"
-    return "network"
+    if any(x in name_lower for x in ['healthypi', 'spectra']): return "signal"
+    if any(x in name_lower for x in ['agent', 'cycle', 'multi-agent-assistant']): return "agents"
+
+    # Fallback to content-based (less specific, ordered by preference)
+    if 'network' in sections_lower or 'topology' in sections_lower: return "network"
+    if any(x in sections_lower for x in ['signal', 'biometric', 'spectrum', 'radio']): return "signal"
+    if any(x in sections_lower for x in ['astro', 'telescope', 'astrophotography']): return "astrophotography"
+    if 'data' in sections_lower or 'geospatial' in sections_lower or 'utilities' in sections_lower: return "data-utilities"
+    if 'agent' in sections_lower or 'ai' in sections_lower: return "agents"
+    if 'personal' in sections_lower or 'app' in sections_lower or 'watch' in sections_lower: return "personal-apps"
+    
+    return "other" # New default category for anything uncategorized
 
 
 def generate_status_badge(project: ProjectInfo) -> str:
@@ -200,14 +215,19 @@ def generate_projects_index(projects: list[ProjectInfo]) -> str:
         "", "---", ""
     ]
 
-    categories = {"network": ("Network Engineering", []), "signal": ("Signal Processing & Hardware", []), "agents": ("AI & Agents", [])}
+    categories = {
+        "network": ("Network Engineering", []),
+        "signal": ("Signal Processing & Hardware", []),
+        "astrophotography": ("Astrophotography", []),
+        "agents": ("AI & Agents", []),
+        "data-utilities": ("Data & Utilities", []),
+        "personal-apps": ("Personal Apps", []),
+        "other": ("Other Projects", []) # For any uncategorized
+    }
     for p in projects:
         p.category = categorize_project(p)
         if p.category in categories: categories[p.category][1].append(p)
-
-    # Adding dynamic content for project cards directly into the lines list.
-    # The existing template seems to suggest a different approach for categories that I need to adapt.
-    # Let's re-think the category handling and grid generation.
+        else: categories["other"][1].append(p) # Assign to 'other' if category not defined
 
     for cat_id, (title, cat_projects) in categories.items():
         if not cat_projects:
@@ -274,37 +294,3 @@ def generate_projects_index(projects: list[ProjectInfo]) -> str:
     lines.append('</style>')
     
     return "\n".join(lines)
-
-def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--dry-run", action="store_true")
-    args = parser.parse_args()
-
-    base_dirs = [Path.home() / "dev", Path.home() / "PycharmProjects", Path.home() / "RustroverProjects"]
-    projects = []
-    for d in base_dirs:
-        if not d.exists(): continue
-        for p_dir in d.iterdir():
-            if p_dir.is_dir() and not p_dir.name.startswith('.'):
-                info = parse_project_metadata(p_dir)
-                if info: projects.append(info)
-
-    if args.dry_run:
-        print("Summary Index Preview:")
-        print(generate_projects_index(projects)[:500] + "...")
-    else:
-        # 1. Update projects.md
-        Path("projects.md").write_text(generate_projects_index(projects))
-        
-        # 2. Update projects/*.md
-        projects_dir = Path("projects")
-        projects_dir.mkdir(exist_ok=True)
-        for p in projects:
-            file_path = projects_dir / f"{p.slug}.md"
-            file_path.write_text(generate_detailed_page(p))
-            
-        print(f"✓ Updated projects.md and {len(projects)} detailed pages in projects/")
-
-
-if __name__ == "__main__":
-    main()

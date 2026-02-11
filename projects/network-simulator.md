@@ -10,6 +10,11 @@ layout: default
 
 ---
 
+
+## The Insight
+
+Validate network configurations at scale with protocol-level fidelity before deploying to real infrastructure.
+
 ## Quick Facts
 
 | | |
@@ -19,10 +24,6 @@ layout: default
 | **Started** | 2025 |
 
 ---
-
-## Core Value
-
-Validate network configurations at scale with protocol-level fidelity before deploying to real infrastructure.
 
 ## What This Is
 

@@ -10,6 +10,11 @@ layout: default
 
 ---
 
+
+## The Insight
+
+Network engineering is often fragmented—you design in a drawing tool, validate in a spreadsheet, and test in a separate lab. **ANK Workbench** unifies these into a single "Source of Truth" workflow. By integrating declarative modeling, real-time simulation, and high-fidelity visualization, it provides a modern alternative to VM-heavy emulators, focusing on the *intent* of the network rather than just the hardware.
+
 ## Quick Facts
 
 | | |
@@ -19,10 +24,6 @@ layout: default
 | **Started** | 2025 |
 
 ---
-
-## Core Value
-
-Network engineers can design, validate, and visualize network changes in one complete workflow without switching between separate tools or manually gluing components together.
 
 ## What This Is
 

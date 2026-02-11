@@ -10,6 +10,11 @@ layout: default
 
 ---
 
+
+## The Insight
+
+Network engineers can quickly generate realistic, validated network topologies without implementing complex algorithms from scratch.
+
 ## Quick Facts
 
 | | |
@@ -19,10 +24,6 @@ layout: default
 | **Started** | 2025 |
 
 ---
-
-## Core Value
-
-Network engineers can quickly generate realistic, validated network topologies without implementing complex algorithms from scratch.
 
 ## What This Is
 

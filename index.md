@@ -2,78 +2,54 @@
 layout: default
 ---
 
-# About Me
+# Simon Knight, PhD
 
-I build network automation tools and intelligent systems. My work focuses on network configuration generation, topology modeling, and multi-agent architectures.
+I specialize in the architecture of intelligent systems and network automation. My work bridges the gap between high-level intent and low-level execution through formal modeling, deterministic simulation, and multi-agent coordination.
 
-## Current Work
+## Core Expertise
 
-I develop tools for network engineering and agent-based systems:
+My approach is rooted in a "compiler-first" philosophy applied to infrastructure and signal processing:
 
-- Network topology generators, simulators, and visualization libraries in Rust
-- Type-safe network modeling with Pydantic and Rust-backed graph engines
-- Multi-agent systems with security-first message bus architectures
-- Astrophotography control systems and biometric analysis tools
+- **Network Automation:** Developing high-performance Rust engines for topology modeling and configuration generation.
+- **Agent Architectures:** Designing secure, message-bus-driven multi-agent systems with zero-trust isolation.
+- **Signal Processing:** Building modular ecosystems for real-time biometric analysis and RF spectrum monitoring.
+- **Systems Design:** Emphasizing systematic planning, type-safe interfaces, and comprehensive test coverage as first-class citizens.
 
-I work independently on open-source projects. I emphasize systematic planning, comprehensive testing, and clear documentation.
+I focus on building tools that solve the "information noise" problem—transforming complex, raw data into clear, actionable visualizations and configurations.
+
+## Research & Background
+
+I completed my PhD at the University of South Australia in 2017. My thesis, *Abstractions and Transformations for Automated Data Network Configuration*, pioneered a compiler-based approach to transform high-level network specifications into multi-platform device configurations.
+
+This research led to the creation of **AutoNetkit**, an open-source tool used by Cisco's VIRL project for large-scale network simulation. I have presented this work at PyCon AU and continue to evolve these abstractions in my current projects.
+
+[Explore my PhD Thesis](thesis) | [View Research on Google Scholar](http://scholar.google.com.au/citations?user=BJ1Efr8AAAAJ)
+
+## Active Projects
+
+I am currently developing a suite of interconnected tools:
+
+- **NetVis:** A high-performance visualization engine for complex network topologies.
+- **ank-pydantic:** Type-safe topology modeling backed by a Rust graph core.
+- **Secure Multi-Agent Assistant:** A containerized agent framework for secure automation.
+- **HealthyPi Ecosystem:** Real-time biometric signal processing and agentic health insights.
+
+[View all projects](projects)
+
+---
 
 ## Technical Skills
 
-### Languages
+| Domain | Primary Tools & Languages |
+| :--- | :--- |
+| **Languages** | Rust (System performance), Python (Rapid modeling), Swift (Native UX) |
+| **Architecture** | NATS (Messaging), Docker (Isolation), Pydantic (Validation) |
+| **Analysis** | NeuroKit2, NumPy, SciPy, petgraph |
 
-| Language   | Status                                      |
-|------------|---------------------------------------------|
-| Python     | Primary                                     |
-| Rust       | Increasing focus                            |
-| JavaScript | UI work (React), mostly automated           |
-| Go         | Several projects, may return to             |
+## Development Philosophy
 
-### Areas of Focus
+I work in a highly automated, agent-assisted environment that prioritizes deep work and deterministic results. My setup includes `nvim` with `neovide` and a variety of LLM-integrated agents. I follow the GSD (Get Stuff Done) workflow to maintain a high velocity without compromising architectural integrity.
 
-- Software and platform architecture
-- Systems design and network automation
-- Data integration and analysis
-- ML integration (expanding)
+---
 
-## Tools & Workflow
-
-### Development Environment
-- **Editor:** nvim with Neophyte
-- **AI Assistants:** Ghostie (primary), alternating between Codex, OpenCode, Claude Code, Gemini
-- **Knowledge Management:** Obsidian with Agent plugin
-
-### Productivity
-- **Planning:** GSD workflow (also exploring Superpowers)
-- **Voice Input:** Wispr Flow
-- **Quick Access:** Claude Menu Bar
-
-## Background
-
-I completed my PhD at the University of South Australia in 2017. My thesis, *Abstractions and Transformations for Automated Data Network Configuration*, presented a compiler-based approach to transform high-level network specifications into device configurations.
-
-The work produced AutoNetkit, an open-source Python tool for network configuration automation. I presented this work at PyCon AU 2013 ([recording](https://www.youtube.com/watch?v=EGK5jjyUBCQ)).
-
-## Research Interests
-
-- Network automation and high-level configuration abstractions
-- Network topology generation, simulation, and visualization
-- Multi-agent architectures and message-based coordination
-- Biometric signal processing and RF spectrum analysis
-
-## Outside Technology
-
-### Active Pursuits
-- **Photography & Astrophotography** (related projects in development)
-- **Mountain Biking**
-- **Yoga** (yin yoga and vinyasa)
-- **Soccer**
-
-### Creative & Contemplative
-- **Music** (projects coming soon)
-- **Insight Meditation** (theory and practice)
-
-## Links
-
-- [Google Scholar](http://scholar.google.com.au/citations?user=BJ1Efr8AAAAJ)
-- [LinkedIn](https://www.linkedin.com/in/simoncknight/)
-- [GitHub](https://github.com/sk2)
+[LinkedIn](https://www.linkedin.com/in/simoncknight/) | [GitHub](https://github.com/sk2)

@@ -2,24 +2,26 @@
 layout: default
 ---
 
-# netsim - Network Simulator
+# netsim
 
-<span class="status-badge status-active">Active Development</span>
+<span class="status-badge status-active">Active</span>
 
 [← Back to Projects](../projects)
 
 ---
 
+## The Insight
+
+Network simulation usually falls into two traps: it's either too slow (VM-based emulation) or too abstract (mathematical models). **netsim** takes a middle path—deterministic, tick-based protocol simulation. It doesn't emulate the kernel; it simulates the *logic* of OSPF, IS-IS, and BGP. This allows you to validate massive topologies in seconds, ensuring that a configuration change won't cause a routing loop before it ever hits a real router.
+
 ## Quick Facts
 
 | | |
 |---|---|
-| **Status** | Active development |
-| **Language** | Rust (with Python bindings) |
-| **Protocols** | OSPF, IS-IS, BGP, MPLS/LDP, BFD, GRE, VRF |
-| **Performance** | 100+ device topologies in seconds |
-| **Started** | 2024 |
-| **License** | MIT |
+| **Status** | Active |
+| **Language** | Rust / Python |
+| **Sim Type** | Tick-based, Deterministic |
+| **Performance** | 100+ nodes in seconds |
 
 ---
 

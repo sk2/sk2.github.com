@@ -10,6 +10,11 @@ layout: default
 
 ---
 
+
+## The Insight
+
+In the field, you can see what the camera sees and get actionable guidance/control fast enough to improve the shot.
+
 ## Quick Facts
 
 | | |
@@ -19,10 +24,6 @@ layout: default
 | **Started** | 2025 |
 
 ---
-
-## Core Value
-
-In the field, you can see what the camera sees and get actionable guidance/control fast enough to improve the shot.
 
 ## What This Is
 

@@ -4,26 +4,41 @@ layout: default
 
 # ank_workbench
 
-<span class="status-badge status-active">Phase 16/19 (100%)</span>
+<span class="status-badge status-active">v1.1 Complete</span>
 
 [← Back to Projects](../projects)
 
 ---
 
+## Quick Facts
+
+| | |
+|---|---|
+| **Status** | v1.1 Complete |
+| **Language** | Python (FastAPI), React, TypeScript |
+| **Started** | 2025 |
+
+---
 
 ## The Insight
 
 Network engineering is often fragmented—you design in a drawing tool, validate in a spreadsheet, and test in a separate lab. **ANK Workbench** unifies these into a single "Source of Truth" workflow. By integrating declarative modeling, real-time simulation, and high-fidelity visualization, it provides a modern alternative to VM-heavy emulators, focusing on the *intent* of the network rather than just the hardware.
 
-## Quick Facts
+## Core Value
 
-| | |
-|---|---|
-| **Status** | Phase 16/19 (100%) |
-| **Language** | Python backend (FastAPI or Flask), React or Vue frontend — Leverages existing Python ecosystem for ANK components, meets modern UX expectations |
-| **Started** | 2025 |
+Design, validate, and visualize network changes in one workflow without switching tools or manual integration.
 
----
+## v1.1 Features (Feb 9, 2026)
+
+- Persistent help system: non-modal drawer, 16 contextual tips, route-aware visibility.
+- Sample gallery: 5 offline topologies (2-node starter to 12-node spine-leaf DC).
+- Intelligent empty states: cause-specific, outcome preview pattern.
+- Guided tour: 8-step workflow coverage with CSS-only spotlight.
+- Production-ready onboarding: 101 files modified, 30 commits, 50/50 audit score.
+
+## Workflow
+
+Declarative Pydantic models → lightweight simulation → integrated topology/config/behavior visualization.
 
 ## What This Is
 

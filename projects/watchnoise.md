@@ -67,3 +67,11 @@ An Apple Watch sleep sounds application featuring adaptive audio. It uses a cust
 ---
 
 [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)

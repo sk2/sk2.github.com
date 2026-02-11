@@ -126,9 +126,35 @@ def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
 
 
 def categorize_project(project: ProjectInfo) -> str:
-    # Note: Categorization disabled per user feedback - using simple list instead
-    # This function kept for potential future use but returns empty string
-    return ""
+    """Categorize projects for grouping in index."""
+    name_lower = project.name.lower()
+    sections_lower = str(project.sections).lower()
+
+    # Network projects
+    if any(x in name_lower for x in ['netvis', 'ank', 'topogen', 'netsim', 'autonetkit', 'network']):
+        return "network"
+
+    # Signal processing / SDR / Hardware
+    if any(x in name_lower for x in ['healthypi', 'spectra', 'passive', 'radar', 'kraken']):
+        return "signal"
+
+    # Astrophotography
+    if any(x in name_lower for x in ['astro', 'asiair']) or 'astro' in sections_lower:
+        return "astrophotography"
+
+    # AI & Agents
+    if any(x in name_lower for x in ['agent', 'multi-agent', 'cycle']):
+        return "agents"
+
+    # Data & Utilities
+    if any(x in name_lower for x in ['cleanup', 'tileserver', 'tile']):
+        return "data"
+
+    # Personal / Productivity
+    if any(x in name_lower for x in ['watch', 'photo-tour', 'photo']):
+        return "personal"
+
+    return "other"
 
 
 def generate_status_badge(project: ProjectInfo) -> str:
@@ -294,7 +320,12 @@ def main():
             new_lines = len(page_content.split('\n'))
 
             # If existing file has 3x more content, it's likely manually enriched
+            # Also extract the existing name for use in the index
             if existing_lines > new_lines * 3:
+                # Extract name from existing file and update project info
+                name_match = re.search(r'^#\s+(.+)$', existing_content, re.MULTILINE)
+                if name_match:
+                    project.name = name_match.group(1).strip()
                 print(f"  Preserving detailed content: {page_path} ({existing_lines} vs {new_lines} lines)")
                 continue
 
@@ -315,24 +346,50 @@ def generate_projects_index(projects: list[ProjectInfo]) -> str:
         "", "---", ""
     ]
 
-    # Simple list format (no categories per user preference)
-    for p in sorted(projects, key=lambda x: x.name):
-        overview = p.sections.get("Overview") or p.sections.get("Core Value") or p.sections.get("What This Is") or ""
-        summary = overview.split('\n\n')[0] if overview else ""
-        if len(summary) > 200:
-            summary = summary[:197] + "..."
+    # Group by category
+    categories = {
+        "network": ("Network Engineering", []),
+        "signal": ("Signal Processing & SDR", []),
+        "astrophotography": ("Astrophotography", []),
+        "agents": ("AI & Agents", []),
+        "data": ("Data & Utilities", []),
+        "personal": ("Personal Apps", []),
+        "other": ("Other", [])
+    }
 
-        lines.append(f"## [{p.name}](projects/{p.slug})\n")
-        lines.append(f"{generate_status_badge(p)}\n")
+    for p in projects:
+        p.category = categorize_project(p)
+        if p.category in categories:
+            categories[p.category][1].append(p)
+        else:
+            categories["other"][1].append(p)
 
-        if p.stack:
-            tech_str = " · ".join(p.stack[:4])
-            lines.append(f"**Stack:** {tech_str}\n")
+    # Generate sections
+    for cat_key, (cat_title, cat_projects) in categories.items():
+        if not cat_projects:
+            continue
 
-        if summary:
-            lines.append(f"{summary}\n")
+        lines.append(f"## {cat_title}\n")
 
-        lines.append("")
+        for p in sorted(cat_projects, key=lambda x: x.name):
+            overview = p.sections.get("Overview") or p.sections.get("Core Value") or p.sections.get("What This Is") or ""
+            summary = overview.split('\n\n')[0] if overview else ""
+            if len(summary) > 150:
+                summary = summary[:147] + "..."
+
+            lines.append(f"### [{p.name}](projects/{p.slug})\n")
+            lines.append(f"{generate_status_badge(p)}")
+
+            if p.stack:
+                tech_str = " · ".join(p.stack[:3])
+                lines.append(f" · **{tech_str}**")
+
+            lines.append("\n")
+
+            if summary:
+                lines.append(f"{summary}\n")
+
+            lines.append("")
 
 
     # Note: Development philosophy section removed per user preference

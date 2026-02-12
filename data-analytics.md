@@ -6,6 +6,15 @@ layout: default
 
 High-performance tools for processing massive datasets, discovering patterns in time series, and creating information-dense visualizations that transform raw data into actionable insights.
 
+## Contents
+- [The Vision](#the-vision)
+- [How They Work Together](#how-they-work-together)
+- [The Tools](#the-tools)
+  - [Tileserver Polars — Geospatial Analytics at Scale](#tileserver-polars--geospatial-analytics-at-scale)
+  - [matrix-profile-rs — Time Series Pattern Discovery](#matrix-profile-rs--time-series-pattern-discovery)
+- [Philosophy: Why This Approach?](#philosophy-why-this-approach)
+- [Open Source & Contributions](#open-source--contributions)
+
 ---
 
 ## The Vision

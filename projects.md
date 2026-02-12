@@ -10,11 +10,6 @@ My work focuses on network automation tools, signal processing systems, and mult
 
 ## Network Engineering
 
-> **[View Network Automation Ecosystem →](network-automation)**
-> Explore the complete network automation toolchain — from topology modeling to protocol simulation to visualization. See how the tools integrate and work together.
-
----
-
 ### [ANK Workbench](projects/ank-workbench)
 
 <span class="status-badge status-active">Phase 18/19 (98%)</span>
@@ -65,7 +60,7 @@ Outputs custom YAML format for use across the network engineering tool ecosystem
 
 ### [ank_pydantic](projects/ank-pydantic)
 
-<span class="status-badge status-active">Phase 59/62 (99%)</span>
+<span class="status-badge status-active">Phase 59/62 (100%)</span>
 
 
 A Python library for modeling and querying network topologies, backed by a high-performance Rust core (`ank_nte`). Features a two-stage transformation model (Whiteboard → Plan → Protocol Layers), type-safe Pydantic models for nodes/edges/layers, and a composable lazy query API with Rust-backed execution.
@@ -75,22 +70,17 @@ Ships with "batteries-included" domain models (ISIS, MPLS, EVPN, L3VPN, IXP) in 
 
 ## Signal Processing & SDR
 
-> **[View Signal Processing & RF Ecosystem →](signal-processing)**
-> Explore real-time biometric analysis, passive radar systems, and RF spectrum monitoring. Transform raw sensor data into actionable intelligence.
+### [HealthyPi Ecosystem](projects/healthypi)
 
----
-
-### [HealthyPi Signal Processing](projects/healthypi)
-
-<span class="status-badge status-active">Experimental</span>
+<span class="status-badge status-active">Active Development</span>
 
 
-Experimental signal processing work using the [HealthyPi](https://www.crowdsupply.com/protocentral/healthypi-move) biometric hardware platform by Protocentral. Exploring integration of research-grade algorithms (NeuroKit2) with multi-agent automation systems.
+A modular, agent-aware health monitoring ecosystem that translates raw biometric data from HealthyPi hardware (6 and Move) into actionable insights and automated interventions.
 
 
 ### [Passive Radar - KrakenSDR Multi-Beam System](projects/passive)
 
-<span class="status-badge status-active">Phase 2/4 (56%)</span>
+<span class="status-badge status-active">Phase 3/4 (100%)</span>
 
 
 A multi-beam passive radar system based on KrakenSDR hardware, extending an abandoned prototype to reliably track aircraft. Currently focused on establishing a clean, stable foundation before adding advanced multi-beam correlation capabilities.
@@ -158,11 +148,6 @@ In the field, you can see what the camera sees and get actionable guidance/contr
 
 ## AI & Agents
 
-> **[View Agentic Systems Ecosystem →](agentic-systems)**
-> Explore security-first multi-agent architectures with 13+ specialized agents. Container isolation, capability-based authorization, and comprehensive audit trails.
-
----
-
 ### [Cycle Agent](projects/cycle)
 
 <span class="status-badge status-active">Phase 1/5 (80%)</span>
@@ -173,7 +158,7 @@ A native SwiftUI training application for iPad and Apple TV that bridges profess
 
 ### [Multi-Agent Assistant](projects/multi-agent)
 
-<span class="status-badge status-active">Phase 17/20 (79%)</span>
+<span class="status-badge status-active">Phase 18/20 (80%)</span>
 
 
 A security-first multi-agent system that coordinates specialized containerized agents (health monitoring, home automation, data aggregation, workflow automation) through a message broker architecture. Each agent runs in isolation with minimal privileges and communicates only through validated message queues, demonstrating production-ready patterns for deploying AI agents in security-critical infrastructure environments.
@@ -183,28 +168,12 @@ The orchestrator uses cloud LLM reasoning (GPT-4/Claude) while agents remain lig
 
 ## Data & Utilities
 
-> **[View Data Analytics & Visualization Ecosystem →](data-analytics)**
-> Explore high-performance tools for geospatial analytics and time series pattern discovery. Process millions of rows interactively with Polars-native implementations.
-
----
-
 ### [Tileserver Polars](projects/tileserver)
 
 <span class="status-badge status-active">Active Development</span>
 
 
 Serve dynamic vector tiles (MVT) from massive geospatial datasets (millions of points) with sub-second latency, enabling interactive visualization in Kepler.gl without pre-rendering static tilesets.
-
-
-### [matrix-profile-rs](projects/matrix-time-series)
-
-<span class="status-badge status-active">Phase 2/5 (16%)</span>
- · **Rust · ndarray · rayon · Polars integration planned**
-
-
-A high-performance Rust implementation of Matrix Profile algorithms for time series analysis. Enables pattern discovery (motifs), anomaly detection (discords), and similarity search in univariate time series with native performance and Polars integration.
-
-Provides production-quality implementations of STOMP, SCAMP, and SCRIMP++ algorithms with clean APIs (`.motifs(k=3)`) and seamless DataFrame operations for time series pattern analysis.
 
 
 ### [nascleanup](projects/nascleanup)
@@ -235,6 +204,29 @@ An Apple Watch sleep sounds application featuring adaptive audio. It uses a cust
 **Wave** is an evolutionary ambient audio ecosystem designed to manage the user's sensory environment across rest and work. - **StillState:** Reclaiming silence and rest in shared or noisy environments through intelligent, adaptive audio.
 
 - **FlowState:** Achieving and maintaining a "Steady State" of focus through task-linked audio and genetic evolution.
+
+
+## Other
+
+### [matrix-profile-rs](projects/matrix-time-series)
+
+<span class="status-badge status-active">Phase 2/5 (16%)</span>
+
+
+A high-performance Rust implementation of Matrix Profile algorithms for time series analysis. Matrix Profiles enable pattern discovery, anomaly detection, and similarity search in univariate time series without domain knowledge or parameter tuning.
+
+Time series analysis requires identifying:
+- **Repeating patterns** (motifs): "This sensor pattern happened 15 times before failure"
+- **Anomalies** (discords): "This heartbeat segment is unlike any other"
+- **Similar segments**: "Find all sequences similar to this known good pattern"
+
+
+### [netflowsim](projects/netflowsim)
+
+<span class="status-badge status-active">Active Development</span>
+ · **Rust**
+
+`netflowsim` provides rapid, massive-scale network performance analysis by using analytic queuing models and Monte Carlo simulations instead of packet-level discrete event simulation. It enables network engineers to validate topologies and routing strategies against billions of flow iterations in seconds.
 
 
 <style>

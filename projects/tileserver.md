@@ -11,7 +11,7 @@ layout: default
 ---
 
 
-## The Insight
+## The Concept
 
 Serving dynamic vector tiles (MVT) from massive geospatial datasets typically requires slow pre-rendering or high-latency database queries. **tileserver** uses Rust (PyO3) and Polars for sub-second tile generation directly from columnar data stores (Parquet), enabling real-time interactivity in Kepler.gl.
 

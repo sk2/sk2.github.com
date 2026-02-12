@@ -2,7 +2,7 @@
 layout: default
 ---
 
-# netflowsim
+# Traffic Simulator
 
 <span class="status-badge status-active">Active Development</span>
 
@@ -11,7 +11,7 @@ layout: default
 ---
 
 
-## The Insight
+## The Concept
 
 `netflowsim` provides rapid, massive-scale network performance analysis by using analytic queuing models and Monte Carlo simulations instead of packet-level discrete event simulation. It enables network engineers to validate topologies and routing strategies against billions of flow iterations in seconds.
 

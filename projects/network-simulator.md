@@ -11,7 +11,7 @@ layout: default
 ---
 
 
-## The Insight
+## The Concept
 
 A deterministic, tick-based network simulator for rapid prototyping and testing of network configurations. Enables quick validation of routing protocol behavior before moving to full emulation or production deployment — catch obvious errors early in the design cycle.
 

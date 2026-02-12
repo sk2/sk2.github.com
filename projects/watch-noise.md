@@ -11,7 +11,7 @@ layout: default
 ---
 
 
-## The Insight
+## The Concept
 
 - **StillState:** Reclaiming silence and rest in shared or noisy environments through intelligent, adaptive audio.
 - **FlowState:** Achieving and maintaining a "Steady State" of focus through task-linked audio and genetic evolution.

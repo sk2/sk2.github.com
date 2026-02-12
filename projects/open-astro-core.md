@@ -11,7 +11,7 @@ layout: default
 ---
 
 
-## The Insight
+## The Concept
 
 Astrophotography software often suffers from inconsistent coordinate math and brittle hardware drivers. **OpenAstro Core** provides a high-performance Rust library for astronomical logic and device primitives, ensuring mathematical and protocol consistency across the ecosystem.
 

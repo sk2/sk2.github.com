@@ -11,7 +11,7 @@ layout: default
 ---
 
 
-## The Insight
+## The Concept
 
 Manual radio spectrum monitoring is resource-intensive and prone to operator fatigue. **Project Spectra** automates wideband scanning and modulation identification using a distributed architecture. It uses Raspberry Pi nodes for edge acquisition and a Mac mini core for ML-based signal classification and historical "Signal Census" tracking.
 

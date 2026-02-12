@@ -297,10 +297,10 @@ otel query --anomalies
 ```
 06:30 - Calendar Agent: "Meeting at 09:00"
   ↓
-06:30 - Weather Agent: "Rain expected, 42°F"
+06:30 - Weather Agent: "Rain expected, 6°C"
   ↓
 06:35 - Workflow Engine: Execute morning routine
-  ├─ Climate Agent: Pre-heat home to 68°F
+  ├─ Climate Agent: Pre-heat home to 20°C
   ├─ Hue Agent: Gradual light fade-in (sunrise simulation)
   └─ Notification Gateway: "Morning briefing ready"
   ↓

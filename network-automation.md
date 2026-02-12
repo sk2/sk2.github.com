@@ -164,7 +164,7 @@ A deterministic, tick-based network simulator for rapid prototyping and testing 
 
 ---
 
-### NetFlow Sim — Flow-Based Performance Analysis
+### Traffic Simulator — Flow-Based Performance Analysis
 
 <span class="status-badge status-active">Active Development</span> · [Full Details →](projects/netflowsim)
 

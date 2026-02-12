@@ -11,7 +11,7 @@ layout: default
 ---
 
 
-## The Insight
+## The Concept
 
 Health monitoring typically relies on siloed apps that provide opaque "scores." The **HealthyPi Ecosystem** treats biometrics as a real-time event stream for intelligent agents. It integrates research-grade signal processing (NeuroKit2) with a multi-agent message bus to enable autonomous health observation and longitudinal analysis.
 

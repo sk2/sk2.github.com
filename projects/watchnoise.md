@@ -11,7 +11,7 @@ layout: default
 ---
 
 
-## The Insight
+## The Concept
 
 Sleep sound applications typically rely on static loops and phone dependency. **WatchNoise** implements procedural audio synthesis on watchOS, enabling heartbeat-synced ambient noise and environmental adaptation directly from the wrist without requiring a nearby iPhone.
 
@@ -39,6 +39,10 @@ An Apple Watch sleep sounds application featuring adaptive audio. It uses a cust
 ---
 
 [← Back to Projects](../projects)
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)
 
 ---
 

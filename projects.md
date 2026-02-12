@@ -78,14 +78,14 @@ Ships with "batteries-included" domain models (ISIS, MPLS, EVPN, L3VPN, IXP) in 
 A modular, agent-aware health monitoring ecosystem that translates raw biometric data from HealthyPi hardware (6 and Move) into actionable insights and automated interventions.
 
 
-### [Passive Radar - KrakenSDR Multi-Beam System](projects/passive)
+### [Illumination Reflection Tracking](projects/passive)
 
 <span class="status-badge status-active">Phase 3/4 (100%)</span>
 
 
-A multi-beam passive radar system based on KrakenSDR hardware, extending an abandoned prototype to reliably track aircraft. Currently focused on establishing a clean, stable foundation before adding advanced multi-beam correlation capabilities.
+Multi-beam signal reflection analysis system using coherent SDR hardware, extending open source implementations. Currently focused on establishing a clean, stable foundation before adding advanced multi-beam correlation capabilities.
 
-Clean, understandable, stable codebase that reliably tracks aircraft in real-time.
+Clean, understandable, stable codebase for real-time reflection tracking.
 
 
 ### [Project Spectra](projects/signals)
@@ -101,7 +101,7 @@ Transform raw radio spectrum data into an actionable "Signal Census" through aut
 <span class="status-badge status-active">Active Development</span>
 
 
-Passive radar system that utilizes existing Wi-Fi signals for through-wall human detection and localization, leveraging the KrakenSDR coherent radio array.
+Through-wall human detection and localization using existing Wi-Fi signal reflections analyzed via coherent SDR arrays.
 
 
 ### [soundarray - Spatial Audio Processing](projects/soundarray)
@@ -239,7 +239,7 @@ Time series analysis requires identifying:
 - **Similar segments**: "Find all sequences similar to this known good pattern"
 
 
-### [netflowsim](projects/netflowsim)
+### [Traffic Simulator](projects/netflowsim)
 
 <span class="status-badge status-active">Active Development</span>
 

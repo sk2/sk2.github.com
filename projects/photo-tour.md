@@ -11,7 +11,7 @@ layout: default
 ---
 
 
-## The Insight
+## The Concept
 
 Photography guidance often relies on static rules or cumbersome manual triggering. **photo-tour** implements a real-time composition engine and AI-assisted wildlife detection to automate complex workflows—such as "Holy Grail" timelapses and focus stacking—directly on-device.
 

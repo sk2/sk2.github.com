@@ -11,7 +11,7 @@ layout: default
 ---
 
 
-## The Insight
+## The Concept
 
 Generating realistic, validated network topologies for testing often requires custom, brittle scripts. **Topogen** consolidates topology generation logic into a high-performance Rust core, producing structured data center and WAN graphs with consistent YAML output for the simulation and visualization ecosystem.
 

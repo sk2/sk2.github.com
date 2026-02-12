@@ -11,7 +11,7 @@ layout: default
 ---
 
 
-## The Insight
+## The Concept
 
 Training applications often disconnect professional hardware from dynamic simulation logic. **Cycle** bridges cycling hardware (KICKR Core) with AI-driven workout logic via NATS. It provides real-time telemetry and 60fps terrain rendering in a native SwiftUI/SceneKit environment for iPad and Apple TV.
 

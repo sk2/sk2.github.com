@@ -11,7 +11,7 @@ layout: default
 ---
 
 
-## The Insight
+## The Concept
 
 The ability to reliably and efficiently stream high-fidelity IQ data from multiple SDRs over a network with a modern management interface.
 

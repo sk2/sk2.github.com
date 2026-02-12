@@ -10,7 +10,7 @@ layout: default
 
 ---
 
-## The Insight
+## The Concept
 
 Microphone arrays on edge devices (Raspberry Pi) enable spatial audio processing, sound localization, and classification without cloud dependencies.
 
@@ -36,7 +36,7 @@ A spatial audio processing system using microphone arrays on Raspberry Pi for be
 - **Noise Reduction**: Signal enhancement techniques for varied environments
 
 ### Sound Classification
-- **Vehicle Detection**: Classify cars, aircraft, helicopters by engine acoustics
+- **Vehicle Detection**: Classify cars, helicopters, motorcycles by engine acoustics
 - **Wildlife Monitoring**: Identify birds, bats, and other animal sounds
 - **ML Models**: Trained classifiers for real-time sound identification
 
@@ -68,8 +68,8 @@ A spatial audio processing system using microphone arrays on Raspberry Pi for be
 ## Use Cases
 
 - **Wildlife Monitoring**: Automated species identification from bird/bat calls
-- **Airspace Awareness**: Detect and classify aircraft by acoustic signature
 - **Security**: Perimeter monitoring with directional sound detection
+- **Environmental Monitoring**: Noise source identification and classification
 - **Noise Mapping**: Environmental noise measurement and source localization
 
 ## Current Status

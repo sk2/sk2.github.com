@@ -11,7 +11,7 @@ layout: default
 ---
 
 
-## The Insight
+## The Concept
 
 Proprietary astrophotography systems often restrict hardware choice, while Windows-based solutions require high power and maintenance. **OpenAstro Node** provides a headless, autonomous controller for low-power Linux devices. It enables rig safety and automated imaging sequences through a reactive web interface and a robust TUI.
 

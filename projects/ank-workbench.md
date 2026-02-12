@@ -11,7 +11,7 @@ layout: default
 ---
 
 
-## The Insight
+## The Concept
 
 Network design, validation, and testing typically occur in fragmented tools. **ANK Workbench** unifies these into a declarative "Source of Truth" workflow. It replaces VM-heavy emulators with lightweight simulations and high-fidelity visualizations, focusing on network intent rather than hardware emulation.
 

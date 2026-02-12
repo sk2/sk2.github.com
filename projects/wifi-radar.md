@@ -11,9 +11,9 @@ layout: default
 ---
 
 
-## The Insight
+## The Concept
 
-Passive radar system that utilizes existing Wi-Fi signals for through-wall human detection and localization, leveraging the KrakenSDR coherent radio array.
+Through-wall human detection and localization using existing Wi-Fi signal reflections analyzed via coherent SDR arrays.
 
 ## Quick Facts
 

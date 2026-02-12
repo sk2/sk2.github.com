@@ -10,16 +10,16 @@ Experimental projects exploring SDR spectrum monitoring and biometric signal pro
 
 ## Software Defined Radio
 
-### Passive Radar — KrakenSDR Multi-Beam System
+### Illumination Reflection Tracking
 
 <span class="status-badge status-active">Phase 2/4 (56%)</span> · [Full Details →](projects/passive)
 
 **What It Is:**
-Building on open source passive radar implementations to track aircraft using KrakenSDR (5-channel coherent SDR) by analyzing reflections of existing FM radio transmissions.
+Building on open source implementations to analyze reflections of existing broadcast transmissions using coherent multi-channel SDR hardware.
 
 **Current Status:** Phase 2 (Clean, stable foundation for reliable tracking)
 
-**Tech Stack:** Python, numpy, scipy, KrakenSDR firmware, Rust (planned migration)
+**Tech Stack:** Python, numpy, scipy, Rust (planned migration)
 
 ---
 ### Project Spectra — SDR Client
@@ -49,11 +49,11 @@ The Spectra interface provides both high-level signal census data and low-level 
 <span class="status-badge status-active">Active Development</span> · [Full Details →](projects/wifi-radar)
 
 **What It Is:**
-Using KrakenSDR for through-wall human detection via Wi-Fi signal phase analysis.
+Using coherent SDR arrays for through-wall human detection via Wi-Fi signal phase analysis.
 
 **Current Status:** Proof-of-concept detection working
 
-**Tech Stack:** Rust, KrakenSDR
+**Tech Stack:** Rust
 
 ---
 
@@ -76,7 +76,7 @@ Experimental signal processing using the [HealthyPi](https://www.crowdsupply.com
 
 - **HealthyPi Ecosystem**: [github.com/sk2/healthypi](https://github.com/sk2/healthypi)
 - **Project Spectra**: [github.com/sk2/spectra](https://github.com/sk2/spectra)
-- **Passive Radar**: [github.com/sk2/passive-radar](https://github.com/sk2/passive-radar)
+- **Illumination Reflection**: [github.com/sk2/passive-radar](https://github.com/sk2/passive-radar)
 - **Wi-Fi Radar**: [github.com/sk2/wifi-radar](https://github.com/sk2/wifi-radar)
 
 ---

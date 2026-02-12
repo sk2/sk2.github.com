@@ -10,7 +10,7 @@ layout: default
 
 ---
 
-## The Insight
+## The Concept
 
 Network simulation typically involves a trade-off between the resource intensity of VM-based emulation and the abstraction of mathematical models. **netsim** implements deterministic, tick-based protocol simulation. It simulates the logic of OSPF, IS-IS, and BGP rather than emulating the kernel, allowing for high-fidelity validation of large topologies in seconds.
 

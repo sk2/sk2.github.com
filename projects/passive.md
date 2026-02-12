@@ -2,7 +2,7 @@
 layout: default
 ---
 
-# Passive Radar - KrakenSDR Multi-Beam System
+# Illumination Reflection Tracking
 
 <span class="status-badge status-active">Phase 3/4 (100%)</span>
 
@@ -11,23 +11,23 @@ layout: default
 ---
 
 
-## The Insight
+## The Concept
 
-Clean, understandable, stable codebase that reliably tracks aircraft in real-time.
+Clean, understandable, stable codebase for real-time reflection tracking and analysis.
 
 ## Quick Facts
 
 | | |
 |---|---|
 | **Status** | Phase 3/4 (100%) |
-| **Language** | N/A |
+| **Language** | Python, Rust |
 | **Started** | 2026 |
 
 ---
 
 ## What This Is
 
-A multi-beam passive radar system based on KrakenSDR hardware, extending an abandoned prototype to reliably track aircraft. Currently focused on establishing a clean, stable foundation before adding advanced multi-beam correlation capabilities.
+Multi-beam signal reflection analysis system using coherent SDR hardware, extending open source implementations. Currently focused on establishing a clean, stable foundation before adding advanced multi-beam correlation capabilities.
 
 ---
 

@@ -67,21 +67,7 @@ Modern data analysis fragments across disconnected tools: extract data with one 
 <span class="status-badge status-active">Active Development</span> · [Full Details →](projects/tileserver)
 
 **What It Is:**
-A high-performance tile server that renders vector tiles (MVT) directly from Polars DataFrames. Enables interactive visualization of millions of geospatial points in Kepler.gl without pre-rendering static tilesets.
-
-**The Problem:**
-Traditional geospatial workflows require:
-- **Pre-rendered tiles**: Hours of preprocessing for each dataset change
-- **Static data**: Can't filter or query interactively
-- **Memory limits**: Can't handle datasets larger than RAM
-- **Vendor lock-in**: Proprietary formats tied to specific platforms
-
-**The Solution:**
-Tileserver Polars generates tiles on-demand from raw data:
-- **Zero preprocessing**: Load CSV, start visualizing immediately
-- **Dynamic filtering**: Change SQL queries, see results instantly
-- **Streaming**: Process 10M+ points without loading everything into memory
-- **Open standards**: MVT output works with any mapping library
+Tile server that renders vector tiles (MVT) from Polars DataFrames for interactive geospatial visualization.
 
 **Key Features:**
 - **Polars-native**: Direct DataFrame-to-MVT conversion without intermediate formats

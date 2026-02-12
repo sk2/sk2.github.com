@@ -6,6 +6,12 @@ layout: default
 
 Security-first multi-agent architectures for personal and infrastructure automation. Specialized agents coordinate through message brokers with strict isolation boundaries, capability-based authorization, and comprehensive audit trails.
 
+**Quick Navigation:**
+- [Individual Agents](#individual-agents) - Health, Home, Data, Monitoring, Automation
+- [Security Model](#security-model-in-depth) - Isolation, Authorization, Audit Trail
+- [Workflow Examples](#real-world-workflow-examples) - Morning Routine, Health Alerts, Backup Monitoring
+- [Architecture](#architecture-overview) - System design and communication patterns
+
 ---
 
 ## The Vision
@@ -74,7 +80,7 @@ Complete isolation with message-broker coordination:
 - **Pre-approval workflow**: Sensitive actions require user confirmation
 - **Audit trail**: OpenTelemetry logs all agent actions for forensic analysis
 
-**Individual Agents:**
+## Individual Agents
 
 ### Health & Biometrics
 

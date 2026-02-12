@@ -17,6 +17,16 @@ Thesis: *Abstractions and Transformations for Automated Data Network Configurati
 
 Developed compiler-based approach to transform high-level network specifications into multi-platform device configurations. Research focused on graph transformations, declarative network modeling, and automated configuration generation across heterogeneous vendors. Created AutoNetkit, which was integrated into Cisco's VIRL network simulation platform and presented at PyCon Australia 2013.
 
+**Bachelor of Engineering (Telecommunications), First Class Honours**
+University of Adelaide, 2008
+
+Final year subjects: Telecommunications, Communications, Computer Networks and Applications, Signal Processing, Advanced Telecommunications, Optical Communications, Communication Network Design
+
+**Bachelor of Economics**
+University of Adelaide, 2009
+
+Awards: Development Economics III Excellence Award (2009), The DSTO Surveillance Systems Undergraduate Prize (2008), Dean's Merit Certificate for Outstanding Academic Achievement in Electrical & Electronic Engineering (2008)
+
 ## Technical Skills
 
 **Languages:** Rust, Python, Swift, TypeScript

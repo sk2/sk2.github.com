@@ -30,7 +30,7 @@ layout: default
 1. **Performance:** Utilize Rust and Rayon to maximize multi-core hardware utilization.
 2. **Scalability:** Handle massive topologies via Petgraph and efficient data structures.
 3. **Decoupling:** Clearly separate the Routing Matrix generation (packet-sim logic) from the Flow Simulation (queuing logic).
-4. **Visibility:** Provide high-performance geographic visualization via MVT/Martin.
+4. **Analysis:** Provide accurate analytic modeling of network performance under load.
 
 ## Success Criteria
 
@@ -45,7 +45,6 @@ layout: default
 - **Graph Library:** Petgraph
 - **Parallelism:** Rayon
 - **Serialization:** Serde (JSON), GraphML
-- **Visualization:** Martin (Tileserver), MVT (Mapbox Vector Tiles)
 
 ---
 

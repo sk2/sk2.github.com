@@ -6,6 +6,20 @@ layout: default
 
 Tools for network topology modeling, simulation, and visualization.
 
+## Contents
+- [Overview](#overview)
+- [How They Work Together](#how-they-work-together)
+- [The Tools](#the-tools)
+  - [ANK Workbench — Unified Platform](#ank-workbench--unified-platform)
+  - [ank_pydantic — Topology Modeling Library](#ank_pydantic--topology-modeling-library)
+  - [Network Simulator (netsim) — Protocol Validation](#network-simulator-netsim--protocol-validation)
+  - [NetFlow Sim — Flow-Based Performance Analysis](#netflow-sim--flow-based-performance-analysis)
+  - [NetVis — Visualization Engine](#netvis--visualization-engine)
+  - [TopoGen — Topology Generator](#topogen--topology-generator)
+  - [AutoNetkit — The Foundation](#autonetkit--the-foundation)
+- [Getting Started](#getting-started)
+- [Source Code](#source-code)
+
 ---
 
 ## Overview
@@ -176,6 +190,8 @@ A Rust-based network topology layout and visualization engine. Renders complex m
 
 ---
 
+### TopoGen — Topology Generator
+
 <span class="status-badge status-active">Phase 17/24 (11%)</span> · [Full Details →](projects/topogen)
 
 **What It Is:**
@@ -185,9 +201,10 @@ A Rust library with Python bindings for generating realistic network topologies.
 
 **Tech Stack:** Rust core, PyO3 bindings
 
-```
+---
 
-**Current Status:** Early development, focusing on core algorithms and Python bindings.
+### AutoNetkit — The Foundation
+
 <span class="status-badge status-active">PhD 2017</span> · [Full Details →](projects/autonetkit)
 
 **What It Is:**
@@ -196,10 +213,6 @@ The original compiler-based network automation tool from my PhD research. Introd
 **Current Status:** Maintained for reference. Active development moved to ank_pydantic and ANK Workbench.
 
 **Tech Stack:** Python, NetworkX
-
-**Current Status:** Maintained for historical reference and research use. Active development has moved to ank_pydantic and ANK Workbench, which implement the same concepts with modern tooling.
-
-**Tech Stack:** Python, NetworkX for graph operations
 
 ---
 

@@ -177,48 +177,117 @@ Round-trip path: h1 -> r1 -> r3 -> h3 -> r3 -> r1 -> h1
 Simulation complete: 120ms simulated, 0.034s real time (3529x speedup)
 ```
 
-## Example 2: Enterprise Campus (25 routers)
+## Example 2: IS-IS Level 1/Level 2 Hierarchy
 
-Larger topology to test convergence behavior and routing table consistency.
+Service provider topology demonstrating IS-IS hierarchical routing with L1 and L2 areas.
 
-```bash
-$ netsim run enterprise-campus.yaml
+Input topology (`isis-hierarchy.yaml`):
+```yaml
+name: isis-hierarchy
+description: IS-IS L1/L2 hierarchy with inter-area routing
 
-[t=0ms] Loading topology: 25 devices, 48 links
-[t=0ms] Initializing OSPF on 25 routers
-[t=10ms] OSPF: Hello packets sent
-[t=15ms] OSPF: 24 adjacencies formed
-[t=20ms] OSPF: LSA flooding in progress (157 LSAs)
-[t=35ms] OSPF: SPF calculation triggered on all routers
-[t=45ms] OSPF: Network converged
+devices:
+  - name: r1
+    type: router
+    isis:
+      net: "49.0001.0000.0000.0001.00"
+      level: l1
+    interfaces:
+      - name: eth0
+        ip: 10.1.0.1/24
+        isis: { metric: 10 }
+      - name: lo
+        ip: 192.0.2.1/32
+        isis: {}
 
-[t=45ms] core-1> show ip route summary
-Routes: 178 total
-  directly connected: 6
-  OSPF intra-area: 164
-  OSPF inter-area: 8
+  - name: r2
+    type: router
+    isis:
+      net: "49.0001.0000.0000.0002.00"
+      level: l1l2  # Area border router
+    interfaces:
+      - name: eth0
+        ip: 10.1.0.2/24
+        isis: { metric: 10 }
+      - name: eth1
+        ip: 10.0.0.2/24
+        isis: { metric: 10 }
+      - name: lo
+        ip: 192.0.2.2/32
+        isis: {}
 
-[t=45ms] core-1> show ip ospf neighbor
-Neighbor ID     State    Priority  Dead Time  Interface
-10.0.0.2        Full     1         38s        eth0
-10.0.0.3        Full     1         37s        eth1
-10.0.0.4        Full     1         39s        eth2
+  - name: r3
+    type: router
+    isis:
+      net: "49.0002.0000.0000.0003.00"
+      level: l2
+    interfaces:
+      - name: eth0
+        ip: 10.0.0.3/24
+        isis: { metric: 10 }
+      - name: lo
+        ip: 192.0.2.3/32
+        isis: {}
 
-[t=50ms] Link failure simulation: core-1:eth0 down
-[t=52ms] OSPF: LSA update triggered on core-1
-[t=55ms] OSPF: Recalculating SPF on 12 affected routers
-[t=60ms] OSPF: Reconverged (10ms convergence time)
+links:
+  - endpoints: [r1:eth0, r2:eth0]
+  - endpoints: [r2:eth1, r3:eth0]
 
-[t=60ms] core-1> show ip route 10.5.12.0
-10.5.12.0/24  via 10.0.0.3 [OSPF/110] metric=30
-  (rerouted via backup path)
-
-Simulation complete: 180ms simulated, 0.156s real time
-OSPF events: 243 hellos, 157 LSAs, 25 SPF runs
-Convergence: initial=45ms, failover=10ms
+script:
+  - at: converged
+    device: r2
+    command: show isis neighbors
+  - at: converged
+    device: r2
+    command: show isis database
+  - at: converged
+    device: r1
+    command: show ip route
 ```
 
-## Example 3: Advanced OSPF Inspection
+Run simulation:
+```bash
+$ netsim run isis-hierarchy.yaml
+
+[t=0ms] Network initialized: 3 devices, 2 links
+[t=0ms] IS-IS: r1, r2, r3 sending IIH (IS-IS Hello)
+[t=3ms] IS-IS: Adjacencies forming
+[t=5ms] IS-IS: r1<->r2 L1 adjacency Up
+[t=5ms] IS-IS: r2<->r3 L2 adjacency Up
+[t=8ms] IS-IS: LSP flooding in progress
+[t=12ms] IS-IS: SPF calculation complete (L1 and L2)
+[t=12ms] Network converged
+
+[t=12ms] r2> show isis neighbors
+System ID       Interface  State  Level  Holdtime
+0000.0000.0001  eth0       Up     L1     24s
+0000.0000.0003  eth1       Up     L2     24s
+
+[t=12ms] r2> show isis database
+IS-IS Level-1 Link State Database:
+LSPID                 LSP Seq Num  Checksum  Lifetime  Attributes
+0000.0000.0001.00-00  0x00000003   0x4a2e    864       L1
+0000.0000.0002.00-00  0x00000003   0x5c1a    864       L1L2
+
+IS-IS Level-2 Link State Database:
+LSPID                 LSP Seq Num  Checksum  Lifetime  Attributes
+0000.0000.0002.00-00  0x00000003   0x7f3c    864       L1L2
+0000.0000.0003.00-00  0x00000003   0x9a2b    864       L2
+
+[t=12ms] r1> show ip route
+Codes: C - connected, i L1 - IS-IS level-1, i L2 - IS-IS level-2
+
+C    10.1.0.0/24 is directly connected, eth0
+C    192.0.2.1/32 is directly connected, lo
+i L1 192.0.2.2/32 [115/10] via 10.1.0.2, eth0
+i L2 192.0.2.3/32 [115/20] via 10.1.0.2, eth0
+     (route leaked from L2 to L1 by ABR r2)
+
+Simulation complete: 15ms simulated, 0.008s real time
+IS-IS events: 18 hellos, 4 LSPs, 2 SPF runs
+```
+
+## Example 3: Protocol State Inspection (OSPF)
 
 Detailed protocol state inspection with full routing tables and OSPF database dumps.
 

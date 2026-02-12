@@ -4,50 +4,23 @@ layout: default
 
 # Signal Processing & RF Ecosystem
 
-Real-time biometric analysis, passive radar systems, and RF spectrum monitoring — transforming raw sensor data into actionable intelligence through advanced signal processing and machine learning.
+Experimental projects exploring biometric signal processing and RF spectrum monitoring using affordable hardware and open-source algorithms.
 
 ---
 
-## The Vision
+## Overview
 
-Signal processing traditionally requires expensive proprietary hardware and closed-source software. This ecosystem demonstrates that research-grade capabilities are achievable with affordable SDR (Software-Defined Radio) hardware, open-source algorithms, and modern multi-agent architectures.
+These are independent experimental projects demonstrating that research-grade signal processing is achievable with affordable SDR (Software-Defined Radio) hardware, open-source algorithms, and modern tooling.
 
-**Core Philosophy:**
-- **Real-time processing**: Sub-second latency from sensor to insight
-- **Open algorithms**: NeuroKit2, scipy, custom DSP pipelines
+**Common Themes:**
 - **Affordable hardware**: KrakenSDR ($300), HealthyPi ($200), RTL-SDR ($30)
-- **Agent-aware**: Treat sensor streams as events for intelligent automation
+- **Open algorithms**: NeuroKit2, scipy, custom DSP pipelines
+- **Real-time processing**: Sub-second latency from sensor to insight
 - **Reproducible science**: All processing pipelines documented and testable
 
-## Architecture Overview
-
-```
-┌─────────────────────────────────────────────────────────┐
-│              Raw Signal Sources                          │
-│  (HealthyPi · KrakenSDR · Wi-Fi · RTL-SDR · HackRF)    │
-└────────────┬────────────────────────────┬────────────────┘
-             │                            │
-    ┌────────▼─────────┐         ┌────────▼─────────┐
-    │  Signal Pipeline │         │   RF Pipeline    │
-    │  (Biometrics)    │         │   (Radar/SDR)    │
-    └────────┬─────────┘         └────────┬─────────┘
-             │                            │
-    ┌────────▼─────────┐         ┌────────▼─────────┐
-    │ Feature Extract  │         │ Detection/Track  │
-    │ (HRV, Resp Rate) │         │ (Targets, Sigs)  │
-    └────────┬─────────┘         └────────┬─────────┘
-             │                            │
-             └──────────┬─────────────────┘
-                        │
-          ┌─────────────▼──────────────┐
-          │    Agent Coordination      │
-          │    (NATS Event Stream)     │
-          └────────────────────────────┘
-```
-
 ---
 
-## The Systems
+## The Projects
 
 ### HealthyPi Biometric Signal Processing
 

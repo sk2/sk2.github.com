@@ -65,11 +65,13 @@ A Rust-based network simulator that models packet-level behavior for routing pro
 - **Pseudonodes**: LAN representation with designated IS election
 - **Metrics**: Wide metrics (32-bit) and narrow metrics (6-bit) support
 
-**BGP (RFC 4271 - BGP-4) - In Development:**
-- **Session Management**: TCP-based peering with keepalive/hold timers
-- **Path Attributes**: AS_PATH, NEXT_HOP, LOCAL_PREF, MED
-- **Route Selection**: Full BGP decision process implementation
-- **Policy**: Community-based filtering and attribute manipulation
+**BGP (RFC 4271 - BGP-4):**
+- **Session Management**: Full FSM with keepalive/hold timers
+- **Path Attributes**: AS_PATH, NEXT_HOP, LOCAL_PREF, MED, Communities, Extended Communities
+- **Route Selection**: RFC 4271 best-path algorithm with all tie-breakers
+- **Route Reflection**: RFC 4456 with CLUSTER_ID and ORIGINATOR_ID
+- **eBGP/iBGP**: Multi-AS topologies with proper next-hop handling
+- **Advanced Features**: Graceful restart (RFC 4724), VPNv4 (RFC 4760)
 
 **MPLS - Planned:**
 - **LDP**: Label distribution for IP prefixes
@@ -402,6 +404,128 @@ eth0 is up, line protocol is up
     Adjacent with neighbor 10.0.100.2 (Backup Designated Router)
   Suppress hello for 0 neighbor(s)
 ```
+
+## Example 4: BGP Multi-AS Route Propagation
+
+eBGP peering across three autonomous systems with route propagation and path attribute handling.
+
+Input topology (`bgp-multi-as.yaml`):
+```yaml
+name: bgp-multi-as
+description: BGP propagation across multiple ASes with communities
+
+devices:
+  - name: r1
+    type: router
+    router_id: 1.1.1.1
+    interfaces:
+      - name: lo0
+        ip: 1.1.1.1/32
+      - name: eth0
+        ip: 10.0.12.1/24
+    bgp:
+      as: 65001
+      networks: ["10.1.0.0/24"]
+      neighbors:
+        - ip: 10.0.12.2
+          remote_as: 65002
+          send_community: true
+
+  - name: r2
+    type: router
+    router_id: 2.2.2.2
+    interfaces:
+      - name: lo0
+        ip: 2.2.2.2/32
+      - name: eth0
+        ip: 10.0.12.2/24
+      - name: eth1
+        ip: 10.0.23.2/24
+    bgp:
+      as: 65002
+      neighbors:
+        - ip: 10.0.12.1
+          remote_as: 65001
+        - ip: 10.0.23.3
+          remote_as: 65003
+
+  - name: r3
+    type: router
+    router_id: 3.3.3.3
+    interfaces:
+      - name: lo0
+        ip: 3.3.3.3/32
+      - name: eth0
+        ip: 10.0.23.3/24
+    bgp:
+      as: 65003
+      neighbors:
+        - ip: 10.0.23.2
+          remote_as: 65002
+
+links:
+  - endpoints: [r1:eth0, r2:eth0]
+  - endpoints: [r2:eth1, r3:eth0]
+
+script:
+  - at: converged
+    device: r2
+    command: show bgp summary
+  - at: converged
+    device: r3
+    command: show bgp
+```
+
+Run simulation:
+```bash
+$ netsim run bgp-multi-as.yaml
+
+[t=0ms] Network initialized: 3 devices, 2 links
+[t=0ms] BGP: r1, r2, r3 establishing sessions
+[t=5ms] BGP: r1<->r2 session established (eBGP AS65001-AS65002)
+[t=5ms] BGP: r2<->r3 session established (eBGP AS65002-AS65003)
+[t=10ms] BGP: r1 advertising 10.1.0.0/24
+[t=12ms] BGP: Route propagation in progress
+[t=15ms] Network converged
+
+[t=15ms] r2> show bgp summary
+BGP router identifier 2.2.2.2, local AS number 65002
+
+Neighbor        V    AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+10.0.12.1       4 65001       3       3        1    0    0 00:00:15        1
+10.0.23.3       4 65003       3       3        1    0    0 00:00:15        0
+
+Total number of neighbors 2
+
+[t=15ms] r3> show bgp
+BGP table version is 1, local router ID is 3.3.3.3
+Status codes: s suppressed, d damped, h history, * valid, > best, i internal
+Origin codes: i - IGP, e - EGP, ? - incomplete
+
+   Network          Next Hop            Metric LocPrf Weight Path
+*> 10.1.0.0/24      10.0.23.2                0             0 65002 65001 i
+
+Total number of prefixes 1
+
+Path details:
+  10.1.0.0/24:
+    AS_PATH: 65002 65001
+    NEXT_HOP: 10.0.23.2
+    ORIGIN: IGP
+    MED: not set
+    LOCAL_PREF: not set (eBGP)
+    Communities: (none)
+
+Simulation complete: 18ms simulated, 0.009s real time
+BGP events: 6 sessions established, 1 route originated, 2 UPDATEs sent
+```
+
+**Key BGP Features Demonstrated:**
+- **eBGP Peering**: Cross-AS session establishment
+- **AS_PATH Construction**: Path vector grows as route propagates (65002 65001)
+- **Next-Hop Handling**: Next-hop set to eBGP peer address
+- **Route Selection**: Best-path algorithm applied at each AS
+- **Session Management**: Keepalive/hold timers, graceful establishment
 
 ## Limitations
 

@@ -68,12 +68,56 @@ Existing C-based implementations (`rtl_tcp`, `hfp_tcp`) are single-threaded, dif
 
 ## Tech Stack
 
-- **Language**: Rust
+- **Language**: Rust (2021 edition)
+- **Async Runtime**: `tokio` for high-performance concurrency
 - **Hardware Interface**: `libusb` via FFI wrapping of `librtlsdr` and `libairspyhf`
 - **Networking**: TCP implementing the `rtl_tcp` protocol
 - **UI**: Terminal User Interface via `ratatui`
 - **Config**: TOML file-backed persistence
-- **Target**: Raspberry Pi (cross-compiled from macOS/Linux)
+- **Target**: Raspberry Pi (cross-compiled with `cross` tool)
+
+## Development Roadmap
+
+### v1: Core Streaming & Hardware (Current Focus)
+
+**Hardware Access:**
+- Wrap `librtlsdr` for RTL-SDR device control
+- Wrap `libairspyhf` for AirSpy HF+ device control
+- Multi-threaded IQ sample acquisition with high-performance buffering
+
+**Networking:**
+- Implement `rtl_tcp` protocol (command parsing and binary IQ streaming)
+- Support multiple concurrent streams (one per device)
+- Basic connection management (heartbeats, clean disconnects)
+
+**Interface & Config:**
+- Basic TUI showing connected devices and active stream status
+- Real-time frequency and gain adjustment via TUI
+- Persistent configuration in `config.toml`
+
+### v2: Optimization & Advanced Features (Planned)
+
+- **Network Transport Compression**: Lossless compression for bandwidth reduction
+- **Delta Encoding**: Frame-to-frame sample delta reduction
+- **UDP Transport**: FEC/Raptor codes for robust streaming
+- **Remote Management**: Tunnel client for Mac/desktop control
+
+## Getting Started
+
+### Building
+
+```bash
+# Local build
+cargo build --release
+
+# Cross-compile for Raspberry Pi
+cross build --target armv7-unknown-linux-gnueabihf --release
+```
+
+### Prerequisites
+- Rust toolchain
+- `libusb-1.0-0-dev`
+- `librtlsdr-dev` and `libairspyhf-dev`
 
 ## Use Cases
 

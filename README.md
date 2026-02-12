@@ -257,6 +257,70 @@ All four pages added to main navigation and linked via callout boxes in projects
 ### Principle Established
 Keep website understated and honest. Show what tools actually do, not what they aspire to be.
 
+## Recent Session Summary (2026-02-12 Evening)
+
+Major refactoring of ecosystem pages and project content distribution:
+
+### Content Architecture Fix
+- **Problem**: Ecosystem overview page (network-automation.md) had 814 lines with detailed examples, while individual project pages were stubs (38 lines)
+- **Solution**: Moved 574 lines of detailed content to individual project pages where it belongs
+  - Network Simulator: Added 300+ lines of OSPF examples, database dumps, convergence metrics
+  - NetVis: Added layout examples, integration code, visualization samples
+  - ank_pydantic: Added Python API examples and integration details
+  - TopoGen: Added data center generation examples
+- **Result**: Ecosystem page now 240 lines (70% reduction), proper progressive disclosure
+
+### Navigation Improvements
+- Added dual breadcrumb navigation to all network project pages
+  - "Back to Network Automation" + "Back to Projects"
+  - Users can return to their entry point instead of losing context
+- Fixed missing section headers (TopoGen, AutoNetkit) on ecosystem page
+- Added complete table of contents with anchor links
+
+### Protocol Examples
+- **Added NetFlow Sim project** with flow-based performance analysis details
+- **Replaced OSPF-heavy examples** with multi-protocol showcase:
+  - Example 1: OSPF Triangle (basic validation)
+  - Example 2: IS-IS L1/L2 Hierarchy (service provider routing) - NEW
+  - Example 3: Protocol State Inspection (OSPF database dumps)
+  - Example 4: BGP Multi-AS Route Propagation (eBGP peering) - NEW
+- **Updated protocol status**: BGP from "In Development" to fully implemented
+  - Route Reflection (RFC 4456)
+  - Communities & Extended Communities (RFC 1997, RFC 4360)
+  - Graceful Restart (RFC 4724)
+  - VPNv4 Multi-Protocol BGP (RFC 4760)
+
+### Bug Fixes
+- Fixed all projects showing "Started: 2025" → "2026" (25 files updated)
+- Removed Martin/tileserver references from NetFlowSim (not relevant)
+- Cleaned up duplicate footer links (nascleanup.md, watchnoise.md)
+
+### Commits Made
+- `2648149` Refactor ecosystem pages: move detailed content to project pages
+- `e44a093` Add NetFlow Sim to network automation ecosystem page
+- `63c491b` Fix network automation page: add TOC and missing section headers
+- `6ed60aa` Add IS-IS example to Network Simulator page
+- `f6631c0` Fix project start year from 2025 to 2026
+- `3a3ea07` Add BGP example and update protocol status
+
+### Next Steps (Pending)
+
+**BGP Example Enhancement** (User creating)
+- Current BGP example is only 3 nodes (boring)
+- User will create larger, more impressive BGP example showing:
+  - Route reflection hierarchy, or
+  - Multi-AS transit scenario, or
+  - Data center BGP deployment
+- Once created, add to website to replace current Example 4
+
+**Feature Lists Enhancement** (Suggested but interrupted)
+- Add more complete feature lists for each project
+- Currently feature lists are brief; could be expanded with:
+  - Detailed capabilities
+  - Supported protocols/formats
+  - Integration points
+  - Performance characteristics
+
 ## Writing Style
 
 All prose on this site follows **The Elements of Style** (Strunk and White).

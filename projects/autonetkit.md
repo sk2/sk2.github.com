@@ -117,3 +117,7 @@ Network diagram generation:
 ---
 
 [← Back to Network Automation](../network-automation) | [← Back to Projects](../projects)
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)

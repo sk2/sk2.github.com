@@ -27,24 +27,10 @@ Network design, validation, and testing typically occur in fragmented tools. **A
 
 ## What This Is
 
-A web-based platform that integrates the entire network automation ecosystem into a single workflow. Upload topology YAML, visualize the network, run simulations, and analyze results without switching between tools.
+A unified network simulation and visualization platform for enterprise network engineers. ANK Workbench integrates existing ANK Pydantic models, simulator, and visualization components into a seamless end-to-end workflow.
 
-## Key Features
-
-- **Unified Web Interface**: React/Vue frontend with modern UX
-- **Topology Management**: Import, edit, and version control network designs
-- **Integrated Simulation**: One-click validation with netsim
-- **Live Visualization**: Interactive topology rendering with NetVis
-- **Results Analysis**: Compare configuration states, routing tables, and protocol behavior
-
-## Current Status
-
-Near production-ready. Core integration complete, polishing UI/UX and adding advanced workflow features.
-
-## Tech Stack
-
-Python backend (FastAPI/Flask), React or Vue frontend, integrates all ANK ecosystem components
+Engineers can design networks declaratively, run lightweight simulations, and visualize topology, configuration state, and simulation results in one integrated environment. Complements existing network tools by providing a declarative, intent-based workflow alongside traditional emulation platforms.
 
 ---
 
-[← Back to Network Automation](../network-automation) | [← Back to Projects](../projects)
+[← Back to Projects](../projects) | [Development Philosophy](../development)

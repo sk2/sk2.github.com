@@ -4,20 +4,13 @@ layout: default
 
 # Network Automation Ecosystem
 
-A comprehensive suite of tools for network design, validation, simulation, and visualization — from topology modeling to protocol-level simulation to production-quality rendering.
+Tools for network topology modeling, simulation, and visualization.
 
 ---
 
-## The Vision
+## Overview
 
-Network engineering traditionally fragments across disconnected tools: design in one tool, validate in another, visualize in a third. This ecosystem provides an integrated workflow where topology models flow seamlessly from design through simulation to visualization, with consistent data structures and APIs throughout.
-
-**Core Philosophy:**
-- **Declarative over imperative**: Define *what* the network should do, not *how* to configure it
-- **Type-safe modeling**: Catch errors at design time, not deployment time
-- **Rapid iteration**: Quick simulation cycles for testing configuration changes
-- **Performance without compromise**: Rust cores with Python bindings where ergonomics matter
-- **Composable components**: Each tool solves one problem well and integrates cleanly with others
+A set of tools that work together: generate or model topologies, run basic protocol simulations, and render network diagrams.
 
 ## How They Work Together
 
@@ -59,48 +52,13 @@ Network engineering traditionally fragments across disconnected tools: design in
     └─► ANK Workbench coordinates entire pipeline
 ```
 
-**Design-to-Visualization Workflow:**
+**Workflow:**
 
-1. **Generate** (`TopoGen`)
-   - Create realistic topologies (spine-leaf, WAN, random graphs)
-   - Output YAML with nodes, links, and parameters
+1. Generate or create topology (TopoGen or ank_pydantic)
+2. Optionally run simulation to check routing behavior
+3. Visualize the topology (NetVis)
 
-2. **Model** (`ank_pydantic`)
-   - Load topology into type-safe Python API
-   - Transform through layers (Whiteboard → Plan → Protocol)
-   - Query relationships, compute paths, assign addressing
-
-3. **Analyze** (Analysis Module)
-   - **ank_pydantic**: Query topology structure, compute metrics
-   - **Network Simulator**: Validate protocol behavior, test failover scenarios
-   - Combined analysis identifies issues before deployment
-
-4. **Visualize** (`NetVis`)
-   - Render topology with advanced layout algorithms
-   - Show analysis results (failed routes, bottlenecks, coverage)
-   - Generate documentation-quality diagrams
-
-5. **Orchestrate** (`ANK Workbench`)
-   - Web UI manages entire pipeline
-   - One-click workflow execution
-   - Interactive result exploration
-
-**Example End-to-End:**
-```
-TopoGen: Generate 4-pod spine-leaf topology
-  ↓
-ank_pydantic: Load YAML, apply OSPF+BGP transformations
-  ↓
-Analysis:
-  ├─ ank_pydantic: Verify all leaf-spine links present, compute redundancy
-  └─ Network Simulator: Validate OSPF convergence, test link failure scenarios
-  ↓
-NetVis: Render hierarchical layout with color-coded health status
-  ↓
-ANK Workbench: Display results, allow parameter tweaks, re-run workflow
-```
-
-All orchestrated through **ANK Workbench** — a unified web interface for the complete network automation pipeline.
+ANK Workbench provides a web interface to coordinate these tools.
 
 ---
 
@@ -232,7 +190,9 @@ A deterministic, tick-based network simulator for rapid prototyping and testing 
 - **RSVP-TE**: Traffic engineering with explicit paths
 - **Fast Reroute**: Link/node protection with backup tunnels
 
-**Example: OSPF Triangle Topology**
+**Example 1: OSPF Triangle Topology**
+
+Simple three-router topology to verify basic OSPF functionality.
 
 Input topology (`ospf-triangle.yaml`):
 ```yaml
@@ -331,6 +291,53 @@ Round-trip path: h1 -> r1 -> r3 -> h3 -> r3 -> r1 -> h1
 Simulation complete: 120ms simulated, 0.034s real time (3529x speedup)
 ```
 
+**Example 2: Enterprise Campus (25 routers)**
+
+Larger topology to test convergence behavior and routing table consistency.
+
+```bash
+$ netsim run enterprise-campus.yaml
+
+[t=0ms] Loading topology: 25 devices, 48 links
+[t=0ms] Initializing OSPF on 25 routers
+[t=10ms] OSPF: Hello packets sent
+[t=15ms] OSPF: 24 adjacencies formed
+[t=20ms] OSPF: LSA flooding in progress (157 LSAs)
+[t=35ms] OSPF: SPF calculation triggered on all routers
+[t=45ms] OSPF: Network converged
+
+[t=45ms] core-1> show ip route summary
+Routes: 178 total
+  directly connected: 6
+  OSPF intra-area: 164
+  OSPF inter-area: 8
+
+[t=45ms] core-1> show ip ospf neighbor
+Neighbor ID     State    Priority  Dead Time  Interface
+10.0.0.2        Full     1         38s        eth0
+10.0.0.3        Full     1         37s        eth1
+10.0.0.4        Full     1         39s        eth2
+
+[t=50ms] Link failure simulation: core-1:eth0 down
+[t=52ms] OSPF: LSA update triggered on core-1
+[t=55ms] OSPF: Recalculating SPF on 12 affected routers
+[t=60ms] OSPF: Reconverged (10ms convergence time)
+
+[t=60ms] core-1> show ip route 10.5.12.0
+10.5.12.0/24  via 10.0.0.3 [OSPF/110] metric=30
+  (rerouted via backup path)
+
+Simulation complete: 180ms simulated, 0.156s real time
+OSPF events: 243 hellos, 157 LSAs, 25 SPF runs
+Convergence: initial=45ms, failover=10ms
+```
+
+**Limitations:**
+- Protocol behavior is simplified compared to real implementations
+- Timing is deterministic (useful for testing, not realistic)
+- Some edge cases and vendor-specific behaviors not modeled
+- Best used for smoke testing, not certification
+
 **Use Cases:**
 - **Pre-deployment Validation**: Catch routing loops, black holes, and misconfigurations before production
 - **Convergence Analysis**: Measure failover time and validate backup paths
@@ -412,24 +419,16 @@ Rendering to SVG...
 Written: output.svg (6.5 KB)
 ```
 
-**Example Output: Data Center Topology**
+**Example Outputs**
 
-A real-world data center spine-leaf topology rendered with NetVis:
+Data center spine-leaf:
+![NetVis Data Center](/images/netvis-datacenter-example.svg)
 
-![NetVis Data Center Example](/images/netvis-datacenter-example.svg)
+Mesh network:
+![NetVis Mesh](/images/netvis-mesh-example.svg)
 
-This visualization shows:
-- **Hierarchical Layout**: Spine layer at top, leaf layer below
-- **Node Differentiation**: Different visual styles for device types
-- **Clean Edge Routing**: Minimal crossings, readable even at scale
-- **Information Density**: Compact representation without cluttering
-
-**Use Cases:**
-- **Network Documentation**: Auto-generate topology diagrams from inventory
-- **Change Impact Visualization**: Show blast radius of configuration changes
-- **Capacity Planning**: Identify bottlenecks and underutilized links
-- **Architectural Reviews**: Present network designs to stakeholders
-- **Incident Response**: Quickly understand failure domains and dependencies
+Ring topology:
+![NetVis Ring](/images/netvis-ring-example.svg)
 
 **Current Status:** Core layout algorithms implemented, refining edge bundling and multi-layer rendering. Interactive browser embedding planned for v2.
 
@@ -673,28 +672,7 @@ AutoNetkit proved that declarative, intent-based network automation could work a
 
 ---
 
-## Philosophy: Why This Approach?
-
-### Type Safety Over Runtime Errors
-Pydantic models catch topology errors at design time. Invalid node types, missing interfaces, and broken references fail fast rather than causing cryptic runtime errors during simulation or deployment.
-
-### Rust for Performance-Critical Paths
-Graph algorithms (path finding, centrality, layout) run in Rust with Python bindings. Engineers get Python ergonomics for modeling, Rust speed for computation.
-
-### Simulation for Rapid Prototyping
-Simulating OSPF/BGP logic is 100x faster than running actual network OS instances. The goal is rapid testing and iteration — catch obvious misconfigurations quickly before moving to full emulation or production testing.
-
-### Declarative Over Imperative
-Define *what* the network should do (all routers run OSPF, advertise loopbacks) rather than *how* to configure it (87 lines of Cisco IOS commands per router). The compiler handles vendor-specific syntax.
-
-### Composable Tools Over Monoliths
-Each tool solves one problem well and integrates via standard formats (YAML topologies, JSON APIs). Use the whole stack or just the pieces you need.
-
----
-
-## Open Source & Contributions
-
-All projects are open source and actively developed. Contributions welcome:
+## Source Code
 
 - **ank_pydantic**: [github.com/sk2/ank_pydantic](https://github.com/sk2/ank_pydantic)
 - **netsim**: [github.com/sk2/netsim](https://github.com/sk2/netsim)

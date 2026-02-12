@@ -23,7 +23,7 @@ Network simulation typically involves a trade-off between the resource intensity
 | **Lines of Code** | ~126,000 |
 | **Test Coverage** | 1,350+ tests |
 | **Requirements Met** | 122 (35 MVP + 87 advanced) |
-| **Started** | 2025 |
+| **Started** | 2026 |
 
 ---
 

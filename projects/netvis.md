@@ -21,7 +21,7 @@ Network visualization often fails at scale because layout algorithms treat all n
 |---|---|
 | **Status** | Active |
 | **Language** | Rust |
-| **Started** | 2025 |
+| **Started** | 2026 |
 
 ---
 

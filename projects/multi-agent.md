@@ -21,7 +21,7 @@ Multi-agent coordination requires strict security boundaries to prevent lateral 
 |---|---|
 | **Status** | Active Development |
 | **Language** | Python, Go, Rust, Swift |
-| **Started** | 2025 |
+| **Started** | 2026 |
 
 ---
 

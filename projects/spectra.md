@@ -21,7 +21,7 @@ Manual radio spectrum monitoring is resource-intensive and prone to operator fat
 |---|---|
 | **Status** | Phase 2/3 (45%) |
 | **Language** | Python + Rust + Swift |
-| **Started** | 2025 |
+| **Started** | 2026 |
 
 ---
 

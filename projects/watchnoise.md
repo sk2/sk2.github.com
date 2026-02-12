@@ -21,7 +21,7 @@ Sleep sound applications typically rely on static loops and phone dependency. **
 |---|---|
 | **Status** | v1.1 Shipped |
 | **Language** | Swift (SwiftUI) |
-| **Started** | 2025 |
+| **Started** | 2026 |
 
 ---
 

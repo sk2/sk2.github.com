@@ -21,7 +21,7 @@ Training applications often disconnect professional hardware from dynamic simula
 |---|---|
 | **Status** | Phase 1/5 (80%) |
 | **Language** | N/A |
-| **Started** | 2025 |
+| **Started** | 2026 |
 
 ---
 

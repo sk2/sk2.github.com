@@ -21,7 +21,7 @@ Manual deduplication of large NAS shares is error-prone and slow. **nascleanup**
 |---|---|
 | **Status** | Active Development |
 | **Language** | Rust |
-| **Started** | 2025 |
+| **Started** | 2026 |
 
 ---
 

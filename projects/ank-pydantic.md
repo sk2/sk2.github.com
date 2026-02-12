@@ -21,7 +21,7 @@ Network topology modeling typically forces a choice between the speed of untyped
 |---|---|
 | **Status** | Phase 59/62 (99%) |
 | **Language** | Python, Rust |
-| **Started** | 2025 |
+| **Started** | 2026 |
 
 ---
 

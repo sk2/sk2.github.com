@@ -21,7 +21,7 @@ Configuration automation often lacks a formal model, leading to vendor-specific 
 |---|---|
 | **Status** | PhD 2017 |
 | **Language** | Python |
-| **Started** | 2025 |
+| **Started** | 2026 |
 
 ---
 

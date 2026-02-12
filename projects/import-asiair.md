@@ -21,7 +21,7 @@ Eliminates manual file sorting after imaging sessions - scan hundreds of frames,
 |---|---|
 | **Status** | Phase 1/1 (0%) |
 | **Language** | N/A |
-| **Started** | 2025 |
+| **Started** | 2026 |
 
 ---
 

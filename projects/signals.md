@@ -25,7 +25,7 @@ Transform raw radio spectrum data into an actionable "Signal Census" through aut
 |---|---|
 | **Status** | Active |
 | **Language** | N/A |
-| **Started** | 2025 |
+| **Started** | 2026 |
 
 ---
 

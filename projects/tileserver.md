@@ -21,7 +21,7 @@ Serving dynamic vector tiles (MVT) from massive geospatial datasets typically re
 |---|---|
 | **Status** | Active |
 | **Language** | N/A |
-| **Started** | 2025 |
+| **Started** | 2026 |
 
 ---
 

@@ -21,7 +21,7 @@ Proprietary astrophotography systems often restrict hardware choice, while Windo
 |---|---|
 | **Status** | Active |
 | **Language** | N/A |
-| **Started** | 2025 |
+| **Started** | 2026 |
 
 ---
 

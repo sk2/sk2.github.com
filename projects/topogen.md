@@ -21,7 +21,7 @@ Generating realistic, validated network topologies for testing often requires cu
 |---|---|
 | **Status** | Phase 17/24 (11%) |
 | **Language** | Rust, Python |
-| **Started** | 2025 |
+| **Started** | 2026 |
 
 ---
 

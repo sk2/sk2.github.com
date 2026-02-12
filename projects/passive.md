@@ -21,7 +21,7 @@ Clean, understandable, stable codebase that reliably tracks aircraft in real-tim
 |---|---|
 | **Status** | Phase 3/4 (100%) |
 | **Language** | N/A |
-| **Started** | 2025 |
+| **Started** | 2026 |
 
 ---
 

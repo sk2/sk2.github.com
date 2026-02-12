@@ -21,7 +21,7 @@ A deterministic, tick-based network simulator for rapid prototyping and testing 
 |---|---|
 | **Status** | v1.6 shipped |
 | **Language** | Rust |
-| **Started** | 2025 |
+| **Started** | 2026 |
 
 ---
 

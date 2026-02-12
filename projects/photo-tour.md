@@ -21,7 +21,7 @@ Photography guidance often relies on static rules or cumbersome manual triggerin
 |---|---|
 | **Status** | Active |
 | **Language** | N/A |
-| **Started** | 2025 |
+| **Started** | 2026 |
 
 ---
 

@@ -199,7 +199,7 @@ def generate_detailed_page(project: ProjectInfo) -> str:
         "| | |", "|---|---|",
         f"| **Status** | {project.status_detail or project.status.capitalize()} |",
         f"| **Language** | {', '.join(project.stack) if project.stack else 'N/A'} |",
-        "| **Started** | 2025 |", "", "---", ""
+        "| **Started** | 2026 |", "", "---", ""
     ])
 
     # Include all relevant sections from PROJECT.md (expanded for more detail)

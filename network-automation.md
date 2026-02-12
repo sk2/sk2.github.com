@@ -229,6 +229,217 @@ The original compiler-based network automation tool from my PhD research. Introd
 
 ---
 
+## Integration Examples
+
+These examples demonstrate how ank_pydantic, netsim, and NetVis work together for end-to-end network design workflows.
+
+### Example 1: Service Provider Core (IS-IS/MPLS/iBGP)
+
+Multi-layer service provider topology showing ank_pydantic → netsim integration.
+
+**Topology Overview:**
+- 16 devices: 8 core (P), 6 edge (PE), 2 route reflectors (RR)
+- AS 65000, 4 Points of Presence (PoPs): West, East, North, South
+- Protocol stack: IS-IS underlay, MPLS/LDP transport, iBGP with RR
+
+**Step 1: Model topology with ank_pydantic**
+
+```python
+from ank_pydantic import Topology
+from ank_pydantic.core.designs import build_isis_layer, build_mpls_layer
+
+# Load whiteboard topology (YAML defining 16 routers, PoP locations, roles)
+topology = Topology.from_yaml("transitnet-sp-core.yaml")
+print(f"Loaded {len(list(topology.layer('input').nodes()))} nodes")
+# Output: Loaded 16 nodes
+
+# Build IS-IS Layer (Level 2 flat domain)
+isis_layer = build_isis_layer(
+    topology,
+    level=2,
+    area="49.0001",
+    parent_layer="physical"
+)
+print(f"Created {len(list(isis_layer.edges()))} IS-IS adjacencies")
+# Output: Created 14 IS-IS adjacencies
+
+# Build MPLS/LDP Layer (follows IS-IS)
+mpls_layer = build_mpls_layer(
+    topology,
+    igp_layer="isis",
+    layer_name="mpls"
+)
+print(f"Created {len(list(mpls_layer.edges()))} LDP sessions")
+# Output: Created 14 LDP sessions
+
+# Build iBGP Layer (PE to RR sessions)
+rr_nodes = ["RR1", "RR2"]
+pe_nodes = ["PE1", "PE2", "PE3", "PE4", "PE5", "PE6"]
+
+print("iBGP Sessions:")
+for pe in pe_nodes:
+    for rr in rr_nodes:
+        print(f"  {pe} <-> {rr} (client-to-RR)")
+print(f"  RR1 <-> RR2 (RR-to-RR)")
+# Total: 13 iBGP sessions (6 PEs × 2 RRs + 1 RR-RR)
+```
+
+**Step 2: Export for netsim validation**
+
+```python
+# Export topology for protocol simulation
+topology.export_netsim("transitnet-netsim.yaml")
+```
+
+**Step 3: Validate with netsim**
+
+```bash
+$ netsim run transitnet-netsim.yaml
+
+[t=0ms] Network initialized: 16 devices, 14 links
+[t=5ms] IS-IS: Adjacencies Up (14 adjacencies)
+[t=12ms] IS-IS: SPF calculation complete (all routers)
+[t=20ms] MPLS: Label bindings distributed
+[t=30ms] BGP: iBGP sessions Up (13 sessions, 2 RRs)
+[t=35ms] Network converged
+
+Simulation complete: 35ms simulated
+- 16 IS-IS routers, 14 adjacencies
+- 14 LDP sessions, labels distributed
+- 13 iBGP sessions, 2 route reflectors
+```
+
+**Key Insight:** ank_pydantic's design functions automatically derive protocol layers from the whiteboard topology, then netsim validates the resulting configuration converges correctly.
+
+---
+
+### Example 2: Data Center Fabric (EVPN/VXLAN) — Proposed
+
+**Topology:**
+- Spine-leaf architecture: 4 spines, 8 leafs
+- eBGP underlay (unique ASN per switch)
+- iBGP EVPN overlay (spines as route reflectors)
+- VXLAN tunnels for L2 extension across fabric
+
+**ank_pydantic workflow:**
+```python
+from ank_pydantic.blueprints.designs.datacenter import build_spine_leaf_fabric
+from ank_pydantic.blueprints.designs.evpn import build_evpn_overlay
+
+# Generate spine-leaf physical topology
+fabric = build_spine_leaf_fabric(
+    num_spines=4,
+    num_leafs=8,
+    link_speed="100G"
+)
+
+# Add eBGP underlay (RFC 7938 - unique ASN per leaf)
+underlay = build_ebgp_underlay(
+    fabric,
+    asn_base=65100,  # Spine ASNs: 65100-65103
+    leaf_asn_base=65200  # Leaf ASNs: 65200-65207
+)
+
+# Add EVPN overlay
+overlay = build_evpn_overlay(
+    fabric,
+    route_reflectors=["spine-1", "spine-2", "spine-3", "spine-4"],
+    vnis=[10001, 10002, 10003]  # Tenant VNIs
+)
+
+# Export for validation
+fabric.export_netsim("dc-fabric-netsim.yaml")
+```
+
+**netsim validation:**
+- Verify eBGP underlay convergence
+- Check EVPN Type-2 MAC routes advertised
+- Validate VXLAN tunnel establishment
+- Test L2 connectivity across fabric
+
+---
+
+### Example 3: L3VPN Service Provisioning — Proposed
+
+**Topology:**
+- SP core from Example 1 (IS-IS/MPLS)
+- 3 customer sites requiring VPN connectivity
+- VRFs on PE routers with RT import/export
+
+**ank_pydantic workflow:**
+```python
+from ank_pydantic.blueprints.designs.l3vpn import provision_l3vpn
+
+# Start with existing SP core
+sp_core = Topology.from_yaml("transitnet-sp-core.yaml")
+
+# Add L3VPN service for customer "ACME Corp"
+l3vpn = provision_l3vpn(
+    sp_core,
+    vpn_name="ACME-CORP-VPN",
+    vrf_rd="65000:100",
+    rt_import=["65000:100"],
+    rt_export=["65000:100"],
+    customer_sites=[
+        {"pe": "PE1", "ce": "ACME-HQ", "interface": "ge-0/0/1", "vlan": 100},
+        {"pe": "PE3", "ce": "ACME-DC", "interface": "ge-0/0/1", "vlan": 100},
+        {"pe": "PE5", "ce": "ACME-REMOTE", "interface": "ge-0/0/1", "vlan": 100}
+    ]
+)
+
+# Generate VRF configs on PE routers
+l3vpn.export_netsim("l3vpn-netsim.yaml")
+```
+
+**netsim validation:**
+- Verify VRF configuration on PEs
+- Check MP-BGP VPNv4 routes exchanged
+- Validate end-to-end customer connectivity
+- Test route leaking between VRFs
+
+---
+
+### Example 4: Multi-Vendor IXP Peering — Proposed
+
+**Topology:**
+- Internet Exchange Point with route servers
+- Members: 3 ISPs (Cisco, Juniper, Arista platforms)
+- BGP communities for routing policy
+
+**ank_pydantic workflow:**
+```python
+from ank_pydantic.blueprints.designs.ixp import build_ixp_fabric
+
+# Create IXP peering fabric
+ixp = build_ixp_fabric(
+    name="MetroIX",
+    peering_lan="192.0.2.0/24",
+    route_servers=[
+        {"name": "rs1", "ip": "192.0.2.1"},
+        {"name": "rs2", "ip": "192.0.2.2"}
+    ],
+    members=[
+        {"name": "ISP-A", "asn": 64510, "ip": "192.0.2.10", "platform": "iosxr"},
+        {"name": "ISP-B", "asn": 64520, "ip": "192.0.2.20", "platform": "junos"},
+        {"name": "ISP-C", "asn": 64530, "ip": "192.0.2.30", "platform": "eos"}
+    ]
+)
+
+# Add route server BGP sessions
+ixp.add_route_server_sessions(transparent_asn=True)
+
+# Export multi-vendor configs
+ixp.export_netsim("ixp-netsim.yaml")
+```
+
+**netsim validation:**
+- Verify BGP sessions to route servers
+- Check transparent AS path handling
+- Validate community-based filtering
+- Test multi-vendor interoperability
+
+---
+
 ## Getting Started
 
 **For Network Engineers:**

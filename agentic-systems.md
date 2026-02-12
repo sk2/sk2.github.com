@@ -424,7 +424,7 @@ Orchestrator uses GPT-4/Claude for high-level reasoning ("user seems stressed, w
 
 ---
 
-[← Back to Projects](projects) | [View CV](cv) | [Network Automation](network-automation) | [Data Analytics](data-analytics)
+[← Back to Projects](projects) | [View CV](cv) | [Network Automation](network-automation) | [Signal Processing](signal-processing) | [Data Analytics](data-analytics)
 
 <style>
 .status-badge {

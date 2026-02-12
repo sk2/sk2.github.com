@@ -279,7 +279,7 @@ Active development, contributions welcome:
 
 ---
 
-[← Back to Projects](projects) | [View CV](cv) | [Network Automation](network-automation)
+[← Back to Projects](projects) | [View CV](cv) | [Network Automation](network-automation) | [Signal Processing](signal-processing) | [Agentic Systems](agentic-systems)
 
 <style>
 .status-badge {

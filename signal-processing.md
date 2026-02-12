@@ -22,26 +22,25 @@ Building on open source passive radar implementations to track aircraft using Kr
 **Tech Stack:** Python, numpy, scipy, KrakenSDR firmware, Rust (planned migration)
 
 ---
-
 ### Project Spectra — SDR Client
 
 <span class="status-badge status-active">Active Development</span> · [Full Details →](projects/signals)
 
 **What It Is:**
-An SDR client for spectrum monitoring and signal analysis using RTL-SDR and HackRF hardware.
+A high-performance SDR client for spectrum monitoring and automated signal discovery. Spectra transforms raw IQ samples into a "Signal Census" using real-time ML classification.
 
-**Features:**
-- Wide-band scanning with RTL-SDR and HackRF
-- Signal detection and classification
-- Real-time waterfall display
+**Real-Time Visualization:**
+The Spectra interface provides both high-level signal census data and low-level waterfall analysis for deep-dive signal inspection.
 
-![Spectra Signal Census](images/spectra-screenshot.png)
+![Spectra Signal Census](/images/spectra-screenshot.png)
+*Spectra Signal Census: Automated detection and classification of signals across the monitored band.*
 
-![Spectra Waterfall](images/spectra-waterfall.png)
+![Spectra Waterfall](/images/spectra-waterfall.png)
+*High-resolution waterfall display showing temporal signal patterns and frequency hopping.*
 
-**Current Status:** Active development
+**Current Status:** Active development of ML classification engine.
 
-**Tech Stack:** Python, numpy, scipy, RTL-SDR, HackRF
+**Tech Stack:** Python, numpy, scipy, RTL-SDR, HackRF, PyTorch (classification)
 
 ---
 

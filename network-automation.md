@@ -184,9 +184,22 @@ High-performance flow-based network simulator using analytic queuing models and 
 **What It Is:**
 A Rust-based network topology layout and visualization engine. Renders complex multi-layer networks using advanced layout algorithms (force-directed, hierarchical, geographic) with high-quality static output (SVG, PDF, PNG).
 
-**Current Status:** Core layout algorithms implemented
+**Key Capabilities:**
+- **Automated Layout**: Reduce visual noise in 100+ node topologies
+- **Multi-Layer Support**: Visualize logical overlays on physical infrastructure
+- **High-Fidelity Output**: Publication-ready SVG and PDF exports
 
-**Tech Stack:** Rust, petgraph
+**Example: Data Center Fabric Layout**
+![Data Center Fabric](/images/netvis-datacenter-example.svg)
+*NetVis rendering a spine-leaf data center fabric with automated port-aware alignment.*
+
+**Example: Path Analysis & Heatmaps**
+![Path Analysis](/images/netvis-path-analysis.svg)
+*Visualizing traffic intensity and shortest-path routing across a mesh topology.*
+
+**Current Status:** Core layout algorithms implemented, building interactive web renderer.
+
+**Tech Stack:** Rust, petgraph, svg-renderer
 
 ---
 

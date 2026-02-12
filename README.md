@@ -322,6 +322,36 @@ Major refactoring of ecosystem pages and project content distribution:
   - Integration points
   - Performance characteristics
 
+## Guidelines for Future Agents
+
+When maintaining or expanding this website, strictly adhere to these architectural and stylistic principles:
+
+### Core Philosophy: "Show, Don't Tell"
+- **Lead with Insight**: Every project page must begin with a "The Insight" section that explains the *why* and the *problem* before the *how*.
+- **Use Real Examples**: Prefer actual CLI outputs, YAML configurations, and code snippets over abstract descriptions.
+- **Visual Evidence**: If a project involves visualization (NetVis, Spectra, Tileserver), include actual rendered output or screenshots.
+
+### Quality & Honesty
+- **No Embellishment**: Never claim "Production Ready" based on phase completion. Use factual status markers (e.g., "Phase 18/20").
+- **Acknowledge Limitations**: Projects should include a "Limitations" section to maintain professional credibility.
+- **Actual Experience**: Only list languages and tools with demonstrated usage in the project files.
+
+### Structural Consistency
+- **Status Badges**: Use standardized status badges in both `projects.md` and individual project pages.
+- **Ecosystem Callouts**: Every category in `projects.md` must have a blockquote callout linking to its respective ecosystem page.
+- **Navigation**: Maintain dual breadcrumbs ("Back to Ecosystem" + "Back to Projects") on all project sub-pages to preserve user context.
+- **Footer**: Ensure every project page has exactly one footer link: `[← Back to Projects](../projects)`.
+
+### Content Architecture
+- **Progressive Disclosure**: Keep ecosystem pages high-level (vision/architecture) and move deep technical details/examples to individual project pages.
+- **Writing Style**: Strictly follow Strunk & White. Omit needless words. Use active voice. Prefer specific over general.
+
+### Maintenance Workflow
+1.  **Update Metadata**: Ensure "Started" year and "Status" are accurate and consistent.
+2.  **Verify Links**: Check that all ecosystem and project links are functional.
+3.  **Sync CV**: If a major project reaches a significant milestone, update the "Professional Work" section in `cv.md`.
+4.  **Run Build**: Always verify the site builds without errors using `./script/cibuild` before finalizing changes.
+
 ## Writing Style
 
 All prose on this site follows **The Elements of Style** (Strunk and White).

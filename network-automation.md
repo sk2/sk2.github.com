@@ -148,6 +148,18 @@ A deterministic, tick-based network simulator for rapid prototyping and testing 
 
 **Tech Stack:** Rust, Tokio, petgraph
 
+---
+
+### NetFlow Sim — Flow-Based Performance Analysis
+
+<span class="status-badge status-active">Active Development</span> · [Full Details →](projects/netflowsim)
+
+**What It Is:**
+High-performance flow-based network simulator using analytic queuing models and Monte Carlo simulations. Validates topologies and routing strategies against billions of flow iterations in seconds, providing massive-scale network performance analysis.
+
+**Current Status:** Early development
+
+**Tech Stack:** Rust, Petgraph, Rayon
 
 ---
 

@@ -130,6 +130,7 @@ This script scans `~/dev`, `~/PycharmProjects`, and `~/RustroverProjects` for pr
 - **Preserve detailed content**: If existing .md file has 3x more lines than generated version, keep the existing file (indicates manual enrichment).
 - **Extract names from preserved files**: When preserving detailed content, use the project name from the existing file, not PROJECT.md.
 - **Legacy projects**: Keep existing project .md files that don't have .planning directories (e.g., autonetkit, nascleanup).
+  - **AutoNetkit (PycharmProjects/autonetkit_legacy)**: This is the legacy PhD project. The active development is **ank_pydantic** in `~/dev/ank_pydantic`.
 
 **Special Cases:**
 - **Multi-Agent Assistant**: The project page includes a comprehensive "Individual Agents" section listing all 13+ agents with their languages, purposes, and security tiers. This is a key feature and should be preserved.

@@ -527,6 +527,156 @@ BGP events: 6 sessions established, 1 route originated, 2 UPDATEs sent
 - **Route Selection**: Best-path algorithm applied at each AS
 - **Session Management**: Keepalive/hold timers, graceful establishment
 
+## Example 5: Service Provider Core with IS-IS/MPLS/iBGP (from ank_pydantic)
+
+Multi-layer service provider topology using ank_pydantic to generate topology and netsim for protocol validation.
+
+**Topology Overview:**
+- 16 devices: 8 core (P), 6 edge (PE), 2 route reflectors (RR)
+- AS 65000
+- 4 Points of Presence (PoPs): West, East, North, South
+
+### Step 1: Define Whiteboard Topology
+
+Create `transitnet-sp-core.yaml`:
+```yaml
+# TransitNet Service Provider Core
+# 16 devices across 4 PoPs with IS-IS/MPLS/iBGP
+
+topology:
+  - metadata:
+      name: TransitNet SP Core
+      description: Tier 1 service provider backbone
+      organisation: TransitNet
+      asn: 65000
+
+  - nodes:
+      # PoP-West: Core and Edge
+      - P1:
+          role: core
+          data:
+            pop: West
+            platform: iosxr
+            asn: 65000
+            loopback: 10.0.0.1/32
+          endpoints:
+            - Gi0/0/0/0  # to P3
+            - Gi0/0/0/1  # to P5
+            - Gi0/0/0/2  # to PE1
+
+      - PE1:
+          role: pe
+          data:
+            pop: West
+            platform: iosxr
+            asn: 65000
+            loopback: 10.0.0.11/32
+          endpoints:
+            - Gi0/0/0/0  # to P1
+
+      # PoP-South: Route Reflectors
+      - RR1:
+          role: rr
+          data:
+            pop: South
+            platform: iosxr
+            asn: 65000
+            loopback: 10.0.0.21/32
+          endpoints:
+            - Gi0/0/0/0  # to P7
+
+      # ... (additional nodes omitted for brevity)
+
+  - links:
+      # Inter-PoP core links
+      - [P1, Gi0/0/0/0, P3, Gi0/0/0/0]   # West-East
+      - [P1, Gi0/0/0/1, P5, Gi0/0/0/0]   # West-North
+      - [P3, Gi0/0/0/1, P7, Gi0/0/0/0]   # East-South
+      # Core to PE links
+      - [P1, Gi0/0/0/2, PE1, Gi0/0/0/0]  # West
+      # ... (additional links omitted)
+```
+
+### Step 2: Generate Protocol Layers with ank_pydantic
+
+```python
+from ank_pydantic import Topology
+from ank_pydantic.core.designs import build_isis_layer, build_mpls_layer
+
+# Load the whiteboard topology
+topology = Topology.from_yaml("transitnet-sp-core.yaml")
+print(f"Loaded {len(list(topology.layer('input').nodes()))} nodes")
+
+# Build IS-IS Layer (Level 2 flat domain)
+isis_layer = build_isis_layer(
+    topology,
+    level=2,
+    area="49.0001",
+    parent_layer="physical"
+)
+print(f"Created {len(list(isis_layer.edges()))} IS-IS adjacencies")
+
+# Build MPLS/LDP Layer (follows IS-IS)
+mpls_layer = build_mpls_layer(
+    topology,
+    igp_layer="isis",
+    layer_name="mpls"
+)
+print(f"Created {len(list(mpls_layer.edges()))} LDP sessions")
+
+# Build iBGP Layer (PE to RR sessions)
+rr_nodes = ["RR1", "RR2"]
+pe_nodes = ["PE1", "PE2", "PE3", "PE4", "PE5", "PE6"]
+
+print("iBGP Sessions:")
+for pe in pe_nodes:
+    for rr in rr_nodes:
+        print(f"  {pe} <-> {rr} (client-to-RR)")
+print(f"  RR1 <-> RR2 (RR-to-RR)")
+# Total: 13 iBGP sessions (6 PEs × 2 RRs + 1 RR-RR)
+```
+
+### Step 3: Export to netsim Format
+
+```python
+# Export for netsim validation
+topology.export_netsim("transitnet-netsim.yaml")
+```
+
+### Step 4: Run in netsim
+
+```bash
+$ netsim run transitnet-netsim.yaml
+
+[t=0ms] Network initialized: 16 devices, 14 links
+[t=0ms] IS-IS: All routers sending IIH (IS-IS Hello)
+[t=5ms] IS-IS: Adjacencies Up (14 adjacencies)
+[t=8ms] IS-IS: LSP flooding in progress
+[t=12ms] IS-IS: SPF calculation complete (all routers)
+[t=15ms] MPLS: LDP sessions establishing
+[t=20ms] MPLS: Label bindings distributed
+[t=25ms] BGP: iBGP sessions establishing (13 sessions)
+[t=30ms] BGP: Route reflectors active, PE sessions Up
+[t=35ms] Network converged
+
+Simulation complete: 35ms simulated
+- 16 IS-IS routers, 14 adjacencies
+- 14 LDP sessions, labels distributed
+- 13 iBGP sessions, 2 route reflectors
+```
+
+### Key Features Demonstrated
+
+- **Multi-layer modeling**: Physical → IS-IS → MPLS → iBGP
+- **ank_pydantic design functions**: Automated layer derivation
+- **Route reflector topology**: Scalable iBGP without full mesh
+- **Service provider patterns**: Realistic SP core architecture
+- **Incremental validation**: Verify each layer before adding next
+
+This example shows how ank_pydantic topology modeling integrates with netsim for protocol validation in complex multi-layer networks.
+
+---
+
 ## Limitations
 
 - Protocol behavior is simplified compared to real implementations

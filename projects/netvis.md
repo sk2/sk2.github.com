@@ -102,6 +102,9 @@ Mesh network:
 Ring topology:
 ![NetVis Ring](/images/netvis-ring-example.svg)
 
+Path analysis with edge bundling:
+![NetVis Path Analysis](/images/netvis-path-analysis.svg)
+
 ## Integration with ank_pydantic
 
 ank_pydantic topologies export directly to NetVis format:

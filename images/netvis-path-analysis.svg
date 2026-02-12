@@ -1,0 +1,254 @@
+<svg height="1000" preserveAspectRatio="none" shape-rendering="geometricPrecision" viewBox="0 0 1600 1000" width="1600" xmlns="http://www.w3.org/2000/svg">
+<path d="M172.04906071793266,498.90949314062783 L305.1459109260859,498.90949314062783" fill="none" stroke="#6b798d" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"/>
+<text dominant-baseline="middle" fill="#000000" font-family="&apos;JetBrains Mono&apos;, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, &apos;Liberation Mono&apos;, &apos;Courier New&apos;, system-ui, -apple-system, BlinkMacSystemFont, &apos;Segoe UI&apos;, Roboto, Inter, &apos;Helvetica Neue&apos;, Arial, sans-serif" font-kerning="normal" font-size="6" text-anchor="middle" text-rendering="optimizeLegibility" x="238.59748582200928" y="508.4924663556149">
+1G
+</text>
+<path d="M305.1459109260859,498.90949314062783 L438.24276113423934,454.54387640457674" fill="none" stroke="#6b798d" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"/>
+<text dominant-baseline="middle" fill="#000000" font-family="&apos;JetBrains Mono&apos;, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, &apos;Liberation Mono&apos;, &apos;Courier New&apos;, system-ui, -apple-system, BlinkMacSystemFont, &apos;Segoe UI&apos;, Roboto, Inter, &apos;Helvetica Neue&apos;, Arial, sans-serif" font-kerning="normal" font-size="6" text-anchor="middle" text-rendering="optimizeLegibility" transform="rotate(-18.43494882292201 358.8151266309708 438.0890565750268)" x="358.8151266309708" y="438.0890565750268">
+10G
+</text>
+<path d="M305.1459109260859,498.90949314062783 L438.24276113423934,543.2751098766789" fill="none" stroke="#6b798d" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"/>
+<text dominant-baseline="middle" fill="#000000" font-family="&apos;JetBrains Mono&apos;, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, &apos;Liberation Mono&apos;, &apos;Courier New&apos;, system-ui, -apple-system, BlinkMacSystemFont, &apos;Segoe UI&apos;, Roboto, Inter, &apos;Helvetica Neue&apos;, Arial, sans-serif" font-kerning="normal" font-size="6" text-anchor="middle" text-rendering="optimizeLegibility" transform="rotate(18.43494882292201 358.8151266309708 559.7299297062289)" x="358.8151266309708" y="559.7299297062289">
+10G
+</text>
+<path d="M438.24276113423934,454.54387640457674 L438.24276113423934,543.2751098766789" fill="none" stroke="#6b798d" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"/>
+<text dominant-baseline="middle" fill="#000000" font-family="&apos;JetBrains Mono&apos;, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, &apos;Liberation Mono&apos;, &apos;Courier New&apos;, system-ui, -apple-system, BlinkMacSystemFont, &apos;Segoe UI&apos;, Roboto, Inter, &apos;Helvetica Neue&apos;, Arial, sans-serif" font-kerning="normal" font-size="6" text-anchor="middle" text-rendering="optimizeLegibility" transform="rotate(90 447.82573434922637 498.90949314062783)" x="447.82573434922637" y="498.90949314062783">
+40G
+</text>
+<path d="M438.24276113423934,454.54387640457674 L615.7052280784437,365.81264293247455" fill="none" stroke="#6b798d" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"/>
+<text dominant-baseline="middle" fill="#000000" font-family="&apos;JetBrains Mono&apos;, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, &apos;Liberation Mono&apos;, &apos;Courier New&apos;, system-ui, -apple-system, BlinkMacSystemFont, &apos;Segoe UI&apos;, Roboto, Inter, &apos;Helvetica Neue&apos;, Arial, sans-serif" font-kerning="normal" font-size="6" text-anchor="middle" text-rendering="optimizeLegibility" transform="rotate(-26.56505117707799 558.0591403855076 472.3485512268578)" x="558.0591403855076" y="472.3485512268578">
+10G WAN
+</text>
+<path d="M438.24276113423934,543.2751098766789 L615.7052280784437,632.0063433487812" fill="none" stroke="#6b798d" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"/>
+<text dominant-baseline="middle" fill="#000000" font-family="&apos;JetBrains Mono&apos;, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, &apos;Liberation Mono&apos;, &apos;Courier New&apos;, system-ui, -apple-system, BlinkMacSystemFont, &apos;Segoe UI&apos;, Roboto, Inter, &apos;Helvetica Neue&apos;, Arial, sans-serif" font-kerning="normal" font-size="6" text-anchor="middle" text-rendering="optimizeLegibility" transform="rotate(26.56505117707799 495.8888488271755 649.8110181710622)" x="495.8888488271755" y="649.8110181710622">
+10G WAN
+</text>
+<path d="M615.7052280784437,365.81264293247455 L793.1676950226482,410.17825966852564" fill="none" stroke="#6b798d" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"/>
+<text dominant-baseline="middle" fill="#000000" font-family="&apos;JetBrains Mono&apos;, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, &apos;Liberation Mono&apos;, &apos;Courier New&apos;, system-ui, -apple-system, BlinkMacSystemFont, &apos;Segoe UI&apos;, Roboto, Inter, &apos;Helvetica Neue&apos;, Arial, sans-serif" font-kerning="normal" font-size="6" text-anchor="middle" text-rendering="optimizeLegibility" transform="rotate(14.036243467926479 694.558558857332 427.5070620733565)" x="694.558558857332" y="427.5070620733565">
+10G WAN
+</text>
+<path d="M615.7052280784437,632.0063433487812 L793.1676950226482,587.6407266127301" fill="none" stroke="#6b798d" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"/>
+<text dominant-baseline="middle" fill="#000000" font-family="&apos;JetBrains Mono&apos;, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, &apos;Liberation Mono&apos;, &apos;Courier New&apos;, system-ui, -apple-system, BlinkMacSystemFont, &apos;Segoe UI&apos;, Roboto, Inter, &apos;Helvetica Neue&apos;, Arial, sans-serif" font-kerning="normal" font-size="6" text-anchor="middle" text-rendering="optimizeLegibility" transform="rotate(-14.036243467926479 714.3143642437601 649.3351457536121)" x="714.3143642437601" y="649.3351457536121">
+10G WAN
+</text>
+<path d="M793.1676950226482,410.17825966852564 L793.1676950226482,498.90949314062783" fill="none" stroke="#6b798d" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"/>
+<text dominant-baseline="middle" fill="#000000" font-family="&apos;JetBrains Mono&apos;, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, &apos;Liberation Mono&apos;, &apos;Courier New&apos;, system-ui, -apple-system, BlinkMacSystemFont, &apos;Segoe UI&apos;, Roboto, Inter, &apos;Helvetica Neue&apos;, Arial, sans-serif" font-kerning="normal" font-size="6" text-anchor="middle" text-rendering="optimizeLegibility" transform="rotate(90 783.5847218076611 454.54387640457674)" x="783.5847218076611" y="454.54387640457674">
+10G
+</text>
+<path d="M793.1676950226482,587.6407266127301 L793.1676950226482,498.90949314062783" fill="none" stroke="#6b798d" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"/>
+<text dominant-baseline="middle" fill="#000000" font-family="&apos;JetBrains Mono&apos;, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, &apos;Liberation Mono&apos;, &apos;Courier New&apos;, system-ui, -apple-system, BlinkMacSystemFont, &apos;Segoe UI&apos;, Roboto, Inter, &apos;Helvetica Neue&apos;, Arial, sans-serif" font-kerning="normal" font-size="6" text-anchor="middle" text-rendering="optimizeLegibility" transform="rotate(-90 802.7506682376353 543.2751098766789)" x="802.7506682376353" y="543.2751098766789">
+10G
+</text>
+<path d="M793.1676950226482,410.17825966852564 L793.1676950226482,587.6407266127301" fill="none" stroke="#6b798d" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"/>
+<text dominant-baseline="middle" fill="#000000" font-family="&apos;JetBrains Mono&apos;, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, &apos;Liberation Mono&apos;, &apos;Courier New&apos;, system-ui, -apple-system, BlinkMacSystemFont, &apos;Segoe UI&apos;, Roboto, Inter, &apos;Helvetica Neue&apos;, Arial, sans-serif" font-kerning="normal" font-size="6" text-anchor="middle" text-rendering="optimizeLegibility" transform="rotate(90 777.5953635482942 498.90949314062783)" x="777.5953635482942" y="498.90949314062783">
+40G
+</text>
+<path d="M793.1676950226482,410.17825966852564 L970.6301619668527,365.81264293247455" fill="none" stroke="#6b798d" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"/>
+<text dominant-baseline="middle" fill="#000000" font-family="&apos;JetBrains Mono&apos;, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, &apos;Liberation Mono&apos;, &apos;Courier New&apos;, system-ui, -apple-system, BlinkMacSystemFont, &apos;Segoe UI&apos;, Roboto, Inter, &apos;Helvetica Neue&apos;, Arial, sans-serif" font-kerning="normal" font-size="6" text-anchor="middle" text-rendering="optimizeLegibility" transform="rotate(-14.036243467926479 891.7768311879645 427.5070620733565)" x="891.7768311879645" y="427.5070620733565">
+10G WAN
+</text>
+<path d="M793.1676950226482,587.6407266127301 L970.6301619668527,632.0063433487812" fill="none" stroke="#6b798d" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"/>
+<text dominant-baseline="middle" fill="#000000" font-family="&apos;JetBrains Mono&apos;, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, &apos;Liberation Mono&apos;, &apos;Courier New&apos;, system-ui, -apple-system, BlinkMacSystemFont, &apos;Segoe UI&apos;, Roboto, Inter, &apos;Helvetica Neue&apos;, Arial, sans-serif" font-kerning="normal" font-size="6" text-anchor="middle" text-rendering="optimizeLegibility" transform="rotate(14.036243467926479 872.0210258015363 649.3351457536121)" x="872.0210258015363" y="649.3351457536121">
+10G WAN
+</text>
+<path d="M970.6301619668527,365.81264293247455 L1148.092628911057,454.54387640457674" fill="none" stroke="#6b798d" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"/>
+<text dominant-baseline="middle" fill="#000000" font-family="&apos;JetBrains Mono&apos;, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, &apos;Liberation Mono&apos;, &apos;Courier New&apos;, system-ui, -apple-system, BlinkMacSystemFont, &apos;Segoe UI&apos;, Roboto, Inter, &apos;Helvetica Neue&apos;, Arial, sans-serif" font-kerning="normal" font-size="6" text-anchor="middle" text-rendering="optimizeLegibility" transform="rotate(26.56505117707799 1028.2762496597888 472.3485512268578)" x="1028.2762496597888" y="472.3485512268578">
+10G WAN
+</text>
+<path d="M970.6301619668527,632.0063433487812 L1148.092628911057,543.2751098766789" fill="none" stroke="#6b798d" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"/>
+<text dominant-baseline="middle" fill="#000000" font-family="&apos;JetBrains Mono&apos;, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, &apos;Liberation Mono&apos;, &apos;Courier New&apos;, system-ui, -apple-system, BlinkMacSystemFont, &apos;Segoe UI&apos;, Roboto, Inter, &apos;Helvetica Neue&apos;, Arial, sans-serif" font-kerning="normal" font-size="6" text-anchor="middle" text-rendering="optimizeLegibility" transform="rotate(-26.56505117707799 1090.446541218121 649.8110181710622)" x="1090.446541218121" y="649.8110181710622">
+10G WAN
+</text>
+<path d="M1148.092628911057,454.54387640457674 L1281.1894791192103,498.90949314062783" fill="none" stroke="#6b798d" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"/>
+<text dominant-baseline="middle" fill="#000000" font-family="&apos;JetBrains Mono&apos;, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, &apos;Liberation Mono&apos;, &apos;Courier New&apos;, system-ui, -apple-system, BlinkMacSystemFont, &apos;Segoe UI&apos;, Roboto, Inter, &apos;Helvetica Neue&apos;, Arial, sans-serif" font-kerning="normal" font-size="6" text-anchor="middle" text-rendering="optimizeLegibility" transform="rotate(18.43494882292201 1227.5202634143257 438.0890565750268)" x="1227.5202634143257" y="438.0890565750268">
+10G
+</text>
+<path d="M1148.092628911057,543.2751098766789 L1281.1894791192103,498.90949314062783" fill="none" stroke="#6b798d" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"/>
+<text dominant-baseline="middle" fill="#000000" font-family="&apos;JetBrains Mono&apos;, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, &apos;Liberation Mono&apos;, &apos;Courier New&apos;, system-ui, -apple-system, BlinkMacSystemFont, &apos;Segoe UI&apos;, Roboto, Inter, &apos;Helvetica Neue&apos;, Arial, sans-serif" font-kerning="normal" font-size="6" text-anchor="middle" text-rendering="optimizeLegibility" transform="rotate(-18.43494882292201 1227.5202634143257 559.7299297062289)" x="1227.5202634143257" y="559.7299297062289">
+10G
+</text>
+<path d="M1281.1894791192103,498.90949314062783 L1414.2863293273638,498.90949314062783" fill="none" stroke="#6b798d" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"/>
+<text dominant-baseline="middle" fill="#000000" font-family="&apos;JetBrains Mono&apos;, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, &apos;Liberation Mono&apos;, &apos;Courier New&apos;, system-ui, -apple-system, BlinkMacSystemFont, &apos;Segoe UI&apos;, Roboto, Inter, &apos;Helvetica Neue&apos;, Arial, sans-serif" font-kerning="normal" font-size="6" text-anchor="middle" text-rendering="optimizeLegibility" x="1347.737904223287" y="508.4924663556149">
+1G
+</text>
+<path d="M1148.092628911057,454.54387640457674 L1148.092628911057,543.2751098766789" fill="none" stroke="#6b798d" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"/>
+<text dominant-baseline="middle" fill="#000000" font-family="&apos;JetBrains Mono&apos;, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, &apos;Liberation Mono&apos;, &apos;Courier New&apos;, system-ui, -apple-system, BlinkMacSystemFont, &apos;Segoe UI&apos;, Roboto, Inter, &apos;Helvetica Neue&apos;, Arial, sans-serif" font-kerning="normal" font-size="6" text-anchor="middle" text-rendering="optimizeLegibility" transform="rotate(90 1138.5096556960702 498.90949314062783)" x="1138.5096556960702" y="498.90949314062783">
+40G
+</text>
+<path d="M615.7052280784437,365.81264293247455 L970.6301619668527,365.81264293247455" fill="none" stroke="#6b798d" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"/>
+<text dominant-baseline="middle" fill="#000000" font-family="&apos;JetBrains Mono&apos;, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, &apos;Liberation Mono&apos;, &apos;Courier New&apos;, system-ui, -apple-system, BlinkMacSystemFont, &apos;Segoe UI&apos;, Roboto, Inter, &apos;Helvetica Neue&apos;, Arial, sans-serif" font-kerning="normal" font-size="6" text-anchor="middle" text-rendering="optimizeLegibility" x="793.1676950226482" y="340.65733824313355">
+Transit Link
+</text>
+<path d="M615.7052280784437,632.0063433487812 L970.6301619668527,632.0063433487812" fill="none" stroke="#6b798d" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"/>
+<text dominant-baseline="middle" fill="#000000" font-family="&apos;JetBrains Mono&apos;, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, &apos;Liberation Mono&apos;, &apos;Courier New&apos;, system-ui, -apple-system, BlinkMacSystemFont, &apos;Segoe UI&apos;, Roboto, Inter, &apos;Helvetica Neue&apos;, Arial, sans-serif" font-kerning="normal" font-size="6" text-anchor="middle" text-rendering="optimizeLegibility" x="793.1676950226482" y="657.1616480381222">
+Transit Link
+</text>
+<g>
+<defs>
+<path d="M172.04906071793266,498.90949314062783 C216.4146774539837,498.90949314062783 260.78029419003485,506.3037625966364 305.1459109260859,498.90949314062783 C349.51152766213704,491.51522368461934 386.4828749421797,476.91377823637936 438.24276113423934,454.54387640457674 C490.0026473262989,432.1739745727741 556.5510724303756,372.0843516058207 615.7052280784437,364.69008214981216 C674.859383726512,357.29581269380367 734.0135393745801,410.17825966852564 793.1676950226482,410.17825966852564 C852.3218506707163,410.17825966852564 911.4760063187846,357.29581269380367 970.6301619668527,364.69008214981216 C1029.7843176149208,372.0843516058207 1096.3327427189975,432.1739745727741 1148.092628911057,454.54387640457674 C1199.8525151031167,476.91377823637936 1236.8238623831594,491.51522368461934 1281.1894791192103,498.90949314062783 C1325.5550958552615,506.3037625966364 1369.9207125913126,498.90949314062783 1414.2863293273638,498.90949314062783" id="path-def-primary-route"/>
+<marker id="path-arrow-end-primary-route" markerHeight="9" markerWidth="9" orient="auto-start-reverse" refX="9" refY="5" viewBox="0 0 10 10">
+<polygon fill="#22c55e" points="0,0 10,5 0,10"/>
+</marker>
+</defs>
+<path d="M172.04906071793266,498.90949314062783 C216.4146774539837,498.90949314062783 260.78029419003485,506.3037625966364 305.1459109260859,498.90949314062783 C349.51152766213704,491.51522368461934 386.4828749421797,476.91377823637936 438.24276113423934,454.54387640457674 C490.0026473262989,432.1739745727741 556.5510724303756,372.0843516058207 615.7052280784437,364.69008214981216 C674.859383726512,357.29581269380367 734.0135393745801,410.17825966852564 793.1676950226482,410.17825966852564 C852.3218506707163,410.17825966852564 911.4760063187846,357.29581269380367 970.6301619668527,364.69008214981216 C1029.7843176149208,372.0843516058207 1096.3327427189975,432.1739745727741 1148.092628911057,454.54387640457674 C1199.8525151031167,476.91377823637936 1236.8238623831594,491.51522368461934 1281.1894791192103,498.90949314062783 C1325.5550958552615,506.3037625966364 1369.9207125913126,498.90949314062783 1414.2863293273638,498.90949314062783" fill="none" marker-end="url(#path-arrow-end-primary-route)" stroke="#22c55e" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+<text dominant-baseline="middle" dy="-5" fill="#22c55e" font-family="&apos;JetBrains Mono&apos;, ui-monospace, monospace, sans-serif" font-kerning="normal" font-size="8.873123347210223" text-anchor="middle" text-rendering="optimizeLegibility">
+
+<textPath href="#path-def-primary-route" startOffset="50%">Primary (Low Latency)</textPath>
+</text>
+</g>
+<g>
+<defs>
+<path d="M172.04906071793266,498.90949314062783 C216.4146774539837,498.90949314062783 260.78029419003485,491.51522368461934 305.1459109260859,498.90949314062783 C349.51152766213704,506.3037625966364 386.4828749421797,521.2793949724305 438.24276113423934,543.2751098766789 C490.0026473262989,565.2708247809275 556.5510724303756,623.4895131101104 615.7052280784437,630.8837825661188 C674.859383726512,638.2780520221274 734.0135393745801,587.6407266127301 793.1676950226482,587.6407266127301 C852.3218506707163,587.6407266127301 911.4760063187846,638.2780520221274 970.6301619668527,630.8837825661188 C1029.7843176149208,623.4895131101104 1096.3327427189975,565.2708247809275 1148.092628911057,543.2751098766789 C1199.8525151031167,521.2793949724305 1236.8238623831594,506.3037625966364 1281.1894791192103,498.90949314062783 C1325.5550958552615,491.51522368461934 1369.9207125913126,498.90949314062783 1414.2863293273638,498.90949314062783" id="path-def-backup-route"/>
+<marker id="path-arrow-end-backup-route" markerHeight="6" markerWidth="6" orient="auto-start-reverse" refX="9" refY="5" viewBox="0 0 10 10">
+<polygon fill="#f59e0b" points="0,0 10,5 0,10"/>
+</marker>
+</defs>
+<path d="M172.04906071793266,498.90949314062783 C216.4146774539837,498.90949314062783 260.78029419003485,491.51522368461934 305.1459109260859,498.90949314062783 C349.51152766213704,506.3037625966364 386.4828749421797,521.2793949724305 438.24276113423934,543.2751098766789 C490.0026473262989,565.2708247809275 556.5510724303756,623.4895131101104 615.7052280784437,630.8837825661188 C674.859383726512,638.2780520221274 734.0135393745801,587.6407266127301 793.1676950226482,587.6407266127301 C852.3218506707163,587.6407266127301 911.4760063187846,638.2780520221274 970.6301619668527,630.8837825661188 C1029.7843176149208,623.4895131101104 1096.3327427189975,565.2708247809275 1148.092628911057,543.2751098766789 C1199.8525151031167,521.2793949724305 1236.8238623831594,506.3037625966364 1281.1894791192103,498.90949314062783 C1325.5550958552615,491.51522368461934 1369.9207125913126,498.90949314062783 1414.2863293273638,498.90949314062783" fill="none" marker-end="url(#path-arrow-end-backup-route)" stroke="#f59e0b" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+<text dominant-baseline="middle" dy="-4" fill="#f59e0b" font-family="&apos;JetBrains Mono&apos;, ui-monospace, monospace, sans-serif" font-kerning="normal" font-size="8.873123347210223" text-anchor="middle" text-rendering="optimizeLegibility">
+
+<textPath href="#path-def-backup-route" startOffset="50%">Backup (Redundant)</textPath>
+</text>
+</g>
+<g>
+<defs>
+<path d="M438.24276113423934,454.54387640457674 C497.39691678230747,424.5926116529886 526.9739946063415,379.6657145256063 615.7052280784437,364.69008214981216 C704.436461550546,349.71444977401814 881.8989284947505,349.71444977401814 970.6301619668527,364.69008214981216 C1059.361395438955,379.6657145256063 1088.938473262989,424.5926116529886 1148.092628911057,454.54387640457674" id="path-def-transit-direct"/>
+<marker id="path-arrow-end-transit-direct" markerHeight="4.5" markerWidth="4.5" orient="auto-start-reverse" refX="9" refY="5" viewBox="0 0 10 10">
+<polygon fill="#56b4e9" points="0,0 10,5 0,10"/>
+</marker>
+</defs>
+<path d="M438.24276113423934,454.54387640457674 C497.39691678230747,424.5926116529886 526.9739946063415,379.6657145256063 615.7052280784437,364.69008214981216 C704.436461550546,349.71444977401814 881.8989284947505,349.71444977401814 970.6301619668527,364.69008214981216 C1059.361395438955,379.6657145256063 1088.938473262989,424.5926116529886 1148.092628911057,454.54387640457674" fill="none" marker-end="url(#path-arrow-end-transit-direct)" stroke="#56b4e9" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+<text dominant-baseline="middle" dy="-3.5" fill="#56b4e9" font-family="&apos;JetBrains Mono&apos;, ui-monospace, monospace, sans-serif" font-kerning="normal" font-size="8.873123347210223" text-anchor="middle" text-rendering="optimizeLegibility">
+
+<textPath href="#path-def-transit-direct" startOffset="50%">Transit Backbone</textPath>
+</text>
+</g>
+<g>
+<defs>
+<path d="M438.24276113423934,454.54387640457674 C438.24276113423934,484.1209542286108 379.08860548617116,550.6693793326875 438.24276113423934,543.2751098766789 C497.39691678230747,535.8808404206704 734.0135393745801,402.7839902125171 793.1676950226482,410.17825966852564 C852.3218506707163,417.5725291245341 793.1676950226482,528.486570964662 793.1676950226482,587.6407266127301" id="path-def-monitoring-path"/>
+<marker id="path-arrow-end-monitoring-path" markerHeight="9" markerWidth="9" orient="auto-start-reverse" refX="9" refY="5" viewBox="0 0 10 10">
+<polygon fill="#8b5cf6" points="0,0 10,5 0,10"/>
+</marker>
+<marker id="path-arrow-start-monitoring-path" markerHeight="9" markerWidth="9" orient="auto-start-reverse" refX="1" refY="5" viewBox="0 0 10 10">
+<polygon fill="#8b5cf6" points="10,0 0,5 10,10"/>
+</marker>
+</defs>
+<path d="M438.24276113423934,454.54387640457674 C438.24276113423934,484.1209542286108 379.08860548617116,550.6693793326875 438.24276113423934,543.2751098766789 C497.39691678230747,535.8808404206704 734.0135393745801,402.7839902125171 793.1676950226482,410.17825966852564 C852.3218506707163,417.5725291245341 793.1676950226482,528.486570964662 793.1676950226482,587.6407266127301" fill="none" marker-end="url(#path-arrow-end-monitoring-path)" marker-start="url(#path-arrow-start-monitoring-path)" stroke="#8b5cf6" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+<text dominant-baseline="middle" dy="-5" fill="#8b5cf6" font-family="&apos;JetBrains Mono&apos;, ui-monospace, monospace, sans-serif" font-kerning="normal" font-size="8.873123347210223" text-anchor="middle" text-rendering="optimizeLegibility">
+
+<textPath href="#path-def-monitoring-path" startOffset="50%">Core Monitoring</textPath>
+</text>
+</g>
+<g>
+<path d="M445.42999104547965,454.54387640457674 C445.42999104547965,458.51338348455477 442.2122682142173,461.731106315817 438.24276113423934,461.731106315817 C434.2732540542613,461.731106315817 431.05553122299904,458.51338348455477 431.05553122299904,454.54387640457674 C431.05553122299904,450.5743693245987 434.2732540542613,447.3566464933365 438.24276113423934,447.3566464933365 C442.2122682142173,447.3566464933365 445.42999104547965,450.5743693245987 445.42999104547965,454.54387640457674 Z M439.04134223548823,454.54387640457674 L443.0342477417328,454.54387640457674 L441.75651797973455,453.585579083078 M443.0342477417328,454.54387640457674 L441.75651797973455,455.50217372607545 M437.4441800329904,454.54387640457674 L433.4512745267458,454.54387640457674 L434.7290042887441,453.585579083078 M433.4512745267458,454.54387640457674 L434.7290042887441,455.50217372607545 M438.24276113423934,453.7452953033278 L438.24276113423934,449.7523897970832 L437.2844638127406,451.03011955908147 M438.24276113423934,449.7523897970832 L439.201058455738,451.03011955908147 M438.24276113423934,455.3424575058257 L438.24276113423934,459.3353630120703 L437.2844638127406,458.057633250072 M438.24276113423934,459.3353630120703 L439.201058455738,458.057633250072" fill="#2d3748" stroke="#4fd1c5" stroke-width="2.4"/>
+<text dominant-baseline="middle" fill="#000000" font-family="&apos;JetBrains Mono&apos;, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, &apos;Liberation Mono&apos;, &apos;Courier New&apos;, system-ui, -apple-system, BlinkMacSystemFont, &apos;Segoe UI&apos;, Roboto, Inter, &apos;Helvetica Neue&apos;, Arial, sans-serif" font-kerning="normal" font-size="13.842072421647948" text-anchor="end" text-rendering="optimizeLegibility" x="407.98541052025246" y="420.5491662367449">
+DC-A Core1
+</text>
+</g>
+<g>
+<path d="M445.42999104547965,543.2751098766789 C445.42999104547965,547.244616956657 442.2122682142173,550.4623397879193 438.24276113423934,550.4623397879193 C434.2732540542613,550.4623397879193 431.05553122299904,547.244616956657 431.05553122299904,543.2751098766789 C431.05553122299904,539.3056027967009 434.2732540542613,536.0878799654387 438.24276113423934,536.0878799654387 C442.2122682142173,536.0878799654387 445.42999104547965,539.3056027967009 445.42999104547965,543.2751098766789 Z M439.04134223548823,543.2751098766789 L443.0342477417328,543.2751098766789 L441.75651797973455,542.3168125551803 M443.0342477417328,543.2751098766789 L441.75651797973455,544.2334071981777 M437.4441800329904,543.2751098766789 L433.4512745267458,543.2751098766789 L434.7290042887441,542.3168125551803 M433.4512745267458,543.2751098766789 L434.7290042887441,544.2334071981777 M438.24276113423934,542.4765287754301 L438.24276113423934,538.4836232691854 L437.2844638127406,539.7613530311837 M438.24276113423934,538.4836232691854 L439.201058455738,539.7613530311837 M438.24276113423934,544.0736909779279 L438.24276113423934,548.0665964841725 L437.2844638127406,546.7888667221742 M438.24276113423934,548.0665964841725 L439.201058455738,546.7888667221742" fill="#2d3748" stroke="#4fd1c5" stroke-width="2.4"/>
+<text dominant-baseline="middle" fill="#000000" font-family="&apos;JetBrains Mono&apos;, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, &apos;Liberation Mono&apos;, &apos;Courier New&apos;, system-ui, -apple-system, BlinkMacSystemFont, &apos;Segoe UI&apos;, Roboto, Inter, &apos;Helvetica Neue&apos;, Arial, sans-serif" font-kerning="normal" font-size="13.842072421647948" text-anchor="start" text-rendering="optimizeLegibility" x="454.30311439268985" y="523.4773970643835">
+DC-A Core2
+</text>
+</g>
+<g>
+<path d="M298.7572621160947,495.7151687356322 L305.1459109260859,492.52084433063646 L311.5345597360773,495.7151687356322 L311.5345597360773,502.10381754562354 L305.1459109260859,505.2981419506192 L298.7572621160947,502.10381754562354 Z M300.35442431859246,496.51374983688106 L309.93739753357954,496.51374983688106 M299.5558432173435,498.90949314062783 L310.7359786348285,498.90949314062783 M300.35442431859246,501.3052364443746 L309.93739753357954,501.3052364443746 M302.7501676223393,496.51374983688106 L302.7501676223393,498.90949314062783 M307.5416542298327,496.51374983688106 L307.5416542298327,498.90949314062783 M305.1459109260859,498.90949314062783 L305.1459109260859,501.3052364443746" fill="#2d3748" stroke="#f6ad55" stroke-width="2.4"/>
+<text dominant-baseline="middle" fill="#000000" font-family="&apos;JetBrains Mono&apos;, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, &apos;Liberation Mono&apos;, &apos;Courier New&apos;, system-ui, -apple-system, BlinkMacSystemFont, &apos;Segoe UI&apos;, Roboto, Inter, &apos;Helvetica Neue&apos;, Arial, sans-serif" font-kerning="normal" font-size="13.842072421647948" text-anchor="end" text-rendering="optimizeLegibility" x="289.88413876888444" y="479.9103614295813">
+DC-A Edge
+</text>
+</g>
+<g>
+<path d="M167.25757411043924,491.0833983483884 L176.8405473254262,491.0833983483884 L176.8405473254262,495.5554525153824 L167.25757411043924,495.5554525153824 Z M168.05615521168795,492.2014118901369 L169.65331741418595,492.2014118901369 L169.65331741418595,494.4374389736339 L168.05615521168795,494.4374389736339 Z M175.24338512292843,492.87222001518603 L176.04196622417726,492.87222001518603 L176.04196622417726,493.7666308485848 L175.24338512292843,493.7666308485848 Z M167.25757411043924,496.6734660571309 L176.8405473254262,496.6734660571309 L176.8405473254262,501.1455202241248 L167.25757411043924,501.1455202241248 Z M168.05615521168795,497.79147959887933 L169.65331741418595,497.79147959887933 L169.65331741418595,500.0275066823763 L168.05615521168795,500.0275066823763 Z M175.24338512292843,498.46228772392845 L176.04196622417726,498.46228772392845 L176.04196622417726,499.35669855732726 L175.24338512292843,499.35669855732726 Z M167.25757411043924,502.2635337658733 L176.8405473254262,502.2635337658733 L176.8405473254262,506.73558793286725 L167.25757411043924,506.73558793286725 Z M168.05615521168795,503.3815473076218 L169.65331741418595,503.3815473076218 L169.65331741418595,505.6175743911188 L168.05615521168795,505.6175743911188 Z M175.24338512292843,504.0523554326709 L176.04196622417726,504.0523554326709 L176.04196622417726,504.9467662660697 L175.24338512292843,504.9467662660697 Z" fill="#2d3748" stroke="#b794f4" stroke-width="2.4"/>
+<text dominant-baseline="middle" fill="#000000" font-family="&apos;JetBrains Mono&apos;, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, &apos;Liberation Mono&apos;, &apos;Courier New&apos;, system-ui, -apple-system, BlinkMacSystemFont, &apos;Segoe UI&apos;, Roboto, Inter, &apos;Helvetica Neue&apos;, Arial, sans-serif" font-kerning="normal" font-size="13.842072421647948" text-anchor="middle" text-rendering="optimizeLegibility" x="172.04906071793266" y="525.7666628879638">
+App Server A
+</text>
+</g>
+<g>
+<path d="M800.3549249338885,410.17825966852564 C800.3549249338885,414.1477667485036 797.1372021026262,417.3654895797659 793.1676950226482,417.3654895797659 C789.1981879426702,417.3654895797659 785.980465111408,414.1477667485036 785.980465111408,410.17825966852564 C785.980465111408,406.2087525885476 789.1981879426702,402.99102975728533 793.1676950226482,402.99102975728533 C797.1372021026262,402.99102975728533 800.3549249338885,406.2087525885476 800.3549249338885,410.17825966852564 Z M793.9662761238972,410.17825966852564 L797.9591816301418,410.17825966852564 L796.6814518681434,409.2199623470269 M797.9591816301418,410.17825966852564 L796.6814518681434,411.13655699002436 M792.3691139213993,410.17825966852564 L788.3762084151547,410.17825966852564 L789.653938177153,409.2199623470269 M788.3762084151547,410.17825966852564 L789.653938177153,411.13655699002436 M793.1676950226482,409.3796785672767 L793.1676950226482,405.3867730610321 L792.2093977011496,406.6645028230304 M793.1676950226482,405.3867730610321 L794.1259923441469,406.6645028230304 M793.1676950226482,410.9768407697745 L793.1676950226482,414.9697462760191 L792.2093977011496,413.6920165140209 M793.1676950226482,414.9697462760191 L794.1259923441469,413.6920165140209" fill="#2d3748" stroke="#4fd1c5" stroke-width="2.4"/>
+<text dominant-baseline="middle" fill="#000000" font-family="&apos;JetBrains Mono&apos;, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, &apos;Liberation Mono&apos;, &apos;Courier New&apos;, system-ui, -apple-system, BlinkMacSystemFont, &apos;Segoe UI&apos;, Roboto, Inter, &apos;Helvetica Neue&apos;, Arial, sans-serif" font-kerning="normal" font-size="13.842072421647948" text-anchor="start" text-rendering="optimizeLegibility" x="837.6220429921715" y="469.5820458534286">
+DC-B Core1
+</text>
+</g>
+<g>
+<path d="M800.3549249338885,587.6407266127301 C800.3549249338885,591.6102336927081 797.1372021026262,594.8279565239703 793.1676950226482,594.8279565239703 C789.1981879426702,594.8279565239703 785.980465111408,591.6102336927081 785.980465111408,587.6407266127301 C785.980465111408,583.671219532752 789.1981879426702,580.4534967014898 793.1676950226482,580.4534967014898 C797.1372021026262,580.4534967014898 800.3549249338885,583.671219532752 800.3549249338885,587.6407266127301 Z M793.9662761238972,587.6407266127301 L797.9591816301418,587.6407266127301 L796.6814518681434,586.6824292912313 M797.9591816301418,587.6407266127301 L796.6814518681434,588.5990239342287 M792.3691139213993,587.6407266127301 L788.3762084151547,587.6407266127301 L789.653938177153,586.6824292912313 M788.3762084151547,587.6407266127301 L789.653938177153,588.5990239342287 M793.1676950226482,586.8421455114811 L793.1676950226482,582.8492400052365 L792.2093977011496,584.1269697672349 M793.1676950226482,582.8492400052365 L794.1259923441469,584.1269697672349 M793.1676950226482,588.439307713979 L793.1676950226482,592.4322132202236 L792.2093977011496,591.1544834582253 M793.1676950226482,592.4322132202236 L794.1259923441469,591.1544834582253" fill="#2d3748" stroke="#4fd1c5" stroke-width="2.4"/>
+<text dominant-baseline="middle" fill="#000000" font-family="&apos;JetBrains Mono&apos;, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, &apos;Liberation Mono&apos;, &apos;Courier New&apos;, system-ui, -apple-system, BlinkMacSystemFont, &apos;Segoe UI&apos;, Roboto, Inter, &apos;Helvetica Neue&apos;, Arial, sans-serif" font-kerning="normal" font-size="13.842072421647948" text-anchor="start" text-rendering="optimizeLegibility" x="809.2280482810987" y="567.8430138004346">
+DC-B Core2
+</text>
+</g>
+<g>
+<path d="M786.7790462126569,495.7151687356322 L793.1676950226482,492.52084433063646 L799.5563438326395,495.7151687356322 L799.5563438326395,502.10381754562354 L793.1676950226482,505.2981419506192 L786.7790462126569,502.10381754562354 Z M788.3762084151547,496.51374983688106 L797.9591816301418,496.51374983688106 M787.5776273139057,498.90949314062783 L798.7577627313907,498.90949314062783 M788.3762084151547,501.3052364443746 L797.9591816301418,501.3052364443746 M790.7719517189015,496.51374983688106 L790.7719517189015,498.90949314062783 M795.5634383263949,496.51374983688106 L795.5634383263949,498.90949314062783 M793.1676950226482,498.90949314062783 L793.1676950226482,501.3052364443746" fill="#2d3748" stroke="#f6ad55" stroke-width="2.4"/>
+<text dominant-baseline="middle" fill="#000000" font-family="&apos;JetBrains Mono&apos;, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, &apos;Liberation Mono&apos;, &apos;Courier New&apos;, system-ui, -apple-system, BlinkMacSystemFont, &apos;Segoe UI&apos;, Roboto, Inter, &apos;Helvetica Neue&apos;, Arial, sans-serif" font-kerning="normal" font-size="13.842072421647948" text-anchor="start" text-rendering="optimizeLegibility" x="808.4294671798498" y="498.90949314062783">
+DC-B Edge
+</text>
+</g>
+<g>
+<path d="M1155.2798588222975,454.54387640457674 C1155.2798588222975,458.51338348455477 1152.0621359910351,461.731106315817 1148.092628911057,461.731106315817 C1144.123121831079,461.731106315817 1140.9053989998167,458.51338348455477 1140.9053989998167,454.54387640457674 C1140.9053989998167,450.5743693245987 1144.123121831079,447.3566464933365 1148.092628911057,447.3566464933365 C1152.0621359910351,447.3566464933365 1155.2798588222975,450.5743693245987 1155.2798588222975,454.54387640457674 Z M1148.891210012306,454.54387640457674 L1152.8841155185505,454.54387640457674 L1151.6063857565523,453.585579083078 M1152.8841155185505,454.54387640457674 L1151.6063857565523,455.50217372607545 M1147.2940478098083,454.54387640457674 L1143.3011423035637,454.54387640457674 L1144.5788720655619,453.585579083078 M1143.3011423035637,454.54387640457674 L1144.5788720655619,455.50217372607545 M1148.092628911057,453.7452953033278 L1148.092628911057,449.7523897970832 L1147.1343315895583,451.03011955908147 M1148.092628911057,449.7523897970832 L1149.0509262325559,451.03011955908147 M1148.092628911057,455.3424575058257 L1148.092628911057,459.3353630120703 L1147.1343315895583,458.057633250072 M1148.092628911057,459.3353630120703 L1149.0509262325559,458.057633250072" fill="#2d3748" stroke="#4fd1c5" stroke-width="2.4"/>
+<text dominant-baseline="middle" fill="#000000" font-family="&apos;JetBrains Mono&apos;, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, &apos;Liberation Mono&apos;, &apos;Courier New&apos;, system-ui, -apple-system, BlinkMacSystemFont, &apos;Segoe UI&apos;, Roboto, Inter, &apos;Helvetica Neue&apos;, Arial, sans-serif" font-kerning="normal" font-size="13.842072421647948" text-anchor="start" text-rendering="optimizeLegibility" x="1178.349979525044" y="420.5491662367449">
+DC-C Core1
+</text>
+</g>
+<g>
+<path d="M1155.2798588222975,543.2751098766789 C1155.2798588222975,547.244616956657 1152.0621359910351,550.4623397879193 1148.092628911057,550.4623397879193 C1144.123121831079,550.4623397879193 1140.9053989998167,547.244616956657 1140.9053989998167,543.2751098766789 C1140.9053989998167,539.3056027967009 1144.123121831079,536.0878799654387 1148.092628911057,536.0878799654387 C1152.0621359910351,536.0878799654387 1155.2798588222975,539.3056027967009 1155.2798588222975,543.2751098766789 Z M1148.891210012306,543.2751098766789 L1152.8841155185505,543.2751098766789 L1151.6063857565523,542.3168125551803 M1152.8841155185505,543.2751098766789 L1151.6063857565523,544.2334071981777 M1147.2940478098083,543.2751098766789 L1143.3011423035637,543.2751098766789 L1144.5788720655619,542.3168125551803 M1143.3011423035637,543.2751098766789 L1144.5788720655619,544.2334071981777 M1148.092628911057,542.4765287754301 L1148.092628911057,538.4836232691854 L1147.1343315895583,539.7613530311837 M1148.092628911057,538.4836232691854 L1149.0509262325559,539.7613530311837 M1148.092628911057,544.0736909779279 L1148.092628911057,548.0665964841725 L1147.1343315895583,546.7888667221742 M1148.092628911057,548.0665964841725 L1149.0509262325559,546.7888667221742" fill="#2d3748" stroke="#4fd1c5" stroke-width="2.4"/>
+<text dominant-baseline="middle" fill="#000000" font-family="&apos;JetBrains Mono&apos;, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, &apos;Liberation Mono&apos;, &apos;Courier New&apos;, system-ui, -apple-system, BlinkMacSystemFont, &apos;Segoe UI&apos;, Roboto, Inter, &apos;Helvetica Neue&apos;, Arial, sans-serif" font-kerning="normal" font-size="13.842072421647948" text-anchor="end" text-rendering="optimizeLegibility" x="1132.0322756526066" y="523.4773970643835">
+DC-C Core2
+</text>
+</g>
+<g>
+<path d="M1274.800830309219,495.7151687356322 L1281.1894791192103,492.52084433063646 L1287.5781279292019,495.7151687356322 L1287.5781279292019,502.10381754562354 L1281.1894791192103,505.2981419506192 L1274.800830309219,502.10381754562354 Z M1276.397992511717,496.51374983688106 L1285.980965726704,496.51374983688106 M1275.599411410468,498.90949314062783 L1286.7795468279528,498.90949314062783 M1276.397992511717,501.3052364443746 L1285.980965726704,501.3052364443746 M1278.7937358154636,496.51374983688106 L1278.7937358154636,498.90949314062783 M1283.5852224229573,496.51374983688106 L1283.5852224229573,498.90949314062783 M1281.1894791192103,498.90949314062783 L1281.1894791192103,501.3052364443746" fill="#2d3748" stroke="#f6ad55" stroke-width="2.4"/>
+<text dominant-baseline="middle" fill="#000000" font-family="&apos;JetBrains Mono&apos;, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, &apos;Liberation Mono&apos;, &apos;Courier New&apos;, system-ui, -apple-system, BlinkMacSystemFont, &apos;Segoe UI&apos;, Roboto, Inter, &apos;Helvetica Neue&apos;, Arial, sans-serif" font-kerning="normal" font-size="13.842072421647948" text-anchor="start" text-rendering="optimizeLegibility" x="1296.451251276412" y="479.9103614295813">
+DC-C Edge
+</text>
+</g>
+<g>
+<path d="M1409.4948427198701,491.0833983483884 L1419.0778159348574,491.0833983483884 L1419.0778159348574,495.5554525153824 L1409.4948427198701,495.5554525153824 Z M1410.2934238211192,492.2014118901369 L1411.8905860236168,492.2014118901369 L1411.8905860236168,494.4374389736339 L1410.2934238211192,494.4374389736339 Z M1417.4806537323593,492.87222001518603 L1418.2792348336084,492.87222001518603 L1418.2792348336084,493.7666308485848 L1417.4806537323593,493.7666308485848 Z M1409.4948427198701,496.6734660571309 L1419.0778159348574,496.6734660571309 L1419.0778159348574,501.1455202241248 L1409.4948427198701,501.1455202241248 Z M1410.2934238211192,497.79147959887933 L1411.8905860236168,497.79147959887933 L1411.8905860236168,500.0275066823763 L1410.2934238211192,500.0275066823763 Z M1417.4806537323593,498.46228772392845 L1418.2792348336084,498.46228772392845 L1418.2792348336084,499.35669855732726 L1417.4806537323593,499.35669855732726 Z M1409.4948427198701,502.2635337658733 L1419.0778159348574,502.2635337658733 L1419.0778159348574,506.73558793286725 L1409.4948427198701,506.73558793286725 Z M1410.2934238211192,503.3815473076218 L1411.8905860236168,503.3815473076218 L1411.8905860236168,505.6175743911188 L1410.2934238211192,505.6175743911188 Z M1417.4806537323593,504.0523554326709 L1418.2792348336084,504.0523554326709 L1418.2792348336084,504.9467662660697 L1417.4806537323593,504.9467662660697 Z" fill="#2d3748" stroke="#b794f4" stroke-width="2.4"/>
+<text dominant-baseline="middle" fill="#000000" font-family="&apos;JetBrains Mono&apos;, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, &apos;Liberation Mono&apos;, &apos;Courier New&apos;, system-ui, -apple-system, BlinkMacSystemFont, &apos;Segoe UI&apos;, Roboto, Inter, &apos;Helvetica Neue&apos;, Arial, sans-serif" font-kerning="normal" font-size="13.842072421647948" text-anchor="start" text-rendering="optimizeLegibility" x="1427.9509392820676" y="498.90949314062783">
+App Server C
+</text>
+</g>
+<g>
+<path d="M609.3165792684524,369.0069673374702 C605.4833899824575,369.0069673374702 604.2056602204593,366.61122403372343 606.7611197444559,365.0140618312256 C605.4833899824575,363.4168996287278 608.0388495064541,361.81973742622995 611.872038792449,362.61831852747883 C611.872038792449,360.22257522373206 616.982957840442,359.4239941224832 619.5384173644386,361.81973742622995 C622.0938768884351,360.22257522373206 627.2047959364282,362.61831852747883 624.6493364124317,365.0140618312256 C627.2047959364282,366.61122403372343 625.9270661744299,369.0069673374702 622.0938768884351,369.0069673374702 L609.3165792684524,369.0069673374702 Z" fill="#2d3748" stroke="#63b3ed" stroke-width="2.4"/>
+<text dominant-baseline="middle" fill="#000000" font-family="&apos;JetBrains Mono&apos;, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, &apos;Liberation Mono&apos;, &apos;Courier New&apos;, system-ui, -apple-system, BlinkMacSystemFont, &apos;Segoe UI&apos;, Roboto, Inter, &apos;Helvetica Neue&apos;, Arial, sans-serif" font-kerning="normal" font-size="13.842072421647948" text-anchor="middle" text-rendering="optimizeLegibility" x="615.7052280784437" y="352.55420066859256">
+Transit ISP1
+</text>
+</g>
+<g>
+<path d="M609.3165792684524,635.2006677537769 C605.4833899824575,635.2006677537769 604.2056602204593,632.8049244500301 606.7611197444559,631.2077622475323 C605.4833899824575,629.6106000450344 608.0388495064541,628.0134378425366 611.872038792449,628.8120189437855 C611.872038792449,626.4162756400387 616.982957840442,625.6176945387898 619.5384173644386,628.0134378425366 C622.0938768884351,626.4162756400387 627.2047959364282,628.8120189437855 624.6493364124317,631.2077622475323 C627.2047959364282,632.8049244500301 625.9270661744299,635.2006677537769 622.0938768884351,635.2006677537769 L609.3165792684524,635.2006677537769 Z" fill="#2d3748" stroke="#63b3ed" stroke-width="2.4"/>
+<text dominant-baseline="middle" fill="#000000" font-family="&apos;JetBrains Mono&apos;, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, &apos;Liberation Mono&apos;, &apos;Courier New&apos;, system-ui, -apple-system, BlinkMacSystemFont, &apos;Segoe UI&apos;, Roboto, Inter, &apos;Helvetica Neue&apos;, Arial, sans-serif" font-kerning="normal" font-size="13.842072421647948" text-anchor="middle" text-rendering="optimizeLegibility" x="615.7052280784437" y="654.2317427088733">
+Transit ISP2
+</text>
+</g>
+<g>
+<path d="M964.2415131568614,369.0069673374702 C960.4083238708665,369.0069673374702 959.1305941088683,366.61122403372343 961.6860536328649,365.0140618312256 C960.4083238708665,363.4168996287278 962.9637833948631,361.81973742622995 966.7969726808578,362.61831852747883 C966.7969726808578,360.22257522373206 971.9078917288509,359.4239941224832 974.4633512528476,361.81973742622995 C977.018810776844,360.22257522373206 982.1297298248371,362.61831852747883 979.5742703008406,365.0140618312256 C982.1297298248371,366.61122403372343 980.8520000628388,369.0069673374702 977.018810776844,369.0069673374702 L964.2415131568614,369.0069673374702 Z" fill="#2d3748" stroke="#63b3ed" stroke-width="2.4"/>
+<text dominant-baseline="middle" fill="#000000" font-family="&apos;JetBrains Mono&apos;, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, &apos;Liberation Mono&apos;, &apos;Courier New&apos;, system-ui, -apple-system, BlinkMacSystemFont, &apos;Segoe UI&apos;, Roboto, Inter, &apos;Helvetica Neue&apos;, Arial, sans-serif" font-kerning="normal" font-size="13.842072421647948" text-anchor="middle" text-rendering="optimizeLegibility" x="970.6301619668527" y="352.55420066859256">
+Transit ISP3
+</text>
+</g>
+<g>
+<path d="M964.2415131568614,635.2006677537769 C960.4083238708665,635.2006677537769 959.1305941088683,632.8049244500301 961.6860536328649,631.2077622475323 C960.4083238708665,629.6106000450344 962.9637833948631,628.0134378425366 966.7969726808578,628.8120189437855 C966.7969726808578,626.4162756400387 971.9078917288509,625.6176945387898 974.4633512528476,628.0134378425366 C977.018810776844,626.4162756400387 982.1297298248371,628.8120189437855 979.5742703008406,631.2077622475323 C982.1297298248371,632.8049244500301 980.8520000628388,635.2006677537769 977.018810776844,635.2006677537769 L964.2415131568614,635.2006677537769 Z" fill="#2d3748" stroke="#63b3ed" stroke-width="2.4"/>
+<text dominant-baseline="middle" fill="#000000" font-family="&apos;JetBrains Mono&apos;, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, &apos;Liberation Mono&apos;, &apos;Courier New&apos;, system-ui, -apple-system, BlinkMacSystemFont, &apos;Segoe UI&apos;, Roboto, Inter, &apos;Helvetica Neue&apos;, Arial, sans-serif" font-kerning="normal" font-size="13.842072421647948" text-anchor="middle" text-rendering="optimizeLegibility" x="970.6301619668527" y="654.2317427088733">
+Transit ISP4
+</text>
+</g>
+<g id="path-legend">
+<rect fill="#ffffff" fill-opacity="0.95" height="120" rx="4" stroke="#cccccc" stroke-width="1" width="250" x="20" y="850"/>
+<text fill="#333333" font-family="&apos;JetBrains Mono&apos;, monospace, sans-serif" font-kerning="normal" font-size="12" font-weight="bold" text-rendering="optimizeLegibility" x="30" y="872">
+Paths
+</text>
+<path d="M 30 895 L 60 895" fill="none" stroke="#22c55e" stroke-width="3"/>
+<text dominant-baseline="middle" fill="#333333" font-family="&apos;JetBrains Mono&apos;, monospace, sans-serif" font-kerning="normal" font-size="10" text-rendering="optimizeLegibility" x="70" y="898">
+Primary (Low Latency) (8 hops, weight 8.0, 32.4 ms, 1.0 Gbps bottleneck)
+</text>
+<path d="M 30 915 L 60 915" fill="none" stroke="#f59e0b" stroke-width="2"/>
+<text dominant-baseline="middle" fill="#333333" font-family="&apos;JetBrains Mono&apos;, monospace, sans-serif" font-kerning="normal" font-size="10" text-rendering="optimizeLegibility" x="70" y="918">
+Backup (Redundant) (8 hops, weight 8.0, 41.4 ms, 1.0 Gbps bottleneck)
+</text>
+<path d="M 30 935 L 60 935" fill="none" stroke="#56b4e9" stroke-width="1.5"/>
+<text dominant-baseline="middle" fill="#333333" font-family="&apos;JetBrains Mono&apos;, monospace, sans-serif" font-kerning="normal" font-size="10" text-rendering="optimizeLegibility" x="70" y="938">
+Transit Backbone (3 hops, weight 3.0, 15.0 ms, 5.0 Gbps bottleneck)
+</text>
+<path d="M 30 955 L 60 955" fill="none" stroke="#8b5cf6" stroke-width="3"/>
+<text dominant-baseline="middle" fill="#333333" font-family="&apos;JetBrains Mono&apos;, monospace, sans-serif" font-kerning="normal" font-size="10" text-rendering="optimizeLegibility" x="70" y="958">
+Core Monitoring (3 hops, weight 2.0, 0.2 ms, 40.0 Gbps bottleneck)
+</text>
+</g>
+<metadata id="netvis-render-metadata">{"warnings":[{"LabelOverlapRisk":{"labels_checked":36,"overlap_count":2,"worst_overlap_fraction":0.014839749534540463}}],"stats":{"effects_defined":0,"effects_applied":0,"deduplication_ratio":0.0}}</metadata>
+</svg>

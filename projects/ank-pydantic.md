@@ -41,14 +41,59 @@ A Python library for modeling and querying network topologies with type-safe Pyd
 
 ### Service Provider Core: IS-IS + MPLS + iBGP
 
-Build a multi-vendor service provider topology with protocol layers:
+**Input Topology** (transitnet.yaml):
+
+```yaml
+topology:
+  - metadata:
+      name: TransitNet SP Core
+      organisation: TransitNet
+      asn: 65000
+
+  - nodes:
+      - P1:
+          role: core
+          data:
+            pop: West
+            platform: iosxr
+            loopback: 10.0.0.1/32
+          endpoints:
+            - Gi0/0/0/0  # to P3
+            - Gi0/0/0/1  # to P5
+            - Gi0/0/0/2  # to PE1
+
+      - P3:
+          role: core
+          data:
+            pop: East
+            platform: iosxr
+            loopback: 10.0.0.3/32
+          endpoints:
+            - Gi0/0/0/0  # to P1
+            - Gi0/0/0/2  # to PE3
+
+      - PE1:
+          role: pe
+          data:
+            pop: West
+            platform: iosxr
+            loopback: 10.0.0.11/32
+          endpoints:
+            - Gi0/0/0/0  # to P1
+
+  - links:
+      - [P1, Gi0/0/0/0, P3, Gi0/0/0/0]   # West-East core
+      - [P1, Gi0/0/0/2, PE1, Gi0/0/0/0]  # Core-PE
+```
+
+**Build Protocol Layers:**
 
 ```python
 from ank_pydantic import Topology
 from ank_pydantic.blueprints.designs.isis import build_isis_layer
 from ank_pydantic.blueprints.designs.mpls import build_mpls_layer
 
-# Load topology from YAML (16 devices: 8 core, 6 PE, 2 RR)
+# Load topology from YAML
 topology = Topology.from_yaml("transitnet.yaml")
 
 # Build IS-IS Layer 2 flat domain
@@ -65,22 +110,93 @@ mpls_layer = build_mpls_layer(
     igp_layer="isis",
     layer_name="mpls"
 )
+```
 
-# Verify layers created
-print(f"IS-IS routers: {isis_layer.nodes().count()}")  # 16
-print(f"MPLS nodes: {mpls_layer.nodes().count()}")     # 16
-print(f"LDP sessions: {mpls_layer.edges().count()}")   # 14
+**Generated Configuration** (P1 - Cisco IOS-XR):
+
+```cisco
+hostname P1
+!
+interface Loopback0
+ ipv4 address 10.0.0.1 255.255.255.255
+!
+interface GigabitEthernet0/0/0/0
+ description to P3
+ ipv4 address 10.1.0.1 255.255.255.252
+!
+interface GigabitEthernet0/0/0/2
+ description to PE1
+ ipv4 address 10.1.0.5 255.255.255.252
+!
+router isis CORE
+ is-type level-2-only
+ net 49.0001.0100.0000.0001.00
+ address-family ipv4 unicast
+  metric-style wide
+ !
+ interface Loopback0
+  passive
+  address-family ipv4 unicast
+ !
+ interface GigabitEthernet0/0/0/0
+  point-to-point
+  address-family ipv4 unicast
+   metric 10
+  !
+ !
+ interface GigabitEthernet0/0/0/2
+  point-to-point
+  address-family ipv4 unicast
+   metric 10
+  !
+ !
+!
+mpls ldp
+ router-id 10.0.0.1
+ interface GigabitEthernet0/0/0/0
+ !
+ interface GigabitEthernet0/0/0/2
+ !
+!
 ```
 
 **Protocol Stack Generated:**
-- **Physical Layer**: 16 routers, 14 links across 4 PoPs
+- **Physical Layer**: Nodes, interfaces, and connections
 - **IS-IS Layer**: Level 2 adjacencies, auto-generated NETs from loopbacks
-- **MPLS Layer**: LDP sessions on all IS-IS adjacencies
+- **MPLS Layer**: LDP sessions on all IS-IS adjacencies, router-id from loopback
 - **iBGP Layer**: Route reflector topology (PEs → RRs)
 
 ### L3VPN Configuration
 
-Build L3VPN service layers with VRF assignments:
+**Input:** Add customer sites to PE routers:
+
+```yaml
+# Add customer edge routers to topology
+- nodes:
+    - CE1:
+        role: ce
+        data:
+          organisation: NetCorp
+          asn: 65100
+          loopback: 192.168.1.1/32
+        endpoints:
+          - Gi0/0
+
+    - CE2:
+        role: ce
+        data:
+          organisation: NetCorp
+          asn: 65100
+          loopback: 192.168.2.1/32
+        endpoints:
+          - Gi0/0
+
+- links:
+    - [PE1, Gi0/0/0/1, CE1, Gi0/0]  # PE-CE link
+    - [PE3, Gi0/0/0/1, CE2, Gi0/0]  # PE-CE link
+```
+
+**Build L3VPN Layer:**
 
 ```python
 from ank_pydantic.blueprints.designs.l3vpn import build_l3vpn_layer
@@ -94,22 +210,53 @@ l3vpn_layer = build_l3vpn_layer(
     provider_asn=65000,
     vpn_id=100
 )
-
-# VRF configuration automatically applied to PE nodes
-# PE-CE links identified and marked with BGP session data
-print(f"PE nodes with VRF: {l3vpn_layer.nodes().where(role='pe').count()}")
-print(f"PE-CE links: {l3vpn_layer.edges().count()}")
 ```
 
-**Generated Configuration:**
+**Generated VRF Configuration** (PE1):
+
+```cisco
+vrf NETCORP
+ address-family ipv4 unicast
+  import route-target
+   65000:100
+  !
+  export route-target
+   65000:100
+  !
+ !
+!
+interface GigabitEthernet0/0/0/1
+ description to CE1 (NetCorp)
+ vrf NETCORP
+ ipv4 address 10.100.1.1 255.255.255.252
+!
+router bgp 65000
+ vrf NETCORP
+  rd 65000:100
+  address-family ipv4 unicast
+   redistribute connected
+  !
+  neighbor 10.100.1.2
+   remote-as 65100
+   description CE1
+   address-family ipv4 unicast
+    route-policy NETCORP-IN in
+    route-policy NETCORP-OUT out
+   !
+  !
+ !
+!
+```
+
+**Result:**
 - **VRF Name**: `NETCORP`
 - **Route Distinguisher**: `65000:100`
 - **Route Targets**: `65000:100` (import/export)
-- **PE-CE Sessions**: eBGP with customer ASN 65100
+- **PE-CE Sessions**: eBGP between PE1↔CE1, PE3↔CE2
 
 ### Containerlab Deployment
 
-Export topology to Containerlab and deploy:
+**Export to Containerlab:**
 
 ```python
 from ank_pydantic.blueprints.environments import get_environment
@@ -125,7 +272,43 @@ with open("transitnet.clab.yml", "w") as f:
     f.write(artifacts.files['topology.clab.yml'])
 ```
 
-Deploy to Containerlab:
+**Generated Containerlab File** (transitnet.clab.yml):
+
+```yaml
+name: transitnet
+mgmt:
+  network: mgmt
+  ipv4-subnet: 172.20.20.0/24
+
+topology:
+  nodes:
+    P1:
+      kind: cisco_xrv9k
+      image: vrnetlab/vr-xrv9k:7.3.2
+      mgmt-ipv4: 172.20.20.11
+      binds:
+        - ./configs/P1.cfg:/config/startup-config.cfg
+
+    P3:
+      kind: cisco_xrv9k
+      image: vrnetlab/vr-xrv9k:7.3.2
+      mgmt-ipv4: 172.20.20.13
+      binds:
+        - ./configs/P3.cfg:/config/startup-config.cfg
+
+    PE1:
+      kind: cisco_xrv9k
+      image: vrnetlab/vr-xrv9k:7.3.2
+      mgmt-ipv4: 172.20.20.21
+      binds:
+        - ./configs/PE1.cfg:/config/startup-config.cfg
+
+  links:
+    - endpoints: ["P1:Gi0/0/0/0", "P3:Gi0/0/0/0"]
+    - endpoints: ["P1:Gi0/0/0/2", "PE1:Gi0/0/0/0"]
+```
+
+**Deploy and Verify:**
 
 ```bash
 # Deploy topology
@@ -134,21 +317,34 @@ sudo containerlab deploy -t transitnet.clab.yml
 # Verify deployment
 sudo containerlab inspect -t transitnet.clab.yml
 
+# Output:
+# +---+---------------------+--------------+-------------------+-------+---------+
+# | # |        Name         | Container ID |       Image       | Kind  |  State  |
+# +---+---------------------+--------------+-------------------+-------+---------+
+# | 1 | clab-transitnet-P1  | abc123...    | vr-xrv9k:7.3.2   | xrv9k | running |
+# | 2 | clab-transitnet-P3  | def456...    | vr-xrv9k:7.3.2   | xrv9k | running |
+# | 3 | clab-transitnet-PE1 | ghi789...    | vr-xrv9k:7.3.2   | xrv9k | running |
+
 # Test IS-IS neighbors on P1
 docker exec -it clab-transitnet-P1 show isis neighbors
+
+# Expected output:
+# IS-IS CORE neighbors:
+# System Id       Interface       SNPA           State  Holdtime Type IETF-NSF
+# P3              Gi0/0/0/0       *PtoP*         Up     28       L2   Capable
+# PE1             Gi0/0/0/2       *PtoP*         Up     29       L2   Capable
 
 # Verify LDP sessions
 docker exec -it clab-transitnet-P1 show mpls ldp neighbor
 
-# Test end-to-end connectivity (PE1 → PE6)
-docker exec -it clab-transitnet-PE1 ping 10.0.0.16
+# Expected output:
+# Peer LDP Ident: 10.0.0.3:0; Local LDP Ident 10.0.0.1:0
+#   TCP connection: 10.0.0.3:646 - 10.0.0.1:28577
+#   State: Oper; Msgs sent/rcvd: 12/11; Downstream
+# Peer LDP Ident: 10.0.0.11:0; Local LDP Ident 10.0.0.1:0
+#   TCP connection: 10.0.0.11:646 - 10.0.0.1:12389
+#   State: Oper; Msgs sent/rcvd: 10/9; Downstream
 ```
-
-**Output Format:**
-- Multi-vendor support (Cisco IOS-XR, Juniper Junos)
-- Management network auto-configured (172.20.20.0/24)
-- Volume mounts for configs
-- Interface mappings preserved
 
 ### Query API Usage
 

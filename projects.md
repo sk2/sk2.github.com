@@ -50,7 +50,7 @@ Used for smoke testing and design validation of network configurations. Validate
 
 ### [TopoGen - Network Topology Generator](projects/topogen)
 
-<span class="status-badge status-active">Phase 17/24 (11%)</span>
+<span class="status-badge status-active">Phase 18/24 (15%)</span>
 
 
 A Rust-based network topology generator with Python bindings that consolidates scattered topology generation logic from AutoNetKit, simulation tools, and visualization tools. Generates realistic data center, WAN, and random graph topologies with proper structure, design patterns, and realistic parameters.
@@ -102,6 +102,17 @@ Transform raw radio spectrum data into an actionable "Signal Census" through aut
 
 
 Passive radar system that utilizes existing Wi-Fi signals for through-wall human detection and localization, leveraging the KrakenSDR coherent radio array.
+
+
+### [rtltcp-rust](projects/rtltcp)
+
+<span class="status-badge status-active">Active Development</span>
+ · **Rust**
+
+
+A cross-platform (targeted at Raspberry Pi) server that interfaces with multiple SDR devices (RTL-SDR, AirSpy HF+) and streams raw IQ samples over the network using the industry-standard `rtl_tcp` protocol. Features a built-in TUI for live configuration and device management.
+
+High-performance, multi-threaded Rust implementation modernizing the SDR streaming stack with concurrent multi-device support and real-time configuration management.
 
 
 ## Astrophotography
@@ -158,7 +169,7 @@ A native SwiftUI training application for iPad and Apple TV that bridges profess
 
 ### [Multi-Agent Assistant](projects/multi-agent)
 
-<span class="status-badge status-active">Phase 18/20 (80%)</span>
+<span class="status-badge status-active">Phase 18/20 (83%)</span>
 
 
 A security-first multi-agent system that coordinates specialized containerized agents (health monitoring, home automation, data aggregation, workflow automation) through a message broker architecture. Each agent runs in isolation with minimal privileges and communicates only through validated message queues, demonstrating production-ready patterns for deploying AI agents in security-critical infrastructure environments.
@@ -224,7 +235,7 @@ Time series analysis requires identifying:
 ### [netflowsim](projects/netflowsim)
 
 <span class="status-badge status-active">Active Development</span>
- · **Rust**
+
 
 `netflowsim` provides rapid, massive-scale network performance analysis by using analytic queuing models and Monte Carlo simulations instead of packet-level discrete event simulation. It enables network engineers to validate topologies and routing strategies against billions of flow iterations in seconds.
 

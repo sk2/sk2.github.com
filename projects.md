@@ -68,15 +68,7 @@ A Python library for modeling and querying network topologies, backed by a high-
 Ships with "batteries-included" domain models (ISIS, MPLS, EVPN, L3VPN, IXP) in the blueprints/ module. A clean, consistent API where there's one obvious way to perform each topology operation — predictable naming, return types, and method signatures across the entire public surface.
 
 
-## Signal Processing & SDR
-
-### [HealthyPi Ecosystem](projects/healthypi)
-
-<span class="status-badge status-active">Active Development</span>
-
-
-A modular, agent-aware health monitoring ecosystem that translates raw biometric data from HealthyPi hardware (6 and Move) into actionable insights and automated interventions.
-
+## Software Defined Radio
 
 ### [Passive Radar - KrakenSDR Multi-Beam System](projects/passive)
 
@@ -113,6 +105,16 @@ Passive radar system that utilizes existing Wi-Fi signals for through-wall human
 A cross-platform (targeted at Raspberry Pi) server that interfaces with multiple SDR devices (RTL-SDR, AirSpy HF+) and streams raw IQ samples over the network using the industry-standard `rtl_tcp` protocol. Features a built-in TUI for live configuration and device management.
 
 High-performance, multi-threaded Rust implementation modernizing the SDR streaming stack with concurrent multi-device support and real-time configuration management.
+
+
+## Health & Biometrics
+
+### [HealthyPi Ecosystem](projects/healthypi)
+
+<span class="status-badge status-active">Active Development</span>
+
+
+A modular, agent-aware health monitoring ecosystem that translates raw biometric data from HealthyPi hardware (6 and Move) into actionable insights and automated interventions.
 
 
 ## Astrophotography

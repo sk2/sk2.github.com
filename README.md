@@ -109,10 +109,10 @@ This script scans `~/dev`, `~/PycharmProjects`, and `~/RustroverProjects` for pr
 - **No fabricated completion status**: Projects are not production ready just because all phases are complete.
 
 **Layout & Organization:**
-- **Categorized sections**: Group projects into categories (Network Engineering, Signal Processing & SDR, Astrophotography, Photography, AI & Agents, Data & Utilities, Wellness & Sound).
+- **Categorized sections**: Group projects into categories (Network Engineering, Software Defined Radio, Health & Biometrics, Astrophotography, Photography, AI & Agents, Data & Utilities, Wellness & Sound).
 - **Simple list format**: Use section headers (`##` for category, `###` for project) NOT grid/card layouts.
 - **No Development Philosophy section**: The projects.md index should NOT include a "Development Approach" section at the bottom.
-- **Category assignments**: Photo Tour → Photography; WatchNoise/Wave → Wellness & Sound; HealthyPi → Signal Processing (hardware, not wellness).
+- **Category assignments**: Photo Tour → Photography; WatchNoise/Wave → Wellness & Sound; HealthyPi → Health & Biometrics; SDR projects → Software Defined Radio.
 
 **Project Summaries:**
 - **Complete sentences**: Show 4-5 full sentences, NOT truncated at character limits.

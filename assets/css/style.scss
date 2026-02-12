@@ -2,3 +2,13 @@
 ---
 
 @import "jekyll-theme-minimal";
+
+/* Fix anchor navigation - ensure headings appear at top of viewport */
+h1, h2, h3, h4, h5, h6 {
+  scroll-margin-top: 20px;
+}
+
+/* Also ensure the html element respects scroll padding */
+html {
+  scroll-padding-top: 20px;
+}

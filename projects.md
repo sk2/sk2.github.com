@@ -194,6 +194,14 @@ The orchestrator uses cloud LLM reasoning (GPT-4/Claude) while agents remain lig
 
 ## Data Analytics
 
+### [Weather (BOM ACCESS Pipeline)](projects/weather)
+
+<span class="status-badge status-planning">Planning</span>
+ · **Python · Rust**
+
+Data engineering pipeline to fetch, process, and serve high-resolution weather model data from Australia's Bureau of Meteorology. Automates FTP polling of ACCESS model outputs, converts GRIB2/NetCDF to Parquet/DuckDB, and provides JSON API for point-location weather queries. Focused on South Australia with high-performance Polars processing.
+
+
 ### [matrix-profile-rs](projects/matrix-time-series)
 
 <span class="status-badge status-active">Phase 2/5 (50%)</span>

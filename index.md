@@ -39,18 +39,22 @@ I am currently developing a suite of interconnected tools:
 
 ---
 
-## Areas of Interest
+## Domain Focus
 
-| Area | Focus |
-| :--- | :--- |
-| **Languages** | Rust, Python, Go, JavaScript, Java |
-| **Technical Domains** | Distributed computing, data processing and analytics, simulation, signal processing, graph algorithms, network automation |
-| **Product & Innovation** | Team structures for innovation delivery, cutting-edge product design, building tools that solve real problems |
-| **Background** | Electrical engineering, economics |
+I build systems that transform high-level intent into deterministic execution through well-defined layers of abstraction.
 
-## Development Workflow
+- **Network Automation:** High-performance Rust engines for topology modeling, protocol simulation, and multi-vendor configuration generation.
+- **Signal Processing:** Real-time RF spectrum monitoring and biometric signal analysis using modular, high-throughput acquisition pipelines.
+- **Agent Architectures:** Secure, message-bus-driven multi-agent systems focusing on strong isolation, capability-based security, and deterministic coordination.
+- **Data & Simulation:** High-performance analytics engines (Rust/Polars) for massive geospatial datasets and time-series pattern discovery.
 
-I maintain a high-velocity development environment focused on deep work and deterministic results. My toolchain centers on `nvim` and a suite of specialized LLM-integrated agents. I employ the GSD (Get Stuff Done) workflow to ensure architectural integrity through systematic planning and automated verification.
+## Research & Background
+
+I completed my PhD at the University of South Australia in 2017. My thesis, *Abstractions and Transformations for Automated Data Network Configuration*, pioneered a compiler-based approach to transform high-level network specifications into multi-platform device configurations.
+
+This research led to **AutoNetkit**, an open-source tool integrated into Cisco's VIRL platform for automated network lab provisioning. My current work evolves these abstractions into high-performance, type-safe implementations.
+
+[Explore PhD Thesis](thesis) | [Research on Google Scholar](https://scholar.google.com.au/citations?user=BJ1Efr8AAAAJ)
 
 ---
 

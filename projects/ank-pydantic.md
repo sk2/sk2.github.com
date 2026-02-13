@@ -11,7 +11,7 @@ layout: default
 ---
 
 
-## The Concept
+## The Insight
 
 Network topology modeling typically forces a choice between the speed of untyped graph libraries (NetworkX) and the rigidity of database-backed sources of truth. **ank-pydantic** eliminates this trade-off by using Pydantic for schema validation and a high-performance Rust core (`petgraph`) for graph traversals.
 
@@ -40,6 +40,9 @@ A Python library for modeling and querying network topologies with type-safe Pyd
 ## Examples
 
 ### Service Provider Core: IS-IS + MPLS + iBGP
+
+<details>
+<summary>View Core Topology & Protocol Derivation</summary>
 
 **Input Topology** (transitnet.yaml):
 
@@ -159,14 +162,12 @@ mpls ldp
  !
 !
 ```
-
-**Protocol Stack Generated:**
-- **Physical Layer**: Nodes, interfaces, and connections
-- **IS-IS Layer**: Level 2 adjacencies, auto-generated NETs from loopbacks
-- **MPLS Layer**: LDP sessions on all IS-IS adjacencies, router-id from loopback
-- **iBGP Layer**: Route reflector topology (PEs → RRs)
+</details>
 
 ### L3VPN Configuration
+
+<details>
+<summary>View VRF & BGP PE-CE Configuration</summary>
 
 **Input:** Add customer sites to PE routers:
 
@@ -247,14 +248,12 @@ router bgp 65000
  !
 !
 ```
-
-**Result:**
-- **VRF Name**: `NETCORP`
-- **Route Distinguisher**: `65000:100`
-- **Route Targets**: `65000:100` (import/export)
-- **PE-CE Sessions**: eBGP between PE1↔CE1, PE3↔CE2
+</details>
 
 ### Containerlab Deployment
+
+<details>
+<summary>View Containerlab Export & Verification</summary>
 
 **Export to Containerlab:**
 
@@ -345,6 +344,7 @@ docker exec -it clab-transitnet-P1 show mpls ldp neighbor
 #   TCP connection: 10.0.0.11:646 - 10.0.0.1:12389
 #   State: Oper; Msgs sent/rcvd: 10/9; Downstream
 ```
+</details>
 
 ### Query API Usage
 

@@ -11,7 +11,7 @@ layout: default
 ---
 
 
-## The Concept
+## The Insight
 
 A deterministic, tick-based network simulator for rapid prototyping and testing of network configurations. Enables quick validation of routing protocol behavior before moving to full emulation or production deployment — catch obvious errors early in the design cycle.
 
@@ -81,6 +81,9 @@ A Rust-based network simulator that models packet-level behavior for routing pro
 ## Example 1: OSPF Triangle Topology
 
 Simple three-router topology to verify basic OSPF functionality.
+
+<details>
+<summary>View Topology & Simulation Output</summary>
 
 Input topology (`ospf-triangle.yaml`):
 ```yaml
@@ -178,47 +181,14 @@ Round-trip path: h1 -> r1 -> r3 -> h3 -> r3 -> r1 -> h1
 
 Simulation complete: 120ms simulated, 0.034s real time (3529x speedup)
 ```
-
-Detailed routing table on r1:
-```bash
-r1> show ip route ospf
-Codes: O - OSPF, * - candidate default
-
-O    10.0.3.0/24 [110/11] via 10.0.13.3, eth1, 00:01:40
-O    10.0.23.0/24 [110/20] via 10.0.12.2, eth0, 00:01:40
-                  [110/20] via 10.0.13.3, eth1, 00:01:40
-```
-
-OSPF neighbor details:
-```bash
-r1> show ip ospf neighbor detail
-
-Neighbor 2.2.2.2, interface address 10.0.12.2
-    In the area 0.0.0.0 via interface eth0
-    Neighbor priority is 1, State is Full, 6 state changes
-    DR is 10.0.12.1, BDR is 10.0.12.2
-    Options is 0x52
-    Dead timer due in 00:00:36
-    Neighbor is up for 00:01:45
-    Database Summary List 0
-    Link State Request List 0
-    Link State Retransmission List 0
-
-Neighbor 3.3.3.3, interface address 10.0.13.3
-    In the area 0.0.0.0 via interface eth1
-    Neighbor priority is 1, State is Full, 6 state changes
-    DR is 10.0.13.1, BDR is 10.0.13.3
-    Options is 0x52
-    Dead timer due in 00:00:38
-    Neighbor is up for 00:01:45
-    Database Summary List 0
-    Link State Request List 0
-    Link State Retransmission List 0
-```
+</details>
 
 ## Example 2: IS-IS Level 1/Level 2 Hierarchy
 
 Service provider topology demonstrating IS-IS hierarchical routing with L1 and L2 areas.
+
+<details>
+<summary>View Topology & Simulation Output</summary>
 
 Input topology (`isis-hierarchy.yaml`):
 ```yaml
@@ -325,10 +295,14 @@ i L2 192.0.2.3/32 [115/20] via 10.1.0.2, eth0
 Simulation complete: 15ms simulated, 0.008s real time
 IS-IS events: 18 hellos, 4 LSPs, 2 SPF runs
 ```
+</details>
 
 ## Example 3: Protocol State Inspection (OSPF)
 
 Detailed protocol state inspection with full routing tables and OSPF database dumps.
+
+<details>
+<summary>View OSPF State & Database Dumps</summary>
 
 ```bash
 [t=45ms] core-1> show ip route
@@ -441,10 +415,14 @@ eth0 is up, line protocol is up
     Adjacent with neighbor 10.0.100.2 (Backup Designated Router)
   Suppress hello for 0 neighbor(s)
 ```
+</details>
 
 ## Example 4: BGP Multi-AS Route Propagation
 
 eBGP peering across three autonomous systems with route propagation and path attribute handling.
+
+<details>
+<summary>View Topology & BGP Propagation Output</summary>
 
 Input topology (`bgp-multi-as.yaml`):
 ```yaml
@@ -556,344 +534,7 @@ Path details:
 Simulation complete: 18ms simulated, 0.009s real time
 BGP events: 6 sessions established, 1 route originated, 2 UPDATEs sent
 ```
-
-Detailed BGP neighbor information:
-```bash
-r2> show bgp neighbors 10.0.12.1
-
-BGP neighbor is 10.0.12.1, remote AS 65001, external link
-  BGP version 4, remote router ID 1.1.1.1
-  BGP state = Established, up for 00:00:15
-  Last read 00:00:05, last write 00:00:05, hold time is 90, keepalive interval is 30 seconds
-  Neighbor sessions:
-    1 active, 1 passive
-  Neighbor capabilities:
-    4 Byte AS: advertised and received
-    Route refresh: advertised and received(new)
-    Address family IPv4 Unicast: advertised and received
-  Message statistics:
-    InQ depth is 0
-    OutQ depth is 0
-                         Sent       Rcvd
-    Opens:                  1          1
-    Notifications:          0          0
-    Updates:                0          1
-    Keepalives:             2          2
-    Route Refresh:          0          0
-    Total:                  3          4
-  Minimum time between advertisement runs is 30 seconds
-  Update source is 10.0.12.2
-
- For address family: IPv4 Unicast
-  BGP table version 1, neighbor version 1/0
-  Output queue size : 0
-  Index 1, Offset 0, Mask 0x2
-  1 accepted prefixes (10.1.0.0/24)
-  Prefix advertised 0, suppressed 0, withdrawn 0
-  Number of NLRIs in the update sent: max 0, min 0
-
-r3> show bgp neighbors 10.0.23.2 received-routes
-
-BGP table version is 1, local router ID is 3.3.3.3
-Status codes: s suppressed, d damped, h history, * valid, > best, i internal
-Origin codes: i - IGP, e - EGP, ? - incomplete
-
-   Network          Next Hop            Metric LocPrf Weight Path
-*> 10.1.0.0/24      10.0.23.2                0             0 65002 65001 i
-
-Total number of prefixes 1
-```
-
-**Key BGP Features Demonstrated:**
-- **eBGP Peering**: Cross-AS session establishment
-- **AS_PATH Construction**: Path vector grows as route propagates (65002 65001)
-- **Next-Hop Handling**: Next-hop set to eBGP peer address
-- **Route Selection**: Best-path algorithm applied at each AS
-- **Session Management**: Keepalive/hold timers, graceful establishment
-- **Message Counters**: Track Opens, Updates, Keepalives, Notifications
-
-## Example 5: Large-Scale BGP Inter-AS Routing
-
-Realistic internet-scale BGP topology with 5 autonomous systems, route reflectors, and routing policies.
-
-**Topology Overview:**
-- 5 ASes: Tier 1 transit (AS 64500), Regional ISPs (AS 64510, AS 64520), Enterprise (AS 65001), IXP route servers
-- 24 routers total
-- eBGP peering at 3 points
-- iBGP with route reflectors in each AS
-- BGP communities for traffic engineering
-
-Input topology (`internet-scale-bgp.yaml`):
-```yaml
-name: internet-scale-bgp
-description: Multi-AS BGP with routing policies and communities
-
-# AS 64500: Tier 1 Transit Provider (6 routers)
-# - 2 core routers (C1, C2)
-# - 2 border routers (BR1, BR2)
-# - 2 route reflectors (RR1, RR2)
-devices:
-  # AS 64500 - Tier 1 Transit
-  - name: t1-c1
-    type: router
-    router_id: 1.0.0.1
-    bgp:
-      as: 64500
-      role: core
-      rr_client: true
-    interfaces:
-      - name: eth0
-        ip: 10.64.0.1/30
-        ospf: { area: 0, cost: 10 }
-      - name: lo0
-        ip: 1.0.0.1/32
-
-  - name: t1-rr1
-    type: router
-    router_id: 1.0.0.10
-    bgp:
-      as: 64500
-      role: rr
-      cluster_id: 1.0.0.10
-    interfaces:
-      - name: lo0
-        ip: 1.0.0.10/32
-
-  - name: t1-br1
-    type: router
-    router_id: 1.0.0.20
-    bgp:
-      as: 64500
-      role: border
-      rr_client: true
-    interfaces:
-      - name: eth0  # to AS 64510
-        ip: 192.0.2.1/30
-      - name: eth1  # internal
-        ip: 10.64.1.1/30
-        ospf: { area: 0 }
-      - name: lo0
-        ip: 1.0.0.20/32
-
-  # AS 64510 - Regional ISP
-  - name: isp1-core1
-    type: router
-    router_id: 2.0.0.1
-    bgp:
-      as: 64510
-      role: core
-    interfaces:
-      - name: eth0
-        ip: 10.65.0.1/30
-        ospf: { area: 0 }
-      - name: lo0
-        ip: 2.0.0.1/32
-
-  - name: isp1-br1
-    type: router
-    router_id: 2.0.0.20
-    bgp:
-      as: 64510
-      role: border
-    interfaces:
-      - name: eth0  # to AS 64500
-        ip: 192.0.2.2/30
-      - name: eth1  # to AS 65001 (customer)
-        ip: 192.0.2.5/30
-      - name: eth2  # internal
-        ip: 10.65.1.1/30
-        ospf: { area: 0 }
-      - name: lo0
-        ip: 2.0.0.20/32
-
-  # AS 65001 - Enterprise Customer
-  - name: ent-edge1
-    type: router
-    router_id: 10.0.0.1
-    bgp:
-      as: 65001
-      role: edge
-      networks: ["10.1.0.0/16", "10.2.0.0/16"]
-    interfaces:
-      - name: eth0  # to ISP1
-        ip: 192.0.2.6/30
-      - name: eth1  # to ISP2 (backup)
-        ip: 192.0.2.9/30
-      - name: lo0
-        ip: 10.0.0.1/32
-
-links:
-  # AS 64500 internal
-  - endpoints: [t1-c1:eth0, t1-br1:eth1]
-
-  # AS 64500 to AS 64510
-  - endpoints: [t1-br1:eth0, isp1-br1:eth0]
-
-  # AS 64510 to AS 65001
-  - endpoints: [isp1-br1:eth1, ent-edge1:eth0]
-
-# BGP Configuration
-bgp_sessions:
-  # AS 64500 iBGP (via route reflectors)
-  - { src: t1-br1, dst: t1-rr1, type: ibgp }
-  - { src: t1-c1, dst: t1-rr1, type: ibgp }
-
-  # AS 64500 to AS 64510 (eBGP)
-  - { src: t1-br1, dst: isp1-br1, type: ebgp,
-      import_policy: accept_customer_routes,
-      export_policy: announce_full_table }
-
-  # AS 64510 to AS 65001 (eBGP customer)
-  - { src: isp1-br1, dst: ent-edge1, type: ebgp,
-      import_policy: accept_with_community,
-      export_policy: announce_default_plus_local,
-      communities: ["64510:100"] }
-
-# Routing Policies
-routing_policies:
-  - name: accept_customer_routes
-    type: import
-    rules:
-      - match: { community: "64510:100" }
-        action: accept
-        set_local_pref: 150
-
-  - name: announce_default_plus_local
-    type: export
-    rules:
-      - match: { prefix_list: customer_prefixes }
-        action: accept
-        set_community: "64510:100"
-      - match: { prefix: "0.0.0.0/0" }
-        action: accept
-
-script:
-  - at: converged
-    device: t1-rr1
-    command: show bgp summary
-  - at: converged
-    device: ent-edge1
-    command: show bgp
-  - at: converged + 50
-    device: t1-br1
-    command: show bgp neighbors 192.0.2.2
-```
-
-Run simulation:
-```bash
-$ netsim run internet-scale-bgp.yaml --scale
-
-[t=0ms] Network initialized: 24 devices, 18 links
-[t=5ms] OSPF: Convergence in AS 64500, AS 64510 (intra-AS IGP)
-[t=15ms] BGP: iBGP sessions establishing
-[t=20ms] BGP: 12 iBGP sessions Up (4 per AS, via route reflectors)
-[t=30ms] BGP: eBGP sessions establishing
-[t=35ms] BGP: AS 64500 <-> AS 64510 session Up
-[t=40ms] BGP: AS 64510 <-> AS 65001 session Up
-[t=50ms] BGP: Route propagation in progress
-[t=60ms] BGP: Enterprise routes (10.1.0.0/16, 10.2.0.0/16) propagated to Tier 1
-[t=70ms] BGP: Default route propagated to Enterprise
-[t=80ms] Network converged
-
-[t=80ms] t1-rr1> show bgp summary
-BGP router identifier 1.0.0.10, local AS number 64500
-RR Cluster ID 1.0.0.10
-
-Neighbor        V    AS   MsgRcvd MsgSent   TblVer  InQ OutQ  Up/Down  State/PfxRcd
-1.0.0.1         4 64500        15      15        8    0    0 00:01:20        0/1
-1.0.0.2         4 64500        15      15        8    0    0 00:01:20        0/1
-1.0.0.20        4 64500        16      18       12    0    0 00:01:20        2/3
-1.0.0.21        4 64500        16      18       12    0    0 00:01:20        2/3
-
-Total iBGP sessions: 4 clients, reflecting 3 routes
-
-[t=80ms] ent-edge1> show bgp
-BGP table version is 3, local router ID is 10.0.0.1
-Status codes: * valid, > best, i internal
-Origin codes: i - IGP, e - EGP, ? - incomplete
-
-   Network          Next Hop            AS Path           Local Pref  Communities
-*> 0.0.0.0/0        192.0.2.5           64510 i                   100  64510:100
-*> 10.1.0.0/16      0.0.0.0             i                         100  (originated)
-*> 10.2.0.0/16      0.0.0.0             i                         100  (originated)
-
-Total BGP routes: 3 (1 default, 2 customer prefixes)
-
-[t=130ms] t1-br1> show bgp neighbors 192.0.2.2
-BGP neighbor is 192.0.2.2, remote AS 64510, external link
-  BGP version 4, remote router ID 2.0.0.20
-  BGP state = Established, up for 00:01:50
-  Neighbor sessions:
-    1 active, configured, enabled
-  Received prefixes: 2 (customer routes from AS 65001)
-    10.1.0.0/16 via AS_PATH: 64510 65001
-    10.2.0.0/16 via AS_PATH: 64510 65001
-  Applied import policy: accept_customer_routes
-    Set LOCAL_PREF=150 for community 64510:100
-  Sent prefixes: 1500+ (full Internet table)
-
-Simulation complete: 130ms simulated, 0.095s real time
-BGP statistics:
-  - 18 eBGP sessions (across 5 ASes)
-  - 42 iBGP sessions (via route reflectors)
-  - 15,000+ routes propagated
-  - Route reflectors reduced iBGP mesh from O(n²) to O(n)
-  - Routing policies: 8 import, 8 export
-  - Communities used for traffic engineering
-```
-
-Detailed route analysis showing policy application:
-```bash
-isp1-br1> show bgp 10.1.0.0/16
-
-BGP routing table entry for 10.1.0.0/16
-Paths: (1 available, best #1, table default)
-  Advertised to update-groups:
-     1  (to t1-br1)
-  65001
-    192.0.2.6 from 192.0.2.6 (10.0.0.1)
-      Origin IGP, metric 0, localpref 100, valid, external, best
-      Community: 64510:100
-      rx pathid: 0, tx pathid: 0x0
-
-t1-br1> show bgp 10.1.0.0/16
-
-BGP routing table entry for 10.1.0.0/16
-Paths: (1 available, best #1, table default)
-  Advertised to update-groups:
-     2  (to internal peers via RR)
-  64510 65001
-    192.0.2.2 from 192.0.2.2 (2.0.0.20)
-      Origin IGP, localpref 150, valid, external, best
-      Community: 64510:100
-      Import policy: accept_customer_routes matched
-        Action: Set LOCAL_PREF to 150 (community tag detected)
-      rx pathid: 0, tx pathid: 0x0
-
-t1-c1> show bgp 10.1.0.0/16
-
-BGP routing table entry for 10.1.0.0/16
-Paths: (1 available, best #1, table default)
-  Not advertised to any peer
-  64510 65001
-    1.0.0.20 (metric 10) from 1.0.0.10 (1.0.0.10)
-      Origin IGP, localpref 150, valid, internal, best
-      Community: 64510:100
-      Originator: 1.0.0.20, Cluster list: 1.0.0.10
-      rx pathid: 0, tx pathid: 0x0
-```
-
-**Key Features Demonstrated:**
-- **Large-scale BGP**: 24 routers, 5 ASes, realistic internet topology
-- **Route reflectors**: iBGP scalability without full mesh
-- **Routing policies**: Import/export filters with LOCAL_PREF manipulation
-- **BGP communities**: Traffic engineering and policy signaling
-- **Multi-AS path selection**: Best path across competing routes
-- **Realistic scale**: Propagation of 15K+ routes simulated
-
-**Performance:** Simulates internet-scale BGP convergence in ~130ms simulation time, demonstrating protocol behavior at scale before production deployment.
-
----
+</details>
 
 ## Limitations
 

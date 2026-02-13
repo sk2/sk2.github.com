@@ -54,7 +54,7 @@ If you'd like to add your own custom styles:
 
     @import "{{ site.theme }}";
     ```
-3. Add any custom CSS (or Sass, including imports) you'd like immediately after the `@import` line
+3. Add any custom CSS (or Sass, including imports) like immediately after the `@import` line
 
 ### Layouts
 
@@ -219,138 +219,25 @@ The CV page (`cv.md`) is manually maintained with these guidelines:
 - Organize Tools & Frameworks into categories (Infrastructure, Web, Data/ML, Rust Ecosystem, Network)
 - Base on actual technology used across all work, not just current projects
 
-## Recent Session Summary (2026-02-12)
-
-Major website overhaul focused on creating ecosystem pages, adding examples, and toning down embellishments:
-
-### Ecosystem Pages Created
-- `/network-automation` - Network automation toolchain with examples
-- `/data-analytics` - Data analytics and visualization tools
-- `/agentic-systems` - Multi-agent architectures with security details
-- `/signal-processing` - RF and biometric signal processing
-
-All four pages added to main navigation and linked via callout boxes in projects.md.
-
-### Content Improvements
-- **Network Simulator**: Added larger 25-router example with realistic CLI output showing convergence metrics, LSA counts, timing
-- **NetVis**: Added mesh and ring topology visualizations, switched from Rust API to CLI examples
-- **Spectra**: Added screenshot of signal census interface
-- **Topology Zoo**: Added 2000+ citation count with Google Scholar link and GÉANT visualization
-
-### Honest Positioning
-- Removed embellished claims (SIMD optimization, zero-copy structures, etc.)
-- Changed from "Technical Competencies" to "Areas of Interest"
-- Toned down HealthyPi claims - clarified it's experimental work on existing hardware by Protocentral
-- Added "Limitations" section to network simulator
-- Removed PyCon AU presentation mentions
-- Removed "For Researchers" sections
-
-### Architecture Updates
-- Updated network automation diagram showing Analysis Module and workflow
-- Changed to Containerlab deployment (not VIRL)
-- Fixed image paths for proper loading
-
-### Content Removed
-- Philosophy sections with marketing language
-- Overly promotional descriptions
-- Claims about capabilities not yet implemented
-
-### Principle Established
-Keep website understated and honest. Show what tools actually do, not what they aspire to be.
-
-## Recent Session Summary (2026-02-12 Evening)
-
-Major refactoring of ecosystem pages and project content distribution:
-
-### Content Architecture Fix
-- **Problem**: Ecosystem overview page (network-automation.md) had 814 lines with detailed examples, while individual project pages were stubs (38 lines)
-- **Solution**: Moved 574 lines of detailed content to individual project pages where it belongs
-  - Network Simulator: Added 300+ lines of OSPF examples, database dumps, convergence metrics
-  - NetVis: Added layout examples, integration code, visualization samples
-  - ank_pydantic: Added Python API examples and integration details
-  - TopoGen: Added data center generation examples
-- **Result**: Ecosystem page now 240 lines (70% reduction), proper progressive disclosure
-
-### Navigation Improvements
-- Added dual breadcrumb navigation to all network project pages
-  - "Back to Network Automation" + "Back to Projects"
-  - Users can return to their entry point instead of losing context
-- Fixed missing section headers (TopoGen, AutoNetkit) on ecosystem page
-- Added complete table of contents with anchor links
-
-### Protocol Examples
-- **Added NetFlow Sim project** with flow-based performance analysis details
-- **Replaced OSPF-heavy examples** with multi-protocol showcase:
-  - Example 1: OSPF Triangle (basic validation)
-  - Example 2: IS-IS L1/L2 Hierarchy (service provider routing) - NEW
-  - Example 3: Protocol State Inspection (OSPF database dumps)
-  - Example 4: BGP Multi-AS Route Propagation (eBGP peering) - NEW
-- **Updated protocol status**: BGP from "In Development" to fully implemented
-  - Route Reflection (RFC 4456)
-  - Communities & Extended Communities (RFC 1997, RFC 4360)
-  - Graceful Restart (RFC 4724)
-  - VPNv4 Multi-Protocol BGP (RFC 4760)
-
-### Bug Fixes
-- Fixed all projects showing "Started: 2025" → "2026" (25 files updated)
-- Removed Martin/tileserver references from NetFlowSim (not relevant)
-- Cleaned up duplicate footer links (nascleanup.md, watchnoise.md)
-
-### Commits Made
-- `2648149` Refactor ecosystem pages: move detailed content to project pages
-- `e44a093` Add NetFlow Sim to network automation ecosystem page
-- `63c491b` Fix network automation page: add TOC and missing section headers
-- `6ed60aa` Add IS-IS example to Network Simulator page
-- `f6631c0` Fix project start year from 2025 to 2026
-- `3a3ea07` Add BGP example and update protocol status
-
-### Next Steps (Pending)
-
-**BGP Example Enhancement** (User creating)
-- Current BGP example is only 3 nodes (boring)
-- User will create larger, more impressive BGP example showing:
-  - Route reflection hierarchy, or
-  - Multi-AS transit scenario, or
-  - Data center BGP deployment
-- Once created, add to website to replace current Example 4
-
-**Feature Lists Enhancement** (Suggested but interrupted)
-- Add more complete feature lists for each project
-- Currently feature lists are brief; could be expanded with:
-  - Detailed capabilities
-  - Supported protocols/formats
-  - Integration points
-  - Performance characteristics
-
-## Guidelines for Future Agents
+## Guidelines for Future Maintenance
 
 When maintaining or expanding this website, strictly adhere to these architectural and stylistic principles:
 
-### Core Philosophy: "Show, Don't Tell"
-- **Lead with Insight**: Every project page must begin with a "The Insight" section that explains the *why* and the *problem* before the *how*.
-- **Use Real Examples**: Prefer actual CLI outputs, YAML configurations, and code snippets over abstract descriptions.
-- **Visual Evidence**: If a project involves visualization (NetVis, Spectra, Tileserver), include actual rendered output or screenshots.
-
-### Quality & Honesty
-- **No Embellishment**: Never claim "Production Ready" based on phase completion. Use factual status markers (e.g., "Phase 18/20").
-- **Acknowledge Limitations**: Projects should include a "Limitations" section to maintain professional credibility.
-- **Actual Experience**: Only list languages and tools with demonstrated usage in the project files.
+### Core Philosophy: "Understated Expert"
+- **Lead with Insight**: Every project page must begin with a "The Insight" section explaining the technical problem and architectural solution before implementation details.
+- **Show, Don't Overwhelm**: Use `<details>` blocks for long code examples or CLI outputs. Provide a concise summary of what the evidence proves above the fold.
+- **Tight Prose**: Strictly follow Strunk & White. Remove marketing adjectives. Let technical outcomes and realistic examples speak for the system's value.
+- **High-Signal Hierarchy**: Keep Core Systems (Network, Data Science, Agentic Architectures, Signal Processing) at the top of the projects index. Demote experimental tools and technical hobbies to the bottom to preserve the "Expert" brand.
 
 ### Structural Consistency
-- **Status Badges**: Use standardized status badges in both `projects.md` and individual project pages.
-- **Ecosystem Callouts**: Every category in `projects.md` must have a blockquote callout linking to its respective ecosystem page.
-- **Navigation**: Maintain dual breadcrumbs ("Back to Ecosystem" + "Back to Projects") on all project sub-pages to preserve user context.
-- **Footer**: Ensure every project page has exactly one footer link: `[← Back to Projects](../projects)`.
+- **Status Badges**: Use standardized status badges. Do not embellish "Production Ready" status.
+- **Dual Breadcrumbs**: Maintain `[← Back to Ecosystem]` and `[← Back to Projects]` navigation on all sub-pages.
+- **Footer**: Every project page must have exactly one footer link: `[← Back to Projects](../projects)`.
+- **Ecosystem Callouts**: Use blockquote callouts in `projects.md` to link to the respective ecosystem visions.
 
 ### Content Architecture
-- **Progressive Disclosure**: Keep ecosystem pages high-level (vision/architecture) and move deep technical details/examples to individual project pages.
-- **Writing Style**: Strictly follow Strunk & White. Omit needless words. Use active voice. Prefer specific over general.
-
-### Maintenance Workflow
-1.  **Update Metadata**: Ensure "Started" year and "Status" are accurate and consistent.
-2.  **Verify Links**: Check that all ecosystem and project links are functional.
-3.  **Sync CV**: If a major project reaches a significant milestone, update the "Professional Work" section in `cv.md`.
-4.  **Run Build**: Always verify the site builds without errors using `./script/cibuild` before finalizing changes.
+- **Progressive Disclosure**: Ecosystem pages focus on Vision, Philosophy, and Architecture. Move detailed protocol examples and API usage to individual project pages.
+- **No Zero-Value Content**: Remove trivial scripts or 0%-complete placeholders that dilute the professional brand. Focus on systems with significant architectural depth.
 
 ## Writing Style
 

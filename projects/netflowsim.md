@@ -2,7 +2,7 @@
 layout: default
 ---
 
-# Traffic Simulator
+# netflowsim
 
 <span class="status-badge status-active">Active Development</span>
 
@@ -19,8 +19,8 @@ layout: default
 
 | | |
 |---|---|
-| **Status** | Phase 3/5 - Simulator Interop |
-| **Language** | Rust |
+| **Status** | Active |
+| **Language** | N/A |
 | **Started** | 2026 |
 
 ---
@@ -79,7 +79,7 @@ Traditional approaches force a choice between:
 ## Example Usage
 
 ```bash
-# Simulate traffic flows through a topology
+# netflowsim
 $ netflowsim simulate \
     --topology topology.json \
     --traffic traffic.json \
@@ -96,7 +96,7 @@ GeoJSON visualization: network.geojson
 ```
 
 ```bash
-# Generate routing matrix from FIB data
+# netflowsim
 $ netflowsim generate-routing \
     --topology topology.json \
     --fibs examples/fibs/ \

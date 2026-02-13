@@ -2,9 +2,9 @@
 layout: default
 ---
 
-# AuroraData — Aurora Planning & Substorm Advisor
+# AuroraData - Aurora Planning & Substorm Advisor
 
-<span class="status-badge status-active">Active Development</span>
+<span class="status-badge status-active">** 1 - Substorm Trigger Engine</span>
 
 [← Back to Projects](../projects)
 
@@ -19,8 +19,8 @@ Aurora hunting in Australia requires a 60+ minute drive to dark sites, but most 
 
 | | |
 |---|---|
-| **Status** | Active Development |
-| **Language** | TypeScript (Node.js) |
+| **Status** | ** 1 - Substorm Trigger Engine |
+| **Language** | N/A |
 | **Started** | 2026 |
 
 ---

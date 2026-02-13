@@ -10,6 +10,10 @@ layout: default
 
 ---
 
+## The Insight
+
+Developing...
+
 ## Quick Facts
 
 | | |
@@ -19,7 +23,6 @@ layout: default
 | **Started** | 2026 |
 
 ---
-
 ## What This Is
 
 A high-performance Rust implementation of Matrix Profile algorithms for time series analysis. Matrix Profiles enable pattern discovery, anomaly detection, and similarity search in univariate time series without domain knowledge or parameter tuning.

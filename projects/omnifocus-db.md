@@ -2,9 +2,9 @@
 layout: default
 ---
 
-# OmniFocus DB CLI
+# OmniFocus DB CLI (omnifocus-db)
 
-<span class="status-badge status-planning">Planning</span>
+<span class="status-badge status-active">** Phase 1: Foundation & DB Safety</span>
 
 [← Back to Projects](../projects)
 
@@ -19,9 +19,8 @@ OmniFocus 4's AppleScript and app-based APIs are slow—too slow for AI agents t
 
 | | |
 |---|---|
-| **Status** | Planning |
-| **Language** | Python |
-| **Platform** | macOS only |
+| **Status** | ** Phase 1: Foundation & DB Safety |
+| **Language** | N/A |
 | **Started** | 2026 |
 
 ---
@@ -174,11 +173,11 @@ Agent: "You have 3 flagged items due today: PR review, dentist appointment, and 
 
 **Direct MCP Server:**
 ```python
-# Agent can query OmniFocus context directly
+# OmniFocus DB CLI (omnifocus-db)
 from mcp import use_tool
 
 inbox = use_tool("omnifocus_db", action="inbox")
-# Returns: {"inbox_count": 3, "items": [...]} in 5ms
+# OmniFocus DB CLI (omnifocus-db)
 ```
 
 **Claude Desktop Integration:**

@@ -4,7 +4,7 @@ layout: default
 
 # NetVis
 
-<span class="status-badge status-active">Active Development</span>
+<span class="status-badge status-active">40 - Integration Surface & Diagnostics</span>
 
 [← Back to Projects](../projects)
 
@@ -19,7 +19,7 @@ Network visualization often fails at scale because layout algorithms treat all n
 
 | | |
 |---|---|
-| **Status** | Active |
+| **Status** | 40 - Integration Surface & Diagnostics |
 | **Language** | Rust |
 | **Started** | 2026 |
 
@@ -95,7 +95,7 @@ Written: output.svg (6.5 KB)
 
 ank_pydantic topologies export directly to NetVis format:
 ```python
-# Export topology with layout hints
+# NetVis
 topo.export_for_netvis(
     "output.json",
     layout="hierarchical",

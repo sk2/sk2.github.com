@@ -19,8 +19,8 @@ Network topology modeling typically forces a choice between the speed of untyped
 
 | | |
 |---|---|
-| **Status** | Phase 59/62 (99%) |
-| **Language** | Python, Rust |
+| **Status** | Phase 59/62 (100%) |
+| **Language** | N/A |
 | **Started** | 2026 |
 
 ---
@@ -93,10 +93,10 @@ from ank_pydantic import Topology
 from ank_pydantic.blueprints.designs.isis import build_isis_layer
 from ank_pydantic.blueprints.designs.mpls import build_mpls_layer
 
-# Load topology from YAML
+# ank_pydantic
 topology = Topology.from_yaml("transitnet.yaml")
 
-# Build IS-IS Layer 2 flat domain
+# ank_pydantic
 isis_layer = build_isis_layer(
     topology,
     level=2,
@@ -104,7 +104,7 @@ isis_layer = build_isis_layer(
     parent_layer="physical"
 )
 
-# Build MPLS/LDP following IS-IS adjacencies
+# ank_pydantic
 mpls_layer = build_mpls_layer(
     topology,
     igp_layer="isis",
@@ -165,7 +165,7 @@ mpls ldp
 **Input:** Add customer sites to PE routers:
 
 ```yaml
-# Add customer edge routers to topology
+# ank_pydantic
 - nodes:
     - CE1:
         role: ce
@@ -195,7 +195,7 @@ mpls ldp
 ```python
 from ank_pydantic.blueprints.designs.l3vpn import build_l3vpn_layer
 
-# Build L3VPN service for customer NetCorp
+# ank_pydantic
 l3vpn_layer = build_l3vpn_layer(
     topology,
     service_name="NetCorp-L3VPN",
@@ -249,13 +249,13 @@ router bgp 65000
 ```python
 from ank_pydantic.blueprints.environments import get_environment
 
-# Get Containerlab compiler
+# ank_pydantic
 env = get_environment('containerlab')
 
-# Generate Containerlab topology file
+# ank_pydantic
 artifacts = env.generate(topology)
 
-# Write topology file
+# ank_pydantic
 with open("transitnet.clab.yml", "w") as f:
     f.write(artifacts.files['topology.clab.yml'])
 ```
@@ -299,39 +299,39 @@ topology:
 **Deploy and Verify:**
 
 ```bash
-# Deploy topology
+# ank_pydantic
 sudo containerlab deploy -t transitnet.clab.yml
 
-# Verify deployment
+# ank_pydantic
 sudo containerlab inspect -t transitnet.clab.yml
 
-# Output:
-# +---+---------------------+--------------+-------------------+-------+---------+
-# | # |        Name         | Container ID |       Image       | Kind  |  State  |
-# +---+---------------------+--------------+-------------------+-------+---------+
-# | 1 | clab-transitnet-P1  | abc123...    | vr-xrv9k:7.3.2   | xrv9k | running |
-# | 2 | clab-transitnet-P3  | def456...    | vr-xrv9k:7.3.2   | xrv9k | running |
-# | 3 | clab-transitnet-PE1 | ghi789...    | vr-xrv9k:7.3.2   | xrv9k | running |
+# ank_pydantic
+# ank_pydantic
+# ank_pydantic
+# ank_pydantic
+# ank_pydantic
+# ank_pydantic
+# ank_pydantic
 
-# Test IS-IS neighbors on P1
+# ank_pydantic
 docker exec -it clab-transitnet-P1 show isis neighbors
 
-# Expected output:
-# IS-IS CORE neighbors:
-# System Id       Interface       SNPA           State  Holdtime Type IETF-NSF
-# P3              Gi0/0/0/0       *PtoP*         Up     28       L2   Capable
-# PE1             Gi0/0/0/2       *PtoP*         Up     29       L2   Capable
+# ank_pydantic
+# ank_pydantic
+# ank_pydantic
+# ank_pydantic
+# ank_pydantic
 
-# Verify LDP sessions
+# ank_pydantic
 docker exec -it clab-transitnet-P1 show mpls ldp neighbor
 
-# Expected output:
-# Peer LDP Ident: 10.0.0.3:0; Local LDP Ident 10.0.0.1:0
-#   TCP connection: 10.0.0.3:646 - 10.0.0.1:28577
-#   State: Oper; Msgs sent/rcvd: 12/11; Downstream
-# Peer LDP Ident: 10.0.0.11:0; Local LDP Ident 10.0.0.1:0
-#   TCP connection: 10.0.0.11:646 - 10.0.0.1:12389
-#   State: Oper; Msgs sent/rcvd: 10/9; Downstream
+# ank_pydantic
+# ank_pydantic
+# ank_pydantic
+# ank_pydantic
+# ank_pydantic
+# ank_pydantic
+# ank_pydantic
 ```
 
 ### Query API Usage
@@ -339,17 +339,17 @@ docker exec -it clab-transitnet-P1 show mpls ldp neighbor
 Composable queries with Rust-backed execution:
 
 ```python
-# Find all core routers in North PoP
+# ank_pydantic
 core_routers = topology.query.nodes().where(
     lambda n: n.data.role == "core" and n.data.pop == "North"
 ).models()
 
-# Get links between specific sites
+# ank_pydantic
 inter_pop_links = topology.query.links().where(
     lambda l: l.data.link_type == "long-haul"
 ).count()
 
-# Find devices requiring MPLS
+# ank_pydantic
 mpls_devices = topology.layer("mpls").nodes().where(
     mpls_enabled=True
 ).ids()
@@ -360,7 +360,7 @@ mpls_devices = topology.layer("mpls").nodes().where(
 Export for visualization:
 
 ```python
-# Export topology with layout hints
+# ank_pydantic
 topology.export_for_netvis(
     "output.json",
     layout="hierarchical",
@@ -415,11 +415,11 @@ Load and process:
 ```python
 topology = Topology.from_yaml("transitnet.yaml")
 
-# Apply design functions to derive protocol layers
+# ank_pydantic
 isis_layer = build_isis_layer(topology, level=2, area="49.0001")
 mpls_layer = build_mpls_layer(topology, igp_layer="isis")
 
-# Export to Containerlab
+# ank_pydantic
 env = get_environment('containerlab')
 artifacts = env.generate(topology)
 ```

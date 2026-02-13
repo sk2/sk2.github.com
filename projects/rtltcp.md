@@ -19,8 +19,8 @@ The ability to reliably and efficiently stream high-fidelity IQ data from multip
 
 | | |
 |---|---|
-| **Status** | Active Development |
-| **Language** | Rust |
+| **Status** | Active |
+| **Language** | N/A |
 | **Started** | 2026 |
 
 ---
@@ -154,10 +154,10 @@ The raw IQ stream from an RTL-SDR at 2.4 MSPS with 8-bit samples produces 4.8 MB
 ### Building
 
 ```bash
-# Local build
+# Project Context: rtltcp-rust
 cargo build --release
 
-# Cross-compile for Raspberry Pi
+# Project Context: rtltcp-rust
 cross build --target armv7-unknown-linux-gnueabihf --release
 ```
 

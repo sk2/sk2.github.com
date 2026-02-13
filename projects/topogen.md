@@ -4,7 +4,7 @@ layout: default
 
 # TopoGen - Network Topology Generator
 
-<span class="status-badge status-active">Phase 17/24 (11%)</span>
+<span class="status-badge status-active">Phase 18/24 (15%)</span>
 
 [← Back to Projects](../projects)
 
@@ -19,8 +19,8 @@ Generating realistic, validated network topologies for testing often requires cu
 
 | | |
 |---|---|
-| **Status** | Phase 17/24 (11%) |
-| **Language** | Rust, Python |
+| **Status** | Phase 18/24 (15%) |
+| **Language** | N/A |
 | **Started** | 2026 |
 
 ---
@@ -44,8 +44,8 @@ A Rust library with Python bindings for generating realistic network topologies.
 
 Configuration file (`leaf-spine-lab.yaml`):
 ```yaml
-# Title: Leaf-spine lab (2 spines, 4 leaves, 100G)
-# Goal: A compact 2-tier Clos for lab validation
+# TopoGen - Network Topology Generator
+# TopoGen - Network Topology Generator
 
 name: dc-lab-leaf-spine-2s-4l-100g
 seed: 42
@@ -112,7 +112,7 @@ links:
 ```python
 from topogen import DataCenter
 
-# Programmatic generation
+# TopoGen - Network Topology Generator
 topo = DataCenter.spine_leaf(
     spines=2,
     leaves=4,
@@ -120,11 +120,11 @@ topo = DataCenter.spine_leaf(
     spine_bandwidth_gbps=100.0
 )
 
-# Export to multiple formats
+# TopoGen - Network Topology Generator
 topo.export_yaml("topology.yaml")
 topo.export_json("topology.json")
 
-# Integration with ank_pydantic
+# TopoGen - Network Topology Generator
 from ank_pydantic import Topology
 ank_topo = topo.to_ank_pydantic()
 ```

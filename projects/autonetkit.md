@@ -10,6 +10,10 @@ layout: default
 
 ---
 
+## The Insight
+
+Developing...
+
 ## Quick Facts
 
 | | |
@@ -19,7 +23,6 @@ layout: default
 | **Started** | 2026 |
 
 ---
-
 ## Features
 
 ### Automatic IP Addressing
@@ -112,6 +115,18 @@ Network diagram generation:
 ---
 
 [← Back to Network Automation](../network-automation) | [← Back to Projects](../projects)
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)
 
 ---
 

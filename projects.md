@@ -15,13 +15,11 @@ Focusing on network automation, high-performance signal processing, and secure m
 
 ### [ANK Workbench](projects/ank-workbench)
 
-<span class="status-badge status-active">Phase 18/19 (98%)</span>
+<span class="status-badge status-active">Not started (defining requirements)</span>
  · **Python backend (FastAPI or Flask) · React or Vue frontend — Leverages existing Python ecosystem for ANK components · meets modern UX expectations**
 
 
-A unified network simulation and visualization platform for enterprise network engineers. ANK Workbench integrates existing ANK Pydantic models, simulator, and visualization components into a seamless end-to-end workflow.
-
-Network engineers can design, validate, and visualize network changes in one complete workflow without switching between separate tools or manually gluing components together.
+**An orchestration platform** that integrates the ANK ecosystem tools (TopoGen, ank_pydantic, Network Simulator, NetVis) into one seamless workflow. Network engineers can design, validate, and visualize network changes in one complete workflow without switching between separate tools or manually gluing components together.
 
 
 ### [AutoNetkit](projects/autonetkit)
@@ -31,9 +29,12 @@ Network engineers can design, validate, and visualize network changes in one com
 
 
 
+
+
 ### [NetVis](projects/netvis)
 
-<span class="status-badge status-active">Active Development</span>
+<span class="status-badge status-active">40 - Integration Surface & Diagnostics</span>
+ · **Rust**
 
 
 A Rust-based network topology layout and visualization engine. Takes complex multi-layer network topologies (via petgraph) and renders them using advanced layout algorithms that reduce visual complexity while preserving structural clarity.
@@ -43,7 +44,8 @@ Outputs static formats (SVG, PDF, PNG) for v1, with interactive browser embeddin
 
 ### [Network Simulator](projects/network-simulator)
 
-<span class="status-badge status-active">Active Development</span>
+<span class="status-badge status-active">52 (in progress) — daemon-mode-interactive-console</span>
+ · **Rust**
 
 
 A Rust-based network simulator that models packet-level behavior for routing protocols. It provides a middle ground between pure algorithmic analysis (like C-BGP) and full emulation (like Containerlab) — larger scale and smaller footprint than emulation, higher fidelity than algorithmic simulation.
@@ -76,7 +78,7 @@ Ships with "batteries-included" domain models (ISIS, MPLS, EVPN, L3VPN, IXP) in 
 > **[View Ecosystem →](/data-analytics)**
 > High-performance tools for large-scale geospatial analytics and time-series pattern discovery.
 
-### [Tileserver Polars](projects/tileserver)
+### [Tileserver Polars (Rust Optimized)](projects/tileserver)
 
 <span class="status-badge status-active">Active Development</span>
 
@@ -86,7 +88,7 @@ Serve dynamic vector tiles (MVT) from massive geospatial datasets (millions of p
 
 ### [Weather (BOM ACCESS Pipeline)](projects/weather)
 
-<span class="status-badge status-active">Active Development</span>
+<span class="status-badge status-active">Phase 1/4 (50%)</span>
 
 
 A data engineering pipeline to fetch, process, and serve high-resolution weather model data from the Australian Bureau of Meteorology (BOM). Specifically targeting the ACCESS (Australian Community Climate and Earth-System Simulator) model outputs.
@@ -107,6 +109,14 @@ Time series analysis requires identifying:
 - **Similar segments**: "Find all sequences similar to this known good pattern"
 
 
+### [netflowsim](projects/netflowsim)
+
+<span class="status-badge status-active">Active Development</span>
+
+
+`netflowsim` provides rapid, massive-scale network performance analysis by using analytic queuing models and Monte Carlo simulations instead of packet-level discrete event simulation. It enables network engineers to validate topologies and routing strategies against billions of flow iterations in seconds.
+
+
 ## 🤖 AI & Agents
 
 > **[View Ecosystem →](/agentic-systems)**
@@ -120,9 +130,10 @@ Time series analysis requires identifying:
 A native SwiftUI training application for iPad and Apple TV that bridges professional cycling hardware (KICKR Core) with dynamic AI-driven workout logic via NATS, visualized in a high-performance SceneKit environment.
 
 
-### [Multi-Agent Assistant](projects/multi-agent)
+### [Secure Multi-Agent Personal Assistant](projects/multi-agent)
 
 <span class="status-badge status-active">Phase 18/20 (84%)</span>
+ · **Agents can be Go · Python · or Rust**
 
 
 A security-first multi-agent system that coordinates specialized containerized agents (health monitoring, home automation, data aggregation, workflow automation) through a message broker architecture. Each agent runs in isolation with minimal privileges and communicates only through validated message queues, demonstrating production-ready patterns for deploying AI agents in security-critical infrastructure environments.
@@ -137,7 +148,7 @@ The orchestrator uses cloud LLM reasoning (GPT-4/Claude) while agents remain lig
 
 ### [HealthyPi Ecosystem](projects/healthypi)
 
-<span class="status-badge status-active">Active Development</span>
+<span class="status-badge status-active">Phase 6/6 (87%)</span>
 
 
 A modular, agent-aware health monitoring ecosystem that translates raw biometric data from HealthyPi hardware (6 and Move) into actionable insights and automated interventions.
@@ -165,13 +176,13 @@ The ability to reliably and efficiently stream high-fidelity IQ data from multip
 
 ### [Project Spectra](projects/signals)
 
-<span class="status-badge status-active">Active Development</span>
+<span class="status-badge status-active">** Phase 3: Autonomy</span>
 
 
 Transform raw radio spectrum data into an actionable "Signal Census" through automated detection, ML classification, and distributed acquisition.
 
 
-### [Wi-Fi Radar](projects/wifi-radar)
+### [Wi-Fi Radar (KrakenSDR)](projects/wifi-radar)
 
 <span class="status-badge status-active">Active Development</span>
 
@@ -191,9 +202,9 @@ A Python script that automates post-imaging-session file organization for astrop
 Eliminates manual file sorting after imaging sessions - scan hundreds of frames, organize by target/filter/date, validate calibration frame availability, and go straight to PixInsight processing.
 
 
-### [AuroraData — Aurora Planning & Substorm Advisor](projects/auroradata)
+### [AuroraData - Aurora Planning & Substorm Advisor](projects/auroradata)
 
-<span class="status-badge status-active">Active Development</span>
+<span class="status-badge status-active">** 1 - Substorm Trigger Engine</span>
 
 
 A specialized tool for Australian aurora observers that solves the "should I drive 60 minutes?" problem. It combines real-time solar wind data (NOAA), substorm trigger logic (Bz/HP trends), and local weather (ACCESS-G model) to provide actionable advice.
@@ -203,7 +214,7 @@ Providing a single, definitive "Go/No-Go" score that accounts for both space wea
 
 ### [AuroraPhoto](projects/auroraphoto)
 
-<span class="status-badge status-active">Active Development</span>
+<span class="status-badge status-active">** Phase 1: Star Sharpness Foundation</span>
 
 
 An automated astrophotography system designed to capture high-quality aurora and night sky imagery. The project uses Raspberry Pi "nodes" connected via USB to Sony a7R V/a7 IV cameras, controlled and assisted by an iPhone companion app.
@@ -213,7 +224,7 @@ Provides precise, automated control over exposure and focus specifically optimiz
 
 ### [EclipsePhoto](projects/eclipsephoto)
 
-<span class="status-badge status-active">Active Development</span>
+<span class="status-badge status-active">** 1 - Hardware & Data Foundation</span>
 
 
 A "fire and forget" Raspberry Pi-based controller for autonomous solar eclipse photography. It coordinates a camera (via gphoto2) and a high-end mount (ZWO AM5 / Benro Polaris via INDI) to capture a complete eclipse sequence from C1 to C4 without manual intervention.
@@ -223,7 +234,7 @@ Reliability and autonomy for a "one-shot" astronomical event. The system handles
 
 ### [EclipseStack](projects/eclipsestack)
 
-<span class="status-badge status-active">Active Development</span>
+<span class="status-badge status-active">** 1 (Ingestion & Foundation)</span>
 
 
 EclipseStack is a Rust-powered utility (with a web-based UI) specifically designed to align hundreds of RAW solar eclipse images taken during totality. It addresses the challenge of tracker drift by combining image feature detection (solar disk and flares) with temporal extrapolation based on EXIF data.
@@ -231,9 +242,9 @@ EclipseStack is a Rust-powered utility (with a web-based UI) specifically design
 The goal is to produce a perfectly aligned set of frames ready for HDR stacking in professional tools like PixInsight. Enable high-fidelity HDR solar composites by providing sub-pixel alignment of eclipse frames through a combination of computer vision and temporal drift modeling.
 
 
-### [OmniFocus DB CLI](projects/omnifocus-db)
+### [OmniFocus DB CLI (omnifocus-db)](projects/omnifocus-db)
 
-<span class="status-badge status-active">Active Development</span>
+<span class="status-badge status-active">** Phase 1: Foundation & DB Safety</span>
 
 
 A Python-based CLI that bypasses slow AppleScript/TypeScript layers to read directly from the OmniFocus SQLite database on macOS. It provides structured, token-efficient data (JSON/Text) to agents for lightning-fast project listing, inbox analysis, and context gathering.
@@ -255,7 +266,7 @@ Downstream apps can rely on correct, consistent coordinate math and device/proto
 
 ### [OpenAstro Node](projects/open-astro-node)
 
-<span class="status-badge status-active">Active Development</span>
+<span class="status-badge status-active">** 2. Control</span>
 
 
 A headless, autonomous astrophotography controller designed for low-power Linux devices (RPi/Jetson). It manages hardware, executes imaging sequences, and ensures rig safety.
@@ -271,17 +282,19 @@ Photo Tour is a smart, interactive photography assistant designed for field use.
 In the field, you can see what the camera sees and get actionable guidance/control fast enough to improve the shot.
 
 
-### [Traffic Simulator](projects/netflowsim)
+### [Wave](projects/watch-noise)
 
 <span class="status-badge status-active">Active Development</span>
+ · **Swift (SwiftUI)**
 
 
-`netflowsim` provides rapid, massive-scale network performance analysis by using analytic queuing models and Monte Carlo simulations instead of packet-level discrete event simulation. It enables network engineers to validate topologies and routing strategies against billions of flow iterations in seconds.
+**Wave** is an evolutionary ambient audio ecosystem designed to manage the user's sensory environment across rest and work. - **StillState:** Reclaiming silence and rest in shared or noisy environments through intelligent, adaptive audio
+- **FlowState:** Achieving and maintaining a "Steady State" of focus through task-linked audio and genetic evolution
 
 
-### [Wave](projects/watchnoise)
+### [Wave (StillState & FlowState)](projects/watchnoise)
 
-<span class="status-badge status-active">Active Development</span>
+<span class="status-badge status-active">21 (Bluetooth Output Enforcement Hardening)</span>
 
 
 **Wave** is an evolutionary ambient audio ecosystem designed to manage the user's sensory environment across rest and work. - **StillState:** Reclaiming silence and rest in shared or noisy environments through intelligent, adaptive audio.

@@ -4,7 +4,7 @@ layout: default
 
 # Network Simulator
 
-<span class="status-badge status-active">Active Development</span>
+<span class="status-badge status-active">52 (in progress) — daemon-mode-interactive-console</span>
 
 [← Back to Projects](../projects)
 
@@ -19,7 +19,7 @@ A deterministic, tick-based network simulator for rapid prototyping and testing 
 
 | | |
 |---|---|
-| **Status** | v1.6 shipped |
+| **Status** | 52 (in progress) — daemon-mode-interactive-console |
 | **Language** | Rust |
 | **Started** | 2026 |
 
@@ -534,6 +534,12 @@ BGP events: 6 sessions established, 1 route originated, 2 UPDATEs sent
 - **Capacity Planning**: Test network behavior under scaled topologies
 - **Protocol Verification**: Validate RFC compliance for custom implementations
 - **Training**: Safe environment for learning routing protocol behavior
+
+## Roadmap
+
+- v1.7 Segment Routing Foundations (SR-MPLS) (In Progress) — Phases 46-51
+- v1.8 Data Center Fabric & EVPN (Proposed)
+- v1.9 Chaos Engineering & Performance (Proposed)
 
 ## Current Status
 

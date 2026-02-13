@@ -2,9 +2,9 @@
 layout: default
 ---
 
-# Multi-Agent Assistant
+# Secure Multi-Agent Personal Assistant
 
-<span class="status-badge status-active">Active Development</span>
+<span class="status-badge status-active">Phase 18/20 (84%)</span>
 
 [← Back to Projects](../projects)
 
@@ -19,8 +19,8 @@ Multi-agent coordination requires strict security boundaries to prevent lateral 
 
 | | |
 |---|---|
-| **Status** | Active Development |
-| **Language** | Python, Go, Rust, Swift |
+| **Status** | Phase 18/20 (84%) |
+| **Language** | Agents can be Go, Python, or Rust |
 | **Started** | 2026 |
 
 ---

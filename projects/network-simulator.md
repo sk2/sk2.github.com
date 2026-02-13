@@ -82,9 +82,6 @@ A Rust-based network simulator that models packet-level behavior for routing pro
 
 Simple three-router topology to verify basic OSPF functionality.
 
-<details>
-<summary>View Topology & Simulation Output</summary>
-
 Input topology (`ospf-triangle.yaml`):
 ```yaml
 name: ospf-triangle
@@ -181,14 +178,10 @@ Round-trip path: h1 -> r1 -> r3 -> h3 -> r3 -> r1 -> h1
 
 Simulation complete: 120ms simulated, 0.034s real time (3529x speedup)
 ```
-</details>
 
 ## Example 2: IS-IS Level 1/Level 2 Hierarchy
 
 Service provider topology demonstrating IS-IS hierarchical routing with L1 and L2 areas.
-
-<details>
-<summary>View Topology & Simulation Output</summary>
 
 Input topology (`isis-hierarchy.yaml`):
 ```yaml
@@ -295,14 +288,10 @@ i L2 192.0.2.3/32 [115/20] via 10.1.0.2, eth0
 Simulation complete: 15ms simulated, 0.008s real time
 IS-IS events: 18 hellos, 4 LSPs, 2 SPF runs
 ```
-</details>
 
 ## Example 3: Protocol State Inspection (OSPF)
 
 Detailed protocol state inspection with full routing tables and OSPF database dumps.
-
-<details>
-<summary>View OSPF State & Database Dumps</summary>
 
 ```bash
 [t=45ms] core-1> show ip route
@@ -415,14 +404,10 @@ eth0 is up, line protocol is up
     Adjacent with neighbor 10.0.100.2 (Backup Designated Router)
   Suppress hello for 0 neighbor(s)
 ```
-</details>
 
 ## Example 4: BGP Multi-AS Route Propagation
 
 eBGP peering across three autonomous systems with route propagation and path attribute handling.
-
-<details>
-<summary>View Topology & BGP Propagation Output</summary>
 
 Input topology (`bgp-multi-as.yaml`):
 ```yaml
@@ -534,7 +519,6 @@ Path details:
 Simulation complete: 18ms simulated, 0.009s real time
 BGP events: 6 sessions established, 1 route originated, 2 UPDATEs sent
 ```
-</details>
 
 ## Limitations
 

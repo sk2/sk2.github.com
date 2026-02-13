@@ -41,9 +41,6 @@ A Python library for modeling and querying network topologies with type-safe Pyd
 
 ### Service Provider Core: IS-IS + MPLS + iBGP
 
-<details>
-<summary>View Core Topology & Protocol Derivation</summary>
-
 **Input Topology** (transitnet.yaml):
 
 ```yaml
@@ -162,12 +159,8 @@ mpls ldp
  !
 !
 ```
-</details>
 
 ### L3VPN Configuration
-
-<details>
-<summary>View VRF & BGP PE-CE Configuration</summary>
 
 **Input:** Add customer sites to PE routers:
 
@@ -248,12 +241,8 @@ router bgp 65000
  !
 !
 ```
-</details>
 
 ### Containerlab Deployment
-
-<details>
-<summary>View Containerlab Export & Verification</summary>
 
 **Export to Containerlab:**
 
@@ -344,7 +333,6 @@ docker exec -it clab-transitnet-P1 show mpls ldp neighbor
 #   TCP connection: 10.0.0.11:646 - 10.0.0.1:12389
 #   State: Oper; Msgs sent/rcvd: 10/9; Downstream
 ```
-</details>
 
 ### Query API Usage
 

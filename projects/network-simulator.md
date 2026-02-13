@@ -13,7 +13,7 @@ layout: default
 
 ## The Insight
 
-A deterministic, tick-based network simulator for rapid prototyping and testing of network configurations. Enables quick validation of routing protocol behavior before moving to full emulation or production deployment — catch obvious errors early in the design cycle.
+Developing agentic AI systems and network automation tools requires rapid iteration. Spinning up containers for every test cycle takes minutes; simulation takes seconds. This simulator enables fast prototyping of network automation agents, DevOps pipelines, and AI-driven network operations — validate configurations and agent logic in simulation before committing to heavyweight container deployments.
 
 ## Quick Facts
 
@@ -107,10 +107,11 @@ netsim daemon stop my-network
 
 ### Why Use Daemon Mode?
 
-- **Real-time interaction**: Attach to running devices and explore state as the simulation evolves
-- **Long-running simulations**: Let topologies run for extended periods, check in periodically
-- **CI/CD integration**: Start daemon, run tests via `exec`, collect results, stop daemon
-- **Development workflow**: Keep a topology running while you experiment with configurations
+- **Agentic AI development**: Test automation agents against live network state without container overhead — agents can execute commands, parse responses, and iterate in seconds rather than minutes
+- **Network automation prototyping**: Rapidly develop and test configuration management tools, DevOps scripts, and automated network operations
+- **Fast iteration loop**: Design → Generate configs → Simulate → Iterate, all without spinning up containers until you're ready to deploy
+- **CI/CD integration**: Start daemon, run automated tests via `exec`, collect results, stop daemon
+- **Development workflow**: Keep a topology running while you experiment with agent logic or automation scripts
 
 ### Available Commands in Daemon Mode
 
@@ -611,11 +612,12 @@ BGP events: 6 sessions established, 1 route originated, 2 UPDATEs sent
 
 ## Use Cases
 
+- **Agentic AI & Network Automation Development**: Rapidly prototype and test automation agents, DevOps pipelines, and AI-driven network operations with seconds-long iteration cycles instead of minutes spinning up containers
+- **Configuration Generation Testing**: Validate ank_pydantic-generated configs in simulation before deploying to Containerlab — catch errors in the generation logic early
+- **Network Automation Prototyping**: Develop configuration management tools, automated provisioning systems, and orchestration scripts against realistic network topologies without infrastructure overhead
 - **Pre-deployment Validation**: Catch routing loops, black holes, and misconfigurations before production
 - **Convergence Analysis**: Measure failover time and validate backup paths
-- **Capacity Planning**: Test network behavior under scaled topologies
-- **Protocol Verification**: Validate RFC compliance for custom implementations
-- **Training**: Safe environment for learning routing protocol behavior
+- **Training**: Safe environment for learning routing protocol behavior and automation development
 
 ## Roadmap
 

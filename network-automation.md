@@ -159,15 +159,26 @@ NetVis reads the exported topology and applies advanced layout algorithms, produ
 **What It Is:**
 A deterministic, tick-based network simulator for rapid prototyping and testing of network configurations. Simulates OSPF, IS-IS, and BGP with packet-level accuracy for quick validation before deployment.
 
+**Rapid Prototyping for Agentic AI & Network Automation:**
+The simulator's core value is accelerating the development iteration loop for agentic AI systems and network automation tools. Instead of spinning up containers for every test cycle (minutes), validate configurations in simulation (seconds):
+
+1. **Design topology** with ank_pydantic
+2. **Generate configs** automatically for target platforms
+3. **Simulate in seconds** to validate routing behavior
+4. **Iterate rapidly** on agent logic, automation scripts, or config templates
+5. **Deploy to containers** only after simulation validates the approach
+
+This workflow dramatically shortens the iteration cycle for developing network automation agents, DevOps pipelines, and AI-driven network operations — validate ideas in simulation before committing to heavyweight container deployments. Originally built to enable this exact use case: fast prototyping for automated network systems.
+
 **Daemon Mode — Real-Time Interaction:**
 Run simulations as background daemons and interact with them in real-time, like `docker exec` for network simulations:
 - **Start a daemon**: `netsim daemon start my-network topology.yaml`
 - **Execute commands**: `netsim exec my-network r1 "show ip route"`
 - **Attach interactively**: `netsim attach my-network r1` for full REPL console with command history
-- **Long-running simulations**: Keep topologies running for extended periods, check in as needed
+- **Agent development**: Test automation agents against live network state without container overhead
 - **CI/CD integration**: Start daemon, run tests via `exec`, collect results, stop daemon
 
-This enables real-time exploration of network state as the simulation evolves — perfect for development workflows and automated testing.
+This enables real-time exploration of network state as the simulation evolves — perfect for developing agentic systems and automated testing.
 
 **Current Status:** v1.6 shipped with OSPF support, daemon mode with interactive console
 

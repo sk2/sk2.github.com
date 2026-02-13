@@ -161,11 +161,6 @@ Expand project pages with these sections when available: Overview, What This Is,
 - Background: Include educational background (electrical engineering, economics)
 - NO embellished claims (SIMD optimization, zero-copy structures) unless actually implemented
 
-**Active Projects:**
-- Keep concise (4 bullet points max)
-- Link to /projects for full list
-- Biometric tools: "Building agent-based analysis systems on top of the HealthyPi hardware platform" (not "part of HealthyPi")
-
 ### Ecosystem Pages
 
 **Created Pages:**
@@ -225,18 +220,18 @@ When maintaining or expanding this website, strictly adhere to these architectur
 
 ### Core Philosophy: "Understated Expert"
 - **Lead with Insight**: Every project page must begin with a "The Insight" section explaining the technical problem and architectural solution before implementation details.
-- **Show, Don't Overwhelm**: Use `<details>` blocks for long code examples or CLI outputs. Provide a concise summary of what the evidence proves above the fold.
-- **Tight Prose**: Strictly follow Strunk & White. Remove marketing adjectives. Let technical outcomes and realistic examples speak for the system's value.
+- **Show, Don't Overwhelm**: Use raw code blocks and CLI outputs to provide technical substance. **DO NOT** use collapsible `<details>` blocks for code; the raw technical evidence is essential for the "Show, Don't Tell" philosophy.
+- **Tight Prose**: Strictly follow Strunk & White. Remove marketing adjectives and "loose" sentences. Let technical outcomes and realistic examples speak for the system's value.
 - **High-Signal Hierarchy**: Keep Core Systems (Network, Data Science, Agentic Architectures, Signal Processing) at the top of the projects index. Demote experimental tools and technical hobbies to the bottom to preserve the "Expert" brand.
 
 ### Structural Consistency
-- **Status Badges**: Use standardized status badges. Do not embellish "Production Ready" status.
+- **Status Badges**: Use standardized status badges. Do not embellish "Production Ready" status; show actual phase completion (e.g., "Phase 18/20").
 - **Dual Breadcrumbs**: Maintain `[← Back to Ecosystem]` and `[← Back to Projects]` navigation on all sub-pages.
 - **Footer**: Every project page must have exactly one footer link: `[← Back to Projects](../projects)`.
-- **Ecosystem Callouts**: Use blockquote callouts in `projects.md` to link to the respective ecosystem visions.
+- **Ecosystem Callouts**: Use blockquote callouts in `projects.md` to link to the respective ecosystem visions immediately under the category header.
 
 ### Content Architecture
-- **Progressive Disclosure**: Ecosystem pages focus on Vision, Philosophy, and Architecture. Move detailed protocol examples and API usage to individual project pages.
+- **Progressive Disclosure**: Ecosystem pages focus on Vision, Philosophy, and Architecture. Move deep technical details, protocol examples, and API usage to individual project pages.
 - **No Zero-Value Content**: Remove trivial scripts or 0%-complete placeholders that dilute the professional brand. Focus on systems with significant architectural depth.
 
 ## Writing Style

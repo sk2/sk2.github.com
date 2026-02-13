@@ -158,7 +158,17 @@ NetVis reads the exported topology and applies advanced layout algorithms, produ
 **What It Is:**
 A deterministic, tick-based network simulator for rapid prototyping and testing of network configurations. Simulates OSPF, IS-IS, and BGP with packet-level accuracy for quick validation before deployment.
 
-**Current Status:** v1.6 shipped with OSPF support
+**Daemon Mode — Real-Time Interaction:**
+Run simulations as background daemons and interact with them in real-time, like `docker exec` for network simulations:
+- **Start a daemon**: `netsim daemon start my-network topology.yaml`
+- **Execute commands**: `netsim exec my-network r1 "show ip route"`
+- **Attach interactively**: `netsim attach my-network r1` for full REPL console with command history
+- **Long-running simulations**: Keep topologies running for extended periods, check in as needed
+- **CI/CD integration**: Start daemon, run tests via `exec`, collect results, stop daemon
+
+This enables real-time exploration of network state as the simulation evolves — perfect for development workflows and automated testing.
+
+**Current Status:** v1.6 shipped with OSPF support, daemon mode with interactive console
 
 **Tech Stack:** Rust, Tokio, petgraph
 

@@ -37,6 +37,88 @@ A Rust-based network simulator that models packet-level behavior for routing pro
 - **RIB/FIB Separation**: Models routing decisions (control plane) and forwarding behavior (data plane)
 - **Comprehensive Testing**: 1,350+ tests validate protocol behavior against RFCs
 - **Parallel Execution**: Multi-core support for large topologies
+- **Daemon Mode**: Real-time interaction with running simulations via interactive console or one-shot commands
+
+## Daemon Mode — Real-Time Network Interaction
+
+Run simulations as background daemons and interact with them in real-time — like `docker exec` for network simulations.
+
+### Starting a Daemon
+
+```bash
+# Start a simulation as a background daemon
+netsim daemon start my-network topology.yaml
+
+# With custom tick rate (default: 100ms)
+netsim daemon start my-network topology.yaml --tick-interval 50ms
+```
+
+The daemon runs continuously in the background, ticking the simulation at the specified interval.
+
+### Execute One-Shot Commands
+
+```bash
+# Run a single command on a device
+netsim exec my-network r1 "show ip route"
+netsim exec my-network h1 "ping 10.0.3.10"
+netsim exec my-network r2 "show ospf neighbors"
+```
+
+### Attach an Interactive Console
+
+```bash
+# Attach to a device for an interactive session
+netsim attach my-network r1
+```
+
+Once attached, you get an interactive REPL with command history:
+
+```
+r1> show ip route
+Destination       Next Hop        Metric  Interface
+10.0.1.0/24       —               0       eth2 (connected)
+10.0.12.0/24      —               0       eth0 (connected)
+...
+
+r1> show interfaces
+Interface  IP Address      MAC Address        Status
+eth0       10.0.12.1/24    02:00:00:00:01:00  up
+eth1       10.0.13.1/24    02:00:00:00:01:01  up
+...
+
+r1> ping 10.0.3.10
+Ping 10.0.3.10: 5/5 packets received, 0% loss
+...
+
+r1> exit
+```
+
+Type `help` in the console for available commands, or `exit` to detach.
+
+### Daemon Management
+
+```bash
+# Check daemon status
+netsim daemon status my-network
+
+# Stop a daemon
+netsim daemon stop my-network
+```
+
+### Why Use Daemon Mode?
+
+- **Real-time interaction**: Attach to running devices and explore state as the simulation evolves
+- **Long-running simulations**: Let topologies run for extended periods, check in periodically
+- **CI/CD integration**: Start daemon, run tests via `exec`, collect results, stop daemon
+- **Development workflow**: Keep a topology running while you experiment with configurations
+
+### Available Commands in Daemon Mode
+
+All commands from `netsim run` work in daemon mode via `exec` or `attach`:
+
+- **Show commands**: `show ip route`, `show interfaces`, `show arp`, `show ospf neighbors`, `show isis database`, `show mpls forwarding`, `show ldp bindings`, `show bfd sessions`, `show vrf`, `show traffic`
+- **Diagnostics**: `ping <ip>`, `traceroute <ip>`
+- **Configuration**: `route add <dest> via <nexthop>`, `mpls lfib add <label> ...`, `bgp vpn-originate <vrf>`, `gre tunnel set <dest> ...`
 
 ## Detailed Protocol Support
 

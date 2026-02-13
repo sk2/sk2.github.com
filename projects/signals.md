@@ -11,13 +11,9 @@ layout: default
 ---
 
 
-## The Concept
+## The Insight
 
 Transform raw radio spectrum data into an actionable "Signal Census" through automated detection, ML classification, and distributed acquisition.
-
-![Spectra Signal Census](../images/spectra-screenshot.png)
-
-*Real-time signal detection showing frequency, bandwidth, modulation type, and classification confidence across the RF spectrum*
 
 ## Quick Facts
 
@@ -28,6 +24,10 @@ Transform raw radio spectrum data into an actionable "Signal Census" through aut
 | **Started** | 2026 |
 
 ---
+
+## Core Value
+
+Transform raw radio spectrum data into an actionable "Signal Census" through automated detection, ML classification, and distributed acquisition.
 
 ---
 

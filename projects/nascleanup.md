@@ -10,11 +10,6 @@ layout: default
 
 ---
 
-
-## The Concept
-
-Manual deduplication of large NAS shares is error-prone and slow. **nascleanup** uses Rust for rapid content-based hashing and traversal, automating the organization and deduplication of distributed file systems.
-
 ## Quick Facts
 
 | | |
@@ -40,6 +35,10 @@ A Rust-based CLI tool for deduplicating and organizing large file shares. Optimi
 ---
 
 [← Back to Projects](../projects)
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)
 
 ---
 

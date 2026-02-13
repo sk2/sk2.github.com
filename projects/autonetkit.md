@@ -10,11 +10,6 @@ layout: default
 
 ---
 
-
-## The Concept
-
-Configuration automation often lacks a formal model, leading to vendor-specific hard-coded logic. **AutoNetkit** solves this by transforming high-level topologies into vendor-neutral abstract models. It then compiles these models into device-specific configurations (Cisco, Juniper, Quagga) using Python-based design logic.
-
 ## Quick Facts
 
 | | |
@@ -117,6 +112,10 @@ Network diagram generation:
 ---
 
 [← Back to Network Automation](../network-automation) | [← Back to Projects](../projects)
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)
 
 ---
 

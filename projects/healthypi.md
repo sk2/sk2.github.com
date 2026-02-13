@@ -11,9 +11,9 @@ layout: default
 ---
 
 
-## The Concept
+## The Insight
 
-Health monitoring typically relies on siloed apps that provide opaque "scores." The **HealthyPi Ecosystem** treats biometrics as a real-time event stream for intelligent agents. It integrates research-grade signal processing (NeuroKit2) with a multi-agent message bus to enable autonomous health observation and longitudinal analysis.
+A modular, agent-aware health monitoring ecosystem that translates raw biometric data from HealthyPi hardware (6 and Move) into actionable insights and automated interventions.
 
 ## Quick Facts
 
@@ -24,6 +24,10 @@ Health monitoring typically relies on siloed apps that provide opaque "scores." 
 | **Started** | 2026 |
 
 ---
+
+## Core Value
+
+A modular, agent-aware health monitoring ecosystem that translates raw biometric data from HealthyPi hardware (6 and Move) into actionable insights and automated interventions.
 
 ## Current Status
 

@@ -11,9 +11,9 @@ layout: default
 ---
 
 
-## The Concept
+## The Insight
 
-Through-wall human detection and localization using existing Wi-Fi signal reflections analyzed via coherent SDR arrays.
+Passive radar system that utilizes existing Wi-Fi signals for through-wall human detection and localization, leveraging the KrakenSDR coherent radio array.
 
 ## Quick Facts
 
@@ -24,6 +24,10 @@ Through-wall human detection and localization using existing Wi-Fi signal reflec
 | **Started** | 2026 |
 
 ---
+
+## Core Value
+
+Passive radar system that utilizes existing Wi-Fi signals for through-wall human detection and localization, leveraging the KrakenSDR coherent radio array.
 
 ---
 

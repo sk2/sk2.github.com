@@ -7,7 +7,7 @@ and generates:
 1. projects.md (Summary index)
 2. projects/*.md (Detailed project pages)
 
-Enforces "Strunk and White" style.
+Enforces "Understated Expert" style.
 """
 
 import argparse
@@ -64,7 +64,7 @@ def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
     # Clean up project names (remove verbose prefixes)
     project_name = re.sub(r'^PROJECT:\s*', '', project_name, flags=re.IGNORECASE)
     project_name = re.sub(r'^Project:\s*', '', project_name, flags=re.IGNORECASE)
-    project_name = re.sub(r'\s*\([^)]+\)$', '', project_name)  # Remove trailing parentheticals like (KrakenSDR)
+    project_name = re.sub(r'\s*\([^)]+\)$', '', project_name)  # Remove trailing parentheticals
 
     # Slug for filenames with special mappings
     slug = project_path.name.lower().replace("_", "-").replace(" ", "-")
@@ -72,6 +72,7 @@ def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
     # Special slug mappings to consolidate duplicates
     slug_mappings = {
         "multi-agent-assistant": "multi-agent",
+        "watch-noise": "watchnoise", # Corrected to match existing watchnoise.md
     }
     slug = slug_mappings.get(slug, slug)
 
@@ -109,9 +110,6 @@ def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
         if last_activity:
             current_status = last_activity.group(1).strip()
 
-    # Note: Don't assume production readiness based on phase completion
-    # Just use the phase progress as the status detail
-
     return ProjectInfo(
         name=project_name,
         slug=slug,
@@ -134,38 +132,22 @@ def categorize_project(project: ProjectInfo) -> str:
     if any(x in name_lower for x in ['netvis', 'ank', 'topogen', 'netsim', 'autonetkit', 'network']):
         return "network"
 
-    # Signal processing / SDR / Hardware
-    if any(x in name_lower for x in ['healthypi', 'spectra', 'passive', 'radar', 'kraken']):
-        return "signal"
-
-    # Astrophotography
-    if any(x in name_lower for x in ['astro', 'asiair']) or 'astro' in sections_lower:
-        return "astrophotography"
-
-    # Photography
-    if any(x in name_lower for x in ['photo-tour', 'photo tour']):
-        return "photography"
+    # Data & Simulation
+    if any(x in name_lower for x in ['netflow', 'polars', 'tileserver', 'matrix-time-series', 'matrix-profile', 'matrix_profile', 'weather', 'simulation']):
+        return "data"
 
     # AI & Agents
     if any(x in name_lower for x in ['agent', 'multi-agent', 'cycle']):
         return "agents"
 
-    # Data & Utilities
-    if any(x in name_lower for x in ['cleanup', 'tileserver', 'tile']):
-        return "data"
+    # Signal processing / SDR
+    if any(x in name_lower for x in ['healthypi', 'spectra', 'passive', 'radar', 'kraken', 'rtltcp', 'wifi-radar']):
+        return "signal"
 
-    # Wellness & Sound
-    if any(x in name_lower for x in ['watch', 'noise', 'wave', 'sleep', 'health']):
-        # Exclude healthypi (that's signal processing hardware)
-        if 'healthypi' not in name_lower:
-            return "wellness"
-
-    return "other"
+    return "experimental"
 
 
 def generate_status_badge(project: ProjectInfo) -> str:
-    if project.status == "complete":
-        return '<span class="status-badge status-complete">Production Ready</span>'
     detail = project.status_detail or "Active Development"
     cls = "status-planning" if project.status == "planning" else "status-active"
     return f'<span class="status-badge {cls}">{detail}</span>'
@@ -202,7 +184,7 @@ def generate_detailed_page(project: ProjectInfo) -> str:
         "| **Started** | 2026 |", "", "---", ""
     ])
 
-    # Include all relevant sections from PROJECT.md (expanded for more detail)
+    # Include priority sections from PROJECT.md
     priority_sections = [
         "Overview", "What This Is", "Problem It Solves", "Core Value",
         "Features", "Key Capabilities", "Technical Features",
@@ -213,7 +195,6 @@ def generate_detailed_page(project: ProjectInfo) -> str:
     ]
 
     for sec_name in priority_sections:
-        # Skip Core Value if we already used it in The Insight section
         if sec_name == "Core Value" and existing_insight:
             continue
 
@@ -232,6 +213,86 @@ def generate_detailed_page(project: ProjectInfo) -> str:
     return "\n".join(lines)
 
 
+def generate_projects_index(projects: list[ProjectInfo]) -> str:
+    lines = [
+        "---", "layout: default", "---", "",
+        "# Projects", "",
+        "Focusing on network automation, high-performance signal processing, and secure multi-agent architectures.",
+        "", "---", ""
+    ]
+
+    # Group by category matching the established order
+    categories = {
+        "network": ("🌐 Network Engineering", "High-performance tools for topology modeling, deterministic protocol simulation, and visualization.", "/network-automation", []),
+        "data": ("📊 Data Science & Simulation", "High-performance tools for large-scale geospatial analytics and time-series pattern discovery.", "/data-analytics", []),
+        "agents": ("🤖 AI & Agents", "Security-first architectures for multi-agent coordination and isolated automation.", "/agentic-systems", []),
+        "signal": ("📡 Signal Processing & RF", "SDR spectrum monitoring and biometric signal processing using modular acquisition pipelines.", "/signal-processing", []),
+        "experimental": ("🔭 Experimental & Hobbies", "Projects in exploratory phases or related to technical hobbies.", None, [])
+    }
+
+    for p in projects:
+        p.category = categorize_project(p)
+        if p.category in categories:
+            categories[p.category][3].append(p)
+        else:
+            categories["experimental"][3].append(p)
+
+    # Generate sections
+    for cat_key, (cat_title, cat_desc, cat_link, cat_projects) in categories.items():
+        if not cat_projects:
+            continue
+
+        lines.append(f"## {cat_title}\n")
+        if cat_link:
+            lines.append(f"> **[View Ecosystem →]({cat_link})**")
+            lines.append(f"> {cat_desc}\n")
+
+        for p in sorted(cat_projects, key=lambda x: x.name):
+            # Build summary from multiple sections
+            summary_parts = []
+            for section_key in ["Overview", "What This Is", "Core Value", "Problem It Solves"]:
+                content = p.sections.get(section_key)
+                if content:
+                    first_para = content.split('\n\n')[0]
+                    summary_parts.append(first_para)
+
+            summary = ' '.join(summary_parts) if summary_parts else ""
+
+            if summary:
+                sentences = re.split(r'(?<=[.!?])\s+', summary)
+                num_sentences = min(5, len(sentences))
+                selected_sentences = sentences[:num_sentences]
+                paragraphs = []
+                for i in range(0, len(selected_sentences), 2):
+                    para = ' '.join(selected_sentences[i:i+2])
+                    paragraphs.append(para)
+                summary = '\n\n'.join(paragraphs)
+
+            lines.append(f"### [{p.name}](projects/{p.slug})\n")
+            lines.append(f"{generate_status_badge(p)}")
+
+            if p.stack:
+                tech_str = " · ".join(p.stack[:3])
+                lines.append(f" · **{tech_str}**")
+
+            lines.append("\n")
+            if summary:
+                lines.append(f"{summary}\n")
+            lines.append("")
+
+    lines.append('<style>')
+    lines.append('.status-badge { display: inline-block; padding: 0.2em 0.6em; margin: 0.3em 0; border-radius: 4px; font-size: 0.8em; font-weight: 600; }')
+    lines.append('.status-active { background-color: #f8f9fa; color: #495057; border: 1px solid #dee2e6; }')
+    lines.append('.status-planning { background-color: #fff3cd; color: #856404; border: 1px solid #ffeeba; }')
+    lines.append('h3 { margin-bottom: 0.1em; }')
+    lines.append('h3 + .status-badge { margin-top: 0; }')
+    lines.append('section { margin-bottom: 2em; }')
+    lines.append('blockquote { margin: 1em 0; padding: 0.5em 1em; border-left: 2px solid #495057; background: #f8f9fa; font-style: normal; font-size: 0.9em; }')
+    lines.append('</style>')
+
+    return "\n".join(lines)
+
+
 def main():
     parser = argparse.ArgumentParser(description="Update projects pages.")
     parser.add_argument("--scan-dirs", nargs="+",
@@ -239,7 +300,6 @@ def main():
                         help="Directories to scan for projects with .planning/PROJECT.md")
     args = parser.parse_args()
 
-    # Scan for projects with .planning/PROJECT.md
     projects = []
     for scan_dir in args.scan_dirs:
         scan_path = Path(scan_dir).expanduser()
@@ -253,34 +313,25 @@ def main():
             if project_info:
                 projects.append(project_info)
 
-    # Also include legacy projects (existing .md files without .planning dirs)
+    # Legacy projects
     projects_dir = Path("projects")
     if projects_dir.exists():
         scanned_slugs = {p.slug for p in projects}
         scanned_names = {p.name for p in projects}
         for legacy_md in projects_dir.glob("*.md"):
             if legacy_md.stem not in scanned_slugs:
-                # Read existing file to preserve it
                 content = legacy_md.read_text()
                 name_match = re.search(r'^#\s+(.+)$', content, re.MULTILINE)
                 if name_match:
                     name = name_match.group(1).strip()
-
-                    # Skip if a project with this name already exists (from new scan)
                     if name in scanned_names:
-                        print(f"  Skipping duplicate: {name} (using newly scanned version)")
                         continue
-
-                    print(f"  Preserving legacy project: {name}")
-
-                    # Extract basic metadata for index generation
+                    
                     status = "active"
                     status_detail = "Active Development"
                     badge_match = re.search(r'<span class="status-badge.*?>(.*?)</span>', content)
                     if badge_match:
                         status_detail = badge_match.group(1).strip()
-                        if "Complete" in status_detail or "Ready" in status_detail:
-                            status = "complete"
 
                     stack = []
                     stack_match = re.search(r'\|\s*\*\*Language\*\*\s*\|\s*(.*?)\s*\|', content)
@@ -289,151 +340,32 @@ def main():
                         stack = [s.strip() for s in re.split(r'[,·]', stack_str) if s.strip() and s.strip() != "N/A"]
 
                     sections = extract_sections(content)
+                    projects.append(ProjectInfo(
+                        name=name, slug=legacy_md.stem, path=legacy_md,
+                        category="experimental", status=status,
+                        status_detail=status_detail, stack=stack, sections=sections
+                    ))
 
-                    legacy_project = ProjectInfo(
-                        name=name,
-                        slug=legacy_md.stem,
-                        path=legacy_md,
-                        category="other",
-                        status=status,
-                        status_detail=status_detail,
-                        stack=stack,
-                        sections=sections
-                    )
-                    projects.append(legacy_project)
-
-    if not projects:
-        print("No projects found with .planning/PROJECT.md")
-        return
-
-    # Sort projects by name
     projects.sort(key=lambda x: x.name)
-    print(f"Found {len(projects)} projects: {[p.name for p in projects]}")
-
-    # Generate individual project pages
-    projects_dir = Path("projects")
-    projects_dir.mkdir(exist_ok=True)
+    print(f"Found {len(projects)} projects")
 
     for project in projects:
-        page_path = projects_dir / f"{project.slug}.md"
+        page_path = Path("projects") / f"{project.slug}.md"
         page_content = generate_detailed_page(project)
 
-        # Preserve existing detailed content if it's substantially longer
-        # (indicates manual enrichment that shouldn't be lost)
         if page_path.exists():
             existing_content = page_path.read_text()
-            existing_lines = len(existing_content.split('\n'))
-            new_lines = len(page_content.split('\n'))
-
-            # If existing file has 3x more content, it's likely manually enriched
-            # Also extract the existing name for use in the index
-            if existing_lines > new_lines * 3:
-                # Extract name from existing file and update project info
+            if len(existing_content.split('\n')) > len(page_content.split('\n')) * 3:
                 name_match = re.search(r'^#\s+(.+)$', existing_content, re.MULTILINE)
                 if name_match:
                     project.name = name_match.group(1).strip()
-                print(f"  Preserving detailed content: {page_path} ({existing_lines} vs {new_lines} lines)")
                 continue
 
         page_path.write_text(page_content)
-        print(f"  Generated {page_path}")
 
-    # Generate index
     index_content = generate_projects_index(projects)
     Path("projects.md").write_text(index_content)
-    print("Updated projects.md")
-
-
-def generate_projects_index(projects: list[ProjectInfo]) -> str:
-    lines = [
-        "---", "layout: default", "---", "",
-        "# Projects", "",
-        "My work focuses on network automation tools, signal processing systems, and multi-agent architectures.",
-        "", "---", ""
-    ]
-
-    # Group by category
-    categories = {
-        "network": ("Network Engineering", []),
-        "signal": ("Signal Processing & SDR", []),
-        "astrophotography": ("Astrophotography", []),
-        "photography": ("Photography", []),
-        "agents": ("AI & Agents", []),
-        "data": ("Data & Utilities", []),
-        "wellness": ("Wellness & Sound", []),
-        "other": ("Other", [])
-    }
-
-    for p in projects:
-        p.category = categorize_project(p)
-        if p.category in categories:
-            categories[p.category][1].append(p)
-        else:
-            categories["other"][1].append(p)
-
-    # Generate sections
-    for cat_key, (cat_title, cat_projects) in categories.items():
-        if not cat_projects:
-            continue
-
-        lines.append(f"## {cat_title}\n")
-
-        for p in sorted(cat_projects, key=lambda x: x.name):
-            # Build summary from multiple sections to get 4-5 sentences
-            summary_parts = []
-            for section_key in ["Overview", "What This Is", "Core Value", "Problem It Solves"]:
-                content = p.sections.get(section_key)
-                if content:
-                    # Get first paragraph
-                    first_para = content.split('\n\n')[0]
-                    summary_parts.append(first_para)
-
-            summary = ' '.join(summary_parts) if summary_parts else ""
-
-            # Extract first 4-5 sentences with paragraph breaks for readability
-            if summary:
-                sentences = re.split(r'(?<=[.!?])\s+', summary)
-                # Take 4-5 sentences depending on length
-                if len(sentences) <= 3:
-                    num_sentences = len(sentences)
-                elif len(sentences[0]) > 100:
-                    num_sentences = min(4, len(sentences))
-                else:
-                    num_sentences = min(5, len(sentences))
-
-                # Add paragraph breaks every 2-3 sentences
-                selected_sentences = sentences[:num_sentences]
-                paragraphs = []
-                for i in range(0, len(selected_sentences), 2):
-                    # Group 2 sentences per paragraph
-                    para = ' '.join(selected_sentences[i:i+2])
-                    paragraphs.append(para)
-                summary = '\n\n'.join(paragraphs)
-
-            lines.append(f"### [{p.name}](projects/{p.slug})\n")
-            lines.append(f"{generate_status_badge(p)}")
-
-            if p.stack:
-                tech_str = " · ".join(p.stack[:3])
-                lines.append(f" · **{tech_str}**")
-
-            lines.append("\n")
-
-            if summary:
-                lines.append(f"{summary}\n")
-
-            lines.append("")
-
-
-    # Note: Development philosophy section removed per user preference
-    # Simple list layout - minimal CSS needed
-    lines.append('<style>')
-    lines.append('.status-badge { display: inline-block; padding: 0.3em 0.8em; margin: 0.5em 0; border-radius: 4px; font-size: 0.85em; font-weight: 600; }')
-    lines.append('.status-active { background-color: #007bff; color: white; }')
-    lines.append('.status-planning { background-color: #ffc107; color: #343a40; }')
-    lines.append('</style>')
-
-    return "\n".join(lines)
+    print("Updated projects.md and individual pages")
 
 
 if __name__ == "__main__":

@@ -11,9 +11,9 @@ layout: default
 ---
 
 
-## The Concept
+## The Insight
 
-Network design, validation, and testing typically occur in fragmented tools. **ANK Workbench** unifies these into a declarative "Source of Truth" workflow. It replaces VM-heavy emulators with lightweight simulations and high-fidelity visualizations, focusing on network intent rather than hardware emulation.
+Network engineers can design, validate, and visualize network changes in one complete workflow without switching between separate tools or manually gluing components together.
 
 ## Quick Facts
 
@@ -30,6 +30,10 @@ Network design, validation, and testing typically occur in fragmented tools. **A
 A unified network simulation and visualization platform for enterprise network engineers. ANK Workbench integrates existing ANK Pydantic models, simulator, and visualization components into a seamless end-to-end workflow.
 
 Engineers can design networks declaratively, run lightweight simulations, and visualize topology, configuration state, and simulation results in one integrated environment. Complements existing network tools by providing a declarative, intent-based workflow alongside traditional emulation platforms.
+
+## Core Value
+
+Network engineers can design, validate, and visualize network changes in one complete workflow without switching between separate tools or manually gluing components together.
 
 ---
 

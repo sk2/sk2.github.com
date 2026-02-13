@@ -11,9 +11,9 @@ layout: default
 ---
 
 
-## The Concept
+## The Insight
 
-Training applications often disconnect professional hardware from dynamic simulation logic. **Cycle** bridges cycling hardware (KICKR Core) with AI-driven workout logic via NATS. It provides real-time telemetry and 60fps terrain rendering in a native SwiftUI/SceneKit environment for iPad and Apple TV.
+A native SwiftUI training application for iPad and Apple TV that bridges professional cycling hardware (KICKR Core) with dynamic AI-driven workout logic via NATS, visualized in a high-performance SceneKit environment.
 
 ## Quick Facts
 
@@ -24,6 +24,10 @@ Training applications often disconnect professional hardware from dynamic simula
 | **Started** | 2026 |
 
 ---
+
+## Core Value
+
+A native SwiftUI training application for iPad and Apple TV that bridges professional cycling hardware (KICKR Core) with dynamic AI-driven workout logic via NATS, visualized in a high-performance SceneKit environment.
 
 ---
 

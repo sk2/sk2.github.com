@@ -12,7 +12,7 @@ layout: default
 
 ## The Concept
 
-Microphone arrays on edge devices (Raspberry Pi) enable spatial audio processing, sound localization, and classification without cloud dependencies.
+An exploration-focused audio processing system using Raspberry Pi and microphone arrays, designed to provide structured spatial audio insights to an "analyst" agent framework rather than real-time reactive triggers.
 
 ## Quick Facts
 
@@ -26,7 +26,11 @@ Microphone arrays on edge devices (Raspberry Pi) enable spatial audio processing
 
 ## What This Is
 
-A spatial audio processing system using microphone arrays on Raspberry Pi for beamforming, sound localization, and classification. Explores edge vs. remote processing trade-offs for real-time audio analysis.
+A spatial audio processing system using microphone arrays on Raspberry Pi for beamforming, sound localization, and classification. Focuses on spatial audio (ToA, beamforming) and classification (vehicles, wildlife) using an "analyst" agent approach that provides structured insights to an agent framework.
+
+## Core Value
+
+The ability to capture, localize, and classify complex soundscapes on edge devices or via remote streaming, providing structured insights to an agent framework.
 
 ## Key Features
 
@@ -72,9 +76,18 @@ A spatial audio processing system using microphone arrays on Raspberry Pi for be
 - **Environmental Monitoring**: Noise source identification and classification
 - **Noise Mapping**: Environmental noise measurement and source localization
 
+## Design Philosophy
+
+**Analyst-First Approach**: Rather than building real-time reactive triggers, soundarray focuses on deeper data exploration and analysis. Sound events are captured, localized, and classified, then provided to analyst agents for interpretation and decision-making.
+
+**Edge vs Remote Trade-offs**: The system explores the balance between:
+- **Edge Processing**: Run classification models locally on Raspberry Pi for immediate insights
+- **Remote Processing**: Stream raw or processed audio to desktop for intensive analysis
+- **Hybrid**: Simple detection on device, complex analysis remotely
+
 ## Current Status
 
-Early development. Exploring hardware options and beamforming algorithms.
+Active development. Exploring hardware options (ReSpeaker, Matrix arrays), beamforming algorithms, and integration patterns with agent frameworks.
 
 ---
 

@@ -57,6 +57,46 @@ Using coherent SDR arrays for through-wall human detection via Wi-Fi signal phas
 
 ---
 
+### rtltcp-rust — SDR Network Streaming
+
+<span class="status-badge status-active">Active Development</span> · [Full Details →](projects/rtltcp)
+
+**What It Is:**
+A high-performance Rust server that streams raw IQ samples from multiple SDR devices (RTL-SDR, AirSpy HF+) over the network using the industry-standard `rtl_tcp` protocol, with a built-in TUI for live configuration.
+
+**Key Features:**
+- Multi-threaded architecture for concurrent streaming from multiple SDRs
+- Terminal User Interface (TUI) for real-time frequency, gain, and sample rate adjustments
+- TOML-based persistent configuration
+- Cross-platform with Raspberry Pi target for headless remote stations
+
+**Current Status:** Active development of v1 core streaming and hardware support
+
+**Tech Stack:** Rust, tokio, ratatui (TUI), librtlsdr/libairspyhf (FFI)
+
+---
+
+## Audio Processing
+
+### soundarray — Spatial Audio Processing
+
+<span class="status-badge status-active">Active Development</span> · [Full Details →](projects/soundarray)
+
+**What It Is:**
+An exploration-focused audio processing system using Raspberry Pi and microphone arrays. Focuses on spatial audio (ToA, beamforming) and classification (vehicles, wildlife) using an "analyst" agent approach.
+
+**Key Features:**
+- **Time of Arrival (ToA) Estimation**: Localize sound sources using microphone array phase differences
+- **Beamforming**: Directionally filter audio to enhance signals from specific angles
+- **Sound Classification**: Classify vehicles and wildlife by acoustic signatures
+- **Agent Integration**: Provides structured insights to analyst agent frameworks
+
+**Current Status:** Exploring hardware options (ReSpeaker, Matrix arrays) and beamforming algorithms
+
+**Tech Stack:** Python, numpy, scipy, PyTorch/TensorFlow (classification)
+
+---
+
 ## Health & Biometrics
 
 ### HealthyPi Biometric Signal Processing
@@ -76,6 +116,8 @@ Experimental signal processing using the [HealthyPi](https://www.crowdsupply.com
 
 - **HealthyPi Ecosystem**: [github.com/sk2/healthypi](https://github.com/sk2/healthypi)
 - **Project Spectra**: [github.com/sk2/spectra](https://github.com/sk2/spectra)
+- **rtltcp-rust**: [github.com/sk2/rtltcp-rust](https://github.com/sk2/rtltcp-rust)
+- **soundarray**: [github.com/sk2/soundarray](https://github.com/sk2/soundarray)
 - **Illumination Reflection**: [github.com/sk2/passive-radar](https://github.com/sk2/passive-radar)
 - **Wi-Fi Radar**: [github.com/sk2/wifi-radar](https://github.com/sk2/wifi-radar)
 

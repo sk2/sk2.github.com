@@ -70,12 +70,12 @@ Ships with "batteries-included" domain models (ISIS, MPLS, EVPN, L3VPN, IXP) in 
 
 ## Signal Processing & SDR
 
-### [HealthyPi Ecosystem](projects/healthypi)
+### [rtltcp-rust](projects/rtltcp)
 
 <span class="status-badge status-active">Active Development</span>
+ · **Rust**
 
-
-A modular, agent-aware health monitoring ecosystem that translates raw biometric data from HealthyPi hardware (6 and Move) into actionable insights and automated interventions.
+A cross-platform server (targeted at Raspberry Pi) that interfaces with multiple SDR devices (RTL-SDR, AirSpy HF+) and streams raw IQ samples over the network using the industry-standard `rtl_tcp` protocol. Features a built-in TUI for live configuration and device management, multi-threaded architecture, and TOML-based configuration.
 
 
 ### [Illumination Reflection Tracking](projects/passive)
@@ -114,6 +114,14 @@ Microphone array-based spatial audio processing on Raspberry Pi for beamforming,
 
 ## Astrophotography
 
+### [AuroraPhoto](projects/auroraphoto)
+
+<span class="status-badge status-planning">Planning</span>
+ · **Raspberry Pi · iOS (SwiftUI)**
+
+Automated aurora and night sky photography system using Raspberry Pi nodes controlling Sony a7R V/a7 IV cameras via USB, with iPhone companion app for composition and multi-node management. Features automated star sharpness (HFR) monitoring and intelligent capture sequencing optimized for aurora bursts.
+
+
 ### [ASIAIR Import Tool](projects/import-asiair)
 
 <span class="status-badge status-active">Phase 1/1 (0%)</span>
@@ -122,6 +130,14 @@ Microphone array-based spatial audio processing on Raspberry Pi for beamforming,
 A Python script that automates post-imaging-session file organization for astrophotography. It batch-imports FITS files from ASIAIR backup locations, organizes them by target and observation night, copies matching calibration frames, and prepares the directory structure for PixInsight's WBPP (Weighted Batch Preprocessing) workflow.
 
 Eliminates manual file sorting after imaging sessions - scan hundreds of frames, organize by target/filter/date, validate calibration frame availability, and go straight to PixInsight processing.
+
+
+### [EclipseStack](projects/eclipsestack)
+
+<span class="status-badge status-planning">Planning</span>
+ · **Rust**
+
+A high-precision alignment tool for solar eclipse photography designed to handle tracker drift and enable HDR stacking. Combines computer vision (solar disk detection, flare tracking) with temporal drift modeling based on EXIF timestamps to achieve sub-pixel alignment of hundreds of RAW frames for PixInsight processing.
 
 
 ### [OpenAstro Core](projects/open-astro-core)
@@ -154,15 +170,17 @@ Photo Tour is a smart, interactive photography assistant designed for field use.
 In the field, you can see what the camera sees and get actionable guidance/control fast enough to improve the shot.
 
 
-## AI & Agents
+## Health & Fitness
 
-### [Cycle Agent](projects/cycle)
+### [Cycle](projects/cycle)
 
 <span class="status-badge status-active">Phase 1/5 (80%)</span>
-
+ · **Swift (SwiftUI) · iPad/Apple TV**
 
 A native SwiftUI training application for iPad and Apple TV that bridges professional cycling hardware (KICKR Core) with dynamic AI-driven workout logic via NATS, visualized in a high-performance SceneKit environment.
 
+
+## AI & Agents
 
 ### [Multi-Agent Assistant](projects/multi-agent)
 
@@ -174,15 +192,25 @@ A security-first multi-agent system that coordinates specialized containerized a
 The orchestrator uses cloud LLM reasoning (GPT-4/Claude) while agents remain lightweight and deterministic. Complete isolation between agents such that compromise of one agent cannot cascade to others or the orchestrator—demonstrating that secure multi-agent systems are practical for both personal and production infrastructure use cases.
 
 
-## Data & Utilities
+## Data Analytics
+
+### [matrix-profile-rs](projects/matrix-time-series)
+
+<span class="status-badge status-active">Phase 2/5 (50%)</span>
+ · **Rust**
+
+A high-performance Rust implementation of Matrix Profile algorithms for time series analysis. Enables pattern discovery, anomaly detection, and similarity search in univariate time series without domain knowledge or parameter tuning. Automatically identifies repeating patterns (motifs) and anomalies (discords) in sensor data, financial signals, and biometric streams.
+
 
 ### [Tileserver Polars](projects/tileserver)
 
 <span class="status-badge status-active">Active Development</span>
-
+ · **Rust**
 
 Serve dynamic vector tiles (MVT) from massive geospatial datasets (millions of points) with sub-second latency, enabling interactive visualization in Kepler.gl without pre-rendering static tilesets.
 
+
+## Utilities
 
 ### [nascleanup](projects/nascleanup)
 
@@ -195,48 +223,16 @@ A Rust-based CLI tool for deduplicating and organizing large file shares. Optimi
 
 ## Wellness & Sound
 
-### [WatchNoise](projects/watchnoise)
-
-<span class="status-badge status-active">v1.1 Shipped</span>
- · **Swift (SwiftUI)**
-
-
-An Apple Watch sleep sounds application featuring adaptive audio. It uses a custom audio unit graph for real-time synthesis and integrates with HealthKit for heart rate synchronization.
-
-
 ### [Wave](projects/watch-noise)
 
-<span class="status-badge status-active">Active Development</span>
+<span class="status-badge status-active">v1.1 Shipped</span>
+ · **Swift (SwiftUI) · watchOS**
 
+**Wave** is an evolutionary ambient audio ecosystem designed to manage the user's sensory environment across rest and work.
 
-**Wave** is an evolutionary ambient audio ecosystem designed to manage the user's sensory environment across rest and work. - **StillState:** Reclaiming silence and rest in shared or noisy environments through intelligent, adaptive audio.
+**StillState (Apple Watch):** Adaptive sleep sounds app with procedural audio engine, binaural beats, personalized frequency calibration, heartbeat synchronization, and environmental monitoring. v1.1 shipped Feb 2026 with <15% battery drain for overnight use.
 
-- **FlowState:** Achieving and maintaining a "Steady State" of focus through task-linked audio and genetic evolution.
-
-
-## Other
-
-### [Project Context: rtltcp-rust](projects/rtltcp)
-
-<span class="status-badge status-active">Active Development</span>
-
-
-A cross-platform (targeted at Raspberry Pi) server that interfaces with multiple SDR devices (RTL-SDR, AirSpy HF+) and streams raw IQ samples over the network using the industry-standard `rtl_tcp` protocol. It features a built-in TUI for live configuration and device management.
-
-The ability to reliably and efficiently stream high-fidelity IQ data from multiple SDRs over a network with a modern management interface.
-
-
-### [matrix-profile-rs](projects/matrix-time-series)
-
-<span class="status-badge status-active">Phase 2/5 (50%)</span>
-
-
-A high-performance Rust implementation of Matrix Profile algorithms for time series analysis. Matrix Profiles enable pattern discovery, anomaly detection, and similarity search in univariate time series without domain knowledge or parameter tuning.
-
-Time series analysis requires identifying:
-- **Repeating patterns** (motifs): "This sensor pattern happened 15 times before failure"
-- **Anomalies** (discords): "This heartbeat segment is unlike any other"
-- **Similar segments**: "Find all sequences similar to this known good pattern"
+**FlowState (macOS - Planned):** Productivity-focused menu bar app that links procedural audio to active tasks and "Genetic System" TODO list.
 
 
 ### [Traffic Simulator](projects/netflowsim)

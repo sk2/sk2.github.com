@@ -16,8 +16,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" media="(prefers-color-scheme: dark)">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css" media="(prefers-color-scheme: light)">
 
-    <!-- Plausible Analytics -->
-    <script defer data-domain="sk2.id.au" src="https://plausible.io/js/script.js"></script>
+    <!-- Privacy-friendly analytics by Plausible -->
+    <script async src="https://plausible.io/js/pa-igLgeb_kQ5AZPa8Nwch4m.js"></script>
+    <script>
+      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+      plausible.init()
+    </script>
   </head>
   <body>
     <div class="container">
@@ -31,6 +35,7 @@
             <a href="{{ '/signal-processing' | relative_url }}" {% if page.url contains 'signal-processing' %}class="active"{% endif %}>Signal Processing</a>
             <a href="{{ '/data-analytics' | relative_url }}" {% if page.url contains 'data-analytics' %}class="active"{% endif %}>Data Analytics</a>
             <a href="{{ '/agentic-systems' | relative_url }}" {% if page.url contains 'agentic-systems' %}class="active"{% endif %}>Agentic Systems</a>
+            <a href="{{ '/photography' | relative_url }}" {% if page.url contains 'photography' %}class="active"{% endif %}>Photography</a>
             <a href="{{ '/cv' | relative_url }}" {% if page.url contains 'cv' %}class="active"{% endif %}>CV</a>
             <a href="{{ '/thesis' | relative_url }}" {% if page.url contains 'thesis' %}class="active"{% endif %}>Thesis</a>
           </nav>

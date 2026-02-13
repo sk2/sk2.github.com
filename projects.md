@@ -44,6 +44,10 @@ The original compiler-based network automation tool. Introduced declarative netw
 > **[View Data Analytics Ecosystem →](/data-analytics)**
 > High-performance tools for large-scale geospatial analytics and time-series pattern discovery.
 
+### [AuroraData](projects/auroradata)
+<span class="status-badge status-active">Active Development</span> · **TypeScript**
+Aurora planning advisor for Australian observers. Combines real-time NOAA space weather (solar wind, hemispheric power), ACCESS-G local weather forecasts, and travel time logic to provide actionable "Go/No-Go" recommendations for aurora observation sites.
+
 ### [matrix-profile-rs](projects/matrix-time-series)
 <span class="status-badge status-active">Phase 2/5 (50%)</span>
 Native Rust implementation of Matrix Profile algorithms. Guarantees discovery of motifs and anomalies in univariate time series without domain-specific parameter tuning.
@@ -88,7 +92,7 @@ Automated spectrum monitoring that transforms raw radio data into an actionable 
 
 ### [Illumination Reflection Tracking](projects/passive)
 <span class="status-badge status-active">Phase 3/4 (100%)</span>
-A multi-beam passive radar system utilizing KrakenSDR hardware to track aircraft via FM radio reflections.
+Multi-beam signal reflection analysis system using coherent SDR hardware and broadcast transmissions for spatial tracking.
 
 ### [rtltcp-rust](projects/rtltcp)
 <span class="status-badge status-active">Active Development</span>
@@ -113,6 +117,10 @@ Adaptive audio synthesis for Apple Watch, integrating real-time synthesis with H
 
 ### [nascleanup](projects/nascleanup)
 Rust-based indexing and deduplication for large file shares, optimized for resource-constrained NAS environments.
+
+### [OmniFocus DB CLI](projects/omnifocus-db)
+<span class="status-badge status-planning">Planning</span> · **Python**
+High-performance CLI for direct OmniFocus 4 SQLite database access. Provides near-instant retrieval of projects and tasks in token-efficient formats optimized for AI agent context, bypassing slow AppleScript layers with ~200x performance improvement.
 
 ### [Photo Tour](projects/photo-tour)
 Interactive photography assistant focusing on composition and automated capture workflows.

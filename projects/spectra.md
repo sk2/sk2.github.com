@@ -45,10 +45,10 @@ Multiple Pi units with specialized SDRs:
 - Amateur radio bands
 - Maritime, shortwave broadcast
 
-**KrakenSDR:**
-- 5-channel phase-coherent
-- Direction of arrival (DoA)
-- 24 MHz - 1766 MHz
+**Coherent SDR Arrays:**
+- Multi-channel phase-coherent capability
+- Direction of arrival (DoA) analysis
+- 24 MHz - 1766 MHz coverage
 
 **RTL-SDR:**
 - 1090 MHz ADS-B (aircraft)
@@ -146,7 +146,7 @@ Edge Pi → SpyServer/rtl_tcp → Mac mini Core
 ### Phase 3 Planned: Autonomy
 
 **Direction Finding:**
-- KrakenSDR DoA calculation
+- Coherent array DoA calculation
 - Signal source localization
 - Azimuth estimation
 

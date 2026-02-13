@@ -2,7 +2,7 @@
 layout: default
 ---
 
-# Passive Radar — Bistatic Target Detection
+# RF Signal Reflection Experiments
 
 <span class="status-badge status-active">Phase 3/4 (100%)</span>
 
@@ -12,7 +12,7 @@ layout: default
 
 ## The Insight
 
-Passive radar exploits existing radio transmissions as illuminators of opportunity, detecting targets through their reflections without requiring dedicated transmitters. This approach enables covert surveillance and target tracking using ambient RF signals.
+Ambient RF signals reflect off objects in the environment. By processing these reflections with coherent multi-channel receivers, we can extract bistatic range and Doppler shift information — an interesting signal processing challenge.
 
 ## Quick Facts
 
@@ -26,33 +26,31 @@ Passive radar exploits existing radio transmissions as illuminators of opportuni
 
 ## What This Is
 
-A passive radar system that detects and tracks targets by analyzing reflections of ambient radio signals. The system processes coherent multi-channel RF data to extract bistatic range and Doppler information, enabling real-time target detection without active transmission.
+An experimental signal processing project exploring how to analyze reflections of ambient radio signals. The system uses coherent multi-channel RF data to study bistatic geometry and Doppler effects.
 
 ## Core Principles
 
-**Illumination and Reflection:**
-- **Illuminators of Opportunity**: Uses existing transmitters (FM radio, DVB-T, cellular) as non-cooperative illumination sources
-- **Bistatic Geometry**: Separates transmitter, target, and receiver — targets reflect illuminator signals toward receiver
-- **Cross-Correlation Processing**: Correlates reference channel (direct signal) with surveillance channels (reflections) to extract target echoes
-- **Range-Doppler Processing**: Maps targets in bistatic range and Doppler shift dimensions
+**Signal Reflection and Processing:**
+- **Ambient Transmitters**: FM radio, DVB-T, or cellular signals serve as convenient RF sources
+- **Bistatic Geometry**: Separates transmitter and receiver — objects reflect signals toward the receiver
+- **Cross-Correlation Processing**: Correlates reference channel (direct signal) with surveillance channels (reflections)
+- **Range-Doppler Mapping**: Extracts time-delay and frequency-shift information from reflections
 
 **Signal Processing Chain:**
-1. **Direct Signal Acquisition**: Capture clean reference from illuminator
-2. **Surveillance Channel Processing**: Receive reflected signals with target echoes
-3. **Adaptive Cancellation**: Remove direct signal and multipath interference
-4. **Cross-Correlation**: Extract target echoes via time-delay cross-correlation
-5. **Doppler Analysis**: Apply FFT to detect moving targets
-6. **Detection & Tracking**: Threshold detections and form tracks over time
+1. **Reference Signal Capture**: Acquire clean direct signal from transmitter
+2. **Reflection Channel Processing**: Receive signals containing reflections
+3. **Adaptive Interference Cancellation**: Remove direct signal and static multipath
+4. **Cross-Correlation**: Extract reflection signatures via time-delay analysis
+5. **Doppler Analysis**: Apply FFT to study frequency shifts from motion
+6. **Detection Processing**: Threshold analysis and signal extraction
 
-**Key Advantages:**
-- **Covert Operation**: No active transmission reveals receiver location
-- **Cost-Effective**: Leverages existing RF infrastructure
-- **Multi-Target Tracking**: Simultaneous detection of multiple targets
-- **Resilience**: Difficult to jam without disrupting commercial services
+**Why This Approach:**
+- **Cost-Effective**: Uses existing RF infrastructure for experiments
+- **Educational**: Practical exploration of bistatic radar concepts and signal processing techniques
 
 ## Current Status
 
-Clean, understandable, stable codebase that reliably tracks aircraft in real-time. Currently focused on establishing a solid foundation with single-channel processing before expanding to advanced multi-beam correlation capabilities.
+Clean, stable codebase for processing multi-channel RF reflections. Currently focused on establishing a solid signal processing foundation with single-channel experiments.
 
 ---
 

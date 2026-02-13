@@ -127,13 +127,13 @@ The orchestrator uses cloud LLM reasoning (GPT-4/Claude) while agents remain lig
 
 A modular, agent-aware health monitoring ecosystem that translates raw biometric data from HealthyPi hardware (6 and Move) into actionable insights and automated interventions.
 
-### [Passive Radar — Bistatic Target Detection](projects/passive)
+### [RF Signal Reflection Experiments](projects/passive)
 
 <span class="status-badge status-active">Phase 3/4 (100%)</span>
 
-A passive radar system that detects and tracks targets by analyzing reflections of ambient radio signals. The system processes coherent multi-channel RF data to extract bistatic range and Doppler information, enabling real-time target detection without active transmission.
+An experimental signal processing project exploring how to analyze reflections of ambient radio signals. The system uses coherent multi-channel RF data to study bistatic geometry and Doppler effects.
 
-Exploits existing radio transmissions as illuminators of opportunity, detecting targets through their reflections without requiring dedicated transmitters. Clean, understandable, stable codebase that reliably tracks aircraft in real-time.
+Practical exploration of bistatic radar concepts and signal processing techniques using existing RF infrastructure. Clean, stable codebase for processing multi-channel RF reflections.
 
 ### [Project Context: rtltcp-rust](projects/rtltcp)
 

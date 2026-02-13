@@ -234,6 +234,25 @@ When maintaining or expanding this website, strictly adhere to these architectur
 - **Progressive Disclosure**: Ecosystem pages focus on Vision, Philosophy, and Architecture. Move deep technical details, protocol examples, and API usage to individual project pages.
 - **No Zero-Value Content**: Remove trivial scripts or 0%-complete placeholders that dilute the professional brand. Focus on systems with significant architectural depth.
 
+### ITAR and Export Control Compliance
+**CRITICAL: Avoid content that may fall under International Traffic in Arms Regulations (ITAR) or export control.**
+
+When describing RF signal processing, radar, or related projects:
+- **DO NOT** use terms like "passive radar", "target detection", "surveillance", "tracking", or "covert operation"
+- **DO NOT** describe military/defense applications, capabilities, or use cases
+- **DO NOT** mention specific detection ranges, accuracies, or performance metrics that suggest military utility
+- **DO** frame projects as academic experiments, signal processing research, or educational explorations
+- **DO** use neutral technical language: "signal reflections", "bistatic geometry", "Doppler analysis"
+- **DO** emphasize cost-effectiveness and educational value over operational capabilities
+
+**Examples:**
+- ❌ "Passive radar system for covert aircraft tracking"
+- ✅ "RF signal reflection experiments exploring bistatic geometry"
+- ❌ "Multi-target surveillance with 50km range"
+- ✅ "Signal processing experiments with ambient RF sources"
+
+This is not just about compliance — it protects the site, the projects, and the ability to share technical work publicly.
+
 ## Writing Style
 
 All prose on this site follows **The Elements of Style** (Strunk and White).

@@ -98,10 +98,6 @@ High-performance Rust implementation of the `rtl_tcp` protocol with concurrent m
 <span class="status-badge status-active">Active Development</span>
 Through-wall human detection and localization using existing Wi-Fi signal reflections analyzed via coherent SDR arrays.
 
-### [HealthyPi Ecosystem](projects/healthypi)
-<span class="status-badge status-active">Active Development</span>
-Real-time biometric signal processing (ECG, PPG, HRV) for experimental health monitoring, integrated into the agentic system.
-
 ---
 
 ## 🔭 Experimental & Hobbies

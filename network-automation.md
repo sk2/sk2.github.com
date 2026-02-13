@@ -103,12 +103,13 @@ A web-based platform that integrates the entire network automation ecosystem int
 <span class="status-badge status-active">Phase 59/62 (99%)</span> · [Full Details →](projects/ank-pydantic)
 
 **What It Is:**
-A Python library for modeling and querying network topologies with type-safe Pydantic models and a high-performance Rust core. Think of it as SQLAlchemy for network topologies — expressive Python API backed by blazing-fast graph algorithms.
+A Python library for modeling and querying network topologies with type-safe Pydantic models and a high-performance Rust core. Expressive Python API backed by blazing-fast graph algorithms, with automatic configuration generation for multi-vendor network deployments.
 
 **Key Features:**
 - **Two-Stage Transformation Model**: Whiteboard (sketch) → Plan (logical) → Protocol Layers (physical)
 - **Type-Safe Models**: Pydantic validation ensures correct topology structure at design time
 - **Lazy Query API**: Composable queries with Rust-backed execution (powered by `petgraph`)
+- **Configuration Generation**: Automatic multi-vendor config generation (Cisco IOS/IOS-XR/NX-OS, Juniper JunOS, Arista EOS)
 - **Batteries-Included Blueprints**: Pre-built domain models for ISIS, MPLS, EVPN, L3VPN, IXP
 - **Rust Core (`ank_nte`)**: Graph operations run at native speed with Python FFI bindings
 

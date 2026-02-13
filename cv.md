@@ -29,7 +29,7 @@ Awards: Development Economics III Excellence Award (2009), The DSTO Surveillance
 
 ## Technical Skills
 
-**Languages:** Rust, Python, Swift, TypeScript
+**Languages:** Rust, Python, Go, Swift, JavaScript
 
 **Domains:**
 - Network automation and configuration generation
@@ -39,14 +39,14 @@ Awards: Development Economics III Excellence Award (2009), The DSTO Surveillance
 
 **Tools & Frameworks:**
 - **Infrastructure:** Docker, NATS, OpenTelemetry, Tokio
-- **Web:** FastAPI, Flask, React, Vue, Axum
+- **Web:** FastAPI, Flask, Vue, Axum
 - **Data & ML:** Polars, Pydantic, NeuroKit2, PyTorch
 - **Rust Ecosystem:** PyO3, petgraph, serde, tracing
 - **Network:** INDI/ASCOM protocols, MPLS, BGP, OSPF
 
 ## Professional Work
 
-**Independent Software Engineer** (2024-Present)
+**Independent Software Engineer** (2025-Present)
 - **ank_pydantic**: Developing a high-performance network topology modeling framework with a Rust core (`petgraph`) and Python bindings (`PyO3`) for large-scale network simulation.
 - **NetVis**: Built a deterministic topology layout engine that transforms complex multi-layer network graphs into information-dense visualizations for engineering analysis.
 - **Agentic Systems**: Implementing a security-first multi-agent framework using NATS and Docker for isolated, capability-based automation in production environments.

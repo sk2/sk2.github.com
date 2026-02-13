@@ -91,20 +91,6 @@ Rendering to SVG...
 Written: output.svg (6.5 KB)
 ```
 
-## Example Outputs
-
-Data center spine-leaf:
-![NetVis Data Center](/images/netvis-datacenter-example.svg)
-
-Mesh network:
-![NetVis Mesh](/images/netvis-mesh-example.svg)
-
-Ring topology:
-![NetVis Ring](/images/netvis-ring-example.svg)
-
-Path analysis with edge bundling:
-![NetVis Path Analysis](/images/netvis-path-analysis.svg)
-
 ## Integration with ank_pydantic
 
 ank_pydantic topologies export directly to NetVis format:

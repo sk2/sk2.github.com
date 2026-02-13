@@ -189,14 +189,6 @@ A Rust-based network topology layout and visualization engine. Renders complex m
 - **Multi-Layer Support**: Visualize logical overlays on physical infrastructure
 - **High-Fidelity Output**: Publication-ready SVG and PDF exports
 
-**Example: Data Center Fabric Layout**
-![Data Center Fabric](/images/netvis-datacenter-example.svg)
-*NetVis rendering a spine-leaf data center fabric with automated port-aware alignment.*
-
-**Example: Path Analysis & Heatmaps**
-![Path Analysis](/images/netvis-path-analysis.svg)
-*Visualizing traffic intensity and shortest-path routing across a mesh topology.*
-
 **Current Status:** Core layout algorithms implemented, building interactive web renderer.
 
 **Tech Stack:** Rust, petgraph, svg-renderer

@@ -127,6 +127,11 @@ NetVis reads the exported topology and applies advanced layout algorithms, produ
 ![Radial Layout](/images/netvis-showcase-radial-layout.png)
 *Zone-based service mesh with central controller, regional coordinators, edge nodes, and service endpoints arranged in a radial layout. Demonstrates NetVis's ability to handle hierarchical topologies with many leaf nodes.*
 
+### Isometric Multi-Layer View
+
+![Isometric Multi-Layer](/images/netvis-isometric-multi-layer.png)
+*Three network layers (WAN, distribution, access) rendered as stacked isometric planes. The same topology is shown at each layer with inter-layer connections visible, revealing how logical structure maps across the network hierarchy.*
+
 ### Theme Showcase — Device-Aware Icons
 
 ![Theme Showcase](/images/netvis-theme-showcase.png)

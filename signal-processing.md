@@ -30,7 +30,7 @@ Building on open source implementations to analyze reflections of existing broad
 A high-performance SDR client for spectrum monitoring and automated signal discovery. Spectra transforms raw IQ samples into a "Signal Census" using real-time ML classification.
 
 ![Spectra Waterfall](/images/spectra-waterfall.png)
-*Spectra WebGL waterfall — real-time spectrum analysis with heat palette, streaming from a remote RTL-SDR at 120 fps.*
+*Spectra WebGL waterfall — real-time spectrum analysis with heat palette, streaming from a remote RTL-SDR.*
 
 **Current Status:** Active development of ML classification engine.
 

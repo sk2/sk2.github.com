@@ -113,12 +113,6 @@ Confidence: 0.85
 
 ---
 
-[← Back to Agentic Systems](../agentic-systems)
-
----
-
-[← Back to Agentic Systems](../agentic-systems)
-
 ## Architecture
 
 ### Message Broker: NATS

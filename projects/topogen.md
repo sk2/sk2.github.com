@@ -127,11 +127,35 @@ from ank_pydantic import Topology
 ank_topo = topo.to_ank_pydantic()
 ```
 
-## Current Status
+## Milestones
 
-**v0.10 Gap Closure** shipped (Feb 11, 2026) with ContainerLab output converter, AutoNetKit GraphML converter, traffic pattern generation, and POP design patterns.
+**v1.0-alpha Foundation** (Shipped Jan 28, 2026)
+Core topology generators, validation framework, and output format.
+- Data center generators (fat-tree, leaf-spine) and WAN generators (ring, mesh, hierarchical)
+- Random graph generators (Barabási-Albert, Watts-Strogatz, Erdős-Rényi)
+- Structural and design-pattern validation
+- YAML output format
 
-Currently working on **Phase 22-24**: geographic placement infrastructure (city database, H3 grids), fiber map integration (GeoJSON import/export), multi-layer topology generation, and eyeball network generators.
+**v0.9 User Interfaces** (Shipped Feb 5, 2026)
+CLI, Python API, config-driven generation, and documentation.
+- Production CLI with shell completions and JSON diagnostics
+- Python bindings via PyO3 with full API parity
+- Config-driven generation from YAML/TOML files
+- Documentation site with algorithm references and example gallery
+
+**v0.10 Gap Closure** (Shipped Feb 11, 2026)
+Output converters, traffic patterns, and POP design patterns.
+- ContainerLab topology file export
+- AutoNetKit GraphML converter
+- Gravity-model traffic matrices with diurnal/weekly temporal dynamics
+- POP design patterns — access, metro, regional, and backbone tiers with geographic placement and redundancy models
+
+**v1.0 Production Features** (In Progress — Phases 22-24)
+
+- **Geographic placement infrastructure** — City database lookup, H3 grid placement, distance-based latency calculation, region/country filtering
+- **Fiber map integration** — GeoJSON import/export, estimated vs actual fiber route distinction, terrain plausibility checks
+- **Multi-layer topology generation** — Explicit underlay/overlay layer dependencies, overlay-to-underlay path mapping, cross-layer capacity validation
+- **Eyeball network generator** — Access-aggregation-core hierarchy for ISP topologies, inbound-heavy traffic ratios, peering and transit policy configuration
 
 ## Tech Stack
 

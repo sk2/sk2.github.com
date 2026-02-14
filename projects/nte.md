@@ -75,6 +75,7 @@ NTE supports pluggable storage through the `nte-datastore-*` crates:
 - **Polars** (`nte-datastore-polars`) — Primary backend. Columnar storage for efficient analytical queries over node/edge attributes.
 - **DuckDB** (`nte-datastore-duckdb`) — SQL-based backend for complex analytical queries, joins, and aggregations. Useful when topology data needs to be correlated with external datasets.
 - **Lite** (`nte-datastore-lite`) — Lightweight in-memory backend for small topologies and testing.
+- **LadybugDB** (Potential) — Under evaluation as an embedded analytical database backend, offering fast columnar queries with a smaller footprint than DuckDB.
 
 ## Integration with ank_pydantic
 

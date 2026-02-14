@@ -29,14 +29,8 @@ Building on open source implementations to analyze reflections of existing broad
 **What It Is:**
 A high-performance SDR client for spectrum monitoring and automated signal discovery. Spectra transforms raw IQ samples into a "Signal Census" using real-time ML classification.
 
-**Real-Time Visualization:**
-The Spectra interface provides both high-level signal census data and low-level waterfall analysis for deep-dive signal inspection.
-
-![Spectra Signal Census](/images/spectra-screenshot.png)
-*Spectra Signal Census: Automated detection and classification of signals across the monitored band.*
-
 ![Spectra Waterfall](/images/spectra-waterfall.png)
-*High-resolution waterfall display showing temporal signal patterns and frequency hopping.*
+*Spectra WebGL waterfall — real-time spectrum analysis with heat palette, streaming from a remote RTL-SDR at 120 fps.*
 
 **Current Status:** Active development of ML classification engine.
 

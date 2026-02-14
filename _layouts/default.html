@@ -58,6 +58,58 @@
       </footer>
     </div>
 
+    <!-- Image lightbox -->
+    <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+      <button class="lightbox-close" aria-label="Close">&times;</button>
+      <img class="lightbox-img" alt="">
+      <p class="lightbox-caption"></p>
+    </div>
+
+    <style>
+      .lightbox {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        background: rgba(255, 255, 255, 0.97);
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        cursor: pointer;
+      }
+      .lightbox.active { display: flex; }
+      .lightbox-close {
+        position: absolute;
+        top: 1rem;
+        right: 1.5rem;
+        background: none;
+        border: none;
+        font-size: 2rem;
+        color: #333;
+        cursor: pointer;
+        line-height: 1;
+      }
+      .lightbox-close:hover { color: #000; }
+      .lightbox-img {
+        max-width: 90vw;
+        max-height: 80vh;
+        object-fit: contain;
+        cursor: default;
+        border-radius: 4px;
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+      }
+      .lightbox-caption {
+        margin-top: 1rem;
+        color: #555;
+        font-size: 0.9em;
+        max-width: 80vw;
+        text-align: center;
+      }
+      .site-content img {
+        cursor: zoom-in;
+      }
+    </style>
+
     <script>
       // Set dark mode by default
       document.documentElement.setAttribute('data-theme', 'dark');
@@ -69,6 +121,35 @@
             hljs.highlightElement(block);
           });
         }
+
+        // Lightbox
+        var lightbox = document.getElementById('lightbox');
+        var lbImg = lightbox.querySelector('.lightbox-img');
+        var lbCaption = lightbox.querySelector('.lightbox-caption');
+
+        document.querySelectorAll('.site-content img').forEach(function(img) {
+          img.addEventListener('click', function() {
+            lbImg.src = this.src;
+            lbImg.alt = this.alt;
+            var em = this.parentElement.querySelector('em');
+            lbCaption.textContent = em ? em.textContent : this.alt;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+          });
+        });
+
+        function closeLightbox() {
+          lightbox.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+
+        lightbox.addEventListener('click', function(e) {
+          if (e.target !== lbImg) closeLightbox();
+        });
+        lightbox.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape') closeLightbox();
+        });
       });
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>

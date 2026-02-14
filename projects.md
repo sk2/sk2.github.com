@@ -13,17 +13,14 @@ Focusing on network automation, high-performance signal processing, and secure m
 > **[View Ecosystem →](/network-automation)**
 > High-performance tools for topology modeling, deterministic protocol simulation, and visualization.
 
-### [ANK Workbench](projects/ank-workbench)
+### [Network Simulator](projects/network-simulator)
 
-<span class="status-badge status-active">v1.3 — Tool Integration & Interactive Workflows</span>
-· **Python (FastAPI) · React frontend**
+<span class="status-badge status-active">v1.7 — Segment Routing (SR-MPLS)</span>
+· **Rust · 126,000+ LOC · 1,350+ tests**
 
-**An orchestration platform** that integrates the ANK ecosystem tools (TopoGen, ank_pydantic, NTE, Network Simulator, NetVis) into one seamless workflow. v1.0-v1.1 shipped with end-to-end workflow and UX polish. v1.2 added GPU-accelerated visualization at scale. v1.3 adds interactive device access, simulator integration, config export, and live simulation observability.
+A Rust-based network simulator that models packet-level behavior for routing protocols. Provides a middle ground between pure algorithmic analysis (like C-BGP) and full emulation (like Containerlab) — larger scale and smaller footprint than emulation, higher fidelity than algorithmic simulation.
 
-### [AutoNetkit](projects/autonetkit)
-
-<span class="status-badge status-active">PhD 2017</span>
-· **Python**
+v1.6 shipped with L3VPN, daemon mode with interactive console (attach to simulated devices with tab completion and Cisco IOS-style command abbreviation), and BMP telemetry. v1.7 adds SR-MPLS dataplane support.
 
 ### [NetVis](projects/netvis)
 
@@ -37,14 +34,27 @@ v1.2 shipped with SVG filter infrastructure, WCAG contrast enforcement, and labe
 ![ISP Backbone](/images/netvis-isp-backbone.png)
 *ISP backbone with path analysis — one of several layout styles available.*
 
-### [Network Simulator](projects/network-simulator)
+### [ank_pydantic](projects/ank-pydantic)
 
-<span class="status-badge status-active">v1.7 — Segment Routing (SR-MPLS)</span>
-· **Rust · 126,000+ LOC · 1,350+ tests**
+<span class="status-badge status-active">v1.8 — Performance & Optimization</span>
 
-A Rust-based network simulator that models packet-level behavior for routing protocols. Provides a middle ground between pure algorithmic analysis (like C-BGP) and full emulation (like Containerlab) — larger scale and smaller footprint than emulation, higher fidelity than algorithmic simulation.
+A Python library for modeling and querying network topologies, backed by the NTE Rust engine. Features a two-stage transformation model (Whiteboard → Plan → Protocol Layers), type-safe Pydantic models for nodes/edges/layers, and a composable lazy query API with Rust-backed execution.
 
-v1.6 shipped with L3VPN, daemon mode with interactive console (attach to simulated devices with tab completion and Cisco IOS-style command abbreviation), and BMP telemetry. v1.7 adds SR-MPLS dataplane support.
+v1.7 shipped with API usability improvements. Currently optimizing query performance, adding profiling infrastructure, and validating at 10k+ node scale. Ships with domain models (ISIS, MPLS, EVPN, L3VPN, IXP) in the blueprints/ module.
+
+### [NTE — Network Topology Engine](projects/nte)
+
+<span class="status-badge status-active">Stable — Rust Backend</span>
+· **Rust**
+
+The high-performance Rust engine that powers ank_pydantic's graph operations. Extracted into its own repository as the engine matured. Uses petgraph's StableDiGraph for topology representation and Polars for columnar storage. Organized as a Cargo workspace with specialized crates (nte-core, nte-query, nte-domain, nte-datastore-*, nte-server, nte-monte-carlo).
+
+### [ANK Workbench](projects/ank-workbench)
+
+<span class="status-badge status-active">v1.3 — Tool Integration & Interactive Workflows</span>
+· **Python (FastAPI) · React frontend**
+
+**An orchestration platform** that integrates the ANK ecosystem tools (TopoGen, ank_pydantic, NTE, Network Simulator, NetVis) into one seamless workflow. v1.0-v1.1 shipped with end-to-end workflow and UX polish. v1.2 added GPU-accelerated visualization at scale. v1.3 adds interactive device access, simulator integration, config export, and live simulation observability.
 
 ### [TopoGen - Network Topology Generator](projects/topogen)
 
@@ -54,20 +64,10 @@ A Rust-based network topology generator with Python bindings that consolidates s
 
 Outputs custom YAML format for use across the network engineering tool ecosystem. Network engineers can quickly generate realistic, validated network topologies without implementing complex algorithms from scratch.
 
-### [NTE — Network Topology Engine](projects/nte)
+### [AutoNetkit](projects/autonetkit)
 
-<span class="status-badge status-active">Stable — Rust Backend</span>
-· **Rust**
-
-The high-performance Rust engine that powers ank_pydantic's graph operations. Extracted into its own repository as the engine matured. Uses petgraph's StableDiGraph for topology representation and Polars for columnar storage. Organized as a Cargo workspace with specialized crates (nte-core, nte-query, nte-domain, nte-datastore-*, nte-server, nte-monte-carlo).
-
-### [ank_pydantic](projects/ank-pydantic)
-
-<span class="status-badge status-active">v1.8 — Performance & Optimization</span>
-
-A Python library for modeling and querying network topologies, backed by the NTE Rust engine. Features a two-stage transformation model (Whiteboard → Plan → Protocol Layers), type-safe Pydantic models for nodes/edges/layers, and a composable lazy query API with Rust-backed execution.
-
-v1.7 shipped with API usability improvements. Currently optimizing query performance, adding profiling infrastructure, and validating at 10k+ node scale. Ships with domain models (ISIS, MPLS, EVPN, L3VPN, IXP) in the blueprints/ module.
+<span class="status-badge status-active">PhD 2017</span>
+· **Python**
 
 ## 📊 Data Science & Simulation
 
@@ -100,11 +100,11 @@ Time series analysis requires identifying:
 - **Anomalies** (discords): "This heartbeat segment is unlike any other"
 - **Similar segments**: "Find all sequences similar to this known good pattern"
 
-### [netflowsim](projects/netflowsim)
+### [Network Traffic Simulator](projects/netflowsim)
 
 <span class="status-badge status-active">Active Development</span>
 
-`netflowsim` provides rapid, massive-scale network performance analysis by using analytic queuing models and Monte Carlo simulations instead of packet-level discrete event simulation. It enables network engineers to validate topologies and routing strategies against billions of flow iterations in seconds.
+Rapid, massive-scale network performance analysis using analytic queuing models and Monte Carlo simulations instead of packet-level discrete event simulation. Validates topologies and routing strategies against billions of flow iterations in seconds.
 
 ## 🤖 AI & Agents
 

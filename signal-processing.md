@@ -59,7 +59,7 @@ Using coherent SDR arrays for through-wall human detection via Wi-Fi signal phas
 
 ### rtltcp-rust — SDR Network Streaming
 
-<span class="status-badge status-active">Active Development</span> · [Full Details →](projects/rtltcp)
+<span class="status-badge status-active">v1 — Core Streaming & Hardware</span> · [Full Details →](projects/rtltcp)
 
 **What It Is:**
 A high-performance Rust server that streams raw IQ samples from multiple SDR devices (RTL-SDR, AirSpy HF+) over the network using the industry-standard `rtl_tcp` protocol, with a built-in TUI for live configuration.
@@ -70,7 +70,7 @@ A high-performance Rust server that streams raw IQ samples from multiple SDR dev
 - TOML-based persistent configuration
 - Cross-platform with Raspberry Pi target for headless remote stations
 
-**Current Status:** Active development of v1 core streaming and hardware support
+**Current Status:** Building v1 core streaming — hardware access (librtlsdr/libairspyhf wrapping), rtl_tcp protocol implementation, TUI interface, and persistent configuration.
 
 **Tech Stack:** Rust, tokio, ratatui (TUI), librtlsdr/libairspyhf (FFI)
 

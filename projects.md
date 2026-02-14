@@ -8,17 +8,17 @@ Focusing on network automation, high-performance signal processing, and secure m
 
 ---
 
-## 🌐 Network Engineering
+## 🌐 Network Automation
 
 > **[View Ecosystem →](/network-automation)**
 > High-performance tools for topology modeling, deterministic protocol simulation, and visualization.
 
 ### [ANK Workbench](projects/ank-workbench)
 
-<span class="status-badge status-active">Not started (defining requirements)</span>
-· **Python backend (FastAPI or Flask) · React or Vue frontend — Leverages existing Python ecosystem for ANK components · meets modern UX expectations**
+<span class="status-badge status-active">v1.3 — Tool Integration & Interactive Workflows</span>
+· **Python (FastAPI) · React frontend**
 
-**An orchestration platform** that integrates the ANK ecosystem tools (TopoGen, ank_pydantic, Network Simulator, NetVis) into one seamless workflow. Network engineers can design, validate, and visualize network changes in one complete workflow without switching between separate tools or manually gluing components together.
+**An orchestration platform** that integrates the ANK ecosystem tools (TopoGen, ank_pydantic, NTE, Network Simulator, NetVis) into one seamless workflow. v1.0-v1.1 shipped with end-to-end workflow and UX polish. v1.2 added GPU-accelerated visualization at scale. v1.3 adds interactive device access, simulator integration, config export, and live simulation observability.
 
 ### [AutoNetkit](projects/autonetkit)
 
@@ -27,21 +27,24 @@ Focusing on network automation, high-performance signal processing, and secure m
 
 ### [NetVis](projects/netvis)
 
-<span class="status-badge status-active">40 - Integration Surface & Diagnostics</span>
+<span class="status-badge status-active">v1.3 — Embed Readiness & API Stability</span>
 · **Rust**
 
 A Rust-based network topology layout and visualization engine. Takes complex multi-layer network topologies (via petgraph) and renders them using advanced layout algorithms that reduce visual complexity while preserving structural clarity.
 
-Outputs static formats (SVG, PDF, PNG) for v1, with interactive browser embedding planned for future integration with other tooling. Transform network topologies into clear, information-dense visualizations using algorithms that minimize edge crossings, bundle related connections, and respect hierarchical/geographic structure — enabling understanding of networks that would otherwise be visual noise.
+v1.2 shipped with SVG filter infrastructure, WCAG contrast enforcement, and label collision avoidance. Currently stabilizing the public API and output contracts for embedding in ANK Workbench.
+
+![ISP Backbone](/images/netvis-isp-backbone.png)
+*ISP backbone with path analysis — one of several layout styles available.*
 
 ### [Network Simulator](projects/network-simulator)
 
-<span class="status-badge status-active">52 (in progress) — daemon-mode-interactive-console</span>
-· **Rust**
+<span class="status-badge status-active">v1.7 — Segment Routing (SR-MPLS)</span>
+· **Rust · 126,000+ LOC · 1,350+ tests**
 
-A Rust-based network simulator that models packet-level behavior for routing protocols. It provides a middle ground between pure algorithmic analysis (like C-BGP) and full emulation (like Containerlab) — larger scale and smaller footprint than emulation, higher fidelity than algorithmic simulation.
+A Rust-based network simulator that models packet-level behavior for routing protocols. Provides a middle ground between pure algorithmic analysis (like C-BGP) and full emulation (like Containerlab) — larger scale and smaller footprint than emulation, higher fidelity than algorithmic simulation.
 
-Used for smoke testing and design validation of network configurations. Validate network configurations at scale with protocol-level fidelity before deploying to real infrastructure.
+v1.6 shipped with L3VPN, daemon mode with interactive console (attach to simulated devices with tab completion and Cisco IOS-style command abbreviation), and BMP telemetry. v1.7 adds SR-MPLS dataplane support.
 
 ### [TopoGen - Network Topology Generator](projects/topogen)
 
@@ -51,13 +54,20 @@ A Rust-based network topology generator with Python bindings that consolidates s
 
 Outputs custom YAML format for use across the network engineering tool ecosystem. Network engineers can quickly generate realistic, validated network topologies without implementing complex algorithms from scratch.
 
+### [NTE — Network Topology Engine](projects/nte)
+
+<span class="status-badge status-active">Stable — Rust Backend</span>
+· **Rust**
+
+The high-performance Rust engine that powers ank_pydantic's graph operations. Extracted into its own repository as the engine matured. Uses petgraph's StableDiGraph for topology representation and Polars for columnar storage. Organized as a Cargo workspace with specialized crates (nte-core, nte-query, nte-domain, nte-datastore-*, nte-server, nte-monte-carlo).
+
 ### [ank_pydantic](projects/ank-pydantic)
 
-<span class="status-badge status-active">Phase 59/62 (100%)</span>
+<span class="status-badge status-active">v1.8 — Performance & Optimization</span>
 
-A Python library for modeling and querying network topologies, backed by a high-performance Rust core (`ank_nte`). Features a two-stage transformation model (Whiteboard → Plan → Protocol Layers), type-safe Pydantic models for nodes/edges/layers, and a composable lazy query API with Rust-backed execution.
+A Python library for modeling and querying network topologies, backed by the NTE Rust engine. Features a two-stage transformation model (Whiteboard → Plan → Protocol Layers), type-safe Pydantic models for nodes/edges/layers, and a composable lazy query API with Rust-backed execution.
 
-Ships with "batteries-included" domain models (ISIS, MPLS, EVPN, L3VPN, IXP) in the blueprints/ module. A clean, consistent API where there's one obvious way to perform each topology operation — predictable naming, return types, and method signatures across the entire public surface.
+v1.7 shipped with API usability improvements. Currently optimizing query performance, adding profiling infrastructure, and validating at 10k+ node scale. Ships with domain models (ISIS, MPLS, EVPN, L3VPN, IXP) in the blueprints/ module.
 
 ## 📊 Data Science & Simulation
 
@@ -135,13 +145,12 @@ An experimental signal processing project exploring how to analyze reflections o
 
 Practical exploration of bistatic radar concepts and signal processing techniques using existing RF infrastructure. Clean, stable codebase for processing multi-channel RF reflections.
 
-### [Project Context: rtltcp-rust](projects/rtltcp)
+### [rtltcp-rust](projects/rtltcp)
 
-<span class="status-badge status-active">Active Development</span>
+<span class="status-badge status-active">v1 — Core Streaming & Hardware</span>
+· **Rust**
 
-A cross-platform (targeted at Raspberry Pi) server that interfaces with multiple SDR devices (RTL-SDR, AirSpy HF+) and streams raw IQ samples over the network using the industry-standard `rtl_tcp` protocol. It features a built-in TUI for live configuration and device management.
-
-The ability to reliably and efficiently stream high-fidelity IQ data from multiple SDRs over a network with a modern management interface.
+A cross-platform (targeted at Raspberry Pi) server that interfaces with multiple SDR devices (RTL-SDR, AirSpy HF+) and streams raw IQ samples over the network using the industry-standard `rtl_tcp` protocol. Features a built-in TUI for live configuration and device management, multi-threaded architecture for concurrent SDR streaming, and TOML-based persistent configuration.
 
 ### [Project Spectra](projects/signals)
 

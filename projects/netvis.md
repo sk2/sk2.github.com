@@ -4,7 +4,7 @@ layout: default
 
 # NetVis
 
-<span class="status-badge status-active">40 - Integration Surface & Diagnostics</span>
+<span class="status-badge status-active">v1.3 — Embed Readiness & API Stability</span>
 
 [← Back to Projects](../projects)
 
@@ -19,7 +19,7 @@ Network visualization often fails at scale because layout algorithms treat all n
 
 | | |
 |---|---|
-| **Status** | 40 - Integration Surface & Diagnostics |
+| **Status** | v1.3 — Embed Readiness & API Stability |
 | **Language** | Rust |
 | **Started** | 2026 |
 
@@ -105,13 +105,42 @@ topo.export_for_netvis(
 
 NetVis reads the exported topology and applies advanced layout algorithms, producing publication-quality diagrams that reflect the logical structure captured in ank_pydantic.
 
+## Example Gallery
+
+### Enterprise Campus Network
+
+![Enterprise Campus](/images/netvis-enterprise-campus.png)
+*Multi-building campus with core/distribution/access layers, firewalls, ISP uplinks, data center spine-leaf, and management infrastructure. Edge bundling groups related connections; path analysis overlays highlight application, backup, and management traffic flows.*
+
+### Data Center Spine-Leaf Fabric
+
+![Data Center Fabric](/images/netvis-datacenter-large.png)
+*Spine-leaf topology with 4 leaf switches, 2 spines, and 12 racks of hosts. Bandwidth annotations (10G, 25G, 100G) on each link. Force-directed layout separates rack groups while keeping the spine-leaf hierarchy visible.*
+
+### ISP Backbone with Path Analysis
+
+![ISP Backbone](/images/netvis-isp-backbone.png)
+*US-wide ISP backbone spanning 8 cities (LAX, SEA, DEN, DAL, CHI, NYC, BOS, WAS) with core routers, customer edge devices, and IX peering. Path analysis overlay shows primary east-west, backup, and regional paths with distinct colors and weights.*
+
+### Radial Layout — Distributed Service Mesh
+
+![Radial Layout](/images/netvis-showcase-radial-layout.png)
+*Zone-based service mesh with central controller, regional coordinators, edge nodes, and service endpoints arranged in a radial layout. Demonstrates NetVis's ability to handle hierarchical topologies with many leaf nodes.*
+
+### Theme Showcase — Device-Aware Icons
+
+![Theme Showcase](/images/netvis-theme-showcase.png)
+*Device-type-aware rendering with distinct icons for routers, switches, firewalls, servers, and cloud nodes. Bandwidth labels (1G, 10G) on links. Shows the visual fidelity available for smaller, detail-rich diagrams.*
+
 ## Current Status
 
-Core layout algorithms implemented, refining edge bundling and multi-layer rendering. Interactive browser embedding planned for v2.
+**v1.2 Visual Polish & Production Hardening** shipped (Feb 9, 2026) with SVG filter infrastructure, WCAG 3:1 contrast enforcement, high-contrast theme, and label collision avoidance.
+
+Currently working on **v1.3 Embed Readiness & API Stability**: stable public API, deterministic output contracts, versioned config/topology schemas, and WASM compatibility testing.
 
 ## Tech Stack
 
-Rust, petgraph for graph algorithms, SVG/PDF rendering libraries
+Rust, petgraph, fjadra (d3-force port), SVG/PDF/PNG rendering, WASM-ready
 
 ---
 

@@ -4,7 +4,7 @@ layout: default
 
 # Project Context: rtltcp-rust
 
-<span class="status-badge status-active">Active Development</span>
+<span class="status-badge status-active">v1 — Core Streaming & Hardware</span>
 
 [← Back to Projects](../projects)
 
@@ -19,7 +19,7 @@ The ability to reliably and efficiently stream high-fidelity IQ data from multip
 
 | | |
 |---|---|
-| **Status** | Active |
+| **Status** | v1 — Core Streaming & Hardware |
 | **Language** | N/A |
 | **Started** | 2026 |
 

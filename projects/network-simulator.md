@@ -16,13 +16,13 @@ Developing agentic AI systems and network automation tools requires rapid iterat
 
 ## Quick Facts
 
-| | |
-|---|---|
-| **Status** | Active Development — v1.7 Segment Routing |
-| **Language** | Rust |
-| **Lines of Code** | 126,000+ |
-| **Test Coverage** | 1,350+ protocol behavior tests |
-| **Started** | 2026 |
+|                   |                                           |
+| ----------------- | ----------------------------------------- |
+| **Status**        | Active Development — v1.7 Segment Routing |
+| **Language**      | Rust                                      |
+| **Lines of Code** | 126,000+                                  |
+| **Test Coverage** | 1,350+ protocol behavior tests            |
+| **Started**       | 2026                                      |
 
 ---
 
@@ -138,7 +138,8 @@ Round-trip path: h1 -> r1 -> r3 -> h3 -> r3 -> r1 -> h1
 Simulation complete: 120ms simulated, 0.034s real time (3529x speedup)
 ```
 
-**What just happened:**
+**Discussion:**
+
 1. Topology loaded — 3 routers, 2 hosts, 5 links
 2. OSPF converged — Routers exchanged LSAs, computed SPF
 3. Routes installed — FIBs populated with best paths
@@ -214,6 +215,7 @@ r1> exit
 ```
 
 **Console Features:**
+
 - **Abbreviated commands** — Cisco IOS-style prefix matching (`sh ip ro` → `show ip route`)
 - **Tab completion** — Commands and subcommands
 - **Interface management** — `interface shutdown/no shutdown` with protocol teardown
@@ -255,45 +257,45 @@ netsim daemon list --clean
 
 ### Layer 2
 
-| Protocol | Status | Notes |
-|----------|--------|-------|
-| Ethernet | ✓ | MAC addressing, frame encapsulation |
-| ARP | ✓ | Request/reply, cache management |
+| Protocol | Status | Notes                               |
+| -------- | ------ | ----------------------------------- |
+| Ethernet | ✓      | MAC addressing, frame encapsulation |
+| ARP      | ✓      | Request/reply, cache management     |
 
 ### Layer 3
 
-| Protocol | Status | Notes |
-|----------|--------|-------|
-| IPv4 | ✓ | Forwarding, TTL decrement, fragmentation not supported |
-| ICMP | ✓ | Echo (ping), Time Exceeded (traceroute), Destination Unreachable |
+| Protocol | Status | Notes                                                            |
+| -------- | ------ | ---------------------------------------------------------------- |
+| IPv4     | ✓      | Forwarding, TTL decrement, fragmentation not supported           |
+| ICMP     | ✓      | Echo (ping), Time Exceeded (traceroute), Destination Unreachable |
 
 ### Routing Protocols
 
-| Protocol | Status | Notes |
-|----------|--------|-------|
-| Static | ✓ | Host default gateway |
-| OSPF | ✓ | Point-to-point, Area 0, LSA Types 1 & 2, SPF via Dijkstra |
-| IS-IS | ✓ | L1/L2 hierarchical routing, LSP flooding, SPF via Dijkstra |
-| BGP | ✓ | iBGP/eBGP, communities, route reflectors, MP-BGP VPNv4 |
+| Protocol | Status | Notes                                                      |
+| -------- | ------ | ---------------------------------------------------------- |
+| Static   | ✓      | Host default gateway                                       |
+| OSPF     | ✓      | Point-to-point, Area 0, LSA Types 1 & 2, SPF via Dijkstra  |
+| IS-IS    | ✓      | L1/L2 hierarchical routing, LSP flooding, SPF via Dijkstra |
+| BGP      | ✓      | iBGP/eBGP, communities, route reflectors, MP-BGP VPNv4     |
 
 ### MPLS & Tunneling
 
-| Protocol | Status | Notes |
-|----------|--------|-------|
-| MPLS | ✓ | Label imposition/swap/pop/pop-continue, LFIB, multi-label stacks |
-| LDP | ✓ | Label distribution, targeted sessions |
-| SR-MPLS | ✓ | Segment Routing with SRGB, Node-SIDs, SR-owned LFIB precedence |
-| RSVP-TE | ✓ | Explicit-path tunnels, deterministic refresh, convergence gating |
-| GRE | ✓ | Generic routing encapsulation, overlay tunnels |
-| VRF | ✓ | Virtual routing and forwarding, L3VPN with RD/RT |
+| Protocol | Status | Notes                                                            |
+| -------- | ------ | ---------------------------------------------------------------- |
+| MPLS     | ✓      | Label imposition/swap/pop/pop-continue, LFIB, multi-label stacks |
+| LDP      | ✓      | Label distribution, targeted sessions                            |
+| SR-MPLS  | ✓      | Segment Routing with SRGB, Node-SIDs, SR-owned LFIB precedence   |
+| RSVP-TE  | ✓      | Explicit-path tunnels, deterministic refresh, convergence gating |
+| GRE      | ✓      | Generic routing encapsulation, overlay tunnels                   |
+| VRF      | ✓      | Virtual routing and forwarding, L3VPN with RD/RT                 |
 
 ### Resilience & Telemetry
 
-| Protocol | Status | Notes |
-|----------|--------|-------|
-| BFD | ✓ | Bidirectional forwarding detection, async mode |
-| BMP | ✓ | RFC 7854 BGP Monitoring Protocol, post-decision export |
-| PCAP | ✓ | Packet capture with MPLS-aware filtering, Wireshark compatible |
+| Protocol | Status | Notes                                                          |
+| -------- | ------ | -------------------------------------------------------------- |
+| BFD      | ✓      | Bidirectional forwarding detection, async mode                 |
+| BMP      | ✓      | RFC 7854 BGP Monitoring Protocol, post-decision export         |
+| PCAP     | ✓      | Packet capture with MPLS-aware filtering, Wireshark compatible |
 
 ### Available Commands
 
@@ -331,7 +333,7 @@ devices:
     type: router
     isis:
       net: "49.0001.0000.0000.0002.00"
-      level: l1l2  # Area border router
+      level: l1l2 # Area border router
     interfaces:
       - name: eth0
         ip: 10.1.0.2/24
@@ -431,17 +433,20 @@ IS-IS events: 18 hellos, 4 LSPs, 2 SPF runs
 ## Current Status
 
 **v1.7 Segment Routing** (In Progress) — Phases 46-51
+
 - SR-MPLS programming with SRGB and Node-SID model
 - RSVP-TE explicit-path tunnels
 - Multi-label stack forwarding
 
 **v1.6 L3VPN & Interactive Console** (Shipped)
+
 - L3VPN with VRFs, RD/RT, MP-BGP VPNv4
 - Daemon mode with interactive console
 - Tab completion, command abbreviation, interface management
 - 126,000+ lines of Rust, 1,350+ tests
 
 **Roadmap:**
+
 - v1.8 Data Center Fabric & EVPN (Proposed)
 - v1.9 Chaos Engineering & Performance (Proposed)
 

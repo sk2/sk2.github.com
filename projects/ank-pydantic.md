@@ -4,7 +4,7 @@ layout: default
 
 # ank_pydantic
 
-<span class="status-badge status-active">Phase 59/62 (100%)</span>
+<span class="status-badge status-active">v1.8 — Performance & Optimization</span>
 
 [← Back to Projects](../projects)
 
@@ -19,7 +19,7 @@ Network topology modeling typically forces a choice between the speed of untyped
 
 | | |
 |---|---|
-| **Status** | Phase 59/62 (100%) |
+| **Status** | v1.8 — Performance & Optimization |
 | **Language** | N/A |
 | **Started** | 2026 |
 
@@ -450,7 +450,7 @@ Each blueprint provides:
 
 ## Current Status
 
-Feature-complete, final polish and documentation before 1.0 release.
+**v1.7 API Usability & Ergonomics** shipped (Feb 9, 2026). Currently working on **v1.8 Performance & Optimization**: query performance optimization, profiling infrastructure, backend evaluation, hierarchical graph analytics, and large-scale topology validation (10k+ nodes).
 
 ## Tech Stack
 

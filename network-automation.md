@@ -11,6 +11,7 @@ Tools for network topology modeling, simulation, and visualization.
 - [How They Work Together](#how-they-work-together)
 - [The Tools](#the-tools)
   - [ANK Workbench — Unified Platform](#ank-workbench--unified-platform)
+  - [NTE — Network Topology Engine](#nte--network-topology-engine)
   - [ank_pydantic — Topology Modeling Library](#ank_pydantic--topology-modeling-library)
   - [Network Simulator (netsim) — Protocol Validation](#network-simulator-netsim--protocol-validation)
   - [NetFlow Sim — Flow-Based Performance Analysis](#netflow-sim--flow-based-performance-analysis)
@@ -80,27 +81,47 @@ ANK Workbench provides a web interface to coordinate these tools.
 
 ### ANK Workbench — Unified Platform
 
-<span class="status-badge status-active">Phase 18/19 (98%)</span> · [Full Details →](projects/ank-workbench)
+<span class="status-badge status-active">v1.3 — Tool Integration & Interactive Workflows</span> · [Full Details →](projects/ank-workbench)
 
 **What It Is:**
 A web-based platform that integrates the entire network automation ecosystem into a single workflow. Upload topology YAML, visualize the network, run simulations, and analyze results without switching between tools.
 
 **Key Features:**
-- **Unified Web Interface**: React/Vue frontend with modern UX
+- **Unified Web Interface**: React frontend with guided onboarding and sample gallery
 - **Topology Management**: Import, edit, and version control network designs
-- **Integrated Simulation**: One-click validation with netsim
-- **Live Visualization**: Interactive topology rendering with NetVis
-- **Results Analysis**: Compare configuration states, routing tables, and protocol behavior
+- **Integrated Simulation**: One-click validation with netsim, including interactive device access
+- **GPU-Accelerated Visualization**: Scale-first rendering with NetVis integration
+- **Config Export**: Generate multi-vendor configs from ank_pydantic, preview and download
 
-**Current Status:** Near production-ready. Core integration complete, polishing UI/UX and adding advanced workflow features.
+**Milestones:** v1.0 Foundation shipped (Feb 4). v1.1 UX Polish shipped (Feb 9). v1.2 Scale Visualization at 98%. v1.3 adds simulator integration, interactive device terminals, and live observability.
 
-**Tech Stack:** Python backend (FastAPI/Flask), React or Vue frontend, integrates all ANK ecosystem components
+**Tech Stack:** Python (FastAPI), React frontend, integrates all ANK ecosystem components
+
+---
+
+### NTE — Network Topology Engine
+
+<span class="status-badge status-active">Stable</span> · [Full Details →](projects/nte)
+
+**What It Is:**
+The high-performance Rust engine that powers ank_pydantic's graph operations. Extracted into its own repository as the engine's scope grew beyond a simple backing store.
+
+**Key Features:**
+- **petgraph StableDiGraph**: Native-speed topology representation
+- **Polars Storage**: Columnar data backend for efficient queries
+- **Pluggable Backends**: Polars, DuckDB, and Lite storage options
+- **Monte Carlo**: Simulation capabilities via nte-monte-carlo crate
+- **Distributed Support**: nte-server crate for distributed computation
+
+**Architecture:** Cargo workspace with specialized crates: nte-core, nte-query, nte-domain, nte-backend, nte-datastore-*, nte-server, nte-monte-carlo.
+
+**Tech Stack:** Rust, petgraph, Polars, DuckDB, PyO3/Maturin bindings
 
 ---
 
 ### ank_pydantic — Topology Modeling Library
 
-<span class="status-badge status-active">Phase 59/62 (99%)</span> · [Full Details →](projects/ank-pydantic)
+<span class="status-badge status-active">v1.8 — Performance & Optimization</span> · [Full Details →](projects/ank-pydantic)
 
 **What It Is:**
 A Python library for modeling and querying network topologies with type-safe Pydantic models and a high-performance Rust core. Expressive Python API backed by blazing-fast graph algorithms, with automatic configuration generation for multi-vendor network deployments.
@@ -146,9 +167,9 @@ topo.export_for_netvis(
 
 NetVis reads the exported topology and applies advanced layout algorithms, producing publication-quality diagrams that reflect the logical structure captured in ank_pydantic.
 
-**Current Status:** Feature-complete, final polish and documentation before 1.0 release.
+**Current Status:** v1.7 API Usability shipped. Working on v1.8 Performance & Optimization — query performance, profiling infrastructure, and 10k+ node validation.
 
-**Tech Stack:** Python (Pydantic), Rust core (`petgraph`-backed), PyO3 bindings
+**Tech Stack:** Python (Pydantic), NTE Rust engine, PyO3 bindings
 
 ---
 
@@ -180,9 +201,9 @@ Run simulations as background daemons and interact with them in real-time, like 
 
 This enables real-time exploration of network state as the simulation evolves — perfect for developing agentic systems and automated testing.
 
-**Current Status:** v1.6 shipped with OSPF support, daemon mode with interactive console
+**Current Status:** v1.6 shipped with L3VPN (VRFs, RD/RT, MP-BGP VPNv4), daemon mode with interactive console (Cisco IOS-style abbreviation, tab completion), and BMP telemetry. v1.7 adds SR-MPLS dataplane support. 126,000+ lines of Rust, 1,350+ tests.
 
-**Tech Stack:** Rust, Tokio, petgraph
+**Tech Stack:** Rust, Tokio, petgraph, gRPC (daemon IPC), ratatui (TUI)
 
 ---
 
@@ -201,19 +222,27 @@ High-performance flow-based network simulator using analytic queuing models and 
 
 ### NetVis — Visualization Engine
 
-<span class="status-badge status-active">Active Development</span> · [Full Details →](projects/netvis)
+<span class="status-badge status-active">v1.3 — Embed Readiness & API Stability</span> · [Full Details →](projects/netvis)
 
 **What It Is:**
-A Rust-based network topology layout and visualization engine. Renders complex multi-layer networks using advanced layout algorithms (force-directed, hierarchical, geographic) with high-quality static output (SVG, PDF, PNG).
+A Rust-based network topology layout and visualization engine. Renders complex multi-layer networks using advanced layout algorithms (force-directed, hierarchical, geographic, radial) with high-quality static output (SVG, PDF, PNG).
 
 **Key Capabilities:**
 - **Automated Layout**: Reduce visual noise in 100+ node topologies
 - **Multi-Layer Support**: Visualize logical overlays on physical infrastructure
-- **High-Fidelity Output**: Publication-ready SVG and PDF exports
+- **Device-Aware Rendering**: Distinct icons for routers, switches, firewalls, servers, cloud
+- **Path Analysis Overlays**: Highlight traffic flows, backup paths, and protocol adjacencies
+- **WCAG Contrast**: Accessibility-compliant color schemes and high-contrast themes
 
-**Current Status:** Core layout algorithms implemented, building interactive web renderer.
+![Enterprise Campus](/images/netvis-enterprise-campus.png)
+*Enterprise campus network with edge bundling and path analysis overlays.*
 
-**Tech Stack:** Rust, petgraph, svg-renderer
+![Data Center Fabric](/images/netvis-datacenter-large.png)
+*Spine-leaf data center with bandwidth annotations and rack grouping.*
+
+**Current Status:** v1.2 shipped with visual polish and production hardening. Working on v1.3 API stability and WASM embedding for ANK Workbench integration.
+
+**Tech Stack:** Rust, petgraph, fjadra (d3-force port), WASM-ready
 
 ---
 
@@ -610,6 +639,7 @@ ixp.export_netsim("ixp-netsim.yaml")
 ## Source Code
 
 - **ank_pydantic**: [github.com/sk2/ank_pydantic](https://github.com/sk2/ank_pydantic)
+- **NTE**: [github.com/sk2/ank_nte](https://github.com/sk2/ank_nte)
 - **netsim**: [github.com/sk2/netsim](https://github.com/sk2/netsim)
 - **NetVis**: [github.com/sk2/netvis](https://github.com/sk2/netvis)
 - **TopoGen**: [github.com/sk2/topogen](https://github.com/sk2/topogen)

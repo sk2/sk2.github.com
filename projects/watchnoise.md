@@ -1,5 +1,6 @@
 ---
 layout: default
+section: projects
 ---
 
 # Wave (StillState & FlowState)

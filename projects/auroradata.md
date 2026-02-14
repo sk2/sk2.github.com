@@ -1,5 +1,6 @@
 ---
 layout: default
+section: projects
 ---
 
 # AuroraData - Aurora Planning & Substorm Advisor

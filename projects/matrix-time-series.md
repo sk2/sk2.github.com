@@ -1,5 +1,6 @@
 ---
 layout: default
+section: data-analytics
 ---
 
 # matrix-profile-rs

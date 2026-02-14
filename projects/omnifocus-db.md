@@ -1,5 +1,6 @@
 ---
 layout: default
+section: projects
 ---
 
 # OmniFocus DB CLI (omnifocus-db)

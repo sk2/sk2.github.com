@@ -1,5 +1,6 @@
 ---
 layout: default
+section: signal-processing
 ---
 
 # Wi-Fi Passive Radar — Through-Wall Detection

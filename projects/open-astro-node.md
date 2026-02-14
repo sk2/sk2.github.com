@@ -1,5 +1,6 @@
 ---
 layout: default
+section: photography
 ---
 
 # OpenAstro Node

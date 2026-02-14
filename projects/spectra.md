@@ -1,5 +1,6 @@
 ---
 layout: default
+section: signal-processing
 ---
 
 # Project Spectra

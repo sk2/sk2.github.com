@@ -1,5 +1,6 @@
 ---
 layout: default
+section: agentic-systems
 ---
 
 # Secure Multi-Agent Personal Assistant

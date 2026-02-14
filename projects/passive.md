@@ -1,5 +1,6 @@
 ---
 layout: default
+section: signal-processing
 ---
 
 # RF Signal Reflection Experiments

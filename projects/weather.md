@@ -1,5 +1,6 @@
 ---
 layout: default
+section: projects
 ---
 
 # Weather (BOM ACCESS Pipeline)

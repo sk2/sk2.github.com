@@ -635,25 +635,60 @@ IS-IS events: 18 hellos, 4 LSPs, 2 SPF runs
 
 ---
 
-## Current Status
+## Milestones
 
-**v1.7 Segment Routing** (In Progress) — Phases 46-51
+**v1.0 MVP** (Shipped Jan 24, 2026)
+Tick-based simulation engine with deterministic execution.
+- Layer 2/3 forwarding (Ethernet, ARP, IPv4), ICMP (ping, traceroute)
+- OSPF routing with adjacency formation, LSA flooding, and SPF calculation
+- YAML topology input, scripted command execution
 
-- SR-MPLS programming with SRGB and Node-SID model
-- RSVP-TE explicit-path tunnels
+**v1.1 Scale & Features** (Shipped Jan 31, 2026)
+Parallel execution, BGP, and traffic generation.
+- Tokio parallel execution with adaptive thresholds
+- Full BGP protocol (iBGP/eBGP, path selection, communities)
+- Traffic generation (CBR, Poisson, burst patterns), latency/loss modeling
+- Multi-access OSPF with DR/BDR election
+
+**v1.2 Engine Hardening** (Shipped Jan 31, 2026)
+Convergence detection and dynamic topology changes.
+- Quiescence detection with configurable stability window
+- Dynamic wire/device removal with cascade cleanup
+
+**v1.3 Automation** (Shipped Feb 1, 2026)
+Python bindings and REST API.
+- Python bindings via PyO3 (`netsim-py` package)
+- REST API with OpenAPI documentation, SSE real-time events
+
+**v1.4 Observability & Export** (Shipped Feb 1, 2026)
+Packet capture and flow export.
+- Pcap/pcapng export with Wireshark compatibility
+- NetFlow v9 and IPFIX (RFC 7011) export with UDP streaming
+
+**v1.5 Protocol Foundation** (Shipped Feb 5, 2026)
+Second IGP, sub-second failure detection, tunneling, and MPLS.
+- IS-IS with L1/L2 hierarchical routing, DIS election, SPF
+- BFD sub-second failure detection, GRE tunnel encap/decap
+- MPLS/LDP dataplane label switching and signaling, OAM ping/traceroute
+- BGP hardening: route reflectors (RFC 4456), graceful restart, End-of-RIB
+
+**v1.6 L3VPN & Telemetry** (Shipped Feb 11, 2026)
+VRF isolation, L3VPN services, RSVP-TE, and BGP monitoring.
+- VRF foundations with separate RIB/FIB/ARP per VRF
+- L3VPN with MP-BGP VPNv4, RD/RT import/export, VPN label stacks
+- RSVP-TE explicit-path tunnels with label precedence (TE > SR > LDP > static)
+- BMP export (RFC 7854) for BGP monitoring
+- Daemon mode with interactive console, tab completion, TUI selector
+
+**v1.7 Segment Routing** (In Progress)
+SR-MPLS programming and traffic analysis.
+- SR-MPLS with deterministic SRGB and Node-SID model
 - Multi-label stack forwarding
-
-**v1.6 L3VPN & Interactive Console** (Shipped)
-
-- L3VPN with VRFs, RD/RT, MP-BGP VPNv4
-- Daemon mode with interactive console
-- Tab completion, command abbreviation, interface management
-- 126,000+ lines of Rust, 1,350+ tests
+- Routing matrix export and flow-based simulation engine (planned)
 
 **Roadmap:**
-
-- v1.8 Data Center Fabric & EVPN (Proposed)
-- v1.9 Chaos Engineering & Performance (Proposed)
+- **v1.8 Data Center Fabric & EVPN** — VXLAN overlay, EVPN control plane, spine-leaf topologies
+- **v1.9 Chaos Engineering & Performance** — Fault injection framework, large-scale topology benchmarks
 
 ## Tech Stack
 

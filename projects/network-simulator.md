@@ -148,6 +148,13 @@ Simulation complete: 120ms simulated, 0.034s real time (3529x speedup)
 
 ---
 
+## Demo
+
+![netsim demo](/images/netsim-demo.gif)
+*OSPF triangle: three routers form adjacencies, compute SPF, then a host pings across the network. ARP resolution, traceroute hop-by-hop path discovery, and convergence timing all visible.*
+
+---
+
 ## Daemon Mode — Real-Time Network Interaction
 
 Run simulations as background daemons and interact with them in real-time — like `docker exec` for network simulations.
@@ -162,25 +169,38 @@ netsim daemon start my-network topology.yaml
 netsim daemon start my-network topology.yaml --tick-interval 50ms
 ```
 
-The daemon runs continuously in the background, ticking the simulation at the specified interval.
+The daemon runs continuously in the background, ticking the simulation at the specified interval. State files are stored in `~/.netsim/<name>/` — PID file, Unix domain socket for gRPC IPC, and structured log.
 
 ### Execute One-Shot Commands
 
+Run a single command against a device in a running daemon, get the result, and exit. Ideal for scripting and CI/CD:
+
 ```bash
-# Run a single command on a device
-netsim exec my-network r1 "show ip route"
-netsim exec my-network h1 "ping 10.0.3.10"
-netsim exec my-network r2 "show ospf neighbors"
+# Check routing table
+$ netsim exec my-network r1 "show ip route"
+Destination       Next Hop        Metric  Interface
+10.0.1.0/24       —               0       eth2 (connected)
+10.0.3.0/24       10.0.13.3       11      eth1 (OSPF)
+10.0.12.0/24      —               0       eth0 (connected)
+10.0.13.0/24      —               0       eth1 (connected)
+10.0.23.0/24      10.0.12.2       20      eth0 (OSPF)
+
+# Ping across the network
+$ netsim exec my-network h1 "ping 10.0.3.10"
+Ping 10.0.3.10: 5/5 packets received, 0% loss
+
+# Get structured JSON for parsing
+$ netsim exec my-network r1 "show ip route --json"
+[{"destination":"10.0.1.0/24","next_hop":"—","metric":0,"interface":"eth2","source":"connected"}, ...]
 ```
 
 ### Attach an Interactive Console
 
 ```bash
-# Attach to a device for an interactive session
 netsim attach my-network r1
 ```
 
-Once attached, you get an interactive REPL with **Cisco IOS-style command abbreviation** and **tab completion**:
+Opens a full interactive REPL session on the device. You're effectively "logged in" to the simulated router with command history, tab completion, and Cisco IOS-style abbreviated commands:
 
 ```
 r1> sh ip ro
@@ -197,49 +217,189 @@ eth0       10.0.12.1/24    02:00:00:00:01:00  up      up
 eth1       10.0.13.1/24    02:00:00:00:01:01  up      up
 eth2       10.0.1.1/24     02:00:00:00:01:02  up      up
 
-r1> ping 10.0.3.10
-Ping 10.0.3.10: 5/5 packets received, 0% loss
+r1> show ospf neighbors
+Neighbor ID     Interface  State   Priority  Dead Time
+2.2.2.2         eth0       Full    1         38s
+3.3.3.3         eth1       Full    1         36s
 
-r1> show ip route --json
-[{"destination":"10.0.1.0/24","next_hop":"—","metric":0, ...}]
+r1> show arp
+IP Address      MAC Address        State     Age  Interface
+10.0.12.2       02:00:00:00:02:00  Resolved  396  eth0
+10.0.13.3       02:00:00:00:03:00  Resolved  396  eth1
+```
 
-r1> int shut eth0
+**Live interface management** — shut down a link and watch the protocol reconverge in real time:
+
+```
+r1> interface shutdown eth0
 Interface eth0 admin-down
 [OSPF adjacency r1<->r2 torn down]
 
-r1> int no shut eth0
+r1> sh ip ro
+Destination       Next Hop        Metric  Interface
+10.0.1.0/24       —               0       eth2 (connected)
+10.0.13.0/24      —               0       eth1 (connected)
+10.0.3.0/24       10.0.13.3       11      eth1 (OSPF)
+10.0.23.0/24      10.0.13.3       21      eth1 (OSPF)
+   ← traffic to r2 now routes via r3 (metric increased from 20 to 21)
+
+r1> interface no shutdown eth0
 Interface eth0 admin-up
 [OSPF adjacency r1<->r2 re-establishing...]
 
-r1> exit
+r1> sh ip ro
+   ← routes restored to original paths after reconvergence
+```
+
+**JSON output on any show command** for structured data:
+
+```
+r1> show ospf neighbors --json
+[{"neighbor_id":"2.2.2.2","interface":"eth0","state":"Full","priority":1},
+ {"neighbor_id":"3.3.3.3","interface":"eth1","state":"Full","priority":1}]
 ```
 
 **Console Features:**
 
-- **Abbreviated commands** — Cisco IOS-style prefix matching (`sh ip ro` → `show ip route`)
-- **Tab completion** — Commands and subcommands
-- **Interface management** — `interface shutdown/no shutdown` with protocol teardown
+- **Abbreviated commands** — Cisco IOS-style prefix matching (`sh ip ro` → `show ip route`, `int shut` → `interface shutdown`)
+- **Tab completion** — Full hierarchical completion for commands, subcommands, and arguments
+- **Interface management** — `interface shutdown/no shutdown` triggers protocol teardown and reconvergence
 - **JSON output** — Append `--json` to any show command for structured output
 - **Command history** — Arrow keys navigate previous commands
+- **MPLS operations** — `mpls lfib add/del`, `mpls ftn add/del` for label manipulation
+- **VPN commands** — `bgp vpn-originate`, `show bgp vpn`, `show vrf` for L3VPN troubleshooting
+- **GRE tunnels** — `gre tunnel set` for overlay configuration
+- **MPLS OAM** — `mpls ping`, `mpls traceroute` for label-switched path verification
 
-### TUI Selector
+---
 
-Running `netsim daemon` with no subcommand launches an interactive TUI that lets you browse running daemons, select devices, and attach — all without memorizing names.
+### TUI Daemon Selector
+
+Running `netsim daemon` with no subcommand launches an interactive TUI (built with ratatui) that lets you browse running daemons, select devices, and attach — all without memorizing names.
+
+**Level 1 — Daemon selector** lists all running simulations:
+
+```
+┌─ Running Daemons ─────────────────────────────────────────┐
+│                                                           │
+│ > ospf-triangle  (PID 48291, 2h 15m)                     │
+│     examples/ospf-triangle.yaml                           │
+│                                                           │
+│   sp-core         (PID 48305, 45m 12s)                    │
+│     topologies/transitnet-sp-core.yaml                    │
+│                                                           │
+│   dc-fabric       (PID 49102, 3m 8s)                      │
+│     topologies/spine-leaf-evpn.yaml                        │
+│                                                           │
+└───────────────────────────────────────────────────────────┘
+ Up/Down: Navigate  Enter: Select  l: Logs  q: Quit
+```
+
+Press Enter to select a daemon, then **Level 2 — Device selector** shows all devices:
+
+```
+┌─ ospf-triangle: Devices ──────────────────────────────────┐
+│                                                           │
+│ > r1  (router)                                            │
+│   r2  (router)                                            │
+│   r3  (router)                                            │
+│   h1  (host)                                              │
+│   h3  (host)                                              │
+│                                                           │
+└───────────────────────────────────────────────────────────┘
+ Up/Down: Navigate  Enter: Select  l: Logs  q: Back
+```
+
+Press Enter on a device to open an interactive console session. Press `l` at any point to open the **log viewer** showing real-time daemon events (protocol state changes, adjacency transitions, convergence events).
+
+---
 
 ### Daemon Management
 
 ```bash
 # List all running daemons
-netsim daemon list
+$ netsim daemon list
+NAME            PID    UPTIME   TOPOLOGY
+ospf-triangle   48291  2h 15m   examples/ospf-triangle.yaml
+sp-core         48305  45m 12s  topologies/transitnet-sp-core.yaml
 
-# Check daemon status
-netsim daemon status my-network
+# Check a specific daemon's status
+$ netsim daemon status my-network
+Daemon: my-network
+PID: 48291
+Uptime: 2h 15m 30s
+Tick interval: 100ms
+Topology: examples/ospf-triangle.yaml
+Devices: r1 (router), r2 (router), r3 (router), h1 (host), h3 (host)
 
 # Stop a daemon
-netsim daemon stop my-network
+$ netsim daemon stop my-network
 
 # Clean up stale PID files from crashed daemons
-netsim daemon list --clean
+$ netsim daemon list --clean
+```
+
+---
+
+### CI/CD Integration Example
+
+Start a daemon, run automated validation, collect results, tear down:
+
+```bash
+#!/bin/bash
+# ci-validate.sh — validate topology in CI pipeline
+
+# Start simulation in background
+netsim daemon start ci-test topology.yaml --tick-interval 10ms
+
+# Wait for convergence
+sleep 2
+
+# Run validation checks, collect JSON output
+ROUTES=$(netsim exec ci-test r1 "show ip route --json")
+OSPF=$(netsim exec ci-test r1 "show ospf neighbors --json")
+PING=$(netsim exec ci-test h1 "ping 10.0.3.10")
+
+# Assert expected state
+echo "$ROUTES" | jq -e '.[] | select(.destination == "10.0.3.0/24")' || exit 1
+echo "$OSPF" | jq -e 'length == 2' || exit 1
+echo "$PING" | grep -q "0% loss" || exit 1
+
+# Clean up
+netsim daemon stop ci-test
+
+echo "All validations passed"
+```
+
+### Failover Testing with Daemon Mode
+
+Test link failure and reconvergence interactively:
+
+```bash
+# Start the simulation
+$ netsim daemon start failover-test sp-core.yaml
+
+# Check initial state
+$ netsim exec failover-test r1 "show ospf neighbors"
+Neighbor ID     Interface  State   Priority  Dead Time
+2.2.2.2         eth0       Full    1         38s
+3.3.3.3         eth1       Full    1         36s
+
+# Shut down a link
+$ netsim exec failover-test r1 "interface shutdown eth0"
+Interface eth0 admin-down
+
+# Verify reconvergence — traffic now routes via alternate path
+$ netsim exec failover-test r1 "show ip route"
+10.0.23.0/24      10.0.13.3       21      eth1 (OSPF)
+
+# Restore and verify
+$ netsim exec failover-test r1 "interface no shutdown eth0"
+$ sleep 1
+$ netsim exec failover-test r1 "show ospf neighbors"
+Neighbor ID     Interface  State   Priority  Dead Time
+2.2.2.2         eth0       Full    1         38s      ← re-established
+3.3.3.3         eth1       Full    1         36s
 ```
 
 ### Why Use Daemon Mode?
@@ -249,7 +409,7 @@ netsim daemon list --clean
 - **Fast iteration loop**: Design → Generate configs → Simulate → Iterate, all without spinning up containers until you're ready to deploy
 - **CI/CD integration**: Start daemon, run automated tests via `exec`, collect JSON results, stop daemon
 - **Development workflow**: Keep a topology running while you experiment with agent logic or automation scripts
-- **Structured logging**: Daemon events logged to `~/.netsim/<name>/daemon.log` for debugging
+- **Structured logging**: Daemon events logged in JSON to `~/.netsim/<name>/daemon.log` for debugging and post-mortem analysis
 
 ---
 
@@ -299,11 +459,55 @@ netsim daemon list --clean
 
 ### Available Commands
 
-All commands support abbreviation (e.g., `sh ip ro`) and `--json` output:
+All commands support Cisco IOS-style abbreviation (e.g., `sh ip ro`) and `--json` output for structured data.
 
-- **Show commands**: `show ip route`, `show interfaces`, `show arp`, `show ospf neighbors`, `show isis database`, `show isis neighbors`, `show bgp neighbors`, `show bgp vpn`, `show mpls forwarding`, `show ldp bindings`, `show bfd sessions`, `show vrf`, `show sr`, `show traffic`
-- **Diagnostics**: `ping <ip>`, `traceroute <ip>`
-- **Configuration**: `route add <dest> via <nexthop>`, `interface shutdown <name>`, `interface no shutdown <name>`
+**Show Commands (Read-Only Introspection):**
+
+| Command | Purpose |
+|---------|---------|
+| `show ip route [vrf <name>]` | Routing table (global or per-VRF) |
+| `show interfaces` | Interface status, IP, MAC, admin state |
+| `show arp` | ARP cache entries |
+| `show ospf neighbors` | OSPF adjacency state |
+| `show ospf database` | OSPF LSDB contents |
+| `show isis neighbors` | IS-IS adjacency state |
+| `show isis database` | IS-IS LSDB contents |
+| `show isis interfaces` | IS-IS interface status |
+| `show isis spf` | IS-IS SPF run information |
+| `show isis route` | IS-IS routing table |
+| `show bgp [summary]` | BGP Loc-RIB / neighbor overview |
+| `show bgp neighbors [<ip>]` | BGP neighbor details |
+| `show bgp vpn` | VPNv4 routes |
+| `show mpls [forwarding]` | MPLS FTN/LFIB tables |
+| `show mpls vpn-labels` | VPN label allocations |
+| `show ldp [bindings/neighbors]` | LDP session and label state |
+| `show bfd [sessions]` | BFD session status |
+| `show gre [tunnels]` | GRE tunnel status |
+| `show vrf [<name> [routes]]` | VRF list, details, or per-VRF routes |
+| `show sr` | Segment Routing state and SIDs |
+| `show rsvp [tunnels]` | RSVP-TE tunnel status |
+| `show traffic` | Traffic generator statistics |
+
+**Data Plane Probes:**
+
+| Command | Purpose |
+|---------|---------|
+| `ping <ip> [-c N]` | ICMP echo test |
+| `traceroute <ip> [-m TTL]` | Hop-by-hop path discovery |
+| `mpls ping <ip> [--vrf <name>]` | MPLS OAM echo test |
+| `mpls traceroute <ip> [--vrf <name>]` | MPLS OAM path discovery |
+
+**Operational Configuration:**
+
+| Command | Purpose |
+|---------|---------|
+| `route add <dest> via <nexthop>` | Add static route |
+| `interface shutdown <name>` | Admin-down interface (triggers protocol reconvergence) |
+| `interface no shutdown <name>` | Admin-up interface |
+| `mpls lfib add/del <label> ...` | Manipulate MPLS LFIB entries |
+| `mpls ftn add/del <prefix> ...` | Manipulate MPLS FTN entries |
+| `bgp vpn-originate <vrf>` | Trigger VPN route origination |
+| `gre tunnel set <iface> ...` | Configure GRE tunnel parameters |
 
 ---
 

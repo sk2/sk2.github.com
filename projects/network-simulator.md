@@ -4,12 +4,11 @@ layout: default
 
 # Network Simulator
 
-<span class="status-badge status-active">52 (in progress) — daemon-mode-interactive-console</span>
+<span class="status-badge status-active">Active Development — v1.7 Segment Routing</span>
 
 [← Back to Projects](../projects)
 
 ---
-
 
 ## The Insight
 
@@ -19,25 +18,134 @@ Developing agentic AI systems and network automation tools requires rapid iterat
 
 | | |
 |---|---|
-| **Status** | 52 (in progress) — daemon-mode-interactive-console |
+| **Status** | Active Development — v1.7 Segment Routing |
 | **Language** | Rust |
+| **Lines of Code** | 126,000+ |
+| **Test Coverage** | 1,350+ protocol behavior tests |
 | **Started** | 2026 |
 
 ---
 
-## What This Is
+## Why netsim?
 
-A Rust-based network simulator that models packet-level behavior for routing protocols. It provides a middle ground between pure algorithmic analysis (like C-BGP) and full emulation (like Containerlab) — larger scale and smaller footprint than emulation, higher fidelity than algorithmic simulation.
+- **Validate before deploying** — Catch routing loops, black holes, and misconfigurations in simulation
+- **Deterministic execution** — Same topology, same results, every time
+- **Protocol fidelity** — Real OSPF/IS-IS SPF calculations, MPLS label operations, BFD failure detection
+- **Advanced features** — MPLS/LDP, SR-MPLS, RSVP-TE, GRE tunnels, L3VPN with VRFs, BFD, BMP telemetry
+- **Daemon mode** — Run simulations as background services, attach interactive consoles with tab completion
+- **Scriptable** — JSON output for CI/CD integration and automated testing
+- **Fast** — Simulate 100+ device topologies in seconds
 
-## Key Features
+## Quick Start — Three-Router OSPF Example
 
-- **Deterministic Simulation**: Tick-based execution ensures reproducible results
-- **Protocol Implementations**: OSPF, IS-IS, BGP with packet-level accuracy
-- **Fast Validation**: Simulate 100+ node topologies in seconds
-- **RIB/FIB Separation**: Models routing decisions (control plane) and forwarding behavior (data plane)
-- **Comprehensive Testing**: 1,350+ tests validate protocol behavior against RFCs
-- **Parallel Execution**: Multi-core support for large topologies
-- **Daemon Mode**: Real-time interaction with running simulations via interactive console or one-shot commands
+Create `ospf-triangle.yaml`:
+
+```yaml
+name: ospf-triangle
+description: Three OSPF routers in a triangle with hosts
+
+devices:
+  - name: r1
+    type: router
+    router_id: 1.1.1.1
+    interfaces:
+      - name: eth0
+        ip: 10.0.12.1/24
+        ospf: { area: 0, cost: 10 }
+      - name: eth1
+        ip: 10.0.13.1/24
+        ospf: { area: 0, cost: 10 }
+      - name: eth2
+        ip: 10.0.1.1/24
+
+  - name: r2
+    type: router
+    router_id: 2.2.2.2
+    interfaces:
+      - name: eth0
+        ip: 10.0.12.2/24
+        ospf: { area: 0, cost: 10 }
+      - name: eth1
+        ip: 10.0.23.2/24
+        ospf: { area: 0, cost: 10 }
+
+  - name: r3
+    type: router
+    router_id: 3.3.3.3
+    interfaces:
+      - name: eth0
+        ip: 10.0.13.3/24
+        ospf: { area: 0, cost: 10 }
+      - name: eth1
+        ip: 10.0.23.3/24
+        ospf: { area: 0, cost: 10 }
+      - name: eth2
+        ip: 10.0.3.1/24
+
+  - name: h1
+    type: host
+    interfaces:
+      - name: eth0
+        ip: 10.0.1.10/24
+        gateway: 10.0.1.1
+
+  - name: h3
+    type: host
+    interfaces:
+      - name: eth0
+        ip: 10.0.3.10/24
+        gateway: 10.0.3.1
+
+links:
+  - endpoints: [r1:eth0, r2:eth0]
+  - endpoints: [r1:eth1, r3:eth0]
+  - endpoints: [r2:eth1, r3:eth1]
+  - endpoints: [r1:eth2, h1:eth0]
+  - endpoints: [r3:eth2, h3:eth0]
+
+script:
+  - at: converged
+    device: r1
+    command: show ip route
+  - at: converged + 100
+    device: h1
+    command: ping 10.0.3.10
+```
+
+Run the simulation:
+
+```bash
+$ netsim run ospf-triangle.yaml
+
+[t=0ms] Network initialized: 5 devices, 5 links
+[t=0ms] OSPF: r1, r2, r3 sending Hello on all interfaces
+[t=10ms] OSPF: Neighbors established (r1<->r2, r1<->r3, r2<->r3)
+[t=15ms] OSPF: LSA flooding in progress
+[t=20ms] OSPF: SPF calculation complete on all routers
+[t=20ms] Network converged
+
+[t=20ms] r1> show ip route
+10.0.1.0/24   directly connected (eth2)
+10.0.3.0/24   via 10.0.13.3 [OSPF/110] metric=11
+10.0.12.0/24  directly connected (eth0)
+10.0.13.0/24  directly connected (eth1)
+10.0.23.0/24  via 10.0.12.2 [OSPF/110] metric=20
+
+[t=120ms] h1> ping 10.0.3.10
+PING 10.0.3.10: 64 bytes from 10.0.3.10: icmp_seq=1 ttl=62 time=2.1ms
+Round-trip path: h1 -> r1 -> r3 -> h3 -> r3 -> r1 -> h1
+
+Simulation complete: 120ms simulated, 0.034s real time (3529x speedup)
+```
+
+**What just happened:**
+1. Topology loaded — 3 routers, 2 hosts, 5 links
+2. OSPF converged — Routers exchanged LSAs, computed SPF
+3. Routes installed — FIBs populated with best paths
+4. Commands executed — `show ip route`, `ping` ran at scripted times
+5. Results output — ASCII tables showing routing tables and ping responses
+
+---
 
 ## Daemon Mode — Real-Time Network Interaction
 
@@ -71,38 +179,65 @@ netsim exec my-network r2 "show ospf neighbors"
 netsim attach my-network r1
 ```
 
-Once attached, you get an interactive REPL with command history:
+Once attached, you get an interactive REPL with **Cisco IOS-style command abbreviation** and **tab completion**:
 
 ```
-r1> show ip route
+r1> sh ip ro
 Destination       Next Hop        Metric  Interface
 10.0.1.0/24       —               0       eth2 (connected)
 10.0.12.0/24      —               0       eth0 (connected)
-...
+10.0.13.0/24      —               0       eth1 (connected)
+10.0.3.0/24       10.0.13.3       11      eth1 (OSPF)
+10.0.23.0/24      10.0.12.2       20      eth0 (OSPF)
 
 r1> show interfaces
-Interface  IP Address      MAC Address        Status
-eth0       10.0.12.1/24    02:00:00:00:01:00  up
-eth1       10.0.13.1/24    02:00:00:00:01:01  up
-...
+Interface  IP Address      MAC Address        Admin   Status
+eth0       10.0.12.1/24    02:00:00:00:01:00  up      up
+eth1       10.0.13.1/24    02:00:00:00:01:01  up      up
+eth2       10.0.1.1/24     02:00:00:00:01:02  up      up
 
 r1> ping 10.0.3.10
 Ping 10.0.3.10: 5/5 packets received, 0% loss
-...
+
+r1> show ip route --json
+[{"destination":"10.0.1.0/24","next_hop":"—","metric":0, ...}]
+
+r1> int shut eth0
+Interface eth0 admin-down
+[OSPF adjacency r1<->r2 torn down]
+
+r1> int no shut eth0
+Interface eth0 admin-up
+[OSPF adjacency r1<->r2 re-establishing...]
 
 r1> exit
 ```
 
-Type `help` in the console for available commands, or `exit` to detach.
+**Console Features:**
+- **Abbreviated commands** — Cisco IOS-style prefix matching (`sh ip ro` → `show ip route`)
+- **Tab completion** — Commands and subcommands
+- **Interface management** — `interface shutdown/no shutdown` with protocol teardown
+- **JSON output** — Append `--json` to any show command for structured output
+- **Command history** — Arrow keys navigate previous commands
+
+### TUI Selector
+
+Running `netsim daemon` with no subcommand launches an interactive TUI that lets you browse running daemons, select devices, and attach — all without memorizing names.
 
 ### Daemon Management
 
 ```bash
+# List all running daemons
+netsim daemon list
+
 # Check daemon status
 netsim daemon status my-network
 
 # Stop a daemon
 netsim daemon stop my-network
+
+# Clean up stale PID files from crashed daemons
+netsim daemon list --clean
 ```
 
 ### Why Use Daemon Mode?
@@ -110,163 +245,70 @@ netsim daemon stop my-network
 - **Agentic AI development**: Test automation agents against live network state without container overhead — agents can execute commands, parse responses, and iterate in seconds rather than minutes
 - **Network automation prototyping**: Rapidly develop and test configuration management tools, DevOps scripts, and automated network operations
 - **Fast iteration loop**: Design → Generate configs → Simulate → Iterate, all without spinning up containers until you're ready to deploy
-- **CI/CD integration**: Start daemon, run automated tests via `exec`, collect results, stop daemon
+- **CI/CD integration**: Start daemon, run automated tests via `exec`, collect JSON results, stop daemon
 - **Development workflow**: Keep a topology running while you experiment with agent logic or automation scripts
+- **Structured logging**: Daemon events logged to `~/.netsim/<name>/daemon.log` for debugging
 
-### Available Commands in Daemon Mode
+---
 
-All commands from `netsim run` work in daemon mode via `exec` or `attach`:
+## Protocol Support
 
-- **Show commands**: `show ip route`, `show interfaces`, `show arp`, `show ospf neighbors`, `show isis database`, `show mpls forwarding`, `show ldp bindings`, `show bfd sessions`, `show vrf`, `show traffic`
+### Layer 2
+
+| Protocol | Status | Notes |
+|----------|--------|-------|
+| Ethernet | ✓ | MAC addressing, frame encapsulation |
+| ARP | ✓ | Request/reply, cache management |
+
+### Layer 3
+
+| Protocol | Status | Notes |
+|----------|--------|-------|
+| IPv4 | ✓ | Forwarding, TTL decrement, fragmentation not supported |
+| ICMP | ✓ | Echo (ping), Time Exceeded (traceroute), Destination Unreachable |
+
+### Routing Protocols
+
+| Protocol | Status | Notes |
+|----------|--------|-------|
+| Static | ✓ | Host default gateway |
+| OSPF | ✓ | Point-to-point, Area 0, LSA Types 1 & 2, SPF via Dijkstra |
+| IS-IS | ✓ | L1/L2 hierarchical routing, LSP flooding, SPF via Dijkstra |
+| BGP | ✓ | iBGP/eBGP, communities, route reflectors, MP-BGP VPNv4 |
+
+### MPLS & Tunneling
+
+| Protocol | Status | Notes |
+|----------|--------|-------|
+| MPLS | ✓ | Label imposition/swap/pop/pop-continue, LFIB, multi-label stacks |
+| LDP | ✓ | Label distribution, targeted sessions |
+| SR-MPLS | ✓ | Segment Routing with SRGB, Node-SIDs, SR-owned LFIB precedence |
+| RSVP-TE | ✓ | Explicit-path tunnels, deterministic refresh, convergence gating |
+| GRE | ✓ | Generic routing encapsulation, overlay tunnels |
+| VRF | ✓ | Virtual routing and forwarding, L3VPN with RD/RT |
+
+### Resilience & Telemetry
+
+| Protocol | Status | Notes |
+|----------|--------|-------|
+| BFD | ✓ | Bidirectional forwarding detection, async mode |
+| BMP | ✓ | RFC 7854 BGP Monitoring Protocol, post-decision export |
+| PCAP | ✓ | Packet capture with MPLS-aware filtering, Wireshark compatible |
+
+### Available Commands
+
+All commands support abbreviation (e.g., `sh ip ro`) and `--json` output:
+
+- **Show commands**: `show ip route`, `show interfaces`, `show arp`, `show ospf neighbors`, `show isis database`, `show isis neighbors`, `show bgp neighbors`, `show bgp vpn`, `show mpls forwarding`, `show ldp bindings`, `show bfd sessions`, `show vrf`, `show sr`, `show traffic`
 - **Diagnostics**: `ping <ip>`, `traceroute <ip>`
-- **Configuration**: `route add <dest> via <nexthop>`, `mpls lfib add <label> ...`, `bgp vpn-originate <vrf>`, `gre tunnel set <dest> ...`
+- **Configuration**: `route add <dest> via <nexthop>`, `interface shutdown <name>`, `interface no shutdown <name>`
 
-## Detailed Protocol Support
+---
 
-**Layer 2: Data Link**
-- **Ethernet**: Full IEEE 802.3 frame handling with MAC learning
-- **ARP**: Address Resolution Protocol for IPv4-to-MAC mapping
-- **Switching**: VLAN-aware forwarding with MAC address tables
+## Example: IS-IS L1/L2 Hierarchy with Real Output
 
-**Layer 3: Network**
-- **IPv4**: Complete packet forwarding with TTL decrement, fragmentation handling
-- **ICMPv4**: Echo request/reply, destination unreachable, time exceeded
-- **Routing Table**: Longest-prefix-match lookups with administrative distance
+Service provider topology demonstrating IS-IS hierarchical routing:
 
-**OSPF (RFC 2328 - OSPFv2):**
-- **Neighbor Discovery**: Hello protocol with dead interval detection
-- **Link State Database**: Full LSA flooding with sequence number validation
-- **SPF Calculation**: Dijkstra's algorithm for shortest path computation
-- **Areas**: Single-area and multi-area with ABR support
-- **Network Types**: Broadcast, point-to-point, NBMA
-- **Metrics**: Interface cost calculation and cumulative path costs
-- **Convergence**: Sub-second convergence for typical topologies
-
-**IS-IS (ISO 10589):**
-- **Level 1/Level 2**: Intra-area and inter-area routing
-- **TLV Encoding**: Proper handling of IS-IS TLV structures
-- **Pseudonodes**: LAN representation with designated IS election
-- **Metrics**: Wide metrics (32-bit) and narrow metrics (6-bit) support
-
-**BGP (RFC 4271 - BGP-4):**
-- **Session Management**: Full FSM with keepalive/hold timers
-- **Path Attributes**: AS_PATH, NEXT_HOP, LOCAL_PREF, MED, Communities, Extended Communities
-- **Route Selection**: RFC 4271 best-path algorithm with all tie-breakers
-- **Route Reflection**: RFC 4456 with CLUSTER_ID and ORIGINATOR_ID
-- **eBGP/iBGP**: Multi-AS topologies with proper next-hop handling
-- **Advanced Features**: Graceful restart (RFC 4724), VPNv4 (RFC 4760)
-
-**MPLS - Planned:**
-- **LDP**: Label distribution for IP prefixes
-- **RSVP-TE**: Traffic engineering with explicit paths
-- **Fast Reroute**: Link/node protection with backup tunnels
-
-## Example 1: OSPF Triangle Topology
-
-Simple three-router topology to verify basic OSPF functionality.
-
-Input topology (`ospf-triangle.yaml`):
-```yaml
-name: ospf-triangle
-description: Three OSPF routers in a triangle with hosts
-
-devices:
-  - name: r1
-    type: router
-    router_id: 1.1.1.1
-    interfaces:
-      - name: eth0
-        ip: 10.0.12.1/24
-        ospf: { area: 0, cost: 10 }
-      - name: eth1
-        ip: 10.0.13.1/24
-        ospf: { area: 0, cost: 10 }
-      - name: eth2
-        ip: 10.0.1.1/24
-        ospf: { area: 0, cost: 1 }
-
-  - name: r2
-    type: router
-    router_id: 2.2.2.2
-    interfaces:
-      - name: eth0
-        ip: 10.0.12.2/24
-        ospf: { area: 0, cost: 10 }
-      - name: eth1
-        ip: 10.0.23.2/24
-        ospf: { area: 0, cost: 10 }
-
-  - name: r3
-    type: router
-    router_id: 3.3.3.3
-    interfaces:
-      - name: eth0
-        ip: 10.0.13.3/24
-        ospf: { area: 0, cost: 10 }
-      - name: eth1
-        ip: 10.0.23.3/24
-        ospf: { area: 0, cost: 10 }
-
-  - name: h1
-    type: host
-    interfaces:
-      - name: eth0
-        ip: 10.0.1.10/24
-        gateway: 10.0.1.1
-
-  - name: h3
-    type: host
-    interfaces:
-      - name: eth0
-        ip: 10.0.3.10/24
-        gateway: 10.0.3.1
-
-links:
-  - endpoints: [r1:eth0, r2:eth0]
-  - endpoints: [r1:eth1, r3:eth0]
-  - endpoints: [r2:eth1, r3:eth1]
-  - endpoints: [r1:eth2, h1:eth0]
-  - endpoints: [r3:eth2, h3:eth0]
-
-script:
-  - at: converged
-    device: r1
-    command: show ip route
-  - at: converged + 100
-    device: h1
-    command: ping 10.0.3.10
-```
-
-Run simulation:
-```bash
-$ netsim run ospf-triangle.yaml
-
-[t=0ms] Network initialized: 5 devices, 5 links
-[t=0ms] OSPF: r1, r2, r3 sending Hello on all interfaces
-[t=10ms] OSPF: Neighbors established (r1<->r2, r1<->r3, r2<->r3)
-[t=15ms] OSPF: LSA flooding in progress
-[t=20ms] OSPF: SPF calculation complete on all routers
-[t=20ms] Network converged
-
-[t=20ms] r1> show ip route
-10.0.1.0/24   directly connected (eth2)
-10.0.3.0/24   via 10.0.13.3 [OSPF/110] metric=11
-10.0.12.0/24  directly connected (eth0)
-10.0.13.0/24  directly connected (eth1)
-10.0.23.0/24  via 10.0.12.2 [OSPF/110] metric=20
-
-[t=120ms] h1> ping 10.0.3.10
-PING 10.0.3.10: 64 bytes from 10.0.3.10: icmp_seq=1 ttl=62 time=2.1ms
-Round-trip path: h1 -> r1 -> r3 -> h3 -> r3 -> r1 -> h1
-
-Simulation complete: 120ms simulated, 0.034s real time (3529x speedup)
-```
-
-## Example 2: IS-IS Level 1/Level 2 Hierarchy
-
-Service provider topology demonstrating IS-IS hierarchical routing with L1 and L2 areas.
-
-Input topology (`isis-hierarchy.yaml`):
 ```yaml
 name: isis-hierarchy
 description: IS-IS L1/L2 hierarchy with inter-area routing
@@ -330,7 +372,8 @@ script:
     command: show ip route
 ```
 
-Run simulation:
+**Simulation Output:**
+
 ```bash
 $ netsim run isis-hierarchy.yaml
 
@@ -372,243 +415,7 @@ Simulation complete: 15ms simulated, 0.008s real time
 IS-IS events: 18 hellos, 4 LSPs, 2 SPF runs
 ```
 
-## Example 3: Protocol State Inspection (OSPF)
-
-Detailed protocol state inspection with full routing tables and OSPF database dumps.
-
-```bash
-[t=45ms] core-1> show ip route
-Codes: C - connected, O - OSPF, IA - OSPF inter-area
-       * - candidate default
-
-Gateway of last resort is not set
-
-C    10.0.0.0/30 is directly connected, eth0
-C    10.0.0.4/30 is directly connected, eth1
-C    10.0.0.8/30 is directly connected, eth2
-C    10.0.100.1/32 is directly connected, lo0
-O    10.0.100.2/32 [110/10] via 10.0.0.2, eth0, 00:00:25
-O    10.0.100.3/32 [110/10] via 10.0.0.6, eth1, 00:00:25
-O    10.0.100.4/32 [110/10] via 10.0.0.10, eth2, 00:00:25
-O    10.5.1.0/24 [110/20] via 10.0.0.2, eth0, 00:00:23
-O    10.5.2.0/24 [110/20] via 10.0.0.6, eth1, 00:00:23
-O    10.5.12.0/24 [110/20] via 10.0.0.2, eth0, 00:00:23
-                  [110/20] via 10.0.0.6, eth1, 00:00:23
-O IA 10.10.1.0/24 [110/25] via 10.0.0.10, eth2, 00:00:20
-O IA 10.10.2.0/24 [110/25] via 10.0.0.10, eth2, 00:00:20
-
-[t=45ms] core-1> show ip ospf database
-
-       OSPF Router with ID (10.0.100.1) (Process ID 1)
-
-                Router Link States (Area 0.0.0.0)
-
-Link ID         ADV Router      Age  Seq#       Checksum
-10.0.100.1      10.0.100.1      25   0x80000003 0x6d2a
-10.0.100.2      10.0.100.2      23   0x80000003 0x7f1c
-10.0.100.3      10.0.100.3      24   0x80000003 0x8b0e
-10.0.100.4      10.0.100.4      22   0x80000004 0x9700
-
-                Net Link States (Area 0.0.0.0)
-
-Link ID         ADV Router      Age  Seq#       Checksum
-10.0.0.1        10.0.100.1      25   0x80000001 0x4a12
-10.0.0.5        10.0.100.1      25   0x80000001 0x5b23
-10.5.12.2       10.0.100.2      23   0x80000002 0x7c45
-
-                Summary Net Link States (Area 0.0.0.0)
-
-Link ID         ADV Router      Age  Seq#       Checksum
-10.10.1.0       10.0.100.4      20   0x80000001 0xa1f3
-10.10.2.0       10.0.100.4      20   0x80000001 0xb2e4
-
-[t=45ms] core-1> show ip ospf database router 10.0.100.1
-
-       OSPF Router with ID (10.0.100.1) (Process ID 1)
-
-                Router Link States (Area 0.0.0.0)
-
-  LS age: 25
-  Options: (No TOS-capability, DC)
-  LS Type: Router Links
-  Link State ID: 10.0.100.1
-  Advertising Router: 10.0.100.1
-  LS Seq Number: 0x80000003
-  Checksum: 0x6d2a
-  Length: 60
-  Number of Links: 3
-
-    Link connected to: a Transit Network
-     (Link ID) Designated Router address: 10.0.0.1
-     (Link Data) Router Interface address: 10.0.0.1
-      Number of TOS metrics: 0
-       TOS 0 Metrics: 10
-
-    Link connected to: a Transit Network
-     (Link ID) Designated Router address: 10.0.0.5
-     (Link Data) Router Interface address: 10.0.0.5
-      Number of TOS metrics: 0
-       TOS 0 Metrics: 10
-
-    Link connected to: a Transit Network
-     (Link ID) Designated Router address: 10.0.0.9
-     (Link Data) Router Interface address: 10.0.0.9
-      Number of TOS metrics: 0
-       TOS 0 Metrics: 10
-
-[t=45ms] core-1> show ip protocols
-Routing Protocol is "ospf 1"
-  Outgoing update filter list for all interfaces is not set
-  Incoming update filter list for all interfaces is not set
-  Router ID 10.0.100.1
-  Number of areas in this router is 1. 1 normal 0 stub 0 nssa
-  Maximum path: 4
-  Routing for Networks:
-    10.0.0.0 0.0.0.3 area 0.0.0.0
-    10.0.0.4 0.0.0.3 area 0.0.0.0
-    10.0.0.8 0.0.0.3 area 0.0.0.0
-  Routing Information Sources:
-    Gateway         Distance      Last Update
-    10.0.100.2      110           00:00:25
-    10.0.100.3      110           00:00:24
-    10.0.100.4      110           00:00:22
-  Distance: (default is 110)
-
-[t=45ms] core-1> show ip ospf interface eth0
-eth0 is up, line protocol is up
-  Internet Address 10.0.0.1/30, Area 0.0.0.0
-  Process ID 1, Router ID 10.0.100.1, Network Type BROADCAST, Cost: 10
-  Transmit Delay is 1 sec, State DR, Priority 1
-  Designated Router (ID) 10.0.100.1, Interface Address 10.0.0.1
-  Backup Designated router (ID) 10.0.100.2, Interface Address 10.0.0.2
-  Timer intervals configured, Hello 10, Dead 40, Wait 40, Retransmit 5
-    Hello due in 00:00:07
-  Neighbor Count is 1, Adjacent neighbor count is 1
-    Adjacent with neighbor 10.0.100.2 (Backup Designated Router)
-  Suppress hello for 0 neighbor(s)
-```
-
-## Example 4: BGP Multi-AS Route Propagation
-
-eBGP peering across three autonomous systems with route propagation and path attribute handling.
-
-Input topology (`bgp-multi-as.yaml`):
-```yaml
-name: bgp-multi-as
-description: BGP propagation across multiple ASes with communities
-
-devices:
-  - name: r1
-    type: router
-    router_id: 1.1.1.1
-    interfaces:
-      - name: lo0
-        ip: 1.1.1.1/32
-      - name: eth0
-        ip: 10.0.12.1/24
-    bgp:
-      as: 65001
-      networks: ["10.1.0.0/24"]
-      neighbors:
-        - ip: 10.0.12.2
-          remote_as: 65002
-          send_community: true
-
-  - name: r2
-    type: router
-    router_id: 2.2.2.2
-    interfaces:
-      - name: lo0
-        ip: 2.2.2.2/32
-      - name: eth0
-        ip: 10.0.12.2/24
-      - name: eth1
-        ip: 10.0.23.2/24
-    bgp:
-      as: 65002
-      neighbors:
-        - ip: 10.0.12.1
-          remote_as: 65001
-        - ip: 10.0.23.3
-          remote_as: 65003
-
-  - name: r3
-    type: router
-    router_id: 3.3.3.3
-    interfaces:
-      - name: lo0
-        ip: 3.3.3.3/32
-      - name: eth0
-        ip: 10.0.23.3/24
-    bgp:
-      as: 65003
-      neighbors:
-        - ip: 10.0.23.2
-          remote_as: 65002
-
-links:
-  - endpoints: [r1:eth0, r2:eth0]
-  - endpoints: [r2:eth1, r3:eth0]
-
-script:
-  - at: converged
-    device: r2
-    command: show bgp summary
-  - at: converged
-    device: r3
-    command: show bgp
-```
-
-Run simulation:
-```bash
-$ netsim run bgp-multi-as.yaml
-
-[t=0ms] Network initialized: 3 devices, 2 links
-[t=0ms] BGP: r1, r2, r3 establishing sessions
-[t=5ms] BGP: r1<->r2 session established (eBGP AS65001-AS65002)
-[t=5ms] BGP: r2<->r3 session established (eBGP AS65002-AS65003)
-[t=10ms] BGP: r1 advertising 10.1.0.0/24
-[t=12ms] BGP: Route propagation in progress
-[t=15ms] Network converged
-
-[t=15ms] r2> show bgp summary
-BGP router identifier 2.2.2.2, local AS number 65002
-
-Neighbor        V    AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
-10.0.12.1       4 65001       3       3        1    0    0 00:00:15        1
-10.0.23.3       4 65003       3       3        1    0    0 00:00:15        0
-
-Total number of neighbors 2
-
-[t=15ms] r3> show bgp
-BGP table version is 1, local router ID is 3.3.3.3
-Status codes: s suppressed, d damped, h history, * valid, > best, i internal
-Origin codes: i - IGP, e - EGP, ? - incomplete
-
-   Network          Next Hop            Metric LocPrf Weight Path
-*> 10.1.0.0/24      10.0.23.2                0             0 65002 65001 i
-
-Total number of prefixes 1
-
-Path details:
-  10.1.0.0/24:
-    AS_PATH: 65002 65001
-    NEXT_HOP: 10.0.23.2
-    ORIGIN: IGP
-    MED: not set
-    LOCAL_PREF: not set (eBGP)
-    Communities: (none)
-
-Simulation complete: 18ms simulated, 0.009s real time
-BGP events: 6 sessions established, 1 route originated, 2 UPDATEs sent
-```
-
-## Limitations
-
-- Protocol behavior is simplified compared to real implementations
-- Timing is deterministic (useful for testing, not realistic)
-- Some edge cases and vendor-specific behaviors not modeled
-- Best used for smoke testing, not certification
+---
 
 ## Use Cases
 
@@ -619,19 +426,28 @@ BGP events: 6 sessions established, 1 route originated, 2 UPDATEs sent
 - **Convergence Analysis**: Measure failover time and validate backup paths
 - **Training**: Safe environment for learning routing protocol behavior and automation development
 
-## Roadmap
-
-- v1.7 Segment Routing Foundations (SR-MPLS) (In Progress) — Phases 46-51
-- v1.8 Data Center Fabric & EVPN (Proposed)
-- v1.9 Chaos Engineering & Performance (Proposed)
+---
 
 ## Current Status
 
-v1.6 shipped with OSPF support. 126,000 lines of Rust, 122 requirements met (35 MVP + 87 advanced).
+**v1.7 Segment Routing** (In Progress) — Phases 46-51
+- SR-MPLS programming with SRGB and Node-SID model
+- RSVP-TE explicit-path tunnels
+- Multi-label stack forwarding
+
+**v1.6 L3VPN & Interactive Console** (Shipped)
+- L3VPN with VRFs, RD/RT, MP-BGP VPNv4
+- Daemon mode with interactive console
+- Tab completion, command abbreviation, interface management
+- 126,000+ lines of Rust, 1,350+ tests
+
+**Roadmap:**
+- v1.8 Data Center Fabric & EVPN (Proposed)
+- v1.9 Chaos Engineering & Performance (Proposed)
 
 ## Tech Stack
 
-Rust, Tokio for async execution, petgraph for topology representation
+Rust, Tokio for async execution, petgraph for topology representation, gRPC for daemon IPC, ratatui for TUI
 
 ---
 

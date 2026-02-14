@@ -138,11 +138,41 @@ NetVis reads the exported topology and applies advanced layout algorithms, produ
 ![Theme Showcase](/images/netvis-theme-showcase.png)
 *Device-type-aware rendering with distinct icons for routers, switches, firewalls, servers, and cloud nodes. Bandwidth labels (1G, 10G) on links. Shows the visual fidelity available for smaller, detail-rich diagrams.*
 
-## Current Status
+## Milestones
 
-**v1.2 Visual Polish & Production Hardening** shipped (Feb 9, 2026) with SVG filter infrastructure, WCAG 3:1 contrast enforcement, high-contrast theme, and label collision avoidance.
+**v1.0 Core Engine** (Shipped Jan 31, 2026)
+Layout algorithms, rendering pipeline, and multi-layer topology support.
+- Force-directed, hierarchical, geographic, and radial layout algorithms
+- SVG/PDF/PNG rendering with anti-aliased output
+- Edge bundling and routing, isometric multi-layer stacking
+- Device-aware icons and theming system
 
-Currently working on **v1.3 Embed Readiness & API Stability**: stable public API, deterministic output contracts, versioned config/topology schemas, and WASM compatibility testing.
+**v1.0.0 Release Preparation** (Shipped Jan 31, 2026)
+Documentation, CLI guides, and visual polish.
+- CLI documentation and topology/config format references
+- Device icons and theme improvements, label positioning
+
+**v1.1 Network Analysis & Operations** (Shipped Feb 3, 2026)
+Interactive features, Python bindings, and WASM.
+- Layout templates and presets, path highlighting and analysis
+- Geographic layout algorithm, auto-clustering and community detection
+- Python bindings and WASM module, interactive demo site
+
+**v1.2 Visual Polish & Production Hardening** (Shipped Feb 9, 2026)
+Accessibility, contrast enforcement, and label quality.
+- SVG filter infrastructure with signature-based deduplication
+- WCAG 3:1 contrast enforcement and high-contrast theme (AAA 21:1)
+- Label collision avoidance, export quality diagnostics
+
+**v1.3 Embed Readiness & API Stability** (In Progress)
+Stable API, deterministic rendering, and spatial indexing.
+- Deterministic output contracts with golden fixtures
+- Spatial indexing foundation, curved edge collision detection
+- Stable public API with versioned schemas, structured diagnostics
+
+**Roadmap:**
+
+- **v1.4 Advanced Operations & Interaction** — Visual topology diffing, live traffic flow simulation, interactive ARIA-enabled SVG, sub-graph layout composition, multi-page poster export
 
 ## Tech Stack
 

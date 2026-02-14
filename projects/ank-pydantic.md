@@ -449,11 +449,43 @@ Each blueprint provides:
 
 ---
 
-## Current Status
+## Milestones
 
-**v1.7 API Usability & Ergonomics** shipped (Feb 9, 2026). Currently working on **v1.8 Performance & Optimization**: query performance optimization, profiling infrastructure, backend evaluation, hierarchical graph analytics, and large-scale topology validation (10k+ nodes).
+**v1.0 API Polish** (Shipped Jan 24, 2026)
+Standardized manager API and query API foundation.
+
+**v1.1 Batteries-Included** (Shipped Jan 25, 2026)
+Transform operations, IP allocation helpers, and query demos.
+
+**v1.2 Foundations Extraction** (Shipped Jan 27, 2026)
+Extracted domain models into blueprints module (ISIS, MPLS, EVPN, L3VPN, IXP).
+
+**v1.3 Whiteboard-to-Blueprint** (Shipped Jan 31, 2026)
+Two-stage transformation model and Rust-backed query engine.
+- Whiteboard (sketch) → Plan (logical) → Protocol Layers pipeline
+- Rust query execution via nte-query with QuerySpec DTO pattern
+
+**v1.4 Native Foundation** (Shipped Feb 1, 2026)
+Rust-first architecture with CoreTopology as single source of truth.
+
+**v1.5 API Ergonomics** (Shipped Feb 3, 2026)
+Query API completion — sorting, between queries, graph traversal, cascade delete.
+
+**v1.6 Documentation & Adoption** (Shipped Feb 5, 2026)
+MkDocs site with Diataxis structure, tested examples, and domain case studies.
+
+**v1.7 API Usability & Ergonomics** (Shipped Feb 9, 2026)
+Collision handling policies, safe defaults, round-trip I/O, and blueprint validation.
+
+**v1.8 Performance & Optimization** (In Progress)
+Query optimization and large-scale topology support (10k+ nodes).
+- Profiling infrastructure with py-spy, cProfile, and cargo-flamegraph
+- LadybugDB backend evaluation and backend abstraction layer
+- LazyFrame executor with filter planning, materialized query cache (100-1000x speedup)
+- Hierarchical analytics with cross-layer queries (planned)
 
 **Roadmap:**
+
 - **IP addressing** — Automated IP address allocation and management across topology layers
 - **NSOT integration** — Workflow to import/export topology state with Network Source of Truth systems
 

@@ -76,6 +76,11 @@ Performance benchmarks, worker-first compute, GPU renderer, scale navigation.
 - Topology generation — TopoGen patterns available in UI
 - Live simulation observability — watch protocol convergence and routing updates
 
+**Roadmap:**
+
+- **Complete v1.2 Scale-First Visualization** — Paused at 98% to focus on tool integration; remaining work includes stub indicators for hidden connections, scale-first view state persistence, and simulation overlays in scale-first mode
+- **v1.4 and beyond** — Multi-user collaboration, version-controlled topology projects, CI/CD pipeline integration for topology validation workflows
+
 ---
 
 [← Back to Network Automation](../network-automation)

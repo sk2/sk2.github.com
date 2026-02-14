@@ -687,8 +687,11 @@ SR-MPLS programming and traffic analysis.
 - Routing matrix export and flow-based simulation engine (planned)
 
 **Roadmap:**
-- **v1.8 Data Center Fabric & EVPN** — VXLAN overlay, EVPN control plane, spine-leaf topologies
-- **v1.9 Chaos Engineering & Performance** — Fault injection framework, large-scale topology benchmarks
+
+- **v1.8 Data Center Fabric & EVPN** — VXLAN overlay with BGP EVPN (Type 2/3/5 routes), ESI multi-homing and LACP simulation, multicast foundation (PIM-SM, IGMP/MLD)
+- **v1.9 Chaos Engineering & Performance** — Scripted chaos injection with blast radius analysis, BGP hijack simulation, SoA memory layout and zero-copy parallel execution, incremental FIB updates, QoS with WRR and priority queuing
+- **v2.0 Intelligent Simulation** — Distributed engine with remote participation via gRPC, simulation time machine with state snapshot and rewind debugging, LLM-powered troubleshooting CLI
+- **v2.1 Ecosystem & Digital Twin** — Hybrid real-sim bridge via TUN/TAP for host connectivity, config ingestion from Cisco/Juniper to netsim YAML
 
 ## Tech Stack
 

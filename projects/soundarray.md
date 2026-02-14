@@ -6,7 +6,7 @@ layout: default
 
 <span class="status-badge status-active">Active Development</span>
 
-[← Back to Projects](../projects)
+[← Back to Signal Processing](../signal-processing)
 
 ---
 
@@ -29,4 +29,4 @@ An exploration-focused audio processing system using Raspberry Pi and microphone
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+[← Back to Signal Processing](../signal-processing)

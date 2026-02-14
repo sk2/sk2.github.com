@@ -6,7 +6,7 @@ layout: default
 
 <span class="status-badge status-active">Phase 18/20 (84%)</span>
 
-[← Back to Projects](../projects)
+[← Back to Agentic Systems](../agentic-systems)
 
 ---
 
@@ -112,11 +112,11 @@ Confidence: 0.85
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+[← Back to Agentic Systems](../agentic-systems)
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+[← Back to Agentic Systems](../agentic-systems)
 
 ## Architecture
 
@@ -259,4 +259,4 @@ All agents communicate exclusively via NATS with subject-based ACLs. Each agent'
 
 ---
 
-[← Back to Projects](../projects)
+[← Back to Agentic Systems](../agentic-systems)

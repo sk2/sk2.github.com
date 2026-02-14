@@ -6,7 +6,7 @@ layout: default
 
 <span class="status-badge status-active">Phase 2/5 (50%)</span>
 
-[← Back to Projects](../projects)
+[← Back to Data Analytics](../data-analytics)
 
 ---
 
@@ -117,4 +117,4 @@ Discovery APIs → motifs() / discords() / to_polars()
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+[← Back to Data Analytics](../data-analytics)

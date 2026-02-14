@@ -2,11 +2,11 @@
 layout: default
 ---
 
-# ank_pydantic
+# Topology Modeling Library
 
 <span class="status-badge status-active">v1.8 — Performance & Optimization</span>
 
-[← Back to Projects](../projects)
+[← Back to Network Automation](../network-automation)
 
 ---
 
@@ -340,17 +340,17 @@ docker exec -it clab-transitnet-P1 show mpls ldp neighbor
 Composable queries with Rust-backed execution:
 
 ```python
-# ank_pydantic
+# Filter by keyword attributes
 core_routers = topology.query.nodes().where(
-    lambda n: n.data.role == "core" and n.data.pop == "North"
+    role="core", pop="North"
 ).models()
 
-# ank_pydantic
+# Count with attribute filters
 inter_pop_links = topology.query.links().where(
-    lambda l: l.data.link_type == "long-haul"
+    link_type="long-haul"
 ).count()
 
-# ank_pydantic
+# Layer-scoped queries
 mpls_devices = topology.layer("mpls").nodes().where(
     mpls_enabled=True
 ).ids()
@@ -452,10 +452,14 @@ Each blueprint provides:
 
 **v1.7 API Usability & Ergonomics** shipped (Feb 9, 2026). Currently working on **v1.8 Performance & Optimization**: query performance optimization, profiling infrastructure, backend evaluation, hierarchical graph analytics, and large-scale topology validation (10k+ nodes).
 
+**Roadmap:**
+- **IP addressing** — Automated IP address allocation and management across topology layers
+- **NSOT integration** — Workflow to import/export topology state with Network Source of Truth systems
+
 ## Tech Stack
 
 Python (Pydantic), Rust core (`petgraph`-backed), PyO3 bindings
 
 ---
 
-[← Back to Network Automation](../network-automation) | [← Back to Projects](../projects)
+[← Back to Network Automation](../network-automation)

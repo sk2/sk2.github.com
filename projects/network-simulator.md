@@ -6,7 +6,7 @@ layout: default
 
 <span class="status-badge status-active">Active Development — v1.7 Segment Routing</span>
 
-[← Back to Projects](../projects)
+[← Back to Network Automation](../network-automation)
 
 ---
 
@@ -200,7 +200,7 @@ $ netsim exec my-network r1 "show ip route --json"
 netsim attach my-network r1
 ```
 
-Opens a full interactive REPL session on the device. You're effectively "logged in" to the simulated router with command history, tab completion, and Cisco IOS-style abbreviated commands:
+Opens a full interactive REPL session on the device. You're effectively "logged in" to the simulated router with command history, tab completion, and abbreviated commands:
 
 ```
 r1> sh ip ro
@@ -261,7 +261,7 @@ r1> show ospf neighbors --json
 
 **Console Features:**
 
-- **Abbreviated commands** — Cisco IOS-style prefix matching (`sh ip ro` → `show ip route`, `int shut` → `interface shutdown`)
+- **Abbreviated commands** — Prefix matching (`sh ip ro` → `show ip route`, `int shut` → `interface shutdown`)
 - **Tab completion** — Full hierarchical completion for commands, subcommands, and arguments
 - **Interface management** — `interface shutdown/no shutdown` triggers protocol teardown and reconvergence
 - **JSON output** — Append `--json` to any show command for structured output
@@ -459,7 +459,7 @@ Neighbor ID     Interface  State   Priority  Dead Time
 
 ### Available Commands
 
-All commands support Cisco IOS-style abbreviation (e.g., `sh ip ro`) and `--json` output for structured data.
+All commands support prefix abbreviation (e.g., `sh ip ro`) and `--json` output for structured data.
 
 **Show Commands (Read-Only Introspection):**
 
@@ -660,4 +660,4 @@ Rust, Tokio for async execution, petgraph for topology representation, gRPC for 
 
 ---
 
-[← Back to Network Automation](../network-automation) | [← Back to Projects](../projects)
+[← Back to Network Automation](../network-automation)

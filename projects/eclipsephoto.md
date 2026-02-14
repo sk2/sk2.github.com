@@ -29,4 +29,4 @@ A "fire and forget" Raspberry Pi-based controller for autonomous solar eclipse p
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+[← Back to Photography](../photography)

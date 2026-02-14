@@ -6,7 +6,7 @@ layout: default
 
 <span class="status-badge status-active">** 1 (Ingestion & Foundation)</span>
 
-[← Back to Projects](../projects)
+[← Back to Photography](../photography)
 
 ---
 
@@ -29,4 +29,4 @@ EclipseStack is a Rust-powered utility (with a web-based UI) specifically design
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+[← Back to Photography](../photography)

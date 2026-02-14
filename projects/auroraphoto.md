@@ -6,7 +6,7 @@ layout: default
 
 <span class="status-badge status-active">** Phase 1: Star Sharpness Foundation</span>
 
-[← Back to Projects](../projects)
+[← Back to Photography](../photography)
 
 ---
 
@@ -29,4 +29,4 @@ An automated astrophotography system designed to capture high-quality aurora and
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+[← Back to Photography](../photography)

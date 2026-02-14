@@ -6,7 +6,7 @@ layout: default
 
 <span class="status-badge status-active">v1 — Core Streaming & Hardware</span>
 
-[← Back to Projects](../projects)
+[← Back to Signal Processing](../signal-processing)
 
 ---
 
@@ -107,7 +107,7 @@ The raw IQ stream from an RTL-SDR at 2.4 MSPS with 8-bit samples produces 4.8 MB
    - **Implementation**: `delta[n] = sample[n] - sample[n-1]`
    - **Benefit**: Deltas compress better (more zeros/small values) → 20-40% reduction with zstd
    - **CPU Impact**: Minimal (single subtract per sample)
-   - **Trade-off**: Requires client-side reconstruction (accumulate deltas)
+   - **Trade-off**: Requires client-side reconstruction (accumulate deltas). Susceptible to packet loss — a single dropped packet corrupts all subsequent samples until the next absolute reference frame
 
 2. **Lossless Compression (Planned)**
    - **Algorithms under evaluation**:
@@ -139,6 +139,10 @@ The raw IQ stream from an RTL-SDR at 2.4 MSPS with 8-bit samples produces 4.8 MB
 | zstd (level 1) | 35-45% | 8-12% | < 2ms |
 | Delta + zstd | 40-50% | 10-15% | < 3ms |
 | Bit depth reduction | 25% | 3-5% | 0ms |
+
+**Protocol Precision Limitations:**
+
+The standard `rtl_tcp` protocol transmits IQ samples as 8-bit unsigned integers, limiting dynamic range to ~48 dB. Higher-end SDRs (AirSpy HF+) natively capture at 18-bit resolution, which is truncated to 8 bits for protocol compatibility. A future protocol extension could support higher bit depths (12/16-bit samples) for improved dynamic range, at the cost of increased bandwidth and requiring updated client support.
 
 **Current Focus:** v1 core streaming must be stable before adding compression. Compression will be opt-in (via config flag) to maintain protocol compatibility with standard `rtl_tcp` clients.
 
@@ -175,4 +179,4 @@ cross build --target armv7-unknown-linux-gnueabihf --release
 
 ---
 
-[← Back to Projects](../projects)
+[← Back to Signal Processing](../signal-processing)

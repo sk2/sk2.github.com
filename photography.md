@@ -13,6 +13,7 @@ Integrated tools for field photography, astrophotography automation, and image p
   - [AuroraPhoto — Automated Aurora Capture](#auroraphoto--automated-aurora-capture)
   - [OpenAstro Node — Autonomous Observatory](#openastro-node--autonomous-observatory)
   - [OpenAstro Core — Shared Astronomical Logic](#openastro-core--shared-astronomical-logic)
+  - [EclipsePhoto — Autonomous Eclipse Capture](#eclipsephoto--autonomous-eclipse-capture)
   - [EclipseStack — High-Precision Alignment](#eclipsestack--high-precision-alignment)
   - [ASIAIR Import Tool — Workflow Automation](#asiair-import-tool--workflow-automation)
 - [Field Photography](#field-photography)
@@ -28,7 +29,7 @@ Photography—whether capturing aurora bursts in sub-zero conditions or composin
 **Core Philosophy:**
 - **Autonomous where possible**: Automated focus, exposure sequencing, hardware management
 - **Assistive where valuable**: Composition guidance, timing suggestions, workflow optimization
-- **Field-ready**: Designed for real-world conditions (cold, dark, no internet)
+- **Field-ready**: Designed for real-world conditions (dark, remote, no internet)
 - **Workflow integration**: From capture through processing with minimal manual steps
 
 ## How They Work Together
@@ -99,7 +100,7 @@ Automated aurora photography system using Raspberry Pi nodes controlling Sony a7
 - **Multi-Node Control**: Manage 4+ camera arrays from single iPhone interface
 - **Field-Ready**: Wi-Fi hotspot connectivity for remote locations
 
-**Use Case:** Capture high-quality aurora imagery during unpredictable "bursts" while maintaining perfect star focus in freezing field conditions.
+**Use Case:** Capture high-quality aurora imagery during unpredictable "bursts" while maintaining perfect star focus in remote field conditions.
 
 **Tech Stack:** Raspberry Pi, iOS (SwiftUI), Python/Rust camera control
 
@@ -143,6 +144,25 @@ High-performance Rust library providing shared astronomical logic, hardware driv
 **Current Milestone:** v0.1 Celestial Math (angle primitives, coordinate transforms, time helpers)
 
 **Tech Stack:** Rust
+
+---
+
+### EclipsePhoto — Autonomous Eclipse Capture
+
+<span class="status-badge status-active">Phase 1 — Hardware & Data Foundation</span> · [Full Details →](projects/eclipsephoto)
+
+**What It Is:**
+A "fire and forget" Raspberry Pi-based controller for autonomous solar eclipse photography. Coordinates a camera (via gphoto2) and a high-end mount (ZWO AM5 / Benro Polaris via INDI) to capture a complete eclipse sequence from C1 to C4 without manual intervention.
+
+**Key Features:**
+- **Full Autonomy**: Handles guiding, exposure ramping (Holy Grail), and error recovery so the photographer can experience the eclipse
+- **Mount Control**: INDI-based integration with ZWO AM5 and Benro Polaris
+- **Watchdog Recovery**: Automatic recovery from hardware faults during the one-shot event
+- **Sequence Planning**: Pre-programmed exposure sequences for each contact phase (C1-C4)
+
+**Use Case:** Secure high-quality eclipse imagery from a completely autonomous system, eliminating the need to choose between operating the camera and experiencing the event.
+
+**Tech Stack:** Python, gphoto2, INDI protocol, Raspberry Pi
 
 ---
 
@@ -217,7 +237,7 @@ Technical perfection (focus, exposure, tracking) should be automated. Creative d
 ### Field-Ready Design
 
 These tools are designed for real-world conditions:
-- **Aurora shoots**: Sub-zero temperatures, no internet, unpredictable timing
+- **Aurora shoots**: Remote locations, no internet, unpredictable timing
 - **Deep sky imaging**: Overnight unattended operation, safety monitoring
 - **Landscape work**: Quick setup, minimal fumbling with settings
 
@@ -236,6 +256,7 @@ Capture is only half the workflow. These tools integrate with industry-standard 
 - **AuroraPhoto**: [github.com/sk2/auroraphoto](https://github.com/sk2/auroraphoto)
 - **OpenAstro Node**: [github.com/sk2/open-astro-node](https://github.com/sk2/open-astro-node)
 - **OpenAstro Core**: [github.com/sk2/open-astro-core](https://github.com/sk2/open-astro-core)
+- **EclipsePhoto**: [github.com/sk2/eclipsephoto](https://github.com/sk2/eclipsephoto)
 - **EclipseStack**: [github.com/sk2/eclipsestack](https://github.com/sk2/eclipsestack)
 - **ASIAIR Import Tool**: [github.com/sk2/import-asiair](https://github.com/sk2/import-asiair)
 - **Photo Tour**: [github.com/sk2/photo-tour](https://github.com/sk2/photo-tour)

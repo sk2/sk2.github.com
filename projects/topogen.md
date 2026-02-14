@@ -2,11 +2,11 @@
 layout: default
 ---
 
-# TopoGen - Network Topology Generator
+# Topology Generator
 
-<span class="status-badge status-active">Phase 18/24 (15%)</span>
+<span class="status-badge status-active">Phase 21/24 (89%)</span>
 
-[← Back to Projects](../projects)
+[← Back to Network Automation](../network-automation)
 
 ---
 
@@ -19,7 +19,7 @@ Generating realistic, validated network topologies for testing often requires cu
 
 | | |
 |---|---|
-| **Status** | Phase 18/24 (15%) |
+| **Status** | Phase 21/24 (89%) |
 | **Language** | N/A |
 | **Started** | 2026 |
 
@@ -31,22 +31,22 @@ A Rust library with Python bindings for generating realistic network topologies.
 
 ## Key Features
 
-- **Realistic Topology Types**:
-  - Data center: Spine-leaf, fat-tree, Clos
-  - WAN: Hub-and-spoke, ring, full mesh, partial mesh
-  - Random graphs: Erdős-Rényi, Barabási-Albert, Watts-Strogatz
-- **Design Pattern Awareness**: Generates topologies that reflect real-world network design
-- **Configurable Parameters**: Node count, link capacity, failure domains, geographic distribution
-- **Custom YAML Output**: Compatible with ank_pydantic and other ecosystem tools
-- **Python Bindings**: Ergonomic API for scripting and integration
+- **Topology Types**:
+  - Data center: Fat-tree, leaf-spine
+  - WAN/Backbone: Ring, mesh, hierarchical WAN, POP (Points of Presence)
+  - Random graphs: Barabási-Albert, Watts-Strogatz, Erdős-Rényi
+- **Realistic Interface Specifications**: Vendor-specific naming conventions (Cisco, Arista, Juniper)
+- **Traffic Matrix Generation**: Gravity-model traffic matrices with temporal dynamics (diurnal/weekly patterns)
+- **Distance-Aware Latency**: Geographic placement drives realistic link latencies
+- **Seed-Deterministic**: Reproducible topology generation from a seed value
+- **Output Converters**: YAML, ContainerLab topology files, AutoNetKit GraphML
+- **Three Interfaces**: CLI, Python API, and config-driven YAML/TOML input
+- **Validation**: Structural and design-pattern compliance checks
 
 ## Example: Data Center Leaf-Spine
 
 Configuration file (`leaf-spine-lab.yaml`):
 ```yaml
-# TopoGen - Network Topology Generator
-# TopoGen - Network Topology Generator
-
 name: dc-lab-leaf-spine-2s-4l-100g
 seed: 42
 
@@ -112,7 +112,6 @@ links:
 ```python
 from topogen import DataCenter
 
-# TopoGen - Network Topology Generator
 topo = DataCenter.spine_leaf(
     spines=2,
     leaves=4,
@@ -120,23 +119,24 @@ topo = DataCenter.spine_leaf(
     spine_bandwidth_gbps=100.0
 )
 
-# TopoGen - Network Topology Generator
 topo.export_yaml("topology.yaml")
 topo.export_json("topology.json")
 
-# TopoGen - Network Topology Generator
+# Integration with topology modeling library
 from ank_pydantic import Topology
 ank_topo = topo.to_ank_pydantic()
 ```
 
 ## Current Status
 
-Early development, focusing on core algorithms and Python bindings.
+**v0.10 Gap Closure** shipped (Feb 11, 2026) with ContainerLab output converter, AutoNetKit GraphML converter, traffic pattern generation, and POP design patterns.
+
+Currently working on **Phase 22-24**: geographic placement infrastructure (city database, H3 grids), fiber map integration (GeoJSON import/export), multi-layer topology generation, and eyeball network generators.
 
 ## Tech Stack
 
-Rust core, PyO3 for Python bindings
+Rust core, PyO3 for Python bindings, Maturin build system
 
 ---
 
-[← Back to Network Automation](../network-automation) | [← Back to Projects](../projects)
+[← Back to Network Automation](../network-automation)

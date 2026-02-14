@@ -2,11 +2,11 @@
 layout: default
 ---
 
-# NetVis
+# Network Visualization Engine
 
 <span class="status-badge status-active">v1.3 — Embed Readiness & API Stability</span>
 
-[← Back to Projects](../projects)
+[← Back to Network Automation](../network-automation)
 
 ---
 
@@ -149,4 +149,4 @@ Rust, petgraph, fjadra (d3-force port), SVG/PDF/PNG rendering, WASM-ready
 
 ---
 
-[← Back to Network Automation](../network-automation) | [← Back to Projects](../projects)
+[← Back to Network Automation](../network-automation)

@@ -6,7 +6,7 @@ layout: default
 
 <span class="status-badge status-active">** 2. Control</span>
 
-[← Back to Projects](../projects)
+[← Back to Photography](../photography)
 
 ---
 
@@ -29,4 +29,4 @@ A headless, autonomous astrophotography controller designed for low-power Linux 
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+[← Back to Photography](../photography)

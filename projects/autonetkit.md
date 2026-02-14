@@ -6,7 +6,7 @@ layout: default
 
 <span class="status-badge status-active">PhD 2017</span>
 
-[← Back to Projects](../projects)
+[← Back to Network Automation](../network-automation)
 
 ---
 
@@ -114,28 +114,28 @@ Network diagram generation:
 
 ---
 
-[← Back to Network Automation](../network-automation) | [← Back to Projects](../projects)
+[← Back to Network Automation](../network-automation)
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+[← Back to Network Automation](../network-automation)
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+[← Back to Network Automation](../network-automation)
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+[← Back to Network Automation](../network-automation)
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+[← Back to Network Automation](../network-automation)
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+[← Back to Network Automation](../network-automation)
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+[← Back to Network Automation](../network-automation)

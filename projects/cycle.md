@@ -6,7 +6,7 @@ layout: default
 
 <span class="status-badge status-active">Phase 1/5 (80%)</span>
 
-[← Back to Projects](../projects)
+[← Back to Agentic Systems](../agentic-systems)
 
 ---
 
@@ -25,4 +25,4 @@ A native SwiftUI training application for iPad and Apple TV that bridges profess
 ---
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+[← Back to Agentic Systems](../agentic-systems)

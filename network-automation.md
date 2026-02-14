@@ -10,14 +10,14 @@ Tools for network topology modeling, simulation, and visualization.
 - [Overview](#overview)
 - [How They Work Together](#how-they-work-together)
 - [The Tools](#the-tools)
-  - [Network Simulator (netsim) — Protocol Validation](#network-simulator-netsim--protocol-validation)
-  - [NetVis — Visualization Engine](#netvis--visualization-engine)
-  - [ank_pydantic — Topology Modeling Library](#ank_pydantic--topology-modeling-library)
-  - [NTE — Network Topology Engine](#nte--network-topology-engine)
-  - [ANK Workbench — Unified Platform](#ank-workbench--unified-platform)
-  - [Network Traffic Simulator — Flow-Based Performance Analysis](#network-traffic-simulator--flow-based-performance-analysis)
-  - [TopoGen — Topology Generator](#topogen--topology-generator)
-  - [AutoNetkit — The Foundation](#autonetkit--the-foundation)
+  - [Network Simulator](#network-simulator--protocol-validation)
+  - [Network Visualization Engine](#network-visualization-engine)
+  - [Topology Modeling Library](#topology-modeling-library)
+  - [Network Topology Engine](#network-topology-engine)
+  - [Network Automation Workbench](#network-automation-workbench)
+  - [Network Traffic Simulator](#network-traffic-simulator--flow-based-performance-analysis)
+  - [Topology Generator](#topology-generator)
+  - [AutoNetKit](#autonetkit--the-foundation)
 - [Getting Started](#getting-started)
 - [Source Code](#source-code)
 
@@ -25,7 +25,7 @@ Tools for network topology modeling, simulation, and visualization.
 
 ## Overview
 
-A set of tools that work together: generate or model topologies, run basic protocol simulations, and render network diagrams.
+An integrated ecosystem of high-performance tools for network topology modeling, deterministic protocol simulation, and visualization. Design topologies declaratively, validate routing behavior in simulation, and render publication-quality network diagrams — driven from YAML, Python, CLI, or a unified web and text interface.
 
 ## How They Work Together
 
@@ -79,7 +79,7 @@ ANK Workbench provides a web interface to coordinate these tools.
 
 ## The Tools
 
-### Network Simulator (netsim) — Protocol Validation
+### Network Simulator — Protocol Validation
 
 <span class="status-badge status-active">v1.7 — Segment Routing</span> · [Full Details →](projects/network-simulator)
 
@@ -103,13 +103,13 @@ Run simulations as background daemons and interact with them in real-time, like 
 - **Agent development**: Test automation agents against live network state without container overhead
 - **CI/CD integration**: Start daemon, run tests via `exec`, collect results, stop daemon
 
-**Current Status:** v1.6 shipped with L3VPN (VRFs, RD/RT, MP-BGP VPNv4), daemon mode with interactive console (Cisco IOS-style abbreviation, tab completion), and BMP telemetry. v1.7 adds SR-MPLS dataplane support. 126,000+ lines of Rust, 1,350+ tests.
+**Current Status:** v1.6 shipped with L3VPN (VRFs, RD/RT, MP-BGP VPNv4), daemon mode with interactive console (command abbreviation, tab completion), and BMP telemetry. v1.7 adds SR-MPLS dataplane support. 126,000+ lines of Rust, 1,350+ tests.
 
 **Tech Stack:** Rust, Tokio, petgraph, gRPC (daemon IPC), ratatui (TUI)
 
 ---
 
-### NetVis — Visualization Engine
+### Network Visualization Engine
 
 <span class="status-badge status-active">v1.3 — Embed Readiness & API Stability</span> · [Full Details →](projects/netvis)
 
@@ -135,7 +135,7 @@ A Rust-based network topology layout and visualization engine. Renders complex m
 
 ---
 
-### ank_pydantic — Topology Modeling Library
+### Topology Modeling Library
 
 <span class="status-badge status-active">v1.8 — Performance & Optimization</span> · [Full Details →](projects/ank-pydantic)
 
@@ -176,7 +176,7 @@ topo.export_for_netvis("topology.json")
 
 ---
 
-### NTE — Network Topology Engine
+### Network Topology Engine
 
 <span class="status-badge status-active">Stable</span> · [Full Details →](projects/nte)
 
@@ -196,12 +196,12 @@ The high-performance Rust engine that powers ank_pydantic's graph operations. Ex
 
 ---
 
-### ANK Workbench — Unified Platform
+### Network Automation Workbench
 
 <span class="status-badge status-active">v1.3 — Tool Integration & Interactive Workflows</span> · [Full Details →](projects/ank-workbench)
 
 **What It Is:**
-A web-based platform that integrates the entire network automation ecosystem into a single workflow. Upload topology YAML, visualize the network, run simulations, and analyze results without switching between tools.
+A platform that integrates the entire network automation ecosystem into a single workflow. Driven from YAML, a text-based TUI, or the web interface — upload topology YAML, visualize the network, run simulations, and analyze results without switching between tools.
 
 **Milestones:** v1.0 Foundation shipped (Feb 4). v1.1 UX Polish shipped (Feb 9). v1.2 Scale Visualization at 98%. v1.3 adds simulator integration, interactive device terminals, and live observability.
 
@@ -222,20 +222,20 @@ High-performance flow-based network traffic simulator using analytic queuing mod
 
 ---
 
-### TopoGen — Topology Generator
+### Topology Generator
 
-<span class="status-badge status-active">Phase 17/24 (11%)</span> · [Full Details →](projects/topogen)
+<span class="status-badge status-active">Phase 21/24 (89%)</span> · [Full Details →](projects/topogen)
 
 **What It Is:**
-A Rust library with Python bindings for generating realistic network topologies. Supports data center (spine-leaf, fat-tree), WAN (hub-spoke, mesh), and random graph patterns.
+A Rust library with Python bindings for generating realistic network topologies. Supports data center (fat-tree, leaf-spine), WAN/backbone (ring, mesh, hierarchical, POP), and random graph patterns. Includes traffic matrix generation, ContainerLab output converter, and vendor-specific interface naming.
 
-**Current Status:** Early development
+**Current Status:** v0.10 shipped. Geographic placement and multi-layer generation in progress.
 
 **Tech Stack:** Rust core, PyO3 bindings
 
 ---
 
-### AutoNetkit — The Foundation
+### AutoNetKit — The Foundation
 
 <span class="status-badge status-active">PhD 2017</span> · [Full Details →](projects/autonetkit)
 
@@ -328,146 +328,36 @@ Simulation complete: 35ms simulated
 - 13 iBGP sessions, 2 route reflectors
 ```
 
-**Step 4: Deploy to ContainerLab and verify**
+**Step 4: Visualize with NetVis**
 
-Generated IOS-XR configuration for P1:
-```cisco
-hostname P1
-!
-interface Loopback0
- ipv4 address 10.0.0.1 255.255.255.255
-!
-router isis CORE
- is-type level-2-only
- net 49.0001.0100.0000.0001.00
- address-family ipv4 unicast
-  metric-style wide
- !
- interface Loopback0
-  passive
-  address-family ipv4 unicast
- !
- interface GigabitEthernet0/0/0/0
-  point-to-point
-  address-family ipv4 unicast
- !
-!
-mpls ldp
- router-id 10.0.0.1
- interface GigabitEthernet0/0/0/0
- !
-!
+```python
+# Export for visualization
+topology.export_for_netvis("transitnet-vis.json", layout="hierarchical", node_metadata=True)
 ```
 
-Verify IS-IS neighbors on P1:
 ```bash
-$ docker exec -it clab-transitnet-P1 xr show isis neighbors
-
-IS-IS CORE neighbors:
-System Id       Interface       SNPA           State  Holdtime Type IETF-NSF
-P3              Gi0/0/0/0       *PtoP*         Up     28       L2   Capable
-P5              Gi0/0/0/1       *PtoP*         Up     26       L2   Capable
-PE1             Gi0/0/0/2       *PtoP*         Up     29       L2   Capable
+$ netvis render transitnet-vis.json --layout hierarchical --output transitnet.svg
+Loaded topology: 16 nodes, 14 edges
+Rendering to SVG...
+Written: transitnet.svg
 ```
 
-Verify MPLS/LDP sessions on P1:
+NetVis renders the topology with device-aware icons, PoP grouping, and protocol overlay annotations.
+
+**Step 5: Deploy to ContainerLab**
+
+The generated configs deploy directly to ContainerLab for real device testing:
+
+```python
+env = get_environment('containerlab')
+artifacts = env.generate(topology)
+```
+
 ```bash
-$ docker exec -it clab-transitnet-P1 xr show mpls ldp neighbor
-
-Peer LDP Identifier: 10.0.0.3:0
-  TCP connection: 10.0.0.3:646 - 10.0.0.1:37854
-  Graceful Restart: No
-  Session Holdtime: 180 sec
-  State: Oper; Msgs sent/rcvd: 15/14; Downstream-Unsolicited
-  Up time: 00:05:23
-  LDP Discovery Sources:
-    IPv4: (1)
-      Gi0/0/0/0
-    IPv6: (0)
-
-Peer LDP Identifier: 10.0.0.5:0
-  TCP connection: 10.0.0.5:646 - 10.0.0.1:41203
-  Graceful Restart: No
-  Session Holdtime: 180 sec
-  State: Oper; Msgs sent/rcvd: 16/15; Downstream-Unsolicited
-  Up time: 00:05:21
+$ sudo containerlab deploy -t transitnet.clab.yml
 ```
 
-Verify BGP sessions on PE1 (to route reflectors):
-```bash
-$ docker exec -it clab-transitnet-PE1 xr show bgp summary
-
-BGP router identifier 10.0.0.11, local AS number 65000
-BGP generic scan interval 60 secs
-BGP table state: Active
-Table ID: 0xe0000000   RD version: 5
-BGP main routing table version 5
-BGP scan interval 60 secs
-
-BGP is operating in STANDALONE mode.
-
-Process       RcvTblVer   bRIB/RIB   LabelVer  ImportVer  SendTblVer  StandbyVer
-Speaker               5          5          5          5           5           0
-
-Neighbor        Spk    AS MsgRcvd MsgSent   TblVer  InQ OutQ  Up/Down  St/PfxRcd
-10.0.0.21         0 65000      12      11        5    0    0 00:05:18          0
-10.0.0.22         0 65000      12      11        5    0    0 00:05:17          0
-```
-
-Check routing table on PE1:
-```bash
-$ docker exec -it clab-transitnet-PE1 xr show route
-
-Codes: C - connected, S - static, R - RIP, B - BGP, (>) - Diversion path
-       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
-       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
-       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP
-       i - ISIS, L1 - IS-IS level-1, L2 - IS-IS level-2
-       ia - IS-IS inter area, su - IS-IS summary null, * - candidate default
-       U - per-user static route, o - ODR, L - local, G  - DAGR, l - LISP
-
-Gateway of last resort is not set
-
-L    10.0.0.11/32 is directly connected, 00:05:45, Loopback0
-i L2 10.0.0.1/32 [115/10] via 10.1.11.1, 00:05:28, GigabitEthernet0/0/0/0
-i L2 10.0.0.3/32 [115/20] via 10.1.11.1, 00:05:28, GigabitEthernet0/0/0/0
-i L2 10.0.0.5/32 [115/20] via 10.1.11.1, 00:05:28, GigabitEthernet0/0/0/0
-i L2 10.0.0.16/32 [115/30] via 10.1.11.1, 00:05:28, GigabitEthernet0/0/0/0
-i L2 10.0.0.21/32 [115/20] via 10.1.11.1, 00:05:28, GigabitEthernet0/0/0/0
-i L2 10.0.0.22/32 [115/20] via 10.1.11.1, 00:05:28, GigabitEthernet0/0/0/0
-```
-
-Verify MPLS forwarding table:
-```bash
-$ docker exec -it clab-transitnet-PE1 xr show mpls forwarding
-
-Local  Outgoing    Prefix             Outgoing     Next Hop        Bytes
-Label  Label       or ID              Interface                    Switched
------- ----------- ------------------ ------------ --------------- ------------
-24000  Pop         10.0.0.1/32        Gi0/0/0/0    10.1.11.1       0
-24001  24001       10.0.0.3/32        Gi0/0/0/0    10.1.11.1       0
-24002  24002       10.0.0.5/32        Gi0/0/0/0    10.1.11.1       0
-24003  24003       10.0.0.16/32       Gi0/0/0/0    10.1.11.1       0
-24004  24004       10.0.0.21/32       Gi0/0/0/0    10.1.11.1       0
-24005  24005       10.0.0.22/32       Gi0/0/0/0    10.1.11.1       0
-```
-
-End-to-end connectivity test (PE1 to PE6):
-```bash
-$ docker exec -it clab-transitnet-PE1 ping 10.0.0.16 -c 3
-PING 10.0.0.16 (10.0.0.16) 56(84) bytes of data.
-64 bytes from 10.0.0.16: icmp_seq=1 ttl=62 time=2.1 ms
-64 bytes from 10.0.0.16: icmp_seq=2 ttl=62 time=1.8 ms
-64 bytes from 10.0.0.16: icmp_seq=3 ttl=62 time=1.9 ms
-
-$ docker exec -it clab-transitnet-PE1 traceroute 10.0.0.16
-1  P1 (10.0.0.1) [MPLS: Label 24001]
-2  P5 (10.0.0.5) [MPLS: Label 24002]
-3  P6 (10.0.0.6) [MPLS: Label 24003]
-4  PE6 (10.0.0.16)
-```
-
-**Key Insight:** ank_pydantic's design functions automatically derive protocol layers from the whiteboard topology, then netsim validates the resulting configuration converges correctly. The generated configs can be deployed directly to ContainerLab for real device testing.
+**Key Insight:** ank_pydantic's design functions automatically derive protocol layers from the whiteboard topology, netsim validates convergence in seconds, and NetVis renders the result — all before committing to container deployment.
 
 ---
 
@@ -594,14 +484,13 @@ ixp.export_netsim("ixp-netsim.yaml")
 - Verify BGP sessions to route servers
 - Check transparent AS path handling
 - Validate community-based filtering
-- Test multi-vendor interoperability
 
 ---
 
 ## Getting Started
 
 **For Network Engineers:**
-1. Start with **ANK Workbench** (coming soon) — the unified web interface for the entire workflow
+1. Start with **ANK Workbench** — the unified platform for the entire workflow
 2. Explore **ank_pydantic** for programmatic topology modeling
 3. Use **Network Simulator** for validation and testing
 

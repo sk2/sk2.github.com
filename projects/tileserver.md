@@ -6,7 +6,7 @@ layout: default
 
 <span class="status-badge status-active">Active Development</span>
 
-[← Back to Projects](../projects)
+[← Back to Data Analytics](../data-analytics)
 
 ---
 
@@ -25,4 +25,4 @@ Serve dynamic vector tiles (MVT) from massive geospatial datasets (millions of p
 ---
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+[← Back to Data Analytics](../data-analytics)

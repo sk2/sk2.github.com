@@ -6,7 +6,7 @@ layout: default
 
 <span class="status-badge status-active">Active Development</span>
 
-[← Back to Projects](../projects)
+[← Back to Photography](../photography)
 
 ---
 
@@ -30,4 +30,4 @@ It helps you compose shots, automate repeatable workflows, and progressively add
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+[← Back to Photography](../photography)

@@ -6,7 +6,7 @@ layout: default
 
 <span class="status-badge status-active">Phase 05/05 (100%)</span>
 
-[← Back to Projects](../projects)
+[← Back to Network Automation](../network-automation)
 
 ---
 
@@ -251,4 +251,4 @@ Adding SR-MPLS foundations with deterministic label/SID handling and IGP-based d
 
 ---
 
-[← Back to Projects](../projects)
+[← Back to Network Automation](../network-automation)

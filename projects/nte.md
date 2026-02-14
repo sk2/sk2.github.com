@@ -2,11 +2,11 @@
 layout: default
 ---
 
-# NTE — Network Topology Engine
+# Network Topology Engine
 
-<span class="status-badge status-active">Stable — Rust Backend for ank_pydantic</span>
+<span class="status-badge status-active">Stable</span>
 
-[← Back to Projects](../projects)
+[← Back to Network Automation](../network-automation)
 
 ---
 
@@ -57,6 +57,25 @@ NTE is organized as a Cargo workspace with specialized crates:
 | **nte-server** | Distributed computation support |
 | **nte-monte-carlo** | Monte Carlo simulation engine |
 
+## Query Engine (nte-query)
+
+The `nte-query` crate provides a composable query API that executes against the topology graph. Queries are built as chains of filter, select, and aggregate operations that compile down to efficient graph traversals:
+
+- **Node/edge filtering** by attribute predicates (role, type, layer membership)
+- **Path queries** — shortest path, all paths, constrained walks
+- **Aggregation** — count, group-by, statistical summaries over topology subsets
+- **Lazy evaluation** — queries build an execution plan, only materializing results on `.collect()`
+
+Queries execute in Rust and return results to Python via PyO3, avoiding the overhead of Python-side graph traversal.
+
+## Storage Backends
+
+NTE supports pluggable storage through the `nte-datastore-*` crates:
+
+- **Polars** (`nte-datastore-polars`) — Primary backend. Columnar storage for efficient analytical queries over node/edge attributes.
+- **DuckDB** (`nte-datastore-duckdb`) — SQL-based backend for complex analytical queries, joins, and aggregations. Useful when topology data needs to be correlated with external datasets.
+- **Lite** (`nte-datastore-lite`) — Lightweight in-memory backend for small topologies and testing.
+
 ## Integration with ank_pydantic
 
 ank_pydantic imports NTE as a Python package built with Maturin/PyO3. All graph mutations and queries flow through NTE's Rust engine:
@@ -79,4 +98,4 @@ Rust, petgraph (StableDiGraph), Polars, DuckDB, PyO3/Maturin for Python bindings
 
 ---
 
-[← Back to Network Automation](../network-automation) | [← Back to Projects](../projects)
+[← Back to Network Automation](../network-automation)

@@ -6,7 +6,7 @@ layout: default
 
 <span class="status-badge status-active">Phase 2/3 (45%)</span>
 
-[← Back to Projects](../projects)
+[← Back to Signal Processing](../signal-processing)
 
 ---
 
@@ -163,4 +163,4 @@ Edge Pi → SpyServer/rtl_tcp → Mac mini Core
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+[← Back to Signal Processing](../signal-processing)

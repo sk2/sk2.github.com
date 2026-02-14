@@ -6,7 +6,7 @@ layout: default
 
 <span class="status-badge status-active">Active Development</span>
 
-[← Back to Projects](../projects)
+[← Back to Signal Processing](../signal-processing)
 
 ---
 
@@ -48,19 +48,6 @@ A passive radar system that exploits ambient Wi-Fi signals (2.4 GHz / 5 GHz) as 
 - **Clutter Rejection**: Static objects (furniture, walls) must be filtered from moving targets
 - **Low SNR Operation**: Human reflections are weak compared to direct signal and clutter
 
-**Detection Capabilities:**
-- **Presence Detection**: Identify human presence behind walls
-- **Motion Classification**: Distinguish walking, standing, breathing based on micro-Doppler
-- **Localization**: Estimate position using angle-of-arrival from coherent array
-- **Tracking**: Follow movement over time
-
-## Applications
-
-- **Emergency Response**: Locate people in burning buildings or disaster zones
-- **Security**: Perimeter monitoring and intrusion detection
-- **Smart Home**: Occupancy sensing for automation
-- **Healthcare**: Non-contact breathing/heartbeat monitoring
-
 ## Technical Approach
 
 The system processes coherent multi-channel Wi-Fi signals using:
@@ -73,4 +60,4 @@ The system processes coherent multi-channel Wi-Fi signals using:
 7. **Tracking**: Maintain target tracks over time
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+[← Back to Signal Processing](../signal-processing)

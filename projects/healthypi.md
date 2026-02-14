@@ -6,7 +6,7 @@ layout: default
 
 <span class="status-badge status-active">Phase 6/6 (87%)</span>
 
-[← Back to Projects](../projects)
+[← Back to Signal Processing](../signal-processing)
 
 ---
 
@@ -29,4 +29,4 @@ A modular, agent-aware health monitoring ecosystem that translates raw biometric
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+[← Back to Signal Processing](../signal-processing)

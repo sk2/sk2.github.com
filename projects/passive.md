@@ -6,7 +6,7 @@ layout: default
 
 <span class="status-badge status-active">Phase 3/4 (100%)</span>
 
-[← Back to Projects](../projects)
+[← Back to Signal Processing](../signal-processing)
 
 ---
 
@@ -54,4 +54,4 @@ Clean, stable codebase for processing multi-channel RF reflections. Currently fo
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+[← Back to Signal Processing](../signal-processing)

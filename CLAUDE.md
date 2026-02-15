@@ -30,6 +30,10 @@ Keep code names only in: Python imports, CLI commands, repository URLs, file pat
 - Avoid templated section headers like "What It Is", "Problem It Solves", "Why This Tool?". Use natural, specific headings or fold content into the introduction.
 - Each project page has one footer: `[<- Back to Network Automation](../network-automation)` or equivalent.
 
+## Upcoming Projects
+
+- **Synthetic Music Generation**: Algorithmic/generative music project. No page yet — waiting for more substance before adding.
+
 ## Technical
 
 - Jekyll site using the minimal theme with custom layout in `_layouts/default.html`

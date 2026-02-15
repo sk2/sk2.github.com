@@ -130,12 +130,12 @@ This script scans `~/dev`, `~/PycharmProjects`, and `~/RustroverProjects` for pr
 - **Preserve detailed content**: If existing .md file has 3x more lines than generated version, keep the existing file (indicates manual enrichment).
 - **Extract names from preserved files**: When preserving detailed content, use the project name from the existing file, not PROJECT.md.
 - **Legacy projects**: Keep existing project .md files that don't have .planning directories (e.g., autonetkit, nascleanup).
-  - **AutoNetkit (PycharmProjects/autonetkit_legacy)**: This is the legacy PhD project. The active development is **ank_pydantic** in `~/dev/ank_pydantic`.
+  - **AutoNetkit (PycharmProjects/autonetkit_legacy)**: This is the legacy PhD project. The active development is the **Topology Modeling Library** in `~/dev/ank_pydantic`.
 
 **Special Cases:**
 - **Multi-Agent Assistant**: The project page includes a comprehensive "Individual Agents" section listing all 13+ agents with their languages, purposes, and security tiers. This is a key feature and should be preserved.
-- **NetSim**: Should be substantially detailed (250+ lines) with complete protocol lists, features, requirements validated, architecture decisions, and tech stack. Not a brief overview.
-- **ANK Workbench**: Position as "complements existing network tools" NOT "commercial product" or "modern alternative to GNS3". It's a complementary tool with declarative, intent-based workflow.
+- **Network Simulator**: Should be substantially detailed (250+ lines) with complete protocol lists, features, requirements validated, architecture decisions, and tech stack. Not a brief overview.
+- **Network Automation Workbench**: Position as "complements existing network tools" NOT "commercial product" or "modern alternative to GNS3". It's a complementary tool with declarative, intent-based workflow.
 
 **Page Sections to Include:**
 Expand project pages with these sections when available: Overview, What This Is, Problem It Solves, Features, Key Capabilities, Architecture, Technical Depth, Security Model, Implementation Details, Protocols Implemented, Performance, Use Cases, Integration, Hardware, Agents, Components.

@@ -13,7 +13,7 @@ section: network-automation
 
 ## The Concept
 
-Network simulation typically involves a trade-off between the resource intensity of VM-based emulation and the abstraction of mathematical models. **netsim** implements deterministic, tick-based protocol simulation. It simulates the logic of OSPF, IS-IS, and BGP rather than emulating the kernel, allowing for high-fidelity validation of large topologies in seconds.
+Network simulation typically involves a trade-off between the resource intensity of VM-based emulation and the abstraction of mathematical models. The **Network Simulator** implements deterministic, tick-based protocol simulation. It simulates the logic of OSPF, IS-IS, and BGP rather than emulating the kernel, allowing for high-fidelity validation of large topologies in seconds.
 
 ## Quick Facts
 
@@ -39,7 +39,7 @@ Network engineers need to validate configurations before deploying to production
 - **Real hardware labs**: Expensive, requires physical space, limited scale.
 - **Production testing**: Risky, causes outages when configs have errors.
 
-netsim provides fast, deterministic simulation with protocol-level fidelity. Catch routing loops, unreachable hosts, and misconfigurations before touching production.
+The Network Simulator provides fast, deterministic simulation with protocol-level fidelity. Catch routing loops, unreachable hosts, and misconfigurations before touching production.
 
 ## Architecture
 

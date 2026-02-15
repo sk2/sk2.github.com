@@ -14,7 +14,7 @@ section: network-automation
 
 ## The Insight
 
-Network topology modeling typically forces a choice between the speed of untyped graph libraries (NetworkX) and the rigidity of database-backed sources of truth. **ank-pydantic** eliminates this trade-off by using Pydantic for schema validation and a high-performance Rust core (`petgraph`) for graph traversals.
+Network topology modeling typically forces a choice between the speed of untyped graph libraries (NetworkX) and the rigidity of database-backed sources of truth. The **Topology Modeling Library** eliminates this trade-off by using Pydantic for schema validation and a high-performance Rust core (`petgraph`) for graph traversals.
 
 ## Quick Facts
 
@@ -357,7 +357,7 @@ mpls_devices = topology.layer("mpls").nodes().where(
 ).ids()
 ```
 
-### Integration with NetVis
+### Integration with the Network Visualization Engine
 
 Export for visualization:
 
@@ -370,7 +370,7 @@ topology.export_for_netvis(
 )
 ```
 
-NetVis applies advanced layout algorithms to produce publication-quality diagrams.
+The Network Visualization Engine applies advanced layout algorithms to produce publication-quality diagrams.
 
 ---
 

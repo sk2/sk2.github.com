@@ -14,7 +14,7 @@ section: network-automation
 
 ## The Concept
 
-Network visualization often fails at scale because layout algorithms treat all nodes and edges equally, producing cluttered "hairball" diagrams. **NetVis** treats topologies as hierarchical structures and uses domain-aware layout constraints—including isometric views and edge bundling—to reflect engineering intent.
+Network visualization often fails at scale because layout algorithms treat all nodes and edges equally, producing cluttered "hairball" diagrams. The **Network Visualization Engine** treats topologies as hierarchical structures and uses domain-aware layout constraints—including isometric views and edge bundling—to reflect engineering intent.
 
 ## Quick Facts
 
@@ -92,9 +92,9 @@ Rendering to SVG...
 Written: output.svg (6.5 KB)
 ```
 
-## Integration with ank_pydantic
+## Integration with the Topology Modeling Library
 
-ank_pydantic topologies export directly to NetVis format:
+Topology Modeling Library topologies export directly to the Network Visualization Engine format:
 ```python
 # NetVis
 topo.export_for_netvis(
@@ -104,7 +104,7 @@ topo.export_for_netvis(
 )
 ```
 
-NetVis reads the exported topology and applies advanced layout algorithms, producing publication-quality diagrams that reflect the logical structure captured in ank_pydantic.
+The Network Visualization Engine reads the exported topology and applies advanced layout algorithms, producing publication-quality diagrams that reflect the logical structure captured in the Topology Modeling Library.
 
 ## Example Gallery
 
@@ -126,7 +126,7 @@ NetVis reads the exported topology and applies advanced layout algorithms, produ
 ### Radial Layout — Distributed Service Mesh
 
 ![Radial Layout](/images/netvis-showcase-radial-layout.png)
-*Zone-based service mesh with central controller, regional coordinators, edge nodes, and service endpoints arranged in a radial layout. Demonstrates NetVis's ability to handle hierarchical topologies with many leaf nodes.*
+*Zone-based service mesh with central controller, regional coordinators, edge nodes, and service endpoints arranged in a radial layout. Demonstrates the engine's ability to handle hierarchical topologies with many leaf nodes.*
 
 ### Isometric Multi-Layer View
 

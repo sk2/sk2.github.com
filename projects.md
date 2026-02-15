@@ -10,7 +10,7 @@ Focusing on network automation, high-performance signal processing, and secure m
 
 ## [Network Automation →](/network-automation)
 
-High-performance tools for topology modeling, deterministic protocol simulation, and visualization. Includes Network Simulator, NetVis, ank_pydantic, NTE, ANK Workbench, TopoGen, and more.
+High-performance tools for topology modeling, deterministic protocol simulation, and visualization. Includes Network Simulator, Network Visualization Engine, Topology Modeling Library, Network Topology Engine, Network Automation Workbench, Topology Generator, and more.
 
 ## [Signal Processing & RF →](/signal-processing)
 

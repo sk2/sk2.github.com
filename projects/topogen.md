@@ -14,7 +14,7 @@ section: network-automation
 
 ## The Concept
 
-Generating realistic, validated network topologies for testing often requires custom, brittle scripts. **Topogen** consolidates topology generation logic into a high-performance Rust core, producing structured data center and WAN graphs with consistent YAML output for the simulation and visualization ecosystem.
+Generating realistic, validated network topologies for testing often requires custom, brittle scripts. The **Topology Generator** consolidates topology generation logic into a high-performance Rust core, producing structured data center and WAN graphs with consistent YAML output for the simulation and visualization ecosystem.
 
 ## Quick Facts
 
@@ -123,7 +123,7 @@ topo = DataCenter.spine_leaf(
 topo.export_yaml("topology.yaml")
 topo.export_json("topology.json")
 
-# Integration with topology modeling library
+# Integration with the Topology Modeling Library
 from ank_pydantic import Topology
 ank_topo = topo.to_ank_pydantic()
 ```

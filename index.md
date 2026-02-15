@@ -29,7 +29,7 @@ This research led to the creation of **AutoNetkit**, an open-source tool integra
 ## Highlighted Projects
 
 - **[Network Simulator:](/projects/network-simulator)** A Rust-based packet-level network simulator with daemon mode, interactive console, and SR-MPLS support. 126,000+ LOC, 1,350+ tests.
-- **[NetVis:](/projects/netvis)** A Rust visualization engine that turns complex multi-layer topologies into clear, information-dense renderings with isometric views and edge bundling.
+- **[Network Visualization Engine:](/projects/netvis)** A Rust visualization engine that turns complex multi-layer topologies into clear, information-dense renderings with isometric views and edge bundling.
 - **[Signal Processing & SDR:](/signal-processing)** Real-time spectrum monitoring (Project Spectra), SDR streaming infrastructure (rtltcp-rust), and experimental RF reflection analysis.
 
 [View all projects](projects)

@@ -30,50 +30,52 @@ An integrated ecosystem of high-performance tools for network topology modeling,
 ## How They Work Together
 
 ```
-┌──────────────────────────────────────────────────────────────────┐
-│                        ANK Workbench                             │
-│         (Orchestration · Web UI · Workflow Management)           │
-│   ┌──────────────┬──────────────┬──────────────┬──────────────┐ │
-│   │   TopoGen    │ ank_pydantic │   Simulator  │    NetVis    │ │
-└───┴──────────────┴──────────────┴──────────────┴──────────────┴─┘
-    │              │              │              │
-    │              │              │              │
-    │   ┌──────────▼──────────┐   │              │
-    │   │     TopoGen         │   │              │
-    │   │  (Generate Topo)    │   │              │
-    │   └──────────┬──────────┘   │              │
-    │              │               │              │
-    │              │               │              │
-    │   ┌──────────▼──────────────────────┐      │
-    │   │       ank_pydantic              │      │
-    │   │   (Topology Modeling API)       │      │
-    │   └──────────┬──────────────────────┘      │
-    │              │                              │
-    │              │                              │
-    │   ┌──────────▼─────────────────────────────────────┐
-    │   │            Analysis Module                      │
-    │   │  ┌─────────────────────┬─────────────────────┐ │
-    │   │  │  ank_pydantic       │ Network Simulator   │ │
-    │   │  │  (Query & Transform)│ (Protocol Behavior) │ │
-    │   │  └─────────────────────┴─────────────────────┘ │
-    │   └──────────┬──────────────────────────────────────┘
-    │              │
-    │              │
-    │   ┌──────────▼──────────┐
-    │   │       NetVis        │
-    │   │   (Visualization)   │
-    │   └─────────────────────┘
-    │
-    └─► ANK Workbench coordinates entire pipeline
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│                              Network Automation Workbench                               │
+│                    (Orchestration · Web UI · Workflow Management)                       │
+│   ┌───────────────────┬────────────────────────┬─────────────────┬──────────────────┐  │
+│   │ Topology Generator│ Topology Modeling Lib.  │ Network Simulator│ Visualization    │  │
+│   │                   │                        │                  │ Engine           │  │
+└───┴───────────────────┴────────────────────────┴─────────────────┴──────────────────┴──┘
+    │                   │                        │                  │
+    │                   │                        │                  │
+    │   ┌───────────────▼───────────────┐        │                  │
+    │   │     Topology Generator        │        │                  │
+    │   │     (Generate Topo)           │        │                  │
+    │   └───────────────┬───────────────┘        │                  │
+    │                   │                        │                  │
+    │                   │                        │                  │
+    │   ┌───────────────▼────────────────────────┐                  │
+    │   │     Topology Modeling Library           │                  │
+    │   │     (Topology Modeling API)             │                  │
+    │   └───────────────┬────────────────────────┘                  │
+    │                   │                                           │
+    │                   │                                           │
+    │   ┌───────────────▼──────────────────────────────────────┐    │
+    │   │            Analysis Module                            │    │
+    │   │  ┌──────────────────────┬──────────────────────────┐ │    │
+    │   │  │ Topology Modeling    │ Network Simulator         │ │    │
+    │   │  │ Library              │ (Protocol Behavior)       │ │    │
+    │   │  │ (Query & Transform)  │                          │ │    │
+    │   │  └──────────────────────┴──────────────────────────┘ │    │
+    │   └───────────────┬──────────────────────────────────────┘    │
+    │                   │                                           │
+    │                   │                                           │
+    │   ┌───────────────▼───────────────────┐                       │
+    │   │   Network Visualization Engine    │                       │
+    │   │   (Visualization)                 │                       │
+    │   └───────────────────────────────────┘                       │
+    │                                                               │
+    └─► Network Automation Workbench coordinates entire pipeline
 ```
 
 **Workflow:**
 
-1. Generate or create topology (TopoGen or ank_pydantic)
+1. Generate or create topology (Topology Generator or Topology Modeling Library)
 2. Optionally run simulation to check routing behavior
-3. Visualize the topology (NetVis)
+3. Visualize the topology (Network Visualization Engine)
 
-ANK Workbench provides a web interface to coordinate these tools.
+The Network Automation Workbench provides a web interface to coordinate these tools.
 
 ---
 
@@ -89,7 +91,7 @@ A deterministic, tick-based network simulator for rapid prototyping and testing 
 **Rapid Prototyping for Agentic AI & Network Automation:**
 The simulator's core value is accelerating the development iteration loop for agentic AI systems and network automation tools. Instead of spinning up containers for every test cycle (minutes), validate configurations in simulation (seconds):
 
-1. **Design topology** with ank_pydantic
+1. **Design topology** with the Topology Modeling Library
 2. **Generate configs** automatically for target platforms
 3. **Simulate in seconds** to validate routing behavior
 4. **Iterate rapidly** on agent logic, automation scripts, or config templates
@@ -129,7 +131,7 @@ A Rust-based network topology layout and visualization engine. Renders complex m
 ![Data Center Fabric](/images/netvis-datacenter-large.png)
 *Spine-leaf data center with bandwidth annotations and rack grouping.*
 
-**Current Status:** v1.2 shipped with visual polish and production hardening. Working on v1.3 API stability and WASM embedding for ANK Workbench integration.
+**Current Status:** v1.2 shipped with visual polish and production hardening. Working on v1.3 API stability and WASM embedding for Network Automation Workbench integration.
 
 **Tech Stack:** Rust, petgraph, fjadra (d3-force port), WASM-ready
 
@@ -148,7 +150,7 @@ A Python library for modeling and querying network topologies with type-safe Pyd
 - **Lazy Query API**: Composable queries with Rust-backed execution (powered by `petgraph`)
 - **Configuration Generation**: Automatic multi-vendor config generation (Cisco IOS/IOS-XR/NX-OS, Juniper JunOS, Arista EOS)
 - **Batteries-Included Blueprints**: Pre-built domain models for ISIS, MPLS, EVPN, L3VPN, IXP
-- **Rust Core (NTE)**: Graph operations run at native speed with Python FFI bindings
+- **Rust Core (Network Topology Engine)**: Graph operations run at native speed with Python FFI bindings
 
 **Example Usage:**
 ```python
@@ -172,7 +174,7 @@ topo.export_for_netvis("topology.json")
 
 **Current Status:** v1.7 API Usability shipped. Working on v1.8 Performance & Optimization — query performance, profiling infrastructure, and 10k+ node validation.
 
-**Tech Stack:** Python (Pydantic), NTE Rust engine, PyO3 bindings
+**Tech Stack:** Python (Pydantic), Network Topology Engine (Rust), PyO3 bindings
 
 ---
 
@@ -181,7 +183,7 @@ topo.export_for_netvis("topology.json")
 <span class="status-badge status-active">Stable</span> · [Full Details →](projects/nte)
 
 **What It Is:**
-The high-performance Rust engine that powers ank_pydantic's graph operations. Extracted into its own repository as the engine's scope grew beyond a simple backing store.
+The high-performance Rust engine that powers the Topology Modeling Library's graph operations. Extracted into its own repository as the engine's scope grew beyond a simple backing store.
 
 **Key Features:**
 - **petgraph StableDiGraph**: Native-speed topology representation
@@ -205,7 +207,7 @@ A platform that integrates the entire network automation ecosystem into a single
 
 **Milestones:** v1.0 Foundation shipped (Feb 4). v1.1 UX Polish shipped (Feb 9). v1.2 Scale Visualization at 98%. v1.3 adds simulator integration, interactive device terminals, and live observability.
 
-**Tech Stack:** Python (FastAPI), React frontend, integrates all ANK ecosystem components
+**Tech Stack:** Python (FastAPI), React frontend, integrates all ecosystem components
 
 ---
 
@@ -242,7 +244,7 @@ A Rust library with Python bindings for generating realistic network topologies.
 **What It Is:**
 The original compiler-based network automation tool from my PhD research. Introduced declarative network design with the Whiteboard → Plan → Build transformation model, integrated into Cisco VIRL.
 
-**Current Status:** Maintained for reference. Active development moved to ank_pydantic and ANK Workbench.
+**Current Status:** Maintained for reference. Active development moved to the Topology Modeling Library and the Network Automation Workbench.
 
 **Tech Stack:** Python, NetworkX
 
@@ -250,18 +252,18 @@ The original compiler-based network automation tool from my PhD research. Introd
 
 ## Integration Examples
 
-These examples demonstrate how ank_pydantic, netsim, and NetVis work together for end-to-end network design workflows.
+These examples demonstrate how the Topology Modeling Library, Network Simulator, and Network Visualization Engine work together for end-to-end network design workflows.
 
 ### Example 1: Service Provider Core (IS-IS/MPLS/iBGP)
 
-Multi-layer service provider topology showing ank_pydantic → netsim integration.
+Multi-layer service provider topology showing Topology Modeling Library → Network Simulator integration.
 
 **Topology Overview:**
 - 16 devices: 8 core (P), 6 edge (PE), 2 route reflectors (RR)
 - AS 65000, 4 Points of Presence (PoPs): West, East, North, South
 - Protocol stack: IS-IS underlay, MPLS/LDP transport, iBGP with RR
 
-**Step 1: Model topology with ank_pydantic**
+**Step 1: Model topology with the Topology Modeling Library**
 
 ```python
 from ank_pydantic import Topology
@@ -303,14 +305,14 @@ print(f"  RR1 <-> RR2 (RR-to-RR)")
 # Total: 13 iBGP sessions (6 PEs × 2 RRs + 1 RR-RR)
 ```
 
-**Step 2: Export for netsim validation**
+**Step 2: Export for Network Simulator validation**
 
 ```python
 # Export topology for protocol simulation
 topology.export_netsim("transitnet-netsim.yaml")
 ```
 
-**Step 3: Validate with netsim**
+**Step 3: Validate with the Network Simulator**
 
 ```bash
 $ netsim run transitnet-netsim.yaml
@@ -328,7 +330,7 @@ Simulation complete: 35ms simulated
 - 13 iBGP sessions, 2 route reflectors
 ```
 
-**Step 4: Visualize with NetVis**
+**Step 4: Visualize with the Network Visualization Engine**
 
 ```python
 # Export for visualization
@@ -342,7 +344,7 @@ Rendering to SVG...
 Written: transitnet.svg
 ```
 
-NetVis renders the topology with device-aware icons, PoP grouping, and protocol overlay annotations.
+The Network Visualization Engine renders the topology with device-aware icons, PoP grouping, and protocol overlay annotations.
 
 **Step 5: Deploy to ContainerLab**
 
@@ -357,7 +359,7 @@ artifacts = env.generate(topology)
 $ sudo containerlab deploy -t transitnet.clab.yml
 ```
 
-**Key Insight:** ank_pydantic's design functions automatically derive protocol layers from the whiteboard topology, netsim validates convergence in seconds, and NetVis renders the result — all before committing to container deployment.
+**Key Insight:** The Topology Modeling Library's design functions automatically derive protocol layers from the whiteboard topology, the Network Simulator validates convergence in seconds, and the Network Visualization Engine renders the result — all before committing to container deployment.
 
 ---
 
@@ -369,7 +371,7 @@ $ sudo containerlab deploy -t transitnet.clab.yml
 - iBGP EVPN overlay (spines as route reflectors)
 - VXLAN tunnels for L2 extension across fabric
 
-**ank_pydantic workflow:**
+**Topology Modeling Library workflow:**
 ```python
 from ank_pydantic.blueprints.designs.datacenter import build_spine_leaf_fabric
 from ank_pydantic.blueprints.designs.evpn import build_evpn_overlay
@@ -399,7 +401,7 @@ overlay = build_evpn_overlay(
 fabric.export_netsim("dc-fabric-netsim.yaml")
 ```
 
-**netsim validation:**
+**Network Simulator validation:**
 - Verify eBGP underlay convergence
 - Check EVPN Type-2 MAC routes advertised
 - Validate VXLAN tunnel establishment
@@ -414,7 +416,7 @@ fabric.export_netsim("dc-fabric-netsim.yaml")
 - 3 customer sites requiring VPN connectivity
 - VRFs on PE routers with RT import/export
 
-**ank_pydantic workflow:**
+**Topology Modeling Library workflow:**
 ```python
 from ank_pydantic.blueprints.designs.l3vpn import provision_l3vpn
 
@@ -439,7 +441,7 @@ l3vpn = provision_l3vpn(
 l3vpn.export_netsim("l3vpn-netsim.yaml")
 ```
 
-**netsim validation:**
+**Network Simulator validation:**
 - Verify VRF configuration on PEs
 - Check MP-BGP VPNv4 routes exchanged
 - Validate end-to-end customer connectivity
@@ -454,7 +456,7 @@ l3vpn.export_netsim("l3vpn-netsim.yaml")
 - Members: 3 ISPs (Cisco, Juniper, Arista platforms)
 - BGP communities for routing policy
 
-**ank_pydantic workflow:**
+**Topology Modeling Library workflow:**
 ```python
 from ank_pydantic.blueprints.designs.ixp import build_ixp_fabric
 
@@ -480,7 +482,7 @@ ixp.add_route_server_sessions(transparent_asn=True)
 ixp.export_netsim("ixp-netsim.yaml")
 ```
 
-**netsim validation:**
+**Network Simulator validation:**
 - Verify BGP sessions to route servers
 - Check transparent AS path handling
 - Validate community-based filtering
@@ -490,24 +492,24 @@ ixp.export_netsim("ixp-netsim.yaml")
 ## Getting Started
 
 **For Network Engineers:**
-1. Start with **ANK Workbench** — the unified platform for the entire workflow
-2. Explore **ank_pydantic** for programmatic topology modeling
-3. Use **Network Simulator** for validation and testing
+1. Start with the **Network Automation Workbench** — the unified platform for the entire workflow
+2. Explore the **Topology Modeling Library** for programmatic topology modeling
+3. Use the **Network Simulator** for validation and testing
 
 **For Developers:**
-1. Check out **ank_pydantic** for the Python API and documentation
-2. Explore **netsim** source code for protocol implementation details
-3. Contribute to **NetVis** for visualization algorithms
+1. Check out the **Topology Modeling Library** for the Python API and documentation
+2. Explore the **Network Simulator** source code for protocol implementation details
+3. Contribute to the **Network Visualization Engine** for visualization algorithms
 
 ---
 
 ## Source Code
 
-- **ank_pydantic**: [github.com/sk2/ank_pydantic](https://github.com/sk2/ank_pydantic)
-- **NTE**: [github.com/sk2/ank_nte](https://github.com/sk2/ank_nte)
-- **netsim**: [github.com/sk2/netsim](https://github.com/sk2/netsim)
-- **NetVis**: [github.com/sk2/netvis](https://github.com/sk2/netvis)
-- **TopoGen**: [github.com/sk2/topogen](https://github.com/sk2/topogen)
+- **Topology Modeling Library**: [github.com/sk2/ank_pydantic](https://github.com/sk2/ank_pydantic)
+- **Network Topology Engine**: [github.com/sk2/ank_nte](https://github.com/sk2/ank_nte)
+- **Network Simulator**: [github.com/sk2/netsim](https://github.com/sk2/netsim)
+- **Network Visualization Engine**: [github.com/sk2/netvis](https://github.com/sk2/netvis)
+- **Topology Generator**: [github.com/sk2/topogen](https://github.com/sk2/topogen)
 - **AutoNetkit**: [github.com/sk2/autonetkit](https://github.com/sk2/autonetkit)
 
 ---

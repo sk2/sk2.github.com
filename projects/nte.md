@@ -13,7 +13,7 @@ section: network-automation
 
 ## The Insight
 
-Graph operations on network topologies demand native performance — Python's NetworkX caps out on large topologies. NTE provides a Rust-native topology engine with Python bindings, giving ank_pydantic the speed of compiled code with the ergonomics of Python.
+Graph operations on network topologies demand native performance — Python's NetworkX caps out on large topologies. The Network Topology Engine provides a Rust-native topology engine with Python bindings, giving the Topology Modeling Library the speed of compiled code with the ergonomics of Python.
 
 ## Quick Facts
 
@@ -27,24 +27,24 @@ Graph operations on network topologies demand native performance — Python's Ne
 
 ## What This Is
 
-NTE (Network Topology Engine) is the Rust backend that powers ank_pydantic's graph operations. Originally embedded within ank_pydantic as `ank_nte`, it has been extracted into its own repository as the engine matured and its scope grew beyond a simple backing store.
+The Network Topology Engine is the Rust backend that powers the Topology Modeling Library's graph operations. Originally embedded within the Topology Modeling Library as `ank_nte`, it has been extracted into its own repository as the engine matured and its scope grew beyond a simple backing store.
 
-NTE provides high-performance graph algorithms, query execution, and data storage for network topology operations. It uses `petgraph`'s `StableDiGraph` for topology representation and Polars for columnar data storage.
+It provides high-performance graph algorithms, query execution, and data storage for network topology operations. It uses `petgraph`'s `StableDiGraph` for topology representation and Polars for columnar data storage.
 
 ## Why It Was Split Out
 
-As ank_pydantic evolved, the Rust core grew into a substantial system with its own architectural concerns:
+As the Topology Modeling Library evolved, the Rust core grew into a substantial system with its own architectural concerns:
 
 - **Multiple storage backends** (Polars, DuckDB, Lite) requiring independent testing
 - **Distributed compute support** via `nte-server` and `nte-backend`
 - **Monte Carlo simulation** capabilities in `nte-monte-carlo`
 - **Independent release cadence** — Rust compilation and Python wheel builds benefit from isolation
 
-Separating NTE enables independent versioning, faster CI, and clearer ownership boundaries.
+Separating the Network Topology Engine enables independent versioning, faster CI, and clearer ownership boundaries.
 
 ## Architecture
 
-NTE is organized as a Cargo workspace with specialized crates:
+The Network Topology Engine is organized as a Cargo workspace with specialized crates:
 
 | Crate | Purpose |
 |-------|---------|
@@ -71,19 +71,19 @@ Queries execute in Rust and return results to Python via PyO3, avoiding the over
 
 ## Storage Backends
 
-NTE supports pluggable storage through the `nte-datastore-*` crates:
+The Network Topology Engine supports pluggable storage through the `nte-datastore-*` crates:
 
 - **Polars** (`nte-datastore-polars`) — Primary backend. Columnar storage for efficient analytical queries over node/edge attributes.
 - **DuckDB** (`nte-datastore-duckdb`) — SQL-based backend for complex analytical queries, joins, and aggregations. Useful when topology data needs to be correlated with external datasets.
 - **Lite** (`nte-datastore-lite`) — Lightweight in-memory backend for small topologies and testing.
 - **LadybugDB** (Potential) — Under evaluation as an embedded analytical database backend, offering fast columnar queries with a smaller footprint than DuckDB.
 
-## Integration with ank_pydantic
+## Integration with the Topology Modeling Library
 
-ank_pydantic imports NTE as a Python package built with Maturin/PyO3. All graph mutations and queries flow through NTE's Rust engine:
+The Topology Modeling Library imports the Network Topology Engine as a Python package built with Maturin/PyO3. All graph mutations and queries flow through the engine's Rust core:
 
 ```
-ank_pydantic (Python API)
+Topology Modeling Library (Python API)
     │
     ▼
 NTE Python bindings (PyO3)
@@ -92,7 +92,7 @@ NTE Python bindings (PyO3)
 nte-query → nte-core → nte-datastore-*
 ```
 
-Python users interact with ank_pydantic's Pydantic models. NTE handles the performance-critical work underneath.
+Python users interact with the Topology Modeling Library's Pydantic models. The Network Topology Engine handles the performance-critical work underneath.
 
 ## Tech Stack
 

@@ -6,29 +6,29 @@ Add visual content to project pages to provide substance and demonstrate functio
 
 ### Network Engineering Projects
 
-**netvis:**
+**Network Visualization Engine:**
 - [ ] Example topology visualizations (force-directed, hierarchical, radial)
 - [ ] CLI usage example with output
 - [ ] Side-by-side comparison of different layout algorithms
 - [ ] Edge bundling demonstration
 
-**ank-pydantic:**
+**Topology Modeling Library:**
 - [ ] Code example showing type-safe topology definition
 - [ ] Query API usage examples
 - [ ] Generated configuration output samples
 
-**ANK Workbench:**
+**Network Automation Workbench:**
 - [ ] Screenshot of web UI (topology editor, visualization)
 - [ ] Guided tour screenshots
 - [ ] Sample gallery view
 - [ ] Workflow demonstration (design → simulate → visualize)
 
-**TopoGen:**
+**Topology Generator:**
 - [ ] CLI usage examples (generate data center, WAN, random topologies)
 - [ ] Generated YAML topology example
 - [ ] Visualization of generated topologies
 
-**netsim:**
+**Network Simulator:**
 - [ ] CLI output showing simulation run
 - [ ] Routing table output (`show ip route`)
 - [ ] Ping/traceroute output examples
@@ -65,7 +65,7 @@ Add visual content to project pages to provide substance and demonstrate functio
 
 ## Content Improvements
 
-- [ ] Create individual project pages (projects/netvis.md, projects/ank-pydantic.md, etc.)
+- [ ] Create individual project pages (projects/netvis.md, projects/ank-pydantic.md, etc.) using full product names
 - [ ] Convert projects.md to summary page with links to individual pages
 - [ ] Add "Quick Facts" boxes to each project page (year started, language, test count, status)
 - [ ] Include relevant links (GitHub, docs, papers) on each project page

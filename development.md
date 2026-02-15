@@ -30,8 +30,8 @@ If verification fails, I fix gaps before advancing.
 ## Technology Choices
 
 **Core Languages:**
-- **Rust**: For performance-critical code (netvis, netsim, topogen, astro). Ensures type safety, zero-cost abstractions, robust error handling.
-- **Python**: For rapid development and scientific computing (ank-pydantic, healthypi). Leverages a rich ecosystem for signal processing and network automation.
+- **Rust**: For performance-critical code (Network Visualization Engine, Network Simulator, Topology Generator, astro). Ensures type safety, zero-cost abstractions, robust error handling.
+- **Python**: For rapid development and scientific computing (Topology Modeling Library, HealthyPi). Leverages a rich ecosystem for signal processing and network automation.
 - **Swift**: For native Apple ecosystem integration (multi-agent collectors, cycle agent). Provides first-class support for iOS/tvOS/macOS.
 
 **Key Tools:**
@@ -42,7 +42,7 @@ If verification fails, I fix gaps before advancing.
 - **FastAPI**: Modern async Python web framework.
 
 **Testing:**
-- Comprehensive test suites (286 tests in HealthyPi, 582 in netvis).
+- Comprehensive test suites (286 tests in HealthyPi, 582 in Network Visualization Engine).
 - Unit tests validate algorithms and logic.
 - Integration tests verify component interaction.
 - Parity tests ensure interface consistency across CLI/API/config.

@@ -10,18 +10,6 @@ Experimental projects exploring SDR spectrum monitoring and biometric signal pro
 
 ## Software Defined Radio
 
-### Illumination Reflection Tracking
-
-<span class="status-badge status-active">Phase 2/4 (56%)</span> · [Full Details →](projects/passive)
-
-**What It Is:**
-Building on open source implementations to analyze reflections of existing broadcast transmissions using coherent multi-channel SDR hardware.
-
-**Current Status:** Phase 2 (Clean, stable foundation for reliable tracking)
-
-**Tech Stack:** Python, numpy, scipy, Rust (planned migration)
-
----
 ### Project Spectra — Autonomous Spectrum Monitoring
 
 <span class="status-badge status-active">Phase 6/7 — Operational Readiness</span> · [Full Details →](projects/signals)
@@ -45,19 +33,6 @@ A distributed spectrum monitoring system that autonomously scans radio bands, cl
 
 ---
 
-### Wi-Fi Signal Reflection — Through-Wall Detection
-
-<span class="status-badge status-active">Active Development</span> · [Full Details →](projects/wifi-radar)
-
-**What It Is:**
-Using coherent SDR arrays for through-wall human detection via Wi-Fi signal reflection and phase analysis.
-
-**Current Status:** Proof-of-concept detection working
-
-**Tech Stack:** Rust
-
----
-
 ### rtltcp-rust — SDR Network Streaming
 
 <span class="status-badge status-active">Phase 3/4 — TUI & Live Config (90%)</span> · [Full Details →](projects/rtltcp)
@@ -74,6 +49,32 @@ A single Rust binary that auto-detects every connected SDR (RTL-SDR, AirSpy HF+,
 **Current Status:** Phase 3 at 90% — TUI dashboard, interactive controls, and HTTP API complete. Config save/reload remaining.
 
 **Tech Stack:** Rust, tokio, axum (HTTP API), ratatui (TUI), librtlsdr/libairspyhf/libairspy (FFI)
+
+---
+
+### Illumination Reflection Tracking
+
+<span class="status-badge status-active">Phase 2/4 (56%)</span> · [Full Details →](projects/passive)
+
+**What It Is:**
+Building on open source implementations to analyze reflections of existing broadcast transmissions using coherent multi-channel SDR hardware.
+
+**Current Status:** Phase 2 (Clean, stable foundation for reliable tracking)
+
+**Tech Stack:** Python, numpy, scipy, Rust (planned migration)
+
+---
+
+### Wi-Fi Signal Reflection — Through-Wall Detection
+
+<span class="status-badge status-active">Active Development</span> · [Full Details →](projects/wifi-radar)
+
+**What It Is:**
+Using coherent SDR arrays for through-wall human detection via Wi-Fi signal reflection and phase analysis.
+
+**Current Status:** Proof-of-concept detection working
+
+**Tech Stack:** Rust
 
 ---
 

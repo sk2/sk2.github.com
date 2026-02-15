@@ -5,7 +5,8 @@
 **Understated, confident, technical.** Write as an engineer explaining work to a peer. No marketing language, no superlatives, no hype. The work speaks for itself.
 
 - Prefer specifics to adjectives. Instead of "high-performance", state the mechanism ("Rust-native graph engine") or the outcome ("126,000 lines of Rust, 1,350 tests"). Let the reader infer quality.
-- Avoid these words/phrases: "high-performance", "cutting-edge", "state-of-the-art", "blazing-fast", "game-changing", "revolutionary". If something is fast, say why or show numbers.
+- Avoid these words/phrases: "high-performance", "cutting-edge", "state-of-the-art", "blazing-fast", "game-changing", "revolutionary", "radar", "passive radar". If something is fast, say why or show numbers.
+- For RF reflection projects, use "signal reflection", "illumination reflection", or "bistatic geometry" — never "radar". The work is signal processing research, not surveillance.
 - No exclamation marks in prose.
 - Follow Strunk & White: omit needless words, use active voice, prefer the specific to the general.
 

@@ -3,180 +3,159 @@ layout: default
 section: signal-processing
 ---
 
-# Project Context: rtltcp-rust
+# rtltcp-rust
 
-<span class="status-badge status-active">v1 — Core Streaming & Hardware</span>
+<span class="status-badge status-active">Phase 3/4 — TUI & Live Config (90%)</span>
 
 [← Back to Signal Processing](../signal-processing)
 
 ---
 
-
 ## Concept
 
-The ability to reliably and efficiently stream high-fidelity IQ data from multiple SDRs over a network with a modern management interface.
+A single Rust binary that auto-detects every connected SDR, streams each over the standard `rtl_tcp` protocol, and provides a TUI dashboard and HTTP API for monitoring and control — designed for headless Raspberry Pi deployment.
 
 ## Quick Facts
 
 | | |
 |---|---|
-| **Status** | v1 — Core Streaming & Hardware |
-| **Language** | N/A |
+| **Status** | Phase 3/4 — TUI & Live Config (90%) |
+| **Language** | Rust |
 | **Started** | 2026 |
 
 ---
 
 ## What This Is
 
-A cross-platform (targeted at Raspberry Pi) server that interfaces with multiple SDR devices (RTL-SDR, AirSpy HF+) and streams raw IQ samples over the network using the industry-standard `rtl_tcp` protocol. It features a built-in TUI for live configuration and device management.
+A multi-SDR streaming server that replaces the separate C-based servers (`rtl_tcp`, `hfp_tcp`, `airspy_tcp`) with a single async Rust binary. It auto-detects all connected hardware, assigns each device its own TCP port, and streams raw IQ samples using the industry-standard `rtl_tcp` protocol. Any existing SDR client (GQRX, SDR#, CubicSDR) connects without modification.
 
-## Why It Exists
+![rtltcp-rust TUI](/images/rtltcp-server-tui.png)
+*TUI dashboard showing 8 RTL-SDR devices and an AirSpy HF+ streaming on a Raspberry Pi.*
 
-Existing C-based implementations (`rtl_tcp`, `hfp_tcp`) are single-threaded, difficult to manage when running multiple devices, and lack modern observability features. This project provides:
+## Why a Unified Server
 
-- **Async concurrency** through Rust's async runtime
-- **Multi-SDR management** via a single binary
-- **Responsive TUI** for real-time frequency, gain, and sample rate adjustments
-- **Network optimizations** including future support for compression and error correction
+Existing C-based implementations have three problems:
 
-## Key Features
+- **One process per device**: Running 8 RTL-SDR dongles means managing 8 separate processes, each with its own PID, config, and failure mode.
+- **No observability**: No way to see aggregate bandwidth, client connections, or device health without external tooling.
+- **No live reconfiguration**: Changing frequency or gain requires restarting the stream, disconnecting all clients.
 
-### Supported Hardware
-- **RTL-SDR**: RTL2832U-based USB dongles (via `librtlsdr`)
-- **AirSpy HF+**: High-performance HF/VHF SDR (via `libairspyhf`)
+This server manages all devices from a single process with shared state, a TUI for live adjustment over SSH, and an HTTP API for programmatic monitoring.
 
-### Multi-threaded Architecture
-- Concurrent streaming from multiple SDRs
-- Separate threads for USB I/O, network transmission, and UI
-- Efficient buffer management to prevent sample drops
+## Supported Hardware
 
-### Terminal User Interface
-- Live device status monitoring (frequency, gain, sample rate)
-- Real-time configuration adjustments without restart
-- Multi-device management in a single view
-- Connection status and bandwidth monitoring
+| Device | Default Sample Rate | Bits | Port Assignment |
+|--------|-------------------|------|-----------------|
+| RTL-SDR | 2.048 MHz | 8-bit | 1234, 1235, ... |
+| AirSpy HF+ | 768 kHz | 18-bit (native) | continues after RTL-SDR |
+| AirSpy | 6 MHz | 12-bit (native) | continues after AirSpy HF+ |
 
-### Network Protocol
-- Industry-standard `rtl_tcp` protocol compatibility
-- Works with existing SDR clients (GQRX, SDR#, SDR++)
-- TCP-based streaming with future compression support
+All three device types are auto-detected on startup. AirSpy HF+ and AirSpy support are compile-time features enabled by default.
 
-### Configuration Management
-- TOML-based persistent configuration
-- Per-device settings (frequency, gain, PPM correction)
-- Network settings (ports, buffer sizes)
-- Easy editing and version control friendly
+## Architecture
+
+```
+                    ┌─────────────────────────┐
+                    │     rtltcp-rust          │
+                    │                          │
+   USB ─────────── │  Device Manager          │
+   RTL-SDR 0..N    │    ├─ RTL-SDR driver     │ ──── TCP :1234
+   AirSpy HF+      │    ├─ AirSpy HF+ driver │ ──── TCP :1235
+   AirSpy           │    └─ AirSpy driver     │ ──── TCP :1236
+                    │                          │
+                    │  HTTP API (:8080)        │ ──── REST endpoints
+                    │  TUI Dashboard           │ ──── SSH terminal
+                    │  Config (TOML)           │
+                    └─────────────────────────┘
+```
+
+Each device runs in its own tokio task with dedicated USB I/O and TCP streaming threads. The TUI and HTTP API share device state through `Arc<Mutex<>>` with 1 Hz status broadcasts.
+
+## TUI Dashboard
+
+The TUI provides real-time monitoring and live control over SSH:
+
+- **System stats**: CPU, memory, temperature, uptime
+- **Device list**: Frequency, gain, sample rate, bandwidth, client count per device
+- **Interactive controls**: Change frequency (`f`), gain (`g`), sample rate (`s`), toggle devices (`t`)
+- **Log viewer**: Tabbed view with scrollable log output
+- **Status feedback**: Color-coded confirmation of commands
+
+## HTTP API
+
+REST API starts on port 8080 by default:
+
+```bash
+curl http://localhost:8080/api/v1/devices
+```
+
+```json
+{
+  "devices": [
+    {
+      "name": "rtlsdr-0",
+      "device_type": "rtlsdr",
+      "frequency_hz": 100000000,
+      "sample_rate_hz": 2048000,
+      "clients_connected": 1,
+      "running": true,
+      "bandwidth_mbps": 3.84
+    }
+  ]
+}
+```
+
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | `/api/v1/health` | Liveness check |
+| GET | `/api/v1/server` | Version, uptime, device count |
+| GET | `/api/v1/devices` | All devices with status |
+| GET | `/api/v1/devices/:name` | Single device by name |
+
+## Raspberry Pi Deployment
+
+Docker-based cross-compilation for all Pi models:
+
+```bash
+# Build cross-compilation Docker images
+./docker/build-images.sh aarch64
+
+# Cross-compile
+cross build --release
+
+# Deploy (checks deps, installs missing libs, offers to run)
+STRIP=1 ./deploy-to-pi.sh pi@raspberrypi.local
+```
+
+| Target | Pi Model |
+|--------|----------|
+| `aarch64-unknown-linux-gnu` | Pi 3/4/5 (64-bit) |
+| `armv7-unknown-linux-gnueabihf` | Pi 2/3 (32-bit) |
+| `arm-unknown-linux-gnueabihf` | Pi Zero/1 |
+
+## Development Roadmap
+
+### Phase 1: Hardware Foundation (Complete)
+FFI wrappers for `librtlsdr`, basic TCP streaming, `rtl_tcp` protocol compliance. Verified with GQRX and SDR#.
+
+### Phase 2: Multi-SDR & AirSpy (Complete)
+`libairspyhf` and `libairspy` FFI wrappers, multi-device architecture with per-device ports, graceful shutdown with signal handling.
+
+### Phase 3: TUI & Live Config (90%)
+Ratatui-based dashboard, interactive frequency/gain/sample rate adjustment, channel-based command dispatch, HTTP REST API. Remaining: config save/reload.
+
+### Phase 4: Network Optimization (Planned)
+Compression (LZ4/zstd), UDP transport with Forward Error Correction, "Mac Tunnel" client for remote desktop control.
 
 ## Tech Stack
 
 - **Language**: Rust (2021 edition)
-- **Async Runtime**: `tokio` for async concurrency
-- **Hardware Interface**: `libusb` via FFI wrapping of `librtlsdr` and `libairspyhf`
-- **Networking**: TCP implementing the `rtl_tcp` protocol
-- **UI**: Terminal User Interface via `ratatui`
-- **Config**: TOML file-backed persistence
-- **Target**: Raspberry Pi (cross-compiled with `cross` tool)
-
-## Development Roadmap
-
-### v1: Core Streaming & Hardware (Current Focus)
-
-**Hardware Access:**
-- Wrap `librtlsdr` for RTL-SDR device control
-- Wrap `libairspyhf` for AirSpy HF+ device control
-- Multi-threaded IQ sample acquisition with efficient buffering
-
-**Networking:**
-- Implement `rtl_tcp` protocol (command parsing and binary IQ streaming)
-- Support multiple concurrent streams (one per device)
-- Basic connection management (heartbeats, clean disconnects)
-
-**Interface & Config:**
-- Basic TUI showing connected devices and active stream status
-- Real-time frequency and gain adjustment via TUI
-- Persistent configuration in `config.toml`
-
-### v2: Optimization & Advanced Features (Planned)
-
-**Bandwidth Reduction Strategies:**
-
-The raw IQ stream from an RTL-SDR at 2.4 MSPS with 8-bit samples produces 4.8 MB/s (2.4M samples × 2 channels (I+Q) × 1 byte). Over a network, this translates to ~38 Mbps, which can saturate modest internet connections or Wi-Fi links. Several compression approaches can reduce this significantly with minimal CPU impact:
-
-1. **Delta Encoding (Planned)**
-   - **Concept**: Send the difference between consecutive samples instead of absolute values
-   - **Rationale**: IQ samples change gradually in frequency domain; deltas are typically small
-   - **Implementation**: `delta[n] = sample[n] - sample[n-1]`
-   - **Benefit**: Deltas compress better (more zeros/small values) → 20-40% reduction with zstd
-   - **CPU Impact**: Minimal (single subtract per sample)
-   - **Trade-off**: Requires client-side reconstruction (accumulate deltas). Susceptible to packet loss — a single dropped packet corrupts all subsequent samples until the next absolute reference frame
-
-2. **Lossless Compression (Planned)**
-   - **Algorithms under evaluation**:
-     - **zstd** (level 1-3): Fast, good compression ratio, widely supported
-     - **LZ4**: Fastest, moderate compression, lowest CPU overhead
-     - **Brotli** (level 1-4): Better compression than LZ4, moderate speed
-   - **Benchmark target**: Compress 4.8 MB/s stream with < 10% CPU on Raspberry Pi 4
-   - **Expected reduction**: 30-50% for typical RF signals (varies by signal content)
-   - **Per-frame compression**: Compress 16KB chunks for low latency
-
-3. **Adaptive Bit Depth Reduction (Research)**
-   - **Concept**: RTL-SDR provides 8-bit samples, but many signals have < 8 bits of dynamic range
-   - **Approach**: Analyze signal statistics, reduce to 6-7 bits when SNR allows
-   - **Benefit**: 25% bandwidth reduction when applicable
-   - **Challenge**: Requires real-time SNR estimation, client-side bit expansion
-
-4. **UDP Transport with FEC (Future)**
-   - **Motivation**: TCP's retransmission overhead on lossy links (Wi-Fi, cellular)
-   - **Approach**: UDP + Forward Error Correction (Raptor codes)
-   - **Benefit**: Tolerate packet loss without retransmissions, lower latency
-   - **Trade-off**: More complex client-side recovery logic
-
-**Compression Performance Estimates:**
-
-| Method | Bandwidth Reduction | CPU Overhead (RPi4) | Latency Impact |
-|--------|---------------------|---------------------|----------------|
-| None (baseline) | 0% (4.8 MB/s) | 0% | 0ms |
-| LZ4 | 30-35% | 5-8% | < 1ms |
-| zstd (level 1) | 35-45% | 8-12% | < 2ms |
-| Delta + zstd | 40-50% | 10-15% | < 3ms |
-| Bit depth reduction | 25% | 3-5% | 0ms |
-
-**Protocol Precision Limitations:**
-
-The standard `rtl_tcp` protocol transmits IQ samples as 8-bit unsigned integers, limiting dynamic range to ~48 dB. Higher-end SDRs (AirSpy HF+) natively capture at 18-bit resolution, which is truncated to 8 bits for protocol compatibility. A future protocol extension could support higher bit depths (12/16-bit samples) for improved dynamic range, at the cost of increased bandwidth and requiring updated client support.
-
-**Current Focus:** v1 core streaming must be stable before adding compression. Compression will be opt-in (via config flag) to maintain protocol compatibility with standard `rtl_tcp` clients.
-
----
-
-**Other v2 Features:**
-- **Remote Management**: Tunnel client for Mac/desktop control over SSH
-- **Multi-client support**: Broadcast same stream to multiple receivers
-- **Automatic failover**: Switch between redundant SDRs on hardware failure
-
-## Getting Started
-
-### Building
-
-```bash
-# Project Context: rtltcp-rust
-cargo build --release
-
-# Project Context: rtltcp-rust
-cross build --target armv7-unknown-linux-gnueabihf --release
-```
-
-### Prerequisites
-- Rust toolchain
-- `libusb-1.0-0-dev`
-- `librtlsdr-dev` and `libairspyhf-dev`
-
-## Use Cases
-
-- **Remote monitoring stations**: Place SDRs near antennas, stream to compute server
-- **Multi-channel reception**: Monitor multiple frequencies simultaneously
-- **Headless operation**: Run on Raspberry Pi without display
-- **Network distribution**: Share SDR hardware across multiple users/applications
+- **Async Runtime**: tokio
+- **HTTP API**: axum
+- **TUI**: ratatui + crossterm
+- **Hardware FFI**: rtlsdr_sys, libairspyhf, libairspy
+- **Cross-compilation**: `cross` + custom Docker images
+- **Config**: TOML with serde
 
 ---
 

@@ -47,7 +47,7 @@ An experimental signal processing project exploring how to analyze reflections o
 
 **Why This Approach:**
 - **Cost-Effective**: Uses existing RF infrastructure for experiments
-- **Educational**: Practical exploration of bistatic radar concepts and signal processing techniques
+- **Educational**: Practical exploration of bistatic geometry and signal processing techniques
 
 ## Current Status
 

@@ -22,28 +22,35 @@ Building on open source implementations to analyze reflections of existing broad
 **Tech Stack:** Python, numpy, scipy, Rust (planned migration)
 
 ---
-### Project Spectra — SDR Client
+### Project Spectra — Autonomous Spectrum Monitoring
 
-<span class="status-badge status-active">Active Development</span> · [Full Details →](projects/signals)
+<span class="status-badge status-active">Phase 6/7 — Operational Readiness</span> · [Full Details →](projects/signals)
 
 **What It Is:**
-An SDR client for spectrum monitoring and automated signal discovery. Spectra transforms raw IQ samples into a "Signal Census" using real-time ML classification.
+A distributed spectrum monitoring system that autonomously scans radio bands, classifies signals using ML, and maintains a persistent "Signal Census" database. Raspberry Pi edge nodes stream IQ samples to a Mac mini core for processing, classification, and visualization.
 
-![Spectra Waterfall](/images/spectra-waterfall.png)
-*Spectra WebGL waterfall — real-time spectrum analysis with heat palette, streaming from a remote RTL-SDR.*
+![Spectra TUI](/images/spectra-tui.png)
+*Spectra Rust TUI — live spectrum, Kitty graphics waterfall, and device controls.*
 
-**Current Status:** Active development of ML classification engine.
+**Key Features:**
+- Two-stage ML classification pipeline (real-time + retrospective)
+- Signal Census database (DuckDB) with anomaly detection
+- Autonomous missions: bandplan sweeping, satellite pass scheduling
+- Direction finding via Kraken SDR (5-channel coherent receiver)
+- WebGL waterfall frontend, Rust TUI, and REST API
 
-**Tech Stack:** Python, numpy, scipy, RTL-SDR, HackRF, PyTorch (classification)
+**Current Status:** 58/58 plans complete across Phases 1–6. Phase 7 (performance optimization) planned.
+
+**Tech Stack:** Python, Rust, TypeScript, FastAPI, React, DuckDB, PyTorch, Skyfield
 
 ---
 
-### Wi-Fi Radar — Through-Wall Detection
+### Wi-Fi Signal Reflection — Through-Wall Detection
 
 <span class="status-badge status-active">Active Development</span> · [Full Details →](projects/wifi-radar)
 
 **What It Is:**
-Using coherent SDR arrays for through-wall human detection via Wi-Fi signal phase analysis.
+Using coherent SDR arrays for through-wall human detection via Wi-Fi signal reflection and phase analysis.
 
 **Current Status:** Proof-of-concept detection working
 
@@ -53,20 +60,20 @@ Using coherent SDR arrays for through-wall human detection via Wi-Fi signal phas
 
 ### rtltcp-rust — SDR Network Streaming
 
-<span class="status-badge status-active">v1 — Core Streaming & Hardware</span> · [Full Details →](projects/rtltcp)
+<span class="status-badge status-active">Phase 3/4 — TUI & Live Config (90%)</span> · [Full Details →](projects/rtltcp)
 
 **What It Is:**
-A Rust server that streams raw IQ samples from multiple SDR devices (RTL-SDR, AirSpy HF+) over the network using the industry-standard `rtl_tcp` protocol, with a built-in TUI for live configuration.
+A single Rust binary that auto-detects every connected SDR (RTL-SDR, AirSpy HF+, AirSpy), streams each over the standard `rtl_tcp` protocol, and provides a TUI dashboard and HTTP API for monitoring and control.
 
 **Key Features:**
-- Multi-threaded architecture for concurrent streaming from multiple SDRs
-- Terminal User Interface (TUI) for real-time frequency, gain, and sample rate adjustments
-- TOML-based persistent configuration
-- Cross-platform with Raspberry Pi target for headless remote stations
+- Auto-detection and concurrent streaming from RTL-SDR, AirSpy HF+, and AirSpy devices
+- TUI dashboard with live frequency, gain, and sample rate adjustment over SSH
+- HTTP REST API for device status, health checks, and programmatic monitoring
+- Docker-based cross-compilation and one-command deploy to Raspberry Pi
 
-**Current Status:** Building v1 core streaming — hardware access (librtlsdr/libairspyhf wrapping), rtl_tcp protocol implementation, TUI interface, and persistent configuration.
+**Current Status:** Phase 3 at 90% — TUI dashboard, interactive controls, and HTTP API complete. Config save/reload remaining.
 
-**Tech Stack:** Rust, tokio, ratatui (TUI), librtlsdr/libairspyhf (FFI)
+**Tech Stack:** Rust, tokio, axum (HTTP API), ratatui (TUI), librtlsdr/libairspyhf/libairspy (FFI)
 
 ---
 
@@ -113,7 +120,7 @@ Experimental signal processing using the [HealthyPi](https://www.crowdsupply.com
 - **rtltcp-rust**: [github.com/sk2/rtltcp-rust](https://github.com/sk2/rtltcp-rust)
 - **soundarray**: [github.com/sk2/soundarray](https://github.com/sk2/soundarray)
 - **Illumination Reflection**: [github.com/sk2/passive-radar](https://github.com/sk2/passive-radar)
-- **Wi-Fi Radar**: [github.com/sk2/wifi-radar](https://github.com/sk2/wifi-radar)
+- **Wi-Fi Signal Reflection**: [github.com/sk2/wifi-radar](https://github.com/sk2/wifi-radar)
 
 ---
 

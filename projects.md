@@ -14,7 +14,7 @@ Tools for topology modeling, deterministic protocol simulation, and visualizatio
 
 ## [Signal Processing & RF →](/signal-processing)
 
-SDR spectrum monitoring, biometric signal processing, and spatial audio using modular acquisition pipelines. Includes Project Spectra, rtltcp-rust, HealthyPi, Wi-Fi Radar, and more.
+SDR spectrum monitoring, biometric signal processing, and spatial audio using modular acquisition pipelines. Includes Project Spectra, rtltcp-rust, HealthyPi, Wi-Fi Signal Reflection, and more.
 
 ## [Data Analytics →](/data-analytics)
 

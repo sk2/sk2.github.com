@@ -64,6 +64,13 @@ A Python CLI that reads directly from the OmniFocus SQLite database on macOS, by
 
 A Rust-based CLI tool for deduplicating and organizing large file shares. Optimized for Docker execution on Synology DSM, using an indexing layer for fast file comparison and metadata management.
 
+### [Satellite Tracker](projects/satellites)
+
+<span class="status-badge status-active">Phase 1/8</span>
+· **Rust**
+
+A terminal-based satellite tracker that plots real-time positions on a world map using SGP4 orbital propagation, predicts passes over your location, and displays transmitter frequencies from SatNOGS. Interactive TUI with vim-style navigation, 15 CelesTrak satellite groups, and local TLE caching.
+
 ### [Psytrance Generator — Algorithmic Music Engine](projects/psytrance)
 
 <span class="status-badge status-active">Phase 1 Complete</span>

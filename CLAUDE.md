@@ -24,6 +24,7 @@ Use full product names in all prose text:
 | `ANK Workbench` | Network Automation Workbench |
 | `rtltcp-rust` | Multi-SDR Streaming Server |
 | `psytrance` | Psytrance Generator |
+| `satellites` | Satellite Tracker |
 
 Keep code names only in: Python imports, CLI commands, repository URLs, file paths, and code examples.
 
@@ -35,7 +36,7 @@ Keep code names only in: Python imports, CLI commands, repository URLs, file pat
 
 ## Upcoming Projects
 
-- **Satellite Tracking**: Satellite observation tool integrating CelesTrak, N2YO, and SatNOGS data. Pre-development — no page yet.
+None currently — all active projects have pages.
 
 ## Technical
 

@@ -31,13 +31,13 @@ If verification fails, I fix gaps before advancing.
 
 **Core Languages:**
 - **Rust**: For performance-critical code (Network Visualization Engine, Network Simulator, Topology Generator, astro). Ensures type safety, zero-cost abstractions, robust error handling.
-- **Python**: For rapid development and scientific computing (Topology Modeling Library, HealthyPi). Leverages a rich ecosystem for signal processing and network automation.
+- **Python**: For rapid development and scientific computing (Network Modeling & Configuration Library, HealthyPi). Leverages a rich ecosystem for signal processing and network automation.
 - **Swift**: For native Apple ecosystem integration (multi-agent collectors, cycle agent). Provides first-class support for iOS/tvOS/macOS.
 
 **Key Tools:**
 - **NATS**: Universal message bus for agent coordination. Features TLS 1.3, per-subject ACLs, JetStream for durability.
 - **Pydantic**: Type-safe Python models with validation at definition time.
-- **PyO3**: Rust-Python FFI for high-performance Python extensions.
+- **PyO3**: Rust-Python FFI for compiled Python extensions.
 - **petgraph**: Production-ready graph data structures in Rust.
 - **FastAPI**: Modern async Python web framework.
 

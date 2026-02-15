@@ -12,7 +12,7 @@ section: signal-processing
 ---
 
 
-## The Concept
+## Concept
 
 The ability to reliably and efficiently stream high-fidelity IQ data from multiple SDRs over a network with a modern management interface.
 
@@ -34,7 +34,7 @@ A cross-platform (targeted at Raspberry Pi) server that interfaces with multiple
 
 Existing C-based implementations (`rtl_tcp`, `hfp_tcp`) are single-threaded, difficult to manage when running multiple devices, and lack modern observability features. This project provides:
 
-- **High-performance concurrency** through Rust's async runtime
+- **Async concurrency** through Rust's async runtime
 - **Multi-SDR management** via a single binary
 - **Responsive TUI** for real-time frequency, gain, and sample rate adjustments
 - **Network optimizations** including future support for compression and error correction
@@ -70,7 +70,7 @@ Existing C-based implementations (`rtl_tcp`, `hfp_tcp`) are single-threaded, dif
 ## Tech Stack
 
 - **Language**: Rust (2021 edition)
-- **Async Runtime**: `tokio` for high-performance concurrency
+- **Async Runtime**: `tokio` for async concurrency
 - **Hardware Interface**: `libusb` via FFI wrapping of `librtlsdr` and `libairspyhf`
 - **Networking**: TCP implementing the `rtl_tcp` protocol
 - **UI**: Terminal User Interface via `ratatui`
@@ -84,7 +84,7 @@ Existing C-based implementations (`rtl_tcp`, `hfp_tcp`) are single-threaded, dif
 **Hardware Access:**
 - Wrap `librtlsdr` for RTL-SDR device control
 - Wrap `libairspyhf` for AirSpy HF+ device control
-- Multi-threaded IQ sample acquisition with high-performance buffering
+- Multi-threaded IQ sample acquisition with efficient buffering
 
 **Networking:**
 - Implement `rtl_tcp` protocol (command parsing and binary IQ streaming)

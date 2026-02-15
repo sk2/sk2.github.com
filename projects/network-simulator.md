@@ -11,7 +11,7 @@ section: network-automation
 
 ---
 
-## The Insight
+## Concept
 
 Developing agentic AI systems and network automation tools requires rapid iteration. Spinning up containers for every test cycle takes minutes; simulation takes seconds. This simulator enables fast prototyping of network automation agents, DevOps pipelines, and AI-driven network operations — validate configurations and agent logic in simulation before committing to heavyweight container deployments.
 
@@ -627,7 +627,7 @@ IS-IS events: 18 hellos, 4 LSPs, 2 SPF runs
 ## Use Cases
 
 - **Agentic AI & Network Automation Development**: Rapidly prototype and test automation agents, DevOps pipelines, and AI-driven network operations with seconds-long iteration cycles instead of minutes spinning up containers
-- **Configuration Generation Testing**: Validate Topology Modeling Library-generated configs in simulation before deploying to Containerlab — catch errors in the generation logic early
+- **Configuration Generation Testing**: Validate Network Modeling & Configuration Library-generated configs in simulation before deploying to Containerlab — catch errors in the generation logic early
 - **Network Automation Prototyping**: Develop configuration management tools, automated provisioning systems, and orchestration scripts against realistic network topologies without infrastructure overhead
 - **Pre-deployment Validation**: Catch routing loops, black holes, and misconfigurations before production
 - **Convergence Analysis**: Measure failover time and validate backup paths

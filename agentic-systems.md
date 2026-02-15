@@ -353,7 +353,7 @@ User: Investigate Time Machine configuration
 <span class="status-badge status-active">Phase 1/5 (80%)</span> · [Full Details →](projects/cycle)
 
 **What It Is:**
-A native SwiftUI training application for iPad and Apple TV that bridges professional cycling hardware (KICKR Core smart trainer) with dynamic AI-driven workout logic via NATS, visualized in a high-performance SceneKit 3D environment.
+A native SwiftUI training application for iPad and Apple TV that bridges professional cycling hardware (KICKR Core smart trainer) with dynamic AI-driven workout logic via NATS, visualized in a SceneKit 3D environment.
 
 **The Training Problem:**
 - **Static workouts**: Pre-programmed intervals don't adapt to real-time performance

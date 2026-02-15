@@ -11,7 +11,7 @@ section: data-analytics
 
 ---
 
-## The Insight
+## Concept
 
 Developing...
 
@@ -26,7 +26,7 @@ Developing...
 ---
 ## What This Is
 
-A high-performance Rust implementation of Matrix Profile algorithms for time series analysis. Matrix Profiles enable pattern discovery, anomaly detection, and similarity search in univariate time series without domain knowledge or parameter tuning.
+A Rust implementation of Matrix Profile algorithms for time series analysis. Matrix Profiles enable pattern discovery, anomaly detection, and similarity search in univariate time series without domain knowledge or parameter tuning.
 
 Think of it as "find repeating patterns and anomalies in any time series data" with a simple API: `df.select(pl.col("ts").mp.stomp(m=20))` for Polars users, or direct Rust APIs for maximum performance.
 

@@ -11,7 +11,7 @@ section: signal-processing
 
 ---
 
-## The Insight
+## Concept
 
 The ability to capture, localize, and classify complex soundscapes on edge devices or via remote streaming, providing structured insights to an agent framework.
 

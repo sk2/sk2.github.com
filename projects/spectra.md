@@ -12,7 +12,7 @@ section: signal-processing
 ---
 
 
-## The Concept
+## Concept
 
 Manual radio spectrum monitoring is resource-intensive and prone to operator fatigue. **Project Spectra** automates wideband scanning and modulation identification using a distributed architecture. It uses Raspberry Pi nodes for edge acquisition and a Mac mini core for ML-based signal classification and historical "Signal Census" tracking.
 
@@ -28,7 +28,7 @@ Manual radio spectrum monitoring is resource-intensive and prone to operator fat
 
 ## What This Is
 
-An autonomous distributed SIGINT system. It monitors the RF spectrum, identifies modulations via ML, and tracks aircraft (ADS-B) and satellites. It leverages NATS for coordination and Polars for high-performance data indexing.
+An autonomous distributed SIGINT system. It monitors the RF spectrum, identifies modulations via ML, and tracks aircraft (ADS-B) and satellites. It leverages NATS for coordination and Polars for data indexing.
 
 ## Architecture
 

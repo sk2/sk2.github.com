@@ -11,7 +11,7 @@ section: projects
 
 ---
 
-## The Insight
+## Concept
 
 Developing...
 

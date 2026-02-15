@@ -12,7 +12,7 @@ section: network-automation
 ---
 
 
-## The Concept
+## Concept
 
 `netflowsim` provides rapid, massive-scale network performance analysis by using analytic queuing models and Monte Carlo simulations instead of packet-level discrete event simulation. It enables network engineers to validate topologies and routing strategies against billions of flow iterations in seconds.
 
@@ -28,7 +28,7 @@ section: network-automation
 
 ## What This Is
 
-High-performance flow-based network simulator that uses analytic queuing models and Monte Carlo simulations for rapid topology and routing validation at massive scale.
+Flow-based network simulator that uses analytic queuing models and Monte Carlo simulations for rapid topology and routing validation at massive scale.
 
 ## Why Flow-Based Simulation
 
@@ -44,7 +44,7 @@ Traditional approaches force a choice between:
 ## Key Features
 
 ### Phase 1: Foundation (✅ Complete)
-- **High-Performance Engine**: Rust + `petgraph` for graph operations
+- **Engine**: Rust + `petgraph` for graph operations
 - **Parallel Processing**: `rayon` for multi-core utilization
 - **Queuing Models**:
   - M/M/1 (Markov arrivals, Markov service)

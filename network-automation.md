@@ -12,7 +12,7 @@ Tools for network topology modeling, simulation, and visualization.
 - [The Tools](#the-tools)
   - [Network Simulator](#network-simulator--protocol-validation)
   - [Network Visualization Engine](#network-visualization-engine)
-  - [Topology Modeling Library](#topology-modeling-library)
+  - [Network Modeling & Configuration Library](#network-modeling--configuration-library)
   - [Network Topology Engine](#network-topology-engine)
   - [Network Automation Workbench](#network-automation-workbench)
   - [Network Traffic Simulator](#network-traffic-simulator--flow-based-performance-analysis)
@@ -25,7 +25,7 @@ Tools for network topology modeling, simulation, and visualization.
 
 ## Overview
 
-An integrated ecosystem of high-performance tools for network topology modeling, deterministic protocol simulation, and visualization. Design topologies declaratively, validate routing behavior in simulation, and render publication-quality network diagrams — driven from YAML, Python, CLI, or a unified web and text interface.
+An integrated ecosystem of tools for network topology modeling, deterministic protocol simulation, and visualization. Design topologies declaratively, validate routing behavior in simulation, and render publication-quality network diagrams — driven from YAML, Python, CLI, or a unified web and text interface.
 
 ## How They Work Together
 
@@ -33,10 +33,10 @@ An integrated ecosystem of high-performance tools for network topology modeling,
 ┌────────────────────────────────────────────────────────────────────────────────────────┐
 │                              Network Automation Workbench                               │
 │                    (Orchestration · Web UI · Workflow Management)                       │
-│   ┌───────────────────┬────────────────────────┬─────────────────┬──────────────────┐  │
-│   │ Topology Generator│ Topology Modeling Lib.  │ Network Simulator│ Visualization    │  │
-│   │                   │                        │                  │ Engine           │  │
-└───┴───────────────────┴────────────────────────┴─────────────────┴──────────────────┴──┘
+│   ┌───────────────────┬──────────────────────────┬─────────────────┬──────────────────┐  │
+│   │ Topology Generator│ Modeling & Configuration │ Network Simulator│ Visualization    │  │
+│   │                   │ Library                  │                  │ Engine           │  │
+└───┴───────────────────┴──────────────────────────┴─────────────────┴──────────────────┴──┘
     │                   │                        │                  │
     │                   │                        │                  │
     │   ┌───────────────▼───────────────┐        │                  │
@@ -46,15 +46,15 @@ An integrated ecosystem of high-performance tools for network topology modeling,
     │                   │                        │                  │
     │                   │                        │                  │
     │   ┌───────────────▼────────────────────────┐                  │
-    │   │     Topology Modeling Library           │                  │
-    │   │     (Topology Modeling API)             │                  │
+    │   │     Network Modeling &                   │                  │
+    │   │     Configuration Library               │                  │
     │   └───────────────┬────────────────────────┘                  │
     │                   │                                           │
     │                   │                                           │
     │   ┌───────────────▼──────────────────────────────────────┐    │
     │   │            Analysis Module                            │    │
     │   │  ┌──────────────────────┬──────────────────────────┐ │    │
-    │   │  │ Topology Modeling    │ Network Simulator         │ │    │
+    │   │  │ Modeling & Config    │ Network Simulator         │ │    │
     │   │  │ Library              │ (Protocol Behavior)       │ │    │
     │   │  │ (Query & Transform)  │                          │ │    │
     │   │  └──────────────────────┴──────────────────────────┘ │    │
@@ -71,7 +71,7 @@ An integrated ecosystem of high-performance tools for network topology modeling,
 
 **Workflow:**
 
-1. Generate or create topology (Topology Generator or Topology Modeling Library)
+1. Generate or create topology (Topology Generator or Network Modeling & Configuration Library)
 2. Optionally run simulation to check routing behavior
 3. Visualize the topology (Network Visualization Engine)
 
@@ -91,7 +91,7 @@ A deterministic, tick-based network simulator for rapid prototyping and testing 
 **Rapid Prototyping for Agentic AI & Network Automation:**
 The simulator's core value is accelerating the development iteration loop for agentic AI systems and network automation tools. Instead of spinning up containers for every test cycle (minutes), validate configurations in simulation (seconds):
 
-1. **Design topology** with the Topology Modeling Library
+1. **Design topology** with the Network Modeling & Configuration Library
 2. **Generate configs** automatically for target platforms
 3. **Simulate in seconds** to validate routing behavior
 4. **Iterate rapidly** on agent logic, automation scripts, or config templates
@@ -137,12 +137,12 @@ A Rust-based network topology layout and visualization engine. Renders complex m
 
 ---
 
-### Topology Modeling Library
+### Network Modeling & Configuration Library
 
 <span class="status-badge status-active">v1.8 — Performance & Optimization</span> · [Full Details →](projects/ank-pydantic)
 
 **What It Is:**
-A Python library for modeling and querying network topologies with type-safe Pydantic models and a high-performance Rust core. Expressive Python API backed by blazing-fast graph algorithms, with automatic configuration generation for multi-vendor network deployments.
+A Python library for modeling and querying network topologies with type-safe Pydantic models and a Rust core. Expressive Python API backed by compiled graph algorithms (petgraph), with automatic configuration generation for multi-vendor network deployments.
 
 **Key Features:**
 - **Two-Stage Transformation Model**: Whiteboard (sketch) → Plan (logical) → Protocol Layers (physical)
@@ -183,7 +183,7 @@ topo.export_for_netvis("topology.json")
 <span class="status-badge status-active">Stable</span> · [Full Details →](projects/nte)
 
 **What It Is:**
-The high-performance Rust engine that powers the Topology Modeling Library's graph operations. Extracted into its own repository as the engine's scope grew beyond a simple backing store.
+The Rust engine that powers the Network Modeling & Configuration Library's graph operations. Extracted into its own repository as the engine's scope grew beyond a simple backing store.
 
 **Key Features:**
 - **petgraph StableDiGraph**: Native-speed topology representation
@@ -216,7 +216,7 @@ A platform that integrates the entire network automation ecosystem into a single
 <span class="status-badge status-active">Active Development</span> · [Full Details →](projects/netflowsim)
 
 **What It Is:**
-High-performance flow-based network traffic simulator using analytic queuing models and Monte Carlo simulations. Validates topologies and routing strategies against billions of flow iterations in seconds, providing massive-scale network performance analysis.
+Flow-based network traffic simulator using analytic queuing models and Monte Carlo simulations. Validates topologies and routing strategies against billions of flow iterations in seconds, providing massive-scale network performance analysis.
 
 **Current Status:** Early development
 
@@ -244,7 +244,7 @@ A Rust library with Python bindings for generating realistic network topologies.
 **What It Is:**
 The original compiler-based network automation tool from my PhD research. Introduced declarative network design with the Whiteboard → Plan → Build transformation model, integrated into Cisco VIRL.
 
-**Current Status:** Maintained for reference. Active development moved to the Topology Modeling Library and the Network Automation Workbench.
+**Current Status:** Maintained for reference. Active development moved to the Network Modeling & Configuration Library and the Network Automation Workbench.
 
 **Tech Stack:** Python, NetworkX
 
@@ -252,18 +252,18 @@ The original compiler-based network automation tool from my PhD research. Introd
 
 ## Integration Examples
 
-These examples demonstrate how the Topology Modeling Library, Network Simulator, and Network Visualization Engine work together for end-to-end network design workflows.
+These examples demonstrate how the Network Modeling & Configuration Library, Network Simulator, and Network Visualization Engine work together for end-to-end network design workflows.
 
 ### Example 1: Service Provider Core (IS-IS/MPLS/iBGP)
 
-Multi-layer service provider topology showing Topology Modeling Library → Network Simulator integration.
+Multi-layer service provider topology showing Network Modeling & Configuration Library → Network Simulator integration.
 
 **Topology Overview:**
 - 16 devices: 8 core (P), 6 edge (PE), 2 route reflectors (RR)
 - AS 65000, 4 Points of Presence (PoPs): West, East, North, South
 - Protocol stack: IS-IS underlay, MPLS/LDP transport, iBGP with RR
 
-**Step 1: Model topology with the Topology Modeling Library**
+**Step 1: Model topology with the Network Modeling & Configuration Library**
 
 ```python
 from ank_pydantic import Topology
@@ -359,7 +359,7 @@ artifacts = env.generate(topology)
 $ sudo containerlab deploy -t transitnet.clab.yml
 ```
 
-**Key Insight:** The Topology Modeling Library's design functions automatically derive protocol layers from the whiteboard topology, the Network Simulator validates convergence in seconds, and the Network Visualization Engine renders the result — all before committing to container deployment.
+**Key Insight:** The Network Modeling & Configuration Library's design functions automatically derive protocol layers from the whiteboard topology, the Network Simulator validates convergence in seconds, and the Network Visualization Engine renders the result — all before committing to container deployment.
 
 ---
 
@@ -371,7 +371,7 @@ $ sudo containerlab deploy -t transitnet.clab.yml
 - iBGP EVPN overlay (spines as route reflectors)
 - VXLAN tunnels for L2 extension across fabric
 
-**Topology Modeling Library workflow:**
+**Network Modeling & Configuration Library workflow:**
 ```python
 from ank_pydantic.blueprints.designs.datacenter import build_spine_leaf_fabric
 from ank_pydantic.blueprints.designs.evpn import build_evpn_overlay
@@ -416,7 +416,7 @@ fabric.export_netsim("dc-fabric-netsim.yaml")
 - 3 customer sites requiring VPN connectivity
 - VRFs on PE routers with RT import/export
 
-**Topology Modeling Library workflow:**
+**Network Modeling & Configuration Library workflow:**
 ```python
 from ank_pydantic.blueprints.designs.l3vpn import provision_l3vpn
 
@@ -456,7 +456,7 @@ l3vpn.export_netsim("l3vpn-netsim.yaml")
 - Members: 3 ISPs (Cisco, Juniper, Arista platforms)
 - BGP communities for routing policy
 
-**Topology Modeling Library workflow:**
+**Network Modeling & Configuration Library workflow:**
 ```python
 from ank_pydantic.blueprints.designs.ixp import build_ixp_fabric
 
@@ -493,11 +493,11 @@ ixp.export_netsim("ixp-netsim.yaml")
 
 **For Network Engineers:**
 1. Start with the **Network Automation Workbench** — the unified platform for the entire workflow
-2. Explore the **Topology Modeling Library** for programmatic topology modeling
+2. Explore the **Network Modeling & Configuration Library** for programmatic topology modeling
 3. Use the **Network Simulator** for validation and testing
 
 **For Developers:**
-1. Check out the **Topology Modeling Library** for the Python API and documentation
+1. Check out the **Network Modeling & Configuration Library** for the Python API and documentation
 2. Explore the **Network Simulator** source code for protocol implementation details
 3. Contribute to the **Network Visualization Engine** for visualization algorithms
 
@@ -505,7 +505,7 @@ ixp.export_netsim("ixp-netsim.yaml")
 
 ## Source Code
 
-- **Topology Modeling Library**: [github.com/sk2/ank_pydantic](https://github.com/sk2/ank_pydantic)
+- **Network Modeling & Configuration Library**: [github.com/sk2/ank_pydantic](https://github.com/sk2/ank_pydantic)
 - **Network Topology Engine**: [github.com/sk2/ank_nte](https://github.com/sk2/ank_nte)
 - **Network Simulator**: [github.com/sk2/netsim](https://github.com/sk2/netsim)
 - **Network Visualization Engine**: [github.com/sk2/netvis](https://github.com/sk2/netvis)

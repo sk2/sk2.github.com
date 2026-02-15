@@ -11,7 +11,7 @@ section: network-automation
 
 ---
 
-## The Insight
+## Concept
 
 Developing...
 

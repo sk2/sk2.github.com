@@ -11,9 +11,9 @@ section: network-automation
 
 ---
 
-## The Insight
+## Concept
 
-Graph operations on network topologies demand native performance — Python's NetworkX caps out on large topologies. The Network Topology Engine provides a Rust-native topology engine with Python bindings, giving the Topology Modeling Library the speed of compiled code with the ergonomics of Python.
+Graph operations on network topologies demand native performance — Python's NetworkX caps out on large topologies. The Network Topology Engine provides a Rust-native topology engine with Python bindings, giving the Network Modeling & Configuration Library the speed of compiled code with the ergonomics of Python.
 
 ## Quick Facts
 
@@ -27,13 +27,13 @@ Graph operations on network topologies demand native performance — Python's Ne
 
 ## What This Is
 
-The Network Topology Engine is the Rust backend that powers the Topology Modeling Library's graph operations. Originally embedded within the Topology Modeling Library as `ank_nte`, it has been extracted into its own repository as the engine matured and its scope grew beyond a simple backing store.
+The Network Topology Engine is the Rust backend that powers the Network Modeling & Configuration Library's graph operations. Originally embedded within the Network Modeling & Configuration Library as `ank_nte`, it has been extracted into its own repository as the engine matured and its scope grew beyond a simple backing store.
 
-It provides high-performance graph algorithms, query execution, and data storage for network topology operations. It uses `petgraph`'s `StableDiGraph` for topology representation and Polars for columnar data storage.
+It provides native-speed graph algorithms, query execution, and data storage for network topology operations. It uses `petgraph`'s `StableDiGraph` for topology representation and Polars for columnar data storage.
 
 ## Why It Was Split Out
 
-As the Topology Modeling Library evolved, the Rust core grew into a substantial system with its own architectural concerns:
+As the Network Modeling & Configuration Library evolved, the Rust core grew into a substantial system with its own architectural concerns:
 
 - **Multiple storage backends** (Polars, DuckDB, Lite) requiring independent testing
 - **Distributed compute support** via `nte-server` and `nte-backend`
@@ -78,12 +78,12 @@ The Network Topology Engine supports pluggable storage through the `nte-datastor
 - **Lite** (`nte-datastore-lite`) — Lightweight in-memory backend for small topologies and testing.
 - **LadybugDB** (Potential) — Under evaluation as an embedded analytical database backend, offering fast columnar queries with a smaller footprint than DuckDB.
 
-## Integration with the Topology Modeling Library
+## Integration with the Network Modeling & Configuration Library
 
-The Topology Modeling Library imports the Network Topology Engine as a Python package built with Maturin/PyO3. All graph mutations and queries flow through the engine's Rust core:
+The Network Modeling & Configuration Library imports the Network Topology Engine as a Python package built with Maturin/PyO3. All graph mutations and queries flow through the engine's Rust core:
 
 ```
-Topology Modeling Library (Python API)
+Network Modeling & Configuration Library (Python API)
     │
     ▼
 NTE Python bindings (PyO3)
@@ -92,7 +92,7 @@ NTE Python bindings (PyO3)
 nte-query → nte-core → nte-datastore-*
 ```
 
-Python users interact with the Topology Modeling Library's Pydantic models. The Network Topology Engine handles the performance-critical work underneath.
+Python users interact with the Network Modeling & Configuration Library's Pydantic models. The Network Topology Engine handles the performance-critical work underneath.
 
 ## Tech Stack
 

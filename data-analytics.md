@@ -4,7 +4,7 @@ layout: default
 
 # Data Analytics & Visualization Ecosystem
 
-High-performance tools for processing massive datasets, discovering patterns in time series, and creating information-dense visualizations that transform raw data into actionable insights.
+Tools for processing massive datasets, discovering patterns in time series, and creating information-dense visualizations that transform raw data into actionable insights.
 
 ## Contents
 - [The Vision](#the-vision)
@@ -19,7 +19,7 @@ High-performance tools for processing massive datasets, discovering patterns in 
 
 ## The Vision
 
-Modern data analysis fragments across disconnected tools: extract data with one tool, analyze with another, visualize with a third. This ecosystem provides an integrated workflow built on high-performance foundations (Rust + Polars) with a focus on three key problems:
+Modern data analysis fragments across disconnected tools: extract data with one tool, analyze with another, visualize with a third. This ecosystem provides an integrated workflow built on Rust and Polars with a focus on three key problems:
 
 1. **Scale**: Process millions of rows interactively, not in overnight batch jobs
 2. **Signal**: Find patterns and anomalies automatically, not through manual exploration
@@ -129,7 +129,7 @@ server.set_filter(pl.col("magnitude") > 5.0)
 <span class="status-badge status-active">Phase 2/5 (16%)</span> · [Full Details →](projects/matrix-time-series)
 
 **What It Is:**
-A high-performance Rust implementation of Matrix Profile algorithms for time series analysis. Automatically discovers repeating patterns (motifs) and anomalies (discords) in univariate time series without domain knowledge or parameter tuning.
+A Rust implementation of Matrix Profile algorithms for time series analysis. Automatically discovers repeating patterns (motifs) and anomalies (discords) in univariate time series without domain knowledge or parameter tuning.
 
 **The Problem:**
 Time series analysis traditionally requires:

@@ -11,7 +11,7 @@ section: photography
 
 ---
 
-## The Insight
+## Concept
 
 Provides precise, automated control over exposure and focus specifically optimized for aurora "bursts" and star sharpness, while offering field-ready composition tools.
 

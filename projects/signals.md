@@ -11,7 +11,7 @@ section: signal-processing
 
 ---
 
-## The Insight
+## Concept
 
 Transform raw radio spectrum data into an actionable "Signal Census" through automated detection, ML classification, and distributed acquisition.
 
@@ -27,7 +27,7 @@ Transform raw radio spectrum data into an actionable "Signal Census" through aut
 
 ## What This Is
 
-A high-performance SDR client for spectrum monitoring and automated signal discovery. Spectra transforms raw IQ samples into a "Signal Census" through automated detection, ML classification, and distributed acquisition across Raspberry Pi edge nodes with Mac mini core processing.
+An SDR client for spectrum monitoring and automated signal discovery. Spectra transforms raw IQ samples into a "Signal Census" through automated detection, ML classification, and distributed acquisition across Raspberry Pi edge nodes with Mac mini core processing.
 
 The system provides both high-level signal census data and low-level waterfall analysis for deep-dive signal inspection.
 

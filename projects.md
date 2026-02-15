@@ -4,13 +4,13 @@ layout: default
 
 # Projects
 
-Focusing on network automation, high-performance signal processing, and secure multi-agent architectures.
+Focusing on network automation, signal processing, and secure multi-agent architectures.
 
 ---
 
 ## [Network Automation →](/network-automation)
 
-High-performance tools for topology modeling, deterministic protocol simulation, and visualization. Includes Network Simulator, Network Visualization Engine, Topology Modeling Library, Network Topology Engine, Network Automation Workbench, Topology Generator, and more.
+Tools for topology modeling, deterministic protocol simulation, and visualization. Includes Network Simulator, Network Visualization Engine, Network Modeling & Configuration Library, Network Topology Engine, Network Automation Workbench, Topology Generator, and more.
 
 ## [Signal Processing & RF →](/signal-processing)
 
@@ -18,7 +18,7 @@ SDR spectrum monitoring, biometric signal processing, and spatial audio using mo
 
 ## [Data Analytics →](/data-analytics)
 
-High-performance tools for large-scale geospatial analytics and time-series pattern discovery. Includes Tileserver Polars, matrix-profile-rs, and more.
+Tools for large-scale geospatial analytics and time-series pattern discovery. Includes Tileserver Polars, matrix-profile-rs, and more.
 
 ## [Agentic Systems →](/agentic-systems)
 

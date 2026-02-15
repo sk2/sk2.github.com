@@ -11,7 +11,7 @@ section: photography
 
 ---
 
-## The Insight
+## Concept
 
 A headless, autonomous astrophotography controller designed for low-power Linux devices (RPi/Jetson). It manages hardware, executes imaging sequences, and ensures rig safety — set up, start the sequence, and go to sleep with confidence.
 

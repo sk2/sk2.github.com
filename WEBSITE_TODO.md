@@ -12,7 +12,7 @@ Add visual content to project pages to provide substance and demonstrate functio
 - [ ] Side-by-side comparison of different layout algorithms
 - [ ] Edge bundling demonstration
 
-**Topology Modeling Library:**
+**Network Modeling & Configuration Library:**
 - [ ] Code example showing type-safe topology definition
 - [ ] Query API usage examples
 - [ ] Generated configuration output samples

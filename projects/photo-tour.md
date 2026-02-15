@@ -11,7 +11,7 @@ section: photography
 
 ---
 
-## The Insight
+## Concept
 
 In the field, you can see what the camera sees and get actionable guidance/control fast enough to improve the shot.
 

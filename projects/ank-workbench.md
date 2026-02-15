@@ -11,7 +11,7 @@ section: network-automation
 
 ---
 
-## The Insight
+## Concept
 
 Network engineers can design, validate, and visualize network changes in one complete workflow without switching between separate tools or manually gluing components together.
 
@@ -27,7 +27,7 @@ Network engineers can design, validate, and visualize network changes in one com
 
 ## What This Is
 
-**An orchestration platform** that integrates the ecosystem tools (Topology Generator, Topology Modeling Library, Network Topology Engine, Network Simulator, Network Visualization Engine) into one seamless workflow.
+**An orchestration platform** that integrates the ecosystem tools (Topology Generator, Network Modeling & Configuration Library, Network Topology Engine, Network Simulator, Network Visualization Engine) into one seamless workflow.
 
 The Network Automation Workbench is the **glue layer** that coordinates the entire network automation pipeline. Engineers can generate topologies, model networks declaratively, run lightweight simulations, and visualize results — driven from YAML configuration, a text-based TUI, or the web interface.
 
@@ -37,7 +37,7 @@ The Network Automation Workbench is the **glue layer** that coordinates the enti
 │                              Network Automation Workbench                               │
 │                    (Orchestration · Web UI · Workflow Management)                       │
 │   ┌───────────────────┬──────────────────────┬─────────────────┬────────────────────┐  │
-│   │ Topology Generator│ Topology Modeling     │ Network         │ Visualization      │  │
+│   │ Topology Generator│ Modeling & Config     │ Network         │ Visualization      │  │
 │   │                   │ Library + Engine      │ Simulator       │ Engine             │  │
 └───┴───────────────────┴──────────────────────┴─────────────────┴────────────────────┴──┘
 ```
@@ -72,7 +72,7 @@ Performance benchmarks, worker-first compute, GPU renderer, scale navigation.
 **v1.3 Tool Integration & Interactive Workflows** (In Progress)
 - Interactive device access — click a node to open a terminal into the simulated device
 - Simulator integration & control — start/stop/reset, stream progress and state
-- Config export pipeline — generate from the Topology Modeling Library, preview, download
+- Config export pipeline — generate from the Network Modeling & Configuration Library, preview, download
 - Topology generation — Topology Generator patterns available in UI
 - Live simulation observability — watch protocol convergence and routing updates
 

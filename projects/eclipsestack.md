@@ -11,7 +11,7 @@ section: photography
 
 ---
 
-## The Insight
+## Concept
 
 Enable high-fidelity HDR solar composites by providing sub-pixel alignment of eclipse frames through a combination of computer vision and temporal drift modeling.
 

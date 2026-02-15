@@ -27,7 +27,7 @@ Building on open source implementations to analyze reflections of existing broad
 <span class="status-badge status-active">Active Development</span> · [Full Details →](projects/signals)
 
 **What It Is:**
-A high-performance SDR client for spectrum monitoring and automated signal discovery. Spectra transforms raw IQ samples into a "Signal Census" using real-time ML classification.
+An SDR client for spectrum monitoring and automated signal discovery. Spectra transforms raw IQ samples into a "Signal Census" using real-time ML classification.
 
 ![Spectra Waterfall](/images/spectra-waterfall.png)
 *Spectra WebGL waterfall — real-time spectrum analysis with heat palette, streaming from a remote RTL-SDR.*
@@ -56,7 +56,7 @@ Using coherent SDR arrays for through-wall human detection via Wi-Fi signal phas
 <span class="status-badge status-active">v1 — Core Streaming & Hardware</span> · [Full Details →](projects/rtltcp)
 
 **What It Is:**
-A high-performance Rust server that streams raw IQ samples from multiple SDR devices (RTL-SDR, AirSpy HF+) over the network using the industry-standard `rtl_tcp` protocol, with a built-in TUI for live configuration.
+A Rust server that streams raw IQ samples from multiple SDR devices (RTL-SDR, AirSpy HF+) over the network using the industry-standard `rtl_tcp` protocol, with a built-in TUI for live configuration.
 
 **Key Features:**
 - Multi-threaded architecture for concurrent streaming from multiple SDRs

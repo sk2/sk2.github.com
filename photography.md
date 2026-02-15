@@ -130,7 +130,7 @@ A headless, autonomous astrophotography controller designed for low-power Linux 
 <span class="status-badge status-active">v0.1 Celestial Math</span> · [Full Details →](projects/open-astro-core)
 
 **What It Is:**
-High-performance Rust library providing shared astronomical logic, hardware drivers, and protocol implementations for the OpenAstro ecosystem.
+Rust library providing shared astronomical logic, hardware drivers, and protocol implementations for the OpenAstro ecosystem.
 
 **Components:**
 - **astro-core**: Coordinate math (RA, Dec, transforms), time calculations (Julian date, sidereal time)

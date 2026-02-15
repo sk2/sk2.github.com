@@ -35,7 +35,7 @@ Awards: Development Economics III Excellence Award (2009), The DSTO Surveillance
 - Network automation and configuration generation
 - Multi-agent systems with message broker architectures
 - Real-time signal processing (biometrics, RF)
-- High-performance visualization and simulation
+- Visualization and simulation
 
 **Tools & Frameworks:**
 - **Infrastructure:** Docker, NATS, OpenTelemetry, Tokio
@@ -47,7 +47,7 @@ Awards: Development Economics III Excellence Award (2009), The DSTO Surveillance
 ## Professional Work
 
 **Independent Software Engineer** (2025-Present)
-- **Topology Modeling Library**: Developing a high-performance network topology modeling framework with a Rust core (`petgraph`) and Python bindings (`PyO3`) for large-scale network simulation.
+- **Network Modeling & Configuration Library**: Developing a network topology modeling framework with a Rust core (`petgraph`) and Python bindings (`PyO3`) for large-scale network simulation.
 - **Network Visualization Engine**: Built a deterministic topology layout engine that transforms complex multi-layer network graphs into information-dense visualizations for engineering analysis.
 - **Agentic Systems**: Implementing a security-first multi-agent framework using NATS and Docker for isolated, capability-based automation in production environments.
 - **HealthyPi Ecosystem**: Developing real-time biometric signal processing pipelines (ECG, PPG, HRV) for experimental health monitoring hardware.

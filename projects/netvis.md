@@ -12,7 +12,7 @@ section: network-automation
 ---
 
 
-## The Concept
+## Concept
 
 Network visualization often fails at scale because layout algorithms treat all nodes and edges equally, producing cluttered "hairball" diagrams. The **Network Visualization Engine** treats topologies as hierarchical structures and uses domain-aware layout constraints—including isometric views and edge bundling—to reflect engineering intent.
 
@@ -92,9 +92,9 @@ Rendering to SVG...
 Written: output.svg (6.5 KB)
 ```
 
-## Integration with the Topology Modeling Library
+## Integration with the Network Modeling & Configuration Library
 
-Topology Modeling Library topologies export directly to the Network Visualization Engine format:
+Network Modeling & Configuration Library topologies export directly to the Network Visualization Engine format:
 ```python
 # NetVis
 topo.export_for_netvis(
@@ -104,7 +104,7 @@ topo.export_for_netvis(
 )
 ```
 
-The Network Visualization Engine reads the exported topology and applies advanced layout algorithms, producing publication-quality diagrams that reflect the logical structure captured in the Topology Modeling Library.
+The Network Visualization Engine reads the exported topology and applies advanced layout algorithms, producing publication-quality diagrams that reflect the logical structure captured in the Network Modeling & Configuration Library.
 
 ## Example Gallery
 

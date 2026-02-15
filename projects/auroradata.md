@@ -12,7 +12,7 @@ section: projects
 ---
 
 
-## The Concept
+## Concept
 
 Aurora hunting in Australia requires a 60+ minute drive to dark sites, but most tools don't help answer the critical question: "Should I leave *now*?" **AuroraData** solves this by combining real-time solar wind data, substorm trigger logic, local weather forecasts, and travel time to provide a single, actionable "Go/No-Go" decision.
 

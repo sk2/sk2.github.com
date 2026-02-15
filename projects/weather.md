@@ -11,7 +11,7 @@ section: projects
 
 ---
 
-## The Insight
+## Concept
 
 The primary goal is to bypass the complexity of BOM's FTP delivery and binary formats (GRIB2/NetCDF) to provide a clean, queryable interface for localized weather insights, starting with South Australia.
 

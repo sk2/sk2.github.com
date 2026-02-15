@@ -11,7 +11,7 @@ section: photography
 
 ---
 
-## The Insight
+## Concept
 
 Downstream apps can rely on correct, consistent coordinate math and device/protocol primitives — keeping astronomical logic and hardware drivers in a single shared Rust library rather than duplicated across applications.
 
@@ -27,7 +27,7 @@ Downstream apps can rely on correct, consistent coordinate math and device/proto
 
 ## What This Is
 
-A high-performance Rust library providing shared astronomical logic, hardware drivers, and protocol implementations for the OpenAstro ecosystem (OpenAstro Node, AuroraPhoto, Photo Tour). It provides coordinate transforms, time calculations, and native drivers for Sony cameras and Benro Polaris mounts.
+A Rust library providing shared astronomical logic, hardware drivers, and protocol implementations for the OpenAstro ecosystem (OpenAstro Node, AuroraPhoto, Photo Tour). It provides coordinate transforms, time calculations, and native drivers for Sony cameras and Benro Polaris mounts.
 
 ## Workspace Crates
 

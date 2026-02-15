@@ -12,7 +12,7 @@ section: projects
 ---
 
 
-## The Concept
+## Concept
 
 OmniFocus 4's AppleScript and app-based APIs are slow—too slow for AI agents that need instant context. **OmniFocus DB** bypasses these layers with direct SQLite database access, providing near-instant retrieval of projects and tasks in token-efficient formats optimized for agent consumption.
 
@@ -28,7 +28,7 @@ OmniFocus 4's AppleScript and app-based APIs are slow—too slow for AI agents t
 
 ## What This Is
 
-A high-performance, low-latency CLI tool for direct database access to OmniFocus 4. Designed specifically for AI agent context and fast triaging, it bypasses slow AppleScript/TypeScript layers to read directly from the OmniFocus SQLite database.
+A fast CLI tool for direct database access to OmniFocus 4. Designed specifically for AI agent context and fast triaging, it bypasses slow AppleScript/TypeScript layers to read directly from the OmniFocus SQLite database.
 
 ## Core Value
 

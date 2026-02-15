@@ -3,7 +3,7 @@ layout: default
 section: network-automation
 ---
 
-# Topology Modeling Library
+# Network Modeling & Configuration Library
 
 <span class="status-badge status-active">v1.8 — Performance & Optimization</span>
 
@@ -12,9 +12,9 @@ section: network-automation
 ---
 
 
-## The Insight
+## Concept
 
-Network topology modeling typically forces a choice between the speed of untyped graph libraries (NetworkX) and the rigidity of database-backed sources of truth. The **Topology Modeling Library** eliminates this trade-off by using Pydantic for schema validation and a high-performance Rust core (`petgraph`) for graph traversals.
+Network topology modeling typically forces a choice between the speed of untyped graph libraries (NetworkX) and the rigidity of database-backed sources of truth. The **Network Modeling & Configuration Library** eliminates this trade-off by using Pydantic for schema validation and a Rust core (`petgraph`) for graph traversals.
 
 ## Quick Facts
 
@@ -28,7 +28,7 @@ Network topology modeling typically forces a choice between the speed of untyped
 
 ## What This Is
 
-A Python library for modeling and querying network topologies with type-safe Pydantic models and a high-performance Rust core. Expressive Python API backed by blazing-fast graph algorithms, with automatic configuration generation for multi-vendor network deployments.
+A Python library for modeling and querying network topologies with type-safe Pydantic models and a Rust core. Expressive Python API backed by compiled graph algorithms (petgraph), with automatic configuration generation for multi-vendor network deployments.
 
 ## Key Features
 

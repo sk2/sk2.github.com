@@ -11,7 +11,7 @@ section: signal-processing
 
 ---
 
-## The Insight
+## Concept
 
 Wi-Fi signals penetrate walls and reflect off human bodies, creating detectable Doppler shifts and signal disruptions. By processing these reflections from coherent multi-channel receivers, we can detect and localize human presence through walls without active transmission.
 

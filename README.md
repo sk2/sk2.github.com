@@ -130,7 +130,7 @@ This script scans `~/dev`, `~/PycharmProjects`, and `~/RustroverProjects` for pr
 - **Preserve detailed content**: If existing .md file has 3x more lines than generated version, keep the existing file (indicates manual enrichment).
 - **Extract names from preserved files**: When preserving detailed content, use the project name from the existing file, not PROJECT.md.
 - **Legacy projects**: Keep existing project .md files that don't have .planning directories (e.g., autonetkit, nascleanup).
-  - **AutoNetkit (PycharmProjects/autonetkit_legacy)**: This is the legacy PhD project. The active development is the **Topology Modeling Library** in `~/dev/ank_pydantic`.
+  - **AutoNetkit (PycharmProjects/autonetkit_legacy)**: This is the legacy PhD project. The active development is the **Network Modeling & Configuration Library** in `~/dev/ank_pydantic`.
 
 **Special Cases:**
 - **Multi-Agent Assistant**: The project page includes a comprehensive "Individual Agents" section listing all 13+ agents with their languages, purposes, and security tiers. This is a key feature and should be preserved.
@@ -218,11 +218,15 @@ The CV page (`cv.md`) is manually maintained with these guidelines:
 
 When maintaining or expanding this website, strictly adhere to these architectural and stylistic principles:
 
-### Core Philosophy: "Understated Expert"
-- **Lead with Insight**: Every project page must begin with a "The Insight" section explaining the technical problem and architectural solution before implementation details.
-- **Show, Don't Overwhelm**: Use raw code blocks and CLI outputs to provide technical substance. **DO NOT** use collapsible `<details>` blocks for code; the raw technical evidence is essential for the "Show, Don't Tell" philosophy.
-- **Tight Prose**: Strictly follow Strunk & White. Remove marketing adjectives and "loose" sentences. Let technical outcomes and realistic examples speak for the system's value.
-- **High-Signal Hierarchy**: Keep Core Systems (Network, Data Science, Agentic Architectures, Signal Processing) at the top of the projects index. Demote experimental tools and technical hobbies to the bottom to preserve the "Expert" brand.
+### Voice: Understated, Confident, Technical
+- **Calm authority, not marketing.** Write as an engineer explaining work to a peer. No superlatives, no hype, no exclamation marks. The work speaks for itself.
+- **Lead with the core idea.** Every project page begins with a short section explaining the technical problem and architectural approach — not a sales pitch. Use the heading "Concept" (not "The Insight", "The Idea", or "Overview").
+- **Prefer specifics to adjectives.** Instead of "high-performance", state what it does: "processes 10k-node topologies in under a second", "126,000 lines of Rust", "1,350 tests". When numbers aren't available, describe the mechanism: "Rust-native graph engine", "compiled layout algorithms". Let the reader infer performance.
+- **Avoid "high-performance".** This phrase appears generic and marketing-adjacent. Prefer: "fast", "native-speed", "Rust-native", or just describe the architecture and let it speak.
+- **No templated section headers.** Avoid formulaic headings like "What It Is", "Problem It Solves", "Why This Tool?". Use natural, specific headings or fold the content into the introduction.
+- **Show, don't overwhelm.** Use raw code blocks and CLI outputs for technical substance. Do NOT use collapsible `<details>` blocks — the technical evidence should be visible.
+- **Tight prose.** Follow Strunk & White. Remove loose sentences. Let technical outcomes and realistic examples carry the weight.
+- **Use full product names in prose.** Refer to projects by their full names (Network Visualization Engine, Network Simulator, etc.) in all prose text. Keep code names (netvis, netsim, ank_pydantic) only in code examples, CLI commands, imports, and repository URLs.
 
 ### Structural Consistency
 - **Status Badges**: Use standardized status badges. Do not embellish "Production Ready" status; show actual phase completion (e.g., "Phase 18/20").
@@ -262,7 +266,11 @@ All prose on this site follows **The Elements of Style** (Strunk and White).
 - **Prefer the specific to the general.**
 - **Avoid a succession of loose sentences.**
 
-When adding or updating project descriptions, ensure they remain information-dense and strictly adhere to these principles.
+**Tone:** Understated, confident, technical. Write as an engineer explaining work to a peer — never as a marketer. The power is in the specifics and the architecture, not in adjectives. Avoid "high-performance", "cutting-edge", "state-of-the-art", "blazing-fast", and similar filler. If something is fast, say why (Rust, compiled, native graph algorithms) or show numbers.
+
+**Project names:** Use full product names in prose (Network Visualization Engine, not NetVis). Keep code names only in code examples, CLI commands, and imports.
+
+**Section headings:** Use "Concept" as the opening section for project pages. Avoid templated headers like "What It Is" or "Problem It Solves".
 
 ### Building and Deploying
 The site is built using Jekyll. To build locally:

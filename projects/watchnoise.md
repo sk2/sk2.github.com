@@ -5,7 +5,7 @@ section: projects
 
 # Wave (StillState & FlowState)
 
-<span class="status-badge status-active">21 (Bluetooth Output Enforcement Hardening)</span>
+<span class="status-badge status-active">Phase 21 — 55/60 Plans Complete</span>
 
 [← Back to Projects](../projects)
 
@@ -20,8 +20,8 @@ section: projects
 
 | | |
 |---|---|
-| **Status** | 21 (Bluetooth Output Enforcement Hardening) |
-| **Language** | N/A |
+| **Status** | Phase 21 — 55/60 plans complete |
+| **Language** | Swift (SwiftUI, watchOS) |
 | **Started** | 2026 |
 
 ---

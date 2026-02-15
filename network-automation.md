@@ -105,7 +105,7 @@ Run simulations as background daemons and interact with them in real-time, like 
 - **Agent development**: Test automation agents against live network state without container overhead
 - **CI/CD integration**: Start daemon, run tests via `exec`, collect results, stop daemon
 
-**Current Status:** v1.6 shipped with L3VPN (VRFs, RD/RT, MP-BGP VPNv4), daemon mode with interactive console (command abbreviation, tab completion), and BMP telemetry. v1.7 adds SR-MPLS dataplane support. 126,000+ lines of Rust, 1,350+ tests.
+**Current Status:** v1.7 shipped with SR-MPLS dataplane, interactive console enhancements (TUI device selector, daemon management), L3VPN (VRFs, RD/RT, MP-BGP VPNv4), and BMP telemetry. 130,000+ lines of Rust, 1,350+ tests, 222 plans complete across 53 phases.
 
 **Tech Stack:** Rust, Tokio, petgraph, gRPC (daemon IPC), ratatui (TUI)
 
@@ -131,7 +131,7 @@ A Rust-based network topology layout and visualization engine. Renders complex m
 ![Data Center Fabric](/images/netvis-datacenter-large.png)
 *Spine-leaf data center with bandwidth annotations and rack grouping.*
 
-**Current Status:** v1.2 shipped with visual polish and production hardening. Working on v1.3 API stability and WASM embedding for Network Automation Workbench integration.
+**Current Status:** v1.2 shipped with visual polish and production hardening. v1.3 in progress — stable API, deterministic rendering, geographic layout with real-world coordinates, and spatial indexing for WASM embedding.
 
 **Tech Stack:** Rust, petgraph, fjadra (d3-force port), WASM-ready
 
@@ -205,7 +205,7 @@ The Rust engine that powers the Network Modeling & Configuration Library's graph
 **What It Is:**
 A platform that integrates the entire network automation ecosystem into a single workflow. Driven from YAML, a text-based TUI, or the web interface — upload topology YAML, visualize the network, run simulations, and analyze results without switching between tools.
 
-**Milestones:** v1.0 Foundation shipped (Feb 4). v1.1 UX Polish shipped (Feb 9). v1.2 Scale Visualization at 98%. v1.3 adds simulator integration, interactive device terminals, and live observability.
+**Milestones:** v1.0 Foundation shipped (Feb 4). v1.1 UX Polish shipped (Feb 9). v1.2 Scale Visualization shipped (Feb 11). v1.3 Tool Integration complete — simulator integration, interactive device terminals, and live event streaming.
 
 **Tech Stack:** Python (FastAPI), React frontend, integrates all ecosystem components
 

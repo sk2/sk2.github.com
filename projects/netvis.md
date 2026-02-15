@@ -128,10 +128,15 @@ The Network Visualization Engine reads the exported topology and applies advance
 ![Radial Layout](/images/netvis-showcase-radial-layout.png)
 *Zone-based service mesh with central controller, regional coordinators, edge nodes, and service endpoints arranged in a radial layout. Demonstrates the engine's ability to handle hierarchical topologies with many leaf nodes.*
 
+### Geographic Layout — European Backbone
+
+![Geographic European Backbone](/images/netvis-geo-europe-backbone.png)
+*Geographic layout rendering of a European backbone network. Nodes placed at real-world coordinates with great-circle edge routing. Demonstrates the geographic layout algorithm for infrastructure spanning physical locations.*
+
 ### Isometric Multi-Layer View
 
 ![Isometric Multi-Layer](/images/netvis-isometric-multi-layer.png)
-*Three network layers (WAN, distribution, access) rendered as stacked isometric planes. The same topology is shown at each layer with inter-layer connections visible, revealing how logical structure maps across the network hierarchy.*
+*Three network layers (WAN, distribution, access) rendered as stacked isometric planes with inter-layer connections visible. Shows how logical structure maps across the network hierarchy.*
 
 ### Theme Showcase — Device-Aware Icons
 

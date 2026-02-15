@@ -34,9 +34,9 @@ Integrated tools for field photography, astrophotography automation, and image p
 
 ### [AuroraData — Aurora Planning & Substorm Advisor](projects/auroradata)
 
-<span class="status-badge status-active">Phase 1 — Substorm Trigger Engine</span>
+<span class="status-badge status-active">v1.0 Complete</span>
 
-A specialized tool for Australian aurora observers that solves the "should I drive 60 minutes?" problem. Combines real-time solar wind data (NOAA), substorm trigger logic (Bz/HP trends), and local weather (ACCESS-G model) to provide a single, definitive "Go/No-Go" score.
+A planning tool for Australian aurora observers that answers "should I leave now?" Combines real-time solar wind monitoring (NOAA SWPC), substorm trigger detection (Bz/HP trends), site-specific weather (ACCESS-G model), and LLM-generated advice to produce a "Go/No-Go" score. Includes Telegram bot for automated alerts and historical playback for backtesting against real storm events.
 
 ### [EclipsePhoto](projects/eclipsephoto)
 
@@ -46,7 +46,7 @@ A "fire and forget" Raspberry Pi-based controller for autonomous solar eclipse p
 
 ### [Wave](projects/watchnoise)
 
-<span class="status-badge status-active">Active Development</span>
+<span class="status-badge status-active">Phase 21 — 55/60 Plans</span>
 · **Swift (SwiftUI)**
 
 An evolutionary ambient audio ecosystem designed to manage the user's sensory environment across rest and work. **StillState** reclaims silence through intelligent, adaptive audio. **FlowState** achieves and maintains focus through task-linked audio and genetic evolution.

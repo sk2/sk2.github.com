@@ -26,7 +26,7 @@ This research led to the creation of **AutoNetkit**, an open-source tool integra
 
 [Explore my PhD Thesis](thesis) | [View Research on Google Scholar](https://scholar.google.com.au/citations?user=BJ1Efr8AAAAJ)
 
-## Highlighted Projects
+## Featured Projects
 
 - **[Network Simulator:](/projects/network-simulator)** A Rust-based packet-level network simulator with daemon mode, interactive console, SR-MPLS dataplane, and L3VPN support. 130,000+ LOC, 1,350+ tests.
 - **[Network Visualization Engine:](/projects/netvis)** A Rust visualization engine that turns complex multi-layer topologies into clear, information-dense renderings with isometric views and edge bundling.

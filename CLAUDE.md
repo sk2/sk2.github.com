@@ -23,6 +23,7 @@ Use full product names in all prose text:
 | `NTE` | Network Topology Engine |
 | `ANK Workbench` | Network Automation Workbench |
 | `rtltcp-rust` | Multi-SDR Streaming Server |
+| `psytrance` | Psytrance Generator |
 
 Keep code names only in: Python imports, CLI commands, repository URLs, file paths, and code examples.
 
@@ -34,7 +35,7 @@ Keep code names only in: Python imports, CLI commands, repository URLs, file pat
 
 ## Upcoming Projects
 
-- **Synthetic Music Generation**: Algorithmic/generative music project. No page yet — waiting for more substance before adding.
+- **Satellite Tracking**: Satellite observation tool integrating CelesTrak, N2YO, and SatNOGS data. Pre-development — no page yet.
 
 ## Technical
 

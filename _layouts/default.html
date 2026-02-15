@@ -30,10 +30,8 @@
           <a href="{{ '/' | relative_url }}" class="site-title">Simon Knight</a>
           <nav class="site-nav">
             <a href="{{ '/' | relative_url }}" {% if page.url == '/' or page.url == '/index.html' %}class="active"{% endif %}>About</a>
-            <a href="{{ '/network-automation' | relative_url }}" {% if page.url contains 'network-automation' or page.section == 'network-automation' %}class="active"{% endif %}>Network Automation</a>
-            <a href="{{ '/signal-processing' | relative_url }}" {% if page.url contains 'signal-processing' or page.section == 'signal-processing' %}class="active"{% endif %}>Signal Processing</a>
             <div class="nav-dropdown">
-              <a href="{{ '/projects' | relative_url }}" class="nav-dropdown-trigger{% if page.url == '/projects.html' or page.url == '/projects/' or page.section == 'projects' or page.url contains 'data-analytics' or page.section == 'data-analytics' or page.url contains 'agentic-systems' or page.section == 'agentic-systems' or page.url contains 'photography' or page.section == 'photography' %} active{% endif %}">Projects <span class="nav-caret">&#9662;</span></a>
+              <a href="{{ '/projects' | relative_url }}" class="nav-dropdown-trigger{% if page.url == '/projects.html' or page.url == '/projects/' or page.section == 'projects' or page.url contains 'data-analytics' or page.section == 'data-analytics' or page.url contains 'agentic-systems' or page.section == 'agentic-systems' or page.url contains 'photography' or page.section == 'photography' %}  active{% endif %}">Projects <span class="nav-caret">&#9662;</span></a>
               <div class="nav-dropdown-menu">
                 <a href="{{ '/projects' | relative_url }}">All Projects</a>
                 <a href="{{ '/data-analytics' | relative_url }}" {% if page.url contains 'data-analytics' or page.section == 'data-analytics' %}class="active"{% endif %}>Data Analytics</a>
@@ -41,6 +39,8 @@
                 <a href="{{ '/photography' | relative_url }}" {% if page.url contains 'photography' or page.section == 'photography' %}class="active"{% endif %}>Photography</a>
               </div>
             </div>
+            <a href="{{ '/network-automation' | relative_url }}" {% if page.url contains 'network-automation' or page.section == 'network-automation' %}class="active"{% endif %}>Network Automation</a>
+            <a href="{{ '/signal-processing' | relative_url }}" {% if page.url contains 'signal-processing' or page.section == 'signal-processing' %}class="active"{% endif %}>Signal Processing</a>
           </nav>
         </div>
       </header>

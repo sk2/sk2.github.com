@@ -22,6 +22,7 @@ Use full product names in all prose text:
 | `TopoGen` | Topology Generator |
 | `NTE` | Network Topology Engine |
 | `ANK Workbench` | Network Automation Workbench |
+| `rtltcp-rust` | Multi-SDR Streaming Server |
 
 Keep code names only in: Python imports, CLI commands, repository URLs, file paths, and code examples.
 

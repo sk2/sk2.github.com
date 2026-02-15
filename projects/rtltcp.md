@@ -3,7 +3,7 @@ layout: default
 section: signal-processing
 ---
 
-# rtltcp-rust
+# Multi-SDR Streaming Server
 
 <span class="status-badge status-active">Phase 3/4 — TUI & Live Config (90%)</span>
 

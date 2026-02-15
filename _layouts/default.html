@@ -30,24 +30,38 @@
           <a href="{{ '/' | relative_url }}" class="site-title">Simon Knight</a>
           <nav class="site-nav">
             <a href="{{ '/' | relative_url }}" {% if page.url == '/' or page.url == '/index.html' %}class="active"{% endif %}>About</a>
+            <a href="{{ '/network-automation' | relative_url }}" {% if page.url contains 'network-automation' or page.section == 'network-automation' %}class="active"{% endif %}>Network Automation</a>
+            <a href="{{ '/signal-processing' | relative_url }}" {% if page.url contains 'signal-processing' or page.section == 'signal-processing' %}class="active"{% endif %}>Signal Processing</a>
             <div class="nav-dropdown">
-              <a href="{{ '/projects' | relative_url }}" class="nav-dropdown-trigger{% if page.url == '/projects.html' or page.url == '/projects/' or page.section == 'projects' or page.url contains 'network-automation' or page.section == 'network-automation' or page.url contains 'signal-processing' or page.section == 'signal-processing' or page.url contains 'data-analytics' or page.section == 'data-analytics' or page.url contains 'agentic-systems' or page.section == 'agentic-systems' or page.url contains 'photography' or page.section == 'photography' %} active{% endif %}">Projects <span class="nav-caret">&#9662;</span></a>
+              <a href="{{ '/projects' | relative_url }}" class="nav-dropdown-trigger{% if page.url == '/projects.html' or page.url == '/projects/' or page.section == 'projects' or page.url contains 'data-analytics' or page.section == 'data-analytics' or page.url contains 'agentic-systems' or page.section == 'agentic-systems' or page.url contains 'photography' or page.section == 'photography' %} active{% endif %}">Projects <span class="nav-caret">&#9662;</span></a>
               <div class="nav-dropdown-menu">
                 <a href="{{ '/projects' | relative_url }}">All Projects</a>
-                <a href="{{ '/network-automation' | relative_url }}" {% if page.url contains 'network-automation' or page.section == 'network-automation' %}class="active"{% endif %}>Network Automation</a>
-                <a href="{{ '/signal-processing' | relative_url }}" {% if page.url contains 'signal-processing' or page.section == 'signal-processing' %}class="active"{% endif %}>Signal Processing</a>
                 <a href="{{ '/data-analytics' | relative_url }}" {% if page.url contains 'data-analytics' or page.section == 'data-analytics' %}class="active"{% endif %}>Data Analytics</a>
                 <a href="{{ '/agentic-systems' | relative_url }}" {% if page.url contains 'agentic-systems' or page.section == 'agentic-systems' %}class="active"{% endif %}>Agentic Systems</a>
                 <a href="{{ '/photography' | relative_url }}" {% if page.url contains 'photography' or page.section == 'photography' %}class="active"{% endif %}>Photography</a>
               </div>
             </div>
-            <a href="{{ '/cv' | relative_url }}" {% if page.url contains 'cv' %}class="active"{% endif %}>CV</a>
-            <a href="{{ '/thesis' | relative_url }}" {% if page.url contains 'thesis' %}class="active"{% endif %}>Thesis</a>
           </nav>
         </div>
       </header>
 
       <main class="site-content">
+        {% if page.section %}
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          {% case page.section %}
+          {% when 'network-automation' %}
+            <a href="{{ '/network-automation' | relative_url }}">Network Automation</a>
+          {% when 'signal-processing' %}
+            <a href="{{ '/signal-processing' | relative_url }}">Signal Processing</a>
+          {% when 'data-analytics' %}
+            <a href="{{ '/data-analytics' | relative_url }}">Data Analytics</a>
+          {% when 'agentic-systems' %}
+            <a href="{{ '/agentic-systems' | relative_url }}">Agentic Systems</a>
+          {% when 'photography' %}
+            <a href="{{ '/photography' | relative_url }}">Photography</a>
+          {% endcase %}
+        </nav>
+        {% endif %}
         {{ content }}
       </main>
 

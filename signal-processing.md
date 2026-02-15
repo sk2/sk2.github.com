@@ -33,7 +33,7 @@ A distributed spectrum monitoring system that autonomously scans radio bands, cl
 
 ---
 
-### rtltcp-rust — SDR Network Streaming
+### Multi-SDR Streaming Server
 
 <span class="status-badge status-active">Phase 3/4 — TUI & Live Config (90%)</span> · [Full Details →](projects/rtltcp)
 
@@ -118,7 +118,7 @@ Experimental signal processing using the [HealthyPi](https://www.crowdsupply.com
 
 - **HealthyPi Ecosystem**: [github.com/sk2/healthypi](https://github.com/sk2/healthypi)
 - **Project Spectra**: [github.com/sk2/spectra](https://github.com/sk2/spectra)
-- **rtltcp-rust**: [github.com/sk2/rtltcp-rust](https://github.com/sk2/rtltcp-rust)
+- **Multi-SDR Streaming Server**: [github.com/sk2/rtltcp-rust](https://github.com/sk2/rtltcp-rust)
 - **soundarray**: [github.com/sk2/soundarray](https://github.com/sk2/soundarray)
 - **Illumination Reflection**: [github.com/sk2/passive-radar](https://github.com/sk2/passive-radar)
 - **Wi-Fi Signal Reflection**: [github.com/sk2/wifi-radar](https://github.com/sk2/wifi-radar)

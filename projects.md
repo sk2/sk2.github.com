@@ -71,12 +71,12 @@ A Rust-based CLI tool for deduplicating and organizing large file shares. Optimi
 
 A terminal-based satellite tracker that plots real-time positions on a world map using SGP4 orbital propagation, predicts passes over your location, and displays transmitter frequencies from SatNOGS. Interactive TUI with vim-style navigation, 15 CelesTrak satellite groups, and local TLE caching.
 
-### [Psytrance Generator — Algorithmic Music Engine](projects/psytrance)
+### [Algorithmic Music Engine](projects/psytrance)
 
 <span class="status-badge status-active">Phase 1 Complete</span>
 · **Rust**
 
-A Rust engine that generates full psytrance tracks from scratch using a multi-level energy model. Hand-written DSP synthesis (oscillators, biquad filters, envelopes) drives kick, bass, hi-hat, and clap elements. Energy curves control pattern density, filter modulation, and accent placement to produce tracks with intentional structure. Five mood presets (dark, mysterious, euphoric, melancholy, aggressive) with configurable BPM, key, and scale. Includes TUI playback with energy visualization.
+A Rust engine that generates full music tracks from scratch using a multi-level energy model. Hand-written DSP synthesis (oscillators, biquad filters, envelopes) drives kick, bass, hi-hat, and clap elements. Energy curves control pattern density, filter modulation, and accent placement to produce tracks with intentional structure. Five mood presets (dark, mysterious, euphoric, melancholy, aggressive) with configurable BPM, key, and scale. Includes TUI playback with energy visualization.
 
 ### [Weather (BOM ACCESS Pipeline)](projects/weather)
 

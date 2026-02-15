@@ -3,7 +3,7 @@ layout: default
 section: projects
 ---
 
-# Psytrance Generator — Algorithmic Music Engine
+# Algorithmic Music Engine
 
 <span class="status-badge status-active">Phase 1 Complete — Foundation</span>
 
@@ -13,7 +13,7 @@ section: projects
 
 ## Concept
 
-A Rust engine that generates full psytrance tracks from scratch using structured generative algorithms rather than pre-composed sequences. A multi-level energy model drives every musical decision — from macro-level track arc (intro, build, peak, breakdown) down to per-16th-note accent patterns — producing coherent tracks with musical tension and release.
+A Rust engine that generates full music tracks from scratch using structured generative algorithms rather than pre-composed sequences. A multi-level energy model drives every musical decision — from macro-level track arc (intro, build, peak, breakdown) down to per-16th-note accent patterns — producing coherent tracks with musical tension and release.
 
 ## Quick Facts
 
@@ -79,7 +79,7 @@ Five presets, each defining a key, scale, energy curve shape, and filter range:
 
 | Mood | Key | Scale | Character |
 |------|-----|-------|-----------|
-| Dark | D | Phrygian | Classic psytrance darkness |
+| Dark | D | Phrygian | Dark, driving |
 | Mysterious | C# | Phrygian Dominant | Goa trance exotica |
 | Euphoric | E | Lydian | Bright, uplifting |
 | Melancholy | C | Harmonic Minor | Sad tension |

@@ -23,7 +23,7 @@ Use full product names in all prose text:
 | `NTE` | Network Topology Engine |
 | `ANK Workbench` | Network Automation Workbench |
 | `rtltcp-rust` | Multi-SDR Streaming Server |
-| `psytrance` | Psytrance Generator |
+| `psytrance` | Algorithmic Music Engine |
 | `satellites` | Satellite Tracker |
 
 Keep code names only in: Python imports, CLI commands, repository URLs, file paths, and code examples.

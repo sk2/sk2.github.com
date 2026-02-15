@@ -44,11 +44,9 @@ A single Rust binary that auto-detects every connected SDR (RTL-SDR, AirSpy HF+,
 - Auto-detection and concurrent streaming from RTL-SDR, AirSpy HF+, and AirSpy devices
 - TUI dashboard with live frequency, gain, and sample rate adjustment over SSH
 - HTTP REST API for device status, health checks, and programmatic monitoring
-- Docker-based cross-compilation and one-command deploy to Raspberry Pi
-
 **Current Status:** Phase 3 at 90% — TUI dashboard, interactive controls, and HTTP API complete. Config save/reload remaining.
 
-**Tech Stack:** Rust, tokio, axum (HTTP API), ratatui (TUI), librtlsdr/libairspyhf/libairspy (FFI)
+**Tech Stack:** Rust, tokio, axum, ratatui
 
 ---
 
@@ -114,18 +112,7 @@ Experimental signal processing using the [HealthyPi](https://www.crowdsupply.com
 
 ---
 
-## Open Source & Contributions
-
-- **HealthyPi Ecosystem**: [github.com/sk2/healthypi](https://github.com/sk2/healthypi)
-- **Project Spectra**: [github.com/sk2/spectra](https://github.com/sk2/spectra)
-- **Multi-SDR Streaming Server**: [github.com/sk2/rtltcp-rust](https://github.com/sk2/rtltcp-rust)
-- **soundarray**: [github.com/sk2/soundarray](https://github.com/sk2/soundarray)
-- **Illumination Reflection**: [github.com/sk2/passive-radar](https://github.com/sk2/passive-radar)
-- **Wi-Fi Signal Reflection**: [github.com/sk2/wifi-radar](https://github.com/sk2/wifi-radar)
-
----
-
-[← Back to Projects](projects) | [View CV](cv) | [Network Automation](network-automation) | [Data Analytics](data-analytics) | [Agentic Systems](agentic-systems)
+[← Back to Projects](projects)
 
 <style>
 .status-badge {

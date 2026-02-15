@@ -13,7 +13,7 @@ section: projects
 
 ## Concept
 
-A Rust engine that generates full music tracks from scratch using structured generative algorithms rather than pre-composed sequences. A multi-level energy model drives every musical decision — from macro-level track arc (intro, build, peak, breakdown) down to per-16th-note accent patterns — producing coherent tracks with musical tension and release.
+A tool for exploring composition ideas through generative algorithms. A multi-level energy model drives every musical decision — from macro-level track arc (intro, build, peak, breakdown) down to per-16th-note accent patterns — producing coherent tracks with musical tension and release.
 
 ## Quick Facts
 
@@ -57,7 +57,7 @@ Macro (Track Arc)
 
 ## Sound Design
 
-All synthesis is hand-written — phase-accumulating oscillators, biquad filters, and amplitude envelopes. No external synth libraries for the core sounds:
+Phase-accumulating oscillators, biquad filters, and amplitude envelopes:
 
 - **Kick**: Sine oscillator with pitch envelope (150 Hz → 50 Hz) plus a click transient for attack definition
 - **Bass**: Sawtooth oscillator through a biquad lowpass filter with energy-driven cutoff modulation
@@ -133,7 +133,7 @@ WASM-based browser interface with spectrum analyser and waveform display.
 ## Tech Stack
 
 - **Language**: Rust
-- **DSP**: Hand-written oscillators, biquad filters, amplitude envelopes (f64 internal precision)
+- **DSP**: Phase-accumulating oscillators, biquad filters, amplitude envelopes (f64 internal precision)
 - **Effects** (Phase 2+): fundsp
 - **WAV Export**: hound
 - **CLI**: clap 4

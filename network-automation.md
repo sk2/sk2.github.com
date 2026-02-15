@@ -103,9 +103,8 @@ Run simulations as background daemons and interact with them in real-time, like 
 - **Execute commands**: `netsim exec my-network r1 "show ip route"`
 - **Attach interactively**: `netsim attach my-network r1` for full REPL console with command history
 - **Agent development**: Test automation agents against live network state without container overhead
-- **CI/CD integration**: Start daemon, run tests via `exec`, collect results, stop daemon
 
-**Current Status:** v1.7 shipped with SR-MPLS dataplane, interactive console enhancements (TUI device selector, daemon management), L3VPN (VRFs, RD/RT, MP-BGP VPNv4), and BMP telemetry. 130,000+ lines of Rust, 1,350+ tests, 222 plans complete across 53 phases.
+**Current Status:** v1.7 shipped with SR-MPLS dataplane, interactive console enhancements (TUI device selector, daemon management), L3VPN (VRFs, RD/RT, MP-BGP VPNv4), and BMP telemetry. 130,000+ lines of Rust, 1,350+ tests.
 
 **Tech Stack:** Rust, Tokio, petgraph, gRPC (daemon IPC), ratatui (TUI)
 
@@ -152,24 +151,29 @@ A Python library for modeling and querying network topologies with type-safe Pyd
 - **Batteries-Included Blueprints**: Pre-built domain models for ISIS, MPLS, EVPN, L3VPN, IXP
 - **Rust Core (Network Topology Engine)**: Graph operations run at native speed with Python FFI bindings
 
-**Example Usage:**
+**Declarative Design:**
 ```python
-from ank_pydantic import Topology, Node, Edge
+from ank_pydantic import Topology
+from ank_pydantic.core.designs import build_isis_layer, build_mpls_layer
 
-# Create topology
-topo = Topology()
-r1 = topo.add_node(Node(name="router1", device_type="cisco_ios"))
-r2 = topo.add_node(Node(name="router2", device_type="juniper_junos"))
-topo.add_edge(Edge(src=r1, dst=r2, interface="ge-0/0/0"))
+# Load a declarative topology specification
+topo = Topology.from_yaml("campus-network.yaml")
 
-# Query with lazy evaluation
-border_routers = topo.query().filter(role="border").collect()
+# Query: find all PE routers in the West PoP
+west_pes = (topo.query()
+    .filter(role="pe", pop="west")
+    .select("name", "loopback", "asn")
+    .collect())
 
-# Transform to protocol layers
-topo.transform_to_protocol("ospf")
+# Query: trace the path between two nodes
+path = topo.query().shortest_path("PE1", "PE4").collect()
 
-# Export for visualization
-topo.export_for_netvis("topology.json")
+# Build protocol layers from the whiteboard topology
+build_isis_layer(topo, level=2, area="49.0001")
+build_mpls_layer(topo, igp_layer="isis")
+
+# Generate multi-vendor configs
+topo.generate_configs(vendors=["cisco_ios", "juniper_junos"])
 ```
 
 **Current Status:** v1.7 API Usability shipped. Working on v1.8 Performance & Optimization — query performance, profiling infrastructure, and 10k+ node validation.
@@ -183,16 +187,28 @@ topo.export_for_netvis("topology.json")
 <span class="status-badge status-active">Stable</span> · [Full Details →](projects/nte)
 
 **What It Is:**
-The Rust engine that powers the Network Modeling & Configuration Library's graph operations. Extracted into its own repository as the engine's scope grew beyond a simple backing store.
+The Rust graph engine that powers the Network Modeling & Configuration Library. Provides native-speed topology operations exposed to Python through PyO3 bindings.
 
-**Key Features:**
-- **petgraph StableDiGraph**: Native-speed topology representation
-- **Polars Storage**: Columnar data backend for efficient queries
-- **Pluggable Backends**: Polars, DuckDB, and Lite storage options
-- **Monte Carlo**: Simulation capabilities via nte-monte-carlo crate
-- **Distributed Support**: nte-server crate for distributed computation
+**Core Capabilities:**
+- **Graph Engine**: petgraph `StableDiGraph` for topology representation with stable node/edge indices across mutations
+- **Query Engine**: Composable, lazy-evaluated queries over topology attributes — filter by node role, device type, protocol participation, or arbitrary properties. Queries compile to Rust iterators for zero-overhead execution
+- **Pluggable Storage**: Three backend options — Polars (columnar analytics), DuckDB (SQL queries over topology data), and Lite (minimal in-memory for embedded use)
+- **Monte Carlo Simulation**: Stochastic failure analysis via `nte-monte-carlo` — inject random link/node failures across thousands of iterations to compute availability metrics and identify single points of failure
+- **Distributed Computation**: `nte-server` crate for splitting large topology analyses across multiple processes
 
-**Architecture:** Cargo workspace with specialized crates: nte-core, nte-query, nte-domain, nte-backend, nte-datastore-*, nte-server, nte-monte-carlo.
+**Architecture:** Cargo workspace with specialized crates:
+
+| Crate | Purpose |
+|-------|---------|
+| `nte-core` | Graph representation, node/edge types, topology mutations |
+| `nte-query` | Lazy query builder, filter/map/collect pipeline |
+| `nte-domain` | Network-specific types (interfaces, protocols, addressing) |
+| `nte-backend` | Storage abstraction trait |
+| `nte-datastore-polars` | Polars columnar backend for analytics workloads |
+| `nte-datastore-duckdb` | DuckDB backend for SQL-based topology queries |
+| `nte-datastore-lite` | Minimal HashMap backend for embedding |
+| `nte-monte-carlo` | Stochastic simulation (failure injection, availability) |
+| `nte-server` | Distributed computation over topology partitions |
 
 **Tech Stack:** Rust, petgraph, Polars, DuckDB, PyO3/Maturin bindings
 
@@ -205,7 +221,7 @@ The Rust engine that powers the Network Modeling & Configuration Library's graph
 **What It Is:**
 A platform that integrates the entire network automation ecosystem into a single workflow. Driven from YAML, a text-based TUI, or the web interface — upload topology YAML, visualize the network, run simulations, and analyze results without switching between tools.
 
-**Milestones:** v1.0 Foundation shipped (Feb 4). v1.1 UX Polish shipped (Feb 9). v1.2 Scale Visualization shipped (Feb 11). v1.3 Tool Integration complete — simulator integration, interactive device terminals, and live event streaming.
+**Milestones:** v1.0 Foundation, v1.1 UX Polish, v1.2 Scale Visualization, v1.3 Tool Integration (current) — simulator integration, interactive device terminals, and live event streaming.
 
 **Tech Stack:** Python (FastAPI), React frontend, integrates all ecosystem components
 
@@ -231,7 +247,7 @@ Flow-based network traffic simulator using analytic queuing models and Monte Car
 **What It Is:**
 A Rust library with Python bindings for generating realistic network topologies. Supports data center (fat-tree, leaf-spine), WAN/backbone (ring, mesh, hierarchical, POP), and random graph patterns. Includes traffic matrix generation, ContainerLab output converter, and vendor-specific interface naming.
 
-**Current Status:** v0.10 shipped. Geographic placement and multi-layer generation in progress.
+**Current Status:** Phase 21/24. Geographic placement, POP design patterns, and multi-layer generation in progress.
 
 **Tech Stack:** Rust core, PyO3 bindings
 
@@ -242,11 +258,11 @@ A Rust library with Python bindings for generating realistic network topologies.
 <span class="status-badge status-active">PhD 2017</span> · [Full Details →](projects/autonetkit)
 
 **What It Is:**
-The original compiler-based network automation tool from my PhD research. Introduced declarative network design with the Whiteboard → Plan → Build transformation model, integrated into Cisco VIRL.
+The original compiler-based network automation tool from my PhD research. Introduced declarative network design with the Whiteboard → Plan → Build transformation model: specify high-level intent (AS numbers, protocol choices, link roles) in a declarative format, and the compiler derives device-level configurations for multiple vendors automatically.
 
-**Current Status:** Maintained for reference. Active development moved to the Network Modeling & Configuration Library and the Network Automation Workbench.
+Integrated into Cisco's VIRL platform for automated multi-vendor lab provisioning. The abstractions pioneered here — layered transformations, declarative topology specification, compiled configuration generation — form the foundation of the current Network Modeling & Configuration Library.
 
-**Tech Stack:** Python, NetworkX
+**Current Status:** Maintained for reference. Active development continues in the Network Modeling & Configuration Library and Network Automation Workbench.
 
 ---
 
@@ -346,20 +362,7 @@ Written: transitnet.svg
 
 The Network Visualization Engine renders the topology with device-aware icons, PoP grouping, and protocol overlay annotations.
 
-**Step 5: Deploy to ContainerLab**
-
-The generated configs deploy directly to ContainerLab for real device testing:
-
-```python
-env = get_environment('containerlab')
-artifacts = env.generate(topology)
-```
-
-```bash
-$ sudo containerlab deploy -t transitnet.clab.yml
-```
-
-**Key Insight:** The Network Modeling & Configuration Library's design functions automatically derive protocol layers from the whiteboard topology, the Network Simulator validates convergence in seconds, and the Network Visualization Engine renders the result — all before committing to container deployment.
+**Key Insight:** The Network Modeling & Configuration Library's design functions automatically derive protocol layers from the whiteboard topology, the Network Simulator validates convergence in seconds, and the Network Visualization Engine renders the result.
 
 ---
 
@@ -489,32 +492,7 @@ ixp.export_netsim("ixp-netsim.yaml")
 
 ---
 
-## Getting Started
-
-**For Network Engineers:**
-1. Start with the **Network Automation Workbench** — the unified platform for the entire workflow
-2. Explore the **Network Modeling & Configuration Library** for programmatic topology modeling
-3. Use the **Network Simulator** for validation and testing
-
-**For Developers:**
-1. Check out the **Network Modeling & Configuration Library** for the Python API and documentation
-2. Explore the **Network Simulator** source code for protocol implementation details
-3. Contribute to the **Network Visualization Engine** for visualization algorithms
-
----
-
-## Source Code
-
-- **Network Modeling & Configuration Library**: [github.com/sk2/ank_pydantic](https://github.com/sk2/ank_pydantic)
-- **Network Topology Engine**: [github.com/sk2/ank_nte](https://github.com/sk2/ank_nte)
-- **Network Simulator**: [github.com/sk2/netsim](https://github.com/sk2/netsim)
-- **Network Visualization Engine**: [github.com/sk2/netvis](https://github.com/sk2/netvis)
-- **Topology Generator**: [github.com/sk2/topogen](https://github.com/sk2/topogen)
-- **AutoNetkit**: [github.com/sk2/autonetkit](https://github.com/sk2/autonetkit)
-
----
-
-[← Back to Projects](projects) | [View CV](cv) | [Development Philosophy](development)
+[← Back to Projects](projects)
 
 <style>
 .status-badge {

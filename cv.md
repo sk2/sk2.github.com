@@ -6,7 +6,7 @@ layout: default
 
 ## Current Role
 
-Independent software engineer developing open-source tools for network automation and intelligent systems.
+Software developer building tools for network automation and intelligent systems.
 
 ## Education
 
@@ -46,7 +46,7 @@ Awards: Development Economics III Excellence Award (2009), The DSTO Surveillance
 
 ## Professional Work
 
-**Independent Software Engineer** (2025-Present)
+**Software Developer** (2025-Present)
 - **Network Modeling & Configuration Library**: Developing a network topology modeling framework with a Rust core (`petgraph`) and Python bindings (`PyO3`) for large-scale network simulation.
 - **Network Visualization Engine**: Built a deterministic topology layout engine that transforms complex multi-layer network graphs into information-dense visualizations for engineering analysis.
 - **Agentic Systems**: Implementing a security-first multi-agent framework using NATS and Docker for isolated, capability-based automation in production environments.

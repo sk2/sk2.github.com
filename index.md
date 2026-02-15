@@ -18,7 +18,11 @@ My work centers on building the right abstractions and transformations for compl
 
 ## Research & Publications
 
-PhD, University of South Australia (2017): *Abstractions and Transformations for Automated Data Network Configuration* — a compiler-based approach to transform high-level network specifications into multi-platform device configurations. This research led to **AutoNetkit**, integrated into Cisco's VIRL platform. [Read the thesis](thesis) | [Google Scholar](https://scholar.google.com.au/citations?user=BJ1Efr8AAAAJ) | [View CV](cv)
+PhD, University of South Australia (2017): *Abstractions and Transformations for Automated Data Network Configuration* — a compiler-based approach to transform high-level network specifications into multi-platform device configurations. This research led to **AutoNetkit**, integrated into Cisco's VIRL platform.
+
+- [Read the thesis](thesis)
+- [Google Scholar](https://scholar.google.com.au/citations?user=BJ1Efr8AAAAJ)
+- [View CV](cv)
 
 ## Featured Projects
 

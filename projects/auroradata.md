@@ -111,7 +111,7 @@ Backtesting and validation against real storm events:
 
 ```
 Location: Adelaide, SA
-Target Site: Willow Springs (90 min drive)
+Target Site: Victor Harbor (75 min drive)
 
 AuroraData Analysis:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -122,15 +122,15 @@ Space Weather:
   Arrival: ~43 minutes
 
 Site Recommendations:
-  1. Willow Springs — Score: 82 (GO)
-     Cloud: 15%, Travel: 90 min, Moon: 12%
+  1. Victor Harbor — Score: 82 (GO)
+     Cloud: 15%, Travel: 75 min, Moon: 12%
      Confidence: HIGH
   2. Port Germein — Score: 71 (GO)
      Cloud: 22%, Travel: 45 min, Moon: 12%
 
 LLM Advice:
   "Strong substorm building with favorable Bz.
-   Leave within 30 minutes for Willow Springs
+   Leave within 30 minutes for Victor Harbor
    to arrive during peak activity window."
 
 Telegram: Alert sent to 12 subscribers
@@ -150,7 +150,7 @@ RECOMMENDATION: GO NOW
 
 AuroraData handles the *planning* side (when to go, where to go), while AuroraPhoto handles the *capture* side (automated camera control, HFR focus):
 
-1. **AuroraData**: "Strong event predicted, leave now for Willow Springs"
+1. **AuroraData**: "Strong event predicted, leave now for Victor Harbor"
 2. **AuroraPhoto**: Automated multi-camera capture once on-site
 
 ---

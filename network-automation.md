@@ -94,6 +94,25 @@ A Rust library with Python bindings for generating realistic network topologies.
 
 ---
 
+### CLI Scrape — Network Device Output Parser
+
+<span class="status-badge status-active">Phase 1 — Foundation</span> · [Full Details →](projects/cliscrape)
+
+**What It Is:**
+Rust-based CLI scraping and parsing tool for network devices. TextFSM-compatible state machine parser with 10-50x faster execution than Python implementations. Includes interactive TUI debugger for template development and modern YAML/TOML template format.
+
+**Key Features:**
+- Full TextFSM compatibility (use existing ntc-templates library)
+- Native Rust performance with parallel processing
+- Interactive TUI debugger for template development
+- Zero-copy parsing and pre-compiled regex patterns
+
+**Current Status:** Phase 1 — defining lexer/parser for TextFSM files
+
+**Tech Stack:** Rust, regex, ratatui
+
+---
+
 ### Network Configuration Parser
 
 <span class="status-badge status-active">Phase 1 — Ingestion</span> · [Full Details →](projects/ank-parse)

@@ -1,13 +1,21 @@
 ---
 layout: default
 section: projects
+## Current Status
+
+2026-02-16 - Closed out phase 7 (summaries, state update)
+
 ---
 
 # OmniFocus DB CLI (omnifocus-db)
 
-<span class="status-badge status-active">** Phase 1: Foundation & DB Safety</span>
+<span class="status-badge status-active">** Phase 7: Interactive Inbox Triage TUI — COMPLETE</span>
 
 [← Back to Projects](../projects)
+
+## Current Status
+
+2026-02-16 - Closed out phase 7 (summaries, state update)
 
 ---
 
@@ -20,9 +28,13 @@ OmniFocus 4's AppleScript and app-based APIs are slow—too slow for AI agents t
 
 | | |
 |---|---|
-| **Status** | ** Phase 1: Foundation & DB Safety |
+| **Status** | ** Phase 7: Interactive Inbox Triage TUI — COMPLETE |
 | **Language** | N/A |
 | **Started** | 2026 |
+
+## Current Status
+
+2026-02-16 - Closed out phase 7 (summaries, state update)
 
 ---
 
@@ -185,6 +197,10 @@ inbox = use_tool("omnifocus_db", action="inbox")
 - Add to `claude_desktop_config.json` MCP servers
 - Instant OmniFocus context in every conversation
 - "What should I work on next?" answered from live database
+
+## Current Status
+
+2026-02-16 - Closed out phase 7 (summaries, state update)
 
 ---
 

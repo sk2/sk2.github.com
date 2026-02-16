@@ -3,9 +3,9 @@ layout: default
 section: network-automation
 ---
 
-# CLI Scrape
+# cliscrape
 
-<span class="status-badge status-active">Phase 1 — Foundation</span>
+<span class="status-badge status-active">** Phase 1: Core Parsing Engine</span>
 
 [← Back to Network Automation](../network-automation) | [← Back to Projects](../projects)
 

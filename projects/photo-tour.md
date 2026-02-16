@@ -1,17 +1,16 @@
 ---
 layout: default
-section: photography
 ---
 
 # Photo Tour
 
 <span class="status-badge status-active">Active Development</span>
 
-[← Back to Photography](../photography)
+[← Back to Projects](../projects)
 
 ---
 
-## Concept
+## The Insight
 
 In the field, you can see what the camera sees and get actionable guidance/control fast enough to improve the shot.
 
@@ -31,4 +30,4 @@ It helps you compose shots, automate repeatable workflows, and progressively add
 
 ---
 
-[← Back to Photography](../photography)
+[← Back to Projects](../projects) | [Development Philosophy](../development)

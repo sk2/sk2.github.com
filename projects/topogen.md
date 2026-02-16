@@ -3,9 +3,9 @@ layout: default
 section: network-automation
 ---
 
-# Topology Generator
+# TopoGen - Network Topology Generator
 
-<span class="status-badge status-active">Phase 21/24 (89%)</span>
+<span class="status-badge status-active">Phase 22/25</span>
 
 [← Back to Network Automation](../network-automation)
 
@@ -20,7 +20,7 @@ Generating realistic, validated network topologies for testing often requires cu
 
 | | |
 |---|---|
-| **Status** | Phase 21/24 (89%) |
+| **Status** | Phase 22/25 |
 | **Language** | N/A |
 | **Started** | 2026 |
 
@@ -123,7 +123,7 @@ topo = DataCenter.spine_leaf(
 topo.export_yaml("topology.yaml")
 topo.export_json("topology.json")
 
-# Integration with the Network Modeling & Configuration Library
+# TopoGen - Network Topology Generator
 from ank_pydantic import Topology
 ank_topo = topo.to_ank_pydantic()
 ```

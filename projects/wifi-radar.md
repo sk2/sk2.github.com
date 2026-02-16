@@ -3,9 +3,9 @@ layout: default
 section: signal-processing
 ---
 
-# Wi-Fi Signal Reflection — Through-Wall Detection
+# Wi-Fi Radar (KrakenSDR)
 
-<span class="status-badge status-complete">Phase 5 — Complete</span>
+<span class="status-badge status-active">Active Development</span>
 
 [← Back to Signal Processing](../signal-processing)
 
@@ -19,8 +19,8 @@ Wi-Fi signals penetrate walls and reflect off human bodies, creating detectable 
 
 | | |
 |---|---|
-| **Status** | Phase 5 — Complete |
-| **Language** | Python, Signal Processing |
+| **Status** | Active |
+| **Language** | N/A |
 | **Started** | 2026 |
 
 ---

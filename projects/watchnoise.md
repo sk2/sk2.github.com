@@ -1,17 +1,16 @@
 ---
 layout: default
-section: projects
 ---
 
 # Wave (StillState & FlowState)
 
-<span class="status-badge status-active">Phase 21 — 55/60 Plans Complete</span>
+<span class="status-badge status-active">21 (Bluetooth Output Enforcement Hardening)</span>
 
 [← Back to Projects](../projects)
 
 ---
 
-## Concept
+## The Insight
 
 - **StillState:** Reclaiming silence and rest in shared or noisy environments through intelligent, adaptive audio.
 - **FlowState:** Achieving and maintaining a "Steady State" of focus through task-linked audio and genetic evolution.
@@ -20,8 +19,8 @@ section: projects
 
 | | |
 |---|---|
-| **Status** | Phase 21 — 55/60 plans complete |
-| **Language** | Swift (SwiftUI, watchOS) |
+| **Status** | 21 (Bluetooth Output Enforcement Hardening) |
+| **Language** | N/A |
 | **Started** | 2026 |
 
 ---

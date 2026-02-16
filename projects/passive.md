@@ -3,9 +3,9 @@ layout: default
 section: signal-processing
 ---
 
-# RF Signal Reflection Experiments
+# Passive Radar - KrakenSDR Multi-Beam System
 
-<span class="status-badge status-active">Phase 6/10 — Track Management</span>
+<span class="status-badge status-active">Phase 7/10 (60%)</span>
 
 [← Back to Signal Processing](../signal-processing)
 
@@ -19,8 +19,8 @@ Ambient RF signals reflect off objects in the environment. By processing these r
 
 | | |
 |---|---|
-| **Status** | Phase 6/10 — Track Management (28 plans complete, 46%) |
-| **Language** | Python, Signal Processing |
+| **Status** | Phase 7/10 (60%) |
+| **Language** | N/A |
 | **Started** | 2026 |
 
 ---

@@ -5,7 +5,7 @@ section: photography
 
 # EclipsePhoto
 
-<span class="status-badge status-planning">Phase 1 — Hardware & Data Foundation</span>
+<span class="status-badge status-active">** 1 - Hardware & Data Foundation</span>
 
 [← Back to Photography](../photography)
 
@@ -19,8 +19,8 @@ Reliability and autonomy for a "one-shot" astronomical event. The system handles
 
 | | |
 |---|---|
-| **Status** | Phase 1 — Hardware & Data Foundation |
-| **Language** | Python |
+| **Status** | ** 1 - Hardware & Data Foundation |
+| **Language** | N/A |
 | **Started** | 2026 |
 
 ---

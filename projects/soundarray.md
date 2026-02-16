@@ -3,9 +3,9 @@ layout: default
 section: signal-processing
 ---
 
-# Sound Array
+# soundarray
 
-<span class="status-badge status-planning">Phase 1 — Audio Foundation</span>
+<span class="status-badge status-active">Active Development</span>
 
 [← Back to Signal Processing](../signal-processing)
 
@@ -19,8 +19,8 @@ The ability to capture, localize, and classify complex soundscapes on edge devic
 
 | | |
 |---|---|
-| **Status** | Phase 1 — Audio Foundation |
-| **Language** | Python + C++ |
+| **Status** | Active |
+| **Language** | N/A |
 | **Started** | 2026 |
 
 ---

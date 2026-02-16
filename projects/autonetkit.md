@@ -95,10 +95,10 @@ from autonetkit import Topology
 from autonetkit.blueprints.designs.isis import build_isis_layer
 from autonetkit.blueprints.designs.mpls import build_mpls_layer
 
-# autonetkit
+# AutoNetkit
 topology = Topology.from_yaml("transitnet.yaml")
 
-# autonetkit
+# AutoNetkit
 isis_layer = build_isis_layer(
     topology,
     level=2,
@@ -106,7 +106,7 @@ isis_layer = build_isis_layer(
     parent_layer="physical"
 )
 
-# autonetkit
+# AutoNetkit
 mpls_layer = build_mpls_layer(
     topology,
     igp_layer="isis",
@@ -167,7 +167,7 @@ mpls ldp
 **Input:** Add customer sites to PE routers:
 
 ```yaml
-# autonetkit
+# AutoNetkit
 - nodes:
     - CE1:
         role: ce
@@ -197,7 +197,7 @@ mpls ldp
 ```python
 from autonetkit.blueprints.designs.l3vpn import build_l3vpn_layer
 
-# autonetkit
+# AutoNetkit
 l3vpn_layer = build_l3vpn_layer(
     topology,
     service_name="NetCorp-L3VPN",
@@ -251,13 +251,13 @@ router bgp 65000
 ```python
 from autonetkit.blueprints.environments import get_environment
 
-# autonetkit
+# AutoNetkit
 env = get_environment('containerlab')
 
-# autonetkit
+# AutoNetkit
 artifacts = env.generate(topology)
 
-# autonetkit
+# AutoNetkit
 with open("transitnet.clab.yml", "w") as f:
     f.write(artifacts.files['topology.clab.yml'])
 ```
@@ -301,39 +301,39 @@ topology:
 **Deploy and Verify:**
 
 ```bash
-# autonetkit
+# AutoNetkit
 sudo containerlab deploy -t transitnet.clab.yml
 
-# autonetkit
+# AutoNetkit
 sudo containerlab inspect -t transitnet.clab.yml
 
-# autonetkit
-# autonetkit
-# autonetkit
-# autonetkit
-# autonetkit
-# autonetkit
-# autonetkit
+# AutoNetkit
+# AutoNetkit
+# AutoNetkit
+# AutoNetkit
+# AutoNetkit
+# AutoNetkit
+# AutoNetkit
 
-# autonetkit
+# AutoNetkit
 docker exec -it clab-transitnet-P1 show isis neighbors
 
-# autonetkit
-# autonetkit
-# autonetkit
-# autonetkit
-# autonetkit
+# AutoNetkit
+# AutoNetkit
+# AutoNetkit
+# AutoNetkit
+# AutoNetkit
 
-# autonetkit
+# AutoNetkit
 docker exec -it clab-transitnet-P1 show mpls ldp neighbor
 
-# autonetkit
-# autonetkit
-# autonetkit
-# autonetkit
-# autonetkit
-# autonetkit
-# autonetkit
+# AutoNetkit
+# AutoNetkit
+# AutoNetkit
+# AutoNetkit
+# AutoNetkit
+# AutoNetkit
+# AutoNetkit
 ```
 
 ### Query API Usage
@@ -341,17 +341,17 @@ docker exec -it clab-transitnet-P1 show mpls ldp neighbor
 Composable queries with Rust-backed execution:
 
 ```python
-# Filter by keyword attributes
+# AutoNetkit
 core_routers = topology.query.nodes().where(
     role="core", pop="North"
 ).models()
 
-# Count with attribute filters
+# AutoNetkit
 inter_pop_links = topology.query.links().where(
     link_type="long-haul"
 ).count()
 
-# Layer-scoped queries
+# AutoNetkit
 mpls_devices = topology.layer("mpls").nodes().where(
     mpls_enabled=True
 ).ids()
@@ -362,7 +362,7 @@ mpls_devices = topology.layer("mpls").nodes().where(
 Export for visualization:
 
 ```python
-# autonetkit
+# AutoNetkit
 topology.export_for_netvis(
     "output.json",
     layout="hierarchical",
@@ -417,11 +417,11 @@ Load and process:
 ```python
 topology = Topology.from_yaml("transitnet.yaml")
 
-# autonetkit
+# AutoNetkit
 isis_layer = build_isis_layer(topology, level=2, area="49.0001")
 mpls_layer = build_mpls_layer(topology, igp_layer="isis")
 
-# autonetkit
+# AutoNetkit
 env = get_environment('containerlab')
 artifacts = env.generate(topology)
 ```

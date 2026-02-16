@@ -19,9 +19,9 @@ Graph operations on network topologies demand native performance — Python's Ne
 
 | | |
 |---|---|
-| **Status** | Stable — extracted as standalone project |
+| **Status** | Stable |
 | **Language** | Rust (with PyO3 Python bindings) |
-| **Architecture** | Workspace of specialized crates |
+| **Started** | 2026 |
 
 ---
 

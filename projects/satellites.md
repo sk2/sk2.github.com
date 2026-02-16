@@ -1,13 +1,21 @@
 ---
 layout: default
 section: projects
+## Current Status
+
+2026-02-16 -- Completed 01-01-PLAN.md
+
 ---
 
-# Satellite Tracker
+# Satellites
 
-<span class="status-badge status-active">Phase 1/8 — Project Setup</span>
+<span class="status-badge status-active">Phase 1/6 (10%)</span>
 
 [← Back to Projects](../projects)
+
+## Current Status
+
+2026-02-16 -- Completed 01-01-PLAN.md
 
 ---
 
@@ -19,9 +27,13 @@ A terminal-based satellite tracker that plots real-time satellite positions on a
 
 | | |
 |---|---|
-| **Status** | Phase 1/8 — Project Setup |
-| **Language** | Rust |
+| **Status** | Phase 1/6 (10%) |
+| **Language** | N/A |
 | **Started** | 2026 |
+
+## Current Status
+
+2026-02-16 -- Completed 01-01-PLAN.md
 
 ---
 
@@ -108,6 +120,10 @@ Pass prediction propagates at 60-second intervals over 24 hours, detects elevati
 - **Coordinates**: map_3d (ECI → ECEF → Geodetic → AER)
 - **HTTP**: reqwest (async JSON API calls)
 - **CLI**: clap 4
+
+## Current Status
+
+2026-02-16 -- Completed 01-01-PLAN.md
 
 ---
 

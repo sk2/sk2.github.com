@@ -139,37 +139,78 @@ def generate_detailed_page(project: ProjectInfo) -> str:
 
 def generate_projects_index(projects: list[ProjectInfo]) -> str:
     lines = ["---", "layout: default", "---", "", "# Projects", "", "Focusing on network automation, high-performance signal processing, and secure multi-agent architectures.", "", "---", ""]
-    categories = {"network": ("🌐 Network Engineering", "High-performance tools for topology modeling, deterministic protocol simulation, and visualization.", "/network-automation", []), "data": ("📊 Data Science & Simulation", "High-performance tools for large-scale geospatial analytics and time-series pattern discovery.", "/data-analytics", []), "agents": ("🤖 AI & Agents", "Security-first architectures for multi-agent coordination and isolated automation.", "/agentic-systems", []), "signal": ("📡 Signal Processing & RF", "SDR spectrum monitoring and biometric signal processing using modular acquisition pipelines.", "/signal-processing", []), "experimental": ("🔭 Experimental & Hobbies", "Projects in exploratory phases or related to technical hobbies.", None, [])}
+    
+    # Categories from README
+    categories = {
+        "network": ("🌐 Network Engineering", "High-performance tools for topology modeling, deterministic protocol simulation, and visualization.", "/network-automation", []),
+        "sdr": ("📡 Software Defined Radio", "Autonomous spectrum monitoring, distributed SIGINT systems, and RF signal processing.", "/signal-processing", []),
+        "health": ("🏥 Health & Biometrics", "Modular health monitoring ecosystems and real-time biometric signal processing.", "/agentic-systems", []), # Link to agentic since it's agent-driven
+        "astrophotography": ("🔭 Astrophotography", "Autonomous imaging systems, solar wind monitoring, and celestial event automation.", None, []),
+        "photography": ("📷 Photography", "Automated camera control, HFR monitoring, and night sky photography systems.", None, []),
+        "agents": ("🤖 AI & Agents", "Security-first architectures for multi-agent coordination and isolated automation.", "/agentic-systems", []),
+        "data": ("📊 Data & Utilities", "High-performance tools for large-scale geospatial analytics and time-series pattern discovery.", "/data-analytics", []),
+        "wellness": ("🧘 Wellness & Sound", "Algorithmic music engines and biometric wellness monitoring.", None, []),
+        "experimental": ("🧪 Experimental", "Projects in exploratory phases or related to technical hobbies.", None, [])
+    }
+
     for p in sorted(projects, key=lambda x: x.name):
-        cat, nl = "network", p.name.lower()
-        if any(x in nl for x in ['netflow', 'polars', 'tileserver', 'matrix-time-series', 'matrix-profile', 'weather', 'simulation']): cat = "data"
-        elif any(x in nl for x in ['agent', 'multi-agent', 'cycle']): cat = "agents"
-        elif any(x in nl for x in ['healthypi', 'spectra', 'passive', 'radar', 'kraken', 'rtltcp', 'wifi-radar']): cat = "signal"
-        elif any(x in nl for x in ['netvis', 'ank', 'topogen', 'netsim', 'autonetkit', 'network']): cat = "network"
-        else: cat = "experimental"
-        categories[cat][3].append(p)
+        cat = "experimental"
+        nl = p.name.lower()
+        slug = p.slug.lower()
+        
+        # Mapping logic from README
+        if any(x in slug for x in ["photo-tour"]): cat = "photography"
+        elif any(x in slug for x in ["watchnoise", "watch-noise", "psytrance"]): cat = "wellness"
+        elif any(x in slug for x in ["healthypi", "hrv"]): cat = "health"
+        elif any(x in slug for x in ["spectra", "rtltcp", "wifi-radar", "signals", "passive", "radar"]): cat = "sdr"
+        elif any(x in slug for x in ["astro", "aurora", "eclipse", "satellites"]): cat = "astrophotography"
+        elif any(x in slug for x in ["agent", "multi-agent", "cycle"]): cat = "agents"
+        elif any(x in slug for x in ["netflow", "polars", "tileserver", "matrix-time-series", "matrix-profile", "weather", "omnifocus-db", "cliscrape", "nascleanup", "devmon"]): cat = "data"
+        elif any(x in slug for x in ["netvis", "ank", "topogen", "netsim", "autonetkit", "network", "configparsing", "nte"]): cat = "network"
+        
+        if cat in categories:
+            categories[cat][3].append(p)
+        else:
+            categories["experimental"][3].append(p)
+
     for cat_key, (title, desc, link, projs) in categories.items():
         if not projs: continue
         lines.append(f"## {title}\n")
         if link: lines.append(f"> **[View Ecosystem →]({link})**\n> {desc}\n")
         for p in projs:
             parts = []
-            for k in ["Overview", "What This Is", "Core Value", "Problem It Solves"]:
-                if k in p.sections: parts.append(p.sections[k].split('\n\n')[0])
+            # Improved summary extraction: Concept, Overview, What This Is, Core Value, Problem It Solves
+            for k in ["Concept", "The Insight", "Overview", "What This Is", "Core Value", "Problem It Solves"]:
+                if k in p.sections:
+                    # Take the first paragraph
+                    first_para = p.sections[k].strip().split('\n\n')[0]
+                    # Remove markdown images
+                    first_para = re.sub(r'!\[.*?\]\(.*?\)', '', first_para).strip()
+                    if first_para:
+                        parts.append(first_para)
+            
             summary = ' '.join(parts)
             if summary:
                 sents = re.split(r'(?<=[.!?])\s+', summary)
-                summary = '\n\n'.join([' '.join(sents[i:i+2]) for i in range(0, min(5, len(sents)), 2)])
+                # Ensure 4-5 sentences and add paragraph breaks every 2 sentences as per README
+                summary_sents = sents[:5]
+                formatted_summary = ""
+                for i in range(0, len(summary_sents), 2):
+                    chunk = ' '.join(summary_sents[i:i+2])
+                    formatted_summary += chunk + "\n\n"
+                summary = formatted_summary.strip()
+
             lines.append(f"### [{p.name}](projects/{p.slug})\n")
             lines.append(f"{generate_status_badge(p)}")
             if p.stack: lines.append(f" · **{' · '.join(p.stack[:3])}**")
             lines.append(f"\n\n{summary}\n\n")
+    
     lines.append('<style>\n.status-badge { display: inline-block; padding: 0.2em 0.6em; margin: 0.3em 0; border-radius: 4px; font-size: 0.8em; font-weight: 600; }\n.status-active { background-color: #f8f9fa; color: #495057; border: 1px solid #dee2e6; }\n.status-planning { background-color: #fff3cd; color: #856404; border: 1px solid #ffeeba; }\nh3 { margin-bottom: 0.1em; }\nh3 + .status-badge { margin-top: 0; }\nsection { margin-bottom: 2em; }\nblockquote { margin: 1em 0; padding: 0.5em 1em; border-left: 2px solid #495057; background: #f8f9fa; font-style: normal; font-size: 0.9em; }\n</style>')
     return "\n".join(lines)
 
 
 def main():
-    parser = argparse.ArgumentParser(); parser.add_argument("--scan-dirs", nargs="+", default=["~/dev", "~/PycharmProjects", "~/RustroverProjects"]); args = parser.parse_args()
+    parser = argparse.ArgumentParser(); parser.add_argument("--scan-dirs", nargs="+", default=["~/dev"]); args = parser.parse_args()
     projects = []
     for d in args.scan_dirs:
         p = Path(d).expanduser()

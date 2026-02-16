@@ -19,7 +19,7 @@ A tool for exploring composition ideas through generative algorithms. A multi-le
 
 | | |
 |---|---|
-| **Status** | Phase 1 Complete (Foundation) |
+| **Status** | Phase 1 Complete — Foundation |
 | **Language** | Rust |
 | **Started** | 2026 |
 
@@ -88,16 +88,16 @@ Five presets, each defining a key, scale, energy curve shape, and filter range:
 ## Usage
 
 ```bash
-# Default: 32 bars, 142 BPM, dark mood
+# Algorithmic Music Engine
 cargo run
 
-# Custom settings with WAV export
+# Algorithmic Music Engine
 cargo run -- --bpm 145 --bars 64 --mood euphoric --output track.wav
 
-# Reproducible generation via seed
+# Algorithmic Music Engine
 cargo run -- --seed 42 --output reproducible.wav
 
-# Key/scale override
+# Algorithmic Music Engine
 cargo run -- --key D2 --scale phrygian
 ```
 

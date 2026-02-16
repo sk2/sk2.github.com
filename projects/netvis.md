@@ -3,9 +3,9 @@ layout: default
 section: network-automation
 ---
 
-# Network Visualization Engine
+# NetVis
 
-<span class="status-badge status-active">v1.3 — Embed Readiness & API Stability</span>
+<span class="status-badge status-active">Phase 41 complete; ready for Phase 41.1 (Performance & Scale Foundation)</span>
 
 [← Back to Network Automation](../network-automation)
 
@@ -20,7 +20,7 @@ Network visualization often fails at scale because layout algorithms treat all n
 
 | | |
 |---|---|
-| **Status** | v1.3 — Embed Readiness & API Stability |
+| **Status** | Phase 41 complete; ready for Phase 41.1 (Performance & Scale Foundation) |
 | **Language** | Rust |
 | **Started** | 2026 |
 

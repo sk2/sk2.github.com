@@ -1,19 +1,18 @@
 ---
 layout: default
-section: network-automation
 ---
 
 # AutoNetkit — The Foundation
 
 <span class="status-badge status-active">PhD 2017</span>
 
-[← Back to Network Automation](../network-automation)
+[← Back to Projects](../projects)
 
 ---
 
-## Concept
+## The Insight
 
-The original AutoNetkit research introduced declarative network design with a compiler-based transformation model. This work demonstrated that high-level intent (AS numbers, protocol choices, link roles) could be automatically transformed into device-level configurations for multiple vendors. It forms the architectural foundation for the modern network automation ecosystem.
+Developing...
 
 ## Quick Facts
 
@@ -140,3 +139,23 @@ Network diagram generation:
 ---
 
 [← Back to Network Automation](../network-automation)
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)

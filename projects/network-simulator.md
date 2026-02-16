@@ -1,13 +1,25 @@
 ---
 layout: default
 section: network-automation
+## Roadmap
+
+- v1.9 IPv6 Foundation (Proposed) — Phases 68-72
+- v2.0 Enterprise & Campus Protocols (Proposed) — Phases 73-74
+- v2.1 Advanced Transport (Proposed) — Phases 75-77
+
 ---
 
 # Network Simulator
 
-<span class="status-badge status-active">v1.8 — Data Center Fabric & EVPN</span>
+<span class="status-badge status-active">Phase 61/67 (67%)</span>
 
 [← Back to Network Automation](../network-automation)
+
+## Roadmap
+
+- v1.9 IPv6 Foundation (Proposed) — Phases 68-72
+- v2.0 Enterprise & Campus Protocols (Proposed) — Phases 73-74
+- v2.1 Advanced Transport (Proposed) — Phases 75-77
 
 ---
 
@@ -17,13 +29,17 @@ Developing agentic AI systems and network automation tools requires rapid iterat
 
 ## Quick Facts
 
-|                   |                                           |
-| ----------------- | ----------------------------------------- |
-| **Status**        | v1.8 — Data Center Fabric & EVPN (Defining Requirements) |
-| **Language**      | Rust                                      |
-| **Lines of Code** | 126,000+                                  |
-| **Test Coverage** | 1,350+ protocol behavior tests            |
-| **Started**       | 2026                                      |
+| | |
+|---|---|
+| **Status** | Phase 61/67 (67%) |
+| **Language** | Rust |
+| **Started** | 2026 |
+
+## Roadmap
+
+- v1.9 IPv6 Foundation (Proposed) — Phases 68-72
+- v2.0 Enterprise & Campus Protocols (Proposed) — Phases 73-74
+- v2.1 Advanced Transport (Proposed) — Phases 75-77
 
 ---
 
@@ -147,12 +163,24 @@ Simulation complete: 120ms simulated, 0.034s real time (3529x speedup)
 4. Commands executed — `show ip route`, `ping` ran at scripted times
 5. Results output — ASCII tables showing routing tables and ping responses
 
+## Roadmap
+
+- v1.9 IPv6 Foundation (Proposed) — Phases 68-72
+- v2.0 Enterprise & Campus Protocols (Proposed) — Phases 73-74
+- v2.1 Advanced Transport (Proposed) — Phases 75-77
+
 ---
 
 ## Demo
 
 ![netsim demo](/images/netsim-demo.gif)
 *OSPF triangle: three routers form adjacencies, compute SPF, then a host pings across the network. ARP resolution, traceroute hop-by-hop path discovery, and convergence timing all visible.*
+
+## Roadmap
+
+- v1.9 IPv6 Foundation (Proposed) — Phases 68-72
+- v2.0 Enterprise & Campus Protocols (Proposed) — Phases 73-74
+- v2.1 Advanced Transport (Proposed) — Phases 75-77
 
 ---
 
@@ -163,10 +191,10 @@ Run simulations as background daemons and interact with them in real-time — li
 ### Starting a Daemon
 
 ```bash
-# Start a simulation as a background daemon
+# Network Simulator
 netsim daemon start my-network topology.yaml
 
-# With custom tick rate (default: 100ms)
+# Network Simulator
 netsim daemon start my-network topology.yaml --tick-interval 50ms
 ```
 
@@ -177,7 +205,7 @@ The daemon runs continuously in the background, ticking the simulation at the sp
 Run a single command against a device in a running daemon, get the result, and exit. Ideal for scripting and CI/CD:
 
 ```bash
-# Check routing table
+# Network Simulator
 $ netsim exec my-network r1 "show ip route"
 Destination       Next Hop        Metric  Interface
 10.0.1.0/24       —               0       eth2 (connected)
@@ -186,11 +214,11 @@ Destination       Next Hop        Metric  Interface
 10.0.13.0/24      —               0       eth1 (connected)
 10.0.23.0/24      10.0.12.2       20      eth0 (OSPF)
 
-# Ping across the network
+# Network Simulator
 $ netsim exec my-network h1 "ping 10.0.3.10"
 Ping 10.0.3.10: 5/5 packets received, 0% loss
 
-# Get structured JSON for parsing
+# Network Simulator
 $ netsim exec my-network r1 "show ip route --json"
 [{"destination":"10.0.1.0/24","next_hop":"—","metric":0,"interface":"eth2","source":"connected"}, ...]
 ```
@@ -272,6 +300,12 @@ r1> show ospf neighbors --json
 - **GRE tunnels** — `gre tunnel set` for overlay configuration
 - **MPLS OAM** — `mpls ping`, `mpls traceroute` for label-switched path verification
 
+## Roadmap
+
+- v1.9 IPv6 Foundation (Proposed) — Phases 68-72
+- v2.0 Enterprise & Campus Protocols (Proposed) — Phases 73-74
+- v2.1 Advanced Transport (Proposed) — Phases 75-77
+
 ---
 
 ### TUI Daemon Selector
@@ -313,18 +347,24 @@ Press Enter to select a daemon, then **Level 2 — Device selector** shows all d
 
 Press Enter on a device to open an interactive console session. Press `l` at any point to open the **log viewer** showing real-time daemon events (protocol state changes, adjacency transitions, convergence events).
 
+## Roadmap
+
+- v1.9 IPv6 Foundation (Proposed) — Phases 68-72
+- v2.0 Enterprise & Campus Protocols (Proposed) — Phases 73-74
+- v2.1 Advanced Transport (Proposed) — Phases 75-77
+
 ---
 
 ### Daemon Management
 
 ```bash
-# List all running daemons
+# Network Simulator
 $ netsim daemon list
 NAME            PID    UPTIME   TOPOLOGY
 ospf-triangle   48291  2h 15m   examples/ospf-triangle.yaml
 sp-core         48305  45m 12s  topologies/transitnet-sp-core.yaml
 
-# Check a specific daemon's status
+# Network Simulator
 $ netsim daemon status my-network
 Daemon: my-network
 PID: 48291
@@ -333,12 +373,18 @@ Tick interval: 100ms
 Topology: examples/ospf-triangle.yaml
 Devices: r1 (router), r2 (router), r3 (router), h1 (host), h3 (host)
 
-# Stop a daemon
+# Network Simulator
 $ netsim daemon stop my-network
 
-# Clean up stale PID files from crashed daemons
+# Network Simulator
 $ netsim daemon list --clean
 ```
+
+## Roadmap
+
+- v1.9 IPv6 Foundation (Proposed) — Phases 68-72
+- v2.0 Enterprise & Campus Protocols (Proposed) — Phases 73-74
+- v2.1 Advanced Transport (Proposed) — Phases 75-77
 
 ---
 
@@ -348,25 +394,25 @@ Start a daemon, run automated validation, collect results, tear down:
 
 ```bash
 #!/bin/bash
-# ci-validate.sh — validate topology in CI pipeline
+# Network Simulator
 
-# Start simulation in background
+# Network Simulator
 netsim daemon start ci-test topology.yaml --tick-interval 10ms
 
-# Wait for convergence
+# Network Simulator
 sleep 2
 
-# Run validation checks, collect JSON output
+# Network Simulator
 ROUTES=$(netsim exec ci-test r1 "show ip route --json")
 OSPF=$(netsim exec ci-test r1 "show ospf neighbors --json")
 PING=$(netsim exec ci-test h1 "ping 10.0.3.10")
 
-# Assert expected state
+# Network Simulator
 echo "$ROUTES" | jq -e '.[] | select(.destination == "10.0.3.0/24")' || exit 1
 echo "$OSPF" | jq -e 'length == 2' || exit 1
 echo "$PING" | grep -q "0% loss" || exit 1
 
-# Clean up
+# Network Simulator
 netsim daemon stop ci-test
 
 echo "All validations passed"
@@ -377,24 +423,24 @@ echo "All validations passed"
 Test link failure and reconvergence interactively:
 
 ```bash
-# Start the simulation
+# Network Simulator
 $ netsim daemon start failover-test sp-core.yaml
 
-# Check initial state
+# Network Simulator
 $ netsim exec failover-test r1 "show ospf neighbors"
 Neighbor ID     Interface  State   Priority  Dead Time
 2.2.2.2         eth0       Full    1         38s
 3.3.3.3         eth1       Full    1         36s
 
-# Shut down a link
+# Network Simulator
 $ netsim exec failover-test r1 "interface shutdown eth0"
 Interface eth0 admin-down
 
-# Verify reconvergence — traffic now routes via alternate path
+# Network Simulator
 $ netsim exec failover-test r1 "show ip route"
 10.0.23.0/24      10.0.13.3       21      eth1 (OSPF)
 
-# Restore and verify
+# Network Simulator
 $ netsim exec failover-test r1 "interface no shutdown eth0"
 $ sleep 1
 $ netsim exec failover-test r1 "show ospf neighbors"
@@ -411,6 +457,12 @@ Neighbor ID     Interface  State   Priority  Dead Time
 - **CI/CD integration**: Start daemon, run automated tests via `exec`, collect JSON results, stop daemon
 - **Development workflow**: Keep a topology running while you experiment with agent logic or automation scripts
 - **Structured logging**: Daemon events logged in JSON to `~/.netsim/<name>/daemon.log` for debugging and post-mortem analysis
+
+## Roadmap
+
+- v1.9 IPv6 Foundation (Proposed) — Phases 68-72
+- v2.0 Enterprise & Campus Protocols (Proposed) — Phases 73-74
+- v2.1 Advanced Transport (Proposed) — Phases 75-77
 
 ---
 
@@ -509,6 +561,12 @@ All commands support prefix abbreviation (e.g., `sh ip ro`) and `--json` output 
 | `mpls ftn add/del <prefix> ...` | Manipulate MPLS FTN entries |
 | `bgp vpn-originate <vrf>` | Trigger VPN route origination |
 | `gre tunnel set <iface> ...` | Configure GRE tunnel parameters |
+
+## Roadmap
+
+- v1.9 IPv6 Foundation (Proposed) — Phases 68-72
+- v2.0 Enterprise & Campus Protocols (Proposed) — Phases 73-74
+- v2.1 Advanced Transport (Proposed) — Phases 75-77
 
 ---
 
@@ -622,6 +680,12 @@ Simulation complete: 15ms simulated, 0.008s real time
 IS-IS events: 18 hellos, 4 LSPs, 2 SPF runs
 ```
 
+## Roadmap
+
+- v1.9 IPv6 Foundation (Proposed) — Phases 68-72
+- v2.0 Enterprise & Campus Protocols (Proposed) — Phases 73-74
+- v2.1 Advanced Transport (Proposed) — Phases 75-77
+
 ---
 
 ## Use Cases
@@ -632,6 +696,12 @@ IS-IS events: 18 hellos, 4 LSPs, 2 SPF runs
 - **Pre-deployment Validation**: Catch routing loops, black holes, and misconfigurations before production
 - **Convergence Analysis**: Measure failover time and validate backup paths
 - **Training**: Safe environment for learning routing protocol behavior and automation development
+
+## Roadmap
+
+- v1.9 IPv6 Foundation (Proposed) — Phases 68-72
+- v2.0 Enterprise & Campus Protocols (Proposed) — Phases 73-74
+- v2.1 Advanced Transport (Proposed) — Phases 75-77
 
 ---
 
@@ -703,6 +773,12 @@ EVPN control plane and VXLAN dataplane for data center fabrics.
 ## Tech Stack
 
 Rust, Tokio for async execution, petgraph for topology representation, gRPC for daemon IPC, ratatui for TUI
+
+## Roadmap
+
+- v1.9 IPv6 Foundation (Proposed) — Phases 68-72
+- v2.0 Enterprise & Campus Protocols (Proposed) — Phases 73-74
+- v2.1 Advanced Transport (Proposed) — Phases 75-77
 
 ---
 

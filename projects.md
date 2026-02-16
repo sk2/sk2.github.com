@@ -4,91 +4,449 @@ layout: default
 
 # Projects
 
-Focusing on network automation, signal processing, and secure multi-agent architectures.
+Focusing on network automation, high-performance signal processing, and secure multi-agent architectures.
 
 ---
 
-## [Network Automation →](/network-automation)
+## 🌐 Network Engineering
 
-Tools for topology modeling, deterministic protocol simulation, and visualization. Includes Network Simulator, Network Visualization Engine, Network Modeling & Configuration Library, Network Topology Engine, Network Automation Workbench, Topology Generator, Network Configuration Parser, and more.
+> **[View Ecosystem →](/network-automation)**
+> High-performance tools for topology modeling, deterministic protocol simulation, and visualization.
 
-## [Signal Processing & RF →](/signal-processing)
+### [ANK Workbench](projects/ank-workbench)
 
-SDR spectrum monitoring, biometric signal processing, and spatial audio using modular acquisition pipelines. Includes Project Spectra, Multi-SDR Streaming Server, HealthyPi, Wi-Fi Signal Reflection, and more.
+<span class="status-badge status-active">Phase 25 (Pipeline Step Execution)</span>
+ · **Python backend (FastAPI or Flask) · React or Vue frontend — Leverages existing Python ecosystem for ANK components · meets modern UX expectations**
 
-## [Data Analytics →](/data-analytics)
 
-Tools for large-scale geospatial analytics and time-series pattern discovery. Includes Tileserver Polars, matrix-profile-rs, and more.
+**An orchestration platform** that integrates the ANK ecosystem tools (TopoGen, ank_pydantic, Network Simulator, NetVis) into one seamless workflow. Network engineers can design, validate, and visualize network changes in one complete workflow without switching between separate tools or manually gluing components together.
 
-## [Agentic Systems →](/agentic-systems)
 
-Security-first architectures for multi-agent coordination and isolated automation. Includes the Secure Multi-Agent Personal Assistant and Cycle Agent.
+### [AutoNetkit](projects/autonetkit)
 
-## [Photography & Astrophotography →](/photography)
+<span class="status-badge status-active">v1.8 — Performance & Optimization</span>
 
-Integrated tools for field photography, astrophotography automation, and image processing. Includes AuroraPhoto, OpenAstro Node, EclipseStack, Photo Tour, and more.
 
----
+Network topology modeling typically forces a choice between the speed of untyped graph libraries (NetworkX) and the rigidity of database-backed sources of truth. **AutoNetkit** eliminates this trade-off by using Pydantic for schema validation and a Rust core (`petgraph`) for graph traversals.
 
-## Other Projects
+It is a modern reimagining of the original AutoNetkit research, reclaiming the name for a production-ready automation library. A Python library for modeling and querying network topologies with type-safe Pydantic models and a Rust core.
 
-### [AuroraData — Aurora Planning & Substorm Advisor](projects/auroradata)
+Expressive Python API backed by compiled graph algorithms (petgraph), with automatic configuration generation for multi-vendor network deployments.
 
-<span class="status-badge status-active">v1.0 Complete</span>
 
-A planning tool for Australian aurora observers that answers "should I leave now?" Combines real-time solar wind monitoring (NOAA SWPC), substorm trigger detection (Bz/HP trends), site-specific weather (ACCESS-G model), and LLM-generated advice to produce a "Go/No-Go" score. Includes Telegram bot for automated alerts and historical playback for backtesting against real storm events.
+### [AutoNetkit — The Foundation](projects/autonetkit-foundation)
+
+<span class="status-badge status-active">PhD 2017</span>
+ · **Python**
+
+
+Developing...
+
+
+### [NTE: Engine Hardening & LadybugDB Evaluation](projects/ank-nte)
+
+<span class="status-badge status-active">Phase 1/5 (71%)</span>
+
+
+NTE (Network Topology Engine) is a Rust-based graph topology engine with Python bindings via PyO3, used as the backend for ank_pydantic. It provides a 14-crate Cargo workspace built on petgraph StableDiGraph with pluggable datastores (Polars, DuckDB, Lite).
+
+This project covers two milestones: first hardening the existing engine for production reliability, then evaluating LadybugDB as a potential backend replacement. The engine must be correct and observable — mutations never silently corrupt state, errors always surface meaningful information, and operations are traceable through logging.
+
+
+### [NetVis](projects/netvis)
+
+<span class="status-badge status-active">Phase 41 complete; ready for Phase 41.1 (Performance & Scale Foundation)</span>
+ · **Rust**
+
+
+A Rust-based network topology layout and visualization engine. Takes complex multi-layer network topologies (via petgraph) and renders them using advanced layout algorithms that reduce visual complexity while preserving structural clarity.
+
+Outputs static formats (SVG, PDF, PNG) for v1, with interactive browser embedding planned for future integration with other tooling. Transform network topologies into clear, information-dense visualizations using algorithms that minimize edge crossings, bundle related connections, and respect hierarchical/geographic structure — enabling understanding of networks that would otherwise be visual noise.
+
+
+### [Network Configuration Parser](projects/ank-parse)
+
+<span class="status-badge status-active">Phase 1 — Knowledge Base Ingestion</span>
+ · **Python**
+
+
+Developing... A framework for parsing and analyzing device configurations across multiple networking vendors.
+
+The project bridges the gap between unstructured legacy CLI data and structured intent-based models. - **Syntax Fragmentation**: Every vendor (Cisco, Juniper, Arista, Nokia) has a different CLI structure for the same protocol (OSPF, BGP).
+
+- **Manual Translation**: Engineers spend hours cross-referencing manuals to convert a "design" into "commands."
+- **Data Silos**: Configuration state is locked in text files rather than queryable databases.
+
+
+### [Network Configuration Parsing & Analysis Framework](projects/configparsing)
+
+<span class="status-badge status-active">** Phase 1 (Knowledge Base Ingestion) — Complete</span>
+
+
+A network automation framework that decouples network configuration from vendor-specific syntax. It uses LLM-powered RAG to extract network-level intent and topology relationships from vendor documentation and CLI configurations, normalizing them into a vendor-neutral topology graph model inspired by AutoNetKit.
+
+The system enables cross-vendor configuration generation and validation through semantic simulation. Extract network-level topology relationships (protocol adjacencies, link roles, VLAN membership) from vendor-specific CLI and documentation with high accuracy, enabling truly vendor-independent network configuration.
+
+
+### [Network Simulator](projects/network-simulator)
+
+<span class="status-badge status-active">Phase 61/67 (67%)</span>
+ · **Rust**
+
+
+A Rust-based network simulator that models packet-level behavior for routing protocols. It provides a middle ground between pure algorithmic analysis (like C-BGP) and full emulation (like Containerlab) — larger scale and smaller footprint than emulation, higher fidelity than algorithmic simulation.
+
+Used for smoke testing and design validation of network configurations. Validate network configurations at scale with protocol-level fidelity before deploying to real infrastructure.
+
+
+### [Network Topology Engine](projects/nte)
+
+<span class="status-badge status-active">Stable</span>
+ · **Rust (with PyO3 Python bindings)**
+
+
+Graph operations on network topologies demand native performance — Python's NetworkX caps out on large topologies. The Network Topology Engine provides a Rust-native topology engine with Python bindings, giving the Network Modeling & Configuration Library the speed of compiled code with the ergonomics of Python.
+
+The Network Topology Engine is the Rust backend that powers the Network Modeling & Configuration Library's graph operations. Originally embedded within the Network Modeling & Configuration Library as `ank_nte`, it has been extracted into its own repository as the engine matured and its scope grew beyond a simple backing store.
+
+
+### [TopoGen - Network Topology Generator](projects/topogen)
+
+<span class="status-badge status-active">Phase 22/25</span>
+
+
+A Rust-based network topology generator with Python bindings that consolidates scattered topology generation logic from AutoNetKit, simulation tools, and visualization tools. Generates realistic data center, WAN, and random graph topologies with proper structure, design patterns, and realistic parameters.
+
+Outputs custom YAML format for use across the network engineering tool ecosystem. Network engineers can quickly generate realistic, validated network topologies without implementing complex algorithms from scratch.
+
+
+### [ank_pydantic](projects/ank-pydantic)
+
+<span class="status-badge status-active">Phase 67/74 (12%)</span>
+
+
+A Python library for modeling and querying network topologies, backed by a high-performance Rust core (`ank_nte`). Features a two-stage transformation model (Whiteboard → Plan → Protocol Layers), type-safe Pydantic models for nodes/edges/layers, and a composable lazy query API with Rust-backed execution.
+
+Ships with "batteries-included" domain models (ISIS, MPLS, EVPN, L3VPN, IXP) in the blueprints/ module. A clean, consistent API where there's one obvious way to perform each topology operation — predictable naming, return types, and method signatures across the entire public surface.
+
+
+## 📡 Software Defined Radio
+
+> **[View Ecosystem →](/signal-processing)**
+> Autonomous spectrum monitoring, distributed SIGINT systems, and RF signal processing.
+
+### [Passive Radar - KrakenSDR Multi-Beam System](projects/passive)
+
+<span class="status-badge status-active">Phase 7/10 (60%)</span>
+
+
+A distributed multi-beam passive radar system based on KrakenSDR hardware. Pi handles data acquisition, Mac/Linux handles compute-intensive DSP.
+
+All 4 surveillance channels process in parallel with independent Range-Doppler visualization, per-beam configuration, and real-time performance monitoring. v2 adds per-beam target tracking with geographic visualization, ADS-B correlation, and detection recording for offline analysis.
+
+Clean, understandable, stable codebase that reliably tracks aircraft in real-time.
+
+
+### [Project Context: rtltcp-rust](projects/rtltcp)
+
+<span class="status-badge status-active">Active Development</span>
+
+
+A cross-platform (targeted at Raspberry Pi) server that interfaces with multiple SDR devices (RTL-SDR, AirSpy HF+) and streams raw IQ samples over the network using the industry-standard `rtl_tcp` protocol. It features a built-in TUI for live configuration and device management.
+
+The ability to reliably and efficiently stream high-fidelity IQ data from multiple SDRs over a network with a modern management interface.
+
+
+### [Project Spectra](projects/signals)
+
+<span class="status-badge status-active">Phase 9/12</span>
+
+
+Transform raw radio spectrum data into an actionable "Signal Census" through automated detection, ML classification, and distributed acquisition.
+
+
+### [Wi-Fi Radar (KrakenSDR)](projects/wifi-radar)
+
+<span class="status-badge status-active">Active Development</span>
+
+
+Passive radar system that utilizes existing Wi-Fi signals for through-wall human detection and localization, leveraging the KrakenSDR coherent radio array.
+
+
+## 🏥 Health & Biometrics
+
+> **[View Ecosystem →](/agentic-systems)**
+> Modular health monitoring ecosystems and real-time biometric signal processing.
+
+### [HRV Monitor](projects/hrv)
+
+<span class="status-badge status-active">Active Development</span>
+
+
+Heart Rate Variability (HRV) reveals stress, recovery, and autonomic nervous system state through timing variations between heartbeats. Most consumer devices only report derived metrics without providing the underlying RR interval data needed for analysis.
+
+This Rust-based driver connects directly to Bluetooth LE heart rate monitors, streams raw RR intervals in real-time, computes time-domain HRV metrics, and logs sessions to columnar Parquet files for downstream analysis.
+
+
+### [HealthyPi Ecosystem](projects/healthypi)
+
+<span class="status-badge status-active">Phase 6/6 (87%)</span>
+
+
+A modular, agent-aware health monitoring ecosystem that translates raw biometric data from HealthyPi hardware (6 and Move) into actionable insights and automated interventions.
+
+
+## 🔭 Astrophotography
+
+### [AuroraData - Aurora Planning & Substorm Advisor](projects/auroradata)
+
+<span class="status-badge status-active">Phase 4/4</span>
+
+
+A specialized tool for Australian aurora observers that solves the "should I drive 60 minutes?" problem. It combines real-time solar wind data (NOAA), substorm trigger logic (Bz/HP trends), and local weather (ACCESS-G model) to provide actionable advice.
+
+Providing a single, definitive "Go/No-Go" score that accounts for both space weather potential and local terrestrial conditions (travel time, clouds, moon).
+
+
+### [AuroraPhoto](projects/auroraphoto)
+
+<span class="status-badge status-active">** Phase 1: Star Sharpness Foundation</span>
+
+
+An automated astrophotography system designed to capture high-quality aurora and night sky imagery. The project uses Raspberry Pi "nodes" connected via USB to Sony a7R V/a7 IV cameras, controlled and assisted by an iPhone companion app.
+
+Provides precise, automated control over exposure and focus specifically optimized for aurora "bursts" and star sharpness, while offering field-ready composition tools.
+
 
 ### [EclipsePhoto](projects/eclipsephoto)
 
-<span class="status-badge status-active">Phase 1 — Hardware & Data Foundation</span>
+<span class="status-badge status-active">** 1 - Hardware & Data Foundation</span>
 
-A "fire and forget" Raspberry Pi-based controller for autonomous solar eclipse photography. Coordinates camera (via gphoto2) and mount (ZWO AM5 / Benro Polaris via INDI) to capture a complete eclipse sequence from C1 to C4 without manual intervention.
 
-### [Wave](projects/watchnoise)
+A "fire and forget" Raspberry Pi-based controller for autonomous solar eclipse photography. It coordinates a camera (via gphoto2) and a high-end mount (ZWO AM5 / Benro Polaris via INDI) to capture a complete eclipse sequence from C1 to C4 without manual intervention.
 
-<span class="status-badge status-active">Phase 21 — 55/60 Plans</span>
-· **Swift (SwiftUI)**
+Reliability and autonomy for a "one-shot" astronomical event. The system handles guiding, exposure ramping (Holy Grail), and error recovery (watchdogs) so the photographer can experience the eclipse while the system secures the data.
 
-An evolutionary ambient audio ecosystem designed to manage the user's sensory environment across rest and work. **StillState** reclaims silence through intelligent, adaptive audio. **FlowState** achieves and maintains focus through task-linked audio and genetic evolution.
 
-### [OmniFocus DB CLI](projects/omnifocus-db)
+### [EclipseStack](projects/eclipsestack)
 
-<span class="status-badge status-complete">Phase 7 — Complete</span>
+<span class="status-badge status-active">** 1 (Ingestion & Foundation)</span>
 
-A Python CLI that reads directly from the OmniFocus SQLite database on macOS, bypassing slow AppleScript layers. Provides structured, token-efficient data (JSON/Text) for agent-driven project listing, inbox analysis, and context gathering. Includes interactive inbox triage TUI with MinimaList import support. Read-only by default.
+
+EclipseStack is a Rust-powered utility (with a web-based UI) specifically designed to align hundreds of RAW solar eclipse images taken during totality. It addresses the challenge of tracker drift by combining image feature detection (solar disk and flares) with temporal extrapolation based on EXIF data.
+
+The goal is to produce a perfectly aligned set of frames ready for HDR stacking in professional tools like PixInsight. Enable high-fidelity HDR solar composites by providing sub-pixel alignment of eclipse frames through a combination of computer vision and temporal drift modeling.
+
+
+### [OpenAstro Core](projects/open-astro-core)
+
+<span class="status-badge status-active">Active Development</span>
+
+
+OpenAstro Core is a high-performance Rust library providing shared astronomical logic, hardware drivers, and protocol implementations for the OpenAstro ecosystem. It exists to keep coordinate math and device/protocol behavior consistent across downstream OpenAstro apps.
+
+Downstream apps can rely on correct, consistent coordinate math and device/protocol primitives.
+
+
+### [OpenAstro Node](projects/open-astro-node)
+
+<span class="status-badge status-active">** 2. Control</span>
+
+
+A headless, autonomous astrophotography controller designed for low-power Linux devices (RPi/Jetson). It manages hardware, executes imaging sequences, and ensures rig safety.
+
+
+### [Satellites](projects/satellites)
+
+<span class="status-badge status-active">Phase 1/6 (10%)</span>
+
+
+A terminal-based satellite tracker that displays real-time satellite positions on a world map, predicts passes over the user's location, and shows transmission/frequency data. Built with Rust, ratatui, and the SGP4 orbital propagation algorithm.
+
+Aimed at amateur radio operators, space enthusiasts, and anyone who wants to know what's overhead. Real-time satellite positions rendered on a terminal world map with pass predictions — a single binary, no browser, no GUI dependencies.
+
+
+## 📷 Photography
+
+### [Photo Tour](projects/photo-tour)
+
+<span class="status-badge status-active">Active Development</span>
+
+
+Photo Tour is a smart, interactive photography assistant designed for field use. It helps you compose shots, automate repeatable workflows, and progressively adds intelligent triggering and transition logic.
+
+In the field, you can see what the camera sees and get actionable guidance/control fast enough to improve the shot.
+
+
+## 🤖 AI & Agents
+
+> **[View Ecosystem →](/agentic-systems)**
+> Security-first architectures for multi-agent coordination and isolated automation.
+
+### [Cycle Agent](projects/cycle)
+
+<span class="status-badge status-active">Phase 1/5 (80%)</span>
+
+
+A native SwiftUI training application for iPad and Apple TV that bridges professional cycling hardware (KICKR Core) with dynamic AI-driven workout logic via NATS, visualized in a high-performance SceneKit environment.
+
+
+### [Secure Multi-Agent Personal Assistant](projects/multi-agent)
+
+<span class="status-badge status-active">Phase 20/20 (93%)</span>
+ · **Agents can be Go · Python · or Rust**
+
+
+A security-first multi-agent system that coordinates specialized containerized agents (health monitoring, home automation, data aggregation, workflow automation) through a message broker architecture. Each agent runs in isolation with minimal privileges and communicates only through validated message queues, demonstrating production-ready patterns for deploying AI agents in security-critical infrastructure environments.
+
+The orchestrator uses cloud LLM reasoning (GPT-4/Claude) while agents remain lightweight and deterministic. Complete isolation between agents such that compromise of one agent cannot cascade to others or the orchestrator—demonstrating that secure multi-agent systems are practical for both personal and production infrastructure use cases.
+
+
+## 📊 Data & Utilities
+
+> **[View Ecosystem →](/data-analytics)**
+> High-performance tools for large-scale geospatial analytics and time-series pattern discovery.
+
+### [GSD Project Monitor](projects/devmon)
+
+<span class="status-badge status-active">Stable</span>
+ · **Python**
+
+
+Automated monitoring tool for GSD (Get Shit Done) projects across multiple workspaces. It provides real-time visibility into project activity, phase progress, and "at-risk" status for projects that are active but lack immediate next steps.
+
+
+### [OmniFocus DB CLI (omnifocus-db)](projects/omnifocus-db)
+
+<span class="status-badge status-active">** Phase 7: Interactive Inbox Triage TUI — COMPLETE</span>
+
+
+A Python-based CLI that bypasses slow AppleScript/TypeScript layers to read directly from the OmniFocus SQLite database on macOS. It provides structured, token-efficient data (JSON/Text) to agents for lightning-fast project listing, inbox analysis, and context gathering.
+
+- **Zero-Latency Context:** Near-instant retrieval of projects and tasks without the overhead of the OmniFocus app or AppleScript. - **Agent-Optimized:** Focused on providing dense, low-token representations of the user's task list.
+
+- **Safety First:** Read-only access by default to prevent database corruption while OmniFocus is active.
+
+
+### [Tileserver Polars (Rust Optimized)](projects/tileserver)
+
+<span class="status-badge status-active">Active Development</span>
+
+
+Serve dynamic vector tiles (MVT) from massive geospatial datasets (millions of points) with sub-second latency, enabling interactive visualization in Kepler.gl without pre-rendering static tilesets.
+
+
+### [Weather (BOM ACCESS Pipeline)](projects/weather)
+
+<span class="status-badge status-active">Phase 2/4 (75%)</span>
+
+
+A data engineering pipeline to fetch, process, and serve high-resolution weather model data from the Australian Bureau of Meteorology (BOM). Specifically targeting the ACCESS (Australian Community Climate and Earth-System Simulator) model outputs.
+
+The primary goal is to bypass the complexity of BOM's FTP delivery and binary formats (GRIB2/NetCDF) to provide a clean, queryable interface (API/DuckDB) for localized weather insights, starting with South Australia.
+
+
+### [cliscrape](projects/cliscrape)
+
+<span class="status-badge status-active">** Phase 1: Core Parsing Engine</span>
+
+
+`cliscrape` is a high-performance CLI scraping and parsing tool for network devices, written in Rust. It provides a modern, ergonomic, and blazingly fast alternative to legacy tools like `TextFSM`, while maintaining first-class compatibility with existing templates.
+
+The one thing that must work perfectly: **Extremely fast, reliable parsing of semi-structured CLI output into structured data, regardless of whether the template is legacy TextFSM or the new ergonomic format.**
+
+
+### [matrix-profile-rs](projects/matrix-time-series)
+
+<span class="status-badge status-active">Phase 2/5 (50%)</span>
+
+
+Time series analysis typically requires either slow Python libraries or complex manual implementation. **matrix-profile-rs** provides Matrix Profile algorithms (STOMP, SCRIMP++, SCAMP) in native Rust with ergonomic APIs for motif discovery and anomaly detection, achieving C-level performance with Python-level usability through Polars integration.
+
+A high-performance Rust implementation of Matrix Profile algorithms for time series analysis. Matrix Profiles enable pattern discovery, anomaly detection, and similarity search in univariate time series without domain knowledge or parameter tuning.
+
+Time series analysis requires identifying:
+- **Repeating patterns** (motifs): "This sensor pattern happened 15 times before failure"
+- **Anomalies** (discords): "This heartbeat segment is unlike any other"
+- **Similar segments**: "Find all sequences similar to this known good pattern"
+
 
 ### [nascleanup](projects/nascleanup)
 
 <span class="status-badge status-active">Active Development</span>
-· **Rust**
+ · **Rust**
 
-A Rust-based CLI tool for deduplicating and organizing large file shares. Optimized for Docker execution on Synology DSM, using an indexing layer for fast file comparison and metadata management.
 
-### [Satellite Tracker](projects/satellites)
+Developing... A Rust-based CLI tool for deduplicating and organizing large file shares.
 
-<span class="status-badge status-active">Phase 1/8</span>
-· **Rust**
+Optimized for Docker execution on DSM, it uses an indexing layer for fast file comparison and metadata management.
 
-A terminal-based satellite tracker that plots real-time positions on a world map using SGP4 orbital propagation, predicts passes over your location, and displays transmitter frequencies from SatNOGS. Interactive TUI with vim-style navigation, 15 CelesTrak satellite groups, and local TLE caching.
+
+### [netflowsim](projects/netflowsim)
+
+<span class="status-badge status-active">Active Development</span>
+
+
+`netflowsim` provides rapid, massive-scale network performance analysis by using analytic queuing models and Monte Carlo simulations instead of packet-level discrete event simulation. It enables network engineers to validate topologies and routing strategies against billions of flow iterations in seconds.
+
+
+## 🧘 Wellness & Sound
 
 ### [Algorithmic Music Engine](projects/psytrance)
 
-<span class="status-badge status-active">Phase 1 Complete</span>
-· **Rust**
+<span class="status-badge status-active">Phase 1 Complete — Foundation</span>
+ · **Rust**
 
-A tool for exploring composition ideas through generative algorithms. A multi-level energy model drives kick, bass, hi-hat, and clap synthesis. Energy curves control pattern density, filter modulation, and accent placement to produce tracks with intentional structure. Five mood presets (dark, mysterious, euphoric, melancholy, aggressive) with configurable BPM, key, and scale. Includes TUI playback with energy visualization.
 
-### [Weather (BOM ACCESS Pipeline)](projects/weather)
+A tool for exploring composition ideas through generative algorithms. A multi-level energy model drives every musical decision — from macro-level track arc (intro, build, peak, breakdown) down to per-16th-note accent patterns — producing coherent tracks with musical tension and release.
 
-<span class="status-badge status-active">Phase 1/4 (50%)</span>
 
-A data engineering pipeline to fetch, process, and serve high-resolution weather model data from the Australian Bureau of Meteorology. Targets the ACCESS model outputs, providing a clean, queryable interface (API/DuckDB) for localized weather insights.
+### [Wave](projects/watch-noise)
+
+<span class="status-badge status-active">v1.1 — Adaptive Audio Features</span>
+ · **Swift (SwiftUI)**
+
+
+- **StillState:** Reclaiming silence and rest in shared or noisy environments through intelligent, adaptive audio
+- **FlowState:** Achieving and maintaining a "Steady State" of focus through task-linked audio and genetic evolution **Wave** is an evolutionary ambient audio ecosystem designed to manage the user's sensory environment across rest and work.
+
+
+### [Wave (StillState & FlowState)](projects/watchnoise)
+
+<span class="status-badge status-active">21 (Bluetooth Output Enforcement Hardening)</span>
+
+
+**Wave** is an evolutionary ambient audio ecosystem designed to manage the user's sensory environment across rest and work. - **StillState:** Reclaiming silence and rest in shared or noisy environments through intelligent, adaptive audio.
+
+- **FlowState:** Achieving and maintaining a "Steady State" of focus through task-linked audio and genetic evolution.
+
+
+## 🧪 Experimental
+
+### [ASIAIR Import Tool](projects/import-asiair)
+
+<span class="status-badge status-active">Phase 1/1 (0%)</span>
+
+
+A Python script that automates post-imaging-session file organization for astrophotography. It batch-imports FITS files from ASIAIR backup locations, organizes them by target and observation night, copies matching calibration frames, and prepares the directory structure for PixInsight's WBPP (Weighted Batch Preprocessing) workflow.
+
+Eliminates manual file sorting after imaging sessions - scan hundreds of frames, organize by target/filter/date, validate calibration frame availability, and go straight to PixInsight processing.
+
+
+### [soundarray](projects/soundarray)
+
+<span class="status-badge status-active">Active Development</span>
+
+
+An exploration-focused audio processing system using Raspberry Pi and microphone arrays. It focuses on spatial audio (ToA, beamforming) and classification (vehicles, wildlife) using an "analyst" agent approach.
+
+The ability to capture, localize, and classify complex soundscapes on edge devices or via remote streaming, providing structured insights to an agent framework.
+
 
 <style>
 .status-badge { display: inline-block; padding: 0.2em 0.6em; margin: 0.3em 0; border-radius: 4px; font-size: 0.8em; font-weight: 600; }
 .status-active { background-color: #f8f9fa; color: #495057; border: 1px solid #dee2e6; }
 .status-planning { background-color: #fff3cd; color: #856404; border: 1px solid #ffeeba; }
-.status-complete { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
 h3 { margin-bottom: 0.1em; }
 h3 + .status-badge { margin-top: 0; }
 section { margin-bottom: 2em; }

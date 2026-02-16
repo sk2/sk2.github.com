@@ -3,9 +3,9 @@ layout: default
 section: signal-processing
 ---
 
-# Multi-SDR Streaming Server
+# Project Context: rtltcp-rust
 
-<span class="status-badge status-active">Phase 3/4 — TUI & Live Config (90%)</span>
+<span class="status-badge status-active">Active Development</span>
 
 [← Back to Signal Processing](../signal-processing)
 
@@ -19,8 +19,8 @@ A single Rust binary that auto-detects every connected SDR, streams each over th
 
 | | |
 |---|---|
-| **Status** | Phase 3/4 — TUI & Live Config (90%) |
-| **Language** | Rust |
+| **Status** | Active |
+| **Language** | N/A |
 | **Started** | 2026 |
 
 ---
@@ -117,13 +117,13 @@ curl http://localhost:8080/api/v1/devices
 Docker-based cross-compilation for all Pi models:
 
 ```bash
-# Build cross-compilation Docker images
+# Project Context: rtltcp-rust
 ./docker/build-images.sh aarch64
 
-# Cross-compile
+# Project Context: rtltcp-rust
 cross build --release
 
-# Deploy (checks deps, installs missing libs, offers to run)
+# Project Context: rtltcp-rust
 STRIP=1 ./deploy-to-pi.sh pi@raspberrypi.local
 ```
 

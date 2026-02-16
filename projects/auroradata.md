@@ -1,13 +1,21 @@
 ---
 layout: default
 section: projects
+## Roadmap
+
+- Scope (not prioritized):
+
 ---
 
-# AuroraData — Aurora Planning & Substorm Advisor
+# AuroraData - Aurora Planning & Substorm Advisor
 
-<span class="status-badge status-active">v1.0 Complete — All 4 Phases Shipped</span>
+<span class="status-badge status-active">Phase 4/4</span>
 
 [← Back to Projects](../projects)
+
+## Roadmap
+
+- Scope (not prioritized):
 
 ---
 
@@ -19,9 +27,13 @@ Aurora hunting in Australia requires a 60+ minute drive to dark sites, but most 
 
 | | |
 |---|---|
-| **Status** | v1.0 Complete (4/4 phases, 13/13 plans) |
-| **Language** | TypeScript (Node.js) |
+| **Status** | Phase 4/4 |
+| **Language** | N/A |
 | **Started** | 2026 |
+
+## Roadmap
+
+- Scope (not prioritized):
 
 ---
 
@@ -152,6 +164,10 @@ AuroraData handles the *planning* side (when to go, where to go), while AuroraPh
 
 1. **AuroraData**: "Strong event predicted, leave now for Victor Harbor"
 2. **AuroraPhoto**: Automated multi-camera capture once on-site
+
+## Roadmap
+
+- Scope (not prioritized):
 
 ---
 

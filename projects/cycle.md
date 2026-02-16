@@ -5,7 +5,7 @@ section: agentic-systems
 
 # Cycle Agent
 
-<span class="status-badge status-active">Phase 1/5 — Core Connectivity</span>
+<span class="status-badge status-active">Phase 1/5 (80%)</span>
 
 [← Back to Agentic Systems](../agentic-systems)
 
@@ -19,8 +19,8 @@ A native SwiftUI training application for iPad and Apple TV that bridges profess
 
 | | |
 |---|---|
-| **Status** | Phase 1/5 — Core Connectivity |
-| **Language** | Swift (SwiftUI, SceneKit) |
+| **Status** | Phase 1/5 (80%) |
+| **Language** | N/A |
 | **Started** | 2026 |
 
 ---

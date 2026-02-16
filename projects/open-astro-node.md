@@ -5,7 +5,7 @@ section: photography
 
 # OpenAstro Node
 
-<span class="status-badge status-active">Phase 2/4 — Control & Safety</span>
+<span class="status-badge status-active">** 2. Control</span>
 
 [← Back to Photography](../photography)
 
@@ -19,8 +19,8 @@ A headless, autonomous astrophotography controller designed for low-power Linux 
 
 | | |
 |---|---|
-| **Status** | Phase 2/4 — Control & Safety |
-| **Language** | Rust + React (TypeScript) |
+| **Status** | ** 2. Control |
+| **Language** | N/A |
 | **Started** | 2026 |
 
 ---

@@ -5,7 +5,7 @@ section: photography
 
 # AuroraPhoto
 
-<span class="status-badge status-planning">Phase 1 — Star Sharpness Foundation</span>
+<span class="status-badge status-active">** Phase 1: Star Sharpness Foundation</span>
 
 [← Back to Photography](../photography)
 
@@ -19,8 +19,8 @@ Provides precise, automated control over exposure and focus specifically optimiz
 
 | | |
 |---|---|
-| **Status** | Phase 1 — Star Sharpness Foundation |
-| **Language** | Python + Swift |
+| **Status** | ** Phase 1: Star Sharpness Foundation |
+| **Language** | N/A |
 | **Started** | 2026 |
 
 ---

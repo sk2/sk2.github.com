@@ -64,7 +64,7 @@ Modern data analysis fragments across disconnected tools: extract data with one 
 
 ### Tileserver Polars — Geospatial Analytics at Scale
 
-<span class="status-badge status-active">Active Development</span> · [Full Details →](projects/tileserver)
+<span class="status-badge status-complete">Phase 7 — Complete</span> · [Full Details →](projects/tileserver)
 
 **What It Is:**
 Tile server that renders vector tiles (MVT) from Polars DataFrames for interactive geospatial visualization.
@@ -283,5 +283,9 @@ Active development, contributions welcome:
 .status-planning {
   background-color: #ffc107;
   color: #343a40;
+}
+.status-complete {
+  background-color: #28a745;
+  color: white;
 }
 </style>

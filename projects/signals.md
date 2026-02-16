@@ -5,7 +5,7 @@ section: signal-processing
 
 # Project Spectra
 
-<span class="status-badge status-active">Phase 6/7 — Operational Readiness</span>
+<span class="status-badge status-active">Phase 9/12 — v2.0 Signal Intelligence</span>
 
 [← Back to Signal Processing](../signal-processing)
 
@@ -19,7 +19,7 @@ Monitor the local radio spectrum autonomously, classify every detected signal us
 
 | | |
 |---|---|
-| **Status** | Phase 6/7 — Operational Readiness (58/58 plans complete) |
+| **Status** | v1.0 Complete (58/58 plans) · v2.0 Phase 9/12 (11/55 plans) |
 | **Language** | Python, Rust, TypeScript |
 | **Hardware** | Kraken SDR, Airspy R2, Airspy HF+, RTL-SDR |
 | **Started** | 2026 |
@@ -48,6 +48,17 @@ The system splits into edge and core nodes connected over Gigabit Ethernet:
 ```
 
 The edge node handles USB device access and raw IQ streaming. The core node runs all processing — FFT, classification, detection, demodulation, and persistence. This split keeps the Pi's job simple (stream bytes) while the Mac mini handles compute-intensive work.
+
+### v2.0 Central Server Architecture
+
+Version 2.0 adds a central WebSocket server that multiplexes real-time spectrum data, classification results, and control commands to multiple clients simultaneously. The TUI and web interface now operate as thin clients — the server streams FFT frames, waterfall data, and signal detection overlays over WebSocket channels. This enables:
+
+- **Dual-mode operation**: TUI and web UI can run concurrently against the same backend
+- **Remote monitoring**: Access spectrum data from any machine on the network
+- **Signal intelligence overlay**: ML classification results stream in real-time with SigIDWiki enrichment
+- **Unified control**: Device configuration, tuning, and mission control through WebSocket commands
+
+Phase 8 (WebSocket Foundation) complete. Phase 9 (Signal Intelligence Overlay) in progress — adding live classification stream and web-based detection visualization.
 
 ## Terminal Interface
 

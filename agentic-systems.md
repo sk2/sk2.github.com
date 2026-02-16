@@ -58,7 +58,7 @@ Each agent:
 
 ### Multi-Agent Personal Assistant
 
-<span class="status-badge status-active">Phase 18/20 (84%)</span> · [Full Details →](projects/multi-agent)
+<span class="status-badge status-active">Phase 20/20 (93%)</span> · [Full Details →](projects/multi-agent)
 
 **What It Is:**
 A security-first framework for coordinating 13+ specialized agents (health monitoring, home automation, data aggregation, workflow automation) through a message broker architecture. Demonstrates production-ready patterns for deploying AI agents in security-critical infrastructure.

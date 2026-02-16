@@ -10,7 +10,7 @@ Focusing on network automation, signal processing, and secure multi-agent archit
 
 ## [Network Automation →](/network-automation)
 
-Tools for topology modeling, deterministic protocol simulation, and visualization. Includes Network Simulator, Network Visualization Engine, Network Modeling & Configuration Library, Network Topology Engine, Network Automation Workbench, Topology Generator, and more.
+Tools for topology modeling, deterministic protocol simulation, and visualization. Includes Network Simulator, Network Visualization Engine, Network Modeling & Configuration Library, Network Topology Engine, Network Automation Workbench, Topology Generator, Network Configuration Parser, and more.
 
 ## [Signal Processing & RF →](/signal-processing)
 
@@ -53,9 +53,9 @@ An evolutionary ambient audio ecosystem designed to manage the user's sensory en
 
 ### [OmniFocus DB CLI](projects/omnifocus-db)
 
-<span class="status-badge status-active">Phase 1 — Foundation & DB Safety</span>
+<span class="status-badge status-complete">Phase 7 — Complete</span>
 
-A Python CLI that reads directly from the OmniFocus SQLite database on macOS, bypassing slow AppleScript layers. Provides structured, token-efficient data (JSON/Text) for agent-driven project listing, inbox analysis, and context gathering. Read-only by default.
+A Python CLI that reads directly from the OmniFocus SQLite database on macOS, bypassing slow AppleScript layers. Provides structured, token-efficient data (JSON/Text) for agent-driven project listing, inbox analysis, and context gathering. Includes interactive inbox triage TUI with MinimaList import support. Read-only by default.
 
 ### [nascleanup](projects/nascleanup)
 
@@ -88,6 +88,7 @@ A data engineering pipeline to fetch, process, and serve high-resolution weather
 .status-badge { display: inline-block; padding: 0.2em 0.6em; margin: 0.3em 0; border-radius: 4px; font-size: 0.8em; font-weight: 600; }
 .status-active { background-color: #f8f9fa; color: #495057; border: 1px solid #dee2e6; }
 .status-planning { background-color: #fff3cd; color: #856404; border: 1px solid #ffeeba; }
+.status-complete { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
 h3 { margin-bottom: 0.1em; }
 h3 + .status-badge { margin-top: 0; }
 section { margin-bottom: 2em; }

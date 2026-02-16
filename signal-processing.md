@@ -12,7 +12,7 @@ Experimental projects exploring SDR spectrum monitoring and biometric signal pro
 
 ### Project Spectra — Autonomous Spectrum Monitoring
 
-<span class="status-badge status-active">Phase 6/7 — Operational Readiness</span> · [Full Details →](projects/signals)
+<span class="status-badge status-active">Phase 9/12 — v2.0 Signal Intelligence</span> · [Full Details →](projects/signals)
 
 **What It Is:**
 A distributed spectrum monitoring system that autonomously scans radio bands, classifies signals using ML, and maintains a persistent "Signal Census" database. Raspberry Pi edge nodes stream IQ samples to a Mac mini core for processing, classification, and visualization.
@@ -26,10 +26,11 @@ A distributed spectrum monitoring system that autonomously scans radio bands, cl
 - Autonomous missions: bandplan sweeping, satellite pass scheduling
 - Direction finding via Kraken SDR (5-channel coherent receiver)
 - WebGL waterfall frontend, Rust TUI, and REST API
+- **v2.0 WebSocket Foundation**: Multiplexed WebSocket streaming, dual-mode TUI, web-based visualization
 
-**Current Status:** 58/58 plans complete across Phases 1–6. Phase 7 (performance optimization) planned.
+**Current Status:** v1.0 complete (58/58 plans). v2.0 Phase 9 in progress (11/55 plans complete) — central server architecture with WebSocket streaming and signal intelligence overlay.
 
-**Tech Stack:** Python, Rust, TypeScript, FastAPI, React, DuckDB, PyTorch, Skyfield
+**Tech Stack:** Python, Rust, TypeScript, FastAPI, React, DuckDB, PyTorch, Skyfield, WebSocket
 
 ---
 
@@ -52,27 +53,27 @@ A single Rust binary that auto-detects every connected SDR (RTL-SDR, AirSpy HF+,
 
 ### Illumination Reflection Tracking
 
-<span class="status-badge status-active">Phase 2/4 (56%)</span> · [Full Details →](projects/passive)
+<span class="status-badge status-active">Phase 6/10 — Track Management</span> · [Full Details →](projects/passive)
 
 **What It Is:**
-Building on open source implementations to analyze reflections of existing broadcast transmissions using coherent multi-channel SDR hardware.
+Analyzes reflections of existing broadcast transmissions using coherent multi-channel SDR hardware (KrakenSDR). Distributed multi-beam system with parallel surveillance channels for real-time aircraft tracking.
 
-**Current Status:** Phase 2 (Clean, stable foundation for reliable tracking)
+**Current Status:** Phase 6 — implementing track management and association logic. Phase 5 (CFAR detection) complete.
 
-**Tech Stack:** Python, numpy, scipy, Rust (planned migration)
+**Tech Stack:** Python, numpy, scipy, ProcessPoolExecutor
 
 ---
 
 ### Wi-Fi Signal Reflection — Through-Wall Detection
 
-<span class="status-badge status-active">Active Development</span> · [Full Details →](projects/wifi-radar)
+<span class="status-badge status-complete">Phase 5 — Complete</span> · [Full Details →](projects/wifi-radar)
 
 **What It Is:**
-Using coherent SDR arrays for through-wall human detection via Wi-Fi signal reflection and phase analysis.
+Coherent SDR array processing for through-wall human detection via Wi-Fi signal reflection and phase analysis.
 
-**Current Status:** Proof-of-concept detection working
+**Current Status:** Phase 5 complete — proof-of-concept detection operational
 
-**Tech Stack:** Rust
+**Tech Stack:** Python, Signal Processing
 
 ---
 
@@ -99,16 +100,41 @@ An exploration-focused audio processing system using Raspberry Pi and microphone
 
 ## Health & Biometrics
 
-### HealthyPi Biometric Signal Processing
+### HRV Monitor — Real-Time Heart Rate Variability
 
-<span class="status-badge status-active">Experimental</span> · [Full Details →](projects/healthypi)
+<span class="status-badge status-active">Active Development</span> · [Full Details →](projects/hrv)
 
 **What It Is:**
-Experimental signal processing using the [HealthyPi](https://www.crowdsupply.com/protocentral/healthypi-move) biometric hardware platform (developed by Protocentral) for ECG, PPG, and respiration analysis with NeuroKit2.
+Rust-based BLE driver for heart rate variability monitoring. Connects to consumer HRV sensors (Elite HRV CorSense, Morpheus M7), streams raw RR intervals, computes time-domain metrics (RMSSD, SDNN, pNN50, AVNN) in real-time, and logs sessions to Parquet files for analysis.
 
-**Current Status:** Phase 6 (NATS integration + reconnection handling + tests)
+**Key Features:**
+- **Real-Time Metrics**: Live HRV computation with rolling 60-second windows
+- **BLE Streaming**: Direct connection to standard Bluetooth Heart Rate Profile devices
+- **Terminal Dashboard**: TUI with live charts and metric visualization
+- **Session Logging**: Automatic Parquet export for DuckDB/Polars analysis
 
-**Tech Stack:** Python, NeuroKit2, numpy, scipy, NATS
+**Current Status:** Core functionality complete, Linux support and frequency-domain metrics planned
+
+**Tech Stack:** Rust, btleplug, ratatui, cardio-rs, Apache Arrow/Parquet
+
+---
+
+### HealthyPi Biometric Signal Processing
+
+<span class="status-badge status-active">Phase 6/6 — Apple Ecosystem (v1.0, 87%)</span> · [Full Details →](projects/healthypi)
+
+**What It Is:**
+Modular signal processing ecosystem using the [HealthyPi](https://www.crowdsupply.com/protocentral/healthypi-move) biometric hardware platform (developed by Protocentral) for ECG, PPG, respiration, and EEG analysis with NeuroKit2.
+
+**Key Features:**
+- Virtual patient simulator for development without hardware
+- NATS message bus integration for agent coordination
+- Pydantic models for ECG, PPG, EDA, EEG, IMU, and respiration
+- HealthyPiKit Swift package for Apple ecosystem integration
+
+**Current Status:** Phase 6, Plan 2/7 (87% complete) — Apple ecosystem integration. Phases 1-5 complete and verified.
+
+**Tech Stack:** Python, Swift, NeuroKit2, numpy, scipy, NATS, Pydantic
 
 ---
 
@@ -130,5 +156,9 @@ Experimental signal processing using the [HealthyPi](https://www.crowdsupply.com
 .status-planning {
   background-color: #ffc107;
   color: #343a40;
+}
+.status-complete {
+  background-color: #28a745;
+  color: white;
 }
 </style>

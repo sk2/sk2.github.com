@@ -5,7 +5,7 @@ section: signal-processing
 
 # HealthyPi Ecosystem
 
-<span class="status-badge status-active">v1.0 — Apple Ecosystem Integration</span>
+<span class="status-badge status-active">Phase 6/6 — Apple Ecosystem (v1.0, 87%)</span>
 
 [← Back to Signal Processing](../signal-processing)
 
@@ -19,7 +19,7 @@ A modular, agent-aware health monitoring ecosystem that translates raw biometric
 
 | | |
 |---|---|
-| **Status** | v1.0 — Apple Ecosystem Integration |
+| **Status** | Phase 6/6 (v1.0, 87% — 34/39 plans complete) |
 | **Language** | Python + Swift |
 | **Started** | 2026 |
 
@@ -69,9 +69,10 @@ Agent scaffold with NATS integration, task handlers, and orchestrator registrati
 **Phase 5: Desktop Menu Bar Prototype** (Complete)
 macOS menu bar app with real-time ambient health status (Green/Yellow/Red).
 
-**Phase 6: Apple Ecosystem & Sync** (In Progress)
-- HealthyPiKit Swift package with NATS subscriber
-- HealthKit bidirectional sync, iOS dashboard, WatchOS app (planned)
+**Phase 6: Apple Ecosystem & Sync** (In Progress — 2/7 plans)
+- HealthyPiKit Swift package with NATS subscriber (complete)
+- Reconnection handling and test coverage (complete)
+- HealthKit bidirectional sync, iOS dashboard, WatchOS app (remaining)
 
 ## Tech Stack
 

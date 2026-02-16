@@ -5,7 +5,7 @@ section: network-automation
 
 # Network Simulator
 
-<span class="status-badge status-active">Active Development — v1.7 Segment Routing</span>
+<span class="status-badge status-active">v1.8 — Data Center Fabric & EVPN</span>
 
 [← Back to Network Automation](../network-automation)
 
@@ -19,7 +19,7 @@ Developing agentic AI systems and network automation tools requires rapid iterat
 
 |                   |                                           |
 | ----------------- | ----------------------------------------- |
-| **Status**        | Active Development — v1.7 Segment Routing |
+| **Status**        | v1.8 — Data Center Fabric & EVPN (Defining Requirements) |
 | **Language**      | Rust                                      |
 | **Lines of Code** | 126,000+                                  |
 | **Test Coverage** | 1,350+ protocol behavior tests            |
@@ -680,11 +680,18 @@ VRF isolation, L3VPN services, RSVP-TE, and BGP monitoring.
 - BMP export (RFC 7854) for BGP monitoring
 - Daemon mode with interactive console, tab completion, TUI selector
 
-**v1.7 Segment Routing** (In Progress)
+**v1.7 Segment Routing** (Shipped Feb 14, 2026)
 SR-MPLS programming and traffic analysis.
 - SR-MPLS with deterministic SRGB and Node-SID model
 - Multi-label stack forwarding
-- Routing matrix export and flow-based simulation engine (planned)
+- Routing matrix export and flow-based simulation engine
+
+**v1.8 Data Center Fabric & EVPN** (In Progress)
+EVPN control plane and VXLAN dataplane for data center fabrics.
+- EVPN Type 2/3/5 routes for MAC/IP advertisement
+- VXLAN encapsulation/decapsulation
+- Multi-tenancy with bridge domains and VRF routing
+- Requirements definition phase
 
 **Roadmap:**
 

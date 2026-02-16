@@ -5,7 +5,7 @@ section: signal-processing
 
 # RF Signal Reflection Experiments
 
-<span class="status-badge status-active">Phase 3/4 (100%)</span>
+<span class="status-badge status-active">Phase 6/10 — Track Management</span>
 
 [← Back to Signal Processing](../signal-processing)
 
@@ -19,7 +19,7 @@ Ambient RF signals reflect off objects in the environment. By processing these r
 
 | | |
 |---|---|
-| **Status** | Phase 3/4 (100%) |
+| **Status** | Phase 6/10 — Track Management (28 plans complete, 46%) |
 | **Language** | Python, Signal Processing |
 | **Started** | 2026 |
 
@@ -49,9 +49,24 @@ An experimental signal processing project exploring how to analyze reflections o
 - **Cost-Effective**: Uses existing RF infrastructure for experiments
 - **Educational**: Practical exploration of bistatic geometry and signal processing techniques
 
+## Architecture
+
+**v1.0 Foundation (Phases 1-4, Complete):**
+Established distributed multi-beam architecture using ProcessPoolExecutor for parallel surveillance channels. CFAR detection (Phase 5) implemented and verified.
+
+**v2.0 Real-Time Tracking (Phases 5-10, In Progress):**
+
+Currently implementing track management and association logic (Phase 6). The system now maintains tracks across multiple beams with detection-level recording for storage efficiency.
+
+**Key Features:**
+- **Multi-Beam Processing**: Parallel surveillance channels across 5-channel coherent array
+- **CFAR Detection**: Constant False Alarm Rate detection complete
+- **Track Management**: Per-beam tracking with cross-beam fusion planned for v3
+- **Real-Time Operation**: Aircraft tracking with sub-second latency
+
 ## Current Status
 
-Clean, stable codebase for processing multi-channel RF reflections. Currently focused on establishing a solid signal processing foundation with single-channel experiments.
+Phase 6 in progress. Clean, understandable, stable codebase that reliably tracks aircraft in real-time. Phase 5 (CFAR Detection) complete and verified.
 
 ---
 

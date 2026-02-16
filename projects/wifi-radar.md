@@ -5,7 +5,7 @@ section: signal-processing
 
 # Wi-Fi Signal Reflection — Through-Wall Detection
 
-<span class="status-badge status-active">Active Development</span>
+<span class="status-badge status-complete">Phase 5 — Complete</span>
 
 [← Back to Signal Processing](../signal-processing)
 
@@ -19,7 +19,7 @@ Wi-Fi signals penetrate walls and reflect off human bodies, creating detectable 
 
 | | |
 |---|---|
-| **Status** | Active Development |
+| **Status** | Phase 5 — Complete |
 | **Language** | Python, Signal Processing |
 | **Started** | 2026 |
 
@@ -62,3 +62,18 @@ The system processes coherent multi-channel Wi-Fi signals using:
 ---
 
 [← Back to Signal Processing](../signal-processing)
+
+<style>
+.status-badge {
+  display: inline-block;
+  padding: 0.3em 0.8em;
+  margin: 0.5em 0;
+  border-radius: 4px;
+  font-size: 0.85em;
+  font-weight: 600;
+}
+.status-complete {
+  background-color: #28a745;
+  color: white;
+}
+</style>

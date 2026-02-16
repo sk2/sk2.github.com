@@ -20,6 +20,7 @@ Use full product names in all prose text:
 | `ank_pydantic` | Network Modeling & Configuration Library |
 | `netsim` | Network Simulator |
 | `TopoGen` | Topology Generator |
+| `ank-parse` | Network Configuration Parser |
 | `NTE` | Network Topology Engine |
 | `ANK Workbench` | Network Automation Workbench |
 | `rtltcp-rust` | Multi-SDR Streaming Server |

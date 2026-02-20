@@ -173,6 +173,16 @@ Transform raw radio spectrum data into an actionable "Signal Census" through aut
 Passive radar system that utilizes existing Wi-Fi signals for through-wall human detection and localization, leveraging the KrakenSDR coherent radio array.
 
 
+### [soundarray](projects/soundarray)
+
+<span class="status-badge status-active">Active Development</span>
+
+
+An exploration-focused audio processing system using Raspberry Pi and microphone arrays. It focuses on spatial audio (ToA, beamforming) and classification (vehicles, wildlife) using an "analyst" agent approach.
+
+The ability to capture, localize, and classify complex soundscapes on edge devices or via remote streaming, providing structured insights to an agent framework.
+
+
 ## 🏥 Health & Biometrics
 
 > **[View Ecosystem →](/agentic-systems)**
@@ -449,16 +459,6 @@ This project aims to comprehensively define the **overall architecture of the Ne
 A fast, keyboard-driven Rust text UI (TUI) task manager inspired by OmniFocus, built around a GTD workflow. It stores data in an owned SQLite database, supports projects and hierarchical contexts/tags, and is optimized for rapid inbox processing (triage + tagging) with minimal friction.
 
 Process an inbox full of captures into correctly-organized next actions (project + tags + defer/due) at high speed, with sub-second interactions.
-
-
-### [soundarray](projects/soundarray)
-
-<span class="status-badge status-active">Active Development</span>
-
-
-An exploration-focused audio processing system using Raspberry Pi and microphone arrays. It focuses on spatial audio (ToA, beamforming) and classification (vehicles, wildlife) using an "analyst" agent approach.
-
-The ability to capture, localize, and classify complex soundscapes on edge devices or via remote streaming, providing structured insights to an agent framework.
 
 
 <style>

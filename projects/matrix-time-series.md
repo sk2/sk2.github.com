@@ -4,7 +4,7 @@ layout: default
 
 # matrix-profile-rs
 
-<span class="status-badge status-active">Phase 2/5 (50%)</span>
+<span class="status-badge status-active">Phase 1/5 (90%)</span>
 
 [← Back to Projects](../projects)
 
@@ -18,7 +18,7 @@ Developing...
 
 | | |
 |---|---|
-| **Status** | Phase 2/5 (50%) |
+| **Status** | Phase 1/5 (90%) |
 | **Language** | N/A |
 | **Started** | 2026 |
 

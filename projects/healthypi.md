@@ -3,19 +3,19 @@ layout: default
 section: signal-processing
 ## Current Status
 
-2026-02-11 - Completed 06-02-PLAN.md (HealthyPiKit NATS subscriber + reconnection + tests)
+2026-02-20 - v1.1 roadmap created
 
 ---
 
 # HealthyPi Ecosystem
 
-<span class="status-badge status-active">Phase 6/6 (87%)</span>
+<span class="status-badge status-active">** Phase 7 - Ingest CLI + HealthyPi 6 Serial MVP</span>
 
 [← Back to Signal Processing](../signal-processing)
 
 ## Current Status
 
-2026-02-11 - Completed 06-02-PLAN.md (HealthyPiKit NATS subscriber + reconnection + tests)
+2026-02-20 - v1.1 roadmap created
 
 ---
 
@@ -27,13 +27,13 @@ A modular, agent-aware health monitoring ecosystem that translates raw biometric
 
 | | |
 |---|---|
-| **Status** | Phase 6/6 (87%) |
+| **Status** | ** Phase 7 - Ingest CLI + HealthyPi 6 Serial MVP |
 | **Language** | N/A |
 | **Started** | 2026 |
 
 ## Current Status
 
-2026-02-11 - Completed 06-02-PLAN.md (HealthyPiKit NATS subscriber + reconnection + tests)
+2026-02-20 - v1.1 roadmap created
 
 ---
 
@@ -92,7 +92,7 @@ Python (Pydantic, NeuroKit2, SciPy), Swift (SwiftUI, HealthKit), NATS messaging,
 
 ## Current Status
 
-2026-02-11 - Completed 06-02-PLAN.md (HealthyPiKit NATS subscriber + reconnection + tests)
+2026-02-20 - v1.1 roadmap created
 
 ---
 

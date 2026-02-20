@@ -4,7 +4,7 @@ layout: default
 
 # NTE: Engine Hardening & LadybugDB Evaluation
 
-<span class="status-badge status-active">Phase 1/5 (71%)</span>
+<span class="status-badge status-active">Phase 2/5 (100%)</span>
 
 [← Back to Projects](../projects)
 
@@ -18,7 +18,7 @@ The engine must be correct and observable — mutations never silently corrupt s
 
 | | |
 |---|---|
-| **Status** | Phase 1/5 (71%) |
+| **Status** | Phase 2/5 (100%) |
 | **Language** | N/A |
 | **Started** | 2026 |
 

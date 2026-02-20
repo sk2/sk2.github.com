@@ -1,14 +1,22 @@
-# The Minimal theme
+# Website
 
-[![Build Status](https://travis-ci.org/pages-themes/minimal.svg?branch=master)](https://travis-ci.org/pages-themes/minimal) [![Gem Version](https://badge.fury.io/rb/jekyll-theme-minimal.svg)](https://badge.fury.io/rb/jekyll-theme-minimal)
+This repository is the source for `sk2.github.com` / `sk2.id.au`, built with Jekyll.
 
-*Minimal is a Jekyll theme for GitHub Pages. You can [preview the theme to see what it looks like](http://pages-themes.github.io/minimal), or even [use it today](#usage).*
+It started from the GitHub Pages Minimal theme, but it now includes a custom layout, CSS, and site-specific content.
 
-![Thumbnail of minimal](thumbnail.png)
+## Build
 
-## Usage
+1. Ensure you have Ruby 3.0+ installed.
+2. Install dependencies: `./script/bootstrap` (or `bundle install`).
+3. Build the site: `./script/cibuild`.
 
-To use the Minimal theme:
+## Deploy
+
+Push changes to the `master` branch to deploy to GitHub Pages.
+
+## Upstream theme notes
+
+If you want to use the upstream Minimal theme elsewhere:
 
 1. Add the following to your site's `_config.yml`:
 

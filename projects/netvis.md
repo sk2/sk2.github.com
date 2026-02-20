@@ -5,7 +5,7 @@ section: network-automation
 
 # NetVis
 
-<span class="status-badge status-active">Phase 41 complete; ready for Phase 41.1 (Performance & Scale Foundation)</span>
+<span class="status-badge status-active">Phase 41.1 in progress (Performance & Scale Foundation)</span>
 
 [← Back to Network Automation](../network-automation)
 
@@ -20,7 +20,7 @@ Network visualization often fails at scale because layout algorithms treat all n
 
 | | |
 |---|---|
-| **Status** | Phase 41 complete; ready for Phase 41.1 (Performance & Scale Foundation) |
+| **Status** | Phase 41.1 in progress (Performance & Scale Foundation) |
 | **Language** | Rust |
 | **Started** | 2026 |
 

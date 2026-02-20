@@ -5,7 +5,7 @@ section: network-automation
 
 # TopoGen - Network Topology Generator
 
-<span class="status-badge status-active">Phase 22/25</span>
+<span class="status-badge status-active">Phase 23/25</span>
 
 [← Back to Network Automation](../network-automation)
 
@@ -20,7 +20,7 @@ Generating realistic, validated network topologies for testing often requires cu
 
 | | |
 |---|---|
-| **Status** | Phase 22/25 |
+| **Status** | Phase 23/25 |
 | **Language** | N/A |
 | **Started** | 2026 |
 

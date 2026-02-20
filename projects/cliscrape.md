@@ -5,7 +5,7 @@ section: network-automation
 
 # cliscrape
 
-<span class="status-badge status-active">** Phase 1: Core Parsing Engine</span>
+<span class="status-badge status-active">** Phase 3: Modern Ergonomic Templates</span>
 
 [← Back to Network Automation](../network-automation) | [← Back to Projects](../projects)
 

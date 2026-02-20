@@ -4,7 +4,7 @@ layout: default
 
 # Wave (StillState & FlowState)
 
-<span class="status-badge status-active">21 (Bluetooth Output Enforcement Hardening)</span>
+<span class="status-badge status-active">23 (FlowState Menu Bar MVP)</span>
 
 [← Back to Projects](../projects)
 
@@ -19,7 +19,7 @@ layout: default
 
 | | |
 |---|---|
-| **Status** | 21 (Bluetooth Output Enforcement Hardening) |
+| **Status** | 23 (FlowState Menu Bar MVP) |
 | **Language** | N/A |
 | **Started** | 2026 |
 

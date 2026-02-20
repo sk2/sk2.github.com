@@ -159,3 +159,7 @@ Network diagram generation:
 ---
 
 [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)

@@ -3,19 +3,19 @@ layout: default
 section: projects
 ## Current Status
 
-2026-02-16 -- Completed 01-01-PLAN.md
+2026-02-20 -- Created 02-CONTEXT.md
 
 ---
 
 # Satellites
 
-<span class="status-badge status-active">Phase 1/6 (10%)</span>
+<span class="status-badge status-active">Phase 2/6 (20%)</span>
 
 [← Back to Projects](../projects)
 
 ## Current Status
 
-2026-02-16 -- Completed 01-01-PLAN.md
+2026-02-20 -- Created 02-CONTEXT.md
 
 ---
 
@@ -27,13 +27,13 @@ A terminal-based satellite tracker that plots real-time satellite positions on a
 
 | | |
 |---|---|
-| **Status** | Phase 1/6 (10%) |
+| **Status** | Phase 2/6 (20%) |
 | **Language** | N/A |
 | **Started** | 2026 |
 
 ## Current Status
 
-2026-02-16 -- Completed 01-01-PLAN.md
+2026-02-20 -- Created 02-CONTEXT.md
 
 ---
 
@@ -123,7 +123,7 @@ Pass prediction propagates at 60-second intervals over 24 hours, detects elevati
 
 ## Current Status
 
-2026-02-16 -- Completed 01-01-PLAN.md
+2026-02-20 -- Created 02-CONTEXT.md
 
 ---
 

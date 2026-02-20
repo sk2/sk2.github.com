@@ -4,7 +4,7 @@ layout: default
 
 # ANK Workbench
 
-<span class="status-badge status-active">Phase 25 (Pipeline Step Execution)</span>
+<span class="status-badge status-active">Phase 27 (Project Foundation / Manifest)</span>
 
 [← Back to Projects](../projects)
 
@@ -18,7 +18,7 @@ Network engineers can design, validate, and visualize network changes in one com
 
 | | |
 |---|---|
-| **Status** | Phase 25 (Pipeline Step Execution) |
+| **Status** | Phase 27 (Project Foundation / Manifest) |
 | **Language** | Python backend (FastAPI or Flask), React or Vue frontend — Leverages existing Python ecosystem for ANK components, meets modern UX expectations |
 | **Started** | 2026 |
 

@@ -4,7 +4,7 @@ layout: default
 
 # Wave (StillState & FlowState)
 
-<span class="status-badge status-active">23 (FlowState Menu Bar MVP)</span>
+<span class="status-badge status-active">26 (FlowState Hotkeys + Quick Actions)</span>
 
 [← Back to Projects](../projects)
 
@@ -19,7 +19,7 @@ layout: default
 
 | | |
 |---|---|
-| **Status** | 23 (FlowState Menu Bar MVP) |
+| **Status** | 26 (FlowState Hotkeys + Quick Actions) |
 | **Language** | N/A |
 | **Started** | 2026 |
 

@@ -4,7 +4,7 @@ layout: default
 
 # Rust TUI GTD Todo (OmniFocus-inspired)
 
-<span class="status-badge status-active">Phase 1/7 (100%)</span>
+<span class="status-badge status-active">Phase 5/7 (71%)</span>
 
 [← Back to Projects](../projects)
 
@@ -18,7 +18,7 @@ Process an inbox full of captures into correctly-organized next actions (project
 
 | | |
 |---|---|
-| **Status** | Phase 1/7 (100%) |
+| **Status** | Phase 5/7 (71%) |
 | **Language** | N/A |
 | **Started** | 2026 |
 

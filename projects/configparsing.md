@@ -4,7 +4,7 @@ layout: default
 
 # Network Configuration Parsing & Analysis Framework
 
-<span class="status-badge status-active">** Phase 1 (Knowledge Base Ingestion) — Complete</span>
+<span class="status-badge status-active">Phase 5/8 (50%)</span>
 
 [← Back to Projects](../projects)
 
@@ -18,7 +18,7 @@ Extract network-level topology relationships (protocol adjacencies, link roles, 
 
 | | |
 |---|---|
-| **Status** | ** Phase 1 (Knowledge Base Ingestion) — Complete |
+| **Status** | Phase 5/8 (50%) |
 | **Language** | N/A |
 | **Started** | 2026 |
 

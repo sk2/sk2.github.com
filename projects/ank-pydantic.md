@@ -4,7 +4,7 @@ layout: default
 
 # ank_pydantic
 
-<span class="status-badge status-active">Phase 69/74 (35%)</span>
+<span class="status-badge status-active">Phase 84/89</span>
 
 [← Back to Projects](../projects)
 
@@ -18,7 +18,7 @@ A clean, consistent API where there's one obvious way to perform each topology o
 
 | | |
 |---|---|
-| **Status** | Phase 69/74 (35%) |
+| **Status** | Phase 84/89 |
 | **Language** | N/A |
 | **Started** | 2026 |
 

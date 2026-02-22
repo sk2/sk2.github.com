@@ -9,7 +9,7 @@ section: projects
 
 # AuroraData - Aurora Planning & Substorm Advisor
 
-<span class="status-badge status-active">Phase 4/4</span>
+<span class="status-badge status-active">** Not started</span>
 
 [← Back to Projects](../projects)
 
@@ -27,7 +27,7 @@ Aurora hunting in Australia requires a 60+ minute drive to dark sites, but most 
 
 | | |
 |---|---|
-| **Status** | Phase 4/4 |
+| **Status** | ** Not started |
 | **Language** | N/A |
 | **Started** | 2026 |
 

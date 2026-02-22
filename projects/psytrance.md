@@ -3,9 +3,9 @@ layout: default
 section: projects
 ---
 
-# Algorithmic Music Engine
+# Psytrance Generator
 
-<span class="status-badge status-active">Phase 1 Complete — Foundation</span>
+<span class="status-badge status-active">Phase 1/5 (0%)</span>
 
 [← Back to Projects](../projects)
 
@@ -19,8 +19,8 @@ A tool for exploring composition ideas through generative algorithms. A multi-le
 
 | | |
 |---|---|
-| **Status** | Phase 1 Complete — Foundation |
-| **Language** | Rust |
+| **Status** | Phase 1/5 (0%) |
+| **Language** | N/A |
 | **Started** | 2026 |
 
 ---
@@ -88,16 +88,16 @@ Five presets, each defining a key, scale, energy curve shape, and filter range:
 ## Usage
 
 ```bash
-# Algorithmic Music Engine
+# Psytrance Generator
 cargo run
 
-# Algorithmic Music Engine
+# Psytrance Generator
 cargo run -- --bpm 145 --bars 64 --mood euphoric --output track.wav
 
-# Algorithmic Music Engine
+# Psytrance Generator
 cargo run -- --seed 42 --output reproducible.wav
 
-# Algorithmic Music Engine
+# Psytrance Generator
 cargo run -- --key D2 --scale phrygian
 ```
 

@@ -15,7 +15,7 @@ Focusing on network automation, high-performance signal processing, and secure m
 
 ### [ANK Workbench](projects/ank-workbench)
 
-<span class="status-badge status-active">Phase 27 (Project Foundation / Manifest)</span>
+<span class="status-badge status-active">Phase 34/39 (42%)</span>
  · **Python backend (FastAPI or Flask) · React or Vue frontend — Leverages existing Python ecosystem for ANK components · meets modern UX expectations**
 
 
@@ -43,9 +43,19 @@ Expressive Python API backed by compiled graph algorithms (petgraph), with autom
 Developing...
 
 
+### [Device Interaction Framework](projects/deviceinteraction)
+
+<span class="status-badge status-active">Not started (defining requirements for v1.1)</span>
+
+
+A fast, simple, and ergonomic Rust library and CLI for network device interaction and automated testing. Provides the essential PyATS capabilities—testbed management, CLI parsing, and state verification—without the complexity, as a focused component in a broader network automation toolkit.
+
+Enable rapid, type-safe validation of network device state through streamlined device interaction: connect to devices (real, simulated, or mocked), execute commands, parse structured output, and verify correctness—all with the performance and safety guarantees of Rust.
+
+
 ### [NTE: Engine Hardening & LadybugDB Evaluation](projects/ank-nte)
 
-<span class="status-badge status-active">Phase 2/5 (100%)</span>
+<span class="status-badge status-active">Phase 3/6 (100%)</span>
 
 
 NTE (Network Topology Engine) is a Rust-based graph topology engine with Python bindings via PyO3, used as the backend for ank_pydantic. It provides a 14-crate Cargo workspace built on petgraph StableDiGraph with pluggable datastores (Polars, DuckDB, Lite).
@@ -55,7 +65,7 @@ This project covers two milestones: first hardening the existing engine for prod
 
 ### [NetVis](projects/netvis)
 
-<span class="status-badge status-active">Phase 41.1 in progress (Performance & Scale Foundation)</span>
+<span class="status-badge status-active">Phase 42.1 complete (data-source-adapters)</span>
  · **Rust**
 
 
@@ -80,7 +90,7 @@ The project bridges the gap between unstructured legacy CLI data and structured 
 
 ### [Network Configuration Parsing & Analysis Framework](projects/configparsing)
 
-<span class="status-badge status-active">** Phase 1 (Knowledge Base Ingestion) — Complete</span>
+<span class="status-badge status-active">Phase 5/8 (50%)</span>
 
 
 A network automation framework that decouples network configuration from vendor-specific syntax. It uses LLM-powered RAG to extract network-level intent and topology relationships from vendor documentation and CLI configurations, normalizing them into a vendor-neutral topology graph model inspired by AutoNetKit.
@@ -90,7 +100,7 @@ The system enables cross-vendor configuration generation and validation through 
 
 ### [Network Simulator](projects/network-simulator)
 
-<span class="status-badge status-active">Phase 61/67 (100%)</span>
+<span class="status-badge status-active">Phase 62/67 (100%)</span>
  · **Rust**
 
 
@@ -112,7 +122,7 @@ The Network Topology Engine is the Rust backend that powers the Network Modeling
 
 ### [TopoGen - Network Topology Generator](projects/topogen)
 
-<span class="status-badge status-active">Phase 23/25</span>
+<span class="status-badge status-active">Not started (defining requirements)</span>
 
 
 A Rust-based network topology generator with Python bindings that consolidates scattered topology generation logic from AutoNetKit, simulation tools, and visualization tools. Generates realistic data center, WAN, and random graph topologies with proper structure, design patterns, and realistic parameters.
@@ -122,7 +132,7 @@ Outputs custom YAML format for use across the network engineering tool ecosystem
 
 ### [ank_pydantic](projects/ank-pydantic)
 
-<span class="status-badge status-active">Phase 69/74 (35%)</span>
+<span class="status-badge status-active">Phase 84/89</span>
 
 
 A Python library for modeling and querying network topologies, backed by a high-performance Rust core (`ank_nte`). Features a two-stage transformation model (Whiteboard → Plan → Protocol Layers), type-safe Pydantic models for nodes/edges/layers, and a composable lazy query API with Rust-backed execution.
@@ -149,7 +159,7 @@ Clean, understandable, stable codebase that reliably tracks aircraft in real-tim
 
 ### [Project Context: rtltcp-rust](projects/rtltcp)
 
-<span class="status-badge status-active">Active Development</span>
+<span class="status-badge status-active">Phase 5/6 (100%)</span>
 
 
 A cross-platform (targeted at Raspberry Pi) server that interfaces with multiple SDR devices (RTL-SDR, AirSpy HF+) and streams raw IQ samples over the network using the industry-standard `rtl_tcp` protocol. It features a built-in TUI for live configuration and device management.
@@ -159,7 +169,7 @@ The ability to reliably and efficiently stream high-fidelity IQ data from multip
 
 ### [Project Spectra](projects/signals)
 
-<span class="status-badge status-active">Phase 10/12</span>
+<span class="status-badge status-active">Phase 7/7</span>
 
 
 Transform raw radio spectrum data into an actionable "Signal Census" through automated detection, ML classification, and distributed acquisition.
@@ -171,16 +181,6 @@ Transform raw radio spectrum data into an actionable "Signal Census" through aut
 
 
 Passive radar system that utilizes existing Wi-Fi signals for through-wall human detection and localization, leveraging the KrakenSDR coherent radio array.
-
-
-### [soundarray](projects/soundarray)
-
-<span class="status-badge status-active">Active Development</span>
-
-
-An exploration-focused audio processing system using Raspberry Pi and microphone arrays. It focuses on spatial audio (ToA, beamforming) and classification (vehicles, wildlife) using an "analyst" agent approach.
-
-The ability to capture, localize, and classify complex soundscapes on edge devices or via remote streaming, providing structured insights to an agent framework.
 
 
 ## 🏥 Health & Biometrics
@@ -210,7 +210,7 @@ A modular, agent-aware health monitoring ecosystem that translates raw biometric
 
 ### [AuroraData - Aurora Planning & Substorm Advisor](projects/auroradata)
 
-<span class="status-badge status-active">Phase 4/4</span>
+<span class="status-badge status-active">** Not started</span>
 
 
 A specialized tool for Australian aurora observers that solves the "should I drive 60 minutes?" problem. It combines real-time solar wind data (NOAA), substorm trigger logic (Bz/HP trends), and local weather (ACCESS-G model) to provide actionable advice.
@@ -268,7 +268,7 @@ A headless, autonomous astrophotography controller designed for low-power Linux 
 
 ### [Satellites](projects/satellites)
 
-<span class="status-badge status-active">Phase 2/6 (20%)</span>
+<span class="status-badge status-active">Phase 4/6 (100%)</span>
 
 
 A terminal-based satellite tracker that displays real-time satellite positions on a world map, predicts passes over the user's location, and shows transmission/frequency data. Built with Rust, ratatui, and the SGP4 orbital propagation algorithm.
@@ -295,7 +295,7 @@ In the field, you can see what the camera sees and get actionable guidance/contr
 
 ### [Cycle Agent](projects/cycle)
 
-<span class="status-badge status-active">Phase 2/5 (75%)</span>
+<span class="status-badge status-active">Phase 4/5 (71%)</span>
 
 
 A native SwiftUI training application for iPad and Apple TV that bridges professional cycling hardware (KICKR Core) with dynamic AI-driven workout logic via NATS, visualized in a high-performance SceneKit environment.
@@ -303,7 +303,7 @@ A native SwiftUI training application for iPad and Apple TV that bridges profess
 
 ### [Secure Multi-Agent Personal Assistant](projects/multi-agent)
 
-<span class="status-badge status-active">Phase 20/20 (93%)</span>
+<span class="status-badge status-active">Phase 21/23 (100%)</span>
  · **Agents can be Go · Python · or Rust**
 
 
@@ -358,7 +358,7 @@ The primary goal is to bypass the complexity of BOM's FTP delivery and binary fo
 
 ### [cliscrape](projects/cliscrape)
 
-<span class="status-badge status-active">** Phase 3: Modern Ergonomic Templates</span>
+<span class="status-badge status-active">Phase 6/11 (45%)</span>
 
 
 `cliscrape` is a high-performance CLI scraping and parsing tool for network devices, written in Rust. It provides a modern, ergonomic, and blazingly fast alternative to legacy tools like `TextFSM`, while maintaining first-class compatibility with existing templates.
@@ -368,17 +368,14 @@ The one thing that must work perfectly: **Extremely fast, reliable parsing of se
 
 ### [matrix-profile-rs](projects/matrix-time-series)
 
-<span class="status-badge status-active">Phase 1/5 (90%)</span>
+<span class="status-badge status-active">Phase 8/11 (64%)</span>
 
 
 Time series analysis typically requires either slow Python libraries or complex manual implementation. **matrix-profile-rs** provides Matrix Profile algorithms (STOMP, SCRIMP++, SCAMP) in native Rust with ergonomic APIs for motif discovery and anomaly detection, achieving C-level performance with Python-level usability through Polars integration.
 
-A high-performance Rust implementation of Matrix Profile algorithms for time series analysis. Matrix Profiles enable pattern discovery, anomaly detection, and similarity search in univariate time series without domain knowledge or parameter tuning.
+A high-performance Rust implementation of Matrix Profile algorithms for time series analysis with SIMD acceleration, out-of-memory tiling support, and Polars ecosystem integration. Matrix Profiles enable pattern discovery, anomaly detection, and similarity search in univariate time series without domain knowledge or parameter tuning.
 
-Time series analysis requires identifying:
-- **Repeating patterns** (motifs): "This sensor pattern happened 15 times before failure"
-- **Anomalies** (discords): "This heartbeat segment is unlike any other"
-- **Similar segments**: "Find all sequences similar to this known good pattern"
+**Performance at scale with ergonomic APIs** — achieve 2.5x speedup via SIMD, handle datasets larger than RAM via tiling, while maintaining simple `.motifs(k)` / `.discords(k)` interfaces.
 
 
 ### [nascleanup](projects/nascleanup)
@@ -394,21 +391,22 @@ Optimized for Docker execution on DSM, it uses an indexing layer for fast file c
 
 ### [netflowsim](projects/netflowsim)
 
-<span class="status-badge status-active">Active Development</span>
+<span class="status-badge status-active">Phase 9/13 (0%)</span>
 
 
-`netflowsim` provides rapid, massive-scale network performance analysis by using analytic queuing models and Monte Carlo simulations instead of packet-level discrete event simulation. It enables network engineers to validate topologies and routing strategies against billions of flow iterations in seconds.
+`netflowsim` provides rapid, massive-scale network performance analysis by using analytic queuing models and Monte Carlo simulations instead of packet-level discrete event simulation. It enables network engineers to validate topologies and routing strategies against billions of flow iterations in seconds, identify bottlenecks probabilistically, and test network resilience under failure scenarios.
 
 
 ## 🧘 Wellness & Sound
 
-### [Algorithmic Music Engine](projects/psytrance)
+### [Psytrance Generator](projects/psytrance)
 
-<span class="status-badge status-active">Phase 1 Complete — Foundation</span>
- · **Rust**
+<span class="status-badge status-active">Phase 1/5 (0%)</span>
 
 
-A tool for exploring composition ideas through generative algorithms. A multi-level energy model drives every musical decision — from macro-level track arc (intro, build, peak, breakdown) down to per-16th-note accent patterns — producing coherent tracks with musical tension and release.
+A generative psytrance synthesis engine with real-time TUI controls. Creates complete tracks driven by a multi-level energy model, with live playback, step editing, and WAV export.
+
+Currently produces high-quality procedural psytrance but lacks workflow features for capturing ideas and iterating efficiently. Energy-driven generative music that sounds professional and lets users quickly explore variations.
 
 
 ### [Wave](projects/watch-noise)
@@ -423,7 +421,7 @@ A tool for exploring composition ideas through generative algorithms. A multi-le
 
 ### [Wave (StillState & FlowState)](projects/watchnoise)
 
-<span class="status-badge status-active">23 (FlowState Menu Bar MVP)</span>
+<span class="status-badge status-active">26 (FlowState Hotkeys + Quick Actions)</span>
 
 
 **Wave** is an evolutionary ambient audio ecosystem designed to manage the user's sensory environment across rest and work. - **StillState:** Reclaiming silence and rest in shared or noisy environments through intelligent, adaptive audio.
@@ -445,20 +443,40 @@ Eliminates manual file sorting after imaging sessions - scan hundreds of frames,
 
 ### [Network Automation Ecosystem - Overall Architecture Definition](projects/automationarch)
 
-<span class="status-badge status-active">Phase 2/6</span>
+<span class="status-badge status-active">Phase 10/12</span>
 
 
 This project aims to comprehensively define the **overall architecture of the Network Automation Ecosystem**. This involves understanding how the existing and planned tools (such as `topogen`, `autonetkit`, `netsim`, `netflowsim`, `netvis`, and the `Workbench`), along with strategic initiatives like the "Intelligence Layer," integrate to form a cohesive, unified, and differentiated product.
 
 
+### [Orchestrator (Device Interaction Runner)](projects/orchestrator)
+
+<span class="status-badge status-active">Phase 1/5 (0%)</span>
+
+
+An orchestration runner for coordinating **device interactions** across real/testbed networks. It executes runs with retries, timeouts, bounded concurrency, and durable artifacts (logs, results, snapshots) that plug into the broader automation ecosystem.
+
+Run the same device workflow reliably across lab/real targets, with deterministic execution semantics and replayable artifacts.
+
+
 ### [Rust TUI GTD Todo (OmniFocus-inspired)](projects/todo)
 
-<span class="status-badge status-active">Phase 1/7 (100%)</span>
+<span class="status-badge status-active">Phase 5/7 (71%)</span>
 
 
 A fast, keyboard-driven Rust text UI (TUI) task manager inspired by OmniFocus, built around a GTD workflow. It stores data in an owned SQLite database, supports projects and hierarchical contexts/tags, and is optimized for rapid inbox processing (triage + tagging) with minimal friction.
 
 Process an inbox full of captures into correctly-organized next actions (project + tags + defer/due) at high speed, with sub-second interactions.
+
+
+### [soundarray](projects/soundarray)
+
+<span class="status-badge status-active">Active Development</span>
+
+
+An exploration-focused audio processing system using Raspberry Pi and microphone arrays. It focuses on spatial audio (ToA, beamforming) and classification (vehicles, wildlife) using an "analyst" agent approach.
+
+The ability to capture, localize, and classify complex soundscapes on edge devices or via remote streaming, providing structured insights to an agent framework.
 
 
 <style>

@@ -5,7 +5,7 @@ section: signal-processing
 
 # Project Context: rtltcp-rust
 
-<span class="status-badge status-active">Active Development</span>
+<span class="status-badge status-active">Phase 5/6 (100%)</span>
 
 [← Back to Signal Processing](../signal-processing)
 
@@ -19,7 +19,7 @@ A single Rust binary that auto-detects every connected SDR, streams each over th
 
 | | |
 |---|---|
-| **Status** | Active |
+| **Status** | Phase 5/6 (100%) |
 | **Language** | N/A |
 | **Started** | 2026 |
 

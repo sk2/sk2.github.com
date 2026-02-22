@@ -5,7 +5,7 @@ section: agentic-systems
 
 # Cycle Agent
 
-<span class="status-badge status-active">Phase 2/5 (75%)</span>
+<span class="status-badge status-active">Phase 4/5 (71%)</span>
 
 [← Back to Agentic Systems](../agentic-systems)
 
@@ -19,7 +19,7 @@ A native SwiftUI training application for iPad and Apple TV that bridges profess
 
 | | |
 |---|---|
-| **Status** | Phase 2/5 (75%) |
+| **Status** | Phase 4/5 (71%) |
 | **Language** | N/A |
 | **Started** | 2026 |
 

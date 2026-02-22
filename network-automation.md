@@ -176,6 +176,24 @@ A platform that integrates the entire network automation ecosystem into a single
 
 ---
 
+### Orchestrator (Device Interaction Runner)
+
+<span class="status-badge status-active">Phase 1/5 (0%)</span> · [Full Details →](projects/orchestrator)
+
+**What It Is:**
+An orchestration runner for coordinating **device interactions** across real/testbed networks. It executes runs with retries, timeouts, bounded concurrency, and durable artifacts (logs, results, snapshots) that plug into the broader automation ecosystem.
+
+---
+
+### Network Automation Ecosystem - Overall Architecture Definition
+
+<span class="status-badge status-active">Phase 10/12</span> · [Full Details →](projects/automationarch)
+
+**What It Is:**
+This project aims to comprehensively define the **overall architecture of the Network Automation Ecosystem**. This involves understanding how the existing and planned tools (such as `topogen`, `autonetkit`, `netsim`, `netflowsim`, `netvis`, and the `Workbench`), along with strategic initiatives like the "Intelligence Layer," integrate to form a cohesive, unified, and differentiated product.
+
+---
+
 ### AutoNetkit — The Foundation
 
 <span class="status-badge status-active">PhD 2017</span> · [Full Details →](projects/autonetkit-foundation)

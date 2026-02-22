@@ -73,3 +73,7 @@ Phase 1 focuses on building the **Knowledge Base**: ingesting thousands of pages
 ---
 
 [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)

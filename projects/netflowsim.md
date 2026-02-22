@@ -5,7 +5,7 @@ section: network-automation
 
 # netflowsim
 
-<span class="status-badge status-active">Phase 9/13 (0%)</span>
+<span class="status-badge status-active">Phase 9/13 (25%)</span>
 
 [← Back to Network Automation](../network-automation)
 
@@ -20,7 +20,7 @@ section: network-automation
 
 | | |
 |---|---|
-| **Status** | Phase 9/13 (0%) |
+| **Status** | Phase 9/13 (25%) |
 | **Language** | N/A |
 | **Started** | 2026 |
 

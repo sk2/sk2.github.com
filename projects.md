@@ -15,7 +15,7 @@ Focusing on network automation, high-performance signal processing, and secure m
 
 ### [ANK Workbench](projects/ank-workbench)
 
-<span class="status-badge status-active">Phase 34/39 (42%)</span>
+<span class="status-badge status-active">Not started (defining requirements)</span>
  · **Python backend (FastAPI or Flask) · React or Vue frontend — Leverages existing Python ecosystem for ANK components · meets modern UX expectations**
 
 
@@ -45,7 +45,7 @@ Developing...
 
 ### [Device Interaction Framework](projects/deviceinteraction)
 
-<span class="status-badge status-active">Not started (defining requirements for v1.1)</span>
+<span class="status-badge status-active">Phase 5/9 (44%)</span>
 
 
 A fast, simple, and ergonomic Rust library and CLI for network device interaction and automated testing. Provides the essential PyATS capabilities—testbed management, CLI parsing, and state verification—without the complexity, as a focused component in a broader network automation toolkit.
@@ -65,7 +65,7 @@ This project covers two milestones: first hardening the existing engine for prod
 
 ### [NetVis](projects/netvis)
 
-<span class="status-badge status-active">Phase 42.1 complete (data-source-adapters)</span>
+<span class="status-badge status-active">Phase 70 in progress (canvas-rendering-foundation)</span>
  · **Rust**
 
 
@@ -76,7 +76,7 @@ Outputs static formats (SVG, PDF, PNG) for v1, with interactive browser embeddin
 
 ### [Network Automation Ecosystem - Overall Architecture Definition](projects/automationarch)
 
-<span class="status-badge status-active">Phase 10/12</span>
+<span class="status-badge status-active">Phase 2/12</span>
 
 
 This project aims to comprehensively define the **overall architecture of the Network Automation Ecosystem**. This involves understanding how the existing and planned tools (such as `topogen`, `autonetkit`, `netsim`, `netflowsim`, `netvis`, and the `Workbench`), along with strategic initiatives like the "Intelligence Layer," integrate to form a cohesive, unified, and differentiated product.
@@ -140,7 +140,7 @@ Run the same device workflow reliably across lab/real targets, with deterministi
 
 ### [TopoGen - Network Topology Generator](projects/topogen)
 
-<span class="status-badge status-active">Not started (defining requirements)</span>
+<span class="status-badge status-active">Phase 30 - Core Validation Architecture</span>
 
 
 A Rust-based network topology generator with Python bindings that consolidates scattered topology generation logic from AutoNetKit, simulation tools, and visualization tools. Generates realistic data center, WAN, and random graph topologies with proper structure, design patterns, and realistic parameters.
@@ -376,7 +376,7 @@ The primary goal is to bypass the complexity of BOM's FTP delivery and binary fo
 
 ### [cliscrape](projects/cliscrape)
 
-<span class="status-badge status-active">Phase 6/11 (45%)</span>
+<span class="status-badge status-active">Phase 6/11 (48%)</span>
 
 
 `cliscrape` is a high-performance CLI scraping and parsing tool for network devices, written in Rust. It provides a modern, ergonomic, and blazingly fast alternative to legacy tools like `TextFSM`, while maintaining first-class compatibility with existing templates.
@@ -409,7 +409,7 @@ Optimized for Docker execution on DSM, it uses an indexing layer for fast file c
 
 ### [netflowsim](projects/netflowsim)
 
-<span class="status-badge status-active">Phase 9/13 (0%)</span>
+<span class="status-badge status-active">Phase 9/13 (25%)</span>
 
 
 `netflowsim` provides rapid, massive-scale network performance analysis by using analytic queuing models and Monte Carlo simulations instead of packet-level discrete event simulation. It enables network engineers to validate topologies and routing strategies against billions of flow iterations in seconds, identify bottlenecks probabilistically, and test network resilience under failure scenarios.

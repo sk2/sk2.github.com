@@ -5,7 +5,7 @@ section: network-automation
 
 # NetVis
 
-<span class="status-badge status-active">Phase 42.1 complete (data-source-adapters)</span>
+<span class="status-badge status-active">Phase 70 in progress (canvas-rendering-foundation)</span>
 
 [← Back to Network Automation](../network-automation)
 
@@ -20,7 +20,7 @@ Network visualization often fails at scale because layout algorithms treat all n
 
 | | |
 |---|---|
-| **Status** | Phase 42.1 complete (data-source-adapters) |
+| **Status** | Phase 70 in progress (canvas-rendering-foundation) |
 | **Language** | Rust |
 | **Started** | 2026 |
 

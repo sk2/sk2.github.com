@@ -4,7 +4,7 @@ layout: default
 
 # ANK Workbench
 
-<span class="status-badge status-active">Phase 34/39 (42%)</span>
+<span class="status-badge status-active">Not started (defining requirements)</span>
 
 [← Back to Projects](../projects)
 
@@ -18,7 +18,7 @@ Network engineers can design, validate, and visualize network changes in one com
 
 | | |
 |---|---|
-| **Status** | Phase 34/39 (42%) |
+| **Status** | Not started (defining requirements) |
 | **Language** | Python backend (FastAPI or Flask), React or Vue frontend — Leverages existing Python ecosystem for ANK components, meets modern UX expectations |
 | **Started** | 2026 |
 

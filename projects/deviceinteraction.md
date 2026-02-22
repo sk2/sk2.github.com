@@ -4,7 +4,7 @@ layout: default
 
 # Device Interaction Framework
 
-<span class="status-badge status-active">Not started (defining requirements for v1.1)</span>
+<span class="status-badge status-active">Phase 5/9 (44%)</span>
 
 [← Back to Projects](../projects)
 
@@ -18,7 +18,7 @@ Enable rapid, type-safe validation of network device state through streamlined d
 
 | | |
 |---|---|
-| **Status** | Not started (defining requirements for v1.1) |
+| **Status** | Phase 5/9 (44%) |
 | **Language** | N/A |
 | **Started** | 2026 |
 

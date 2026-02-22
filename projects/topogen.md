@@ -1,13 +1,21 @@
 ---
 layout: default
 section: network-automation
+## Roadmap
+
+- Plans: TBD
+
 ---
 
 # TopoGen - Network Topology Generator
 
-<span class="status-badge status-active">Not started (defining requirements)</span>
+<span class="status-badge status-active">Phase 30 - Core Validation Architecture</span>
 
 [← Back to Network Automation](../network-automation)
+
+## Roadmap
+
+- Plans: TBD
 
 ---
 
@@ -20,9 +28,13 @@ Generating realistic, validated network topologies for testing often requires cu
 
 | | |
 |---|---|
-| **Status** | Not started (defining requirements) |
+| **Status** | Phase 30 - Core Validation Architecture |
 | **Language** | N/A |
 | **Started** | 2026 |
+
+## Roadmap
+
+- Plans: TBD
 
 ---
 
@@ -161,6 +173,10 @@ Output converters, traffic patterns, and POP design patterns.
 ## Tech Stack
 
 Rust core, PyO3 for Python bindings, Maturin build system
+
+## Roadmap
+
+- Plans: TBD
 
 ---
 

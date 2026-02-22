@@ -166,7 +166,7 @@ def generate_projects_index(projects: list[ProjectInfo]) -> str:
         elif any(x in slug for x in ["astro", "aurora", "eclipse", "satellites"]): cat = "astrophotography"
         elif any(x in slug for x in ["agent", "multi-agent", "cycle"]): cat = "agents"
         elif any(x in slug for x in ["netflow", "polars", "tileserver", "matrix-time-series", "matrix-profile", "weather", "omnifocus-db", "cliscrape", "nascleanup", "devmon"]): cat = "data"
-        elif any(x in slug for x in ["netvis", "ank", "topogen", "netsim", "autonetkit", "network", "configparsing", "nte"]): cat = "network"
+        elif any(x in slug for x in ["netvis", "ank", "topogen", "netsim", "autonetkit", "network", "configparsing", "nte", "orchestrator", "automationarch"]): cat = "network"
         
         if cat in categories:
             categories[cat][3].append(p)

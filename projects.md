@@ -74,6 +74,14 @@ A Rust-based network topology layout and visualization engine. Takes complex mul
 Outputs static formats (SVG, PDF, PNG) for v1, with interactive browser embedding planned for future integration with other tooling. Transform network topologies into clear, information-dense visualizations using algorithms that minimize edge crossings, bundle related connections, and respect hierarchical/geographic structure — enabling understanding of networks that would otherwise be visual noise.
 
 
+### [Network Automation Ecosystem - Overall Architecture Definition](projects/automationarch)
+
+<span class="status-badge status-active">Phase 10/12</span>
+
+
+This project aims to comprehensively define the **overall architecture of the Network Automation Ecosystem**. This involves understanding how the existing and planned tools (such as `topogen`, `autonetkit`, `netsim`, `netflowsim`, `netvis`, and the `Workbench`), along with strategic initiatives like the "Intelligence Layer," integrate to form a cohesive, unified, and differentiated product.
+
+
 ### [Network Configuration Parser](projects/ank-parse)
 
 <span class="status-badge status-active">Phase 1 — Knowledge Base Ingestion</span>
@@ -118,6 +126,16 @@ Used for smoke testing and design validation of network configurations. Validate
 Graph operations on network topologies demand native performance — Python's NetworkX caps out on large topologies. The Network Topology Engine provides a Rust-native topology engine with Python bindings, giving the Network Modeling & Configuration Library the speed of compiled code with the ergonomics of Python.
 
 The Network Topology Engine is the Rust backend that powers the Network Modeling & Configuration Library's graph operations. Originally embedded within the Network Modeling & Configuration Library as `ank_nte`, it has been extracted into its own repository as the engine matured and its scope grew beyond a simple backing store.
+
+
+### [Orchestrator (Device Interaction Runner)](projects/orchestrator)
+
+<span class="status-badge status-active">Phase 1/5 (0%)</span>
+
+
+An orchestration runner for coordinating **device interactions** across real/testbed networks. It executes runs with retries, timeouts, bounded concurrency, and durable artifacts (logs, results, snapshots) that plug into the broader automation ecosystem.
+
+Run the same device workflow reliably across lab/real targets, with deterministic execution semantics and replayable artifacts.
 
 
 ### [TopoGen - Network Topology Generator](projects/topogen)
@@ -439,24 +457,6 @@ Currently produces high-quality procedural psytrance but lacks workflow features
 A Python script that automates post-imaging-session file organization for astrophotography. It batch-imports FITS files from ASIAIR backup locations, organizes them by target and observation night, copies matching calibration frames, and prepares the directory structure for PixInsight's WBPP (Weighted Batch Preprocessing) workflow.
 
 Eliminates manual file sorting after imaging sessions - scan hundreds of frames, organize by target/filter/date, validate calibration frame availability, and go straight to PixInsight processing.
-
-
-### [Network Automation Ecosystem - Overall Architecture Definition](projects/automationarch)
-
-<span class="status-badge status-active">Phase 10/12</span>
-
-
-This project aims to comprehensively define the **overall architecture of the Network Automation Ecosystem**. This involves understanding how the existing and planned tools (such as `topogen`, `autonetkit`, `netsim`, `netflowsim`, `netvis`, and the `Workbench`), along with strategic initiatives like the "Intelligence Layer," integrate to form a cohesive, unified, and differentiated product.
-
-
-### [Orchestrator (Device Interaction Runner)](projects/orchestrator)
-
-<span class="status-badge status-active">Phase 1/5 (0%)</span>
-
-
-An orchestration runner for coordinating **device interactions** across real/testbed networks. It executes runs with retries, timeouts, bounded concurrency, and durable artifacts (logs, results, snapshots) that plug into the broader automation ecosystem.
-
-Run the same device workflow reliably across lab/real targets, with deterministic execution semantics and replayable artifacts.
 
 
 ### [Rust TUI GTD Todo (OmniFocus-inspired)](projects/todo)

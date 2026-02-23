@@ -15,7 +15,7 @@ Focusing on network automation, high-performance signal processing, and secure m
 
 ### [ANK Workbench](projects/ank-workbench)
 
-<span class="status-badge status-active">Not started (defining requirements)</span>
+<span class="status-badge status-active">Phase 35/39 (42%)</span>
  · **Python backend (FastAPI or Flask) · React or Vue frontend — Leverages existing Python ecosystem for ANK components · meets modern UX expectations**
 
 
@@ -45,7 +45,7 @@ Developing...
 
 ### [Device Interaction Framework](projects/deviceinteraction)
 
-<span class="status-badge status-active">Phase 5/9 (44%)</span>
+<span class="status-badge status-active">Phase 6/9 (53%)</span>
 
 
 A fast, simple, and ergonomic Rust library and CLI for network device interaction and automated testing. Provides the essential PyATS capabilities—testbed management, CLI parsing, and state verification—without the complexity, as a focused component in a broader network automation toolkit.
@@ -55,7 +55,7 @@ Enable rapid, type-safe validation of network device state through streamlined d
 
 ### [NTE: Engine Hardening & LadybugDB Evaluation](projects/ank-nte)
 
-<span class="status-badge status-active">Phase 3/6 (100%)</span>
+<span class="status-badge status-active">Phase 5/6 (95%)</span>
 
 
 NTE (Network Topology Engine) is a Rust-based graph topology engine with Python bindings via PyO3, used as the backend for ank_pydantic. It provides a 14-crate Cargo workspace built on petgraph StableDiGraph with pluggable datastores (Polars, DuckDB, Lite).
@@ -65,7 +65,7 @@ This project covers two milestones: first hardening the existing engine for prod
 
 ### [NetVis](projects/netvis)
 
-<span class="status-badge status-active">Phase 70 in progress (canvas-rendering-foundation)</span>
+<span class="status-badge status-active">Phase 42 - Sub-graph Layout Composition (in progress)</span>
  · **Rust**
 
 
@@ -76,7 +76,7 @@ Outputs static formats (SVG, PDF, PNG) for v1, with interactive browser embeddin
 
 ### [Network Automation Ecosystem - Overall Architecture Definition](projects/automationarch)
 
-<span class="status-badge status-active">Phase 2/12</span>
+<span class="status-badge status-active">Phase 3/12</span>
 
 
 This project aims to comprehensively define the **overall architecture of the Network Automation Ecosystem**. This involves understanding how the existing and planned tools (such as `topogen`, `autonetkit`, `netsim`, `netflowsim`, `netvis`, and the `Workbench`), along with strategic initiatives like the "Intelligence Layer," integrate to form a cohesive, unified, and differentiated product.
@@ -98,7 +98,7 @@ The project bridges the gap between unstructured legacy CLI data and structured 
 
 ### [Network Configuration Parsing & Analysis Framework](projects/configparsing)
 
-<span class="status-badge status-active">Phase 5/8 (50%)</span>
+<span class="status-badge status-active">Phase 5/8 (63%)</span>
 
 
 A network automation framework that decouples network configuration from vendor-specific syntax. It uses LLM-powered RAG to extract network-level intent and topology relationships from vendor documentation and CLI configurations, normalizing them into a vendor-neutral topology graph model inspired by AutoNetKit.
@@ -108,7 +108,7 @@ The system enables cross-vendor configuration generation and validation through 
 
 ### [Network Simulator](projects/network-simulator)
 
-<span class="status-badge status-active">Phase 62/67 (100%)</span>
+<span class="status-badge status-active">Phase 98/100 (75%)</span>
  · **Rust**
 
 
@@ -150,7 +150,7 @@ Outputs custom YAML format for use across the network engineering tool ecosystem
 
 ### [ank_pydantic](projects/ank-pydantic)
 
-<span class="status-badge status-active">Phase 84/89</span>
+<span class="status-badge status-active">Phase 85/89</span>
 
 
 A Python library for modeling and querying network topologies, backed by a high-performance Rust core (`ank_nte`). Features a two-stage transformation model (Whiteboard → Plan → Protocol Layers), type-safe Pydantic models for nodes/edges/layers, and a composable lazy query API with Rust-backed execution.
@@ -376,7 +376,7 @@ The primary goal is to bypass the complexity of BOM's FTP delivery and binary fo
 
 ### [cliscrape](projects/cliscrape)
 
-<span class="status-badge status-active">Phase 6/11 (48%)</span>
+<span class="status-badge status-active">Phase 7/11 (50%)</span>
 
 
 `cliscrape` is a high-performance CLI scraping and parsing tool for network devices, written in Rust. It provides a modern, ergonomic, and blazingly fast alternative to legacy tools like `TextFSM`, while maintaining first-class compatibility with existing templates.
@@ -386,7 +386,7 @@ The one thing that must work perfectly: **Extremely fast, reliable parsing of se
 
 ### [matrix-profile-rs](projects/matrix-time-series)
 
-<span class="status-badge status-active">Phase 8/11 (64%)</span>
+<span class="status-badge status-active">Phase 8/11 (73%)</span>
 
 
 Time series analysis typically requires either slow Python libraries or complex manual implementation. **matrix-profile-rs** provides Matrix Profile algorithms (STOMP, SCRIMP++, SCAMP) in native Rust with ergonomic APIs for motif discovery and anomaly detection, achieving C-level performance with Python-level usability through Polars integration.
@@ -409,7 +409,7 @@ Optimized for Docker execution on DSM, it uses an indexing layer for fast file c
 
 ### [netflowsim](projects/netflowsim)
 
-<span class="status-badge status-active">Phase 9/13 (25%)</span>
+<span class="status-badge status-active">Phase 9/13 (100%)</span>
 
 
 `netflowsim` provides rapid, massive-scale network performance analysis by using analytic queuing models and Monte Carlo simulations instead of packet-level discrete event simulation. It enables network engineers to validate topologies and routing strategies against billions of flow iterations in seconds, identify bottlenecks probabilistically, and test network resilience under failure scenarios.

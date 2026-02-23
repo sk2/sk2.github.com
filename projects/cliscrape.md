@@ -5,7 +5,7 @@ section: network-automation
 
 # cliscrape
 
-<span class="status-badge status-active">Phase 6/11 (48%)</span>
+<span class="status-badge status-active">Phase 7/11 (50%)</span>
 
 [← Back to Network Automation](../network-automation) | [← Back to Projects](../projects)
 

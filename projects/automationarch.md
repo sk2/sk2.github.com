@@ -4,7 +4,7 @@ layout: default
 
 # Network Automation Ecosystem - Overall Architecture Definition
 
-<span class="status-badge status-active">Phase 2/12</span>
+<span class="status-badge status-active">Phase 3/12</span>
 
 [← Back to Projects](../projects)
 
@@ -18,7 +18,7 @@ Developing...
 
 | | |
 |---|---|
-| **Status** | Phase 2/12 |
+| **Status** | Phase 3/12 |
 | **Language** | N/A |
 | **Started** | 2026 |
 

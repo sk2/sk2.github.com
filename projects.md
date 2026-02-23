@@ -53,16 +53,6 @@ A fast, simple, and ergonomic Rust library and CLI for network device interactio
 Enable rapid, type-safe validation of network device state through streamlined device interaction: connect to devices (real, simulated, or mocked), execute commands, parse structured output, and verify correctness—all with the performance and safety guarantees of Rust.
 
 
-### [NTE: Engine Hardening & LadybugDB Evaluation](projects/ank-nte)
-
-<span class="status-badge status-active">Phase 5/6 (95%)</span>
-
-
-NTE (Network Topology Engine) is a Rust-based graph topology engine with Python bindings via PyO3, used as the backend for ank_pydantic. It provides a 14-crate Cargo workspace built on petgraph StableDiGraph with pluggable datastores (Polars, DuckDB, Lite).
-
-This project covers two milestones: first hardening the existing engine for production reliability, then evaluating LadybugDB as a potential backend replacement. The engine must be correct and observable — mutations never silently corrupt state, errors always surface meaningful information, and operations are traceable through logging.
-
-
 ### [NetVis](projects/netvis)
 
 <span class="status-badge status-active">Phase 42 - Sub-graph Layout Composition (in progress)</span>
@@ -74,7 +64,7 @@ A Rust-based network topology layout and visualization engine. Takes complex mul
 Outputs static formats (SVG, PDF, PNG) for v1, with interactive browser embedding planned for future integration with other tooling. Transform network topologies into clear, information-dense visualizations using algorithms that minimize edge crossings, bundle related connections, and respect hierarchical/geographic structure — enabling understanding of networks that would otherwise be visual noise.
 
 
-### [Network Automation Ecosystem - Overall Architecture Definition](projects/automationarch)
+### [Network Automation Ecosystem](projects/automationarch)
 
 <span class="status-badge status-active">Phase 3/12</span>
 
@@ -117,15 +107,14 @@ A Rust-based network simulator that models packet-level behavior for routing pro
 Used for smoke testing and design validation of network configurations. Validate network configurations at scale with protocol-level fidelity before deploying to real infrastructure.
 
 
-### [Network Topology Engine](projects/nte)
+### [Network Topology Engine](projects/ank-nte)
 
-<span class="status-badge status-active">Stable</span>
- · **Rust (with PyO3 Python bindings)**
+<span class="status-badge status-active">Phase 5/6 (95%)</span>
 
 
-Graph operations on network topologies demand native performance — Python's NetworkX caps out on large topologies. The Network Topology Engine provides a Rust-native topology engine with Python bindings, giving the Network Modeling & Configuration Library the speed of compiled code with the ergonomics of Python.
+NTE (Network Topology Engine) is a Rust-based graph topology engine with Python bindings via PyO3, used as the backend for ank_pydantic. It provides a 14-crate Cargo workspace built on petgraph StableDiGraph with pluggable datastores (Polars, DuckDB, Lite).
 
-The Network Topology Engine is the Rust backend that powers the Network Modeling & Configuration Library's graph operations. Originally embedded within the Network Modeling & Configuration Library as `ank_nte`, it has been extracted into its own repository as the engine matured and its scope grew beyond a simple backing store.
+This project covers two milestones: first hardening the existing engine for production reliability, then evaluating LadybugDB as a potential backend replacement. The engine must be correct and observable — mutations never silently corrupt state, errors always surface meaningful information, and operations are traceable through logging.
 
 
 ### [Orchestrator (Device Interaction Runner)](projects/orchestrator)

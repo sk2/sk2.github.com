@@ -27,6 +27,11 @@ class ProjectInfo:
     roadmap_summary: list[str] = field(default_factory=list)
 
 
+PROJECT_ALIASES = {
+    "NTE: Engine Hardening & LadybugDB Evaluation": "Network Topology Engine",
+    "Network Automation Ecosystem - Overall Architecture Definition": "Network Automation Ecosystem",
+}
+
 def extract_sections(content: str) -> Dict[str, str]:
     sections = {}
     matches = re.finditer(r'^##\s+(.*?)\s*$(.*?)(?=^##\s|\Z)', content, re.MULTILINE | re.DOTALL)
@@ -48,6 +53,9 @@ def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
     project_name = name_match.group(1).strip() if name_match else project_path.name
     project_name = re.sub(r'^Project:\s*', '', re.sub(r'^PROJECT:\s*', '', project_name, flags=re.IGNORECASE), flags=re.IGNORECASE)
     
+    if project_name in PROJECT_ALIASES:
+        project_name = PROJECT_ALIASES[project_name]
+
     slug = project_path.name.lower().replace("_", "-").replace(" ", "-")
     slug_mappings = {"multi-agent-assistant": "multi-agent", "watch-noise": "watchnoise"}
     slug = slug_mappings.get(slug, slug)

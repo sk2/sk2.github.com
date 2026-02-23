@@ -7,7 +7,7 @@ section: signal-processing
 
 ---
 
-# Project Spectra
+# SDR Spectrum Analysis
 
 <span class="status-badge status-active">Phase 7/7</span>
 

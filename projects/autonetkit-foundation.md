@@ -14,15 +14,6 @@ layout: default
 
 Developing...
 
-## Quick Facts
-
-| | |
-|---|---|
-| **Status** | PhD 2017 |
-| **Language** | Python |
-| **Started** | 2026 |
-
----
 ## Features
 
 ### Automatic IP Addressing
@@ -139,6 +130,38 @@ Network diagram generation:
 ---
 
 [← Back to Network Automation](../network-automation)
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)
 
 ---
 

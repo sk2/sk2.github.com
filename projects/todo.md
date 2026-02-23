@@ -10,19 +10,6 @@ layout: default
 
 ---
 
-## The Insight
-
-Process an inbox full of captures into correctly-organized next actions (project + tags + defer/due) at high speed, with sub-second interactions.
-
-## Quick Facts
-
-| | |
-|---|---|
-| **Status** | Phase 5/7 (71%) |
-| **Language** | N/A |
-| **Started** | 2026 |
-
----
 ## What This Is
 
 A fast, keyboard-driven Rust text UI (TUI) task manager inspired by OmniFocus, built around a GTD workflow. It stores data in an owned SQLite database, supports projects and hierarchical contexts/tags, and is optimized for rapid inbox processing (triage + tagging) with minimal friction.

@@ -4,25 +4,12 @@ layout: default
 
 # ANK Workbench
 
-<span class="status-badge status-active">Phase 35/39 (42%)</span>
+<span class="status-badge status-active">Phase 36/39 (44%)</span>
 
 [← Back to Projects](../projects)
 
 ---
 
-## The Insight
-
-Network engineers can design, validate, and visualize network changes in one complete workflow without switching between separate tools or manually gluing components together.
-
-## Quick Facts
-
-| | |
-|---|---|
-| **Status** | Phase 35/39 (42%) |
-| **Language** | Python backend (FastAPI or Flask), React or Vue frontend — Leverages existing Python ecosystem for ANK components, meets modern UX expectations |
-| **Started** | 2026 |
-
----
 ## What This Is
 
 **An orchestration platform** that integrates the ANK ecosystem tools (TopoGen, ank_pydantic, Network Simulator, NetVis) into one seamless workflow.

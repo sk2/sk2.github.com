@@ -30,6 +30,27 @@ class ProjectInfo:
 PROJECT_ALIASES = {
     "NTE: Engine Hardening & LadybugDB Evaluation": "Network Topology Engine",
     "Network Automation Ecosystem - Overall Architecture Definition": "Network Automation Ecosystem",
+    "ank_pydantic": "Auto NetKit configuration generation",
+    "Project Spectra": "SDR Spectrum Analysis",
+    "Passive Radar - KrakenSDR Multi-Beam System": "RF Signal Analysis",
+    "Wi-Fi Radar (KrakenSDR)": "Wi-Fi Signal Analysis (KrakenSDR)",
+    "cliscrape": "CLI Scrape — Network Device Output Parser",
+}
+
+CONTENT_REPLACEMENTS = {
+    "RF Signal Analysis": [
+        ("A distributed multi-beam passive radar system based on KrakenSDR hardware.", "An experimental signal processing project using a distributed multi-beam system based on KrakenSDR hardware."),
+        ("reliably tracks aircraft in real-time.", "reliably analyzes signals in real-time."),
+        ("v2 adds per-beam target tracking with geographic visualization, ADS-B correlation, and detection recording for offline analysis.", "v2 adds per-beam analysis with geographic visualization, ADS-B correlation, and detection recording for offline analysis."),
+    ],
+    "Wi-Fi Signal Analysis (KrakenSDR)": [
+        ("Passive radar system that utilizes existing Wi-Fi signals for through-wall human detection and localization, leveraging the KrakenSDR coherent radio array.", "An experimental signal processing system that utilizes existing Wi-Fi signals for through-wall human presence detection and localization, leveraging the KrakenSDR coherent radio array."),
+    ],
+    "matrix-profile-rs": [
+        ("Time series analysis typically requires either slow Python libraries or complex manual implementation.", "Time series analysis benefits from high-performance libraries for motif discovery and anomaly detection."),
+        ("achieving C-level performance with Python-level usability through Polars integration.", "providing high performance with Python-level usability through Polars integration."),
+        ("**Performance at scale with ergonomic APIs** — achieve 2.5x speedup via SIMD, handle datasets larger than RAM via tiling, while maintaining simple `.motifs(k)` / `.discords(k)` interfaces.", "**Performance at scale with ergonomic APIs** — SIMD-accelerated, handles datasets larger than RAM via tiling, and provides simple `.motifs(k)` / `.discords(k)` interfaces."),
+    ],
 }
 
 def extract_sections(content: str) -> Dict[str, str]:
@@ -57,7 +78,7 @@ def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
         project_name = PROJECT_ALIASES[project_name]
 
     slug = project_path.name.lower().replace("_", "-").replace(" ", "-")
-    slug_mappings = {"multi-agent-assistant": "multi-agent", "watch-noise": "watchnoise"}
+    slug_mappings = {"multi-agent-assistant": "multi-agent", "watch-noise": "watchnoise", "passive": "rf-signal-analysis", "wifi-radar": "wifi-signal-analysis"}
     slug = slug_mappings.get(slug, slug)
 
     stack = []
@@ -131,11 +152,15 @@ def update_existing_file(content: str, project: ProjectInfo) -> str:
 
 
 def generate_detailed_page(project: ProjectInfo) -> str:
-    lines = ["---", "layout: default", "---", "", f"# {project.name}", "", generate_status_badge(project), "", "[← Back to Projects](../projects)", "", "---", "", "## The Insight", "", project.sections.get("Core Value", project.sections.get("Overview", "Developing...")), "", generate_quick_facts(project), "---"]
-    for sec in ["Overview", "What This Is", "Problem It Solves", "Features", "Key Capabilities", "Architecture", "Technical Depth", "Security Model", "Implementation Details", "Protocols Implemented", "Performance", "Metrics", "Use Cases", "Hardware", "Agents"]:
+    lines = ["---", "layout: default", "---", "", f"# {project.name}", "", generate_status_badge(project), "", "[← Back to Projects](../projects)", "", "---", ""]
+    for sec in ["The Insight", "Overview", "What This Is", "Problem It Solves", "Features", "Key Capabilities", "Architecture", "Technical Depth", "Security Model", "Implementation Details", "Protocols Implemented", "Performance", "Metrics", "Use Cases", "Hardware", "Agents"]:
         if sec == "Core Value": continue
         body = project.sections.get(sec)
-        if body: lines.append(f"## {sec}\n"); lines.append(body + "\n")
+        if body:
+            if (sec == "The Insight" or sec == "What This Is") and project.name in CONTENT_REPLACEMENTS:
+                for old, new in CONTENT_REPLACEMENTS[project.name]:
+                    body = body.replace(old, new)
+            lines.append(f"## {sec}\n"); lines.append(body + "\n")
     if project.roadmap_summary:
         lines.append("## Roadmap\n")
         for item in project.roadmap_summary: lines.append(f"- {item}")
@@ -170,7 +195,7 @@ def generate_projects_index(projects: list[ProjectInfo]) -> str:
         if any(x in slug for x in ["photo-tour"]): cat = "photography"
         elif any(x in slug for x in ["watchnoise", "watch-noise", "psytrance"]): cat = "wellness"
         elif any(x in slug for x in ["healthypi", "hrv"]): cat = "health"
-        elif any(x in slug for x in ["spectra", "rtltcp", "wifi-radar", "signals", "passive", "radar"]): cat = "sdr"
+        elif any(x in slug for x in ["spectra", "rtltcp", "wifi-signal-analysis", "signals", "rf-signal-analysis"]): cat = "sdr"
         elif any(x in slug for x in ["astro", "aurora", "eclipse", "satellites"]): cat = "astrophotography"
         elif any(x in slug for x in ["agent", "multi-agent", "cycle"]): cat = "agents"
         elif any(x in slug for x in ["netflow", "polars", "tileserver", "matrix-time-series", "matrix-profile", "weather", "omnifocus-db", "cliscrape", "nascleanup", "devmon"]): cat = "data"
@@ -207,6 +232,10 @@ def generate_projects_index(projects: list[ProjectInfo]) -> str:
                     chunk = ' '.join(summary_sents[i:i+2])
                     formatted_summary += chunk + "\n\n"
                 summary = formatted_summary.strip()
+            
+            if p.name in CONTENT_REPLACEMENTS:
+                for old, new in CONTENT_REPLACEMENTS[p.name]:
+                    summary = summary.replace(old, new)
 
             lines.append(f"### [{p.name}](projects/{p.slug})\n")
             lines.append(f"{generate_status_badge(p)}")

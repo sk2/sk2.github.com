@@ -3,7 +3,7 @@ layout: default
 section: signal-processing
 ---
 
-# Passive Radar - KrakenSDR Multi-Beam System
+# RF Signal Analysis
 
 <span class="status-badge status-active">Phase 7/10 (60%)</span>
 
@@ -54,19 +54,19 @@ An experimental signal processing project exploring how to analyze reflections o
 **v1.0 Foundation (Phases 1-4, Complete):**
 Established distributed multi-beam architecture using ProcessPoolExecutor for parallel surveillance channels. CFAR detection (Phase 5) implemented and verified.
 
-**v2.0 Real-Time Tracking (Phases 5-10, In Progress):**
+**v2.0 Real-Time Analysis (Phases 5-10, In Progress):**
 
-Currently implementing track management and association logic (Phase 6). The system now maintains tracks across multiple beams with detection-level recording for storage efficiency.
+Currently implementing analysis and association logic (Phase 6). The system now maintains analysis across multiple beams with detection-level recording for storage efficiency.
 
 **Key Features:**
 - **Multi-Beam Processing**: Parallel surveillance channels across 5-channel coherent array
 - **CFAR Detection**: Constant False Alarm Rate detection complete
-- **Track Management**: Per-beam tracking with cross-beam fusion planned for v3
-- **Real-Time Operation**: Aircraft tracking with sub-second latency
+- **Analysis Management**: Per-beam analysis with cross-beam fusion planned for v3
+- **Real-Time Operation**: Signal analysis with sub-second latency
 
 ## Current Status
 
-Phase 6 in progress. Clean, understandable, stable codebase that reliably tracks aircraft in real-time. Phase 5 (CFAR Detection) complete and verified.
+Phase 6 in progress. Clean, understandable, stable codebase that reliably analyzes signals in real-time. Phase 5 (CFAR Detection) complete and verified.
 
 ---
 

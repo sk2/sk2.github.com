@@ -3,7 +3,7 @@ layout: default
 section: network-automation
 ---
 
-# cliscrape
+# CLI Scrape — Network Device Output Parser
 
 <span class="status-badge status-active">Phase 7/11 (50%)</span>
 

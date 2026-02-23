@@ -10,19 +10,6 @@ layout: default
 
 ---
 
-## The Insight
-
-Run the same device workflow reliably across lab/real targets, with deterministic execution semantics and replayable artifacts.
-
-## Quick Facts
-
-| | |
-|---|---|
-| **Status** | Phase 1/5 (0%) |
-| **Language** | N/A |
-| **Started** | 2026 |
-
----
 ## What This Is
 
 An orchestration runner for coordinating **device interactions** across real/testbed networks. It executes runs with retries, timeouts, bounded concurrency, and durable artifacts (logs, results, snapshots) that plug into the broader automation ecosystem.

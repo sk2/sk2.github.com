@@ -15,11 +15,21 @@ Focusing on network automation, high-performance signal processing, and secure m
 
 ### [ANK Workbench](projects/ank-workbench)
 
-<span class="status-badge status-active">Phase 35/39 (42%)</span>
+<span class="status-badge status-active">Phase 36/39 (44%)</span>
  · **Python backend (FastAPI or Flask) · React or Vue frontend — Leverages existing Python ecosystem for ANK components · meets modern UX expectations**
 
 
 **An orchestration platform** that integrates the ANK ecosystem tools (TopoGen, ank_pydantic, Network Simulator, NetVis) into one seamless workflow. Network engineers can design, validate, and visualize network changes in one complete workflow without switching between separate tools or manually gluing components together.
+
+
+### [Auto NetKit configuration generation](projects/ank-pydantic)
+
+<span class="status-badge status-active">Phase 85/89</span>
+
+
+A Python library for modeling and querying network topologies, backed by a high-performance Rust core (`ank_nte`). Features a two-stage transformation model (Whiteboard → Plan → Protocol Layers), type-safe Pydantic models for nodes/edges/layers, and a composable lazy query API with Rust-backed execution.
+
+Ships with "batteries-included" domain models (ISIS, MPLS, EVPN, L3VPN, IXP) in the blueprints/ module. A clean, consistent API where there's one obvious way to perform each topology operation — predictable naming, return types, and method signatures across the entire public surface.
 
 
 ### [AutoNetkit](projects/autonetkit)
@@ -55,7 +65,7 @@ Enable rapid, type-safe validation of network device state through streamlined d
 
 ### [NetVis](projects/netvis)
 
-<span class="status-badge status-active">Phase 42 - Sub-graph Layout Composition (in progress)</span>
+<span class="status-badge status-active">Phase 43 - Interactive HTML Export (not started)</span>
  · **Rust**
 
 
@@ -137,32 +147,10 @@ A Rust-based network topology generator with Python bindings that consolidates s
 Outputs custom YAML format for use across the network engineering tool ecosystem. Network engineers can quickly generate realistic, validated network topologies without implementing complex algorithms from scratch.
 
 
-### [ank_pydantic](projects/ank-pydantic)
-
-<span class="status-badge status-active">Phase 85/89</span>
-
-
-A Python library for modeling and querying network topologies, backed by a high-performance Rust core (`ank_nte`). Features a two-stage transformation model (Whiteboard → Plan → Protocol Layers), type-safe Pydantic models for nodes/edges/layers, and a composable lazy query API with Rust-backed execution.
-
-Ships with "batteries-included" domain models (ISIS, MPLS, EVPN, L3VPN, IXP) in the blueprints/ module. A clean, consistent API where there's one obvious way to perform each topology operation — predictable naming, return types, and method signatures across the entire public surface.
-
-
 ## 📡 Software Defined Radio
 
 > **[View Ecosystem →](/signal-processing)**
 > Autonomous spectrum monitoring, distributed SIGINT systems, and RF signal processing.
-
-### [Passive Radar - KrakenSDR Multi-Beam System](projects/passive)
-
-<span class="status-badge status-active">Phase 7/10 (60%)</span>
-
-
-A distributed multi-beam passive radar system based on KrakenSDR hardware. Pi handles data acquisition, Mac/Linux handles compute-intensive DSP.
-
-All 4 surveillance channels process in parallel with independent Range-Doppler visualization, per-beam configuration, and real-time performance monitoring. v2 adds per-beam target tracking with geographic visualization, ADS-B correlation, and detection recording for offline analysis.
-
-Clean, understandable, stable codebase that reliably tracks aircraft in real-time.
-
 
 ### [Project Context: rtltcp-rust](projects/rtltcp)
 
@@ -174,7 +162,30 @@ A cross-platform (targeted at Raspberry Pi) server that interfaces with multiple
 The ability to reliably and efficiently stream high-fidelity IQ data from multiple SDRs over a network with a modern management interface.
 
 
-### [Project Spectra](projects/signals)
+### [Project Spectra](projects/spectra)
+
+<span class="status-badge status-active">Phase 6/7 — Operational Readiness</span>
+ · **Python + Rust + Swift**
+
+
+Developing... An autonomous distributed SIGINT system.
+
+It monitors the RF spectrum, identifies modulations via ML, and tracks aircraft (ADS-B) and satellites. It leverages NATS for coordination and Polars for data indexing.
+
+
+### [RF Signal Analysis](projects/rf-signal-analysis)
+
+<span class="status-badge status-active">Phase 7/10 (60%)</span>
+
+
+An experimental signal processing project using a distributed multi-beam system based on KrakenSDR hardware. Pi handles data acquisition, Mac/Linux handles compute-intensive DSP.
+
+All 4 surveillance channels process in parallel with independent Range-Doppler visualization, per-beam configuration, and real-time performance monitoring. v2 adds per-beam analysis with geographic visualization, ADS-B correlation, and detection recording for offline analysis.
+
+Clean, understandable, stable codebase that reliably analyzes signals in real-time.
+
+
+### [SDR Spectrum Analysis](projects/signals)
 
 <span class="status-badge status-active">Phase 7/7</span>
 
@@ -182,12 +193,12 @@ The ability to reliably and efficiently stream high-fidelity IQ data from multip
 Transform raw radio spectrum data into an actionable "Signal Census" through automated detection, ML classification, and distributed acquisition.
 
 
-### [Wi-Fi Radar (KrakenSDR)](projects/wifi-radar)
+### [Wi-Fi Signal Analysis (KrakenSDR)](projects/wifi-signal-analysis)
 
 <span class="status-badge status-active">Active Development</span>
 
 
-Passive radar system that utilizes existing Wi-Fi signals for through-wall human detection and localization, leveraging the KrakenSDR coherent radio array.
+An experimental signal processing system that utilizes existing Wi-Fi signals for through-wall human presence detection and localization, leveraging the KrakenSDR coherent radio array.
 
 
 ## 🏥 Health & Biometrics
@@ -324,6 +335,16 @@ The orchestrator uses cloud LLM reasoning (GPT-4/Claude) while agents remain lig
 > **[View Ecosystem →](/data-analytics)**
 > High-performance tools for large-scale geospatial analytics and time-series pattern discovery.
 
+### [CLI Scrape — Network Device Output Parser](projects/cliscrape)
+
+<span class="status-badge status-active">Phase 7/11 (50%)</span>
+
+
+`cliscrape` is a high-performance CLI scraping and parsing tool for network devices, written in Rust. It provides a modern, ergonomic, and blazingly fast alternative to legacy tools like `TextFSM`, while maintaining first-class compatibility with existing templates.
+
+The one thing that must work perfectly: **Extremely fast, reliable parsing of semi-structured CLI output into structured data, regardless of whether the template is legacy TextFSM or the new ergonomic format.**
+
+
 ### [GSD Project Monitor](projects/devmon)
 
 <span class="status-badge status-active">Stable</span>
@@ -363,26 +384,16 @@ A data engineering pipeline to fetch, process, and serve high-resolution weather
 The primary goal is to bypass the complexity of BOM's FTP delivery and binary formats (GRIB2/NetCDF) to provide a clean, queryable interface (API/DuckDB) for localized weather insights, starting with South Australia.
 
 
-### [cliscrape](projects/cliscrape)
-
-<span class="status-badge status-active">Phase 7/11 (50%)</span>
-
-
-`cliscrape` is a high-performance CLI scraping and parsing tool for network devices, written in Rust. It provides a modern, ergonomic, and blazingly fast alternative to legacy tools like `TextFSM`, while maintaining first-class compatibility with existing templates.
-
-The one thing that must work perfectly: **Extremely fast, reliable parsing of semi-structured CLI output into structured data, regardless of whether the template is legacy TextFSM or the new ergonomic format.**
-
-
 ### [matrix-profile-rs](projects/matrix-time-series)
 
 <span class="status-badge status-active">Phase 8/11 (73%)</span>
 
 
-Time series analysis typically requires either slow Python libraries or complex manual implementation. **matrix-profile-rs** provides Matrix Profile algorithms (STOMP, SCRIMP++, SCAMP) in native Rust with ergonomic APIs for motif discovery and anomaly detection, achieving C-level performance with Python-level usability through Polars integration.
+Time series analysis benefits from high-performance libraries for motif discovery and anomaly detection. **matrix-profile-rs** provides Matrix Profile algorithms (STOMP, SCRIMP++, SCAMP) in native Rust with ergonomic APIs for motif discovery and anomaly detection, providing high performance with Python-level usability through Polars integration.
 
 A high-performance Rust implementation of Matrix Profile algorithms for time series analysis with SIMD acceleration, out-of-memory tiling support, and Polars ecosystem integration. Matrix Profiles enable pattern discovery, anomaly detection, and similarity search in univariate time series without domain knowledge or parameter tuning.
 
-**Performance at scale with ergonomic APIs** — achieve 2.5x speedup via SIMD, handle datasets larger than RAM via tiling, while maintaining simple `.motifs(k)` / `.discords(k)` interfaces.
+**Performance at scale with ergonomic APIs** — SIMD-accelerated, handles datasets larger than RAM via tiling, and provides simple `.motifs(k)` / `.discords(k)` interfaces.
 
 
 ### [nascleanup](projects/nascleanup)

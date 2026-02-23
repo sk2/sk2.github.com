@@ -2,7 +2,7 @@
 layout: default
 ---
 
-# NTE: Engine Hardening & LadybugDB Evaluation
+# Network Topology Engine
 
 <span class="status-badge status-active">Phase 5/6 (95%)</span>
 
@@ -10,19 +10,6 @@ layout: default
 
 ---
 
-## The Insight
-
-The engine must be correct and observable — mutations never silently corrupt state, errors always surface meaningful information, and operations are traceable through logging.
-
-## Quick Facts
-
-| | |
-|---|---|
-| **Status** | Phase 5/6 (95%) |
-| **Language** | N/A |
-| **Started** | 2026 |
-
----
 ## What This Is
 
 NTE (Network Topology Engine) is a Rust-based graph topology engine with Python bindings via PyO3, used as the backend for ank_pydantic. It provides a 14-crate Cargo workspace built on petgraph StableDiGraph with pluggable datastores (Polars, DuckDB, Lite). This project covers two milestones: first hardening the existing engine for production reliability, then evaluating LadybugDB as a potential backend replacement.

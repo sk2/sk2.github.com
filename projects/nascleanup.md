@@ -14,15 +14,6 @@ layout: default
 
 Developing...
 
-## Quick Facts
-
-| | |
-|---|---|
-| **Status** | Active Development |
-| **Language** | Rust |
-| **Started** | 2026 |
-
----
 ## What This Is
 
 A Rust-based CLI tool for deduplicating and organizing large file shares. Optimized for Docker execution on DSM, it uses an indexing layer for fast file comparison and metadata management.
@@ -38,6 +29,38 @@ A Rust-based CLI tool for deduplicating and organizing large file shares. Optimi
 ---
 
 [← Back to Projects](../projects)
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)
 
 ---
 

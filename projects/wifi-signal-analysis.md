@@ -2,7 +2,7 @@
 layout: default
 ---
 
-# Tileserver Polars (Rust Optimized)
+# Wi-Fi Signal Analysis (KrakenSDR)
 
 <span class="status-badge status-active">Active Development</span>
 

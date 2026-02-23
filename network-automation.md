@@ -122,6 +122,33 @@ A framework for parsing legacy CLI configurations into vendor-agnostic models. U
 
 ---
 
+### Auto NetKit configuration generation
+
+<span class="status-badge status-active">Phase 85/89</span> · [Full Details →](projects/ank-pydantic)
+
+**What It Is:**
+A Python library for modeling and querying network topologies, backed by a high-performance Rust core (`ank_nte`). Features a two-stage transformation model (Whiteboard → Plan → Protocol Layers), type-safe Pydantic models for nodes/edges/layers, and a composable lazy query API with Rust-backed execution.
+
+---
+
+### Device Interaction Framework
+
+<span class="status-badge status-active">Phase 6/9 (53%)</span> · [Full Details →](projects/deviceinteraction)
+
+**What It Is:**
+A fast, simple, and ergonomic Rust library and CLI for network device interaction and automated testing. Provides the essential PyATS capabilities—testbed management, CLI parsing, and state verification—without the complexity, as a focused component in a broader network automation toolkit.
+
+---
+
+### Network Configuration Parsing & Analysis Framework
+
+<span class="status-badge status-active">Phase 5/8 (63%)</span> · [Full Details →](projects/configparsing)
+
+**What It Is:**
+A network automation framework that decouples network configuration from vendor-specific syntax. It uses LLM-powered RAG to extract network-level intent and topology relationships from vendor documentation and CLI configurations, normalizing them into a vendor-neutral topology graph model inspired by AutoNetKit.
+
+---
+
 ### AutoNetkit
 
 <span class="status-badge status-active">v1.8 — Shipped | v1.10 in progress</span> · [Full Details →](projects/autonetkit)

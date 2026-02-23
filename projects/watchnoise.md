@@ -10,20 +10,6 @@ layout: default
 
 ---
 
-## The Insight
-
-- **StillState:** Reclaiming silence and rest in shared or noisy environments through intelligent, adaptive audio.
-- **FlowState:** Achieving and maintaining a "Steady State" of focus through task-linked audio and genetic evolution.
-
-## Quick Facts
-
-| | |
-|---|---|
-| **Status** | 26 (FlowState Hotkeys + Quick Actions) |
-| **Language** | N/A |
-| **Started** | 2026 |
-
----
 ## What This Is
 
 **Wave** is an evolutionary ambient audio ecosystem designed to manage the user's sensory environment across rest and work.

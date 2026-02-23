@@ -5,7 +5,7 @@ section: network-automation
 
 # NetVis
 
-<span class="status-badge status-active">Phase 42 - Sub-graph Layout Composition (in progress)</span>
+<span class="status-badge status-active">Phase 43 - Interactive HTML Export (not started)</span>
 
 [← Back to Network Automation](../network-automation)
 
@@ -20,7 +20,7 @@ Network visualization often fails at scale because layout algorithms treat all n
 
 | | |
 |---|---|
-| **Status** | Phase 42 - Sub-graph Layout Composition (in progress) |
+| **Status** | Phase 43 - Interactive HTML Export (not started) |
 | **Language** | Rust |
 | **Started** | 2026 |
 

@@ -12,17 +12,8 @@ layout: default
 
 ## The Insight
 
-**Performance at scale with ergonomic APIs** — achieve 2.5x speedup via SIMD, handle datasets larger than RAM via tiling, while maintaining simple `.motifs(k)` / `.discords(k)` interfaces.
+Time series analysis benefits from high-performance libraries for motif discovery and anomaly detection. **matrix-profile-rs** provides Matrix Profile algorithms (STOMP, SCRIMP++, SCAMP) in native Rust with ergonomic APIs for motif discovery and anomaly detection, providing high performance with Python-level usability through Polars integration.
 
-## Quick Facts
-
-| | |
-|---|---|
-| **Status** | Phase 8/11 (73%) |
-| **Language** | N/A |
-| **Started** | 2026 |
-
----
 ## What This Is
 
 A high-performance Rust implementation of Matrix Profile algorithms for time series analysis with SIMD acceleration, out-of-memory tiling support, and Polars ecosystem integration. Matrix Profiles enable pattern discovery, anomaly detection, and similarity search in univariate time series without domain knowledge or parameter tuning.

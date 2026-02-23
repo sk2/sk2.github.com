@@ -1,96 +1,22 @@
 ---
 layout: default
-section: signal-processing
 ---
 
 # Project Spectra
 
 <span class="status-badge status-active">Phase 6/7 — Operational Readiness</span>
 
-[← Back to Signal Processing](../signal-processing)
+[← Back to Projects](../projects)
 
 ---
 
+## The Insight
 
-## Concept
-
-Manual radio spectrum monitoring is resource-intensive and prone to operator fatigue. **Project Spectra** automates wideband scanning and modulation identification using a distributed architecture. It uses Raspberry Pi nodes for edge acquisition and a Mac mini core for ML-based signal classification and historical "Signal Census" tracking.
-
-## Quick Facts
-
-| | |
-|---|---|
-| **Status** | Phase 6/7 — Operational Readiness |
-| **Language** | Python + Rust + Swift |
-| **Started** | 2026 |
-
----
+Developing...
 
 ## What This Is
 
 An autonomous distributed SIGINT system. It monitors the RF spectrum, identifies modulations via ML, and tracks aircraft (ADS-B) and satellites. It leverages NATS for coordination and Polars for data indexing.
-
-## Architecture
-
-### Edge Nodes: Raspberry Pi
-
-Multiple Pi units with specialized SDRs:
-
-**Airspy R2 (Primary Scanner):**
-- 24 MHz - 1800 MHz coverage
-- 10 MSPS bandwidth
-- SpyServer protocol streaming
-
-**Airspy HF Discovery:**
-- 9 kHz - 31 MHz (HF/LF)
-- Amateur radio bands
-- Maritime, shortwave broadcast
-
-**Coherent SDR Arrays:**
-- Multi-channel phase-coherent capability
-- Direction of arrival (DoA) analysis
-- 24 MHz - 1766 MHz coverage
-
-**RTL-SDR:**
-- 1090 MHz ADS-B (aircraft)
-- Utility scanning
-- Low-cost backup
-
-### Core: Mac mini M-Series
-
-Central processing and ML inference:
-
-**FastAPI Orchestrator:**
-- Manages edge SDR connections
-- Coordinates spectrum acquisition
-- WebSocket streaming to clients
-
-**ML Classification:**
-- Leverages Neural Engine
-- Signal modulation identification
-- Automatic mode detection
-
-**Signal Census:**
-- Polars DataFrame tracking
-- Historical activity database
-- Frequency/modulation/time indexing
-
-**Visualization:**
-- PyQtGraph waterfall (desktop)
-- WebGL waterfall (browser)
-- Real-time spectrum display
-
-### Network Architecture
-
-```
-Edge Pi → SpyServer/rtl_tcp → Mac mini Core
-                                    ↓
-                        Orchestrator → ML Pipeline
-                                    ↓
-                        Signal Census Database
-                                    ↓
-                Desktop/Web Visualizers
-```
 
 ## Features
 
@@ -169,3 +95,93 @@ Edge Pi → SpyServer/rtl_tcp → Mac mini Core
 ---
 
 [← Back to Signal Processing](../signal-processing)
+
+## Architecture
+
+### Edge Nodes: Raspberry Pi
+
+Multiple Pi units with specialized SDRs:
+
+**Airspy R2 (Primary Scanner):**
+- 24 MHz - 1800 MHz coverage
+- 10 MSPS bandwidth
+- SpyServer protocol streaming
+
+**Airspy HF Discovery:**
+- 9 kHz - 31 MHz (HF/LF)
+- Amateur radio bands
+- Maritime, shortwave broadcast
+
+**Coherent SDR Arrays:**
+- Multi-channel phase-coherent capability
+- Direction of arrival (DoA) analysis
+- 24 MHz - 1766 MHz coverage
+
+**RTL-SDR:**
+- 1090 MHz ADS-B (aircraft)
+- Utility scanning
+- Low-cost backup
+
+### Core: Mac mini M-Series
+
+Central processing and ML inference:
+
+**FastAPI Orchestrator:**
+- Manages edge SDR connections
+- Coordinates spectrum acquisition
+- WebSocket streaming to clients
+
+**ML Classification:**
+- Leverages Neural Engine
+- Signal modulation identification
+- Automatic mode detection
+
+**Signal Census:**
+- Polars DataFrame tracking
+- Historical activity database
+- Frequency/modulation/time indexing
+
+**Visualization:**
+- PyQtGraph waterfall (desktop)
+- WebGL waterfall (browser)
+- Real-time spectrum display
+
+### Network Architecture
+
+```
+Edge Pi → SpyServer/rtl_tcp → Mac mini Core
+                                    ↓
+                        Orchestrator → ML Pipeline
+                                    ↓
+                        Signal Census Database
+                                    ↓
+                Desktop/Web Visualizers
+```
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)

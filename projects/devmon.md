@@ -14,15 +14,6 @@ layout: default
 
 Developing...
 
-## Quick Facts
-
-| | |
-|---|---|
-| **Status** | Stable |
-| **Language** | Python |
-| **Started** | 2026 |
-
----
 ## Features
 
 ### Multi-Workspace Scanning
@@ -51,6 +42,38 @@ Automatically highlights projects that are "Active" but have zero "Ready" plans.
 **UI Framework**: `ratatui` / `textual` for the TUI dashboard
 **Scanning**: Integrated `ripgrep` support for high-performance file discovery
 **Configuration**: TOML-based project and workspace configuration
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)
 
 ---
 

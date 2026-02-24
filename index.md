@@ -2,9 +2,9 @@
 layout: default
 ---
 
-# Simon Knight, PhD
+# Simon Knight
 
-I'm a telecommunications engineer. I build tools that bridge the gap between high-level intent and execution, focusing on modeling, simulation, and coordination in complex systems.
+I am a telecommunications engineer and software researcher building systems that bridge the gap between high-level intent and technical execution. My work focuses on the modeling, simulation, and coordination of complex infrastructure—transforming design logic into executable, verifiable reality.
 
 ## Focus
 

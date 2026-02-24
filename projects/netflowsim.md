@@ -22,6 +22,7 @@ section: network-automation
 - [Performance Metrics](#performance-metrics)
 - [Tech Stack](#tech-stack)
 - [Use Cases](#use-cases)
+- [Core Value](#core-value)
 
 ---
 
@@ -156,6 +157,12 @@ Routing matrix written to routing.json
 - **Capacity Planning**: Identify congestion points under load
 - **What-If Analysis**: Model link failures and capacity changes
 - **Integration Testing**: Validate packet simulator routing logic
+
+---
+
+## Core Value
+
+`netflowsim` provides rapid, massive-scale network performance analysis by using analytic queuing models and Monte Carlo simulations instead of packet-level discrete event simulation. It enables network engineers to validate topologies and routing strategies against billions of flow iterations in seconds, identify bottlenecks probabilistically, and test network resilience under failure scenarios.
 
 ---
 

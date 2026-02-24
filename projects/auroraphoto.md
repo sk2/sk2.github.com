@@ -19,6 +19,7 @@ section: photography
 - [Key Features](#key-features)
 - [Architecture](#architecture)
 - [Tech Stack](#tech-stack)
+- [Core Value](#core-value)
 
 ---
 
@@ -70,6 +71,12 @@ Raspberry Pi Capture Nodes
 ## Tech Stack
 
 Python (SEP, OpenCV, Rawpy, FastAPI, MQTT), Sony Camera Remote SDK, Swift (SwiftUI), Raspberry Pi
+
+---
+
+## Core Value
+
+Provides precise, automated control over exposure and focus specifically optimized for aurora "bursts" and star sharpness, while offering field-ready composition tools.
 
 ---
 

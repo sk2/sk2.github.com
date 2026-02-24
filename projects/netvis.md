@@ -22,6 +22,7 @@ section: network-automation
 - [Example Gallery](#example-gallery)
 - [Milestones](#milestones)
 - [Tech Stack](#tech-stack)
+- [Core Value](#core-value)
 
 ---
 
@@ -228,6 +229,12 @@ Stable API, deterministic rendering, and spatial indexing.
 ## Tech Stack
 
 Rust, petgraph, fjadra (d3-force port), SVG/PDF/PNG rendering, WASM-ready
+
+---
+
+## Core Value
+
+Transform network topologies into clear, information-dense visualizations using algorithms that minimize edge crossings, bundle related connections, and respect hierarchical/geographic structure — enabling understanding of networks that would otherwise be visual noise.
 
 ---
 

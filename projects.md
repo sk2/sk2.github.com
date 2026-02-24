@@ -60,7 +60,7 @@ A Python library for modeling and querying network topologies, backed by a fast 
 
 ### [Network Simulator](projects/network-simulator)
 
-<span class="status-badge status-active">Phase 65/67 (99%)</span>
+<span class="status-badge status-active">Phase 66/67 (100%)</span>
 
 
 A Rust-based network simulator that models packet-level behavior for routing protocols. It provides a middle ground between pure algorithmic analysis (like C-BGP) and full emulation (like Containerlab) — larger scale and smaller footprint than emulation, higher fidelity than algorithmic simulation. Used for smoke testing and design validation of network configurations.
@@ -186,7 +186,7 @@ A headless, autonomous astrophotography controller designed for low-power Linux 
 
 ### [Satellites](projects/satellites)
 
-<span class="status-badge status-active">Phase 5/6 (75%)</span>
+<span class="status-badge status-active">Phase 3/6 (30%)</span>
 
 
 A terminal-based satellite tracker that displays real-time satellite positions on a world map, predicts passes over the user's location, and shows transmission/frequency data. Built with Rust, ratatui, and the SGP4 orbital propagation algorithm. Aimed at amateur radio operators, space enthusiasts, and anyone who wants to know what's overhead.

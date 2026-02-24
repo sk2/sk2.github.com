@@ -20,6 +20,7 @@ section: agentic-systems
 - [Architecture](#architecture)
 - [Milestones](#milestones)
 - [Tech Stack](#tech-stack)
+- [Core Value](#core-value)
 
 ---
 
@@ -85,6 +86,12 @@ BLE discovery, FTMS control, NATS connection, and live metrics display.
 ## Tech Stack
 
 Swift (SwiftUI, SceneKit, CoreBluetooth, HealthKit), NATS messaging, iPadOS/tvOS
+
+---
+
+## Core Value
+
+A native SwiftUI training application for iPad and Apple TV that bridges professional cycling hardware (KICKR Core) with dynamic AI-driven workout logic via NATS, visualized in a high-performance SceneKit environment.
 
 ---
 

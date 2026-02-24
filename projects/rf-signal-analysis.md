@@ -18,6 +18,7 @@ section: signal-processing
 - [What This Is](#what-this-is)
 - [Core Principles](#core-principles)
 - [Architecture](#architecture)
+- [Core Value](#core-value)
 
 ---
 
@@ -78,6 +79,12 @@ Currently implementing analysis and association logic (Phase 6). The system now 
 - **CFAR Detection**: Constant False Alarm Rate detection complete
 - **Analysis Management**: Per-beam analysis with cross-beam fusion planned for v3
 - **Real-Time Operation**: Signal analysis with sub-second latency
+
+---
+
+## Core Value
+
+Clean, understandable, stable codebase that reliably tracks aircraft in real-time.
 
 ---
 

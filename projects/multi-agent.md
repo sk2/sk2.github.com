@@ -21,6 +21,7 @@ section: agentic-systems
 - [Architecture](#architecture)
 - [Security Model](#security-model)
 - [Individual Agents](#individual-agents)
+- [Core Value](#core-value)
 
 ---
 
@@ -272,6 +273,12 @@ OpenTelemetry tracing for all operations:
 - **Audit Anomaly Agent** (Python): Monitors OpenTelemetry logs for security events and unusual patterns.
 
 All agents communicate exclusively via NATS with subject-based ACLs. Each agent's capabilities are explicitly defined, and actions requiring elevated privileges trigger the pre-approval workflow.
+
+---
+
+## Core Value
+
+Complete isolation between agents such that compromise of one agent cannot cascade to others or the orchestrator—demonstrating that secure multi-agent systems are practical for both personal and production infrastructure use cases.
 
 ---
 

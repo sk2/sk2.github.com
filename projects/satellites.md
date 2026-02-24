@@ -5,7 +5,7 @@ section: projects
 
 # Satellites
 
-<span class="status-badge status-active">Phase 5/6 (75%)</span>
+<span class="status-badge status-active">Phase 3/6 (30%)</span>
 
 [← Back to Projects](../projects)
 
@@ -23,6 +23,8 @@ section: projects
 - [Coordinate Pipeline](#coordinate-pipeline)
 - [Development Roadmap](#development-roadmap)
 - [Tech Stack](#tech-stack)
+- [What This Is](#what-this-is)
+- [Core Value](#core-value)
 
 ---
 
@@ -36,7 +38,7 @@ A terminal-based satellite tracker that plots real-time satellite positions on a
 
 | | |
 |---|---|
-| **Status** | Phase 5/6 (75%) |
+| **Status** | Phase 3/6 (30%) |
 | **Language** | N/A |
 
 ---
@@ -138,6 +140,18 @@ Pass prediction propagates at 60-second intervals over 24 hours, detects elevati
 - **Coordinates**: map_3d (ECI → ECEF → Geodetic → AER)
 - **HTTP**: reqwest (async JSON API calls)
 - **CLI**: clap 4
+
+---
+
+## What This Is
+
+A terminal-based satellite tracker that displays real-time satellite positions on a world map, predicts passes over the user's location, and shows transmission/frequency data. Built with Rust, ratatui, and the SGP4 orbital propagation algorithm. Aimed at amateur radio operators, space enthusiasts, and anyone who wants to know what's overhead.
+
+---
+
+## Core Value
+
+Real-time satellite positions rendered on a terminal world map with pass predictions — a single binary, no browser, no GUI dependencies.
 
 ---
 

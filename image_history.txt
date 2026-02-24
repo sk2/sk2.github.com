@@ -1,0 +1,1673 @@
+commit ac85724a429d21cddb406fad13dfd02ff7fed976
+Author: Simon Knight <simon.knight@gmail.com>
+Date:   Tue Feb 17 07:52:47 2026 +1030
+
+    Update projects and synchronize with latest development state
+
+diff --git a/projects/ank-workbench.md b/projects/ank-workbench.md
+index fafef1c..dc6bcfd 100644
+--- a/projects/ank-workbench.md
++++ b/projects/ank-workbench.md
+@@ -1,17 +1,16 @@
+ ---
+ layout: default
+-section: network-automation
+ ---
+ 
+-# Network Automation Workbench
++# ANK Workbench
+ 
+-<span class="status-badge status-active">v1.3 — Tool Integration & Interactive Workflows</span>
++<span class="status-badge status-active">Phase 25 (Pipeline Step Execution)</span>
+ 
+-[← Back to Network Automation](../network-automation)
++[← Back to Projects](../projects)
+ 
+ ---
+ 
+-## Concept
++## The Insight
+ 
+ Network engineers can design, validate, and visualize network changes in one complete workflow without switching between separate tools or manually gluing components together.
+ 
+@@ -19,68 +18,30 @@ Network engineers can design, validate, and visualize network changes in one com
+ 
+ | | |
+ |---|---|
+-| **Status** | v1.3 — Tool Integration & Interactive Workflows |
+-| **Language** | Python backend (FastAPI), React frontend |
++| **Status** | Phase 25 (Pipeline Step Execution) |
++| **Language** | Python backend (FastAPI or Flask), React or Vue frontend — Leverages existing Python ecosystem for ANK components, meets modern UX expectations |
+ | **Started** | 2026 |
+ 
+ ---
+-
+ ## What This Is
+ 
+-**An orchestration platform** that integrates the ecosystem tools (Topology Generator, Network Modeling & Configuration Library, Network Topology Engine, Network Simulator, Network Visualization Engine) into one seamless workflow.
++**An orchestration platform** that integrates the ANK ecosystem tools (TopoGen, ank_pydantic, Network Simulator, NetVis) into one seamless workflow.
+ 
+-The Network Automation Workbench is the **glue layer** that coordinates the entire network automation pipeline. Engineers can generate topologies, model networks declaratively, run lightweight simulations, and visualize results — driven from YAML configuration, a text-based TUI, or the web interface.
++ANK Workbench is the **glue layer** that coordinates the entire network automation pipeline. Engineers can generate topologies, model networks declaratively, run lightweight simulations, and visualize results—all from a unified web interface. No more context switching between separate tools or manually stitching components together.
+ 
+ **The Integration Vision:**
+ ```
+-┌────────────────────────────────────────────────────────────────────────────────────────┐
+-│                              Network Automation Workbench                               │
+-│                    (Orchestration · Web UI · Workflow Management)                       │
+-│   ┌───────────────────┬──────────────────────┬─────────────────┬────────────────────┐  │
+-│   │ Topology Generator│ Modeling & Config     │ Network         │ Visualization      │  │
+-│   │                   │ Library + Engine      │ Simulator       │ Engine             │  │
+-└───┴───────────────────┴──────────────────────┴─────────────────┴────────────────────┴──┘
++┌──────────────────────────────────────────────────────────────────┐
++│                        ANK Workbench                             │
++│         (Orchestration · Web UI · Workflow Management)           │
++│   ┌──────────────┬──────────────┬──────────────┬──────────────┐ │
++│   │   TopoGen    │ ank_pydantic │   Simulator  │    NetVis    │ │
++└───┴──────────────┴──────────────┴──────────────┴──────────────┴─┘
+ ```
+ 
+ **Workflow:** Generate/model topology → Run simulation → Visualize results → Export configs
+-
+-## Screenshots
+-
+-![Projects](/images/workbench-projects.png)
+-*Projects landing page — create from scratch or start from curated sample topologies (spine-leaf, campus, OSPF multi-area, dual DC with BGP).*
+-
+-![Topology Editor](/images/workbench-editor.png)
+-*Topology editor — drag devices from the palette, edit YAML directly with live validation, and browse sample configurations.*
+-
+-![Workflow & Simulation](/images/workbench-workflow.png)
+-*Workflow view — configure simulation parameters (protocol, tick count, timeout), run simulations, and control the simulator lifecycle.*
+-
+-![Visualization](/images/workbench-visualize.png)
+-*Visualization view — explore topology, physical, logical, and protocol layers with configurable overlays, routing table inspection, and multi-format export.*
+-
+-## Milestones
+-
+-**v1.0 Foundation** (Shipped Feb 4, 2026)
+-End-to-end workflow: define topology → simulate → visualize.
+-
+-**v1.1 UX Polish & Onboarding** (Shipped Feb 9, 2026)
+-Help system, sample gallery, empty states, guided tour.
+-
+-**v1.2 Scale-First Visualization** (98% complete)
+-Performance benchmarks, worker-first compute, GPU renderer, scale navigation.
+-
+-**v1.3 Tool Integration & Interactive Workflows** (In Progress)
+-- Interactive device access — click a node to open a terminal into the simulated device
+-- Simulator integration & control — start/stop/reset, stream progress and state
+-- Config export pipeline — generate from the Network Modeling & Configuration Library, preview, download
+-- Topology generation — Topology Generator patterns available in UI
+-- Live simulation observability — watch protocol convergence and routing updates
+-
+-**Roadmap:**
+-
+-- **Complete v1.2 Scale-First Visualization** — Paused at 98% to focus on tool integration; remaining work includes stub indicators for hidden connections, scale-first view state persistence, and simulation overlays in scale-first mode
+-- **v1.4 and beyond** — Multi-user collaboration, version-controlled topology projects, CI/CD pipeline integration for topology validation workflows
++**Value:** Complete pipeline in one interface, no tool-switching or manual integration
+ 
+ ---
+ 
+-[← Back to Network Automation](../network-automation)
++[← Back to Projects](../projects) | [Development Philosophy](../development)
+
+commit b8c0b3436c579bc31509fbca57f5101d8ebbf899
+Author: Simon Knight <simon.knight@gmail.com>
+Date:   Mon Feb 16 22:57:26 2026 +1030
+
+    Update project statuses and add HRV Monitor
+    
+    Added:
+    - HRV Monitor: New Rust BLE driver for heart rate variability monitoring
+    - HRV screenshot to images directory
+    - Status-complete CSS styling for completed projects
+    
+    Updated project statuses:
+    - Spectra: Phase 9/12 v2.0 with WebSocket architecture
+    - Passive: Phase 6/10 track management with real-time aircraft tracking
+    - HealthyPi: Phase 6/6 v1.0 (87%) with Apple ecosystem integration
+    - Network Simulator: v1.8 Data Center Fabric & EVPN milestone
+    - AutoNetkit: v1.8 shipped, v1.10 in progress
+    - Multi-Agent Assistant: Phase 20/20 (93%)
+    - Wi-Fi Signal Reflection: Phase 5 complete
+    - OmniFocus DB CLI: Phase 7 complete
+    - Tileserver Polars: Phase 7 complete
+    
+    All updates follow style guidelines: tight, specific, no marketing language.
+    
+    Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>
+
+diff --git a/projects/hrv.md b/projects/hrv.md
+new file mode 100644
+index 0000000..74a67b5
+--- /dev/null
++++ b/projects/hrv.md
+@@ -0,0 +1,96 @@
++---
++layout: default
++---
++
++# HRV Monitor
++
++<span class="status-badge status-active">Active Development</span>
++
++[← Back to Signal Processing](../signal-processing) | [← Back to Projects](../projects)
++
++---
++
++## Concept
++
++Heart Rate Variability (HRV) reveals stress, recovery, and autonomic nervous system state through timing variations between heartbeats. Most consumer devices only report derived metrics without providing the underlying RR interval data needed for analysis. This Rust-based driver connects directly to Bluetooth LE heart rate monitors, streams raw RR intervals in real-time, computes time-domain HRV metrics, and logs sessions to columnar Parquet files for downstream analysis.
++
++![HRV Monitor TUI](/images/hrv.png)
++*Live RR interval tracking with rolling 60-second charts and computed HRV metrics.*
++
++---
++
++## Key Features
++
++### Real-Time BLE Streaming
++Connects to any device implementing the standard Bluetooth Heart Rate Profile (UUID 0x2A37) with RR interval support. Tested with Elite HRV CorSense (finger sensor) and Morpheus M7 (chest strap). Auto-discovery with immediate connection—no need to wait for scan completion.
++
++### Time-Domain HRV Metrics
++Computes four core metrics in real-time using rolling 60-second windows:
++- **RMSSD**: Root mean square of successive differences (parasympathetic activity)
++- **SDNN**: Standard deviation of RR intervals (overall variability)
++- **pNN50**: Percentage of intervals differing by >50ms (autonomic balance)
++- **AVNN**: Average RR interval (baseline heart rate)
++
++### Terminal Dashboard
++Built with `ratatui` for responsive TUI rendering. Live charts show heart rate and RR interval trends. Keyboard navigation (`j`/`k` for device selection, `i` for metric info screen, `q` to quit and save).
++
++### Session Logging
++Every session automatically saves to `~/hrv_data/YYYY-MM-DDTHH-MM-SS.parquet` with one row per RR interval. Columns: `timestamp` (UTC), `elapsed_secs`, `heart_rate`, `rr_interval_ms`. Query with DuckDB or load into Polars for analysis.
++
++---
++
++## Architecture
++
++**BLE Stack**: `btleplug` for cross-platform Bluetooth Low Energy communication
++**HRV Analysis**: `cardio-rs` for time-domain metric computation
++**Storage**: Apache Arrow + Parquet for columnar session files
++**TUI**: `ratatui` + `crossterm` for terminal UI
++**Platform**: macOS (Linux/Raspberry Pi planned)
++
++---
++
++## Integration with HealthyPi
++
++Designed to complement the [HealthyPi](healthypi) ecosystem:
++- **Driver Layer**: This Rust implementation provides native BLE handling for consumer HRV sensors
++- **Metric Alignment**: Uses the same HRV metrics (RMSSD, SDNN, pNN50) as HealthyPi's signal processing pipeline
++- **Data Format**: Parquet files integrate with HealthyPi's DuckDB analytics layer
++- **Use Case**: Detect stress baselines and autonomic trends for agentic health workflows
++
++---
++
++## Tech Stack
++
++| Component | Technology |
++|-----------|-----------|
++| Language | Rust |
++| BLE | `btleplug` |
++| TUI | `ratatui`, `crossterm` |
++| HRV Analysis | `cardio-rs` |
++| Storage | Apache Arrow, Parquet |
++| Platform | macOS (Linux planned) |
++
++---
++
++## Current Status
++
++Active development. Core functionality complete: BLE scanning, device connection, real-time metric computation, session logging. Next: Linux support, frequency-domain metrics (LF/HF ratio), integration with HealthyPi agent workflows.
++
++---
++
++[← Back to Signal Processing](../signal-processing) | [← Back to Projects](../projects)
++
++<style>
++.status-badge {
++  display: inline-block;
++  padding: 0.3em 0.8em;
++  margin: 0.5em 0;
++  border-radius: 4px;
++  font-size: 0.85em;
++  font-weight: 600;
++}
++.status-active {
++  background-color: #007bff;
++  color: white;
++}
++</style>
+
+commit f746a3c3139b4e92a10aba7b940ecdcba7dda670
+Author: Simon Knight <simon.knight@gmail.com>
+Date:   Sun Feb 15 18:11:04 2026 +1030
+
+    Update project statuses and add NetVis geographic layout image
+    
+    - AuroraData: rewrite page to reflect v1.0 complete (Phase 4/4, 13/13 plans)
+    - Network Simulator: update to v1.7 shipped, 130K+ LOC, 222 plans across 53 phases
+    - Multi-Agent Assistant: Phase 17/20 → 18/20 (84%)
+    - Network Automation Workbench: v1.3 Tool Integration complete
+    - Wave: update badge to Phase 21, 55/60 plans, add Swift language
+    - NetVis: add geo-europe-backbone geographic layout image, replace isometric
+      image with latest showcase render
+    - Update projects.md and index.md entries to match
+    
+    Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>
+
+diff --git a/projects/netvis.md b/projects/netvis.md
+index 3632eb4..4e25f14 100644
+--- a/projects/netvis.md
++++ b/projects/netvis.md
+@@ -128,10 +128,15 @@ The Network Visualization Engine reads the exported topology and applies advance
+ ![Radial Layout](/images/netvis-showcase-radial-layout.png)
+ *Zone-based service mesh with central controller, regional coordinators, edge nodes, and service endpoints arranged in a radial layout. Demonstrates the engine's ability to handle hierarchical topologies with many leaf nodes.*
+ 
++### Geographic Layout — European Backbone
++
++![Geographic European Backbone](/images/netvis-geo-europe-backbone.png)
++*Geographic layout rendering of a European backbone network. Nodes placed at real-world coordinates with great-circle edge routing. Demonstrates the geographic layout algorithm for infrastructure spanning physical locations.*
++
+ ### Isometric Multi-Layer View
+ 
+ ![Isometric Multi-Layer](/images/netvis-isometric-multi-layer.png)
+-*Three network layers (WAN, distribution, access) rendered as stacked isometric planes. The same topology is shown at each layer with inter-layer connections visible, revealing how logical structure maps across the network hierarchy.*
++*Three network layers (WAN, distribution, access) rendered as stacked isometric planes with inter-layer connections visible. Shows how logical structure maps across the network hierarchy.*
+ 
+ ### Theme Showcase — Device-Aware Icons
+ 
+
+commit 0644487810f518332cb966fbd882ccfbc3ccd636
+Author: Simon Knight <simon.knight@gmail.com>
+Date:   Sun Feb 15 14:05:24 2026 +1030
+
+    Add TUI screenshots, expand Spectra page, update rtltcp, remove radar language
+    
+    - Add Spectra TUI and rtltcp server TUI screenshots
+    - Expand Project Spectra page with full architecture, ML pipeline, Signal Census,
+      autonomous missions, direction finding, and hardware details
+    - Update rtltcp-rust page to Phase 3/4 with AirSpy support, HTTP API, TUI dashboard
+    - Replace "radar" language with "signal reflection" across Wi-Fi and passive projects
+    - Update CLAUDE.md with radar terminology restriction
+    
+    Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>
+
+diff --git a/projects/rtltcp.md b/projects/rtltcp.md
+index 93f2d2e..162495d 100644
+--- a/projects/rtltcp.md
++++ b/projects/rtltcp.md
+@@ -3,180 +3,159 @@ layout: default
+ section: signal-processing
+ ---
+ 
+-# Project Context: rtltcp-rust
++# rtltcp-rust
+ 
+-<span class="status-badge status-active">v1 — Core Streaming & Hardware</span>
++<span class="status-badge status-active">Phase 3/4 — TUI & Live Config (90%)</span>
+ 
+ [← Back to Signal Processing](../signal-processing)
+ 
+ ---
+ 
+-
+ ## Concept
+ 
+-The ability to reliably and efficiently stream high-fidelity IQ data from multiple SDRs over a network with a modern management interface.
++A single Rust binary that auto-detects every connected SDR, streams each over the standard `rtl_tcp` protocol, and provides a TUI dashboard and HTTP API for monitoring and control — designed for headless Raspberry Pi deployment.
+ 
+ ## Quick Facts
+ 
+ | | |
+ |---|---|
+-| **Status** | v1 — Core Streaming & Hardware |
+-| **Language** | N/A |
++| **Status** | Phase 3/4 — TUI & Live Config (90%) |
++| **Language** | Rust |
+ | **Started** | 2026 |
+ 
+ ---
+ 
+ ## What This Is
+ 
+-A cross-platform (targeted at Raspberry Pi) server that interfaces with multiple SDR devices (RTL-SDR, AirSpy HF+) and streams raw IQ samples over the network using the industry-standard `rtl_tcp` protocol. It features a built-in TUI for live configuration and device management.
+-
+-## Why It Exists
+-
+-Existing C-based implementations (`rtl_tcp`, `hfp_tcp`) are single-threaded, difficult to manage when running multiple devices, and lack modern observability features. This project provides:
++A multi-SDR streaming server that replaces the separate C-based servers (`rtl_tcp`, `hfp_tcp`, `airspy_tcp`) with a single async Rust binary. It auto-detects all connected hardware, assigns each device its own TCP port, and streams raw IQ samples using the industry-standard `rtl_tcp` protocol. Any existing SDR client (GQRX, SDR#, CubicSDR) connects without modification.
+ 
+-- **Async concurrency** through Rust's async runtime
+-- **Multi-SDR management** via a single binary
+-- **Responsive TUI** for real-time frequency, gain, and sample rate adjustments
+-- **Network optimizations** including future support for compression and error correction
++![rtltcp-rust TUI](/images/rtltcp-server-tui.png)
++*TUI dashboard showing 8 RTL-SDR devices and an AirSpy HF+ streaming on a Raspberry Pi.*
+ 
+-## Key Features
++## Why a Unified Server
+ 
+-### Supported Hardware
+-- **RTL-SDR**: RTL2832U-based USB dongles (via `librtlsdr`)
+-- **AirSpy HF+**: High-performance HF/VHF SDR (via `libairspyhf`)
++Existing C-based implementations have three problems:
+ 
+-### Multi-threaded Architecture
+-- Concurrent streaming from multiple SDRs
+-- Separate threads for USB I/O, network transmission, and UI
+-- Efficient buffer management to prevent sample drops
++- **One process per device**: Running 8 RTL-SDR dongles means managing 8 separate processes, each with its own PID, config, and failure mode.
++- **No observability**: No way to see aggregate bandwidth, client connections, or device health without external tooling.
++- **No live reconfiguration**: Changing frequency or gain requires restarting the stream, disconnecting all clients.
+ 
+-### Terminal User Interface
+-- Live device status monitoring (frequency, gain, sample rate)
+-- Real-time configuration adjustments without restart
+-- Multi-device management in a single view
+-- Connection status and bandwidth monitoring
++This server manages all devices from a single process with shared state, a TUI for live adjustment over SSH, and an HTTP API for programmatic monitoring.
+ 
+-### Network Protocol
+-- Industry-standard `rtl_tcp` protocol compatibility
+-- Works with existing SDR clients (GQRX, SDR#, SDR++)
+-- TCP-based streaming with future compression support
++## Supported Hardware
+ 
+-### Configuration Management
+-- TOML-based persistent configuration
+-- Per-device settings (frequency, gain, PPM correction)
+-- Network settings (ports, buffer sizes)
+-- Easy editing and version control friendly
++| Device | Default Sample Rate | Bits | Port Assignment |
++|--------|-------------------|------|-----------------|
++| RTL-SDR | 2.048 MHz | 8-bit | 1234, 1235, ... |
++| AirSpy HF+ | 768 kHz | 18-bit (native) | continues after RTL-SDR |
++| AirSpy | 6 MHz | 12-bit (native) | continues after AirSpy HF+ |
+ 
+-## Tech Stack
++All three device types are auto-detected on startup. AirSpy HF+ and AirSpy support are compile-time features enabled by default.
+ 
+-- **Language**: Rust (2021 edition)
+-- **Async Runtime**: `tokio` for async concurrency
+-- **Hardware Interface**: `libusb` via FFI wrapping of `librtlsdr` and `libairspyhf`
+-- **Networking**: TCP implementing the `rtl_tcp` protocol
+-- **UI**: Terminal User Interface via `ratatui`
+-- **Config**: TOML file-backed persistence
+-- **Target**: Raspberry Pi (cross-compiled with `cross` tool)
++## Architecture
+ 
+-## Development Roadmap
+-
+-### v1: Core Streaming & Hardware (Current Focus)
+-
+-**Hardware Access:**
+-- Wrap `librtlsdr` for RTL-SDR device control
+-- Wrap `libairspyhf` for AirSpy HF+ device control
+-- Multi-threaded IQ sample acquisition with efficient buffering
+-
+-**Networking:**
+-- Implement `rtl_tcp` protocol (command parsing and binary IQ streaming)
+-- Support multiple concurrent streams (one per device)
+-- Basic connection management (heartbeats, clean disconnects)
++```
++                    ┌─────────────────────────┐
++                    │     rtltcp-rust          │
++                    │                          │
++   USB ─────────── │  Device Manager          │
++   RTL-SDR 0..N    │    ├─ RTL-SDR driver     │ ──── TCP :1234
++   AirSpy HF+      │    ├─ AirSpy HF+ driver │ ──── TCP :1235
++   AirSpy           │    └─ AirSpy driver     │ ──── TCP :1236
++                    │                          │
++                    │  HTTP API (:8080)        │ ──── REST endpoints
++                    │  TUI Dashboard           │ ──── SSH terminal
++                    │  Config (TOML)           │
++                    └─────────────────────────┘
++```
+ 
+-**Interface & Config:**
+-- Basic TUI showing connected devices and active stream status
+-- Real-time frequency and gain adjustment via TUI
+-- Persistent configuration in `config.toml`
++Each device runs in its own tokio task with dedicated USB I/O and TCP streaming threads. The TUI and HTTP API share device state through `Arc<Mutex<>>` with 1 Hz status broadcasts.
+ 
+-### v2: Optimization & Advanced Features (Planned)
++## TUI Dashboard
+ 
+-**Bandwidth Reduction Strategies:**
++The TUI provides real-time monitoring and live control over SSH:
+ 
+-The raw IQ stream from an RTL-SDR at 2.4 MSPS with 8-bit samples produces 4.8 MB/s (2.4M samples × 2 channels (I+Q) × 1 byte). Over a network, this translates to ~38 Mbps, which can saturate modest internet connections or Wi-Fi links. Several compression approaches can reduce this significantly with minimal CPU impact:
++- **System stats**: CPU, memory, temperature, uptime
++- **Device list**: Frequency, gain, sample rate, bandwidth, client count per device
++- **Interactive controls**: Change frequency (`f`), gain (`g`), sample rate (`s`), toggle devices (`t`)
++- **Log viewer**: Tabbed view with scrollable log output
++- **Status feedback**: Color-coded confirmation of commands
+ 
+-1. **Delta Encoding (Planned)**
+-   - **Concept**: Send the difference between consecutive samples instead of absolute values
+-   - **Rationale**: IQ samples change gradually in frequency domain; deltas are typically small
+-   - **Implementation**: `delta[n] = sample[n] - sample[n-1]`
+-   - **Benefit**: Deltas compress better (more zeros/small values) → 20-40% reduction with zstd
+-   - **CPU Impact**: Minimal (single subtract per sample)
+-   - **Trade-off**: Requires client-side reconstruction (accumulate deltas). Susceptible to packet loss — a single dropped packet corrupts all subsequent samples until the next absolute reference frame
++## HTTP API
+ 
+-2. **Lossless Compression (Planned)**
+-   - **Algorithms under evaluation**:
+-     - **zstd** (level 1-3): Fast, good compression ratio, widely supported
+-     - **LZ4**: Fastest, moderate compression, lowest CPU overhead
+-     - **Brotli** (level 1-4): Better compression than LZ4, moderate speed
+-   - **Benchmark target**: Compress 4.8 MB/s stream with < 10% CPU on Raspberry Pi 4
+-   - **Expected reduction**: 30-50% for typical RF signals (varies by signal content)
+-   - **Per-frame compression**: Compress 16KB chunks for low latency
++REST API starts on port 8080 by default:
+ 
+-3. **Adaptive Bit Depth Reduction (Research)**
+-   - **Concept**: RTL-SDR provides 8-bit samples, but many signals have < 8 bits of dynamic range
+-   - **Approach**: Analyze signal statistics, reduce to 6-7 bits when SNR allows
+-   - **Benefit**: 25% bandwidth reduction when applicable
+-   - **Challenge**: Requires real-time SNR estimation, client-side bit expansion
++```bash
++curl http://localhost:8080/api/v1/devices
++```
+ 
+-4. **UDP Transport with FEC (Future)**
+-   - **Motivation**: TCP's retransmission overhead on lossy links (Wi-Fi, cellular)
+-   - **Approach**: UDP + Forward Error Correction (Raptor codes)
+-   - **Benefit**: Tolerate packet loss without retransmissions, lower latency
+-   - **Trade-off**: More complex client-side recovery logic
++```json
++{
++  "devices": [
++    {
++      "name": "rtlsdr-0",
++      "device_type": "rtlsdr",
++      "frequency_hz": 100000000,
++      "sample_rate_hz": 2048000,
++      "clients_connected": 1,
++      "running": true,
++      "bandwidth_mbps": 3.84
++    }
++  ]
++}
++```
+ 
+-**Compression Performance Estimates:**
++| Method | Path | Description |
++|--------|------|-------------|
++| GET | `/api/v1/health` | Liveness check |
++| GET | `/api/v1/server` | Version, uptime, device count |
++| GET | `/api/v1/devices` | All devices with status |
++| GET | `/api/v1/devices/:name` | Single device by name |
+ 
+-| Method | Bandwidth Reduction | CPU Overhead (RPi4) | Latency Impact |
+-|--------|---------------------|---------------------|----------------|
+-| None (baseline) | 0% (4.8 MB/s) | 0% | 0ms |
+-| LZ4 | 30-35% | 5-8% | < 1ms |
+-| zstd (level 1) | 35-45% | 8-12% | < 2ms |
+-| Delta + zstd | 40-50% | 10-15% | < 3ms |
+-| Bit depth reduction | 25% | 3-5% | 0ms |
++## Raspberry Pi Deployment
+ 
+-**Protocol Precision Limitations:**
++Docker-based cross-compilation for all Pi models:
+ 
+-The standard `rtl_tcp` protocol transmits IQ samples as 8-bit unsigned integers, limiting dynamic range to ~48 dB. Higher-end SDRs (AirSpy HF+) natively capture at 18-bit resolution, which is truncated to 8 bits for protocol compatibility. A future protocol extension could support higher bit depths (12/16-bit samples) for improved dynamic range, at the cost of increased bandwidth and requiring updated client support.
++```bash
++# Build cross-compilation Docker images
++./docker/build-images.sh aarch64
+ 
+-**Current Focus:** v1 core streaming must be stable before adding compression. Compression will be opt-in (via config flag) to maintain protocol compatibility with standard `rtl_tcp` clients.
++# Cross-compile
++cross build --release
+ 
+----
++# Deploy (checks deps, installs missing libs, offers to run)
++STRIP=1 ./deploy-to-pi.sh pi@raspberrypi.local
++```
+ 
+-**Other v2 Features:**
+-- **Remote Management**: Tunnel client for Mac/desktop control over SSH
+-- **Multi-client support**: Broadcast same stream to multiple receivers
+-- **Automatic failover**: Switch between redundant SDRs on hardware failure
++| Target | Pi Model |
++|--------|----------|
++| `aarch64-unknown-linux-gnu` | Pi 3/4/5 (64-bit) |
++| `armv7-unknown-linux-gnueabihf` | Pi 2/3 (32-bit) |
++| `arm-unknown-linux-gnueabihf` | Pi Zero/1 |
+ 
+-## Getting Started
++## Development Roadmap
+ 
+-### Building
++### Phase 1: Hardware Foundation (Complete)
++FFI wrappers for `librtlsdr`, basic TCP streaming, `rtl_tcp` protocol compliance. Verified with GQRX and SDR#.
+ 
+-```bash
+-# Project Context: rtltcp-rust
+-cargo build --release
++### Phase 2: Multi-SDR & AirSpy (Complete)
++`libairspyhf` and `libairspy` FFI wrappers, multi-device architecture with per-device ports, graceful shutdown with signal handling.
+ 
+-# Project Context: rtltcp-rust
+-cross build --target armv7-unknown-linux-gnueabihf --release
+-```
++### Phase 3: TUI & Live Config (90%)
++Ratatui-based dashboard, interactive frequency/gain/sample rate adjustment, channel-based command dispatch, HTTP REST API. Remaining: config save/reload.
+ 
+-### Prerequisites
+-- Rust toolchain
+-- `libusb-1.0-0-dev`
+-- `librtlsdr-dev` and `libairspyhf-dev`
++### Phase 4: Network Optimization (Planned)
++Compression (LZ4/zstd), UDP transport with Forward Error Correction, "Mac Tunnel" client for remote desktop control.
+ 
+-## Use Cases
++## Tech Stack
+ 
+-- **Remote monitoring stations**: Place SDRs near antennas, stream to compute server
+-- **Multi-channel reception**: Monitor multiple frequencies simultaneously
+-- **Headless operation**: Run on Raspberry Pi without display
+-- **Network distribution**: Share SDR hardware across multiple users/applications
++- **Language**: Rust (2021 edition)
++- **Async Runtime**: tokio
++- **HTTP API**: axum
++- **TUI**: ratatui + crossterm
++- **Hardware FFI**: rtlsdr_sys, libairspyhf, libairspy
++- **Cross-compilation**: `cross` + custom Docker images
++- **Config**: TOML with serde
+ 
+ ---
+ 
+diff --git a/projects/signals.md b/projects/signals.md
+index 68445de..8d53d5a 100644
+--- a/projects/signals.md
++++ b/projects/signals.md
+@@ -13,28 +13,159 @@ section: signal-processing
+ 
+ ## Concept
+ 
+-Transform raw radio spectrum data into an actionable "Signal Census" through automated detection, ML classification, and distributed acquisition.
++Monitor the local radio spectrum autonomously, classify every detected signal using ML, and maintain a persistent "Signal Census" — a queryable database of all RF activity over time. Distributed across Raspberry Pi edge nodes and a Mac mini core, the system runs unattended, sweeping bands, scheduling satellite passes, and logging what it finds.
+ 
+ ## Quick Facts
+ 
+ | | |
+ |---|---|
+-| **Status** | Phase 6/7 — Operational Readiness |
+-| **Language** | Python, Rust, Swift |
++| **Status** | Phase 6/7 — Operational Readiness (58/58 plans complete) |
++| **Language** | Python, Rust, TypeScript |
++| **Hardware** | Kraken SDR, Airspy R2, Airspy HF+, RTL-SDR |
+ | **Started** | 2026 |
+ 
+ ---
+ 
+-## What This Is
++## Architecture
+ 
+-An SDR client for spectrum monitoring and automated signal discovery. Spectra transforms raw IQ samples into a "Signal Census" through automated detection, ML classification, and distributed acquisition across Raspberry Pi edge nodes with Mac mini core processing.
++The system splits into edge and core nodes connected over Gigabit Ethernet:
+ 
+-The system provides both high-level signal census data and low-level waterfall analysis for deep-dive signal inspection.
++```
++┌─ EDGE (Raspberry Pi) ──────────────┐
++│  SDR Hub (Airspy, RTL-SDR, HF+)    │
++│  SpyServer · rtl_tcp · readsb      │
++│  IQ streaming over LAN             │
++└──────────────────┬──────────────────┘
++                   │ Gigabit Ethernet
++┌──────────────────▼──────────────────┐
++│  CORE (Mac mini)                    │
++│  Python Orchestrator (2,000+ lines) │
++│  ML Classification Pipeline        │
++│  Signal Census Database (DuckDB)   │
++│  Web UI · Rust TUI · REST API      │
++│  Autonomous Missions Engine        │
++└─────────────────────────────────────┘
++```
++
++The edge node handles USB device access and raw IQ streaming. The core node runs all processing — FFT, classification, detection, demodulation, and persistence. This split keeps the Pi's job simple (stream bytes) while the Mac mini handles compute-intensive work.
++
++## Terminal Interface
++
++![Spectra TUI](/images/spectra-tui.png)
++*Rust TUI showing live spectrum, waterfall (Kitty graphics protocol), and device controls.*
++
++The Rust TUI renders a pixel-level waterfall using the Kitty graphics protocol for true-color, full-resolution display directly in the terminal. Spectrum graphs use block-character rendering with configurable color palettes (twilight, inferno, viridis, ice, gray). Keyboard controls handle retuning, gain adjustment, and device switching without leaving the terminal.
++
++## Hardware
++
++Four SDR types cover the spectrum from HF through L-band:
++
++| SDR | Role | Coverage |
++|-----|------|----------|
++| **Kraken SDR** | Direction finding (5-channel coherent) | 24–1766 MHz |
++| **Airspy R2** | Wideband scanning (10 MSPS) | 24–1700 MHz |
++| **Airspy HF+ Discovery** | HF/VHF reception | 0.5–31 MHz, 60–260 MHz |
++| **RTL-SDR v3/v4** | ADS-B (1090 MHz), satellite (137 MHz) | 24–1766 MHz |
++
++Antenna array: Diamond D-130 discone (wideband), MLA-30 active loop (HF), TA1 turnstile (satellite), dedicated 1090 MHz (ADS-B), with mast-mounted Mini-Kits LNA for weak signals.
++
++## Signal Census
++
++The core concept: every detected signal gets logged to a DuckDB database with timestamp, frequency, power, modulation classification, confidence score, SigIDWiki metadata matches, and bearing (from Kraken direction finding). This builds a persistent picture of the local RF environment over time.
++
++Queries answer questions like:
++- "What transmits on 148.7 MHz at 3 AM?"
++- "Show all FM signals above -60 dBm in the last 24 hours"
++- "Which frequencies had anomalous activity compared to baseline?"
++
++Anomaly detection uses per-band/frequency/hour bucketing with p90+margin flagging — no tuning required.
++
++## ML Classification
++
++Two-stage pipeline:
++
++1. **Real-time model**: Fast CNN inference on live IQ samples (2–5 ms latency). Classifies AM, FM, SSB, BPSK, QPSK, 16-QAM and others.
++2. **Retrospective model**: Deeper CNN triggered on low-confidence detections, using larger sample windows (8,192 samples) for improved accuracy.
++
++Classification augmented by:
++- **Constellation analysis**: Mueller-Muller timing recovery for symbol extraction, EVM (Error Vector Magnitude) against ideal constellation points
++- **SigIDWiki integration**: Semantic MediaWiki queries match detected signals against known frequency allocations, modulation types, and location data (cached with 30-day TTL)
++
++## Autonomous Missions
++
++The missions engine runs unattended scanning operations:
++
++- **Bandplan sweeping**: Systematic frequency scanning across radio service allocations
++- **Satellite scheduling**: Skyfield orbital mechanics calculate NOAA/Meteor pass windows, trigger automated recording during passes
++- **Hit scoring**: Notability-based prioritization ranks signals by rarity and interest
++- **Daily briefings**: Deterministic summary generation (no LLM — template-based)
++
++Each mission logs events to `.logs/missions/{run_id}/events.jsonl` for post-session review.
++
++## ADS-B Integration
++
++Ingests Beast/SBS TCP feeds from readsb running on the Pi. Aircraft positions, altitudes, and callsigns appear on the tactical map alongside signal bearings and census hits. Historical observations are queryable via the API for replay.
++
++## Direction Finding
++
++The Kraken SDR's 5-channel coherent receiver enables phase-coherent direction-of-arrival estimation. Signal bearings render as lines on the tactical map, correlating with census entries and ADS-B aircraft positions.
++
++## Web Frontend
+ 
+ ![Spectra Waterfall](/images/spectra-waterfall.png)
+-*High-resolution waterfall display showing temporal signal patterns across the monitored band.*
++*WebGL waterfall display with real-time spectrum analysis.*
++
++React/TypeScript frontend with:
++- **WebGL waterfall**: Efficient texture updates via `texSubImage2D` with ring-buffer scrolling
++- **Classification panel**: Real-time signal list with confidence scores and SigIDWiki matches
++- **Constellation diagram**: IQ scatter plot with timing recovery overlay
++- **Tactical map**: MapLibre-based with GeoJSON layers for ADS-B aircraft, DoA bearings, and signal census hits
++- **Signal Census view**: Queryable historical database with time-window filtering
++
++## REST API
++
++FastAPI backend with WebSocket support:
++
++| Endpoint | Purpose |
++|----------|---------|
++| `GET /devices` | SDR registry and status |
++| `PATCH /devices/{name}/settings` | Tune frequency, sample rate, gain |
++| `WS /ws/waterfall/{device}` | Binary spectrum frames (uint8) |
++| `GET /api/health/deep` | Structured health JSON |
++| `GET /api/map/live` | ADS-B + DoA bearings + census hits |
++| `POST /api/nlq` | Natural language queries (deterministic templates) |
++
++WebSocket protocol: one JSON metadata message followed by binary uint8 spectrum frames at 10–20 FPS.
++
++## Health and Resilience
++
++- **Auto-reconnect**: Exponential backoff (1s → 30s cap) for all device connections
++- **Per-device isolation**: One SDR failure does not affect others
++- **Bounded queues**: Frame dropping under load keeps UI responsive
++- **Health tracker**: Per-device connection, streaming, and frame freshness monitoring
++- **E2E verification harness**: Automated testing across 4 data flows
++
++## Development Roadmap
++
++| Phase | Focus | Status |
++|-------|-------|--------|
++| 1 | Foundation — streaming, waterfall, device control | Complete |
++| 2 | Intelligence — ML classification, constellation, demod | Complete |
++| 3 | Autonomy — Signal Census, scanning, satellites, missions | Complete |
++| 6 | Verification — health monitoring, auto-reconnect, E2E tests | Complete |
++| 7 | Performance — ring buffer, GPU FFT, batch updates | Planned |
++
++## Tech Stack
++
++**Core (Python):** FastAPI, uvicorn, NumPy, SciPy, Polars, DuckDB, asyncio, Skyfield, httpx, Pydantic
++
++**Frontend (TypeScript):** React 19, Vite, MapLibre GL, WebGL
++
++**TUI (Rust):** ratatui, crossterm, rustfft, Kitty graphics protocol, axum (backend)
++
++**ML:** CoreML, PyTorch, ONNX Runtime (RadioML 2018.01A training data)
+ 
+-**Tech Stack:** Python, Rust (Axum backend), numpy, scipy, RTL-SDR, Airspy, PyTorch (classification), DuckDB (Signal Census)
++**Infrastructure:** uv (package management), systemd (edge services), Docker (optional)
+ 
+ ---
+ 
+
+commit 4b168254ee7e394082685f1a9bbacbd52f6d1db9
+Author: Simon Knight <simon.knight@gmail.com>
+Date:   Sat Feb 14 19:52:25 2026 +1030
+
+    Restructure projects page, add screenshots and images
+    
+    - Projects page now links to ecosystem pages instead of duplicating
+      sub-project listings; miscellaneous projects remain inline
+    - Add 4 ANK Workbench screenshots (projects, editor, workflow, visualize)
+    - Add isometric multi-layer view to NetVis gallery
+    - Replace Spectra waterfall with updated screenshot
+    - Flesh out Spectra project page with description and waterfall image
+    
+    Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>
+
+diff --git a/projects/ank-workbench.md b/projects/ank-workbench.md
+index 7c60809..f5db2b1 100644
+--- a/projects/ank-workbench.md
++++ b/projects/ank-workbench.md
+@@ -43,6 +43,20 @@ ANK Workbench is the **glue layer** that coordinates the entire network automati
+ 
+ **Workflow:** Generate/model topology → Run simulation → Visualize results → Export configs
+ 
++## Screenshots
++
++![Projects](/images/workbench-projects.png)
++*Projects landing page — create from scratch or start from curated sample topologies (spine-leaf, campus, OSPF multi-area, dual DC with BGP).*
++
++![Topology Editor](/images/workbench-editor.png)
++*Topology editor — drag devices from the palette, edit YAML directly with live validation, and browse sample configurations.*
++
++![Workflow & Simulation](/images/workbench-workflow.png)
++*Workflow view — configure simulation parameters (protocol, tick count, timeout), run simulations, and control the simulator lifecycle.*
++
++![Visualization](/images/workbench-visualize.png)
++*Visualization view — explore topology, physical, logical, and protocol layers with configurable overlays, routing table inspection, and multi-format export.*
++
+ ## Milestones
+ 
+ **v1.0 Foundation** (Shipped Feb 4, 2026)
+diff --git a/projects/netvis.md b/projects/netvis.md
+index 8b6297a..50aba3c 100644
+--- a/projects/netvis.md
++++ b/projects/netvis.md
+@@ -127,6 +127,11 @@ NetVis reads the exported topology and applies advanced layout algorithms, produ
+ ![Radial Layout](/images/netvis-showcase-radial-layout.png)
+ *Zone-based service mesh with central controller, regional coordinators, edge nodes, and service endpoints arranged in a radial layout. Demonstrates NetVis's ability to handle hierarchical topologies with many leaf nodes.*
+ 
++### Isometric Multi-Layer View
++
++![Isometric Multi-Layer](/images/netvis-isometric-multi-layer.png)
++*Three network layers (WAN, distribution, access) rendered as stacked isometric planes. The same topology is shown at each layer with inter-layer connections visible, revealing how logical structure maps across the network hierarchy.*
++
+ ### Theme Showcase — Device-Aware Icons
+ 
+ ![Theme Showcase](/images/netvis-theme-showcase.png)
+diff --git a/projects/signals.md b/projects/signals.md
+index 3fc38dd..a61dc10 100644
+--- a/projects/signals.md
++++ b/projects/signals.md
+@@ -18,11 +18,23 @@ Transform raw radio spectrum data into an actionable "Signal Census" through aut
+ 
+ | | |
+ |---|---|
+-| **Status** | ** Phase 3: Autonomy |
+-| **Language** | N/A |
++| **Status** | Phase 3: Autonomy |
++| **Language** | Python, PyTorch |
+ | **Started** | 2026 |
+ 
+ ---
++
++## What This Is
++
++A high-performance SDR client for spectrum monitoring and automated signal discovery. Spectra transforms raw IQ samples into a "Signal Census" through automated detection, ML classification, and distributed acquisition.
++
++The system provides both high-level signal census data and low-level waterfall analysis for deep-dive signal inspection.
++
++![Spectra Waterfall](/images/spectra-waterfall.png)
++*High-resolution waterfall display showing temporal signal patterns across the monitored band.*
++
++**Tech Stack:** Python, numpy, scipy, RTL-SDR, HackRF, PyTorch (classification)
++
+ ---
+ 
+-[← Back to Projects](../projects) | [Development Philosophy](../development)
++[← Back to Projects](../projects) | [Signal Processing Ecosystem](../signal-processing)
+
+commit 478a8e4a41053c6f9b681e12f7949da4d7282a20
+Author: Simon Knight <simon.knight@gmail.com>
+Date:   Sat Feb 14 19:18:04 2026 +1030
+
+    Expand Network Simulator page with detailed daemon mode and TUI docs
+    
+    - Add demo GIF showing OSPF convergence, ARP, traceroute
+    - Expand daemon mode with detailed exec/attach examples
+    - Add text-based TUI representations (daemon selector, device selector)
+    - Add interactive console session with live failover demonstration
+    - Add CI/CD integration script example
+    - Expand command reference with full table of show, probe, and config commands
+    - Document log viewer, JSON output, and MPLS OAM commands
+    
+    Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>
+
+diff --git a/projects/network-simulator.md b/projects/network-simulator.md
+index 831c5d6..bc9f5f0 100644
+--- a/projects/network-simulator.md
++++ b/projects/network-simulator.md
+@@ -148,6 +148,13 @@ Simulation complete: 120ms simulated, 0.034s real time (3529x speedup)
+ 
+ ---
+ 
++## Demo
++
++![netsim demo](/images/netsim-demo.gif)
++*OSPF triangle: three routers form adjacencies, compute SPF, then a host pings across the network. ARP resolution, traceroute hop-by-hop path discovery, and convergence timing all visible.*
++
++---
++
+ ## Daemon Mode — Real-Time Network Interaction
+ 
+ Run simulations as background daemons and interact with them in real-time — like `docker exec` for network simulations.
+@@ -162,25 +169,38 @@ netsim daemon start my-network topology.yaml
+ netsim daemon start my-network topology.yaml --tick-interval 50ms
+ ```
+ 
+-The daemon runs continuously in the background, ticking the simulation at the specified interval.
++The daemon runs continuously in the background, ticking the simulation at the specified interval. State files are stored in `~/.netsim/<name>/` — PID file, Unix domain socket for gRPC IPC, and structured log.
+ 
+ ### Execute One-Shot Commands
+ 
++Run a single command against a device in a running daemon, get the result, and exit. Ideal for scripting and CI/CD:
++
+ ```bash
+-# Run a single command on a device
+-netsim exec my-network r1 "show ip route"
+-netsim exec my-network h1 "ping 10.0.3.10"
+-netsim exec my-network r2 "show ospf neighbors"
++# Check routing table
++$ netsim exec my-network r1 "show ip route"
++Destination       Next Hop        Metric  Interface
++10.0.1.0/24       —               0       eth2 (connected)
++10.0.3.0/24       10.0.13.3       11      eth1 (OSPF)
++10.0.12.0/24      —               0       eth0 (connected)
++10.0.13.0/24      —               0       eth1 (connected)
++10.0.23.0/24      10.0.12.2       20      eth0 (OSPF)
++
++# Ping across the network
++$ netsim exec my-network h1 "ping 10.0.3.10"
++Ping 10.0.3.10: 5/5 packets received, 0% loss
++
++# Get structured JSON for parsing
++$ netsim exec my-network r1 "show ip route --json"
++[{"destination":"10.0.1.0/24","next_hop":"—","metric":0,"interface":"eth2","source":"connected"}, ...]
+ ```
+ 
+ ### Attach an Interactive Console
+ 
+ ```bash
+-# Attach to a device for an interactive session
+ netsim attach my-network r1
+ ```
+ 
+-Once attached, you get an interactive REPL with **Cisco IOS-style command abbreviation** and **tab completion**:
++Opens a full interactive REPL session on the device. You're effectively "logged in" to the simulated router with command history, tab completion, and Cisco IOS-style abbreviated commands:
+ 
+ ```
+ r1> sh ip ro
+@@ -197,49 +217,189 @@ eth0       10.0.12.1/24    02:00:00:00:01:00  up      up
+ eth1       10.0.13.1/24    02:00:00:00:01:01  up      up
+ eth2       10.0.1.1/24     02:00:00:00:01:02  up      up
+ 
+-r1> ping 10.0.3.10
+-Ping 10.0.3.10: 5/5 packets received, 0% loss
++r1> show ospf neighbors
++Neighbor ID     Interface  State   Priority  Dead Time
++2.2.2.2         eth0       Full    1         38s
++3.3.3.3         eth1       Full    1         36s
++
++r1> show arp
++IP Address      MAC Address        State     Age  Interface
++10.0.12.2       02:00:00:00:02:00  Resolved  396  eth0
++10.0.13.3       02:00:00:00:03:00  Resolved  396  eth1
++```
+ 
+-r1> show ip route --json
+-[{"destination":"10.0.1.0/24","next_hop":"—","metric":0, ...}]
++**Live interface management** — shut down a link and watch the protocol reconverge in real time:
+ 
+-r1> int shut eth0
++```
++r1> interface shutdown eth0
+ Interface eth0 admin-down
+ [OSPF adjacency r1<->r2 torn down]
+ 
+-r1> int no shut eth0
++r1> sh ip ro
++Destination       Next Hop        Metric  Interface
++10.0.1.0/24       —               0       eth2 (connected)
++10.0.13.0/24      —               0       eth1 (connected)
++10.0.3.0/24       10.0.13.3       11      eth1 (OSPF)
++10.0.23.0/24      10.0.13.3       21      eth1 (OSPF)
++   ← traffic to r2 now routes via r3 (metric increased from 20 to 21)
++
++r1> interface no shutdown eth0
+ Interface eth0 admin-up
+ [OSPF adjacency r1<->r2 re-establishing...]
+ 
+-r1> exit
++r1> sh ip ro
++   ← routes restored to original paths after reconvergence
++```
++
++**JSON output on any show command** for structured data:
++
++```
++r1> show ospf neighbors --json
++[{"neighbor_id":"2.2.2.2","interface":"eth0","state":"Full","priority":1},
++ {"neighbor_id":"3.3.3.3","interface":"eth1","state":"Full","priority":1}]
+ ```
+ 
+ **Console Features:**
+ 
+-- **Abbreviated commands** — Cisco IOS-style prefix matching (`sh ip ro` → `show ip route`)
+-- **Tab completion** — Commands and subcommands
+-- **Interface management** — `interface shutdown/no shutdown` with protocol teardown
++- **Abbreviated commands** — Cisco IOS-style prefix matching (`sh ip ro` → `show ip route`, `int shut` → `interface shutdown`)
++- **Tab completion** — Full hierarchical completion for commands, subcommands, and arguments
++- **Interface management** — `interface shutdown/no shutdown` triggers protocol teardown and reconvergence
+ - **JSON output** — Append `--json` to any show command for structured output
+ - **Command history** — Arrow keys navigate previous commands
++- **MPLS operations** — `mpls lfib add/del`, `mpls ftn add/del` for label manipulation
++- **VPN commands** — `bgp vpn-originate`, `show bgp vpn`, `show vrf` for L3VPN troubleshooting
++- **GRE tunnels** — `gre tunnel set` for overlay configuration
++- **MPLS OAM** — `mpls ping`, `mpls traceroute` for label-switched path verification
++
++---
++
++### TUI Daemon Selector
++
++Running `netsim daemon` with no subcommand launches an interactive TUI (built with ratatui) that lets you browse running daemons, select devices, and attach — all without memorizing names.
+ 
+-### TUI Selector
++**Level 1 — Daemon selector** lists all running simulations:
+ 
+-Running `netsim daemon` with no subcommand launches an interactive TUI that lets you browse running daemons, select devices, and attach — all without memorizing names.
++```
++┌─ Running Daemons ─────────────────────────────────────────┐
++│                                                           │
++│ > ospf-triangle  (PID 48291, 2h 15m)                     │
++│     examples/ospf-triangle.yaml                           │
++│                                                           │
++│   sp-core         (PID 48305, 45m 12s)                    │
++│     topologies/transitnet-sp-core.yaml                    │
++│                                                           │
++│   dc-fabric       (PID 49102, 3m 8s)                      │
++│     topologies/spine-leaf-evpn.yaml                        │
++│                                                           │
++└───────────────────────────────────────────────────────────┘
++ Up/Down: Navigate  Enter: Select  l: Logs  q: Quit
++```
++
++Press Enter to select a daemon, then **Level 2 — Device selector** shows all devices:
++
++```
++┌─ ospf-triangle: Devices ──────────────────────────────────┐
++│                                                           │
++│ > r1  (router)                                            │
++│   r2  (router)                                            │
++│   r3  (router)                                            │
++│   h1  (host)                                              │
++│   h3  (host)                                              │
++│                                                           │
++└───────────────────────────────────────────────────────────┘
++ Up/Down: Navigate  Enter: Select  l: Logs  q: Back
++```
++
++Press Enter on a device to open an interactive console session. Press `l` at any point to open the **log viewer** showing real-time daemon events (protocol state changes, adjacency transitions, convergence events).
++
++---
+ 
+ ### Daemon Management
+ 
+ ```bash
+ # List all running daemons
+-netsim daemon list
+-
+-# Check daemon status
+-netsim daemon status my-network
++$ netsim daemon list
++NAME            PID    UPTIME   TOPOLOGY
++ospf-triangle   48291  2h 15m   examples/ospf-triangle.yaml
++sp-core         48305  45m 12s  topologies/transitnet-sp-core.yaml
++
++# Check a specific daemon's status
++$ netsim daemon status my-network
++Daemon: my-network
++PID: 48291
++Uptime: 2h 15m 30s
++Tick interval: 100ms
++Topology: examples/ospf-triangle.yaml
++Devices: r1 (router), r2 (router), r3 (router), h1 (host), h3 (host)
+ 
+ # Stop a daemon
+-netsim daemon stop my-network
++$ netsim daemon stop my-network
+ 
+ # Clean up stale PID files from crashed daemons
+-netsim daemon list --clean
++$ netsim daemon list --clean
++```
++
++---
++
++### CI/CD Integration Example
++
++Start a daemon, run automated validation, collect results, tear down:
++
++```bash
++#!/bin/bash
++# ci-validate.sh — validate topology in CI pipeline
++
++# Start simulation in background
++netsim daemon start ci-test topology.yaml --tick-interval 10ms
++
++# Wait for convergence
++sleep 2
++
++# Run validation checks, collect JSON output
++ROUTES=$(netsim exec ci-test r1 "show ip route --json")
++OSPF=$(netsim exec ci-test r1 "show ospf neighbors --json")
++PING=$(netsim exec ci-test h1 "ping 10.0.3.10")
++
++# Assert expected state
++echo "$ROUTES" | jq -e '.[] | select(.destination == "10.0.3.0/24")' || exit 1
++echo "$OSPF" | jq -e 'length == 2' || exit 1
++echo "$PING" | grep -q "0% loss" || exit 1
++
++# Clean up
++netsim daemon stop ci-test
++
++echo "All validations passed"
++```
++
++### Failover Testing with Daemon Mode
++
++Test link failure and reconvergence interactively:
++
++```bash
++# Start the simulation
++$ netsim daemon start failover-test sp-core.yaml
++
++# Check initial state
++$ netsim exec failover-test r1 "show ospf neighbors"
++Neighbor ID     Interface  State   Priority  Dead Time
++2.2.2.2         eth0       Full    1         38s
++3.3.3.3         eth1       Full    1         36s
++
++# Shut down a link
++$ netsim exec failover-test r1 "interface shutdown eth0"
++Interface eth0 admin-down
++
++# Verify reconvergence — traffic now routes via alternate path
++$ netsim exec failover-test r1 "show ip route"
++10.0.23.0/24      10.0.13.3       21      eth1 (OSPF)
++
++# Restore and verify
++$ netsim exec failover-test r1 "interface no shutdown eth0"
++$ sleep 1
++$ netsim exec failover-test r1 "show ospf neighbors"
++Neighbor ID     Interface  State   Priority  Dead Time
++2.2.2.2         eth0       Full    1         38s      ← re-established
++3.3.3.3         eth1       Full    1         36s
+ ```
+ 
+ ### Why Use Daemon Mode?
+@@ -249,7 +409,7 @@ netsim daemon list --clean
+ - **Fast iteration loop**: Design → Generate configs → Simulate → Iterate, all without spinning up containers until you're ready to deploy
+ - **CI/CD integration**: Start daemon, run automated tests via `exec`, collect JSON results, stop daemon
+ - **Development workflow**: Keep a topology running while you experiment with agent logic or automation scripts
+-- **Structured logging**: Daemon events logged to `~/.netsim/<name>/daemon.log` for debugging
++- **Structured logging**: Daemon events logged in JSON to `~/.netsim/<name>/daemon.log` for debugging and post-mortem analysis
+ 
+ ---
+ 
+@@ -299,11 +459,55 @@ netsim daemon list --clean
+ 
+ ### Available Commands
+ 
+-All commands support abbreviation (e.g., `sh ip ro`) and `--json` output:
+-
+-- **Show commands**: `show ip route`, `show interfaces`, `show arp`, `show ospf neighbors`, `show isis database`, `show isis neighbors`, `show bgp neighbors`, `show bgp vpn`, `show mpls forwarding`, `show ldp bindings`, `show bfd sessions`, `show vrf`, `show sr`, `show traffic`
+-- **Diagnostics**: `ping <ip>`, `traceroute <ip>`
+-- **Configuration**: `route add <dest> via <nexthop>`, `interface shutdown <name>`, `interface no shutdown <name>`
++All commands support Cisco IOS-style abbreviation (e.g., `sh ip ro`) and `--json` output for structured data.
++
++**Show Commands (Read-Only Introspection):**
++
++| Command | Purpose |
++|---------|---------|
++| `show ip route [vrf <name>]` | Routing table (global or per-VRF) |
++| `show interfaces` | Interface status, IP, MAC, admin state |
++| `show arp` | ARP cache entries |
++| `show ospf neighbors` | OSPF adjacency state |
++| `show ospf database` | OSPF LSDB contents |
++| `show isis neighbors` | IS-IS adjacency state |
++| `show isis database` | IS-IS LSDB contents |
++| `show isis interfaces` | IS-IS interface status |
++| `show isis spf` | IS-IS SPF run information |
++| `show isis route` | IS-IS routing table |
++| `show bgp [summary]` | BGP Loc-RIB / neighbor overview |
++| `show bgp neighbors [<ip>]` | BGP neighbor details |
++| `show bgp vpn` | VPNv4 routes |
++| `show mpls [forwarding]` | MPLS FTN/LFIB tables |
++| `show mpls vpn-labels` | VPN label allocations |
++| `show ldp [bindings/neighbors]` | LDP session and label state |
++| `show bfd [sessions]` | BFD session status |
++| `show gre [tunnels]` | GRE tunnel status |
++| `show vrf [<name> [routes]]` | VRF list, details, or per-VRF routes |
++| `show sr` | Segment Routing state and SIDs |
++| `show rsvp [tunnels]` | RSVP-TE tunnel status |
++| `show traffic` | Traffic generator statistics |
++
++**Data Plane Probes:**
++
++| Command | Purpose |
++|---------|---------|
++| `ping <ip> [-c N]` | ICMP echo test |
++| `traceroute <ip> [-m TTL]` | Hop-by-hop path discovery |
++| `mpls ping <ip> [--vrf <name>]` | MPLS OAM echo test |
++| `mpls traceroute <ip> [--vrf <name>]` | MPLS OAM path discovery |
++
++**Operational Configuration:**
++
++| Command | Purpose |
++|---------|---------|
++| `route add <dest> via <nexthop>` | Add static route |
++| `interface shutdown <name>` | Admin-down interface (triggers protocol reconvergence) |
++| `interface no shutdown <name>` | Admin-up interface |
++| `mpls lfib add/del <label> ...` | Manipulate MPLS LFIB entries |
++| `mpls ftn add/del <prefix> ...` | Manipulate MPLS FTN entries |
++| `bgp vpn-originate <vrf>` | Trigger VPN route origination |
++| `gre tunnel set <iface> ...` | Configure GRE tunnel parameters |
+ 
+ ---
+ 
+
+commit b30cf5f43a40c0fac00182b8d88ea168bf4696f1
+Author: Simon Knight <simon.knight@gmail.com>
+Date:   Sat Feb 14 19:09:12 2026 +1030
+
+    Update project statuses, add NTE project, add NetVis example gallery
+    
+    - Rename Network Engineering to Network Automation on projects page
+    - Add NTE (Network Topology Engine) as standalone project split from ank_pydantic
+    - Update ANK Workbench from "Not started" to v1.3 with milestone history
+    - Update ank_pydantic to v1.8 Performance & Optimization
+    - Update NetVis to v1.3 with 5 example images (enterprise campus, datacenter,
+      ISP backbone, radial layout, theme showcase)
+    - Update RTL TCP to v1 Core Streaming & Hardware
+    - Update Network Simulator to v1.7 Segment Routing
+    - Add NetVis example images to network-automation ecosystem page
+    
+    Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>
+
+diff --git a/projects/netvis.md b/projects/netvis.md
+index 6f261f3..8b6297a 100644
+--- a/projects/netvis.md
++++ b/projects/netvis.md
+@@ -4,7 +4,7 @@ layout: default
+ 
+ # NetVis
+ 
+-<span class="status-badge status-active">40 - Integration Surface & Diagnostics</span>
++<span class="status-badge status-active">v1.3 — Embed Readiness & API Stability</span>
+ 
+ [← Back to Projects](../projects)
+ 
+@@ -19,7 +19,7 @@ Network visualization often fails at scale because layout algorithms treat all n
+ 
+ | | |
+ |---|---|
+-| **Status** | 40 - Integration Surface & Diagnostics |
++| **Status** | v1.3 — Embed Readiness & API Stability |
+ | **Language** | Rust |
+ | **Started** | 2026 |
+ 
+@@ -105,13 +105,42 @@ topo.export_for_netvis(
+ 
+ NetVis reads the exported topology and applies advanced layout algorithms, producing publication-quality diagrams that reflect the logical structure captured in ank_pydantic.
+ 
++## Example Gallery
++
++### Enterprise Campus Network
++
++![Enterprise Campus](/images/netvis-enterprise-campus.png)
++*Multi-building campus with core/distribution/access layers, firewalls, ISP uplinks, data center spine-leaf, and management infrastructure. Edge bundling groups related connections; path analysis overlays highlight application, backup, and management traffic flows.*
++
++### Data Center Spine-Leaf Fabric
++
++![Data Center Fabric](/images/netvis-datacenter-large.png)
++*Spine-leaf topology with 4 leaf switches, 2 spines, and 12 racks of hosts. Bandwidth annotations (10G, 25G, 100G) on each link. Force-directed layout separates rack groups while keeping the spine-leaf hierarchy visible.*
++
++### ISP Backbone with Path Analysis
++
++![ISP Backbone](/images/netvis-isp-backbone.png)
++*US-wide ISP backbone spanning 8 cities (LAX, SEA, DEN, DAL, CHI, NYC, BOS, WAS) with core routers, customer edge devices, and IX peering. Path analysis overlay shows primary east-west, backup, and regional paths with distinct colors and weights.*
++
++### Radial Layout — Distributed Service Mesh
++
++![Radial Layout](/images/netvis-showcase-radial-layout.png)
++*Zone-based service mesh with central controller, regional coordinators, edge nodes, and service endpoints arranged in a radial layout. Demonstrates NetVis's ability to handle hierarchical topologies with many leaf nodes.*
++
++### Theme Showcase — Device-Aware Icons
++
++![Theme Showcase](/images/netvis-theme-showcase.png)
++*Device-type-aware rendering with distinct icons for routers, switches, firewalls, servers, and cloud nodes. Bandwidth labels (1G, 10G) on links. Shows the visual fidelity available for smaller, detail-rich diagrams.*
++
+ ## Current Status
+ 
+-Core layout algorithms implemented, refining edge bundling and multi-layer rendering. Interactive browser embedding planned for v2.
++**v1.2 Visual Polish & Production Hardening** shipped (Feb 9, 2026) with SVG filter infrastructure, WCAG 3:1 contrast enforcement, high-contrast theme, and label collision avoidance.
++
++Currently working on **v1.3 Embed Readiness & API Stability**: stable public API, deterministic output contracts, versioned config/topology schemas, and WASM compatibility testing.
+ 
+ ## Tech Stack
+ 
+-Rust, petgraph for graph algorithms, SVG/PDF rendering libraries
++Rust, petgraph, fjadra (d3-force port), SVG/PDF/PNG rendering, WASM-ready
+ 
+ ---
+ 
+
+commit 982a99e1119c551876e1d9198240236a0ff5bbc9
+Author: Simon Knight <simon.knight@gmail.com>
+Date:   Fri Feb 13 14:59:08 2026 +1030
+
+    Re-scan projects and refresh website content with latest roadmaps and plans
+
+diff --git a/projects/signals.md b/projects/signals.md
+index 0110eed..b44bd3e 100644
+--- a/projects/signals.md
++++ b/projects/signals.md
+@@ -11,14 +11,10 @@ layout: default
+ ---
+ 
+ 
+-## The Concept
++## The Insight
+ 
+ Transform raw radio spectrum data into an actionable "Signal Census" through automated detection, ML classification, and distributed acquisition.
+ 
+-![Spectra Signal Census](../images/spectra-screenshot.png)
+-
+-*Real-time signal detection showing frequency, bandwidth, modulation type, and classification confidence across the RF spectrum*
+-
+ ## Quick Facts
+ 
+ | | |
+@@ -29,6 +25,10 @@ Transform raw radio spectrum data into an actionable "Signal Census" through aut
+ 
+ ---
+ 
++## Core Value
++
++Transform raw radio spectrum data into an actionable "Signal Census" through automated detection, ML classification, and distributed acquisition.
++
+ ---
+ 
+ [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+commit 8bd2ffbe5a49a31f8e3e4852aac2259611329a47
+Author: Simon Knight <simon.knight@gmail.com>
+Date:   Fri Feb 13 11:42:25 2026 +1030
+
+    Remove broken NetVis visualization examples
+    
+    NetVis SVG outputs have coordinate positioning bug (coordinates outside viewBox)
+    causing blank images. Removed example output sections until layout is fixed.
+    
+    Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>
+
+diff --git a/projects/netvis.md b/projects/netvis.md
+index 4264467..bf62ff6 100644
+--- a/projects/netvis.md
++++ b/projects/netvis.md
+@@ -91,20 +91,6 @@ Rendering to SVG...
+ Written: output.svg (6.5 KB)
+ ```
+ 
+-## Example Outputs
+-
+-Data center spine-leaf:
+-![NetVis Data Center](/images/netvis-datacenter-example.svg)
+-
+-Mesh network:
+-![NetVis Mesh](/images/netvis-mesh-example.svg)
+-
+-Ring topology:
+-![NetVis Ring](/images/netvis-ring-example.svg)
+-
+-Path analysis with edge bundling:
+-![NetVis Path Analysis](/images/netvis-path-analysis.svg)
+-
+ ## Integration with ank_pydantic
+ 
+ ank_pydantic topologies export directly to NetVis format:
+
+commit 9c7ba7aab59aa462d974911bf01347f933a3fa33
+Author: Simon Knight <simon.knight@gmail.com>
+Date:   Fri Feb 13 09:55:11 2026 +1030
+
+    Rename and rebrand project pages
+    
+    - Change "The Insight" to "The Concept" across all project pages
+    - Rename "NetFlow Sim" to "Traffic Simulator"
+    - Remove "Passive Radar" → "Illumination Reflection Tracking"
+    - Remove all mentions of KrakenSDR from SDR projects
+    - Remove all mentions of aircraft from SDR and soundarray projects
+    - Change Fahrenheit to Celsius (42°F → 6°C, 68°F → 20°C)
+    - Trim marketing language from Tileserver section
+    - WiFi Radar: emphasize coherent SDR arrays, not specific hardware
+    
+    Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>
+
+diff --git a/projects/signals.md b/projects/signals.md
+index 37bbb63..0110eed 100644
+--- a/projects/signals.md
++++ b/projects/signals.md
+@@ -11,7 +11,7 @@ layout: default
+ ---
+ 
+ 
+-## The Insight
++## The Concept
+ 
+ Transform raw radio spectrum data into an actionable "Signal Census" through automated detection, ML classification, and distributed acquisition.
+ 
+@@ -19,12 +19,6 @@ Transform raw radio spectrum data into an actionable "Signal Census" through aut
+ 
+ *Real-time signal detection showing frequency, bandwidth, modulation type, and classification confidence across the RF spectrum*
+ 
+-### Live Capture Example
+-
+-![Spectra Waterfall](../images/spectra-waterfall.png)
+-
+-*Waterfall display from live RF capture showing signal activity over time and frequency*
+-
+ ## Quick Facts
+ 
+ | | |
+
+commit 474e81d83d0e5a5338ab631cc4be8cf827da7a01
+Author: Simon Knight <simon.knight@gmail.com>
+Date:   Thu Feb 12 21:46:49 2026 +1030
+
+    Add waterfall image to Spectra and enhance rtltcp page
+    
+    Project Spectra:
+    - Add waterfall display from live RF capture
+    - Resized to 800px width for web display (462KB)
+    - Shows signal activity over time and frequency
+    
+    rtltcp-rust:
+    - Add detailed v1/v2 roadmap with specific requirements
+    - Add build instructions for local and cross-compilation
+    - Enhanced tech stack with tokio async runtime details
+    - Add hardware access, networking, and UI milestones
+    - Document future features (compression, delta encoding, UDP/FEC)
+    
+    Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>
+
+diff --git a/projects/signals.md b/projects/signals.md
+index a2a58ee..37bbb63 100644
+--- a/projects/signals.md
++++ b/projects/signals.md
+@@ -19,6 +19,12 @@ Transform raw radio spectrum data into an actionable "Signal Census" through aut
+ 
+ *Real-time signal detection showing frequency, bandwidth, modulation type, and classification confidence across the RF spectrum*
+ 
++### Live Capture Example
++
++![Spectra Waterfall](../images/spectra-waterfall.png)
++
++*Waterfall display from live RF capture showing signal activity over time and frequency*
++
+ ## Quick Facts
+ 
+ | | |
+
+commit 24e129401e7a59f4fed7885a818c797d2a4ed24e
+Author: Simon Knight <simon.knight@gmail.com>
+Date:   Thu Feb 12 20:41:37 2026 +1030
+
+    Add path analysis showcase to NetVis page
+    
+    - Add netvis-path-analysis.svg from NetVis examples
+    - Shows path analysis with edge bundling visualization
+    - Demonstrates advanced layout algorithms
+    
+    Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>
+
+diff --git a/projects/netvis.md b/projects/netvis.md
+index dd58477..6242e4f 100644
+--- a/projects/netvis.md
++++ b/projects/netvis.md
+@@ -102,6 +102,9 @@ Mesh network:
+ Ring topology:
+ ![NetVis Ring](/images/netvis-ring-example.svg)
+ 
++Path analysis with edge bundling:
++![NetVis Path Analysis](/images/netvis-path-analysis.svg)
++
+ ## Integration with ank_pydantic
+ 
+ ank_pydantic topologies export directly to NetVis format:
+
+commit 2648149d403e8ed704bec077cbca84d2999c9472
+Author: Simon Knight <simon.knight@gmail.com>
+Date:   Thu Feb 12 15:44:30 2026 +1030
+
+    Refactor ecosystem pages: move detailed content to project pages
+    
+    ## Content Distribution
+    - Moved extensive examples, protocol details, and CLI output from ecosystem
+      pages to individual project pages where they belong
+    - Network Simulator: Added 300+ lines of OSPF examples, database dumps,
+      convergence metrics to project page
+    - NetVis: Added layout examples, integration code, and visualization samples
+    - ank_pydantic: Added Python API examples and integration details
+    - TopoGen: Added data center generation examples and Python API
+    - Slimmed network-automation.md from 814 lines to 240 lines (70% reduction)
+    
+    ## Navigation Fixes
+    - Added contextual "Back to Network Automation" links to all network projects
+    - Projects now have proper breadcrumb navigation based on entry point
+    - Fixes jarring experience of losing context when clicking through from
+      ecosystem pages
+    
+    ## New Projects
+    - Added NetFlow Sim project with full details and proper categorization
+    
+    ## Bug Fixes
+    - Removed duplicate footer links from nascleanup.md and watchnoise.md
+    - Fixed duplicate AutoNetkit footers
+    
+    Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>
+
+diff --git a/projects/netvis.md b/projects/netvis.md
+index 76749a6..b4bd740 100644
+--- a/projects/netvis.md
++++ b/projects/netvis.md
+@@ -20,15 +20,110 @@ Network visualization often fails at scale because layout algorithms treat all n
+ | | |
+ |---|---|
+ | **Status** | Active |
+-| **Language** | N/A |
++| **Language** | Rust |
+ | **Started** | 2025 |
+ 
+ ---
+ 
+ ## What This Is
+ 
+-A Rust-based network topology layout and visualization engine. Takes complex multi-layer network topologies (via petgraph) and renders them using advanced layout algorithms that reduce visual complexity while preserving structural clarity. Outputs static formats (SVG, PDF, PNG) for v1, with interactive browser embedding planned for future integration with other tooling.
++A Rust-based network topology layout and visualization engine that transforms complex multi-layer networks into clear, information-dense renderings. Advanced layout algorithms minimize visual complexity while preserving structural clarity.
++
++## Key Features
++
++- **Advanced Layout Algorithms**:
++  - Force-directed layout with configurable parameters
++  - Hierarchical layout for tree-like topologies
++  - Geographic layout for physical infrastructure
++  - Edge bundling to reduce visual clutter
++- **Multi-Layer Support**: Visualize L2, L3, and logical layers simultaneously
++- **Static Output Formats**: SVG, PDF, PNG (v1 focus)
++- **High-Quality Rendering**: Anti-aliased, publication-ready graphics
++- **Topology Awareness**: Uses `petgraph` for graph analysis
++
++## Example: Quick Start
++
++Input topology (`simple-network.yaml`):
++```yaml
++nodes:
++  - name: r1
++    type: router
++  - name: r2
++    type: router
++  - name: s1
++    type: switch
++  - name: s2
++    type: switch
++  - name: h1
++    type: host
++  - name: h2
++    type: host
++
++edges:
++  - src: r1
++    dst: s1
++  - src: r1
++    dst: s2
++  - src: r2
++    dst: s1
++  - src: r2
++    dst: s2
++  - src: s1
++    dst: h1
++  - src: s2
++    dst: h2
++  - src: s1
++    dst: s2
++```
++
++Render with CLI:
++```bash
++$ netvis render simple-network.yaml \
++    --layout force-directed \
++    --output output.svg \
++    --width 800 \
++    --height 600
++
++Loaded topology: 6 nodes, 7 edges
++Applying force-directed layout...
++Layout converged in 245 iterations
++Rendering to SVG...
++Written: output.svg (6.5 KB)
++```
++
++## Example Outputs
++
++Data center spine-leaf:
++![NetVis Data Center](/images/netvis-datacenter-example.svg)
++
++Mesh network:
++![NetVis Mesh](/images/netvis-mesh-example.svg)
++
++Ring topology:
++![NetVis Ring](/images/netvis-ring-example.svg)
++
++## Integration with ank_pydantic
++
++ank_pydantic topologies export directly to NetVis format:
++```python
++# Export topology with layout hints
++topo.export_for_netvis(
++    "output.json",
++    layout="hierarchical",
++    node_metadata=True  # Include device types, roles for styling
++)
++```
++
++NetVis reads the exported topology and applies advanced layout algorithms, producing publication-quality diagrams that reflect the logical structure captured in ank_pydantic.
++
++## Current Status
++
++Core layout algorithms implemented, refining edge bundling and multi-layer rendering. Interactive browser embedding planned for v2.
++
++## Tech Stack
++
++Rust, petgraph for graph algorithms, SVG/PDF rendering libraries
+ 
+ ---
+ 
+-[← Back to Projects](../projects) | [Development Philosophy](../development)
++[← Back to Network Automation](../network-automation) | [← Back to Projects](../projects)
+
+commit 419313253fb75d64e1103b9af9cae7a24776ca74
+Author: Simon Knight <simon.knight@gmail.com>
+Date:   Thu Feb 12 10:11:03 2026 +1030
+
+    Add Signal Processing ecosystem page with Spectra screenshot
+    
+    Create comprehensive Signal Processing & RF ecosystem page covering:
+    
+    HealthyPi Ecosystem:
+    - Biometric signal processing (ECG, PPG, respiration)
+    - NeuroKit2 integration for HRV analysis
+    - Real-time NATS event streaming for agent coordination
+    - Automated stress detection and intervention workflows
+    
+    Project Spectra:
+    - RF spectrum monitoring and signal classification
+    - RTL-SDR/HackRF integration for wide-band scanning
+    - ML-based signal identification pipeline
+    - Added screenshot showing real-time signal census
+    
+    Passive Radar:
+    - KrakenSDR multi-beam system for aircraft tracking
+    - Passive radar using FM illuminators of opportunity
+    - Range-Doppler processing and target tracking
+    
+    Wi-Fi Radar:
+    - Through-wall human detection using Wi-Fi signals
+    - Phase-based localization with coherent array
+    
+    Philosophy section on open algorithms, affordable hardware,
+    agent-aware architecture, and real-time processing.
+    
+    Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>
+
+diff --git a/projects/signals.md b/projects/signals.md
+index d3c7cfe..f344b1d 100644
+--- a/projects/signals.md
++++ b/projects/signals.md
+@@ -15,6 +15,10 @@ layout: default
+ 
+ Transform raw radio spectrum data into an actionable "Signal Census" through automated detection, ML classification, and distributed acquisition.
+ 
++![Spectra Signal Census](../images/spectra-screenshot.png)
++
++*Real-time signal detection showing frequency, bandwidth, modulation type, and classification confidence across the RF spectrum*
++
+ ## Quick Facts
+ 
+ | | |

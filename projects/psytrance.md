@@ -23,6 +23,8 @@ section: projects
 - [Usage](#usage)
 - [Output](#output)
 - [Tech Stack](#tech-stack)
+- [What This Is](#what-this-is)
+- [Core Value](#core-value)
 
 ---
 
@@ -150,6 +152,18 @@ Without `--output`, the engine launches an interactive TUI with real-time playba
 - **Playback**: cpal (real-time audio)
 - **TUI**: ratatui + crossterm
 - **RNG**: Seeded rand for reproducible generation
+
+---
+
+## What This Is
+
+A generative psytrance synthesis engine with real-time TUI controls. Creates complete tracks driven by a multi-level energy model, with live playback, step editing, and WAV export. Currently produces high-quality procedural psytrance but lacks workflow features for capturing ideas and iterating efficiently.
+
+---
+
+## Core Value
+
+Energy-driven generative music that sounds professional and lets users quickly explore variations.
 
 ---
 

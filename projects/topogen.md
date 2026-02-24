@@ -22,6 +22,7 @@ section: network-automation
 - [Python API](#python-api)
 - [Milestones](#milestones)
 - [Tech Stack](#tech-stack)
+- [Core Value](#core-value)
 
 ---
 
@@ -203,6 +204,12 @@ Output converters, traffic patterns, and POP design patterns.
 ## Tech Stack
 
 Rust core, PyO3 for Python bindings, Maturin build system
+
+---
+
+## Core Value
+
+Network engineers can quickly generate realistic, validated network topologies without implementing complex algorithms from scratch.
 
 ---
 

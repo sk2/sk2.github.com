@@ -24,6 +24,7 @@ section: signal-processing
 - [Raspberry Pi Deployment](#raspberry-pi-deployment)
 - [Development Roadmap](#development-roadmap)
 - [Tech Stack](#tech-stack)
+- [Core Value](#core-value)
 
 ---
 
@@ -186,6 +187,12 @@ Compression (LZ4/zstd), UDP transport with Forward Error Correction, "Mac Tunnel
 - **Hardware FFI**: rtlsdr_sys, libairspyhf, libairspy
 - **Cross-compilation**: `cross` + custom Docker images
 - **Config**: TOML with serde
+
+---
+
+## Core Value
+
+The ability to reliably and efficiently stream high-fidelity IQ data from multiple SDRs over a network with a modern management interface.
 
 ---
 

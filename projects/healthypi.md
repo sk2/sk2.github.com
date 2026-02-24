@@ -20,6 +20,7 @@ section: signal-processing
 - [Architecture](#architecture)
 - [Milestones](#milestones)
 - [Tech Stack](#tech-stack)
+- [Core Value](#core-value)
 
 ---
 
@@ -98,6 +99,12 @@ macOS menu bar app with real-time ambient health status (Green/Yellow/Red).
 ## Tech Stack
 
 Python (Pydantic, NeuroKit2, SciPy), Swift (SwiftUI, HealthKit), NATS messaging, pytest (286 tests)
+
+---
+
+## Core Value
+
+A modular, agent-aware health monitoring ecosystem that translates raw biometric data from HealthyPi hardware (6 and Move) into actionable insights and automated interventions.
 
 ---
 

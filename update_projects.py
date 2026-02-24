@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Update website projects page and individual project pages from project metadata.
-Enforces a clean, understated, and powerful style with navigation.
+Enforces an understated style while preserving rich technical content and visual evidence.
 """
 
 import argparse
@@ -59,6 +59,14 @@ FM_SECTIONS = {
     "data": "data-analytics"
 }
 
+DETAILED_SECTIONS = [
+    "Concept", "The Insight", "Overview", "What This Is", "Problem It Solves", 
+    "Features", "Key Capabilities", "Architecture", "Technical Depth", 
+    "Security Model", "Implementation Details", "Protocols Implemented", 
+    "Performance", "Metrics", "Use Cases", "Integration", "Hardware", 
+    "Agents", "Components", "Screenshots", "Core Value"
+]
+
 def extract_sections(content: str) -> Dict[str, str]:
     sections = {}
     matches = re.finditer(r'^##\s+(.*?)\s*$(.*?)(?=^##\s|\Z)', content, re.MULTILINE | re.DOTALL)
@@ -69,26 +77,16 @@ def extract_sections(content: str) -> Dict[str, str]:
     return sections
 
 
-def wrap_long_code_blocks(content: str, threshold: int = 15) -> str:
-    """This functionality is now handled by the site layout (CSS/JS)."""
-    return content
-
-
 def generate_toc(content: str) -> str:
-    """Generate a table of contents from ## headers."""
     headers = re.findall(r'^##\s+([^#\n]+)\s*$', content, re.MULTILINE)
     headers = [h.strip() for h in headers if h.strip() != "Contents"]
-    
-    if len(headers) < 4:
-        return ""
-    
+    if len(headers) < 4: return ""
     links = []
     for h in headers:
         slug = h.lower().replace(" ", "-")
         slug = re.sub(r'[^a-z0-9-]', '', slug)
         slug = re.sub(r'-+', '-', slug)
         links.append(f"- [{h}](#{slug})")
-    
     return "## Contents\n\n" + "\n".join(links) + "\n\n---\n"
 
 
@@ -99,25 +97,14 @@ def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
     if not project_md.exists(): return None
     content = project_md.read_text()
     all_sections = extract_sections(content)
-    
     name_match = re.search(r'^#\s+(.+)$', content, re.MULTILINE)
     project_name = name_match.group(1).strip() if name_match else project_path.name
     project_name = re.sub(r'^(Project|PROJECT):\s*', '', project_name, flags=re.IGNORECASE)
     project_name = re.sub(r'\s*\(KrakenSDR\)$', '', project_name)
-    
-    if project_name in PROJECT_ALIASES:
-        project_name = PROJECT_ALIASES[project_name]
-
+    if project_name in PROJECT_ALIASES: project_name = PROJECT_ALIASES[project_name]
     slug = project_path.name.lower().replace("_", "-").replace(" ", "-")
-    slug_mappings = {
-        "multi-agent-assistant": "multi-agent", 
-        "watch-noise": "watchnoise", 
-        "passive": "rf-signal-analysis", 
-        "wifi-radar": "wifi-signal-analysis",
-        "ank_pydantic": "ank-pydantic"
-    }
+    slug_mappings = {"multi-agent-assistant": "multi-agent", "watch-noise": "watchnoise", "passive": "rf-signal-analysis", "wifi-radar": "wifi-signal-analysis", "ank_pydantic": "ank-pydantic"}
     slug = slug_mappings.get(slug, slug)
-
     cat = "experimental"
     s = slug.lower()
     if any(x in s for x in ["photo-tour"]): cat = "photography"
@@ -128,7 +115,6 @@ def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
     elif any(x in s for x in ["agent", "multi-agent", "cycle"]): cat = "agents"
     elif any(x in s for x in ["netflow", "polars", "tileserver", "matrix-time-series", "matrix-profile", "weather", "omnifocus-db", "cliscrape", "nascleanup", "devmon"]): cat = "data"
     elif any(x in s for x in ["netvis", "ank", "topogen", "netsim", "autonetkit", "network", "configparsing", "nte", "orchestrator", "automationarch", "netflowsim"]): cat = "network"
-
     stack = []
     constraints = all_sections.get("Constraints", "")
     tech_patterns = [r'\*\*Tech Stack[:\-]?\*\*:?\s*(.+)', r'\*\*Language\*\*:?\s*(.+?)(?:\s+—|$)']
@@ -138,7 +124,6 @@ def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
             s_str = match.group(1).split('\n')[0]
             stack.extend([s.strip() for s in re.split(r'[,;·]', s_str) if s.strip()])
             break
-
     status, status_detail, current_status = "active", None, ""
     state_md = planning_dir / "STATE.md"
     if state_md.exists():
@@ -155,7 +140,6 @@ def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
                 elif m_xy: status_detail = f"Phase {m_xy.group(1)}/{m_xy.group(2)}"
         la_match = re.search(r'\*\*Last activity:\*\*\s*(.+)', state_content)
         if la_match: current_status = la_match.group(1).strip()
-
     roadmap_summary = []
     roadmap_md = planning_dir / "ROADMAP.md"
     if roadmap_md.exists():
@@ -165,7 +149,6 @@ def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
             ms_name, ms_detail = match.group(1).strip(), match.group(2).strip()
             roadmap_summary.append(f"{ms_name} {ms_detail}")
             if len(roadmap_summary) >= 3: break
-
     return ProjectInfo(name=project_name, slug=slug, path=project_path, category=cat, status=status, status_detail=status_detail, stack=stack, sections=all_sections, current_status=current_status, roadmap_summary=roadmap_summary)
 
 
@@ -182,27 +165,22 @@ def generate_quick_facts(project: ProjectInfo) -> str:
 def update_existing_file(content: str, project: ProjectInfo) -> str:
     fm_match = re.match(r'^---\n(.*?)\n---', content, re.DOTALL)
     fm_lines = fm_match.group(1).split('\n') if fm_match else ["layout: default"]
-    
     new_fm_lines = []
     for line in fm_lines:
         line = line.strip()
         if not line or any(line.startswith(x) for x in ["#", "-", "|", "##", "<"]): continue
         if ":" in line: new_fm_lines.append(line)
-    
     if not any(l.startswith("section:") for l in new_fm_lines) and project.category in FM_SECTIONS:
         new_fm_lines.append(f"section: {FM_SECTIONS[project.category]}")
-        
     body = content[fm_match.end():].strip() if fm_match else content.strip()
-    
-    # Global cleanup
     body = re.sub(r'</?details>', '', body)
     body = re.sub(r'<summary>.*?</summary>', '', body)
     body = re.sub(r'\[← Back to .*?\]\(.*?\)', '', body)
     body = re.sub(r'^# .*?\n', '', body, flags=re.MULTILINE)
     body = re.sub(r'<span class="status-badge.*?>.*?</span>', '', body)
-    
     sections = re.split(r'^(?=##\s|---)', body, flags=re.MULTILINE)
     clean_sections = []
+    existing_headers = []
     for sec in sections:
         sec = sec.strip()
         if not sec or sec == "---" or sec == "|" or sec.startswith("## Contents"): continue
@@ -210,29 +188,27 @@ def update_existing_file(content: str, project: ProjectInfo) -> str:
         if sec.startswith("- v") or sec.startswith("- Phase") or sec.startswith("- Milestone"): continue
         if sec.startswith("|") and "**Status**" in sec: continue
         clean_sections.append(sec)
+        h_match = re.match(r'##\s+(.*?)$', sec, re.MULTILINE)
+        if h_match: existing_headers.append(h_match.group(1).strip())
     
+    for sec_name in DETAILED_SECTIONS:
+        if sec_name in project.sections and sec_name not in existing_headers:
+            clean_sections.append(f"## {sec_name}\n\n{project.sections[sec_name]}")
     header_block = f"# {project.name}\n\n{generate_status_badge(project)}\n\n[← Back to Projects](../projects)\n\n---"
     gen_sections = [generate_quick_facts(project).strip()]
     if project.roadmap_summary:
         gen_sections.append("## Roadmap\n\n" + "\n".join([f"- {item}" for item in project.roadmap_summary]))
-    
     fm_block = f"---\n" + "\n".join(new_fm_lines) + f"\n---"
-    
     body_content = []
     concept_sec = next((s for s in clean_sections if s.startswith("## Concept")), None)
     if concept_sec:
         body_content.append(concept_sec)
         clean_sections.remove(concept_sec)
-    
     body_content.extend(gen_sections)
     body_content.extend(clean_sections)
-    
     assembled_body = "\n\n---\n\n".join(body_content)
-    
     toc = generate_toc(assembled_body)
-    if toc:
-        assembled_body = toc + "\n" + assembled_body
-
+    if toc: assembled_body = toc + "\n" + assembled_body
     return fm_block + "\n\n" + header_block + "\n\n" + assembled_body + "\n\n---\n\n[← Back to Projects](../projects)\n"
 
 
@@ -240,30 +216,23 @@ def generate_detailed_page(project: ProjectInfo) -> str:
     fm = f"---\nlayout: default"
     if project.category in FM_SECTIONS: fm += f"\nsection: {FM_SECTIONS[project.category]}"
     fm += "\n---"
-    
     lines = [fm, "", f"# {project.name}", "", generate_status_badge(project), "", "[← Back to Projects](../projects)", "", "---", ""]
-    
     content_lines = []
     found_first = False
-    for sec in ["Concept", "The Insight", "Overview", "What This Is", "Problem It Solves", "Features"]:
+    for sec in DETAILED_SECTIONS:
         body = project.sections.get(sec)
         if body:
             heading = "Concept" if not found_first else sec
             found_first = True
             content_lines.append(f"## {heading}\n"); content_lines.append(body + "\n")
-    
     content_lines.append(generate_quick_facts(project))
     if project.roadmap_summary:
         content_lines.append("## Roadmap\n")
         for item in project.roadmap_summary: content_lines.append(f"- {item}")
         content_lines.append("")
-    
     assembled_content = "\n".join(content_lines)
-    
     toc = generate_toc(assembled_content)
-    if toc:
-        lines.append(toc)
-    
+    if toc: lines.append(toc)
     lines.append(assembled_content)
     lines.append("---\n"); lines.append("[← Back to Projects](../projects)\n")
     return "\n".join(lines)
@@ -271,14 +240,11 @@ def generate_detailed_page(project: ProjectInfo) -> str:
 
 def generate_projects_index(projects: list[ProjectInfo]) -> str:
     lines = ["---", "layout: default", "---", "", "# Projects", "", "Focused on network engineering, autonomous systems, and signal processing.", "", "---", ""]
-    
     categorized = {k: [] for k in CATEGORY_MAP.keys()}
     for p in sorted(projects, key=lambda x: x.name): categorized[p.category].append(p)
-
     for cat_key, (title, desc, link) in CATEGORY_MAP.items():
         projs = categorized[cat_key]
         if not projs: continue
-        
         lines.append(f"## {title}\n")
         for p in projs:
             summary = ""
@@ -287,15 +253,12 @@ def generate_projects_index(projects: list[ProjectInfo]) -> str:
                     summary = p.sections[k].strip().split('\n\n')[0]
                     summary = re.sub(r'!\[.*?\]\(.*?\)', '', summary).strip()
                     if summary: break
-            
             summary = summary.replace("high-performance", "fast").replace("blazing-fast", "fast").replace("cutting-edge", "modern")
             sents = re.split(r'(?<=[.!?])\s+', summary)
             summary = ' '.join(sents[:3])
-
             lines.append(f"### [{p.name}](projects/{p.slug})\n")
             lines.append(f"{generate_status_badge(p)}")
             lines.append(f"\n\n{summary}\n\n")
-    
     lines.append('<style>\n.status-badge { display: inline-block; padding: 0.2em 0.6em; margin: 0.3em 0; border-radius: 4px; font-size: 0.8em; font-weight: 600; }\n.status-active { background-color: #f8f9fa; color: #495057; border: 1px solid #dee2e6; }\n.status-planning { background-color: #fff3cd; color: #856404; border: 1px solid #ffeeba; }\nh3 { margin-bottom: 0.1em; }\nh3 + .status-badge { margin-top: 0; }\nsection { margin-bottom: 2em; }\n</style>')
     return "\n".join(lines)
 
@@ -304,7 +267,6 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--scan-dirs", nargs="+", default=["~/dev", "~/PycharmProjects", "~/RustroverProjects"])
     args = parser.parse_args()
-    
     projects = []
     for d in args.scan_dirs:
         p = Path(d).expanduser()
@@ -313,7 +275,6 @@ def main():
                 if not pd.is_dir() or "-clean-" in pd.name or "backup" in pd.name.lower(): continue
                 info = parse_project_metadata(pd)
                 if info: projects.append(info)
-    
     projects_dir = Path("projects")
     scanned_slugs = {p.slug for p in projects}
     scanned_names = {p.name for p in projects}
@@ -325,16 +286,17 @@ def main():
                 name = name_match.group(1).strip()
                 if name in scanned_names: continue
                 projects.append(ProjectInfo(name=name, slug=legacy_md.stem, path=legacy_md, category="experimental", status="active", sections=extract_sections(content)))
-
     for p in projects:
         pp = projects_dir / f"{p.slug}.md"
         if pp.exists():
             content = pp.read_text()
-            if len(content.split('\n')) > 30:
+            metadata_headers = [h for h in DETAILED_SECTIONS if h in p.sections]
+            file_headers = re.findall(r'^##\s+(.*?)$', content, re.MULTILINE)
+            missing_some = any(h not in file_headers for h in metadata_headers)
+            if len(content.split('\n')) > 30 or missing_some:
                 pp.write_text(update_existing_file(content, p))
                 continue
         pp.write_text(generate_detailed_page(p))
-        
     Path("projects.md").write_text(generate_projects_index(projects))
     print("Sync complete.")
 

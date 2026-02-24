@@ -20,6 +20,7 @@ section: data-analytics
 - [Features](#features)
 - [Architecture](#architecture)
 - [Use Cases](#use-cases)
+- [Core Value](#core-value)
 
 ---
 
@@ -146,6 +147,12 @@ Polars DataFrame (via to_dataframe()) or Rust types
 ---
 
  | [Development Philosophy](../development)
+
+---
+
+## Core Value
+
+**Performance at scale with ergonomic APIs** — achieve 2.5x speedup via SIMD, handle datasets larger than RAM via tiling, while maintaining simple `.motifs(k)` / `.discords(k)` interfaces.
 
 ---
 

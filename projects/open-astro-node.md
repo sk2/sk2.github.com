@@ -20,6 +20,7 @@ section: photography
 - [Architecture](#architecture)
 - [Milestones](#milestones)
 - [Tech Stack](#tech-stack)
+- [Overview](#overview)
 
 ---
 
@@ -89,6 +90,12 @@ Web UI with night vision mode, TUI for SSH, real-time state transport, targets C
 ## Tech Stack
 
 Rust (Axum, Tokio, SQLite), React (TypeScript, Tailwind CSS), INDI, PHD2, ASTAP plate-solving
+
+---
+
+## Overview
+
+A headless, autonomous astrophotography controller designed for low-power Linux devices (RPi/Jetson). It manages hardware, executes imaging sequences, and ensures rig safety.
 
 ---
 

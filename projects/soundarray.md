@@ -19,6 +19,7 @@ section: signal-processing
 - [Key Features](#key-features)
 - [Processing Pipeline](#processing-pipeline)
 - [Tech Stack](#tech-stack)
+- [Core Value](#core-value)
 
 ---
 
@@ -74,6 +75,12 @@ JSON/MQTT → Agent Framework
 ## Tech Stack
 
 C++ (ODAS), Python (librosa, NumPy, PyAudio), TensorFlow Lite (YAMNet), MQTT (Mosquitto), Raspberry Pi
+
+---
+
+## Core Value
+
+The ability to capture, localize, and classify complex soundscapes on edge devices or via remote streaming, providing structured insights to an agent framework.
 
 ---
 

@@ -28,6 +28,7 @@ section: signal-processing
 - [Health and Resilience](#health-and-resilience)
 - [Development Roadmap](#development-roadmap)
 - [Tech Stack](#tech-stack)
+- [Core Value](#core-value)
 
 ---
 
@@ -221,6 +222,12 @@ WebSocket protocol: one JSON metadata message followed by binary uint8 spectrum 
 **ML:** CoreML, PyTorch, ONNX Runtime (RadioML 2018.01A training data)
 
 **Infrastructure:** uv (package management), systemd (edge services), Docker (optional)
+
+---
+
+## Core Value
+
+Transform raw radio spectrum data into an actionable "Signal Census" through automated detection, ML classification, and distributed acquisition.
 
 ---
 

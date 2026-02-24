@@ -25,6 +25,8 @@ section: projects
 - [Example Output](#example-output)
 - [Tech Stack](#tech-stack)
 - [Integration with AuroraPhoto](#integration-with-auroraphoto)
+- [What This Is](#what-this-is)
+- [Core Value](#core-value)
 
 ---
 
@@ -218,6 +220,18 @@ AuroraData handles the *planning* side (when to go, where to go), while AuroraPh
 
 1. **AuroraData**: "Strong event predicted, leave now for Victor Harbor"
 2. **AuroraPhoto**: Automated multi-camera capture once on-site
+
+---
+
+## What This Is
+
+A specialized tool for Australian aurora observers that solves the "should I drive 60 minutes?" problem. It combines real-time solar wind data (NOAA), substorm trigger logic (Bz/HP trends), and local weather (ACCESS-G model) to provide actionable advice.
+
+---
+
+## Core Value
+
+Providing a single, definitive "Go/No-Go" score that accounts for both space weather potential and local terrestrial conditions (travel time, clouds, moon).
 
 ---
 

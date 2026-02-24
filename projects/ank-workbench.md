@@ -11,6 +11,15 @@ section: network-automation
 
 ---
 
+## Contents
+
+- [Quick Facts](#quick-facts)
+- [What This Is](#what-this-is)
+- [Screenshots](#screenshots)
+- [Core Value](#core-value)
+
+---
+
 ## Quick Facts
 
 | | |
@@ -44,6 +53,28 @@ ANK Workbench is the **glue layer** that coordinates the entire network automati
 ---
 
  | [Development Philosophy](../development)
+
+---
+
+## Screenshots
+
+![Projects](/images/workbench-projects.png)
+*Projects landing page — create from scratch or start from curated sample topologies (spine-leaf, campus, OSPF multi-area, dual DC with BGP).*
+
+![Topology Editor](/images/workbench-editor.png)
+*Topology editor — drag devices from the palette, edit YAML directly with live validation, and browse sample configurations.*
+
+![Workflow & Simulation](/images/workbench-workflow.png)
+*Workflow view — configure simulation parameters (protocol, tick count, timeout), run simulations, and control the simulator lifecycle.*
+
+![Visualization](/images/workbench-visualize.png)
+*Visualization view — explore topology, physical, logical, and protocol layers with configurable overlays, routing table inspection, and multi-format export.*
+
+---
+
+## Core Value
+
+Network engineers can design, validate, and visualize network changes in one complete workflow without switching between separate tools or manually gluing components together.
 
 ---
 

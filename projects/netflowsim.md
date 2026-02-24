@@ -7,7 +7,9 @@ section: network-automation
 
 <span class="status-badge status-active">Phase 9/13 (100%)</span>
 
-[← Back to Data Analytics](../data-analytics) | [← Back to Projects](../projects)
+[← Back to Data Analytics](../data-analytics)
+
+[← Back to Projects](../projects)
 
 ---
 
@@ -164,4 +166,6 @@ Routing matrix written to routing.json
 
 ---
 
-[← Back to Data Analytics](../data-analytics) | [← Back to Projects](../projects)
+[← Back to Data Analytics](../data-analytics)
+
+[← Back to Projects](../projects)

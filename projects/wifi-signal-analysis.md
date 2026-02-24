@@ -7,7 +7,9 @@ section: signal-processing
 
 <span class="status-badge status-active">Active</span>
 
-[← Back to Signal Processing](../signal-processing) | [← Back to Projects](../projects)
+[← Back to Signal Processing](../signal-processing)
+
+[← Back to Projects](../projects)
 
 ---
 
@@ -32,4 +34,6 @@ Passive radar system that utilizes existing Wi-Fi signals for through-wall human
 
 ---
 
-[← Back to Signal Processing](../signal-processing) | [← Back to Projects](../projects)
+[← Back to Signal Processing](../signal-processing)
+
+[← Back to Projects](../projects)

@@ -7,7 +7,9 @@ section: network-automation
 
 <span class="status-badge status-active">Phase 66/67 (100%)</span>
 
-[← Back to Network Automation](../network-automation) | [← Back to Projects](../projects)
+[← Back to Network Automation](../network-automation)
+
+[← Back to Projects](../projects)
 
 ---
 
@@ -870,4 +872,6 @@ Validate network configurations at scale with protocol-level fidelity before dep
 
 ---
 
-[← Back to Network Automation](../network-automation) | [← Back to Projects](../projects)
+[← Back to Network Automation](../network-automation)
+
+[← Back to Projects](../projects)

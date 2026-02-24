@@ -7,7 +7,9 @@ section: signal-processing
 
 <span class="status-badge status-active">** Phase 7 - Ingest CLI + HealthyPi 6 Serial MVP</span>
 
-[← Back to Agentic Systems](../agentic-systems) | [← Back to Projects](../projects)
+[← Back to Agentic Systems](../agentic-systems)
+
+[← Back to Projects](../projects)
 
 ---
 
@@ -106,4 +108,6 @@ A modular, agent-aware health monitoring ecosystem that translates raw biometric
 
 ---
 
-[← Back to Agentic Systems](../agentic-systems) | [← Back to Projects](../projects)
+[← Back to Agentic Systems](../agentic-systems)
+
+[← Back to Projects](../projects)

@@ -7,7 +7,9 @@ section: network-automation
 
 <span class="status-badge status-active">Phase 1/5 (0%)</span>
 
-[← Back to Network Automation](../network-automation) | [← Back to Projects](../projects)
+[← Back to Network Automation](../network-automation)
+
+[← Back to Projects](../projects)
 
 ---
 
@@ -53,4 +55,6 @@ Run the same device workflow reliably across lab/real targets, with deterministi
 
 ---
 
-[← Back to Network Automation](../network-automation) | [← Back to Projects](../projects)
+[← Back to Network Automation](../network-automation)
+
+[← Back to Projects](../projects)

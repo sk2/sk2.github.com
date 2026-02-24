@@ -7,7 +7,9 @@ section: agentic-systems
 
 <span class="status-badge status-active">Phase 21/23 (100%)</span>
 
-[← Back to Agentic Systems](../agentic-systems) | [← Back to Projects](../projects)
+[← Back to Agentic Systems](../agentic-systems)
+
+[← Back to Projects](../projects)
 
 ---
 
@@ -280,4 +282,6 @@ Complete isolation between agents such that compromise of one agent cannot casca
 
 ---
 
-[← Back to Agentic Systems](../agentic-systems) | [← Back to Projects](../projects)
+[← Back to Agentic Systems](../agentic-systems)
+
+[← Back to Projects](../projects)

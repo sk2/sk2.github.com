@@ -7,7 +7,9 @@ section: data-analytics
 
 <span class="status-badge status-active">Active</span>
 
-[← Back to Data Analytics](../data-analytics) | [← Back to Projects](../projects)
+[← Back to Data Analytics](../data-analytics)
+
+[← Back to Projects](../projects)
 
 ---
 
@@ -32,4 +34,6 @@ Serve dynamic vector tiles (MVT) from massive geospatial datasets (millions of p
 
 ---
 
-[← Back to Data Analytics](../data-analytics) | [← Back to Projects](../projects)
+[← Back to Data Analytics](../data-analytics)
+
+[← Back to Projects](../projects)

@@ -7,7 +7,9 @@ section: network-automation
 
 <span class="status-badge status-active">Phase 72 - Editing Operations (complete)</span>
 
-[← Back to Network Automation](../network-automation) | [← Back to Projects](../projects)
+[← Back to Network Automation](../network-automation)
+
+[← Back to Projects](../projects)
 
 ---
 
@@ -236,4 +238,6 @@ Transform network topologies into clear, information-dense visualizations using 
 
 ---
 
-[← Back to Network Automation](../network-automation) | [← Back to Projects](../projects)
+[← Back to Network Automation](../network-automation)
+
+[← Back to Projects](../projects)

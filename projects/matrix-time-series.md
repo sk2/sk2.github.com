@@ -7,7 +7,9 @@ section: data-analytics
 
 <span class="status-badge status-active">Phase 9/11 (82%)</span>
 
-[← Back to Data Analytics](../data-analytics) | [← Back to Projects](../projects)
+[← Back to Data Analytics](../data-analytics)
+
+[← Back to Projects](../projects)
 
 ---
 
@@ -148,4 +150,6 @@ Polars DataFrame (via to_dataframe()) or Rust types
 
 ---
 
-[← Back to Data Analytics](../data-analytics) | [← Back to Projects](../projects)
+[← Back to Data Analytics](../data-analytics)
+
+[← Back to Projects](../projects)

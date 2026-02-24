@@ -7,7 +7,9 @@ section: network-automation
 
 <span class="status-badge status-active">Phase 92/94</span>
 
-[← Back to Network Automation](../network-automation) | [← Back to Projects](../projects)
+[← Back to Network Automation](../network-automation)
+
+[← Back to Projects](../projects)
 
 ---
 
@@ -45,4 +47,6 @@ A clean, consistent API where there's one obvious way to perform each topology o
 
 ---
 
-[← Back to Network Automation](../network-automation) | [← Back to Projects](../projects)
+[← Back to Network Automation](../network-automation)
+
+[← Back to Projects](../projects)

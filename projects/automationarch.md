@@ -7,7 +7,9 @@ section: network-automation
 
 <span class="status-badge status-active">Phase 3/12</span>
 
-[← Back to Network Automation](../network-automation) | [← Back to Projects](../projects)
+[← Back to Network Automation](../network-automation)
+
+[← Back to Projects](../projects)
 
 ---
 
@@ -36,4 +38,6 @@ The output of this project will be a clearer, more formalized architectural unde
 
 ---
 
-[← Back to Network Automation](../network-automation) | [← Back to Projects](../projects)
+[← Back to Network Automation](../network-automation)
+
+[← Back to Projects](../projects)

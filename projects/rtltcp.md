@@ -7,7 +7,9 @@ section: signal-processing
 
 <span class="status-badge status-active">Phase 5/6 (100%)</span>
 
-[← Back to Signal Processing](../signal-processing) | [← Back to Projects](../projects)
+[← Back to Signal Processing](../signal-processing)
+
+[← Back to Projects](../projects)
 
 ---
 
@@ -194,4 +196,6 @@ The ability to reliably and efficiently stream high-fidelity IQ data from multip
 
 ---
 
-[← Back to Signal Processing](../signal-processing) | [← Back to Projects](../projects)
+[← Back to Signal Processing](../signal-processing)
+
+[← Back to Projects](../projects)

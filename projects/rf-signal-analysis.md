@@ -7,7 +7,9 @@ section: signal-processing
 
 <span class="status-badge status-active">Phase 8/10 (70%)</span>
 
-[← Back to Signal Processing](../signal-processing) | [← Back to Projects](../projects)
+[← Back to Signal Processing](../signal-processing)
+
+[← Back to Projects](../projects)
 
 ---
 
@@ -86,4 +88,6 @@ Clean, understandable, stable codebase that reliably tracks aircraft in real-tim
 
 ---
 
-[← Back to Signal Processing](../signal-processing) | [← Back to Projects](../projects)
+[← Back to Signal Processing](../signal-processing)
+
+[← Back to Projects](../projects)

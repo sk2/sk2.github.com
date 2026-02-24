@@ -7,7 +7,9 @@ section: network-automation
 
 <span class="status-badge status-active">Phase 6/9 (53%)</span>
 
-[← Back to Network Automation](../network-automation) | [← Back to Projects](../projects)
+[← Back to Network Automation](../network-automation)
+
+[← Back to Projects](../projects)
 
 ---
 
@@ -45,4 +47,6 @@ Enable rapid, type-safe validation of network device state through streamlined d
 
 ---
 
-[← Back to Network Automation](../network-automation) | [← Back to Projects](../projects)
+[← Back to Network Automation](../network-automation)
+
+[← Back to Projects](../projects)

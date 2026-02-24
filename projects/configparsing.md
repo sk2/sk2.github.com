@@ -7,7 +7,9 @@ section: network-automation
 
 <span class="status-badge status-active">Phase 5/8 (63%)</span>
 
-[← Back to Network Automation](../network-automation) | [← Back to Projects](../projects)
+[← Back to Network Automation](../network-automation)
+
+[← Back to Projects](../projects)
 
 ---
 
@@ -45,4 +47,6 @@ Extract network-level topology relationships (protocol adjacencies, link roles, 
 
 ---
 
-[← Back to Network Automation](../network-automation) | [← Back to Projects](../projects)
+[← Back to Network Automation](../network-automation)
+
+[← Back to Projects](../projects)

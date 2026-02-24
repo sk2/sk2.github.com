@@ -7,7 +7,9 @@ section: network-automation
 
 <span class="status-badge status-active">Phase 30 - Core Validation Architecture</span>
 
-[← Back to Network Automation](../network-automation) | [← Back to Projects](../projects)
+[← Back to Network Automation](../network-automation)
+
+[← Back to Projects](../projects)
 
 ---
 
@@ -211,4 +213,6 @@ Network engineers can quickly generate realistic, validated network topologies w
 
 ---
 
-[← Back to Network Automation](../network-automation) | [← Back to Projects](../projects)
+[← Back to Network Automation](../network-automation)
+
+[← Back to Projects](../projects)

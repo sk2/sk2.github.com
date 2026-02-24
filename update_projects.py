@@ -99,7 +99,7 @@ def get_back_links(category: str) -> str:
         links.append(f"[← Back to {title}](../{slug})")
     
     links.append("[← Back to Projects](../projects)")
-    return " | ".join(links)
+    return "\n\n".join(links)
 
 
 def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:

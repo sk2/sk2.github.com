@@ -8,14 +8,16 @@ A modular toolchain for the modeling, simulation, and analysis of large-scale da
 
 The tools are designed to work together as a pipeline, allowing engineers to move from initial topology generation to protocol-level verification and performance analysis within a unified workflow.
 
+A typical workflow is: ingest topology + intent, compile candidate configurations, simulate convergence and failure scenarios, then visualize and audit outputs before deployment.
+
 ## The Toolchain
 
 We build specialized engines that handle specific stages of the network lifecycle—from **ingesting brownfield state** to final protocol-level validation.
 
 ```
       ┌────────────────────────┐               ┌────────────────────┐
-      │ Source of Truth Products │             │ Brownfield / Legacy │
-      │                        │               │ CLI / PDF Ingest    │
+      │ Source of Truth        │               │ Brownfield / Legacy │
+      │ Products               │               │ CLI / PDF Ingest    │
       └────────┬───────────────┘               └───────┬────────────┘
               │                                       │
               └───────────────┬───────────────────────┘
@@ -61,11 +63,10 @@ We build specialized engines that handle specific stages of the network lifecycl
 - **[Topology Generator:](/projects/topogen)** A tool for quickly creating realistic network structures. It supports standard patterns for data centers, backbones, and random graph models for large-scale testing.
 - **[CLI Parser:](/projects/cliscrape)** A fast, ergonomic tool for extracting structured data from network device outputs, turning unstructured text into actionable information for analysis and validation.
 - **[Performance Simulator:](/projects/netflowsim)** An analytic engine for massive-scale network performance analysis. It uses queuing models and Monte Carlo simulations to identify bottlenecks and test resilience.
-- **[Configuration Analysis:](/projects/configparsing)** A framework for extracting intent and relationships from existing vendor-specific CLI data, normalizing them into vendor-neutral network models.
 
 ## Legacy
 
-- **[Configuration Generation (AutoNetkit):](/projects/autonetkit)** The original compiler-based configuration generator from the thesis-era work. It established the transformation pipeline and proved multi-vendor config generation at scale, but it is no longer the primary in-progress modeling layer.
+- **[Configuration Generation (AutoNetkit):](/projects/autonetkit)** The original compiler-based configuration generator from the thesis-era work. It established the transformation pipeline and proved multi-vendor config generation at scale, but it is no longer the primary in-progress modeling layer. It remains useful as reference architecture and historical context.
 
 ## Foundations
 

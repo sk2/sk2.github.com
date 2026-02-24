@@ -3,7 +3,7 @@ layout: default
 section: network-automation
 ---
 
-# AutoNetkit
+# Configuration Generation (AutoNetkit)
 
 <span class="status-badge status-active">Active</span>
 
@@ -13,28 +13,45 @@ section: network-automation
 
 ---
 
+## Contents
+
+- [Concept](#concept)
+- [Features](#features)
+- [Architecture](#architecture)
+- [Impact](#impact)
+
 ## Concept
 
-Network topology modeling typically forces a choice between the speed of untyped graph libraries (NetworkX) and the rigidity of database-backed sources of truth. **AutoNetkit** eliminates this trade-off by using Pydantic for schema validation and a Rust core (`petgraph`) for graph traversals.
+A compiler-based framework for automated network provisioning. AutoNetkit transforms high-level design specifications into validated device configurations across heterogeneous hardware and protocol environments.
 
-It is a modern reimagining of the original AutoNetkit research, reclaiming the name for a production-ready automation library.
+Traditional network configuration is often manual and vendor-specific. AutoNetkit introduces a declarative approach where engineers define the architectural intent—the 'Whiteboard' model—and the engine automatically handles the complex transformations required to generate the underlying protocol parameters and CLI commands.
 
-Expressive Python API backed by compiled graph algorithms (petgraph), with automatic configuration generation for multi-vendor network deployments.
+Enables the rapid, automated deployment of multi-vendor networks by decoupling high-level architectural design from low-level device syntax.
 
 ---
 
 ## Features
 
-- **Type-safe modeling**: Every device, link, and protocol attribute is validated using Pydantic.
-- **High-performance core**: Graph traversals and topological queries are executed in Rust.
-- **Multi-vendor support**: Generates configurations for Cisco, Juniper, Arista, and more.
-- **Intent-based workflow**: Define the target state and let the engine handle the addressing and protocol logic.
+- **Automated IP Addressing**: Intelligent allocation of loopbacks and link subnets across multiple protocol layers.
+- **Protocol Orchestration**: Automatic generation of consistent OSPF areas, IS-IS levels, and BGP peering relationships (iBGP/eBGP).
+- **Multi-Vendor Support**: Compiles intent into native configuration formats for Cisco (IOS, XR, NX-OS), Juniper (JunOS), and Arista (EOS).
+- **Visual Feedback**: Generates real-time topological diagrams to verify the physical and logical structure of the design.
 
 ---
 
 ## Architecture
 
-Specification abstraction → intermediate network-wide state representation → low-level device configuration → template assembly.
+AutoNetkit employs a multi-stage transformation pipeline:
+1. **Specification Abstraction**: Captures the high-level design intent.
+2. **Intermediate Representation**: A network-wide graph model that maintains cross-vendor consistency.
+3. **Device Specialization**: Transforms the abstract model into device-specific protocol state.
+4. **Template Assembly**: Generates the final CLI commands using verified vendor templates.
+
+---
+
+## Impact
+
+AutoNetkit was integrated into Cisco's **Virtual Internet Routing Lab (VIRL)** platform as the primary configuration engine. It has been used to successfully generate valid configurations for core-network topologies with over 1,000 devices in seconds, demonstrating significant scalability and practical utility in production-grade engineering environments.
 
 ---
 

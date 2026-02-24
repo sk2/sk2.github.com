@@ -18,6 +18,14 @@ Focused on network engineering, autonomous systems, and signal processing.
 **An orchestration platform** that integrates the ANK ecosystem tools (TopoGen, ank_pydantic, Network Simulator, NetVis) into one seamless workflow.
 
 
+### [Configuration Generation (AutoNetkit)](projects/autonetkit)
+
+<span class="status-badge status-active">Active</span>
+
+
+A compiler-based framework for automated network provisioning. AutoNetkit transforms high-level design specifications into validated device configurations across heterogeneous hardware and protocol environments.
+
+
 ### [Visualization Engine](projects/netvis)
 
 <span class="status-badge status-active">Recently Updated</span>
@@ -32,14 +40,6 @@ A Rust-based network topology layout and visualization engine. Takes complex mul
 
 
 A Rust-based network simulator that models packet-level behavior for routing protocols. It provides a middle ground between pure algorithmic analysis (like C-BGP) and full emulation (like Containerlab) — larger scale and smaller footprint than emulation, higher fidelity than algorithmic simulation. Used for smoke testing and design validation of network configurations.
-
-
-### [AutoNetkit](projects/autonetkit)
-
-<span class="status-badge status-active">Active</span>
-
-
-Network topology modeling typically forces a choice between the speed of untyped graph libraries (NetworkX) and the rigidity of database-backed sources of truth. **AutoNetkit** eliminates this trade-off by using Pydantic for schema validation and a Rust core (`petgraph`) for graph traversals.
 
 
 ### [Topology Generator](projects/topogen)

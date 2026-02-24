@@ -4,7 +4,7 @@ layout: default
 
 # Network Automation
 
-A modular toolchain for the modeling, simulation, and analysis of large-scale data networks. This ecosystem bridges the gap between high-level architectural design and technical validation through formal graph transformations and deterministic execution.
+A modular toolchain for the modeling, simulation, and analysis of large-scale data networks. This ecosystem bridges the gap between high-level architectural intent and technical execution through formal graph transformations and deterministic execution.
 
 The tools are designed to work together as a composable pipeline, allowing engineers to move from initial topology generation to protocol-level verification and performance analysis within a unified workflow.
 
@@ -42,8 +42,9 @@ We build specialized engines that handle specific stages of the network lifecycl
 
 ## Primary Systems
 
-- **[Network Simulator:](/projects/network-simulator)** A deterministic engine for validating large-scale network designs. It simulates the packet-level behavior of routing protocols like OSPF, IS-IS, and BGP, enabling engineers to verify convergence and failover scenarios before deployment.
-- **[Network Modeling Library:](/projects/ank-pydantic)** A modern framework for defining and querying network intent. Built with type-safe Pydantic models and a fast Rust core, it transforms high-level designs into vendor-specific configurations across multiple platforms.
+- **[Configuration Generation (AutoNetkit):](/projects/autonetkit)** A framework for automated network provisioning. It uses a compiler-based approach to transform high-level design specifications into validated device configurations, supporting a wide range of network protocols and hardware vendors.
+- **[Network Modeling Library:](/projects/ank-pydantic)** A modern framework for defining and querying network intent. Built with type-safe Pydantic models and a fast Rust core, it provides a consistent, programmable way to manage large-scale topology data.
+- **[Network Simulator:](/projects/network-simulator)** A deterministic engine for validating network designs. It simulates the packet-level behavior of routing protocols like OSPF, IS-IS, and BGP, enabling engineers to verify convergence and failover scenarios before deployment.
 - **[Network Visualization Engine:](/projects/netvis)** A layout engine that transforms dense, multi-layer topologies into structured diagrams. It employs advanced algorithms to reduce visual complexity, making the architecture of large systems intuitive and actionable.
 - **[Automation Workbench:](/projects/ank-workbench)** A unified web interface that integrates the individual tools into a cohesive engineering environment. It allows for interactive topology editing, simulation control, and real-time protocol observability.
 
@@ -59,8 +60,7 @@ We build specialized engines that handle specific stages of the network lifecycl
 
 The principles of this ecosystem are grounded in my PhD research on automated network configuration. This work introduced the "Whiteboard to Build" model, which continues to inform the development of modern, intent-based networking tools.
 
-- **[Network Modeling Foundations:](/projects/autonetkit-foundation)** The original research and implementation details.
-- **[AutoNetkit:](/projects/autonetkit)** The production-ready reimagining of the original research library.
+- **[Network Modeling Foundations:](/projects/autonetkit-foundation)** The original research and implementation details that established the core abstractions for automated configuration.
 
 ---
 

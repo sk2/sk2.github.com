@@ -74,7 +74,7 @@ PROJECT_ALIASES = {
     "ank-nte": "Topology Engine Core",
     "ank-workbench": "Automation Workbench",
     "autonetkit-foundation": "Network Modeling Foundations",
-    "autonetkit": "AutoNetkit",
+    "autonetkit": "Configuration Generation (AutoNetkit)",
     "netvis": "Visualization Engine",
     "passive": "Signal Reflection Analysis",
     "signals": "Spectrum Analysis",
@@ -83,10 +83,11 @@ PROJECT_ALIASES = {
 # GOLDEN MASTER CONTENT: Used when metadata is missing or for legacy projects
 PROJECT_CONTENT_OVERRIDES = {
     "autonetkit": {
-        "Concept": "Network topology modeling typically forces a choice between the speed of untyped graph libraries (NetworkX) and the rigidity of database-backed sources of truth. **AutoNetkit** eliminates this trade-off by using Pydantic for schema validation and a Rust core (`petgraph`) for graph traversals.\n\nIt is a modern reimagining of the original AutoNetkit research, reclaiming the name for a production-ready automation library.",
-        "Core Value": "Expressive Python API backed by compiled graph algorithms (petgraph), with automatic configuration generation for multi-vendor network deployments.",
-        "Features": "- **Type-safe modeling**: Every device, link, and protocol attribute is validated using Pydantic.\n- **High-performance core**: Graph traversals and topological queries are executed in Rust.\n- **Multi-vendor support**: Generates configurations for Cisco, Juniper, Arista, and more.\n- **Intent-based workflow**: Define the target state and let the engine handle the addressing and protocol logic.",
-        "Architecture": "Specification abstraction → intermediate network-wide state representation → low-level device configuration → template assembly."
+        "Concept": "A compiler-based framework for automated network provisioning. AutoNetkit transforms high-level design specifications into validated device configurations across heterogeneous hardware and protocol environments.\n\nTraditional network configuration is often manual and vendor-specific. AutoNetkit introduces a declarative approach where engineers define the architectural intent—the 'Whiteboard' model—and the engine automatically handles the complex transformations required to generate the underlying protocol parameters and CLI commands.",
+        "Core Value": "Enables the rapid, automated deployment of multi-vendor networks by decoupling high-level architectural design from low-level device syntax.",
+        "Features": "- **Automated IP Addressing**: Intelligent allocation of loopbacks and link subnets across multiple protocol layers.\n- **Protocol Orchestration**: Automatic generation of consistent OSPF areas, IS-IS levels, and BGP peering relationships (iBGP/eBGP).\n- **Multi-Vendor Support**: Compiles intent into native configuration formats for Cisco (IOS, XR, NX-OS), Juniper (JunOS), and Arista (EOS).\n- **Visual Feedback**: Generates real-time topological diagrams to verify the physical and logical structure of the design.",
+        "Architecture": "AutoNetkit employs a multi-stage transformation pipeline:\n1. **Specification Abstraction**: Captures the high-level design intent.\n2. **Intermediate Representation**: A network-wide graph model that maintains cross-vendor consistency.\n3. **Device Specialization**: Transforms the abstract model into device-specific protocol state.\n4. **Template Assembly**: Generates the final CLI commands using verified vendor templates.",
+        "Impact": "AutoNetkit was integrated into Cisco's **Virtual Internet Routing Lab (VIRL)** platform as the primary configuration engine. It has been used to successfully generate valid configurations for core-network topologies with over 1,000 devices in seconds, demonstrating significant scalability and practical utility in production-grade engineering environments."
     },
     "autonetkit-foundation": {
         "Concept": "The original research that established the principles of automated network configuration. This work introduced the **Whiteboard → Plan → Build** transformation model, which allows engineers to work with high-level design abstractions while the system handles the technical implementation details.",
@@ -113,7 +114,7 @@ DETAILED_SECTIONS = [
     "Features", "Key Capabilities", "Use Cases", "Screenshots", "Architecture", 
     "Technical Depth", "Security Model", "Implementation Details", 
     "Protocols Implemented", "Performance", "Metrics", "Integration", 
-    "Hardware", "Agents", "Components", "Tech Stack", "Research Contribution"
+    "Hardware", "Agents", "Components", "Tech Stack", "Research Contribution", "Impact"
 ]
 
 def extract_sections(content: str) -> Dict[str, str]:
@@ -251,7 +252,7 @@ def generate_detailed_page(project: ProjectInfo) -> str:
     body_list = [f"## Concept\n\n" + "\n\n".join(intro_parts)]
     
     # Standard sections
-    for s in ["Features", "Key Capabilities", "Use Cases", "Screenshots", "Architecture", "Technical Depth", "Security Model", "Implementation Details", "Protocols Implemented", "Performance", "Metrics", "Integration", "Hardware", "Agents", "Components", "Tech Stack", "Research Contribution"]:
+    for s in ["Features", "Key Capabilities", "Use Cases", "Screenshots", "Architecture", "Technical Depth", "Security Model", "Implementation Details", "Protocols Implemented", "Performance", "Metrics", "Integration", "Hardware", "Agents", "Components", "Tech Stack", "Research Contribution", "Impact"]:
         if s in project.sections and s not in ["Concept", "The Insight", "Overview", "What This Is", "Problem It Solves", "Core Value"]:
             body_list.append(f"## {s}\n\n{clean_text(project.sections[s])}")
             
@@ -315,7 +316,7 @@ def main():
 
     for p in projects:
         pp = projects_dir / f"{p.slug}.md"
-        # CLEAN ROOM GENERATION: Every page is rebuilt from scratch
+        # Re-generate from Golden Master or metadata
         p.line_count = len(generate_detailed_page(p).splitlines())
         pp.write_text(generate_detailed_page(p))
         

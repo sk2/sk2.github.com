@@ -10,7 +10,7 @@ Focused on network engineering, autonomous systems, and signal processing.
 
 ## 🌐 Network Engineering
 
-### [Network Simulator](projects/network-simulator)
+### [Network Simulator](projects/netsim)
 
 <span class="status-badge status-active">Recently Updated</span>
 
@@ -18,12 +18,20 @@ Focused on network engineering, autonomous systems, and signal processing.
 A Rust-based network simulator that models packet-level behavior for routing protocols. It provides a middle ground between pure algorithmic analysis (like C-BGP) and full emulation (like Containerlab) — larger scale and smaller footprint than emulation, higher fidelity than algorithmic simulation. Used for smoke testing and design validation of network configurations.
 
 
+### [Network Modeling Engine](projects/ank-pydantic)
+
+<span class="status-badge status-active">Recently Updated</span>
+
+
+A modern framework for defining and querying network intent, acting as the primary topology engine for the ANK ecosystem. Built with type-safe Pydantic models and a fast Rust core (NTE), it provides the canonical network model used by the generator, simulator, and visualization tools.
+
+
 ### [Configuration Generation (AutoNetkit)](projects/autonetkit)
 
 <span class="status-badge status-active">Active</span>
 
 
-A compiler-based framework for automated network provisioning. AutoNetkit transforms high-level architectural intent into validated device configurations across heterogeneous hardware and protocol environments.
+Legacy configuration generation engine from the thesis-era work. Established the transformation pipeline and proved multi-vendor config generation at scale.
 
 
 ### [Brownfield Ingestion & Analysis](projects/configparsing)

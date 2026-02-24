@@ -51,7 +51,7 @@ We build specialized engines that handle specific stages of the network lifecycl
 
 - **[Network Simulator:](/projects/netsim)** A deterministic engine for **pre-deployment verification**. It simulates the packet-level behavior of routing protocols like OSPF, IS-IS, and BGP, enabling engineers to verify convergence and failover scenarios before deployment.
 - **[Brownfield Ingestion & Analysis:](/projects/configparsing)** A framework for extracting structured intent from legacy vendor-specific CLI data. It bridges the gap between existing deployments and modern automation, enabling automated audits and migration workflows.
-- **[Configuration Generation (AutoNetkit):](/projects/autonetkit)** A framework for automated network provisioning. It transforms high-level design specifications into validated device configurations through a compiler-based transformation pipeline.
+- **[Network Modeling Engine:](/projects/ank-pydantic)** A type-safe intent and topology modeling layer for the ecosystem. It provides the canonical network model (Whiteboard → Plan → Protocol Layers) used by the generator, simulator, and visualization tools.
 - **[Network Visualization Engine:](/projects/netvis)** A layout engine that transforms dense, multi-layer topologies into clear, structured diagrams. It employs advanced algorithms to reduce visual complexity, making the architecture of large systems intuitive and actionable.
 - **[Automation Workbench:](/projects/ank-workbench)** A unified web interface that integrates the individual tools into a cohesive engineering environment for interactive topology editing and real-time protocol observability.
 
@@ -62,6 +62,10 @@ We build specialized engines that handle specific stages of the network lifecycl
 - **[CLI Parser:](/projects/cliscrape)** A fast, ergonomic tool for extracting structured data from network device outputs, turning unstructured text into actionable information for analysis and validation.
 - **[Performance Simulator:](/projects/netflowsim)** An analytic engine for massive-scale network performance analysis. It uses queuing models and Monte Carlo simulations to identify bottlenecks and test resilience.
 - **[Configuration Analysis:](/projects/configparsing)** A framework for extracting intent and relationships from existing vendor-specific CLI data, normalizing them into vendor-neutral network models.
+
+## Legacy
+
+- **[Configuration Generation (AutoNetkit):](/projects/autonetkit)** The original compiler-based configuration generator from the thesis-era work. It established the transformation pipeline and proved multi-vendor config generation at scale, but it is no longer the primary in-progress modeling layer.
 
 ## Foundations
 

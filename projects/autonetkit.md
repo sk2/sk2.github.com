@@ -63,6 +63,8 @@ A Python library for modeling and querying network topologies with type-safe Pyd
 
 **Input Topology** (transitnet.yaml):
 
+
+
 <details>
 <summary>Show Code (42 lines)</summary>
 
@@ -111,7 +113,11 @@ topology:
 
 </details>
 
+
+
 **Build Protocol Layers:**
+
+
 
 <details>
 <summary>Show Code (23 lines)</summary>
@@ -142,7 +148,11 @@ mpls_layer = build_mpls_layer(
 
 </details>
 
+
+
 **Generated Configuration** (P1 - Cisco IOS-XR):
+
+
 
 <details>
 <summary>Show Code (45 lines)</summary>
@@ -195,9 +205,13 @@ mpls ldp
 
 </details>
 
+
+
 ### L3VPN Configuration
 
 **Input:** Add customer sites to PE routers:
+
+
 
 <details>
 <summary>Code: AutoNetkit (25 lines)</summary>
@@ -230,6 +244,8 @@ mpls ldp
 
 </details>
 
+
+
 **Build L3VPN Layer:**
 
 ```python
@@ -247,6 +263,8 @@ l3vpn_layer = build_l3vpn_layer(
 ```
 
 **Generated VRF Configuration** (PE1):
+
+
 
 <details>
 <summary>Show Code (33 lines)</summary>
@@ -287,6 +305,8 @@ router bgp 65000
 
 </details>
 
+
+
 ### Containerlab Deployment
 
 **Export to Containerlab:**
@@ -306,6 +326,8 @@ with open("transitnet.clab.yml", "w") as f:
 ```
 
 **Generated Containerlab File** (transitnet.clab.yml):
+
+
 
 <details>
 <summary>Show Code (33 lines)</summary>
@@ -346,7 +368,11 @@ topology:
 
 </details>
 
+
+
 **Deploy and Verify:**
+
+
 
 <details>
 <summary>Code: AutoNetkit (35 lines)</summary>
@@ -388,6 +414,8 @@ docker exec -it clab-transitnet-P1 show mpls ldp neighbor
 ```
 
 </details>
+
+
 
 ### Query API Usage
 
@@ -431,6 +459,8 @@ The Network Visualization Engine applies advanced layout algorithms to produce p
 
 Define topologies in YAML for rapid prototyping:
 
+
+
 <details>
 <summary>Show Code (33 lines)</summary>
 
@@ -469,6 +499,8 @@ topology:
 ```
 
 </details>
+
+
 
 Load and process:
 
@@ -558,6 +590,12 @@ Python (Pydantic), Rust core (`petgraph`-backed), PyO3 bindings
 ---
 
 [← Back to Network Automation](../network-automation)
+
+---
+
+---
+
+[← Back to Projects](../projects)
 
 ---
 

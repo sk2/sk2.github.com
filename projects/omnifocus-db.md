@@ -146,6 +146,8 @@ Agent: "You have 3 flagged items due today: PR review, dentist appointment, and 
 
 ## Architecture
 
+
+
 <details>
 <summary>Show Code (30 lines)</summary>
 
@@ -231,6 +233,12 @@ inbox = use_tool("omnifocus_db", action="inbox")
 ---
 
 [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
+
+---
+
+[← Back to Projects](../projects)
 
 ---
 

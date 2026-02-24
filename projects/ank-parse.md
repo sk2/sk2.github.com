@@ -180,4 +180,10 @@ Phase 1 focuses on building the **Knowledge Base**: ingesting thousands of pages
 
 ---
 
+---
+
+[← Back to Projects](../projects)
+
+---
+
 [← Back to Projects](../projects)

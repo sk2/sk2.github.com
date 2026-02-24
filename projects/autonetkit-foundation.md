@@ -76,6 +76,8 @@ interface GigabitEthernet0/0
 ```
 
 **Juniper JunOS Example:**
+
+
 <details>
 <summary>Show Code (21 lines)</summary>
 
@@ -102,6 +104,8 @@ protocols {
 ```
 
 </details>
+
+
 
 ### Visualization
 
@@ -268,6 +272,12 @@ Network diagram generation:
 ---
 
 [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
+
+---
+
+[← Back to Projects](../projects)
 
 ---
 

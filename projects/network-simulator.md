@@ -67,6 +67,8 @@ Developing agentic AI systems and network automation tools requires rapid iterat
 
 Create `ospf-triangle.yaml`:
 
+
+
 <details>
 <summary>Show Code (71 lines)</summary>
 
@@ -144,7 +146,11 @@ script:
 
 </details>
 
+
+
 Run the simulation:
+
+
 
 <details>
 <summary>Code: netsim run ospf-triangle.yaml (23 lines)</summary>
@@ -174,6 +180,8 @@ Simulation complete: 120ms simulated, 0.034s real time (3529x speedup)
 ```
 
 </details>
+
+
 
 **Discussion:**
 
@@ -239,6 +247,8 @@ netsim attach my-network r1
 
 Opens a full interactive REPL session on the device. You're effectively "logged in" to the simulated router with command history, tab completion, and abbreviated commands:
 
+
+
 <details>
 <summary>Show Code (25 lines)</summary>
 
@@ -269,6 +279,8 @@ IP Address      MAC Address        State     Age  Interface
 ```
 
 </details>
+
+
 
 **Live interface management** — shut down a link and watch the protocol reconverge in real time:
 
@@ -362,6 +374,8 @@ Press Enter on a device to open an interactive console session. Press `l` at any
 
 ### Daemon Management
 
+
+
 <details>
 <summary>Code: Network Simulator (22 lines)</summary>
 
@@ -398,6 +412,8 @@ $ netsim daemon list --clean
 
 Start a daemon, run automated validation, collect results, tear down:
 
+
+
 <details>
 <summary>Code: !/bin/bash (25 lines)</summary>
 
@@ -429,9 +445,13 @@ echo "All validations passed"
 
 </details>
 
+
+
 ### Failover Testing with Daemon Mode
 
 Test link failure and reconvergence interactively:
+
+
 
 <details>
 <summary>Code: Network Simulator (26 lines)</summary>
@@ -464,6 +484,8 @@ Neighbor ID     Interface  State   Priority  Dead Time
 ```
 
 </details>
+
+
 
 ### Why Use Daemon Mode?
 
@@ -578,6 +600,8 @@ All commands support prefix abbreviation (e.g., `sh ip ro`) and `--json` output 
 
 Service provider topology demonstrating IS-IS hierarchical routing:
 
+
+
 <details>
 <summary>Show Code (62 lines)</summary>
 
@@ -646,7 +670,11 @@ script:
 
 </details>
 
+
+
 **Simulation Output:**
+
+
 
 <details>
 <summary>Code: netsim run isis-hierarchy.yaml (40 lines)</summary>
@@ -783,6 +811,12 @@ Rust, Tokio for async execution, petgraph for topology representation, gRPC for 
 ---
 
 [← Back to Network Automation](../network-automation)
+
+---
+
+---
+
+[← Back to Projects](../projects)
 
 ---
 

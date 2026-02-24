@@ -4,7 +4,7 @@ layout: default
 
 # Simon Knight, PhD
 
-I build tools that bridge the gap between high-level intent and execution. My work focuses on modeling, simulation, and coordination in complex systems.
+I'm a telecommunications engineer. I build tools that bridge the gap between high-level intent and execution, focusing on modeling, simulation, and coordination in complex systems.
 
 ## Focus
 
@@ -16,9 +16,9 @@ I build tools that bridge the gap between high-level intent and execution. My wo
 
 ## Research
 
-I hold a PhD from the University of South Australia (2017). My research on automated network configuration led to **AutoNetkit**, which was integrated into Cisco's VIRL platform.
+My research at the University of South Australia (2017) on automated network configuration led to **AutoNetkit**, which was integrated into Cisco's VIRL platform.
 
-- [Read the thesis](thesis)
+- [Read my thesis](thesis)
 - [View CV](cv)
 
 ## Featured Work

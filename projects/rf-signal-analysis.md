@@ -5,7 +5,7 @@ section: signal-processing
 
 # Signal Reflection Analysis
 
-<span class="status-badge status-active">Phase 7/10 (100%)</span>
+<span class="status-badge status-active">Phase 8/10 (70%)</span>
 
 [← Back to Projects](../projects)
 
@@ -31,7 +31,7 @@ Ambient RF signals reflect off objects in the environment. By processing these r
 
 | | |
 |---|---|
-| **Status** | Phase 7/10 (100%) |
+| **Status** | Phase 8/10 (70%) |
 | **Language** | N/A |
 
 ---
@@ -84,6 +84,12 @@ Currently implementing analysis and association logic (Phase 6). The system now 
 ---
 
 [← Back to Signal Processing](../signal-processing)
+
+---
+
+---
+
+[← Back to Projects](../projects)
 
 ---
 

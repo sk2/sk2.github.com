@@ -102,7 +102,7 @@ A cross-platform (targeted at Raspberry Pi) server that interfaces with multiple
 
 ### [Signal Reflection Analysis](projects/rf-signal-analysis)
 
-<span class="status-badge status-active">Phase 7/10 (100%)</span>
+<span class="status-badge status-active">Phase 8/10 (70%)</span>
 
 
 A distributed multi-beam passive radar system based on KrakenSDR hardware. Pi handles data acquisition, Mac/Linux handles compute-intensive DSP. All 4 surveillance channels process in parallel with independent Range-Doppler visualization, per-beam configuration, and real-time performance monitoring.

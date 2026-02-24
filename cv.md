@@ -64,7 +64,7 @@ Curated database of real-world network topologies from ISPs and research network
 ## Publications & Links
 
 - [Google Scholar Profile](https://scholar.google.com.au/citations?user=BJ1Efr8AAAAJ)
-- [PhD Thesis Details](thesis)
+- [Read my PhD thesis](thesis)
 - [GitHub](https://github.com/sk2)
 - [LinkedIn](https://www.linkedin.com/in/simoncknight/)
 

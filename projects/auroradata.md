@@ -63,6 +63,8 @@ The question this tool answers: "If I leave now, will I see aurora when I arrive
 
 ## Architecture
 
+
+
 <details>
 <summary>Show Code (37 lines)</summary>
 
@@ -150,6 +152,8 @@ Backtesting and validation against real storm events:
 
 ## Example Output
 
+
+
 <details>
 <summary>Show Code (28 lines)</summary>
 
@@ -202,6 +206,12 @@ AuroraData handles the *planning* side (when to go, where to go), while AuroraPh
 
 1. **AuroraData**: "Strong event predicted, leave now for Victor Harbor"
 2. **AuroraPhoto**: Automated multi-camera capture once on-site
+
+---
+
+---
+
+[← Back to Projects](../projects)
 
 ---
 

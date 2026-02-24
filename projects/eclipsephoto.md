@@ -90,4 +90,10 @@ Python (asyncio, multiprocessing), OpenCV, INDI, gphoto2, TSL2591 light sensor, 
 
 ---
 
+---
+
+[← Back to Projects](../projects)
+
+---
+
 [← Back to Projects](../projects)

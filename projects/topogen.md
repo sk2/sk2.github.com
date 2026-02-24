@@ -96,6 +96,8 @@ Output written to: topology.yaml
 ```
 
 Generated output (excerpt):
+
+
 <details>
 <summary>Show Code (35 lines)</summary>
 
@@ -202,6 +204,12 @@ Rust core, PyO3 for Python bindings, Maturin build system
 ---
 
 [← Back to Network Automation](../network-automation)
+
+---
+
+---
+
+[← Back to Projects](../projects)
 
 ---
 

@@ -68,7 +68,7 @@ A Rust-based network simulator that models packet-level behavior for routing pro
 
 ### [Network Topology Engine](projects/ank-nte)
 
-<span class="status-badge status-active">Phase 06/15 (96%)</span>
+<span class="status-badge status-active">Phase 06/15 (93%)</span>
 
 
 NTE (Network Topology Engine) is a Rust-based graph topology engine with Python bindings via PyO3, used as the backend for ank_pydantic. It provides a 14-crate Cargo workspace built on petgraph StableDiGraph with pluggable datastores (Polars, DuckDB, Lite). This project covers two milestones: first hardening the existing engine for production reliability, then evaluating LadybugDB as a potential backend replacement.
@@ -186,7 +186,7 @@ A headless, autonomous astrophotography controller designed for low-power Linux 
 
 ### [Satellites](projects/satellites)
 
-<span class="status-badge status-active">Phase 5/6 (80%)</span>
+<span class="status-badge status-active">Phase 5/6 (90%)</span>
 
 
 A terminal-based satellite tracker that displays real-time satellite positions on a world map, predicts passes over the user's location, and shows transmission/frequency data. Built with Rust, ratatui, and the SGP4 orbital propagation algorithm. Aimed at amateur radio operators, space enthusiasts, and anyone who wants to know what's overhead.

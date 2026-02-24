@@ -4,21 +4,20 @@ layout: default
 
 # Simon Knight
 
-I am a telecommunications engineer and software researcher. I build systems that bridge the gap between high-level intent and technical execution, focusing on the modeling, simulation, and coordination of complex infrastructure.
+I am a telecommunications engineer and software researcher based in Adelaide, South Australia. My work centers on the modeling, simulation, and coordination of complex systems—bridging the gap between high-level architectural intent and technical execution.
 
-## Focus
+With a background spanning engineering and economics, I focus on building tools that provide structural clarity to large-scale infrastructure. Whether I'm developing deterministic protocol simulators, high-performance graph engines, or secure multi-agent architectures, my goal is to create systems that are as understandable as they are capable.
 
-- **Systems Design:** Building software that transforms intent into implementation through clear layers of abstraction.
-- **Network Engineering:** Creating engines for network design, protocol simulation, and analysis.
-- **Data Visualization:** Developing interfaces that reveal the underlying structure of complex datasets.
-- **Signal Processing:** Processing radio and biometric signals for monitoring and analysis.
-- **Autonomous Systems:** Designing secure systems for multi-agent coordination and infrastructure automation.
+I believe that the most effective engineering solutions come from a combination of formal research and practical implementation. Grounded in my PhD work on automated network configuration, I continue to explore how better abstractions can simplify the management of increasingly complex digital and physical networks.
 
 ## Featured Work
 
-- **[Network Simulator:](/projects/network-simulator)** A deterministic simulator for validating large-scale network designs. It allows for the rapid testing of complex routing protocols, enabling engineers to verify network behavior and convergence before deployment.
-- **[Network Visualization:](/projects/netvis)** A layout engine that transforms dense, multi-layer topologies into clear, structured diagrams. By applying advanced algorithms to complex graph data, it makes the architecture of large-scale systems intuitive and readable.
-- **[Signal Analysis:](/signal-processing)** Research into autonomous radio spectrum monitoring and signal analysis. This work focuses on building acquisition pipelines and processing systems for RF, audio, and biometric signals.
+- **[Network Simulator:](/projects/network-simulator)** A deterministic, tick-based simulator for validating large-scale network designs. It enables rapid testing of routing protocols (OSPF, IS-IS, BGP) and advanced features like Segment Routing and L3VPNs, catching design errors before they reach production.
+- **[Network Visualization:](/projects/netvis)** A layout engine designed to transform dense, multi-layer topologies into clear, structured diagrams. It employs advanced algorithms to handle complex graph data, making the structure of large networks intuitive and actionable for engineers.
+- **[Multi-Agent Assistant:](/projects/multi-agent)** A security-first multi-agent architecture where specialized agents run in isolated containers. It uses a message broker for coordination and capability-based authorization to provide a secure, auditable environment for personal and infrastructure automation.
+- **[Network Modeling Library:](/projects/ank-pydantic)** A modern Python library for defining and querying network topologies, backed by a fast Rust graph engine. It provides type-safe models and a composable API for managing network intent and generating configurations at scale.
+- **[Radio Streaming Server:](/projects/rtltcp)** A multi-threaded Rust implementation of the `rtl_tcp` protocol. It provides a stable, high-performance stack for streaming raw IQ data from multiple SDR devices over a network, featuring a built-in terminal dashboard for real-time management.
+- **[Spectrum Analysis:](/projects/signals)** Research into autonomous radio spectrum monitoring. This system uses machine learning to identify signals and maintains a persistent "Signal Census" database, providing insights into radio activity and modulation patterns over time.
 
 ## Background
 

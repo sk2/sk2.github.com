@@ -22,9 +22,20 @@ section: network-automation
 
 ## Concept
 
-A compiler-based framework for automated network provisioning. AutoNetkit transforms high-level architectural intent into validated device configurations across heterogeneous hardware and protocol environments.
+A compiler-based framework for automated network provisioning. AutoNetkit transforms high-level network designs into validated device configurations across heterogeneous hardware and protocol environments.
 
-Traditional network configuration is often manual and vendor-specific. AutoNetkit introduces a declarative approach where engineers define the architectural intent—the 'Whiteboard' model—and the engine automatically handles the complex transformations required to generate the underlying protocol parameters and CLI commands.
+Traditional network configuration is often manual and vendor-specific. AutoNetkit introduces a declarative approach where engineers define the network design, and the engine handles the transformations required to generate the underlying protocol parameters and CLI commands.
+
+The current work is focused on a modern compiler pipeline: a stable intermediate representation, explicit transformation passes, and predictable code generation for multiple targets.
+
+---
+
+## Roadmap Direction
+
+- **Intermediate Representations (IR):** A canonical, network-wide model that separates design intent from device-specific implementation details.
+- **Compiler Passes:** Validation and rewrite passes that make changes explainable (and reversible) rather than implicit side effects.
+- **Deterministic Output:** Stable ordering and repeatable generation to support diffs, review, and CI gating.
+- **Multi-Target Backends:** Separate backends for vendor CLIs and structured formats (e.g., JSON/YAML) to support tooling and audit workflows.
 
 ---
 
@@ -49,7 +60,7 @@ AutoNetkit employs a multi-stage transformation pipeline:
 
 ## Impact
 
-AutoNetkit was integrated into Cisco's **Virtual Internet Routing Lab (VIRL)** platform as the primary configuration engine. It has been used to successfully generate valid configurations for core-network topologies with over 1,000 devices in seconds, demonstrating significant scalability and practical utility in production-grade engineering environments.
+Earlier iterations of AutoNetkit were integrated into Cisco's Virtual Internet Routing Lab (VIRL) as a configuration engine for lab provisioning. That industry integration reflects the lineage of the approach, not the current in-progress implementation.
 
 ---
 

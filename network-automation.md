@@ -60,7 +60,7 @@ We build specialized engines that handle specific stages of the network lifecycl
 ## Primary Systems
 
 - **[Network Simulator:](/projects/netsim)** Run deterministic protocol convergence and failover assertions on candidate designs before deployment.
- - **[Brownfield Ingestion & Analysis:](/projects/configparsing)** Extract structured topology and relationships from legacy CLI and documentation for audits and migration workflows.
+- **[Brownfield Ingestion & Analysis:](/projects/configparsing)** Extract structured topology and relationships from legacy CLI and documentation for audits and migration workflows.
 - **[Configuration Generation (AutoNetkit):](/projects/autonetkit)** Generate device configurations from a high-level network design using a compiler-style transformation pipeline.
 - **[Network Visualization Engine:](/projects/netvis)** Render large, multi-layer networks into diagrams for design review, topology validation, and analysis.
 - **[Automation Workbench:](/projects/ank-workbench)** Use a single interface to design, simulate, visualize, and audit across the ecosystem.
@@ -72,13 +72,13 @@ We build specialized engines that handle specific stages of the network lifecycl
 - **[CLI Parser:](/projects/cliscrape)** A fast, ergonomic tool for extracting structured data from network device outputs, turning unstructured text into actionable information for analysis and validation.
 - **[Performance Simulator:](/projects/netflowsim)** An analytic engine for massive-scale network performance analysis. It uses queuing models and Monte Carlo simulations to identify bottlenecks and test resilience.
 
-## Legacy
-
-- **[Network Modeling Engine (ank-pydantic):](/projects/ank-pydantic)** A newer type-safe modeling layer used for programmatic topology workflows. Still evolving; not the primary entry point for the public toolchain description.
-
 ## Foundations
 
 This ecosystem borrows from earlier research on automated network configuration, including the "Whiteboard to Build" model. The goal here is practical: take a high-level design and produce verifiable, reviewable outputs.
+
+- **[Configuration Generation (AutoNetkit):](/projects/autonetkit)** The original compiler-based configuration generator from the thesis-era work. It established the transformation pipeline and proved multi-vendor config generation at scale.
+
+- **[Network Modeling Engine (ank-pydantic):](/projects/ank-pydantic)** A newer type-safe modeling layer used for programmatic topology workflows. Still evolving; not the primary entry point for the public toolchain description.
 
 - **[Network Modeling Foundations:](/projects/autonetkit-foundation)** The original research and implementation details that established the core abstractions for automated configuration.
 

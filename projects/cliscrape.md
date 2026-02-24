@@ -3,7 +3,7 @@ layout: default
 section: network-automation
 ---
 
-# CLI Parser
+# Network Output Parser
 
 <span class="status-badge status-active">Phase 7/11 (50%)</span>
 

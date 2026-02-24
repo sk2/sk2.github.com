@@ -5,7 +5,7 @@ section: data-analytics
 
 # matrix-profile-rs
 
-<span class="status-badge status-active">Phase 9/11 (82%)</span>
+<span class="status-badge status-active">Phase 10/11 (82%)</span>
 
 [← Back to Data Analytics](../data-analytics)
 
@@ -28,7 +28,7 @@ section: data-analytics
 
 | | |
 |---|---|
-| **Status** | Phase 9/11 (82%) |
+| **Status** | Phase 10/11 (82%) |
 | **Language** | N/A |
 
 ---

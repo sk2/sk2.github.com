@@ -4,11 +4,13 @@ layout: default
 
 # Network Automation
 
-A toolchain for designing, simulating, and analyzing data networks.
+A modular toolchain for the modeling, simulation, and analysis of large-scale data networks. This ecosystem bridges the gap between high-level architectural design and technical validation through formal graph transformations and deterministic execution.
+
+The tools are designed to work together as a composable pipeline, allowing engineers to move from initial topology generation to protocol-level verification and performance analysis within a unified workflow.
 
 ## The Toolchain
 
-We build specialized tools that handle specific parts of the network lifecycle, from initial design to final validation.
+We build specialized engines that handle specific stages of the network lifecycle.
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -24,93 +26,41 @@ We build specialized tools that handle specific parts of the network lifecycle, 
     └───────┬───────┘               └───────┬───────┘
             │                               │
     ┌───────▼───────┐               ┌───────▼───────┐
-    │  autonetkit   │               │    netsim     │
-    │   topogen     │               │    netvis     │
-    │   ank-parse   │               │  netflowsim   │
+    │  Modeling Lib │               │   Simulator   │
+    │   Generator   │               │ Visualization │
+    │   CLI Parser  │               │ Traffic Sim   │
     └───────┬───────┘               └───────┬───────┘
             │                               │
             └───────────────┬───────────────┘
                     ┌───────▼───────┐
-                    │      NTE      │
                     │ Topology Core │
+                    │ (NTE Engine)  │
                     └───────────────┘
 ```
 
 **Data flows from design to analysis.** The Workbench provides a single interface for the entire process—from editing a topology to running a simulation and viewing the results.
 
----
+## Primary Systems
 
-## Tools
+- **[Network Simulator:](/projects/network-simulator)** A deterministic engine for validating large-scale network designs. It simulates the packet-level behavior of routing protocols like OSPF, IS-IS, and BGP, enabling engineers to verify convergence and failover scenarios before deployment.
+- **[Network Modeling Library:](/projects/ank-pydantic)** A modern framework for defining and querying network intent. Built with type-safe Pydantic models and a fast Rust core, it transforms high-level designs into vendor-specific configurations across multiple platforms.
+- **[Network Visualization Engine:](/projects/netvis)** A layout engine that transforms dense, multi-layer topologies into structured diagrams. It employs advanced algorithms to reduce visual complexity, making the architecture of large systems intuitive and actionable.
+- **[Automation Workbench:](/projects/ank-workbench)** A unified web interface that integrates the individual tools into a cohesive engineering environment. It allows for interactive topology editing, simulation control, and real-time protocol observability.
 
-### Automation Workbench
-[Full Details →](projects/ank-workbench)
-A unified interface for the entire toolchain. Design, simulate, and visualize networks in a single workflow. It integrates the individual tools into a cohesive engineering environment.
+## Specialized Tools
 
----
+- **[Topology Core (NTE):](/projects/ank-nte)** The high-performance graph engine at the center of the ecosystem. It handles large-scale topology operations and queries with high precision and speed.
+- **[Topology Generator:](/projects/topogen)** A tool for quickly creating realistic network structures. It supports standard patterns for data centers, backbones, and random graph models for large-scale testing.
+- **[CLI Parser:](/projects/cliscrape)** A fast, ergonomic tool for extracting structured data from network device outputs, turning unstructured text into actionable information for analysis and validation.
+- **[Performance Simulator:](/projects/netflowsim)** An analytic engine for massive-scale network performance analysis. It uses queuing models and Monte Carlo simulations to identify bottlenecks and test resilience.
+- **[Configuration Analysis:](/projects/configparsing)** A framework for extracting intent and relationships from existing vendor-specific CLI data, normalizing them into vendor-neutral network models.
 
-### Network Simulator
-[Full Details →](projects/network-simulator)
-A tool for validating network designs. It simulates how data moves through a network to catch errors before they reach production. Supports complex routing protocols and real-time interaction.
+## Foundations
 
----
+The principles of this ecosystem are grounded in my PhD research on automated network configuration. This work introduced the "Whiteboard to Build" model, which continues to inform the development of modern, intent-based networking tools.
 
-### Network Modeling Library
-[Full Details →](projects/ank-pydantic)
-A modern library for defining and querying network topologies. It provides a consistent, type-safe way to model network intent and generate configurations.
-
----
-
-### Visualization Engine
-[Full Details →](projects/netvis)
-Transform complex network data into clear diagrams. It uses advanced layout algorithms to make large, multi-layer networks easy to understand.
-
----
-
-### Topology Core (NTE)
-[Full Details →](projects/ank-nte)
-The high-performance graph engine that powers the ecosystem. It handles large-scale topology operations with speed and precision.
-
----
-
-### Topology Generator
-[Full Details →](projects/topogen)
-Quickly create realistic network structures for testing. Supports common patterns for data centers, backbone networks, and random graph models.
-
----
-
-### CLI Parser
-[Full Details →](projects/cliscrape)
-Extract structured data from network device outputs. A fast, ergonomic tool for turning unstructured text into actionable information.
-
----
-
-### Performance Simulator
-[Full Details →](projects/netflowsim)
-Large-scale network performance analysis using analytic models. It validates topologies against billions of traffic flows to identify bottlenecks.
-
----
-
-### Configuration Analysis
-[Full Details →](projects/configparsing)
-A framework for analyzing existing network configurations. It extracts intent and relationships from vendor-specific CLI data to normalize them into vendor-neutral models.
-
----
-
-### Device Interaction
-[Full Details →](projects/deviceinteraction)
-A framework for communicating with network devices. It handles automated testing, state verification, and command execution across real and simulated hardware.
-
----
-
-### AutoNetkit
-[Full Details →](projects/autonetkit)
-The production-ready reimagining of original research. It balances the flexibility of graph libraries with the structure of formal network models.
-
----
-
-### Network Modeling Foundations
-[Full Details →](projects/autonetkit-foundation)
-The original PhD research that established the principles of automated network configuration and the "Whiteboard to Build" model.
+- **[Network Modeling Foundations:](/projects/autonetkit-foundation)** The original research and implementation details.
+- **[AutoNetkit:](/projects/autonetkit)** The production-ready reimagining of the original research library.
 
 ---
 

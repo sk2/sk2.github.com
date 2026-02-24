@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Update website projects page and individual project pages from project metadata.
-Enforces a clean, understated, and powerful style with precise navigation.
+Enforces a clean, mature, and professional style with precise navigation.
 """
 
 import argparse
@@ -23,6 +23,7 @@ class ProjectInfo:
     sections: Dict[str, str] = field(default_factory=dict)
     current_status: str = ""
     roadmap_summary: list[str] = field(default_factory=list)
+    line_count: int = 0
 
 
 PROJECT_ALIASES = {
@@ -37,6 +38,12 @@ PROJECT_ALIASES = {
     "AuroraData - Aurora Planning & Substorm Advisor": "Aurora Advisor",
     "Network Configuration Parsing & Analysis Framework": "Network Configuration Analysis",
     "netflowsim": "Network Performance Simulator",
+    "netsim": "Protocol Simulator Core",
+    "cliscrape": "Network Output Parser",
+    "topogen": "Topology Generator Engine",
+    "ank-pydantic": "Network Modeling Library",
+    "ank-nte": "Topology Engine Core",
+    "ank-workbench": "Network Automation Workbench",
 }
 
 CATEGORY_MAP = {
@@ -228,6 +235,7 @@ def update_existing_file(content: str, project: ProjectInfo) -> str:
     if concept_sec:
         body_content.append(concept_sec)
         clean_sections.remove(concept_sec)
+    
     body_content.extend(gen_sections)
     body_content.extend(clean_sections)
     
@@ -266,8 +274,13 @@ def generate_detailed_page(project: ProjectInfo) -> str:
 
 def generate_projects_index(projects: list[ProjectInfo]) -> str:
     lines = ["---", "layout: default", "---", "", "# Projects", "", "Focused on network engineering, autonomous systems, and signal processing.", "", "---", ""]
+    
+    # Mature logic: sort by line count (surrogate for detail/maturity)
+    sorted_projects = sorted(projects, key=lambda x: x.line_count, reverse=True)
+    
     categorized = {k: [] for k in CATEGORY_MAP.keys()}
-    for p in sorted(projects, key=lambda x: x.name): categorized[p.category].append(p)
+    for p in sorted_projects: categorized[p.category].append(p)
+    
     for cat_key, (title, desc, link) in CATEGORY_MAP.items():
         projs = categorized[cat_key]
         if not projs: continue
@@ -301,6 +314,7 @@ def main():
                 if not pd.is_dir() or "-clean-" in pd.name or "backup" in pd.name.lower(): continue
                 info = parse_project_metadata(pd)
                 if info: projects.append(info)
+    
     projects_dir = Path("projects")
     scanned_slugs = {p.slug for p in projects}
     scanned_names = {p.name for p in projects}
@@ -312,6 +326,15 @@ def main():
                 name = name_match.group(1).strip()
                 if name in scanned_names: continue
                 projects.append(ProjectInfo(name=name, slug=legacy_md.stem, path=legacy_md, category="experimental", status="active", sections=extract_sections(content)))
+    
+    # Post-process: calculate line counts for maturity sorting
+    for p in projects:
+        pp = projects_dir / f"{p.slug}.md"
+        if pp.exists():
+            p.line_count = len(pp.read_text().splitlines())
+        else:
+            p.line_count = 0
+
     for p in projects:
         pp = projects_dir / f"{p.slug}.md"
         if pp.exists():

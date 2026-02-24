@@ -5,7 +5,7 @@ section: signal-processing
 
 # Signal Reflection Analysis
 
-<span class="status-badge status-active">Phase 8/10 (70%)</span>
+<span class="status-badge status-active">Phase 8/10 (83%)</span>
 
 [← Back to Signal Processing](../signal-processing)
 
@@ -32,7 +32,7 @@ Ambient RF signals reflect off objects in the environment. By processing these r
 
 | | |
 |---|---|
-| **Status** | Phase 8/10 (70%) |
+| **Status** | Phase 8/10 (83%) |
 | **Language** | N/A |
 
 ---

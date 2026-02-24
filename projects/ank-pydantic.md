@@ -5,7 +5,7 @@ section: network-automation
 
 # Network Modeling Library
 
-<span class="status-badge status-active">Phase 92/94</span>
+<span class="status-badge status-active">Phase 93/94</span>
 
 [← Back to Network Automation](../network-automation)
 
@@ -30,7 +30,7 @@ A Python library for modeling and querying network topologies, backed by a high-
 
 | | |
 |---|---|
-| **Status** | Phase 92/94 |
+| **Status** | Phase 93/94 |
 | **Language** | N/A |
 
 ---

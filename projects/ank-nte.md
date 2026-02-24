@@ -5,7 +5,7 @@ section: network-automation
 
 # Network Topology Engine
 
-<span class="status-badge status-active">Phase 06/15 (93%)</span>
+<span class="status-badge status-active">Phase 06/15 (97%)</span>
 
 [← Back to Network Automation](../network-automation)
 
@@ -30,7 +30,7 @@ NTE (Network Topology Engine) is a Rust-based graph topology engine with Python 
 
 | | |
 |---|---|
-| **Status** | Phase 06/15 (93%) |
+| **Status** | Phase 06/15 (97%) |
 | **Language** | N/A |
 
 ---

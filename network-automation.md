@@ -10,10 +10,17 @@ The tools are designed to work together as a composable pipeline, allowing engin
 
 ## The Toolchain
 
-We build specialized engines that handle specific stages of the network lifecycle.
+We build specialized engines that handle specific stages of the network lifecycle, from discovery and design to final validation.
 
 ```
-┌─────────────────────────────────────────────────────────┐
+      ┌───────────────┐               ┌───────────────┐
+      │ Source of Truth │               │   External    │
+      │ (NetBox/YAML)   │               │   Discovery   │
+      └───────┬───────┘               └───────┬───────┘
+              │                               │
+              └───────────────┬───────────────┘
+                              │
+┌─────────────────────────────▼───────────────────────────┐
 │              Network Automation Workbench               │
 │             Design · Simulate · Visualize               │
 └───────────────────────────┬─────────────────────────────┘
@@ -38,7 +45,7 @@ We build specialized engines that handle specific stages of the network lifecycl
                     └───────────────┘
 ```
 
-**Data flows from design to analysis.** The Workbench provides a single interface for the entire process—from editing a topology to running a simulation and viewing the results.
+**Data flows from design to analysis.** The Workbench provides a single interface for the entire process—either starting from a clean slate using generators, or ingesting existing state from a Source of Truth or through automated CLI parsing.
 
 ## Primary Systems
 

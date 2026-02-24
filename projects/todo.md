@@ -4,7 +4,7 @@ layout: default
 
 # Rust TUI GTD Todo (OmniFocus-inspired)
 
-<span class="status-badge status-active">Gap closure (05.1 Batch Undo Support)</span>
+<span class="status-badge status-active">08.1 MCP TUI Integration Bridge</span>
 
 [← Back to Projects](../projects)
 
@@ -20,7 +20,7 @@ An OmniFocus 4 `.ofocus-package` importer provides one-time migration into the l
 
 | | |
 |---|---|
-| **Status** | Gap closure (05.1 Batch Undo Support) |
+| **Status** | 08.1 MCP TUI Integration Bridge |
 | **Language** | N/A |
 
 ---

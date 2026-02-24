@@ -3,7 +3,7 @@ layout: default
 section: network-automation
 ---
 
-# Network Configuration Parsing & Analysis Framework
+# Network Configuration Analysis
 
 <span class="status-badge status-active">Phase 5/8 (63%)</span>
 

@@ -3,7 +3,7 @@ layout: default
 section: signal-processing
 ---
 
-# Project Context: rtltcp-rust
+# Radio Streaming Server
 
 <span class="status-badge status-active">Phase 5/6 (100%)</span>
 

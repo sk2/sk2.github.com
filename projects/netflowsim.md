@@ -3,7 +3,7 @@ layout: default
 section: network-automation
 ---
 
-# netflowsim
+# Network Performance Simulator
 
 <span class="status-badge status-active">Phase 9/13 (100%)</span>
 

@@ -5,7 +5,7 @@ section: network-automation
 
 # NetVis
 
-<span class="status-badge status-active">Phase 72 - Editing Operations (in progress)</span>
+<span class="status-badge status-active">Phase 72 - Editing Operations (complete)</span>
 
 [← Back to Projects](../projects)
 
@@ -35,7 +35,7 @@ Network visualization often fails at scale because layout algorithms treat all n
 
 | | |
 |---|---|
-| **Status** | Phase 72 - Editing Operations (in progress) |
+| **Status** | Phase 72 - Editing Operations (complete) |
 | **Language** | Rust |
 
 ---

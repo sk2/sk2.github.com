@@ -28,7 +28,7 @@ A fast, simple, and ergonomic Rust library and CLI for network device interactio
 
 ### [NetVis](projects/netvis)
 
-<span class="status-badge status-active">Phase 72 - Editing Operations (in progress)</span>
+<span class="status-badge status-active">Phase 72 - Editing Operations (complete)</span>
 
 
 A Rust-based network topology layout and visualization engine. Takes complex multi-layer network topologies (via petgraph) and renders them using advanced layout algorithms that reduce visual complexity while preserving structural clarity. Outputs static formats (SVG, PDF, PNG) for v1, with interactive browser embedding planned for future integration with other tooling.
@@ -42,7 +42,7 @@ A Rust-based network topology layout and visualization engine. Takes complex mul
 This project aims to comprehensively define the **overall architecture of the Network Automation Ecosystem**. This involves understanding how the existing and planned tools (such as `topogen`, `autonetkit`, `netsim`, `netflowsim`, `netvis`, and the `Workbench`), along with strategic initiatives like the "Intelligence Layer," integrate to form a cohesive, unified, and differentiated product.
 
 
-### [Network Configuration Parsing & Analysis Framework](projects/configparsing)
+### [Network Configuration Analysis](projects/configparsing)
 
 <span class="status-badge status-active">Phase 5/8 (63%)</span>
 
@@ -92,7 +92,7 @@ A Rust-based network topology generator with Python bindings that consolidates s
 
 ## 📡 Radio Systems
 
-### [Project Context: rtltcp-rust](projects/rtltcp)
+### [Radio Streaming Server](projects/rtltcp)
 
 <span class="status-badge status-active">Phase 5/6 (100%)</span>
 
@@ -136,7 +136,7 @@ A modular, agent-aware health monitoring ecosystem that translates raw biometric
 
 ## 🔭 Astrophotography
 
-### [AuroraData - Aurora Planning & Substorm Advisor](projects/auroradata)
+### [Aurora Advisor](projects/auroradata)
 
 <span class="status-badge status-active">** Not started</span>
 
@@ -186,7 +186,7 @@ A headless, autonomous astrophotography controller designed for low-power Linux 
 
 ### [Satellites](projects/satellites)
 
-<span class="status-badge status-active">Phase 5/6 (70%)</span>
+<span class="status-badge status-active">Phase 5/6 (75%)</span>
 
 
 A terminal-based satellite tracker that displays real-time satellite positions on a world map, predicts passes over the user's location, and shows transmission/frequency data. Built with Rust, ratatui, and the SGP4 orbital propagation algorithm. Aimed at amateur radio operators, space enthusiasts, and anyone who wants to know what's overhead.
@@ -230,6 +230,14 @@ A security-first multi-agent system that coordinates specialized containerized a
 `cliscrape` is a fast CLI scraping and parsing tool for network devices, written in Rust. It provides a modern, ergonomic, and blazingly fast alternative to legacy tools like `TextFSM`, while maintaining first-class compatibility with existing templates.
 
 
+### [Network Performance Simulator](projects/netflowsim)
+
+<span class="status-badge status-active">Phase 9/13 (100%)</span>
+
+
+`netflowsim` provides rapid, massive-scale network performance analysis by using analytic queuing models and Monte Carlo simulations instead of packet-level discrete event simulation. It enables network engineers to validate topologies and routing strategies against billions of flow iterations in seconds, identify bottlenecks probabilistically, and test network resilience under failure scenarios.
+
+
 ### [OmniFocus DB CLI (omnifocus-db)](projects/omnifocus-db)
 
 <span class="status-badge status-active">** Phase 7: Interactive Inbox Triage TUI — COMPLETE</span>
@@ -256,18 +264,10 @@ A data engineering pipeline to fetch, process, and serve high-resolution weather
 
 ### [matrix-profile-rs](projects/matrix-time-series)
 
-<span class="status-badge status-active">Phase 9/11 (100%)</span>
+<span class="status-badge status-active">Phase 9/11 (97%)</span>
 
 
 Time series analysis typically requires either slow Python libraries or complex manual implementation. **matrix-profile-rs** provides Matrix Profile algorithms (STOMP, SCRIMP++, SCAMP) in native Rust with ergonomic APIs for motif discovery and anomaly detection, achieving C-level performance with Python-level usability through Polars integration.
-
-
-### [netflowsim](projects/netflowsim)
-
-<span class="status-badge status-active">Phase 9/13 (100%)</span>
-
-
-`netflowsim` provides rapid, massive-scale network performance analysis by using analytic queuing models and Monte Carlo simulations instead of packet-level discrete event simulation. It enables network engineers to validate topologies and routing strategies against billions of flow iterations in seconds, identify bottlenecks probabilistically, and test network resilience under failure scenarios.
 
 
 ## 🧘 Wellness & Sound
@@ -348,7 +348,7 @@ Developing...
 
 ### [Rust TUI GTD Todo (OmniFocus-inspired)](projects/todo)
 
-<span class="status-badge status-active">Gap closure (05.1 Batch Undo Support)</span>
+<span class="status-badge status-active">08.1 MCP TUI Integration Bridge</span>
 
 
 A fast, keyboard-driven Rust text UI (TUI) task manager inspired by OmniFocus, built around a GTD workflow. It stores data in an owned SQLite database, supports projects and hierarchical contexts/tags, and is optimized for rapid inbox processing (triage + tagging) with minimal friction.

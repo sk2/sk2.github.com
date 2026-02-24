@@ -3,7 +3,7 @@ layout: default
 section: projects
 ---
 
-# AuroraData - Aurora Planning & Substorm Advisor
+# Aurora Advisor
 
 <span class="status-badge status-active">** Not started</span>
 

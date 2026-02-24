@@ -5,7 +5,7 @@ section: projects
 
 # Satellites
 
-<span class="status-badge status-active">Phase 5/6 (70%)</span>
+<span class="status-badge status-active">Phase 5/6 (75%)</span>
 
 [← Back to Projects](../projects)
 
@@ -36,7 +36,7 @@ A terminal-based satellite tracker that plots real-time satellite positions on a
 
 | | |
 |---|---|
-| **Status** | Phase 5/6 (70%) |
+| **Status** | Phase 5/6 (75%) |
 | **Language** | N/A |
 
 ---

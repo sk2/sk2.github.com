@@ -2,7 +2,6 @@
 """
 Update website projects page and individual project pages from project metadata.
 Enforces a clean, understated, and powerful style with navigation.
-Note: Long code blocks are handled automatically by the site's layout (CSS/JS).
 """
 
 import argparse
@@ -34,6 +33,10 @@ PROJECT_ALIASES = {
     "Passive Radar - KrakenSDR Multi-Beam System": "Signal Reflection Analysis",
     "Wi-Fi Radar (KrakenSDR)": "Wi-Fi Signal Analysis",
     "cliscrape": "CLI Parser",
+    "Project Context: rtltcp-rust": "Radio Streaming Server",
+    "AuroraData - Aurora Planning & Substorm Advisor": "Aurora Advisor",
+    "Network Configuration Parsing & Analysis Framework": "Network Configuration Analysis",
+    "netflowsim": "Network Performance Simulator",
 }
 
 CATEGORY_MAP = {
@@ -64,6 +67,11 @@ def extract_sections(content: str) -> Dict[str, str]:
         body = match.group(2).strip()
         if body: sections[header] = body
     return sections
+
+
+def wrap_long_code_blocks(content: str, threshold: int = 15) -> str:
+    """This functionality is now handled by the site layout (CSS/JS)."""
+    return content
 
 
 def generate_toc(content: str) -> str:
@@ -119,7 +127,7 @@ def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
     elif any(x in s for x in ["astro", "aurora", "eclipse", "satellites"]): cat = "astrophotography"
     elif any(x in s for x in ["agent", "multi-agent", "cycle"]): cat = "agents"
     elif any(x in s for x in ["netflow", "polars", "tileserver", "matrix-time-series", "matrix-profile", "weather", "omnifocus-db", "cliscrape", "nascleanup", "devmon"]): cat = "data"
-    elif any(x in s for x in ["netvis", "ank", "topogen", "netsim", "autonetkit", "network", "configparsing", "nte", "orchestrator", "automationarch"]): cat = "network"
+    elif any(x in s for x in ["netvis", "ank", "topogen", "netsim", "autonetkit", "network", "configparsing", "nte", "orchestrator", "automationarch", "netflowsim"]): cat = "network"
 
     stack = []
     constraints = all_sections.get("Constraints", "")
@@ -186,7 +194,7 @@ def update_existing_file(content: str, project: ProjectInfo) -> str:
         
     body = content[fm_match.end():].strip() if fm_match else content.strip()
     
-    # Aggressively remove all generated elements
+    # Global cleanup
     body = re.sub(r'</?details>', '', body)
     body = re.sub(r'<summary>.*?</summary>', '', body)
     body = re.sub(r'\[← Back to .*?\]\(.*?\)', '', body)

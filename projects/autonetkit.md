@@ -22,7 +22,7 @@ section: network-automation
 
 ## Concept
 
-A compiler-based framework for automated network provisioning. AutoNetkit transforms high-level design specifications into validated device configurations across heterogeneous hardware and protocol environments.
+A compiler-based framework for automated network provisioning. AutoNetkit transforms high-level architectural intent into validated device configurations across heterogeneous hardware and protocol environments.
 
 Traditional network configuration is often manual and vendor-specific. AutoNetkit introduces a declarative approach where engineers define the architectural intent—the 'Whiteboard' model—and the engine automatically handles the complex transformations required to generate the underlying protocol parameters and CLI commands.
 

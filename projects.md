@@ -10,20 +10,12 @@ Focused on network engineering, autonomous systems, and signal processing.
 
 ## 🌐 Network Engineering
 
-### [Automation Workbench](projects/ank-workbench)
+### [Network Simulator](projects/network-simulator)
 
 <span class="status-badge status-active">Recently Updated</span>
 
 
-**An orchestration platform** that integrates the ANK ecosystem tools (TopoGen, ank_pydantic, Network Simulator, NetVis) into one seamless workflow.
-
-
-### [Topology Generator](projects/topogen)
-
-<span class="status-badge status-active">Recently Updated</span>
-
-
-A Rust-based topology generation engine that consolidates complex network graph algorithms into a unified, fast library. It enables the creation of realistic, validated network structures ranging from small lab setups to massive data center and backbone environments.
+A Rust-based network simulator that models packet-level behavior for routing protocols. It provides a middle ground between pure algorithmic analysis (like C-BGP) and full emulation (like Containerlab) — larger scale and smaller footprint than emulation, higher fidelity than algorithmic simulation. Used for smoke testing and design validation of network configurations.
 
 
 ### [Configuration Generation (AutoNetkit)](projects/autonetkit)
@@ -31,7 +23,15 @@ A Rust-based topology generation engine that consolidates complex network graph 
 <span class="status-badge status-active">Active</span>
 
 
-A compiler-based framework for automated network provisioning. AutoNetkit transforms high-level design specifications into validated device configurations across heterogeneous hardware and protocol environments.
+A compiler-based framework for automated network provisioning. AutoNetkit transforms high-level architectural intent into validated device configurations across heterogeneous hardware and protocol environments.
+
+
+### [Brownfield Ingestion & Analysis](projects/configparsing)
+
+<span class="status-badge status-active">Recently Updated</span>
+
+
+A specialized framework for **Brownfield Ingestion and Analysis**. It extracts high-level architectural intent and topology relationships from legacy network state—including vendor-specific CLI configurations and unstructured PDF documentation—normalizing them into a vendor-neutral model.
 
 
 ### [Visualization Engine](projects/netvis)
@@ -42,14 +42,6 @@ A compiler-based framework for automated network provisioning. AutoNetkit transf
 A Rust-based network topology layout and visualization engine. Takes complex multi-layer network topologies (via petgraph) and renders them using advanced layout algorithms that reduce visual complexity while preserving structural clarity. Outputs static formats (SVG, PDF, PNG) for v1, with interactive browser embedding planned for future integration with other tooling.
 
 
-### [Brownfield Ingestion & Analysis](projects/configparsing)
-
-<span class="status-badge status-active">Recently Updated</span>
-
-
-A specialized framework for extracting high-level architectural intent and topology relationships from legacy network state. It bridges the gap between manual CLI configurations and modern automation by identifying protocol relationships and topology from unstructured data using LLM-powered RAG pipelines.
-
-
 ### [Topology Engine Core](projects/ank-nte)
 
 <span class="status-badge status-active">Recently Updated</span>
@@ -58,20 +50,20 @@ A specialized framework for extracting high-level architectural intent and topol
 The fast graph core that powers the ANK ecosystem. NTE (Network Topology Engine) provides a native Rust implementation of multi-layer network graphs, optimized for low-latency queries and complex topological transformations.
 
 
-### [Network Simulator](projects/network-simulator)
+### [Topology Generator](projects/topogen)
 
 <span class="status-badge status-active">Recently Updated</span>
 
 
-A Rust-based network simulator that models packet-level behavior for routing protocols. It provides a middle ground between pure algorithmic analysis (like C-BGP) and full emulation (like Containerlab) — larger scale and smaller footprint than emulation, higher fidelity than algorithmic simulation. Used for smoke testing and design validation of network configurations.
+A Rust-based topology generation engine that consolidates complex network graph algorithms into a unified, fast library. It enables the creation of realistic, validated network structures ranging from small lab setups to massive data center and backbone environments.
 
 
-### [Orchestrator (Device Interaction Runner)](projects/orchestrator)
+### [Automation Workbench](projects/ank-workbench)
 
 <span class="status-badge status-active">Recently Updated</span>
 
 
-An orchestration runner for coordinating **device interactions** across real/testbed networks. It executes runs with retries, timeouts, bounded concurrency, and durable artifacts (logs, results, snapshots) that plug into the broader automation ecosystem.
+**An orchestration platform** that integrates the ANK ecosystem tools (TopoGen, ank_pydantic, Network Simulator, NetVis) into one seamless workflow.
 
 
 ### [Network Modeling Foundations](projects/autonetkit-foundation)
@@ -82,20 +74,12 @@ An orchestration runner for coordinating **device interactions** across real/tes
 The original research that established the principles of automated network configuration. This work introduced the **Whiteboard → Plan → Build** transformation model, which allows engineers to work with high-level design abstractions while the system handles the technical implementation details.
 
 
-### [Network Modeling Engine](projects/ank-pydantic)
+### [Orchestrator (Device Interaction Runner)](projects/orchestrator)
 
 <span class="status-badge status-active">Recently Updated</span>
 
 
-A Python library for modeling and querying network topologies, backed by a fast Rust core (`ank_nte`). Features a two-stage transformation model (Whiteboard → Plan → Protocol Layers), type-safe Pydantic models for nodes/edges/layers, and a composable lazy query API with Rust-backed execution (NTE Engine). Ships with "batteries-included" domain models (ISIS, MPLS, EVPN, L3VPN, IXP) in the blueprints/ module.
-
-
-### [Network Automation Ecosystem - Overall Architecture Definition](projects/automationarch)
-
-<span class="status-badge status-active">Recently Updated</span>
-
-
-This project aims to comprehensively define the **overall architecture of the Network Automation Ecosystem**. This involves understanding how the existing and planned tools (such as `topogen`, `autonetkit`, `netsim`, `netflowsim`, `netvis`, and the `Workbench`), along with strategic initiatives like the "Intelligence Layer," integrate to form a cohesive, unified, and differentiated product.
+An orchestration runner for coordinating **device interactions** across real/testbed networks. It executes runs with retries, timeouts, bounded concurrency, and durable artifacts (logs, results, snapshots) that plug into the broader automation ecosystem.
 
 
 ### [Device Interaction Framework](projects/deviceinteraction)
@@ -104,6 +88,14 @@ This project aims to comprehensively define the **overall architecture of the Ne
 
 
 A fast, simple, and ergonomic Rust library and CLI for network device interaction and automated testing. Provides the essential PyATS capabilities—testbed management, CLI parsing, and state verification—without the complexity, as a focused component in a broader network automation toolkit.
+
+
+### [Network Automation Ecosystem - Overall Architecture Definition](projects/automationarch)
+
+<span class="status-badge status-active">Recently Updated</span>
+
+
+This project aims to comprehensively define the **overall architecture of the Network Automation Ecosystem**. This involves understanding how the existing and planned tools (such as `topogen`, `autonetkit`, `netsim`, `netflowsim`, `netvis`, and the `Workbench`), along with strategic initiatives like the "Intelligence Layer," integrate to form a cohesive, unified, and differentiated product.
 
 
 ## 📡 Radio Systems

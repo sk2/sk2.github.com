@@ -13,6 +13,13 @@ section: network-automation
 
 ---
 
+## Contents
+
+- [Concept](#concept)
+- [Screenshots](#screenshots)
+- [Current Status](#current-status)
+- [Roadmap](#roadmap)
+
 ## Concept
 
 A Rust-based network simulator that models packet-level behavior for routing protocols. It provides a middle ground between pure algorithmic analysis (like C-BGP) and full emulation (like Containerlab) — larger scale and smaller footprint than emulation, higher fidelity than algorithmic simulation. Used for smoke testing and design validation of network configurations.
@@ -33,7 +40,7 @@ Validate network configurations at scale with protocol-level fidelity before dep
 
 ## Current Status
 
-2026-02-24 — Completed 68-05-PLAN.md
+2026-02-24 — Completed 68-03-PLAN.md
 
 ---
 

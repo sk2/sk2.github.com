@@ -49,7 +49,7 @@ We build specialized engines that handle specific stages of the network lifecycl
 
 ## Primary Systems
 
-- **[Network Simulator:](/projects/network-simulator)** A deterministic engine for **pre-deployment verification**. It simulates the packet-level behavior of routing protocols like OSPF, IS-IS, and BGP, enabling engineers to verify convergence and failover scenarios before deployment.
+- **[Network Simulator:](/projects/netsim)** A deterministic engine for **pre-deployment verification**. It simulates the packet-level behavior of routing protocols like OSPF, IS-IS, and BGP, enabling engineers to verify convergence and failover scenarios before deployment.
 - **[Brownfield Ingestion & Analysis:](/projects/configparsing)** A framework for extracting structured intent from legacy vendor-specific CLI data. It bridges the gap between existing deployments and modern automation, enabling automated audits and migration workflows.
 - **[Configuration Generation (AutoNetkit):](/projects/autonetkit)** A framework for automated network provisioning. It transforms high-level design specifications into validated device configurations through a compiler-based transformation pipeline.
 - **[Network Visualization Engine:](/projects/netvis)** A layout engine that transforms dense, multi-layer topologies into clear, structured diagrams. It employs advanced algorithms to reduce visual complexity, making the architecture of large systems intuitive and actionable.

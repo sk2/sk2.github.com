@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Update website projects page and individual project pages from project metadata.
-Enforces a clean, understated, and powerful style with navigation and partial-view code blocks.
+Enforces a clean, understated, and powerful style with navigation and collapsible code.
 """
 
 import argparse
@@ -65,40 +65,40 @@ def extract_sections(content: str) -> Dict[str, str]:
     return sections
 
 
-def wrap_long_code_blocks(content: str, threshold: int = 10) -> str:
-    """Wrap code blocks longer than threshold lines in a details tag, showing the first few lines."""
+def wrap_long_code_blocks(content: str, threshold: int = 30) -> str:
+    """Wrap code blocks longer than threshold lines in a details tag."""
     def replacer(match):
-        full_code = match.group(0).strip()
-        lines = full_code.split("\n")
+        code = match.group(0).strip()
+        lines = code.split("\n")
         # Subtract 2 for the backtick lines
         content_lines = len(lines) - 2
-        if content_lines > threshold + 5: # Only split if it's significantly longer
-            fence_start = lines[0]
-            fence_end = "```"
+        if content_lines > threshold:
+            summary = "Show Code"
+            # Try to find a comment or first line that might serve as a better summary
+            first_line = lines[1].strip() if len(lines) > 1 else ""
+            if first_line.startswith("#") or first_line.startswith("//") or first_line.startswith("$"):
+                summary = f"Code: {first_line.lstrip('#/$ ').strip()}"
             
-            # First 10 lines of content
-            visible_content = "\n".join(lines[1:threshold+1])
-            hidden_content = "\n".join(lines[threshold+1:-1])
-            
-            first_block = f"{fence_start}\n{visible_content}\n{fence_end}"
-            second_block = f"{fence_start}\n{hidden_content}\n{fence_end}"
-            
-            return f"{first_block}\n<details>\n<summary>Show remaining {content_lines - threshold} lines</summary>\n\n{second_block}\n\n</details>"
-        return full_code
+            return f"<details>\n<summary>{summary} ({content_lines} lines)</summary>\n\n{code}\n\n</details>"
+        return code
 
-    # Identify code blocks
     return re.sub(r'```.*?```', replacer, content, flags=re.DOTALL)
 
 
 def generate_toc(content: str) -> str:
     """Generate a table of contents from ## headers."""
-    headers = re.findall(r'^##\s+(.*?)\s*$', content, re.MULTILINE)
+    # Find all ## headers that aren't "Contents"
+    headers = re.findall(r'^##\s+([^#\n]+)\s*$', content, re.MULTILINE)
+    headers = [h.strip() for h in headers if h.strip() != "Contents"]
+    
     if len(headers) < 4:
         return ""
     
     links = []
     for h in headers:
-        slug = h.lower().replace(" ", "-").replace("&", "").replace("?", "").replace("(", "").replace(")", "").replace(":", "")
+        # Simple slugification
+        slug = h.lower().replace(" ", "-")
+        slug = re.sub(r'[^a-z0-9-]', '', slug)
         slug = re.sub(r'-+', '-', slug)
         links.append(f"- [{h}](#{slug})")
     
@@ -199,7 +199,7 @@ def update_existing_file(content: str, project: ProjectInfo) -> str:
     new_fm_lines = []
     for line in fm_lines:
         line = line.strip()
-        if not line or line.startswith("#") or line.startswith("-") or line.startswith("|") or line.startswith("##"): continue
+        if not line or any(line.startswith(x) for x in ["#", "-", "|", "##", "<"]): continue
         if ":" in line: new_fm_lines.append(line)
     
     if not any(l.startswith("section:") for l in new_fm_lines) and project.category in FM_SECTIONS:
@@ -207,16 +207,18 @@ def update_existing_file(content: str, project: ProjectInfo) -> str:
         
     body = content[fm_match.end():].strip() if fm_match else content.strip()
     
-    # Aggressively remove previous details/summary to prevent nesting/ghosting
-    body = re.sub(r'</details>', '', body)
-    body = re.sub(r'<details>\s*<summary>.*?</summary>', '', body)
-
+    # Global cleanup of generated elements
+    body = re.sub(r'</?details>', '', body)
+    body = re.sub(r'<summary>.*?</summary>', '', body)
+    body = re.sub(r'\[← Back to .*?\]\(.*?\)', '', body)
+    body = re.sub(r'^# .*?\n', '', body, flags=re.MULTILINE)
+    body = re.sub(r'<span class="status-badge.*?>.*?</span>', '', body)
+    
     sections = re.split(r'^(?=##\s|---)', body, flags=re.MULTILINE)
     clean_sections = []
     for sec in sections:
         sec = sec.strip()
         if not sec or sec == "---" or sec == "|" or sec.startswith("## Contents"): continue
-        if sec.startswith("# ") or sec.startswith("<span class=\"status-badge") or sec.startswith("[← Back to"): continue
         if any(sec.startswith(f"## {h}") for h in ["Roadmap", "Current Status", "Quick Facts"]): continue
         if sec.startswith("- v") or sec.startswith("- Phase") or sec.startswith("- Milestone"): continue
         if sec.startswith("|") and "**Status**" in sec: continue
@@ -239,7 +241,6 @@ def update_existing_file(content: str, project: ProjectInfo) -> str:
     body_content.extend(clean_sections)
     
     assembled_body = "\n\n---\n\n".join(body_content)
-    # Apply code wrapping
     assembled_body = wrap_long_code_blocks(assembled_body)
     
     toc = generate_toc(assembled_body)
@@ -272,7 +273,6 @@ def generate_detailed_page(project: ProjectInfo) -> str:
         content_lines.append("")
     
     assembled_content = "\n".join(content_lines)
-    # Apply code wrapping
     assembled_content = wrap_long_code_blocks(assembled_content)
     
     toc = generate_toc(assembled_content)

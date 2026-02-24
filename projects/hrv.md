@@ -94,7 +94,7 @@ Designed to complement the [HealthyPi](healthypi) ecosystem:
 
 ---
 
-[← Back to Signal Processing](../signal-processing) | [← Back to Projects](../projects)
+ | 
 
 <style>
 .status-badge {
@@ -110,36 +110,6 @@ Designed to complement the [HealthyPi](healthypi) ecosystem:
   color: white;
 }
 </style>
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
 
 ---
 

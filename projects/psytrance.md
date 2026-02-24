@@ -118,16 +118,12 @@ Five presets, each defining a key, scale, energy curve shape, and filter range:
 ## Usage
 
 ```bash
-# Psytrance Generator
 cargo run
 
-# Psytrance Generator
 cargo run -- --bpm 145 --bars 64 --mood euphoric --output track.wav
 
-# Psytrance Generator
 cargo run -- --seed 42 --output reproducible.wav
 
-# Psytrance Generator
 cargo run -- --key D2 --scale phrygian
 ```
 
@@ -154,42 +150,6 @@ Without `--output`, the engine launches an interactive TUI with real-time playba
 - **Playback**: cpal (real-time audio)
 - **TUI**: ratatui + crossterm
 - **RNG**: Seeded rand for reproducible generation
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
 
 ---
 

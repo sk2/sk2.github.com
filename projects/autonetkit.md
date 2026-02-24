@@ -93,8 +93,8 @@ topology:
       - P3:
           role: core
 ```
-<details>
-<summary>Show remaining 20 lines</summary>
+
+
 
 ```yaml
           data:
@@ -119,7 +119,7 @@ topology:
       - [P1, Gi0/0/0/2, PE1, Gi0/0/0/0]  # Core-PE
 ```
 
-</details>
+
 
 
 
@@ -138,10 +138,8 @@ from autonetkit import Topology
 from autonetkit.blueprints.designs.isis import build_isis_layer
 from autonetkit.blueprints.designs.mpls import build_mpls_layer
 
-# AutoNetkit
 topology = Topology.from_yaml("transitnet.yaml")
 
-# AutoNetkit
 isis_layer = build_isis_layer(
     topology,
 ```
@@ -153,7 +151,6 @@ isis_layer = build_isis_layer(
     parent_layer="physical"
 )
 
-# AutoNetkit
 mpls_layer = build_mpls_layer(
     topology,
     igp_layer="isis",
@@ -199,8 +196,8 @@ router isis CORE
  !
  interface Loopback0
 ```
-<details>
-<summary>Show remaining 23 lines</summary>
+
+
 
 ```cisco
   passive
@@ -228,7 +225,7 @@ mpls ldp
 !
 ```
 
-</details>
+
 
 
 
@@ -245,7 +242,6 @@ mpls ldp
 
 
 ```yaml
-# AutoNetkit
 - nodes:
     - CE1:
         role: ce
@@ -285,7 +281,6 @@ mpls ldp
 ```python
 from autonetkit.blueprints.designs.l3vpn import build_l3vpn_layer
 
-# AutoNetkit
 l3vpn_layer = build_l3vpn_layer(
     topology,
     service_name="NetCorp-L3VPN",
@@ -328,8 +323,8 @@ router bgp 65000
   address-family ipv4 unicast
    redistribute connected
 ```
-<details>
-<summary>Show remaining 11 lines</summary>
+
+
 
 ```cisco
   !
@@ -345,7 +340,7 @@ router bgp 65000
 !
 ```
 
-</details>
+
 
 
 
@@ -360,13 +355,10 @@ router bgp 65000
 ```python
 from autonetkit.blueprints.environments import get_environment
 
-# AutoNetkit
 env = get_environment('containerlab')
 
-# AutoNetkit
 artifacts = env.generate(topology)
 
-# AutoNetkit
 with open("transitnet.clab.yml", "w") as f:
     f.write(artifacts.files['topology.clab.yml'])
 ```
@@ -403,8 +395,8 @@ topology:
       binds:
         - ./configs/P3.cfg:/config/startup-config.cfg
 ```
-<details>
-<summary>Show remaining 11 lines</summary>
+
+
 
 ```yaml
 
@@ -420,7 +412,7 @@ topology:
     - endpoints: ["P1:Gi0/0/0/2", "PE1:Gi0/0/0/0"]
 ```
 
-</details>
+
 
 
 
@@ -435,51 +427,28 @@ topology:
 
 
 ```bash
-# AutoNetkit
 sudo containerlab deploy -t transitnet.clab.yml
 
-# AutoNetkit
 sudo containerlab inspect -t transitnet.clab.yml
 
-# AutoNetkit
-# AutoNetkit
-# AutoNetkit
-# AutoNetkit
 ```
 
 
 ```bash
-# AutoNetkit
-# AutoNetkit
-# AutoNetkit
 
-# AutoNetkit
 docker exec -it clab-transitnet-P1 show isis neighbors
 
-# AutoNetkit
-# AutoNetkit
-# AutoNetkit
 ```
-<details>
-<summary>Show remaining 13 lines</summary>
+
+
 
 ```bash
-# AutoNetkit
-# AutoNetkit
 
-# AutoNetkit
 docker exec -it clab-transitnet-P1 show mpls ldp neighbor
 
-# AutoNetkit
-# AutoNetkit
-# AutoNetkit
-# AutoNetkit
-# AutoNetkit
-# AutoNetkit
-# AutoNetkit
 ```
 
-</details>
+
 
 
 
@@ -492,17 +461,14 @@ docker exec -it clab-transitnet-P1 show mpls ldp neighbor
 Composable queries with Rust-backed execution:
 
 ```python
-# AutoNetkit
 core_routers = topology.query.nodes().where(
     role="core", pop="North"
 ).models()
 
-# AutoNetkit
 inter_pop_links = topology.query.links().where(
     link_type="long-haul"
 ).count()
 
-# AutoNetkit
 mpls_devices = topology.layer("mpls").nodes().where(
     mpls_enabled=True
 ).ids()
@@ -513,7 +479,6 @@ mpls_devices = topology.layer("mpls").nodes().where(
 Export for visualization:
 
 ```python
-# AutoNetkit
 topology.export_for_netvis(
     "output.json",
     layout="hierarchical",
@@ -559,8 +524,8 @@ topology:
           role: pe
           data:
 ```
-<details>
-<summary>Show remaining 11 lines</summary>
+
+
 
 ```yaml
             pop: West
@@ -576,7 +541,7 @@ topology:
       - [P1, Gi0/0/0/2, PE1, Gi0/0/0/0]  # Core-PE
 ```
 
-</details>
+
 
 
 
@@ -589,11 +554,9 @@ Load and process:
 ```python
 topology = Topology.from_yaml("transitnet.yaml")
 
-# AutoNetkit
 isis_layer = build_isis_layer(topology, level=2, area="49.0001")
 mpls_layer = build_mpls_layer(topology, igp_layer="isis")
 
-# AutoNetkit
 env = get_environment('containerlab')
 artifacts = env.generate(topology)
 ```
@@ -666,42 +629,6 @@ Query optimization and large-scale topology support (10k+ nodes).
 ## Tech Stack
 
 Python (Pydantic), Rust core (`petgraph`-backed), PyO3 bindings
-
----
-
----
-
-[← Back to Network Automation](../network-automation)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
 
 ---
 

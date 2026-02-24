@@ -117,12 +117,6 @@ An autonomous distributed SIGINT system. It monitors the RF spectrum, identifies
 
 ---
 
----
-
-[← Back to Signal Processing](../signal-processing)
-
----
-
 ## Architecture
 
 ### Edge Nodes: Raspberry Pi
@@ -189,73 +183,43 @@ Edge Pi → SpyServer/rtl_tcp → Mac mini Core
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+ | [Development Philosophy](../development)
 
 ---
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+ | [Development Philosophy](../development)
 
 ---
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+ | [Development Philosophy](../development)
 
 ---
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+ | [Development Philosophy](../development)
 
 ---
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+ | [Development Philosophy](../development)
 
 ---
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+ | [Development Philosophy](../development)
 
 ---
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
+ | [Development Philosophy](../development)
 
 ---
 

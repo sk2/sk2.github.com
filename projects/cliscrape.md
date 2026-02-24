@@ -111,7 +111,7 @@ Rust's zero-cost abstractions and compiled regex engine deliver 10-50x faster pa
 
 ---
 
-[← Back to Network Automation](../network-automation) | [← Back to Projects](../projects)
+ | 
 
 <style>
 .status-badge {
@@ -127,36 +127,6 @@ Rust's zero-cost abstractions and compiled regex engine deliver 10-50x faster pa
   color: white;
 }
 </style>
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
 
 ---
 

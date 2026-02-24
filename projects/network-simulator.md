@@ -17,11 +17,11 @@ section: network-automation
 - [Quick Facts](#quick-facts)
 - [Roadmap](#roadmap)
 - [Why the Network Simulator?](#why-the-network-simulator)
-- [Quick Start — Three-Router OSPF Example](#quick-start-—-three-router-ospf-example)
+- [Quick Start — Three-Router OSPF Example](#quick-start-three-router-ospf-example)
 - [Demo](#demo)
-- [Daemon Mode — Real-Time Network Interaction](#daemon-mode-—-real-time-network-interaction)
+- [Daemon Mode — Real-Time Network Interaction](#daemon-mode-real-time-network-interaction)
 - [Protocol Support](#protocol-support)
-- [Example: IS-IS L1/L2 Hierarchy with Real Output](#example-is-is-l1/l2-hierarchy-with-real-output)
+- [Example: IS-IS L1/L2 Hierarchy with Real Output](#example-is-is-l1l2-hierarchy-with-real-output)
 - [Use Cases](#use-cases)
 - [Milestones](#milestones)
 - [Tech Stack](#tech-stack)
@@ -47,7 +47,7 @@ Developing agentic AI systems and network automation tools requires rapid iterat
 
 - v1.9 Advanced Impairments & Topology Patterns (Proposed) — Phases 97-100
 - v1.10 Engine Hardening & Protocol Fidelity (Proposed) — Phases 111-115
-- v2.0 IPv6 Foundation (Proposed) — Phases 68-72
+- v1.11 Advanced Analysis & Assertions (Proposed) — Phases 116-119
 
 ---
 
@@ -97,8 +97,11 @@ devices:
     type: router
     router_id: 2.2.2.2
 ```
+
+
+
 <details>
-<summary>Show remaining 49 lines</summary>
+<summary>Show Code (49 lines)</summary>
 
 ```yaml
     interfaces:
@@ -153,6 +156,8 @@ script:
 ```
 
 </details>
+
+
 
 
 
@@ -224,10 +229,8 @@ Run simulations as background daemons and interact with them in real-time — li
 ### Starting a Daemon
 
 ```bash
-# Network Simulator
 netsim daemon start my-network topology.yaml
 
-# Network Simulator
 netsim daemon start my-network topology.yaml --tick-interval 50ms
 ```
 
@@ -238,7 +241,6 @@ The daemon runs continuously in the background, ticking the simulation at the sp
 Run a single command against a device in a running daemon, get the result, and exit. Ideal for scripting and CI/CD:
 
 ```bash
-# Network Simulator
 $ netsim exec my-network r1 "show ip route"
 Destination       Next Hop        Metric  Interface
 10.0.1.0/24       —               0       eth2 (connected)
@@ -247,7 +249,6 @@ Destination       Next Hop        Metric  Interface
 10.0.13.0/24      —               0       eth1 (connected)
 10.0.23.0/24      10.0.12.2       20      eth0 (OSPF)
 
-# Network Simulator
 ```
 
 
@@ -255,7 +256,6 @@ Destination       Next Hop        Metric  Interface
 $ netsim exec my-network h1 "ping 10.0.3.10"
 Ping 10.0.3.10: 5/5 packets received, 0% loss
 
-# Network Simulator
 $ netsim exec my-network r1 "show ip route --json"
 [{"destination":"10.0.1.0/24","next_hop":"—","metric":0,"interface":"eth2","source":"connected"}, ...]
 ```
@@ -413,13 +413,11 @@ Press Enter on a device to open an interactive console session. Press `l` at any
 
 
 ```bash
-# Network Simulator
 $ netsim daemon list
 NAME            PID    UPTIME   TOPOLOGY
 ospf-triangle   48291  2h 15m   examples/ospf-triangle.yaml
 sp-core         48305  45m 12s  topologies/transitnet-sp-core.yaml
 
-# Network Simulator
 $ netsim daemon status my-network
 Daemon: my-network
 PID: 48291
@@ -432,10 +430,8 @@ Tick interval: 100ms
 Topology: examples/ospf-triangle.yaml
 Devices: r1 (router), r2 (router), r3 (router), h1 (host), h3 (host)
 
-# Network Simulator
 $ netsim daemon stop my-network
 
-# Network Simulator
 $ netsim daemon list --clean
 ```
 
@@ -453,15 +449,11 @@ Start a daemon, run automated validation, collect results, tear down:
 
 ```bash
 #!/bin/bash
-# Network Simulator
 
-# Network Simulator
 netsim daemon start ci-test topology.yaml --tick-interval 10ms
 
-# Network Simulator
 sleep 2
 
-# Network Simulator
 ```
 
 
@@ -470,12 +462,10 @@ ROUTES=$(netsim exec ci-test r1 "show ip route --json")
 OSPF=$(netsim exec ci-test r1 "show ospf neighbors --json")
 PING=$(netsim exec ci-test h1 "ping 10.0.3.10")
 
-# Network Simulator
 echo "$ROUTES" | jq -e '.[] | select(.destination == "10.0.3.0/24")' || exit 1
 echo "$OSPF" | jq -e 'length == 2' || exit 1
 echo "$PING" | grep -q "0% loss" || exit 1
 
-# Network Simulator
 netsim daemon stop ci-test
 
 echo "All validations passed"
@@ -496,16 +486,13 @@ Test link failure and reconvergence interactively:
 
 
 ```bash
-# Network Simulator
 $ netsim daemon start failover-test sp-core.yaml
 
-# Network Simulator
 $ netsim exec failover-test r1 "show ospf neighbors"
 Neighbor ID     Interface  State   Priority  Dead Time
 2.2.2.2         eth0       Full    1         38s
 3.3.3.3         eth1       Full    1         36s
 
-# Network Simulator
 ```
 
 
@@ -513,11 +500,9 @@ Neighbor ID     Interface  State   Priority  Dead Time
 $ netsim exec failover-test r1 "interface shutdown eth0"
 Interface eth0 admin-down
 
-# Network Simulator
 $ netsim exec failover-test r1 "show ip route"
 10.0.23.0/24      10.0.13.3       21      eth1 (OSPF)
 
-# Network Simulator
 $ netsim exec failover-test r1 "interface no shutdown eth0"
 $ sleep 1
 $ netsim exec failover-test r1 "show ospf neighbors"
@@ -675,8 +660,11 @@ devices:
     type: router
     isis:
 ```
+
+
+
 <details>
-<summary>Show remaining 40 lines</summary>
+<summary>Show Code (40 lines)</summary>
 
 ```yaml
       net: "49.0001.0000.0000.0002.00"
@@ -729,6 +717,8 @@ script:
 
 
 
+
+
 **Simulation Output:**
 
 
@@ -761,8 +751,8 @@ IS-IS Level-1 Link State Database:
 LSPID                 LSP Seq Num  Checksum  Lifetime  Attributes
 0000.0000.0001.00-00  0x00000003   0x4a2e    864       L1
 ```
-<details>
-<summary>Show remaining 18 lines</summary>
+
+
 
 ```bash
 0000.0000.0002.00-00  0x00000003   0x5c1a    864       L1L2
@@ -784,8 +774,6 @@ i L2 192.0.2.3/32 [115/20] via 10.1.0.2, eth0
 Simulation complete: 15ms simulated, 0.008s real time
 IS-IS events: 18 hellos, 4 LSPs, 2 SPF runs
 ```
-
-</details>
 
 ---
 
@@ -870,42 +858,6 @@ EVPN control plane and VXLAN dataplane for data center fabrics.
 ## Tech Stack
 
 Rust, Tokio for async execution, petgraph for topology representation, gRPC for daemon IPC, ratatui for TUI
-
----
-
----
-
-[← Back to Network Automation](../network-automation)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
 
 ---
 

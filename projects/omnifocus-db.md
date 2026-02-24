@@ -176,8 +176,8 @@ Agent: "You have 3 flagged items due today: PR review, dentist appointment, and 
     │    │    │         │
 ┌───▼──┐ │ ┌──▼───┐ ┌──▼────┐
 ```
-<details>
-<summary>Show remaining 8 lines</summary>
+
+
 
 ```
 │ CLI  │ │ │ MCP  │ │Future │
@@ -189,8 +189,6 @@ Agent: "You have 3 flagged items due today: PR review, dentist appointment, and 
     │(Claude)  │
     └──────────┘
 ```
-
-</details>
 
 ---
 
@@ -224,11 +222,9 @@ Agent: "You have 3 flagged items due today: PR review, dentist appointment, and 
 
 **Direct MCP Server:**
 ```python
-# OmniFocus DB CLI (omnifocus-db)
 from mcp import use_tool
 
 inbox = use_tool("omnifocus_db", action="inbox")
-# OmniFocus DB CLI (omnifocus-db)
 ```
 
 **Claude Desktop Integration:**
@@ -240,37 +236,7 @@ inbox = use_tool("omnifocus_db", action="inbox")
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
+ | [Development Philosophy](../development)
 
 ---
 

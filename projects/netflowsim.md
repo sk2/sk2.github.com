@@ -100,7 +100,6 @@ Traditional approaches force a choice between:
 ## Example Usage
 
 ```bash
-# netflowsim
 $ netflowsim simulate \
     --topology topology.json \
     --traffic traffic.json \
@@ -117,7 +116,6 @@ GeoJSON visualization: network.geojson
 ```
 
 ```bash
-# netflowsim
 $ netflowsim generate-routing \
     --topology topology.json \
     --fibs examples/fibs/ \
@@ -158,42 +156,6 @@ Routing matrix written to routing.json
 - **Capacity Planning**: Identify congestion points under load
 - **What-If Analysis**: Model link failures and capacity changes
 - **Integration Testing**: Validate packet simulator routing logic
-
----
-
----
-
-[← Back to Network Automation](../network-automation)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
 
 ---
 

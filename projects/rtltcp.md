@@ -146,13 +146,10 @@ curl http://localhost:8080/api/v1/devices
 Docker-based cross-compilation for all Pi models:
 
 ```bash
-# Project Context: rtltcp-rust
 ./docker/build-images.sh aarch64
 
-# Project Context: rtltcp-rust
 cross build --release
 
-# Project Context: rtltcp-rust
 STRIP=1 ./deploy-to-pi.sh pi@raspberrypi.local
 ```
 
@@ -189,42 +186,6 @@ Compression (LZ4/zstd), UDP transport with Forward Error Correction, "Mac Tunnel
 - **Hardware FFI**: rtlsdr_sys, libairspyhf, libairspy
 - **Cross-compilation**: `cross` + custom Docker images
 - **Config**: TOML with serde
-
----
-
----
-
-[← Back to Signal Processing](../signal-processing)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
 
 ---
 

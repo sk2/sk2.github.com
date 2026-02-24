@@ -126,8 +126,8 @@ nodes:
     tier: 2
   - name: leaf-4
 ```
-<details>
-<summary>Show remaining 13 lines</summary>
+
+
 
 ```yaml
     type: leaf
@@ -144,8 +144,6 @@ links:
     latency_ms: 0.1
   # ... (full mesh: 4 leaves × 2 spines = 8 links)
 ```
-
-</details>
 
 ---
 
@@ -164,7 +162,6 @@ topo = DataCenter.spine_leaf(
 topo.export_yaml("topology.yaml")
 topo.export_json("topology.json")
 
-# TopoGen - Network Topology Generator
 from ank_pydantic import Topology
 ank_topo = topo.to_ank_pydantic()
 ```
@@ -206,42 +203,6 @@ Output converters, traffic patterns, and POP design patterns.
 ## Tech Stack
 
 Rust core, PyO3 for Python bindings, Maturin build system
-
----
-
----
-
-[← Back to Network Automation](../network-automation)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
 
 ---
 

@@ -145,37 +145,7 @@ Polars DataFrame (via to_dataframe()) or Rust types
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
+ | [Development Philosophy](../development)
 
 ---
 

@@ -52,193 +52,157 @@ A Rust-based CLI tool for deduplicating and organizing large file shares. Optimi
 
 ---
 
-[← Back to Projects](../projects)
+ | [Development Philosophy](../development)
 
 ---
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+ | [Development Philosophy](../development)
 
 ---
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+ | [Development Philosophy](../development)
 
 ---
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+ | [Development Philosophy](../development)
 
 ---
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+ | [Development Philosophy](../development)
 
 ---
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+ | [Development Philosophy](../development)
 
 ---
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+ | [Development Philosophy](../development)
 
 ---
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+ | [Development Philosophy](../development)
 
 ---
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+ | [Development Philosophy](../development)
 
 ---
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+ | [Development Philosophy](../development)
 
 ---
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+ | [Development Philosophy](../development)
 
 ---
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+ | [Development Philosophy](../development)
 
 ---
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+ | [Development Philosophy](../development)
 
 ---
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+ | [Development Philosophy](../development)
 
 ---
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+ | [Development Philosophy](../development)
 
 ---
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+ | [Development Philosophy](../development)
 
 ---
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+ | [Development Philosophy](../development)
 
 ---
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+ | [Development Philosophy](../development)
 
 ---
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+ | [Development Philosophy](../development)
 
 ---
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+ | [Development Philosophy](../development)
 
 ---
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+ | [Development Philosophy](../development)
 
 ---
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+ | [Development Philosophy](../development)
 
 ---
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+ | [Development Philosophy](../development)
 
 ---
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+ | [Development Philosophy](../development)
 
 ---
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+ | [Development Philosophy](../development)
 
 ---
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
-
----
-
----
-
-[← Back to Projects](../projects) | [Development Philosophy](../development)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
+ | [Development Philosophy](../development)
 
 ---
 

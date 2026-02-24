@@ -93,8 +93,8 @@ edges:
     dst: s2
   - src: r2
 ```
-<details>
-<summary>Show remaining 9 lines</summary>
+
+
 
 ```yaml
     dst: s1
@@ -108,7 +108,7 @@ edges:
     dst: s2
 ```
 
-</details>
+
 
 
 
@@ -137,7 +137,6 @@ Written: output.svg (6.5 KB)
 
 Network Modeling & Configuration Library topologies export directly to the Network Visualization Engine format:
 ```python
-# NetVis
 topo.export_for_netvis(
     "output.json",
     layout="hierarchical",
@@ -229,42 +228,6 @@ Stable API, deterministic rendering, and spatial indexing.
 ## Tech Stack
 
 Rust, petgraph, fjadra (d3-force port), SVG/PDF/PNG rendering, WASM-ready
-
----
-
----
-
-[← Back to Network Automation](../network-automation)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
 
 ---
 

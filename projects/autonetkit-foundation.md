@@ -132,181 +132,109 @@ Network diagram generation:
 
 ---
 
-[← Back to Network Automation](../network-automation)
+ | [Development Philosophy](../development)
 
 ---
 
 ---
 
-[← Back to Network Automation](../network-automation)
+ | [Development Philosophy](../development)
 
 ---
 
 ---
 
-[← Back to Network Automation](../network-automation)
+ | [Development Philosophy](../development)
 
 ---
 
 ---
 
-[← Back to Network Automation](../network-automation)
+ | [Development Philosophy](../development)
 
 ---
 
 ---
 
-[← Back to Network Automation](../network-automation)
+ | [Development Philosophy](../development)
 
 ---
 
 ---
 
-[← Back to Network Automation](../network-automation)
+ | [Development Philosophy](../development)
 
 ---
 
 ---
 
-[← Back to Network Automation](../network-automation)
+ | [Development Philosophy](../development)
 
 ---
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+ | [Development Philosophy](../development)
 
 ---
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+ | [Development Philosophy](../development)
 
 ---
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+ | [Development Philosophy](../development)
 
 ---
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+ | [Development Philosophy](../development)
 
 ---
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+ | [Development Philosophy](../development)
 
 ---
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+ | [Development Philosophy](../development)
 
 ---
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+ | [Development Philosophy](../development)
 
 ---
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+ | [Development Philosophy](../development)
 
 ---
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+ | [Development Philosophy](../development)
 
 ---
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+ | [Development Philosophy](../development)
 
 ---
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
-
----
-
----
-
-[← Back to Projects](../projects) | [Development Philosophy](../development)
-
----
-
----
-
-[← Back to Projects](../projects) | [Development Philosophy](../development)
-
----
-
----
-
-[← Back to Projects](../projects) | [Development Philosophy](../development)
-
----
-
----
-
-[← Back to Projects](../projects) | [Development Philosophy](../development)
-
----
-
----
-
-[← Back to Projects](../projects) | [Development Philosophy](../development)
-
----
-
----
-
-[← Back to Projects](../projects) | [Development Philosophy](../development)
-
----
-
----
-
-[← Back to Projects](../projects) | [Development Philosophy](../development)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
+ | [Development Philosophy](../development)
 
 ---
 

@@ -5,7 +5,7 @@ section: network-automation
 
 # Device Interaction Framework
 
-<span class="status-badge status-active">Phase 6/9 (53%)</span>
+<span class="status-badge status-updated">Recently Updated</span>
 
 
 

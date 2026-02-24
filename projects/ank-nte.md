@@ -5,7 +5,7 @@ section: network-automation
 
 # Network Topology Engine
 
-<span class="status-badge status-active">Phase 06/15 (97%)</span>
+<span class="status-badge status-updated">Recently Updated</span>
 
 
 

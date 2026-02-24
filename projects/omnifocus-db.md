@@ -5,7 +5,7 @@ section: projects
 
 # OmniFocus DB CLI (omnifocus-db)
 
-<span class="status-badge status-active">** Phase 7: Interactive Inbox Triage TUI — COMPLETE</span>
+<span class="status-badge status-active">Last Active: 2026-02-16</span>
 
 
 

@@ -4,7 +4,7 @@ layout: default
 
 # EclipseStack
 
-<span class="status-badge status-active">** 1 (Ingestion & Foundation)</span>
+<span class="status-badge status-active">Active</span>
 
 
 

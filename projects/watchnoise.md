@@ -4,7 +4,7 @@ layout: default
 
 # Wave (StillState & FlowState)
 
-<span class="status-badge status-active">26 (FlowState Hotkeys + Quick Actions)</span>
+<span class="status-badge status-updated">Recently Updated</span>
 
 
 

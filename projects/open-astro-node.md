@@ -5,7 +5,7 @@ section: photography
 
 # OpenAstro Node
 
-<span class="status-badge status-active">** 2. Control</span>
+<span class="status-badge status-active">Active</span>
 
 
 
@@ -64,10 +64,10 @@ Rust Backend (Axum)
 
 ## Milestones
 
-**Phase 1: Foundation** (Complete — 8/8 plans)
+**/8 plans)
 INDI integration, camera/mount hardware abstraction, target management, background storage.
 
-**Phase 2: Control & Safety** (Complete — 9/9 plans)
+**/9 plans)
 Web UI with night vision mode, TUI for SSH, real-time state transport, targets CRUD.
 
 **Roadmap:**

@@ -5,7 +5,7 @@ section: network-automation
 
 # Network Automation Ecosystem
 
-<span class="status-badge status-active">Phase 3/12</span>
+<span class="status-badge status-updated">Recently Updated</span>
 
 
 

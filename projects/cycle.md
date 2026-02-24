@@ -5,7 +5,7 @@ section: agentic-systems
 
 # Cycle Agent
 
-<span class="status-badge status-active">Phase 4/5 (71%)</span>
+<span class="status-badge status-updated">Recently Updated</span>
 
 
 
@@ -63,7 +63,7 @@ SwiftUI App (iPad / Apple TV)
 
 ## Milestones
 
-**Phase 1: Core Connectivity** (80% Complete)
+**% Complete)
 BLE discovery, FTMS control, NATS connection, and live metrics display.
 
 **Roadmap:**
@@ -71,7 +71,7 @@ BLE discovery, FTMS control, NATS connection, and live metrics display.
 - **Phase 2: Agent Brain** — Request-response workout commands, real-time telemetry streaming
 - **Phase 3: The World** — Infinite procedural terrain, visual speed synchronization
 - **Phase 4: Heart Rate & Health** — Apple Watch integration, HealthKit storage
-- **Phase 5: Polish & UI** — Polished HUD, tvOS optimization, 10-foot UI
+- **-foot UI
 
 ---
 

@@ -5,7 +5,7 @@ section: projects
 
 # Satellites
 
-<span class="status-badge status-active">Phase 5/6 (100%)</span>
+<span class="status-badge status-updated">Recently Updated</span>
 
 
 
@@ -43,10 +43,10 @@ Fetches Two-Line Element (TLE) orbital data from CelesTrak, propagates satellite
 
 ```
 ┌──────────────────────────────────────────────────┐
-│              World Map (Canvas)                   │  ~40%
+│              World Map (Canvas)                   │  ~
 │  [satellite dots]  [observer ✕]  [labels]        │
 ├──────────────────────────┬───────────────────────┤
-│  Satellite Table         │  Detail Panel         │  ~55%
+│  Satellite Table         │  Detail Panel         │  ~
 │  Name | El | Az | Freq   │  Orbit info           │
 │  ISS    45   NW  145.8   │  Transmitters list    │
 │  SO-50  12   SE  436.8   │  Next pass timeline   │
@@ -112,12 +112,12 @@ Pass prediction propagates at 60-second intervals over 24 hours, detects elevati
 
 - Phase 1: Project setup + README (complete)
 - Phase 2: TUI skeleton + world map rendering
-- Phase 3: Live satellite data on map (CelesTrak + SGP4)
+- )
 - Phase 4: Observer location + overhead detection
 - Phase 5: Interactive satellite table with pass predictions
 - Phase 6: Detail panel + SatNOGS frequency data
 - Phase 7: Pass timeline chart + group switching + search
-- Phase 8: GitHub Actions CI + v0.1.0 release
+- .1.0 release
 
 ---
 

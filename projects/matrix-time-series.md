@@ -5,7 +5,7 @@ section: data-analytics
 
 # matrix-profile-rs
 
-<span class="status-badge status-active">Phase 10/11 (82%)</span>
+<span class="status-badge status-updated">Recently Updated</span>
 
 
 

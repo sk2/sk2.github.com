@@ -5,7 +5,7 @@ section: network-automation
 
 # Orchestrator (Device Interaction Runner)
 
-<span class="status-badge status-active">Phase 1/5 (0%)</span>
+<span class="status-badge status-updated">Recently Updated</span>
 
 
 

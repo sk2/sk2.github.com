@@ -5,7 +5,7 @@ section: photography
 
 # AuroraPhoto
 
-<span class="status-badge status-active">** Phase 1: Star Sharpness Foundation</span>
+<span class="status-badge status-active">Active</span>
 
 
 

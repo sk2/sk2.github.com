@@ -43,7 +43,7 @@ section: projects
 - **Procedural Noise Engine**: White, brown, and blended noise with live hot-swap
 - **Binaural Beats**: 5 presets plus custom parameters with noise bed compositing
 - **Ear-Print Calibration**: Interactive 10-step frequency sweep (20 Hz - 8 kHz) with personalized +4dB bias
-- **Heartbeat Synchronization**: 4 BPM presets (50-65 BPM) with conservative 5-8% amplitude modulation
+- **Heartbeat Synchronization**: 4 BPM presets (50-65 BPM) with conservative 5- amplitude modulation
 - **Adaptive Masking**: Microphone-based ambient noise monitoring with vDSP-accelerated analysis, dynamic volume adjustment (1.0-1.5x)
 - **Sleep-Optimized UI**: Large touch targets, Bluetooth-only routing, indefinite background playback
 
@@ -73,7 +73,7 @@ Ear-print calibration, heartbeat synchronization, microphone monitoring infrastr
 
 **v1.2 Polish & Validation** (In Progress)
 - Full adaptive masking algorithm (FFT frequency analysis, dynamic volume/frequency adjustment)
-- Hardware battery validation (target: <15% drain/hour with all features)
+- Hardware battery validation (target: < drain/hour with all features)
 - TestFlight distribution setup
 
 **Roadmap:**

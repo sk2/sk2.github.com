@@ -4,7 +4,7 @@ layout: default
 
 # ASIAIR Import Tool
 
-<span class="status-badge status-active">Phase 1/1 (0%)</span>
+<span class="status-badge status-active">Last Active: 2026-02-11</span>
 
 
 

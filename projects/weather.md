@@ -5,7 +5,7 @@ section: data-analytics
 
 # Weather (BOM ACCESS Pipeline)
 
-<span class="status-badge status-active">Phase 2/4 (75%)</span>
+<span class="status-badge status-active">Last Active: 2026-02-14</span>
 
 
 

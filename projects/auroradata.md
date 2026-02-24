@@ -5,7 +5,7 @@ section: projects
 
 # Aurora Advisor
 
-<span class="status-badge status-active">** Not started</span>
+<span class="status-badge status-active">Active</span>
 
 
 
@@ -37,7 +37,7 @@ Aurora hunting in Australia requires a 60+ minute drive to dark sites, but most 
 
 ## Roadmap
 
-- Scope (not prioritized): 
+- Scope (not prioritized):
 
 ---
 
@@ -80,10 +80,10 @@ The question this tool answers: "If I leave now, will I see aurora when I arrive
                │
       ┌────────▼────────────┐
       │  Site Scoring Engine│
-      │  Activity (40%)     │
-      │  Cloud cover (30%)  │
-      │  Travel time (20%)  │
-      │  Moon phase (10%)   │
+      │  Activity ()     │
+      │  Cloud cover ()  │
+      │  Travel time ()  │
+      │  Moon phase ()   │
 ```
 
 
@@ -121,7 +121,7 @@ Real-time space weather monitoring with substorm detection:
 ## Phase 2: Localized Planning & Site Selection
 
 Multi-criteria site scoring with Australian-specific weather:
-- **Scoring Weights**: Activity 40%, cloud cover 30%, travel time 20%, moon illumination 10%
+- **Scoring Weights**: Activity , cloud cover , travel time , moon illumination 
 - **Cloud Forecast**: Near-term weighting `[0.4, 0.3, 0.2, 0.1]` for hours 0-3 at arrival time, with fallback to 4-hour basic forecast beyond 12 hours
 - **Travel Penalty**: Exponential decay (`rate=0.02`), 45-minute threshold for required activity increase
 - **Weather Reliability**: MAE thresholds — `< 10 = HIGH`, `10-20 = MEDIUM`, `> 20 = LOW` reliability
@@ -172,10 +172,10 @@ Space Weather:
 
 Site Recommendations:
   1. Victor Harbor — Score: 82 (GO)
-     Cloud: 15%, Travel: 75 min, Moon: 12%
+     Cloud: , Travel: 75 min, Moon: 
      Confidence: HIGH
   2. Port Germein — Score: 71 (GO)
-     Cloud: 22%, Travel: 45 min, Moon: 12%
+     Cloud: , Travel: 45 min, Moon: 
 
 LLM Advice:
   "Strong substorm building with favorable Bz.

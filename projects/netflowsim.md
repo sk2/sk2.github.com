@@ -5,7 +5,7 @@ section: network-automation
 
 # Network Performance Simulator
 
-<span class="status-badge status-active">Phase 9/13 (100%)</span>
+<span class="status-badge status-updated">Recently Updated</span>
 
 
 

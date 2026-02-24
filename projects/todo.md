@@ -4,7 +4,7 @@ layout: default
 
 # Rust TUI GTD Todo (OmniFocus-inspired)
 
-<span class="status-badge status-active">08.1 MCP TUI Integration Bridge</span>
+<span class="status-badge status-updated">Recently Updated</span>
 
 
 

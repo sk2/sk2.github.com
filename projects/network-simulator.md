@@ -5,7 +5,7 @@ section: network-automation
 
 # Network Simulator
 
-<span class="status-badge status-active">Phase 66/67 (100%)</span>
+<span class="status-badge status-updated">Recently Updated</span>
 
 **Rust**
 
@@ -39,9 +39,13 @@ Developing agentic AI systems and network automation tools requires rapid iterat
 
 ## Roadmap
 
-- v1.9 Advanced Impairments & Topology Patterns (Proposed) — Phases 97-100
-- v1.10 Engine Hardening & Protocol Fidelity (Proposed) — Phases 111-115
-- v1.11 Advanced Analysis & Assertions (Proposed) — Phases 116-119
+- v1.9 Advanced Impairments & Topology Patterns
+- v1.10 Engine Hardening & Protocol Fidelity
+- v1.11 Advanced Analysis & Assertions
+
+---
+
+**Rust**
 
 ---
 
@@ -248,7 +252,7 @@ Destination       Next Hop        Metric  Interface
 
 ```bash
 $ netsim exec my-network h1 "ping 10.0.3.10"
-Ping 10.0.3.10: 5/5 packets received, 0% loss
+Ping 10.0.3.10: 5/5 packets received,  loss
 
 $ netsim exec my-network r1 "show ip route --json"
 [{"destination":"10.0.1.0/24","next_hop":"—","metric":0,"interface":"eth2","source":"connected"}, ...]
@@ -452,7 +456,7 @@ PING=$(netsim exec ci-test h1 "ping 10.0.3.10")
 
 echo "$ROUTES" | jq -e '.[] | select(.destination == "10.0.3.0/24")' || exit 1
 echo "$OSPF" | jq -e 'length == 2' || exit 1
-echo "$PING" | grep -q "0% loss" || exit 1
+echo "$PING" | grep -q " loss" || exit 1
 
 netsim daemon stop ci-test
 

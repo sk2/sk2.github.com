@@ -5,7 +5,7 @@ section: network-automation
 
 # TopoGen - Network Topology Generator
 
-<span class="status-badge status-active">Phase 30 - Core Validation Architecture</span>
+<span class="status-badge status-updated">Recently Updated</span>
 
 
 
@@ -35,7 +35,7 @@ Generating realistic, validated network topologies for testing often requires cu
 
 ## Roadmap
 
-- Plans: 4 plans
+- Plans:
 
 ---
 

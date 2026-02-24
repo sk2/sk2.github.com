@@ -5,7 +5,7 @@ section: signal-processing
 
 # Radio Streaming Server
 
-<span class="status-badge status-active">Phase 5/6 (100%)</span>
+<span class="status-badge status-updated">Recently Updated</span>
 
 
 
@@ -162,7 +162,7 @@ FFI wrappers for `librtlsdr`, basic TCP streaming, `rtl_tcp` protocol compliance
 ### Phase 2: Multi-SDR & AirSpy (Complete)
 `libairspyhf` and `libairspy` FFI wrappers, multi-device architecture with per-device ports, graceful shutdown with signal handling.
 
-### Phase 3: TUI & Live Config (90%)
+### %)
 Ratatui-based dashboard, interactive frequency/gain/sample rate adjustment, channel-based command dispatch, HTTP REST API. Remaining: config save/reload.
 
 ### Phase 4: Network Optimization (Planned)

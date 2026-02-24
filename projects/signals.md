@@ -5,7 +5,7 @@ section: signal-processing
 
 # Spectrum Analysis
 
-<span class="status-badge status-active">Phase 7/7</span>
+<span class="status-badge status-updated">Recently Updated</span>
 
 
 
@@ -71,7 +71,7 @@ Version 2.0 adds a central WebSocket server that multiplexes real-time spectrum 
 - **Signal intelligence overlay**: ML classification results stream in real-time with SigIDWiki enrichment
 - **Unified control**: Device configuration, tuning, and mission control through WebSocket commands
 
-Phase 8 (WebSocket Foundation) complete. Phase 9 (Signal Intelligence Overlay) in progress — adding live classification stream and web-based detection visualization.
+ (Signal Intelligence Overlay) in progress — adding live classification stream and web-based detection visualization.
 
 ---
 

@@ -5,7 +5,7 @@ section: projects
 
 # Psytrance Generator
 
-<span class="status-badge status-active">Phase 1/5 (0%)</span>
+<span class="status-badge status-updated">Recently Updated</span>
 
 
 
@@ -136,7 +136,7 @@ Without `--output`, the engine launches an interactive TUI with real-time playba
 
 - **Language**: Rust
 - **DSP**: Phase-accumulating oscillators, biquad filters, amplitude envelopes (f64 internal precision)
-- **Effects** (Phase 2+): fundsp
+- **Effects** : fundsp
 - **WAV Export**: hound
 - **CLI**: clap 4
 - **Playback**: cpal (real-time audio)

@@ -5,7 +5,7 @@ section: agentic-systems
 
 # Secure Multi-Agent Personal Assistant
 
-<span class="status-badge status-active">Phase 21/23 (100%)</span>
+<span class="status-badge status-updated">Recently Updated</span>
 
 **Agents can be Go · Python · or Rust**
 
@@ -29,6 +29,13 @@ section: agentic-systems
 ## Concept
 
 Multi-agent coordination requires strict security boundaries to prevent lateral movement. This assistant demonstrates **containerized isolation** where agents (HealthKit, Home Automation, etc.) coordinate via a NATS message broker. By using per-subject ACLs and a "deny-by-default" security posture, the system ensures that compromise of a single agent cannot cascade through the infrastructure.
+
+
+**Agents can be Go · Python · or Rust**
+
+---
+
+**Agents can be Go · Python · or Rust**
 
 ---
 
@@ -117,7 +124,7 @@ Agents provide reasoning for proposed actions:
 ```
 Health Agent: "Suggesting 10-minute walk break"
 Reason: "Sedentary for 3 hours, heart rate variability declining"
-Data: { sitting_time: 180, hrv_trend: -15%, step_count: 450 }
+Data: { sitting_time: 180, hrv_trend: -, step_count: 450 }
 Confidence: 0.85
 ```
 

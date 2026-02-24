@@ -5,7 +5,7 @@ section: photography
 
 # EclipsePhoto
 
-<span class="status-badge status-active">** 1 - Hardware & Data Foundation</span>
+<span class="status-badge status-active">Active</span>
 
 
 

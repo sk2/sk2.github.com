@@ -5,7 +5,7 @@ section: network-automation
 
 # Network Configuration Analysis
 
-<span class="status-badge status-active">Phase 5/8 (63%)</span>
+<span class="status-badge status-updated">Recently Updated</span>
 
 
 

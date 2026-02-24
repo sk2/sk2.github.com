@@ -5,7 +5,7 @@ section: signal-processing
 
 # HealthyPi Ecosystem
 
-<span class="status-badge status-active">** Phase 7 - Ingest CLI + HealthyPi 6 Serial MVP</span>
+<span class="status-badge status-updated">Recently Updated</span>
 
 
 
@@ -81,7 +81,7 @@ Agent scaffold with NATS integration, task handlers, and orchestrator registrati
 **Phase 5: Desktop Menu Bar Prototype** (Complete)
 macOS menu bar app with real-time ambient health status (Green/Yellow/Red).
 
-**Phase 6: Apple Ecosystem & Sync** (In Progress — 2/7 plans)
+**/7 plans)
 - HealthyPiKit Swift package with NATS subscriber (complete)
 - Reconnection handling and test coverage (complete)
 - HealthKit bidirectional sync, iOS dashboard, WatchOS app (remaining)

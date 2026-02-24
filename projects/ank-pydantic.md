@@ -5,7 +5,7 @@ section: network-automation
 
 # Network Modeling Library
 
-<span class="status-badge status-active">Phase 93/94</span>
+<span class="status-badge status-updated">Recently Updated</span>
 
 
 

@@ -63,6 +63,9 @@ The question this tool answers: "If I leave now, will I see aurora when I arrive
 
 ## Architecture
 
+<details>
+<summary>Show Code (37 lines)</summary>
+
 ```
 ┌──────────────────────────────────────────────────┐
 │                 Data Sources                      │
@@ -100,6 +103,8 @@ The question this tool answers: "If I leave now, will I see aurora when I arrive
       │  Historical Playback │
       └─────────────────────┘
 ```
+
+</details>
 
 ---
 
@@ -145,6 +150,9 @@ Backtesting and validation against real storm events:
 
 ## Example Output
 
+<details>
+<summary>Show Code (28 lines)</summary>
+
 ```
 Location: Adelaide, SA
 Target Site: Victor Harbor (75 min drive)
@@ -174,6 +182,8 @@ Telegram: Alert sent to 12 subscribers
 RECOMMENDATION: GO NOW
 ```
 
+</details>
+
 ---
 
 ## Tech Stack
@@ -192,6 +202,12 @@ AuroraData handles the *planning* side (when to go, where to go), while AuroraPh
 
 1. **AuroraData**: "Strong event predicted, leave now for Victor Harbor"
 2. **AuroraPhoto**: Automated multi-camera capture once on-site
+
+---
+
+---
+
+[← Back to Projects](../projects)
 
 ---
 

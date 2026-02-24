@@ -119,4 +119,10 @@ Designed to complement the [HealthyPi](healthypi) ecosystem:
 
 ---
 
+---
+
+[← Back to Projects](../projects)
+
+---
+
 [← Back to Projects](../projects)

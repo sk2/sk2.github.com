@@ -46,8 +46,8 @@ Developing agentic AI systems and network automation tools requires rapid iterat
 ## Roadmap
 
 - v1.9 Advanced Impairments & Topology Patterns (Proposed) — Phases 97-100
+- v1.10 Engine Hardening & Protocol Fidelity (Proposed) — Phases 111-115
 - v2.0 IPv6 Foundation (Proposed) — Phases 68-72
-- v2.1 Enterprise & Campus Protocols (Proposed) — Phases 73-74
 
 ---
 
@@ -66,6 +66,9 @@ Developing agentic AI systems and network automation tools requires rapid iterat
 ## Quick Start — Three-Router OSPF Example
 
 Create `ospf-triangle.yaml`:
+
+<details>
+<summary>Show Code (71 lines)</summary>
 
 ```yaml
 name: ospf-triangle
@@ -139,7 +142,12 @@ script:
     command: ping 10.0.3.10
 ```
 
+</details>
+
 Run the simulation:
+
+<details>
+<summary>Code: netsim run ospf-triangle.yaml (23 lines)</summary>
 
 ```bash
 $ netsim run ospf-triangle.yaml
@@ -164,6 +172,8 @@ Round-trip path: h1 -> r1 -> r3 -> h3 -> r3 -> r1 -> h1
 
 Simulation complete: 120ms simulated, 0.034s real time (3529x speedup)
 ```
+
+</details>
 
 **Discussion:**
 
@@ -229,6 +239,9 @@ netsim attach my-network r1
 
 Opens a full interactive REPL session on the device. You're effectively "logged in" to the simulated router with command history, tab completion, and abbreviated commands:
 
+<details>
+<summary>Show Code (25 lines)</summary>
+
 ```
 r1> sh ip ro
 Destination       Next Hop        Metric  Interface
@@ -254,6 +267,8 @@ IP Address      MAC Address        State     Age  Interface
 10.0.12.2       02:00:00:00:02:00  Resolved  396  eth0
 10.0.13.3       02:00:00:00:03:00  Resolved  396  eth1
 ```
+
+</details>
 
 **Live interface management** — shut down a link and watch the protocol reconverge in real time:
 
@@ -347,6 +362,9 @@ Press Enter on a device to open an interactive console session. Press `l` at any
 
 ### Daemon Management
 
+<details>
+<summary>Code: Network Simulator (22 lines)</summary>
+
 ```bash
 # Network Simulator
 $ netsim daemon list
@@ -370,6 +388,8 @@ $ netsim daemon stop my-network
 $ netsim daemon list --clean
 ```
 
+</details>
+
 ---
 
 ---
@@ -377,6 +397,9 @@ $ netsim daemon list --clean
 ### CI/CD Integration Example
 
 Start a daemon, run automated validation, collect results, tear down:
+
+<details>
+<summary>Code: !/bin/bash (25 lines)</summary>
 
 ```bash
 #!/bin/bash
@@ -404,9 +427,14 @@ netsim daemon stop ci-test
 echo "All validations passed"
 ```
 
+</details>
+
 ### Failover Testing with Daemon Mode
 
 Test link failure and reconvergence interactively:
+
+<details>
+<summary>Code: Network Simulator (26 lines)</summary>
 
 ```bash
 # Network Simulator
@@ -434,6 +462,8 @@ Neighbor ID     Interface  State   Priority  Dead Time
 2.2.2.2         eth0       Full    1         38s      ← re-established
 3.3.3.3         eth1       Full    1         36s
 ```
+
+</details>
 
 ### Why Use Daemon Mode?
 
@@ -548,6 +578,9 @@ All commands support prefix abbreviation (e.g., `sh ip ro`) and `--json` output 
 
 Service provider topology demonstrating IS-IS hierarchical routing:
 
+<details>
+<summary>Show Code (62 lines)</summary>
+
 ```yaml
 name: isis-hierarchy
 description: IS-IS L1/L2 hierarchy with inter-area routing
@@ -611,7 +644,12 @@ script:
     command: show ip route
 ```
 
+</details>
+
 **Simulation Output:**
+
+<details>
+<summary>Code: netsim run isis-hierarchy.yaml (40 lines)</summary>
 
 ```bash
 $ netsim run isis-hierarchy.yaml
@@ -653,6 +691,8 @@ i L2 192.0.2.3/32 [115/20] via 10.1.0.2, eth0
 Simulation complete: 15ms simulated, 0.008s real time
 IS-IS events: 18 hellos, 4 LSPs, 2 SPF runs
 ```
+
+</details>
 
 ---
 
@@ -743,6 +783,12 @@ Rust, Tokio for async execution, petgraph for topology representation, gRPC for 
 ---
 
 [← Back to Network Automation](../network-automation)
+
+---
+
+---
+
+[← Back to Projects](../projects)
 
 ---
 

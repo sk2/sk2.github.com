@@ -96,6 +96,9 @@ Output written to: topology.yaml
 ```
 
 Generated output (excerpt):
+<details>
+<summary>Show Code (35 lines)</summary>
+
 ```yaml
 name: dc-lab-leaf-spine-2s-4l-100g
 topology_type: leaf-spine
@@ -131,6 +134,8 @@ links:
     latency_ms: 0.1
   # ... (full mesh: 4 leaves × 2 spines = 8 links)
 ```
+
+</details>
 
 ---
 
@@ -197,6 +202,12 @@ Rust core, PyO3 for Python bindings, Maturin build system
 ---
 
 [← Back to Network Automation](../network-automation)
+
+---
+
+---
+
+[← Back to Projects](../projects)
 
 ---
 

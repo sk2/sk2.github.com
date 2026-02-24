@@ -63,6 +63,9 @@ A Rust-based network topology layout and visualization engine that transforms co
 ## Example: Quick Start
 
 Input topology (`simple-network.yaml`):
+<details>
+<summary>Show Code (31 lines)</summary>
+
 ```yaml
 nodes:
   - name: r1
@@ -94,6 +97,8 @@ edges:
   - src: s1
     dst: s2
 ```
+
+</details>
 
 Render with CLI:
 ```bash
@@ -214,6 +219,12 @@ Rust, petgraph, fjadra (d3-force port), SVG/PDF/PNG rendering, WASM-ready
 ---
 
 [← Back to Network Automation](../network-automation)
+
+---
+
+---
+
+[← Back to Projects](../projects)
 
 ---
 

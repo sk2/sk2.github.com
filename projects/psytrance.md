@@ -165,4 +165,10 @@ Without `--output`, the engine launches an interactive TUI with real-time playba
 
 ---
 
+---
+
+[← Back to Projects](../projects)
+
+---
+
 [← Back to Projects](../projects)

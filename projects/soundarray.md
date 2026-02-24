@@ -89,4 +89,10 @@ C++ (ODAS), Python (librosa, NumPy, PyAudio), TensorFlow Lite (YAMNet), MQTT (Mo
 
 ---
 
+---
+
+[← Back to Projects](../projects)
+
+---
+
 [← Back to Projects](../projects)

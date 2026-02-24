@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Update website projects page and individual project pages from project metadata.
-Enforces a clean, understated, and powerful style with navigation for long pages.
+Enforces a clean, understated, and powerful style with navigation and collapsible code.
 """
 
 import argparse
@@ -63,6 +63,24 @@ def extract_sections(content: str) -> Dict[str, str]:
         body = match.group(2).strip()
         if body: sections[header] = body
     return sections
+
+
+def wrap_long_code_blocks(content: str, threshold: int = 20) -> str:
+    """Wrap code blocks longer than threshold lines in a details tag."""
+    def replacer(match):
+        code = match.group(0)
+        lines = code.strip().split("\n")
+        if len(lines) > threshold:
+            summary = "Show Code"
+            # Try to find a comment or first line that might serve as a better summary
+            first_line = lines[1].strip() if len(lines) > 1 else ""
+            if first_line.startswith("#") or first_line.startswith("//") or first_line.startswith("$"):
+                summary = f"Code: {first_line.lstrip('#/$ ').strip()}"
+            
+            return f"<details>\n<summary>{summary} ({len(lines)} lines)</summary>\n\n{code}\n\n</details>"
+        return code
+
+    return re.sub(r'```.*?```', replacer, content, flags=re.DOTALL)
 
 
 def generate_toc(content: str) -> str:
@@ -181,6 +199,11 @@ def update_existing_file(content: str, project: ProjectInfo) -> str:
         new_fm_lines.append(f"section: {FM_SECTIONS[project.category]}")
         
     body = content[fm_match.end():].strip() if fm_match else content.strip()
+    
+    # Remove all but the very first details wrapping to prevent nesting
+    body = re.sub(r'</details>', '', body)
+    body = re.sub(r'<details>\s*<summary>.*?</summary>', '', body)
+
     sections = re.split(r'^(?=##\s|---)', body, flags=re.MULTILINE)
     clean_sections = []
     for sec in sections:
@@ -199,7 +222,6 @@ def update_existing_file(content: str, project: ProjectInfo) -> str:
     
     fm_block = f"---\n" + "\n".join(new_fm_lines) + f"\n---"
     
-    # Body assembly
     body_content = []
     concept_sec = next((s for s in clean_sections if s.startswith("## Concept")), None)
     if concept_sec:
@@ -210,8 +232,9 @@ def update_existing_file(content: str, project: ProjectInfo) -> str:
     body_content.extend(clean_sections)
     
     assembled_body = "\n\n---\n\n".join(body_content)
-    toc = generate_toc(assembled_body)
+    assembled_body = wrap_long_code_blocks(assembled_body)
     
+    toc = generate_toc(assembled_body)
     if toc:
         assembled_body = toc + "\n" + assembled_body
 
@@ -241,6 +264,8 @@ def generate_detailed_page(project: ProjectInfo) -> str:
         content_lines.append("")
     
     assembled_content = "\n".join(content_lines)
+    assembled_content = wrap_long_code_blocks(assembled_content)
+    
     toc = generate_toc(assembled_content)
     if toc:
         lines.append(toc)

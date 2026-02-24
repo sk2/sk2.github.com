@@ -36,4 +36,10 @@ This is inspired by Tower/AWX-style job execution, but it is purpose-built for o
 
 ---
 
+---
+
+[← Back to Projects](../projects)
+
+---
+
 [← Back to Projects](../projects)

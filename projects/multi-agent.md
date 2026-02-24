@@ -287,4 +287,10 @@ All agents communicate exclusively via NATS with subject-based ACLs. Each agent'
 
 ---
 
+---
+
+[← Back to Projects](../projects)
+
+---
+
 [← Back to Projects](../projects)

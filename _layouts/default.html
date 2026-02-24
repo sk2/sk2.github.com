@@ -200,8 +200,13 @@
           const code = pre.querySelector('code');
           if (!code) return;
           
-          const lines = code.textContent.trim().split('\n').length;
-          if (lines > 15) {
+          const text = code.textContent;
+          const lines = text.trim().split('\n').length;
+          
+          // Skip if it looks like ASCII art/diagram
+          const isDiagram = /[┌┐└┘│─┬┴┼]/.test(text);
+          
+          if (lines > 15 && !isDiagram) {
             const wrapper = document.createElement('div');
             wrapper.className = 'code-wrapper';
             

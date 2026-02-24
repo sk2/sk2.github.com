@@ -20,14 +20,6 @@ Developing...
 
 ---
 
----
-
----
-
----
-
----
-
 ## Features
 
 ### Automatic IP Addressing
@@ -130,6 +122,14 @@ Network diagram generation:
 - Logical routing domain view
 - BGP AS topology
 - Per-protocol views
+
+---
+
+[← Back to Projects](../projects)
+
+---
+
+[← Back to Projects](../projects)
 
 ---
 

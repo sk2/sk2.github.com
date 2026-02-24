@@ -16,50 +16,19 @@ section: agentic-systems
 ## Contents
 
 - [Concept](#concept)
-- [Problem It Solves](#problem-it-solves)
 - [Features](#features)
 - [Architecture](#architecture)
 - [Security Model](#security-model)
-- [Individual Agents](#individual-agents)
 
 ## Concept
 
+### What This Is
+
 A security-first multi-agent system that coordinates specialized containerized agents (health monitoring, home automation, data aggregation, workflow automation) through a message broker architecture. Each agent runs in isolation with minimal privileges and communicates only through validated message queues, demonstrating production-ready patterns for deploying AI agents in security-critical infrastructure environments. The orchestrator uses cloud LLM reasoning (GPT-4/Claude) while agents remain lightweight and deterministic.
 
+### Core Value
+
 Complete isolation between agents such that compromise of one agent cannot cascade to others or the orchestrator—demonstrating that secure multi-agent systems are practical for both personal and production infrastructure use cases.
-
----
-
-## Problem It Solves
-
-AI agent systems need strong security boundaries to prevent compromise from cascading:
-
-**Monolithic Agent Systems:**
-- Single point of failure
-- Compromise spreads to all capabilities
-- Difficult to audit actions
-- No privilege separation
-
-**Direct Agent-to-Agent Communication:**
-- Attack surface grows with agent count
-- Difficult to enforce security policies
-- No centralized audit trail
-- Trust relationships complex to manage
-
-**Weak Isolation:**
-- Shared memory or filesystem
-- Credential leakage between agents
-- No network segmentation
-- Resource contention
-
-**Multi-Agent Assistant provides:**
-- Complete agent isolation via containers
-- Message broker enforces communication boundaries
-- Capability-based authorization with time-limited tokens
-- Network policies prevent direct agent-to-agent contact
-- Complete audit trail via OpenTelemetry
-- Pre-approval workflow for sensitive actions
-- Lightweight deterministic agents with cloud LLM orchestrator
 
 ---
 
@@ -227,37 +196,6 @@ OpenTelemetry tracing for all operations:
 
 
 ·
-
----
-
-## Individual Agents
-
-**The system includes 13+ specialized agents**, each designed for a specific domain with minimal privileges and explicit security boundaries:
-
-### Health & Biometrics
-- **HealthKit Agent** (Swift): Extracts metrics from Apple Health (heart rate, sleep, activity). Runs on macOS host only (no container) due to HealthKit framework requirements.
-- **HealthyPi Agent** (Python): Processes real-time biometric signals (ECG, PPG, EDA) from HealthyPi hardware, performs HRV analysis, and publishes health events.
-
-### Home & Environment
-- **Hue Agent** (Python): Controls Philips Hue lights based on time of day, presence detection, and automation rules. Scoped network access to Hue Bridge API only.
-- **Climate Agent** (Python): Monitors temperature, humidity, and adjusts HVAC settings. Isolated network tier.
-
-### Data Aggregation
-- **Calendar Agent** (Swift): Reads upcoming events from Apple Calendar/EventKit. macOS host execution only.
-- **Weather Agent** (Python): Fetches forecasts and current conditions. Scoped to weather API endpoints.
-- **RSS Agent** (Python): Aggregates news feeds and notifies on keywords. Full internet tier with content filtering.
-
-### Monitoring & Maintenance
-- **Backup Monitor** (Rust): Verifies Time Machine and NAS backup integrity. Checks disk usage and staleness. Alerts on failures.
-- **Screen Time Agent** (Swift): Tracks application usage patterns from macOS. Host-only execution.
-- **Network Monitor** (Rust): Tracks bandwidth, latency, and detects anomalies in local network traffic.
-
-### Automation & Coordination
-- **Workflow Engine** (Python): Executes multi-step workflows involving multiple agents. Coordinates approval flow for sensitive actions.
-- **Notification Gateway** (Python): Sends notifications via multiple channels (iOS, email, Slack). Full internet access.
-- **Audit Anomaly Agent** (Python): Monitors OpenTelemetry logs for security events and unusual patterns.
-
-All agents communicate exclusively via NATS with subject-based ACLs. Each agent's capabilities are explicitly defined, and actions requiring elevated privileges trigger the pre-approval workflow.
 
 ---
 

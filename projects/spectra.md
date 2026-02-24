@@ -16,18 +16,6 @@ Developing...
 
 ---
 
-An autonomous distributed SIGINT system. It monitors the RF spectrum, identifies modulations via ML, and tracks aircraft (ADS-B) and satellites. It leverages NATS for coordination and Polars for data indexing.
-
----
-
----
-
----
-
----
-
----
-
 ---
 
 ---
@@ -105,6 +93,10 @@ An autonomous distributed SIGINT system. It monitors the RF spectrum, identifies
 
 -  — Advanced ML/DSP including de-noising, blind signal separation, emitter identification, vector search, and beamforming
 -  — GPU acceleration, waterfall ring buffer optimization, memory profiling, batch updates
+
+---
+
+---
 
 ---
 

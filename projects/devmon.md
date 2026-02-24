@@ -20,14 +20,6 @@ Developing...
 
 ---
 
----
-
----
-
----
-
----
-
 ## Features
 
 ### Multi-Workspace Scanning
@@ -47,6 +39,10 @@ Visualizes the progress of projects through the GSD pipeline:
 
 ### At-Risk Alerting
 Automatically highlights projects that are "Active" but have zero "Ready" plans. This serves as a leading indicator that a project's pipeline is running dry and requires planning attention.
+
+---
+
+---
 
 ---
 

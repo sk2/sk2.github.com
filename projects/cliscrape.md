@@ -20,11 +20,14 @@ section: network-automation
 - [Architecture](#architecture)
 - [Performance](#performance)
 - [Tech Stack](#tech-stack)
-- [Key Features](#key-features)
 
 ## Concept
 
+### What This Is
+
 `cliscrape` is a high-performance CLI scraping and parsing tool for network devices, written in Rust. It provides a modern, ergonomic, and blazingly fast alternative to legacy tools like `TextFSM`, while maintaining first-class compatibility with existing templates.
+
+### Core Value
 
 The one thing that must work perfectly: **Extremely fast, reliable parsing of semi-structured CLI output into structured data, regardless of whether the template is legacy TextFSM or the new ergonomic format.**
 
@@ -84,35 +87,6 @@ Rust's zero-cost abstractions and compiled regex engine deliver 10-50x faster pa
   color: white;
 }
 </style>
-
----
-
-## Key Features
-
-### TextFSM Compatibility
-Full support for the TextFSM grammar. Use existing community templates (ntc-templates library) without modification. The parser translates `.textfsm` files into the internal FSM representation, enabling seamless migration from Python-based workflows.
-
-### State Machine Engine
-Finite state machine processes text line-by-line with typed variables, state transitions, and actions (Next, Continue, Record, Clear). Pre-compiled regex patterns with fast dispatching via RegexSet.
-
-### TUI Debugger
-Interactive template development environment showing real-time FSM state transitions, variable captures, and match visualization. See which line matched which rule and why — eliminates "regex soup" debugging.
-
-### Modern Template Format
-Structured YAML/TOML templates as an alternative to TextFSM's positional DSL:
-
-```yaml
-values:
-  interface: \S+
-  ip_address: \d+\.\d+\.\d+\.\d+|unassigned
-  status: up|down|administratively down
-  protocol: up|down
-
-states:
-  Start:
-    - match: ^${interface}\s+${ip_address}\s+\S+\s+\S+\s+${status}\s+${protocol}
-      action: Record
-```
 
 ---
 

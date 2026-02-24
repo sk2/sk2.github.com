@@ -22,8 +22,4 @@ Provides precise, automated control over exposure and focus specifically optimiz
 
 ---
 
-
-
----
-
 [← Back to Projects](../projects)

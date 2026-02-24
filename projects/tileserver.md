@@ -21,10 +21,6 @@ Serve dynamic vector tiles (MVT) from massive geospatial datasets (millions of p
 
 ---
 
-
-
----
-
 [← Back to Data Analytics](../data-analytics)
 
 [← Back to Projects](../projects)

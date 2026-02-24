@@ -22,8 +22,4 @@ The ability to capture, localize, and classify complex soundscapes on edge devic
 
 ---
 
-
-
----
-
 [← Back to Projects](../projects)

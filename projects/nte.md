@@ -24,6 +24,8 @@ It provides native-speed graph algorithms, query execution, and data storage for
 
 ---
 
+---
+
 ## Architecture
 
 The Network Topology Engine is organized as a Cargo workspace with specialized crates:
@@ -39,6 +41,8 @@ The Network Topology Engine is organized as a Cargo workspace with specialized c
 | **nte-datastore-lite** | Lightweight in-memory backend |
 | **nte-server** | Distributed computation support |
 | **nte-monte-carlo** | Monte Carlo simulation engine |
+
+---
 
 ---
 
@@ -63,6 +67,10 @@ Rust, petgraph (StableDiGraph), Polars, DuckDB, PyO3/Maturin for Python bindings
 ---
 
 
+
+---
+
+[← Back to Projects](../projects)
 
 ---
 

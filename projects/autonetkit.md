@@ -24,6 +24,8 @@ Developing...
 
 ---
 
+---
+
 ## Tech Stack
 
 Python (Pydantic), Rust core (`petgraph`-backed), PyO3 bindings
@@ -43,6 +45,10 @@ Python (Pydantic), Rust core (`petgraph`-backed), PyO3 bindings
 ---
 
 
+
+---
+
+[← Back to Projects](../projects)
 
 ---
 

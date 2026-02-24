@@ -25,10 +25,6 @@ The one thing that must work perfectly: **Extremely fast, reliable parsing of se
 
 ---
 
-
-
----
-
 [← Back to Data Analytics](../data-analytics)
 
 [← Back to Projects](../projects)

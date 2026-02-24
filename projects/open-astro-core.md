@@ -33,8 +33,4 @@ Downstream apps can rely on correct, consistent coordinate math and device/proto
 
 ---
 
-
-
----
-
 [← Back to Projects](../projects)

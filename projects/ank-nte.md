@@ -3,7 +3,7 @@ layout: default
 section: network-automation
 ---
 
-# Topology Core (NTE)
+# Topology Engine Core
 
 <span class="status-badge status-updated">Recently Updated</span>
 

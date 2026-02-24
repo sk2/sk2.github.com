@@ -22,8 +22,4 @@ Reliability and autonomy for a "one-shot" astronomical event. The system handles
 
 ---
 
-
-
----
-
 [← Back to Projects](../projects)

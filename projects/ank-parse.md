@@ -24,6 +24,8 @@ Developing...
 
 ---
 
+---
+
 ## Features
 
 - **Layout-Aware Ingestion**: Uses `pymupdf4llm` and `MinerU` to preserve tables, hierarchies, and code blocks from vendor PDFs.
@@ -54,6 +56,10 @@ Developing...
 ---
 
 
+
+---
+
+[← Back to Projects](../projects)
 
 ---
 

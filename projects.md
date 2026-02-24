@@ -50,7 +50,7 @@ A Rust-based network topology generator with Python bindings that consolidates s
 An orchestration runner for coordinating **device interactions** across real/testbed networks. It executes runs with retries, timeouts, bounded concurrency, and durable artifacts (logs, results, snapshots) that plug into the broader automation ecosystem.
 
 
-### [Topology Core (NTE)](projects/ank-nte)
+### [Topology Engine Core](projects/ank-nte)
 
 <span class="status-badge status-updated">Recently Updated</span>
 

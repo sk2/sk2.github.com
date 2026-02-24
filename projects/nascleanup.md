@@ -24,6 +24,8 @@ Developing...
 
 ---
 
+---
+
 ## Architecture
 
 - **Language:** Rust (for performance and safety).
@@ -47,6 +49,10 @@ Developing...
 ---
 
 
+
+---
+
+[← Back to Projects](../projects)
 
 ---
 

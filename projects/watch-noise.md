@@ -24,6 +24,8 @@ Developing...
 
 ---
 
+---
+
 ## Tech Stack
 
 Swift (SwiftUI, AVAudioEngine, Accelerate/vDSP), watchOS, CoreAudio, HealthKit
@@ -43,6 +45,10 @@ Swift (SwiftUI, AVAudioEngine, Accelerate/vDSP), watchOS, CoreAudio, HealthKit
 ---
 
 
+
+---
+
+[← Back to Projects](../projects)
 
 ---
 

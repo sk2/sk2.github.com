@@ -18,8 +18,4 @@ A headless, autonomous astrophotography controller designed for low-power Linux 
 
 ---
 
-
-
----
-
 [← Back to Projects](../projects)

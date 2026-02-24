@@ -24,6 +24,8 @@ Developing...
 
 ---
 
+---
+
 ## Features
 
 ### Phase 1 Complete: Foundation ✅
@@ -97,6 +99,8 @@ Developing...
 
 -  — Advanced ML/DSP including de-noising, blind signal separation, emitter identification, vector search, and beamforming
 -  — GPU acceleration, waterfall ring buffer optimization, memory profiling, batch updates
+
+---
 
 ---
 
@@ -185,6 +189,10 @@ Edge Pi → SpyServer/rtl_tcp → Mac mini Core
 ---
 
 
+
+---
+
+[← Back to Projects](../projects)
 
 ---
 

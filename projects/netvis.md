@@ -48,7 +48,7 @@ Transform network topologies into clear, information-dense visualizations using 
 
 ## Current Status
 
-2026-02-24 — Completed 72-05-PLAN.md (Edge inline label editing gap-closure)
+2026-02-24 — Completed 73-01-PLAN.md (EditorDocument persistence schema)
 
 ---
 

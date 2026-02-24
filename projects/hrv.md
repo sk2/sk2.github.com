@@ -20,6 +20,10 @@ Developing...
 
 ---
 
+---
+
+---
+
 ## Architecture
 
 **BLE Stack**: `btleplug` for cross-platform Bluetooth Low Energy communication
@@ -27,6 +31,10 @@ Developing...
 **Storage**: Apache Arrow + Parquet for columnar session files
 **TUI**: `ratatui` + `crossterm` for terminal UI
 **Platform**: macOS (Linux/Raspberry Pi planned)
+
+---
+
+---
 
 ---
 
@@ -55,6 +63,22 @@ Developing...
   color: white;
 }
 </style>
+
+---
+
+[← Back to Projects](../projects)
+
+---
+
+
+
+---
+
+[← Back to Projects](../projects)
+
+---
+
+
 
 ---
 

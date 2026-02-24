@@ -3,7 +3,7 @@ layout: default
 section: network-automation
 ---
 
-# ANK Workbench
+# Automation Workbench
 
 <span class="status-badge status-updated">Recently Updated</span>
 
@@ -54,8 +54,11 @@ Network engineers can design, validate, and visualize network changes in one com
 ![Visualization](/images/workbench-visualize.png)
 *Visualization view — explore topology, physical, logical, and protocol layers with configurable overlays, routing table inspection, and multi-format export.*
 
+---
 
-·
+## Current Status
+
+2026-02-24 — Completed 43-06-PLAN.md
 
 ---
 

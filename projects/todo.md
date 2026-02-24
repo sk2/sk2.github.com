@@ -24,4 +24,10 @@ Process an inbox full of captures into correctly-organized next actions (project
 
 ---
 
+## Current Status
+
+2026-02-24 - Verified
+
+---
+
 [← Back to Projects](../projects)

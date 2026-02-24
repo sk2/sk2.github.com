@@ -1,9 +1,9 @@
 ---
 layout: default
-section: network-automation
+section: data-analytics
 ---
 
-# Network Performance Simulator
+# Performance Simulator
 
 <span class="status-badge status-updated">Recently Updated</span>
 
@@ -21,23 +21,19 @@ section: network-automation
 
 ---
 
-## Use Cases
+## Tech Stack
 
-- **Topology Validation**: Test network designs before deployment
-- **Routing Strategy Comparison**: Evaluate different routing algorithms
-- **Capacity Planning**: Identify congestion points under load
-- **What-If Analysis**: Model link failures and capacity changes
-- **Integration Testing**: Validate packet simulator routing logic
+- **Language:** Rust
+- **Graph Library:** Petgraph
+- **Parallelism:** Rayon
+- **Serialization:** Serde (JSON), GraphML
+- **Visualization:** Martin (Tileserver), MVT (Mapbox Vector Tiles)
 
 ---
 
-## Tech Stack
+## Current Status
 
-- **Language**: Rust
-- **Graph Library**: Petgraph
-- **Parallelism**: Rayon (multi-core processing)
-- **Serialization**: Serde (JSON), GeoJSON
-- **Visualization**: Martin (Tileserver), MVT (Mapbox Vector Tiles)
+2026-02-23 — Completed 09-07 simulation throughput optimization
 
 ---
 

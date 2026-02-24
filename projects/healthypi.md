@@ -1,13 +1,13 @@
 ---
 layout: default
-section: signal-processing
+section: agentic-systems
 ---
 
 # HealthyPi Ecosystem
 
 <span class="status-badge status-updated">Recently Updated</span>
 
-[← Back to Agentic Systems](../agentic-systems)
+[← Back to Autonomous Systems](../agentic-systems)
 
 [← Back to Projects](../projects)
 
@@ -21,29 +21,12 @@ A modular, agent-aware health monitoring ecosystem that translates raw biometric
 
 ---
 
-## Architecture
+## Current Status
 
-```
-HealthyPi Hardware (BLE/Serial)
-    ↓
-NATS Broker (biometric.raw.*)
-    ↓
-Analysis Engine (HRV, stress, sleep, baseline)
-    ↓
-NATS (health.healthypi.*)
-    ├── macOS Menu Bar App
-    ├── iOS/WatchOS App
-    └── Multi-Agent Orchestrator
-```
+** 2026-02-20 - v1.1 roadmap created
 
 ---
 
-## Tech Stack
-
-Python (Pydantic, NeuroKit2, SciPy), Swift (SwiftUI, HealthKit), NATS messaging, pytest (286 tests)
-
----
-
-[← Back to Agentic Systems](../agentic-systems)
+[← Back to Autonomous Systems](../agentic-systems)
 
 [← Back to Projects](../projects)

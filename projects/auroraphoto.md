@@ -1,6 +1,5 @@
 ---
 layout: default
-section: photography
 ---
 
 # AuroraPhoto
@@ -23,23 +22,7 @@ Provides precise, automated control over exposure and focus specifically optimiz
 
 ---
 
-## Architecture
 
-```
-iPhone Controller (SwiftUI)
-    ↕ Wi-Fi / Hotspot + MQTT
-Raspberry Pi Capture Nodes
-    ├── Sony Camera (USB) — RAW capture, focus motor
-    ├── HFR Calculator (SEP) — Star quality monitoring
-    ├── ML Aurora Detection — Burst response
-    └── Telemetry Publisher (MQTT)
-```
-
----
-
-## Tech Stack
-
-Python (SEP, OpenCV, Rawpy, FastAPI, MQTT), Sony Camera Remote SDK, Swift (SwiftUI), Raspberry Pi
 
 ---
 

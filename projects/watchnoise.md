@@ -26,4 +26,10 @@ layout: default
 
 ---
 
+## Current Status
+
+2026-02-21 — Completed 26-01 FlowState Hotkeys + Quick Actions
+
+---
+
 [← Back to Projects](../projects)

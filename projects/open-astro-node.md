@@ -1,6 +1,5 @@
 ---
 layout: default
-section: photography
 ---
 
 # OpenAstro Node
@@ -19,26 +18,7 @@ A headless, autonomous astrophotography controller designed for low-power Linux 
 
 ---
 
-## Architecture
 
-```
-React Web UI / Rust TUI
-    ↕ WebSocket + REST API
-Rust Backend (Axum)
-    ├── State & Sequencing Manager
-    ├── Hardware Control (INDI)
-    │   ├── Camera Imager
-    │   ├── Mount Controller
-    │   └── Guiding (PHD2)
-    ├── Smart Logic Engine
-    └── Database (SQLite)
-```
-
----
-
-## Tech Stack
-
-Rust (Axum, Tokio, SQLite), React (TypeScript, Tailwind CSS), INDI, PHD2, ASTAP plate-solving
 
 ---
 

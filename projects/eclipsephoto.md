@@ -1,6 +1,5 @@
 ---
 layout: default
-section: photography
 ---
 
 # EclipsePhoto
@@ -23,22 +22,7 @@ Reliability and autonomy for a "one-shot" astronomical event. The system handles
 
 ---
 
-## Architecture
 
-```
-Raspberry Pi
-  ├── Sequencer (Asyncio) — Eclipse state machine, exposure loops
-  ├── Guiding Engine (Multiprocessing) — Star/crescent detection, PID loop
-  ├── Camera HAL — gphoto2 with failover support
-  ├── Mount HAL — INDI protocol
-  └── Mission Control API (FastAPI/BLE)
-```
-
----
-
-## Tech Stack
-
-Python (asyncio, multiprocessing), OpenCV, INDI, gphoto2, TSL2591 light sensor, FastAPI, ZeroMQ
 
 ---
 

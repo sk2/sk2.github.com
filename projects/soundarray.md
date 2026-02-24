@@ -1,6 +1,5 @@
 ---
 layout: default
-section: signal-processing
 ---
 
 # soundarray
@@ -23,9 +22,7 @@ The ability to capture, localize, and classify complex soundscapes on edge devic
 
 ---
 
-## Tech Stack
 
-C++ (ODAS), Python (librosa, NumPy, PyAudio), TensorFlow Lite (YAMNet), MQTT (Mosquitto), Raspberry Pi
 
 ---
 

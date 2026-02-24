@@ -29,6 +29,12 @@ Run the same device workflow reliably across lab/real targets, with deterministi
 
 ---
 
+## Current Status
+
+2026-02-22 — Roadmap initialized
+
+---
+
 [← Back to Network Automation](../network-automation)
 
 [← Back to Projects](../projects)

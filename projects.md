@@ -10,6 +10,22 @@ Focused on network engineering, autonomous systems, and signal processing.
 
 ## 🌐 Network Engineering
 
+### [Automation Workbench](projects/ank-workbench)
+
+<span class="status-badge status-updated">Recently Updated</span>
+
+
+**An orchestration platform** that integrates the ANK ecosystem tools (TopoGen, ank_pydantic, Network Simulator, NetVis) into one seamless workflow.
+
+
+### [Visualization Engine](projects/netvis)
+
+<span class="status-badge status-updated">Recently Updated</span>
+
+
+A Rust-based network topology layout and visualization engine. Takes complex multi-layer network topologies (via petgraph) and renders them using advanced layout algorithms that reduce visual complexity while preserving structural clarity. Outputs static formats (SVG, PDF, PNG) for v1, with interactive browser embedding planned for future integration with other tooling.
+
+
 ### [Network Simulator](projects/network-simulator)
 
 <span class="status-badge status-updated">Recently Updated</span>
@@ -18,28 +34,12 @@ Focused on network engineering, autonomous systems, and signal processing.
 A Rust-based network simulator that models packet-level behavior for routing protocols. It provides a middle ground between pure algorithmic analysis (like C-BGP) and full emulation (like Containerlab) — larger scale and smaller footprint than emulation, higher fidelity than algorithmic simulation. Used for smoke testing and design validation of network configurations.
 
 
-### [ANK Workbench](projects/ank-workbench)
-
-<span class="status-badge status-updated">Recently Updated</span>
-
-
-**An orchestration platform** that integrates the ANK ecosystem tools (TopoGen, ank_pydantic, Network Simulator, NetVis) into one seamless workflow.
-
-
-### [TopoGen - Network Topology Generator](projects/topogen)
+### [Topology Generator](projects/topogen)
 
 <span class="status-badge status-updated">Recently Updated</span>
 
 
 A Rust-based network topology generator with Python bindings that consolidates scattered topology generation logic from AutoNetKit, simulation tools, and visualization tools. Generates realistic data center, WAN, and random graph topologies with proper structure, design patterns, and realistic parameters. Outputs custom YAML format for use across the network engineering tool ecosystem.
-
-
-### [NetVis](projects/netvis)
-
-<span class="status-badge status-updated">Recently Updated</span>
-
-
-A Rust-based network topology layout and visualization engine. Takes complex multi-layer network topologies (via petgraph) and renders them using advanced layout algorithms that reduce visual complexity while preserving structural clarity. Outputs static formats (SVG, PDF, PNG) for v1, with interactive browser embedding planned for future integration with other tooling.
 
 
 ### [Orchestrator (Device Interaction Runner)](projects/orchestrator)
@@ -50,7 +50,7 @@ A Rust-based network topology layout and visualization engine. Takes complex mul
 An orchestration runner for coordinating **device interactions** across real/testbed networks. It executes runs with retries, timeouts, bounded concurrency, and durable artifacts (logs, results, snapshots) that plug into the broader automation ecosystem.
 
 
-### [Network Topology Engine](projects/ank-nte)
+### [Topology Core (NTE)](projects/ank-nte)
 
 <span class="status-badge status-updated">Recently Updated</span>
 
@@ -66,7 +66,7 @@ NTE (Network Topology Engine) is a Rust-based graph topology engine with Python 
 A Python library for modeling and querying network topologies, backed by a fast Rust core (`ank_nte`). Features a two-stage transformation model (Whiteboard → Plan → Protocol Layers), type-safe Pydantic models for nodes/edges/layers, and a composable lazy query API with Rust-backed execution. Ships with "batteries-included" domain models (ISIS, MPLS, EVPN, L3VPN, IXP) in the blueprints/ module.
 
 
-### [Network Configuration Analysis](projects/configparsing)
+### [Configuration Analysis](projects/configparsing)
 
 <span class="status-badge status-updated">Recently Updated</span>
 
@@ -92,14 +92,6 @@ This project aims to comprehensively define the **overall architecture of the Ne
 
 ## 📡 Radio Systems
 
-### [Spectrum Analysis](projects/signals)
-
-<span class="status-badge status-updated">Recently Updated</span>
-
-
-Transform raw radio spectrum data into an actionable "Signal Census" through automated detection, ML classification, and distributed acquisition.
-
-
 ### [Radio Streaming Server](projects/rtltcp)
 
 <span class="status-badge status-updated">Recently Updated</span>
@@ -114,6 +106,14 @@ A cross-platform (targeted at Raspberry Pi) server that interfaces with multiple
 
 
 A distributed multi-beam passive radar system based on KrakenSDR hardware. Pi handles data acquisition, Mac/Linux handles compute-intensive DSP. All 4 surveillance channels process in parallel with independent Range-Doppler visualization, per-beam configuration, and real-time performance monitoring.
+
+
+### [Spectrum Analysis](projects/signals)
+
+<span class="status-badge status-updated">Recently Updated</span>
+
+
+Transform raw radio spectrum data into an actionable "Signal Census" through automated detection, ML classification, and distributed acquisition.
 
 
 ### [Wi-Fi Radar](projects/wifi-signal-analysis)
@@ -136,12 +136,28 @@ A modular, agent-aware health monitoring ecosystem that translates raw biometric
 
 ## 🔭 Astrophotography
 
+### [OpenAstro Core](projects/open-astro-core)
+
+<span class="status-badge status-active">Active</span>
+
+
+OpenAstro Core is a fast Rust library providing shared astronomical logic, hardware drivers, and protocol implementations for the OpenAstro ecosystem. It exists to keep coordinate math and device/protocol behavior consistent across downstream OpenAstro apps.
+
+
 ### [Aurora Advisor](projects/auroradata)
 
 <span class="status-badge status-active">Active</span>
 
 
 A specialized tool for Australian aurora observers that solves the "should I drive 60 minutes?" problem. It combines real-time solar wind data (NOAA), substorm trigger logic (Bz/HP trends), and local weather (ACCESS-G model) to provide actionable advice.
+
+
+### [Satellites](projects/satellites)
+
+<span class="status-badge status-updated">Recently Updated</span>
+
+
+A terminal-based satellite tracker that displays real-time satellite positions on a world map, predicts passes over the user's location, and shows transmission/frequency data. Built with Rust, ratatui, and the SGP4 orbital propagation algorithm. Aimed at amateur radio operators, space enthusiasts, and anyone who wants to know what's overhead.
 
 
 ### [AuroraPhoto](projects/auroraphoto)
@@ -160,36 +176,20 @@ An automated astrophotography system designed to capture high-quality aurora and
 A "fire and forget" Raspberry Pi-based controller for autonomous solar eclipse photography. It coordinates a camera (via gphoto2) and a high-end mount (ZWO AM5 / Benro Polaris via INDI) to capture a complete eclipse sequence from C1 to C4 without manual intervention.
 
 
-### [OpenAstro Node](projects/open-astro-node)
-
-<span class="status-badge status-active">Active</span>
-
-
-A headless, autonomous astrophotography controller designed for low-power Linux devices (RPi/Jetson). It manages hardware, executes imaging sequences, and ensures rig safety.
-
-
-### [Satellites](projects/satellites)
-
-<span class="status-badge status-updated">Recently Updated</span>
-
-
-A terminal-based satellite tracker that displays real-time satellite positions on a world map, predicts passes over the user's location, and shows transmission/frequency data. Built with Rust, ratatui, and the SGP4 orbital propagation algorithm. Aimed at amateur radio operators, space enthusiasts, and anyone who wants to know what's overhead.
-
-
-### [OpenAstro Core](projects/open-astro-core)
-
-<span class="status-badge status-active">Active</span>
-
-
-OpenAstro Core is a fast Rust library providing shared astronomical logic, hardware drivers, and protocol implementations for the OpenAstro ecosystem. It exists to keep coordinate math and device/protocol behavior consistent across downstream OpenAstro apps.
-
-
 ### [EclipseStack](projects/eclipsestack)
 
 <span class="status-badge status-active">Active</span>
 
 
 EclipseStack is a Rust-powered utility (with a web-based UI) specifically designed to align hundreds of RAW solar eclipse images taken during totality. It addresses the challenge of tracker drift by combining image feature detection (solar disk and flares) with temporal extrapolation based on EXIF data. The goal is to produce a perfectly aligned set of frames ready for HDR stacking in professional tools like PixInsight.
+
+
+### [OpenAstro Node](projects/open-astro-node)
+
+<span class="status-badge status-active">Active</span>
+
+
+A headless, autonomous astrophotography controller designed for low-power Linux devices (RPi/Jetson). It manages hardware, executes imaging sequences, and ensures rig safety.
 
 
 ## 📷 Photography
@@ -230,6 +230,14 @@ A native SwiftUI training application for iPad and Apple TV that bridges profess
 Time series analysis typically requires either slow Python libraries or complex manual implementation. **matrix-profile-rs** provides Matrix Profile algorithms (STOMP, SCRIMP++, SCAMP) in native Rust with ergonomic APIs for motif discovery and anomaly detection, achieving C-level performance with Python-level usability through Polars integration.
 
 
+### [Performance Simulator](projects/netflowsim)
+
+<span class="status-badge status-updated">Recently Updated</span>
+
+
+`netflowsim` provides rapid, massive-scale network performance analysis by using analytic queuing models and Monte Carlo simulations instead of packet-level discrete event simulation. It enables network engineers to validate topologies and routing strategies against billions of flow iterations in seconds, identify bottlenecks probabilistically, and test network resilience under failure scenarios.
+
+
 ### [OmniFocus DB CLI (omnifocus-db)](projects/omnifocus-db)
 
 <span class="status-badge status-active">Last Active: 2026-02-16</span>
@@ -238,28 +246,20 @@ Time series analysis typically requires either slow Python libraries or complex 
 A Python-based CLI that bypasses slow AppleScript/TypeScript layers to read directly from the OmniFocus SQLite database on macOS. It provides structured, token-efficient data (JSON/Text) to agents for lightning-fast project listing, inbox analysis, and context gathering.
 
 
-### [Network Output Parser](projects/cliscrape)
-
-<span class="status-badge status-active">Active</span>
-
-
-`cliscrape` is a fast CLI scraping and parsing tool for network devices, written in Rust. It provides a modern, ergonomic, and blazingly fast alternative to legacy tools like `TextFSM`, while maintaining first-class compatibility with existing templates.
-
-
-### [Network Performance Simulator](projects/netflowsim)
-
-<span class="status-badge status-updated">Recently Updated</span>
-
-
-`netflowsim` provides rapid, massive-scale network performance analysis by using analytic queuing models and Monte Carlo simulations instead of packet-level discrete event simulation. It enables network engineers to validate topologies and routing strategies against billions of flow iterations in seconds, identify bottlenecks probabilistically, and test network resilience under failure scenarios.
-
-
 ### [Weather (BOM ACCESS Pipeline)](projects/weather)
 
 <span class="status-badge status-active">Last Active: 2026-02-14</span>
 
 
 A data engineering pipeline to fetch, process, and serve high-resolution weather model data from the Australian Bureau of Meteorology (BOM). Specifically targeting the ACCESS (Australian Community Climate and Earth-System Simulator) model outputs.
+
+
+### [CLI Parser](projects/cliscrape)
+
+<span class="status-badge status-active">Active</span>
+
+
+`cliscrape` is a fast CLI scraping and parsing tool for network devices, written in Rust. It provides a modern, ergonomic, and blazingly fast alternative to legacy tools like `TextFSM`, while maintaining first-class compatibility with existing templates.
 
 
 ### [Tileserver Polars (Rust Optimized)](projects/tileserver)
@@ -272,20 +272,20 @@ Serve dynamic vector tiles (MVT) from massive geospatial datasets (millions of p
 
 ## 🧘 Wellness & Sound
 
-### [Psytrance Generator](projects/psytrance)
-
-<span class="status-badge status-updated">Recently Updated</span>
-
-
-A generative psytrance synthesis engine with real-time TUI controls. Creates complete tracks driven by a multi-level energy model, with live playback, step editing, and WAV export. Currently produces high-quality procedural psytrance but lacks workflow features for capturing ideas and iterating efficiently.
-
-
 ### [Wave (StillState & FlowState)](projects/watchnoise)
 
 <span class="status-badge status-updated">Recently Updated</span>
 
 
 **Wave** is an evolutionary ambient audio ecosystem designed to manage the user's sensory environment across rest and work.
+
+
+### [Psytrance Generator](projects/psytrance)
+
+<span class="status-badge status-updated">Recently Updated</span>
+
+
+A generative psytrance synthesis engine with real-time TUI controls. Creates complete tracks driven by a multi-level energy model, with live playback, step editing, and WAV export. Currently produces high-quality procedural psytrance but lacks workflow features for capturing ideas and iterating efficiently.
 
 
 ## 🧪 Experimental
@@ -322,12 +322,12 @@ Developing...
 Developing...
 
 
-### [nascleanup](projects/nascleanup)
+### [Network Topology Engine](projects/nte)
 
 <span class="status-badge status-active">Active</span>
 
 
-Developing...
+Graph operations on network topologies demand native performance — Python's NetworkX caps out on large topologies. The Network Topology Engine provides a Rust-native topology engine with Python bindings, giving the Network Modeling & Configuration Library the speed of compiled code with the ergonomics of Python.
 
 
 ### [Network Configuration Parser](projects/ank-parse)
@@ -338,12 +338,12 @@ Developing...
 Developing...
 
 
-### [soundarray](projects/soundarray)
+### [nascleanup](projects/nascleanup)
 
 <span class="status-badge status-active">Active</span>
 
 
-An exploration-focused audio processing system using Raspberry Pi and microphone arrays. It focuses on spatial audio (ToA, beamforming) and classification (vehicles, wildlife) using an "analyst" agent approach.
+Developing...
 
 
 ### [AutoNetkit](projects/autonetkit)
@@ -376,6 +376,14 @@ A fast, keyboard-driven Rust text UI (TUI) task manager inspired by OmniFocus, b
 
 
 A Python script that automates post-imaging-session file organization for astrophotography. It batch-imports FITS files from ASIAIR backup locations, organizes them by target and observation night, copies matching calibration frames, and prepares the directory structure for PixInsight's WBPP (Weighted Batch Preprocessing) workflow.
+
+
+### [soundarray](projects/soundarray)
+
+<span class="status-badge status-active">Active</span>
+
+
+An exploration-focused audio processing system using Raspberry Pi and microphone arrays. It focuses on spatial audio (ToA, beamforming) and classification (vehicles, wildlife) using an "analyst" agent approach.
 
 
 <style>

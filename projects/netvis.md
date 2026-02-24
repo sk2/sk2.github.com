@@ -3,7 +3,7 @@ layout: default
 section: network-automation
 ---
 
-# NetVis
+# Visualization Engine
 
 <span class="status-badge status-updated">Recently Updated</span>
 
@@ -25,9 +25,34 @@ Transform network topologies into clear, information-dense visualizations using 
 
 ---
 
-## Tech Stack
+## Screenshots
 
-Rust, petgraph, fjadra (d3-force port), SVG/PDF/PNG rendering, WASM-ready
+![Enterprise Campus](/images/netvis-enterprise-campus.png)
+*Enterprise Campus — Sugiyama hierarchical layout with group containment and obstacle-aware label placement.*
+
+![Data Center Fabric](/images/netvis-datacenter-large.png)
+*Data Center Fabric — Fat-tree topology rendered using force-directed layout with edge bundling to reduce visual complexity.*
+
+![ISP Backbone](/images/netvis-isp-backbone.png)
+*ISP Backbone — Large-scale core network visualization with force-directed positioning and metric-aware line styling.*
+
+![Radial Layout](/images/netvis-showcase-radial-layout.png)
+*Radial Layout — Circular hierarchical projection for symmetrical architectures like rings and star clusters.*
+
+![Geographic European Backbone](/images/netvis-geo-europe-backbone.png)
+*Geographic Backbone — Topology mapped to real-world coordinates with curved edge routing between nodes.*
+
+![Isometric Multi-Layer](/images/netvis-isometric-multi-layer.png)
+*Isometric View — Stacking multiple protocol layers (Physical, OSPF, BGP) to visualize cross-layer associations and dependencies.*
+
+![Theme Showcase](/images/netvis-theme-showcase.png)
+*Theme System — Different visual profiles including light, dark, and high-contrast modes with automated WCAG compliance.*
+
+---
+
+## Current Status
+
+2026-02-24 — Completed 72-05-PLAN.md (Edge inline label editing gap-closure)
 
 ---
 

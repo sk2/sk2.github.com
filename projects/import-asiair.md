@@ -22,4 +22,10 @@ Eliminates manual file sorting after imaging sessions - scan hundreds of frames,
 
 ---
 
+## Current Status
+
+2026-02-11 —  plans across 4 waves
+
+---
+
 [← Back to Projects](../projects)

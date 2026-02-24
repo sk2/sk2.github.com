@@ -25,36 +25,20 @@ The ability to reliably and efficiently stream high-fidelity IQ data from multip
 
 ---
 
-## Architecture
+## Tech Stack
 
-```
-                    ┌─────────────────────────┐
-                    │     rtltcp-rust          │
-                    │                          │
-   USB ─────────── │  Device Manager          │
-   RTL-SDR 0..N    │    ├─ RTL-SDR driver     │ ──── TCP :1234
-   AirSpy HF+      │    ├─ AirSpy HF+ driver │ ──── TCP :1235
-   AirSpy           │    └─ AirSpy driver     │ ──── TCP :1236
-                    │                          │
-                    │  HTTP API (:8080)        │ ──── REST endpoints
-                    │  TUI Dashboard           │ ──── SSH terminal
-                    │  Config (TOML)           │
-                    └─────────────────────────┘
-```
-
-Each device runs in its own tokio task with dedicated USB I/O and TCP streaming threads. The TUI and HTTP API share device state through `Arc<Mutex<>>` with 1 Hz status broadcasts.
+- **Language:** Rust
+- **Hardware Interface:** `libusb` (via FFI wrapping of `librtlsdr` and `libairspyhf`)
+- **Networking:** TCP (implementing the `rtl_tcp` protocol)
+- **UI:** Terminal User Interface (TUI) via `ratatui` or similar
+- **Config:** TOML file-backed persistence
+- **Target:** Raspberry Pi (cross-compiled from macOS/Linux)
 
 ---
 
-## Tech Stack
+## Current Status
 
-- **Language**: Rust (2021 edition)
-- **Async Runtime**: tokio
-- **HTTP API**: axum
-- **TUI**: ratatui + crossterm
-- **Hardware FFI**: rtlsdr_sys, libairspyhf, libairspy
-- **Cross-compilation**: `cross` + custom Docker images
-- **Config**: TOML with serde
+2026-02-22 - Completed 05-04-PLAN.md
 
 ---
 

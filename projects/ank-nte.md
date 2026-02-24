@@ -3,7 +3,7 @@ layout: default
 section: network-automation
 ---
 
-# Network Topology Engine
+# Topology Core (NTE)
 
 <span class="status-badge status-updated">Recently Updated</span>
 
@@ -22,6 +22,12 @@ NTE (Network Topology Engine) is a Rust-based graph topology engine with Python 
 ### Core Value
 
 The engine must be correct and observable — mutations never silently corrupt state, errors always surface meaningful information, and operations are traceable through logging.
+
+---
+
+## Current Status
+
+2026-02-24 — Verified  (Graph Metadata Foundation)
 
 ---
 

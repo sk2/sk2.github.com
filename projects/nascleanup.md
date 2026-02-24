@@ -20,6 +20,10 @@ Developing...
 
 ---
 
+---
+
+---
+
 ## Architecture
 
 - **Language:** Rust (for performance and safety).
@@ -27,6 +31,22 @@ Developing...
 - **Execution:** Optimized for Docker/Native execution on DSM to minimize network latency.
 - **Data Model:** Indexing layer to store file hashes and metadata for fast comparison.
 - **Intelligence:** Future integration of ML for content-based classification.
+
+---
+
+[← Back to Projects](../projects)
+
+---
+
+
+
+---
+
+[← Back to Projects](../projects)
+
+---
+
+
 
 ---
 

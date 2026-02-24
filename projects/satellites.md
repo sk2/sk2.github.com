@@ -1,6 +1,5 @@
 ---
 layout: default
-section: projects
 ---
 
 # Satellites
@@ -23,15 +22,9 @@ Real-time satellite positions rendered on a terminal world map with pass predict
 
 ---
 
-## Tech Stack
+## Current Status
 
-- **Language**: Rust (2021 edition)
-- **TUI**: ratatui + crossterm (canvas widget for world map)
-- **Async**: tokio (background data fetching)
-- **Orbital Mechanics**: sgp4 crate (SGP4/SDP4 propagation)
-- **Coordinates**: map_3d (ECI → ECEF → Geodetic → AER)
-- **HTTP**: reqwest (async JSON API calls)
-- **CLI**: clap 4
+** 2026-02-24 -- Phase 5 executed + verified (manual approval)
 
 ---
 

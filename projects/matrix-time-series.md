@@ -17,8 +17,10 @@ section: data-analytics
 
 - [Concept](#concept)
 - [Features](#features)
+- [Problem It Solves](#problem-it-solves)
 - [Use Cases](#use-cases)
 - [Architecture](#architecture)
+- [Current Status](#current-status)
 
 ## Concept
 
@@ -80,6 +82,26 @@ matrix-profile-rs provides production-quality implementations with:
 
 ---
 
+## Problem It Solves
+
+Time series analysis requires identifying:
+- **Repeating patterns** (motifs): "This sensor pattern happened 15 times before failure"
+- **Anomalies** (discords): "This heartbeat segment is unlike any other"
+- **Similar segments**: "Find all sequences similar to this known good pattern"
+
+Existing solutions:
+- **Python libraries (stumpy)**: Slow, JIT dependencies, awkward array manipulation
+- **Manual implementation**: Complex algorithms, easy to get wrong, poor performance
+- **Academic prototypes**: Not production-ready, missing ergonomics
+
+matrix-profile-rs provides production-quality implementations with:
+- Native performance (2.5x SIMD speedup, no JIT warmup)
+- Clean APIs (`.motifs(k=3)` instead of array indexing)
+- Scalability (N>10^6 via memory-efficient tiling)
+- Polars integration (treat Matrix Profiles as DataFrame operations)
+
+---
+
 ## Use Cases
 
 **Predictive Maintenance:**
@@ -130,6 +152,12 @@ Polars DataFrame (via to_dataframe()) or Rust types
 - **Discovery API**: High-level methods for pattern extraction with deterministic tie-breaking
 - **Tiling Module**: Memory-efficient computation for datasets exceeding RAM
 - **Polars Integration**: Native `.mp()` namespace on Series, DataFrame I/O with metadata columns
+
+---
+
+## Current Status
+
+2026-02-24 — Completed 10-02-PLAN.md: motif/discord notifications + dispatcher helper
 
 ---
 

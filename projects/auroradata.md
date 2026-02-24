@@ -1,6 +1,5 @@
 ---
 layout: default
-section: projects
 ---
 
 # Aurora Advisor
@@ -10,13 +9,6 @@ section: projects
 [← Back to Projects](../projects)
 
 ---
-
-## Contents
-
-- [Concept](#concept)
-- [Architecture](#architecture)
-- [Tech Stack](#tech-stack)
-- [Roadmap](#roadmap)
 
 ## Concept
 
@@ -30,74 +22,9 @@ Providing a single, definitive "Go/No-Go" score that accounts for both space wea
 
 ---
 
-## Architecture
-
-
-
-
-
-```
-┌──────────────────────────────────────────────────┐
-│                 Data Sources                      │
-│  NOAA SWPC (Bz, Bt, Speed, Density, HP)          │
-│  Open-Meteo (ACCESS-G cloud cover, precipitation)│
-│  Moon Phase Calculator                            │
-└──────────────┬───────────────────────────────────┘
-               │
-      ┌────────▼────────────┐
-      │  Substorm Analyzer  │
-      │  Bz southward turns │
-```
-
-
-```
-      │  HP step detection   │
-      │  120-min trend buffer│
-      └────────┬────────────┘
-               │
-      ┌────────▼────────────┐
-      │  Site Scoring Engine│
-      │  Activity ()     │
-      │  Cloud cover ()  │
-      │  Travel time ()  │
-      │  Moon phase ()   │
-```
-
-
-
-```
-      └────────┬────────────┘
-               │
-      ┌────────▼────────────┐
-      │  Weather Reliability│
-      │  MAE-based forecast │
-      │  confidence scoring │
-      └────────┬────────────┘
-               │
-      ┌────────▼────────────┐
-      │   Output Layer      │
-      │  CLI Dashboard      │
-      │  LLM Advice (GPT)   │
-      │  Telegram Bot        │
-      │  Historical Playback │
-      └─────────────────────┘
-```
-
----
-
-## Tech Stack
-
-- **Language**: TypeScript (Node.js)
-- **Data Sources**: NOAA SWPC (solar wind, hemispheric power), Open-Meteo API (ACCESS-G weather model)
-- **LLM**: OpenAI GPT-4o-mini for advice generation
-- **Alerting**: Telegram Bot API with subscriber management
-- **Testing**: Jest with ts-jest (ESM support)
-
----
-
 ## Roadmap
 
-- Scope (not prioritized):
+- **Scope (not prioritized):** 
 
 ---
 

@@ -13,13 +13,6 @@ section: network-automation
 
 ---
 
-## Contents
-
-- [Concept](#concept)
-- [Use Cases](#use-cases)
-- [Tech Stack](#tech-stack)
-- [Roadmap](#roadmap)
-
 ## Concept
 
 ### What This Is
@@ -35,28 +28,19 @@ Validate network configurations at scale with protocol-level fidelity before dep
 
 ---
 
-## Use Cases
+## Current Status
 
-- **Agentic AI & Network Automation Development**: Rapidly prototype and test automation agents, DevOps pipelines, and AI-driven network operations with seconds-long iteration cycles instead of minutes spinning up containers
-- **Configuration Generation Testing**: Validate Network Modeling & Configuration Library-generated configs in simulation before deploying to Containerlab — catch errors in the generation logic early
-- **Network Automation Prototyping**: Develop configuration management tools, automated provisioning systems, and orchestration scripts against realistic network topologies without infrastructure overhead
-- **Pre-deployment Validation**: Catch routing loops, black holes, and misconfigurations before production
-- **Convergence Analysis**: Measure failover time and validate backup paths
-- **Training**: Safe environment for learning routing protocol behavior and automation development
-
----
-
-## Tech Stack
-
-Rust, Tokio for async execution, petgraph for topology representation, gRPC for daemon IPC, ratatui for TUI
+2026-02-24 — Completed 68-02-PLAN.md
 
 ---
 
 ## Roadmap
 
-- v1.9 Advanced Impairments & Topology Patterns
-- v1.10 Engine Hardening & Protocol Fidelity
-- v1.11 Advanced Analysis & Assertions
+- **v1.9 Advanced Impairments & Topology Patterns** (Proposed) — Phases 97-100
+- **v1.10 Engine Hardening & Protocol Fidelity** (Proposed) — Phases 111-115
+- **v1.11 Advanced Analysis & Assertions** (Proposed) — Phases 116-119
+- **v2.0 IPv6 Foundation** (Proposed) — Phases 68-72
+- **v2.1 Enterprise & Campus Protocols** (Proposed) — Phases 73-74
 
 ---
 

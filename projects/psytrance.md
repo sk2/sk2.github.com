@@ -1,6 +1,5 @@
 ---
 layout: default
-section: projects
 ---
 
 # Psytrance Generator
@@ -23,16 +22,9 @@ Energy-driven generative music that sounds professional and lets users quickly e
 
 ---
 
-## Tech Stack
+## Current Status
 
-- **Language**: Rust
-- **DSP**: Phase-accumulating oscillators, biquad filters, amplitude envelopes (f64 internal precision)
-- **Effects** : fundsp
-- **WAV Export**: hound
-- **CLI**: clap 4
-- **Playback**: cpal (real-time audio)
-- **TUI**: ratatui + crossterm
-- **RNG**: Seeded rand for reproducible generation
+2026-02-21 — Roadmap created
 
 ---
 

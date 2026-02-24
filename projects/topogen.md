@@ -3,7 +3,7 @@ layout: default
 section: network-automation
 ---
 
-# TopoGen - Network Topology Generator
+# Topology Generator
 
 <span class="status-badge status-updated">Recently Updated</span>
 
@@ -25,15 +25,15 @@ Network engineers can quickly generate realistic, validated network topologies w
 
 ---
 
-## Tech Stack
+## Current Status
 
-Rust core, PyO3 for Python bindings, Maturin build system
+2026-02-22 — Completed 30-04 (CLI integration with collect-all, error export, threshold config)
 
 ---
 
 ## Roadmap
 
-- Plans:
+- **Plans:** 5 plans
 
 ---
 

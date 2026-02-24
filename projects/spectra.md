@@ -20,6 +20,10 @@ Developing...
 
 ---
 
+---
+
+---
+
 ## Features
 
 ### Phase 1 Complete: Foundation ✅
@@ -100,6 +104,10 @@ Developing...
 
 ---
 
+---
+
+---
+
 ## Architecture
 
 ### Edge Nodes: Raspberry Pi
@@ -161,6 +169,22 @@ Edge Pi → SpyServer/rtl_tcp → Mac mini Core
                                     ↓
                 Desktop/Web Visualizers
 ```
+
+---
+
+[← Back to Projects](../projects)
+
+---
+
+
+
+---
+
+[← Back to Projects](../projects)
+
+---
+
+
 
 ---
 

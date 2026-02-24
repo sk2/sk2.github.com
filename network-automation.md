@@ -51,11 +51,11 @@ We build specialized engines that handle specific stages of the network lifecycl
 
 ## Primary Systems
 
-- **[Network Simulator:](/projects/netsim)** A deterministic engine for **pre-deployment verification**. It simulates the packet-level behavior of routing protocols like OSPF, IS-IS, and BGP, enabling engineers to verify convergence and failover scenarios before deployment.
-- **[Brownfield Ingestion & Analysis:](/projects/configparsing)** A framework for extracting structured intent from legacy vendor-specific CLI data. It bridges the gap between existing deployments and modern automation, enabling automated audits and migration workflows.
-- **[Network Modeling Engine:](/projects/ank-pydantic)** A type-safe intent and topology modeling layer for the ecosystem. It provides the canonical network model (Whiteboard → Plan → Protocol Layers) used by the generator, simulator, and visualization tools.
-- **[Network Visualization Engine:](/projects/netvis)** A layout engine that transforms dense, multi-layer topologies into clear, structured diagrams. It employs advanced algorithms to reduce visual complexity, making the architecture of large systems intuitive and actionable.
-- **[Automation Workbench:](/projects/ank-workbench)** A unified web interface that integrates the individual tools into a cohesive engineering environment for interactive topology editing and real-time protocol observability.
+- **[Network Simulator:](/projects/netsim)** Run deterministic protocol convergence and failover assertions on candidate designs before deployment.
+- **[Brownfield Ingestion & Analysis:](/projects/configparsing)** Extract structured intent and topology relationships from legacy CLI and documentation for audits and migration workflows.
+- **[Network Modeling Engine:](/projects/ank-pydantic)** Define intent and topology once, then query and transform it into protocol layers for the rest of the toolchain.
+- **[Network Visualization Engine:](/projects/netvis)** Render large, multi-layer networks into diagrams for design review, topology validation, and analysis.
+- **[Automation Workbench:](/projects/ank-workbench)** Use a single interface to design, simulate, visualize, and audit across the ecosystem.
 
 ## Specialized Tools
 
@@ -70,7 +70,7 @@ We build specialized engines that handle specific stages of the network lifecycl
 
 ## Foundations
 
-The principles of this ecosystem are grounded in my PhD research on automated network configuration. This work introduced the "Whiteboard to Build" model, which continues to inform the development of modern, intent-based networking tools.
+This ecosystem borrows from earlier research on automated network configuration, including the "Whiteboard to Build" model. The goal here is practical: take a high-level intent and produce verifiable, reviewable outputs.
 
 - **[Network Modeling Foundations:](/projects/autonetkit-foundation)** The original research and implementation details that established the core abstractions for automated configuration.
 

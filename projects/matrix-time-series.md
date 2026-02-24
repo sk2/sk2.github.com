@@ -7,6 +7,8 @@ section: projects
 
 <span class="status-badge status-active">Recently Updated</span>
 
+[← Back to Data Analytics](../data-analytics)
+
 [← Back to Projects](../projects)
 
 ---
@@ -129,5 +131,7 @@ Polars DataFrame (via to_dataframe()) or Rust types
 2026-02-24 — Completed 10-02-PLAN.md: motif/discord notifications + dispatcher helper
 
 ---
+
+[← Back to Data Analytics](../data-analytics)
 
 [← Back to Projects](../projects)

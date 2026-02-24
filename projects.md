@@ -18,6 +18,14 @@ Focused on network engineering, autonomous systems, and signal processing.
 **An orchestration platform** that integrates the ANK ecosystem tools (TopoGen, ank_pydantic, Network Simulator, NetVis) into one seamless workflow.
 
 
+### [Topology Generator](projects/topogen)
+
+<span class="status-badge status-active">Recently Updated</span>
+
+
+A Rust-based topology generation engine that consolidates complex network graph algorithms into a unified, fast library. It enables the creation of realistic, validated network structures ranging from small lab setups to massive data center and backbone environments.
+
+
 ### [Configuration Generation (AutoNetkit)](projects/autonetkit)
 
 <span class="status-badge status-active">Active</span>
@@ -34,6 +42,22 @@ A compiler-based framework for automated network provisioning. AutoNetkit transf
 A Rust-based network topology layout and visualization engine. Takes complex multi-layer network topologies (via petgraph) and renders them using advanced layout algorithms that reduce visual complexity while preserving structural clarity. Outputs static formats (SVG, PDF, PNG) for v1, with interactive browser embedding planned for future integration with other tooling.
 
 
+### [Configuration Analysis](projects/configparsing)
+
+<span class="status-badge status-active">Recently Updated</span>
+
+
+A framework for extracting high-level intent from legacy network state. It uses machine learning and layout-aware text extraction to transform vendor-specific CLI configurations and documentation into vendor-neutral network models.
+
+
+### [Topology Engine Core](projects/ank-nte)
+
+<span class="status-badge status-active">Recently Updated</span>
+
+
+The fast graph core that powers the ANK ecosystem. NTE (Network Topology Engine) provides a native Rust implementation of multi-layer network graphs, optimized for low-latency queries and complex topological transformations.
+
+
 ### [Network Simulator](projects/network-simulator)
 
 <span class="status-badge status-active">Recently Updated</span>
@@ -42,12 +66,12 @@ A Rust-based network topology layout and visualization engine. Takes complex mul
 A Rust-based network simulator that models packet-level behavior for routing protocols. It provides a middle ground between pure algorithmic analysis (like C-BGP) and full emulation (like Containerlab) — larger scale and smaller footprint than emulation, higher fidelity than algorithmic simulation. Used for smoke testing and design validation of network configurations.
 
 
-### [Topology Generator](projects/topogen)
+### [Orchestrator (Device Interaction Runner)](projects/orchestrator)
 
 <span class="status-badge status-active">Recently Updated</span>
 
 
-A Rust-based network topology generator with Python bindings that consolidates scattered topology generation logic from AutoNetKit, simulation tools, and visualization tools. Generates realistic data center, WAN, and random graph topologies with proper structure, design patterns, and realistic parameters. Outputs custom YAML format for use across the network engineering tool ecosystem.
+An orchestration runner for coordinating **device interactions** across real/testbed networks. It executes runs with retries, timeouts, bounded concurrency, and durable artifacts (logs, results, snapshots) that plug into the broader automation ecosystem.
 
 
 ### [Network Modeling Foundations](projects/autonetkit-foundation)
@@ -56,14 +80,6 @@ A Rust-based network topology generator with Python bindings that consolidates s
 
 
 The original research that established the principles of automated network configuration. This work introduced the **Whiteboard → Plan → Build** transformation model, which allows engineers to work with high-level design abstractions while the system handles the technical implementation details.
-
-
-### [Topology Engine Core](projects/ank-nte)
-
-<span class="status-badge status-active">Recently Updated</span>
-
-
-NTE (Network Topology Engine) is a Rust-based graph topology engine with Python bindings via PyO3, used as the backend for ank_pydantic. It provides a 14-crate Cargo workspace built on petgraph StableDiGraph with pluggable datastores (Polars, DuckDB, Lite). This project covers two milestones: first hardening the existing engine for production reliability, then evaluating LadybugDB as a potential backend replacement.
 
 
 ### [Network Modeling Library](projects/ank-pydantic)
@@ -82,28 +98,12 @@ A Python library for modeling and querying network topologies, backed by a fast 
 This project aims to comprehensively define the **overall architecture of the Network Automation Ecosystem**. This involves understanding how the existing and planned tools (such as `topogen`, `autonetkit`, `netsim`, `netflowsim`, `netvis`, and the `Workbench`), along with strategic initiatives like the "Intelligence Layer," integrate to form a cohesive, unified, and differentiated product.
 
 
-### [Network Configuration Parsing & Analysis Framework](projects/configparsing)
-
-<span class="status-badge status-active">Recently Updated</span>
-
-
-A network automation framework that decouples network configuration from vendor-specific syntax. It uses LLM-powered RAG to extract network-level intent and topology relationships from vendor documentation and CLI configurations, normalizing them into a vendor-neutral topology graph model inspired by AutoNetKit. The system enables cross-vendor configuration generation and validation through semantic simulation.
-
-
 ### [Device Interaction Framework](projects/deviceinteraction)
 
 <span class="status-badge status-active">Recently Updated</span>
 
 
 A fast, simple, and ergonomic Rust library and CLI for network device interaction and automated testing. Provides the essential PyATS capabilities—testbed management, CLI parsing, and state verification—without the complexity, as a focused component in a broader network automation toolkit.
-
-
-### [Orchestrator (Device Interaction Runner)](projects/orchestrator)
-
-<span class="status-badge status-active">Recently Updated</span>
-
-
-An orchestration runner for coordinating **device interactions** across real/testbed networks. It executes runs with retries, timeouts, bounded concurrency, and durable artifacts (logs, results, snapshots) that plug into the broader automation ecosystem.
 
 
 ## 📡 Radio Systems
@@ -259,7 +259,7 @@ A fast parsing engine for network device output. It transforms semi-structured C
 <span class="status-badge status-active">Recently Updated</span>
 
 
-`netflowsim` provides rapid, massive-scale network performance analysis by using analytic queuing models and Monte Carlo simulations instead of packet-level discrete event simulation. It enables network engineers to validate topologies and routing strategies against billions of flow iterations in seconds, identify bottlenecks probabilistically, and test network resilience under failure scenarios.
+A performance analysis engine that utilizes analytic queuing models and Monte Carlo simulations to validate network capacity at scale. Unlike packet-level simulators, netflowsim focuses on probabilistic outcomes across billions of traffic flows.
 
 
 ### [OmniFocus DB CLI (omnifocus-db)](projects/omnifocus-db)

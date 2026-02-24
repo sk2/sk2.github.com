@@ -7,7 +7,7 @@ section: network-automation
 
 <span class="status-badge status-active">Active</span>
 
-[← Back to Network Automation](../network-automation)
+[← Back to Data Analytics](../data-analytics)
 
 [← Back to Projects](../projects)
 
@@ -59,6 +59,6 @@ The engine is built on a custom regex-based state machine implemented in Rust. I
 
 ---
 
-[← Back to Network Automation](../network-automation)
+[← Back to Data Analytics](../data-analytics)
 
 [← Back to Projects](../projects)

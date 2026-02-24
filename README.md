@@ -101,14 +101,13 @@ The theme contains a minimal test suite, to ensure a site with the theme would b
 
 ## Maintenance & Updates
 
-### Updating Projects
-The list of projects in `projects.md` can be generated from project metadata in your development directories.
+### Maintaining Project Content
+The projects are synchronized from local development directories using `update_projects.py`. To ensure high-quality content is never lost, follow this protocol:
 
-```bash
-python3 update_projects.py
-```
-
-This script scans `~/dev`, `~/PycharmProjects`, and `~/RustroverProjects` for projects containing `.planning/PROJECT.md`.
+1.  **Metadata is Master:** Primary project descriptions are pulled from `.planning/PROJECT.md` in each project's development folder.
+2.  **Golden Master Overrides:** High-value technical content (Architecture, Impact, Research Foundations) for key or legacy projects is hardcoded in the `PROJECT_CONTENT_OVERRIDES` dictionary within `update_projects.py`. This acts as a safeguard against incomplete local metadata.
+3.  **Clean Room Generation:** The sync script completely rebuilds project pages from scratch on every run. **Do not manually edit files in the `projects/` directory**, as these changes will be overwritten. Always update either the source `.planning/PROJECT.md` or the script overrides.
+4.  **Crisp Narrative:** All technical jargon and project management metrics (Phases, Percentages) are automatically stripped to maintain a professional product focus.
 
 **Important Configuration & Preferences:**
 

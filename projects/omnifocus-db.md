@@ -7,6 +7,8 @@ section: projects
 
 <span class="status-badge status-active">Last Active: 2026-02-16</span>
 
+[← Back to Data Analytics](../data-analytics)
+
 [← Back to Projects](../projects)
 
 ---
@@ -26,5 +28,7 @@ A Python-based CLI that bypasses slow AppleScript/TypeScript layers to read dire
 ** 2026-02-16 - Closed out phase 7 (summaries, state update)
 
 ---
+
+[← Back to Data Analytics](../data-analytics)
 
 [← Back to Projects](../projects)

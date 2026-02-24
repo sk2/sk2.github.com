@@ -17,8 +17,6 @@ section: network-automation
 
 The original research that established the principles of automated network configuration. This work introduced the **Whiteboard → Plan → Build** transformation model, which allows engineers to work with high-level design abstractions while the system handles the technical implementation details.
 
-Demonstrated that a compiler-based approach can successfully automate the configuration of complex, multi-vendor data networks at scale.
-
 ---
 
 ## Research Contribution

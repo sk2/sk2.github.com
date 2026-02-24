@@ -7,6 +7,8 @@ section: projects
 
 <span class="status-badge status-active">Recently Updated</span>
 
+[← Back to Network Automation](../network-automation)
+
 [← Back to Projects](../projects)
 
 ---
@@ -28,5 +30,7 @@ Run the same device workflow reliably across lab/real targets, with deterministi
 2026-02-22 — Roadmap initialized
 
 ---
+
+[← Back to Network Automation](../network-automation)
 
 [← Back to Projects](../projects)

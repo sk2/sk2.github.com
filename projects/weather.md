@@ -7,6 +7,8 @@ section: projects
 
 <span class="status-badge status-active">Last Active: 2026-02-14</span>
 
+[← Back to Data Analytics](../data-analytics)
+
 [← Back to Projects](../projects)
 
 ---
@@ -24,5 +26,7 @@ The primary goal is to bypass the complexity of BOM's FTP delivery and binary fo
 ** 2026-02-14 - Completed 02-04-PLAN.md
 
 ---
+
+[← Back to Data Analytics](../data-analytics)
 
 [← Back to Projects](../projects)

@@ -26,8 +26,6 @@ A compiler-based framework for automated network provisioning. AutoNetkit transf
 
 Traditional network configuration is often manual and vendor-specific. AutoNetkit introduces a declarative approach where engineers define the architectural intent—the 'Whiteboard' model—and the engine automatically handles the complex transformations required to generate the underlying protocol parameters and CLI commands.
 
-Enables the rapid, automated deployment of multi-vendor networks by decoupling high-level architectural design from low-level device syntax.
-
 ---
 
 ## Features

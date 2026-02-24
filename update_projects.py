@@ -2,6 +2,7 @@
 """
 Update website projects page and individual project pages from project metadata.
 Clean Room Generation: Every page is rebuilt from scratch from Source of Truth metadata.
+Includes Hardcoded Overrides to prevent loss of high-value technical content.
 """
 
 import argparse
@@ -31,7 +32,6 @@ class ProjectInfo:
 # SOURCE OF TRUTH: Explicit mapping of projects to ecosystems
 ECOSYSTEM_MAP = {
     "network-simulator": "network-automation",
-    "network_simulator": "network-automation",
     "netsim": "network-automation",
     "ank_pydantic": "network-automation",
     "ank-pydantic": "network-automation",
@@ -78,21 +78,40 @@ PROJECT_ALIASES = {
     "netvis": "Visualization Engine",
     "passive": "Signal Reflection Analysis",
     "signals": "Spectrum Analysis",
+    "configparsing": "Configuration Analysis",
 }
 
-# GOLDEN MASTER CONTENT: Used when metadata is missing or for legacy projects
+# GOLDEN MASTER CONTENT: Used to ensure high-value technical detail is never lost.
 PROJECT_CONTENT_OVERRIDES = {
     "autonetkit": {
         "Concept": "A compiler-based framework for automated network provisioning. AutoNetkit transforms high-level design specifications into validated device configurations across heterogeneous hardware and protocol environments.\n\nTraditional network configuration is often manual and vendor-specific. AutoNetkit introduces a declarative approach where engineers define the architectural intent—the 'Whiteboard' model—and the engine automatically handles the complex transformations required to generate the underlying protocol parameters and CLI commands.",
-        "Core Value": "Enables the rapid, automated deployment of multi-vendor networks by decoupling high-level architectural design from low-level device syntax.",
         "Features": "- **Automated IP Addressing**: Intelligent allocation of loopbacks and link subnets across multiple protocol layers.\n- **Protocol Orchestration**: Automatic generation of consistent OSPF areas, IS-IS levels, and BGP peering relationships (iBGP/eBGP).\n- **Multi-Vendor Support**: Compiles intent into native configuration formats for Cisco (IOS, XR, NX-OS), Juniper (JunOS), and Arista (EOS).\n- **Visual Feedback**: Generates real-time topological diagrams to verify the physical and logical structure of the design.",
         "Architecture": "AutoNetkit employs a multi-stage transformation pipeline:\n1. **Specification Abstraction**: Captures the high-level design intent.\n2. **Intermediate Representation**: A network-wide graph model that maintains cross-vendor consistency.\n3. **Device Specialization**: Transforms the abstract model into device-specific protocol state.\n4. **Template Assembly**: Generates the final CLI commands using verified vendor templates.",
         "Impact": "AutoNetkit was integrated into Cisco's **Virtual Internet Routing Lab (VIRL)** platform as the primary configuration engine. It has been used to successfully generate valid configurations for core-network topologies with over 1,000 devices in seconds, demonstrating significant scalability and practical utility in production-grade engineering environments."
     },
     "autonetkit-foundation": {
         "Concept": "The original research that established the principles of automated network configuration. This work introduced the **Whiteboard → Plan → Build** transformation model, which allows engineers to work with high-level design abstractions while the system handles the technical implementation details.",
-        "Core Value": "Demonstrated that a compiler-based approach can successfully automate the configuration of complex, multi-vendor data networks at scale.",
         "Research Contribution": "- **Abstractions**: Identified the fundamental primitives needed to represent network intent independently of vendor syntax.\n- **Transformations**: Developed graph-based algorithms to automatically calculate IP addresses, OSPF areas, and BGP peerings.\n- **Scalability**: Verified that automated generation can handle core-network topologies with hundreds of devices in seconds.\n- **Industry Impact**: Integrated into Cisco's Virtual Internet Routing Lab (VIRL) for automated lab provisioning."
+    },
+    "topogen": {
+        "Concept": "A Rust-based topology generation engine that consolidates complex network graph algorithms into a unified, high-performance library. It enables the creation of realistic, validated network structures ranging from small lab setups to massive data center and backbone environments.",
+        "Features": "- **Data Center Patterns**: Generate leaf-spine and fat-tree topologies with realistic tier ratios and oversubscription parameters.\n- **WAN & Backbone Models**: Create ring, mesh, POP-based, and hierarchical structures based on real-world ISP patterns.\n- **Random Graph Models**: Support for Barabási-Albert (scale-free) and Watts-Strogatz (small-world) algorithms for research and scale testing.\n- **Traffic Matrix Generation**: Automatically produce demand matrices using gravity models and distance-based weighting.",
+        "Technical Depth": "The engine is implemented in Rust for maximum performance, allowing for the sub-second generation of 10,000+ node graphs. It exports a standardized YAML format that is consumed across the entire ANK ecosystem, ensuring structural consistency from design to simulation."
+    },
+    "ank-nte": {
+        "Concept": "The high-performance graph core that powers the ANK ecosystem. NTE (Network Topology Engine) provides a native Rust implementation of multi-layer network graphs, optimized for low-latency queries and complex topological transformations.",
+        "Architecture": "Built as a 14-crate Cargo workspace, the engine utilizes `petgraph`'s StableDiGraph for structural persistence. It features a pluggable datastore architecture supporting Polars, DuckDB, and Lite backends, allowing for efficient attribute storage and bulk data analysis.",
+        "Technical Depth": "The engine implements a 'Write-Through' model with Python bindings via PyO3. Mutations in the Python layer are automatically persisted to the Rust core, ensuring that topological queries always execute against high-performance compiled graph algorithms rather than slower interpreted structures."
+    },
+    "netflowsim": {
+        "Concept": "A performance analysis engine that utilizes analytic queuing models and Monte Carlo simulations to validate network capacity at scale. Unlike packet-level simulators, netflowsim focuses on probabilistic outcomes across billions of traffic flows.",
+        "Use Cases": "- **Capacity Planning**: Identify bottleneck links and compute-bound nodes before traffic growth impacts production.\n- **Resilience Testing**: Probabilistically analyze the impact of link or node failures on overall network throughput and latency.\n- **Routing Strategy Validation**: Compare the performance of different traffic engineering strategies (e.g., ECMP vs RSVP-TE) against realistic demand matrices.",
+        "Technical Depth": "The engine uses M/M/1 and M/D/1 queuing models implemented in a highly parallelized Rust execution environment. It leverages the Rayon crate to distribute Monte Carlo iterations across all available CPU cores, enabling the analysis of massive traffic scenarios in seconds."
+    },
+    "configparsing": {
+        "Concept": "A framework for extracting high-level intent from legacy network state. It uses machine learning and layout-aware text extraction to transform vendor-specific CLI configurations and documentation into vendor-neutral network models.",
+        "Features": "- **Layout-Aware Ingestion**: Processes vendor manuals and configuration files using PDF structural analysis to maintain technical context.\n- **Semantic Normalization**: Maps vendor-specific syntax (Cisco, Juniper, Arista) into standardized topology relationships and protocol attributes.\n- **AI-Assisted Extraction**: Leverages LLM-powered RAG pipelines to identify intent and architectural patterns from unstructured technical data.",
+        "Technical Depth": "The system acts as the 'External Discovery' input for the Workbench, bridging the gap between existing brownfield deployments and the modern, declarative design toolchain."
     }
 }
 
@@ -106,6 +125,14 @@ CATEGORY_MAP = {
     "data": ("📊 Data & Utilities", "Geospatial analytics and time-series discovery.", "/data-analytics"),
     "wellness": ("🧘 Wellness & Sound", "Sound analysis and wellness monitoring.", None),
     "experimental": ("🧪 Experimental", "Exploratory projects and technical experiments.", None)
+}
+
+FM_SECTIONS = {
+    "network": "network-automation",
+    "sdr": "signal-processing",
+    "agents": "agentic-systems",
+    "health": "agentic-systems",
+    "data": "data-analytics"
 }
 
 # Professional Narrative Sequence
@@ -149,6 +176,19 @@ def generate_toc(content: str) -> str:
         slug = re.sub(r'-+', '-', slug)
         links.append(f"- [{h}](#{slug})")
     return "## Contents\n\n" + "\n".join(links) + "\n\n"
+
+
+def get_back_links(category: str) -> str:
+    links = []
+    if category in FM_SECTIONS:
+        slug = FM_SECTIONS[category]
+        title = slug.replace('-', ' ').title()
+        if slug == "network-automation": title = "Network Automation"
+        if slug == "agentic-systems": title = "Autonomous Systems"
+        if slug == "signal-processing": title = "Signal Processing"
+        links.append(f"[← Back to {title}](../{slug})")
+    links.append("[← Back to Projects](../projects)")
+    return "\n\n".join(links)
 
 
 def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
@@ -226,48 +266,22 @@ def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
 
 
 def generate_detailed_page(project: ProjectInfo) -> str:
-    # 1. Frontmatter
     eco_slug = ECOSYSTEM_MAP.get(project.slug, "projects")
     fm = f"---\nlayout: default\nsection: {eco_slug}\n---\n\n"
-    
-    # 2. Header
     status_badge = f'<span class="status-badge status-active">{project.status_detail}</span>'
-    back_eco_link = ""
-    if eco_slug != "projects":
-        eco_title = eco_slug.replace('-', ' ').title()
-        if eco_slug == "network-automation": eco_title = "Network Automation"
-        if eco_slug == "agentic-systems": eco_title = "Autonomous Systems"
-        if eco_slug == "signal-processing": eco_title = "Signal Processing"
-        back_eco_link = f"[← Back to {eco_title}](../{eco_slug})\n\n"
-        
-    header = f"# {project.name}\n\n{status_badge}\n\n{back_eco_link}[← Back to Projects](../projects)\n\n---\n\n"
-    
-    # 3. Product Narrative
-    # Merge intro sections into Concept
+    back_links = get_back_links(project.category)
+    header = f"# {project.name}\n\n{status_badge}\n\n{back_links}\n\n---\n\n"
     intro_parts = []
     for s in ["Concept", "The Insight", "Overview", "What This Is", "Problem It Solves", "Core Value"]:
-        if s in project.sections:
-            intro_parts.append(clean_text(project.sections[s]))
-    
+        if s in project.sections: intro_parts.append(clean_text(project.sections[s]))
     body_list = [f"## Concept\n\n" + "\n\n".join(intro_parts)]
-    
-    # Standard sections
-    for s in ["Features", "Key Capabilities", "Use Cases", "Screenshots", "Architecture", "Technical Depth", "Security Model", "Implementation Details", "Protocols Implemented", "Performance", "Metrics", "Integration", "Hardware", "Agents", "Components", "Tech Stack", "Research Contribution", "Impact"]:
+    for s in DETAILED_SECTIONS:
         if s in project.sections and s not in ["Concept", "The Insight", "Overview", "What This Is", "Problem It Solves", "Core Value"]:
             body_list.append(f"## {s}\n\n{clean_text(project.sections[s])}")
-            
-    # 4. Status and Roadmap
-    if project.current_status:
-        body_list.append(f"## Current Status\n\n{clean_text(project.current_status)}")
-    if project.roadmap_summary:
-        body_list.append("## Roadmap\n\n" + "\n".join([f"- {item}" for item in project.roadmap_summary]))
-        
-    assembled_body = "\n\n---\n\n".join(body_list)
-    toc = generate_toc(assembled_body)
-    
-    footer = f"\n\n---\n\n{back_eco_link}[← Back to Projects](../projects)\n"
-    
-    return fm + header + toc + assembled_body + footer
+    if project.current_status: body_list.append(f"## Current Status\n\n{clean_text(project.current_status)}")
+    if project.roadmap_summary: body_list.append("## Roadmap\n\n" + "\n".join([f"- {item}" for item in project.roadmap_summary]))
+    final_body = "\n\n---\n\n".join(body_list); toc = generate_toc(final_body)
+    return fm + header + toc + final_body + f"\n\n---\n\n{back_links}\n"
 
 
 def generate_projects_index(projects: list[ProjectInfo]) -> str:
@@ -305,21 +319,16 @@ def main():
                 if not pd.is_dir() or "-clean-" in pd.name or "backup" in pd.name.lower(): continue
                 info = parse_project_metadata(pd)
                 if info: projects.append(info)
-    
     projects_dir = Path("projects")
     scanned_slugs = {p.slug for p in projects}
-    # Add manual/legacy overrides
     for slug in PROJECT_CONTENT_OVERRIDES:
         if slug not in scanned_slugs:
             name = PROJECT_ALIASES.get(slug, slug.title())
             projects.append(ProjectInfo(name=name, slug=slug, path=projects_dir / f"{slug}.md", category="network", status="active", status_detail="Active", sections=PROJECT_CONTENT_OVERRIDES[slug]))
-
     for p in projects:
         pp = projects_dir / f"{p.slug}.md"
-        # Re-generate from Golden Master or metadata
         p.line_count = len(generate_detailed_page(p).splitlines())
         pp.write_text(generate_detailed_page(p))
-        
     Path("projects.md").write_text(generate_projects_index(projects))
     print("Sync complete.")
 

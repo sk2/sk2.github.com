@@ -43,9 +43,9 @@ We build specialized engines that handle specific stages of the network lifecycl
     └───────┬───────┘               └───────┬───────┘
             │                               │
     ┌───────▼───────┐               ┌───────▼───────┐
-    │ Modeling Eng  │               │   Simulator   │
-    │   Generator   │               │ Visualization │
-    │   CLI Parser  │               │ Traffic Sim   │
+    │ Modeling Eng  │               │ Network       │
+    │ Generator     │               │ Simulator     │
+    │ CLI Parser    │               │ NetVis        │
     └───────┬───────┘               └───────┬───────┘
             │                               │
             └───────────────┬───────────────┘

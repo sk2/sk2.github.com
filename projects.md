@@ -12,7 +12,7 @@ Focused on network engineering, autonomous systems, and signal processing.
 
 ### [Network Simulator](projects/network-simulator)
 
-<span class="status-badge status-updated">Recently Updated</span> · **Rust**
+<span class="status-badge status-updated">Recently Updated</span>
 
 
 A Rust-based network simulator that models packet-level behavior for routing protocols. It provides a middle ground between pure algorithmic analysis (like C-BGP) and full emulation (like Containerlab) — larger scale and smaller footprint than emulation, higher fidelity than algorithmic simulation. Used for smoke testing and design validation of network configurations.
@@ -20,7 +20,7 @@ A Rust-based network simulator that models packet-level behavior for routing pro
 
 ### [NetVis](projects/netvis)
 
-<span class="status-badge status-updated">Recently Updated</span> · **Rust**
+<span class="status-badge status-updated">Recently Updated</span>
 
 
 A Rust-based network topology layout and visualization engine. Takes complex multi-layer network topologies (via petgraph) and renders them using advanced layout algorithms that reduce visual complexity while preserving structural clarity. Outputs static formats (SVG, PDF, PNG) for v1, with interactive browser embedding planned for future integration with other tooling.
@@ -36,7 +36,7 @@ A Rust-based network topology generator with Python bindings that consolidates s
 
 ### [ANK Workbench](projects/ank-workbench)
 
-<span class="status-badge status-updated">Recently Updated</span> · **Python backend (FastAPI or Flask) · React or Vue frontend — Leverages existing Python ecosystem for ANK components · meets modern UX expectations**
+<span class="status-badge status-updated">Recently Updated</span>
 
 
 **An orchestration platform** that integrates the ANK ecosystem tools (TopoGen, ank_pydantic, Network Simulator, NetVis) into one seamless workflow.
@@ -206,7 +206,7 @@ Photo Tour is a smart, interactive photography assistant designed for field use.
 
 ### [Secure Multi-Agent Personal Assistant](projects/multi-agent)
 
-<span class="status-badge status-updated">Recently Updated</span> · **Agents can be Go · Python · or Rust**
+<span class="status-badge status-updated">Recently Updated</span>
 
 
 A security-first multi-agent system that coordinates specialized containerized agents (health monitoring, home automation, data aggregation, workflow automation) through a message broker architecture. Each agent runs in isolation with minimal privileges and communicates only through validated message queues, demonstrating production-ready patterns for deploying AI agents in security-critical infrastructure environments. The orchestrator uses cloud LLM reasoning (GPT-4/Claude) while agents remain lightweight and deterministic.

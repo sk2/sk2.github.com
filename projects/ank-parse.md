@@ -26,6 +26,14 @@ Phase 1 focuses on building the **Knowledge Base**: ingesting thousands of pages
 
 ---
 
+---
+
+---
+
+---
+
+---
+
 ## Problem It Solves
 
 - **Syntax Fragmentation**: Every vendor (Cisco, Juniper, Arista, Nokia) has a different CLI structure for the same protocol (OSPF, BGP).

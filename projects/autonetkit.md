@@ -14,12 +14,12 @@ section: network-automation
 ## Contents
 
 - [Concept](#concept)
+- [Tech Stack](#tech-stack)
 - [Key Features](#key-features)
 - [Examples](#examples)
 - [YAML Topology Format](#yaml-topology-format)
 - [Available Blueprints](#available-blueprints)
 - [Milestones](#milestones)
-- [Tech Stack](#tech-stack)
 
 ## Concept
 
@@ -32,6 +32,20 @@ A Python library for modeling and querying network topologies with type-safe Pyd
 ---
 
 ---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+## Tech Stack
+
+Python (Pydantic), Rust core (`petgraph`-backed), PyO3 bindings
 
 ---
 
@@ -608,16 +622,8 @@ Query optimization and large-scale topology support (10k+ nodes).
 - LazyFrame executor with filter planning, materialized query cache (100-1000x speedup)
 - Hierarchical analytics with cross-layer queries (planned)
 
-**Roadmap:**
-
 - **IP addressing** — Automated IP address allocation and management across topology layers
 - **NSOT integration** — Workflow to import/export topology state with Network Source of Truth systems
-
----
-
-## Tech Stack
-
-Python (Pydantic), Rust core (`petgraph`-backed), PyO3 bindings
 
 ---
 

@@ -14,6 +14,7 @@ section: projects
 ## Contents
 
 - [Concept](#concept)
+- [Tech Stack](#tech-stack)
 - [What This Does](#what-this-does)
 - [TUI Layout](#tui-layout)
 - [Key Features](#key-features)
@@ -21,13 +22,24 @@ section: projects
 - [Satellite Groups](#satellite-groups)
 - [Coordinate Pipeline](#coordinate-pipeline)
 - [Development Roadmap](#development-roadmap)
-- [Tech Stack](#tech-stack)
 
 ## Concept
 
 A terminal-based satellite tracker that displays real-time satellite positions on a world map, predicts passes over the user's location, and shows transmission/frequency data. Built with Rust, ratatui, and the SGP4 orbital propagation algorithm. Aimed at amateur radio operators, space enthusiasts, and anyone who wants to know what's overhead.
 
 Real-time satellite positions rendered on a terminal world map with pass predictions — a single binary, no browser, no GUI dependencies.
+
+---
+
+## Tech Stack
+
+- **Language**: Rust (2021 edition)
+- **TUI**: ratatui + crossterm (canvas widget for world map)
+- **Async**: tokio (background data fetching)
+- **Orbital Mechanics**: sgp4 crate (SGP4/SDP4 propagation)
+- **Coordinates**: map_3d (ECI → ECEF → Geodetic → AER)
+- **HTTP**: reqwest (async JSON API calls)
+- **CLI**: clap 4
 
 ---
 
@@ -116,18 +128,6 @@ Pass prediction propagates at 60-second intervals over 24 hours, detects elevati
 - Phase 6: Detail panel + SatNOGS frequency data
 - Phase 7: Pass timeline chart + group switching + search
 - .1.0 release
-
----
-
-## Tech Stack
-
-- **Language**: Rust (2021 edition)
-- **TUI**: ratatui + crossterm (canvas widget for world map)
-- **Async**: tokio (background data fetching)
-- **Orbital Mechanics**: sgp4 crate (SGP4/SDP4 propagation)
-- **Coordinates**: map_3d (ECI → ECEF → Geodetic → AER)
-- **HTTP**: reqwest (async JSON API calls)
-- **CLI**: clap 4
 
 ---
 

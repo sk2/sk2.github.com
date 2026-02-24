@@ -16,11 +16,11 @@ section: network-automation
 ## Contents
 
 - [Concept](#concept)
+- [Tech Stack](#tech-stack)
 - [Key Features](#key-features)
 - [Example: Data Center Leaf-Spine](#example-data-center-leaf-spine)
 - [Python API](#python-api)
 - [Milestones](#milestones)
-- [Tech Stack](#tech-stack)
 - [Roadmap](#roadmap)
 
 ## Concept
@@ -28,6 +28,12 @@ section: network-automation
 A Rust-based network topology generator with Python bindings that consolidates scattered topology generation logic from AutoNetKit, simulation tools, and visualization tools. Generates realistic data center, WAN, and random graph topologies with proper structure, design patterns, and realistic parameters. Outputs custom YAML format for use across the network engineering tool ecosystem.
 
 Network engineers can quickly generate realistic, validated network topologies without implementing complex algorithms from scratch.
+
+---
+
+## Tech Stack
+
+Rust core, PyO3 for Python bindings, Maturin build system
 
 ---
 
@@ -176,12 +182,6 @@ Output converters, traffic patterns, and POP design patterns.
 - **Fiber map integration** — GeoJSON import/export, estimated vs actual fiber route distinction, terrain plausibility checks
 - **Multi-layer topology generation** — Explicit underlay/overlay layer dependencies, overlay-to-underlay path mapping, cross-layer capacity validation
 - **Eyeball network generator** — Access-aggregation-core hierarchy for ISP topologies, inbound-heavy traffic ratios, peering and transit policy configuration
-
----
-
-## Tech Stack
-
-Rust core, PyO3 for Python bindings, Maturin build system
 
 ---
 

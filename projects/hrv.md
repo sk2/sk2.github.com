@@ -13,10 +13,10 @@ layout: default
 ## Contents
 
 - [Concept](#concept)
-- [Key Features](#key-features)
 - [Architecture](#architecture)
-- [Integration with HealthyPi](#integration-with-healthypi)
 - [Tech Stack](#tech-stack)
+- [Integration with HealthyPi](#integration-with-healthypi)
+- [Key Features](#key-features)
 
 ## Concept
 
@@ -31,23 +31,11 @@ Heart Rate Variability (HRV) reveals stress, recovery, and autonomic nervous sys
 
 ---
 
-## Key Features
+---
 
-### Real-Time BLE Streaming
-Connects to any device implementing the standard Bluetooth Heart Rate Profile (UUID 0x2A37) with RR interval support. Tested with Elite HRV CorSense (finger sensor) and Morpheus M7 (chest strap). Auto-discovery with immediate connection—no need to wait for scan completion.
+---
 
-### Time-Domain HRV Metrics
-Computes four core metrics in real-time using rolling 60-second windows:
-- **RMSSD**: Root mean square of successive differences (parasympathetic activity)
-- **SDNN**: Standard deviation of RR intervals (overall variability)
-- **pNN50**: Percentage of intervals differing by >50ms (autonomic balance)
-- **AVNN**: Average RR interval (baseline heart rate)
-
-### Terminal Dashboard
-Built with `ratatui` for responsive TUI rendering. Live charts show heart rate and RR interval trends. Keyboard navigation (`j`/`k` for device selection, `i` for metric info screen, `q` to quit and save).
-
-### Session Logging
-Every session automatically saves to `~/hrv_data/YYYY-MM-DDTHH-MM-SS.parquet` with one row per RR interval. Columns: `timestamp` (UTC), `elapsed_secs`, `heart_rate`, `rr_interval_ms`. Query with DuckDB or load into Polars for analysis.
+---
 
 ---
 
@@ -58,16 +46,6 @@ Every session automatically saves to `~/hrv_data/YYYY-MM-DDTHH-MM-SS.parquet` wi
 **Storage**: Apache Arrow + Parquet for columnar session files
 **TUI**: `ratatui` + `crossterm` for terminal UI
 **Platform**: macOS (Linux/Raspberry Pi planned)
-
----
-
-## Integration with HealthyPi
-
-Designed to complement the [HealthyPi](healthypi) ecosystem:
-- **Driver Layer**: This Rust implementation provides native BLE handling for consumer HRV sensors
-- **Metric Alignment**: Uses the same HRV metrics (RMSSD, SDNN, pNN50) as HealthyPi's signal processing pipeline
-- **Data Format**: Parquet files integrate with HealthyPi's DuckDB analytics layer
-- **Use Case**: Detect stress baselines and autonomic trends for agentic health workflows
 
 ---
 
@@ -96,6 +74,36 @@ Designed to complement the [HealthyPi](healthypi) ecosystem:
   color: white;
 }
 </style>
+
+---
+
+## Integration with HealthyPi
+
+Designed to complement the [HealthyPi](healthypi) ecosystem:
+- **Driver Layer**: This Rust implementation provides native BLE handling for consumer HRV sensors
+- **Metric Alignment**: Uses the same HRV metrics (RMSSD, SDNN, pNN50) as HealthyPi's signal processing pipeline
+- **Data Format**: Parquet files integrate with HealthyPi's DuckDB analytics layer
+- **Use Case**: Detect stress baselines and autonomic trends for agentic health workflows
+
+---
+
+## Key Features
+
+### Real-Time BLE Streaming
+Connects to any device implementing the standard Bluetooth Heart Rate Profile (UUID 0x2A37) with RR interval support. Tested with Elite HRV CorSense (finger sensor) and Morpheus M7 (chest strap). Auto-discovery with immediate connection—no need to wait for scan completion.
+
+### Time-Domain HRV Metrics
+Computes four core metrics in real-time using rolling 60-second windows:
+- **RMSSD**: Root mean square of successive differences (parasympathetic activity)
+- **SDNN**: Standard deviation of RR intervals (overall variability)
+- **pNN50**: Percentage of intervals differing by >50ms (autonomic balance)
+- **AVNN**: Average RR interval (baseline heart rate)
+
+### Terminal Dashboard
+Built with `ratatui` for responsive TUI rendering. Live charts show heart rate and RR interval trends. Keyboard navigation (`j`/`k` for device selection, `i` for metric info screen, `q` to quit and save).
+
+### Session Logging
+Every session automatically saves to `~/hrv_data/YYYY-MM-DDTHH-MM-SS.parquet` with one row per RR interval. Columns: `timestamp` (UTC), `elapsed_secs`, `heart_rate`, `rr_interval_ms`. Query with DuckDB or load into Polars for analysis.
 
 ---
 

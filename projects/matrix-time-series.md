@@ -18,8 +18,8 @@ section: data-analytics
 - [Concept](#concept)
 - [Problem It Solves](#problem-it-solves)
 - [Features](#features)
-- [Architecture](#architecture)
 - [Use Cases](#use-cases)
+- [Architecture](#architecture)
 
 ## Concept
 
@@ -77,6 +77,30 @@ matrix-profile-rs provides production-quality implementations with:
 
 ---
 
+## Use Cases
+
+**Predictive Maintenance:**
+- Find recurring degradation patterns before failure
+- Detect anomalous sensor behavior
+- Example: Motor vibration patterns indicating bearing wear
+
+**Healthcare:**
+- Identify irregular heartbeat patterns
+- Find repeating movement patterns in activity data
+- Example: ECG anomaly detection for arrhythmia screening
+
+**Finance:**
+- Discover recurring market microstructures
+- Detect anomalous trading patterns
+- Example: Flash crash pattern recognition
+
+**Operations:**
+- Find repeating load patterns for capacity planning
+- Detect anomalous system behavior
+- Example: Server load pattern analysis for autoscaling
+
+---
+
 ## Architecture
 
 ### Algorithm Stack
@@ -103,30 +127,6 @@ Polars DataFrame (via to_dataframe()) or Rust types
 - **Discovery API**: High-level methods for pattern extraction with deterministic tie-breaking
 - **Tiling Module**: Memory-efficient computation for datasets exceeding RAM
 - **Polars Integration**: Native `.mp()` namespace on Series, DataFrame I/O with metadata columns
-
----
-
-## Use Cases
-
-**Predictive Maintenance:**
-- Find recurring degradation patterns before failure
-- Detect anomalous sensor behavior
-- Example: Motor vibration patterns indicating bearing wear
-
-**Healthcare:**
-- Identify irregular heartbeat patterns
-- Find repeating movement patterns in activity data
-- Example: ECG anomaly detection for arrhythmia screening
-
-**Finance:**
-- Discover recurring market microstructures
-- Detect anomalous trading patterns
-- Example: Flash crash pattern recognition
-
-**Operations:**
-- Find repeating load patterns for capacity planning
-- Detect anomalous system behavior
-- Example: Server load pattern analysis for autoscaling
 
 ---
 

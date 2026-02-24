@@ -14,15 +14,21 @@ section: signal-processing
 ## Contents
 
 - [Concept](#concept)
+- [Tech Stack](#tech-stack)
 - [Key Features](#key-features)
 - [Processing Pipeline](#processing-pipeline)
-- [Tech Stack](#tech-stack)
 
 ## Concept
 
 An exploration-focused audio processing system using Raspberry Pi and microphone arrays. It focuses on spatial audio (ToA, beamforming) and classification (vehicles, wildlife) using an "analyst" agent approach.
 
 The ability to capture, localize, and classify complex soundscapes on edge devices or via remote streaming, providing structured insights to an agent framework.
+
+---
+
+## Tech Stack
+
+C++ (ODAS), Python (librosa, NumPy, PyAudio), TensorFlow Lite (YAMNet), MQTT (Mosquitto), Raspberry Pi
 
 ---
 
@@ -51,12 +57,6 @@ YAMNet TFLite Inference
     ↓
 JSON/MQTT → Agent Framework
 ```
-
----
-
-## Tech Stack
-
-C++ (ODAS), Python (librosa, NumPy, PyAudio), TensorFlow Lite (YAMNet), MQTT (Mosquitto), Raspberry Pi
 
 ---
 

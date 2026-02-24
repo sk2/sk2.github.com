@@ -14,10 +14,10 @@ section: projects
 ## Contents
 
 - [Concept](#concept)
+- [Tech Stack](#tech-stack)
 - [StillState Features](#stillstate-features)
 - [Audio Architecture](#audio-architecture)
 - [Milestones](#milestones)
-- [Tech Stack](#tech-stack)
 
 ## Concept
 
@@ -34,6 +34,20 @@ section: projects
 ---
 
 ---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+## Tech Stack
+
+Swift (SwiftUI, AVAudioEngine, Accelerate/vDSP), watchOS, CoreAudio, HealthKit
 
 ---
 
@@ -75,16 +89,8 @@ Ear-print calibration, heartbeat synchronization, microphone monitoring infrastr
 - Hardware battery validation (target: < drain/hour with all features)
 - TestFlight distribution setup
 
-**Roadmap:**
-
 - **v1.3 Distribution & Enhancement** — Advanced adaptive sensitivity, user feedback integration
 - **FlowState (macOS)** — Genetic system integration, audio DNA evolution, flow-locking with task coupling, pomodoro synchronization
-
----
-
-## Tech Stack
-
-Swift (SwiftUI, AVAudioEngine, Accelerate/vDSP), watchOS, CoreAudio, HealthKit
 
 ---
 

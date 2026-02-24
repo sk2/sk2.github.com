@@ -16,20 +16,53 @@ section: signal-processing
 ## Contents
 
 - [Concept](#concept)
+- [Architecture](#architecture)
+- [Tech Stack](#tech-stack)
 - [Why a Unified Server](#why-a-unified-server)
 - [Supported Hardware](#supported-hardware)
-- [Architecture](#architecture)
 - [TUI Dashboard](#tui-dashboard)
 - [HTTP API](#http-api)
 - [Raspberry Pi Deployment](#raspberry-pi-deployment)
 - [Development Roadmap](#development-roadmap)
-- [Tech Stack](#tech-stack)
 
 ## Concept
 
 A cross-platform (targeted at Raspberry Pi) server that interfaces with multiple SDR devices (RTL-SDR, AirSpy HF+) and streams raw IQ samples over the network using the industry-standard `rtl_tcp` protocol. It features a built-in TUI for live configuration and device management.
 
 The ability to reliably and efficiently stream high-fidelity IQ data from multiple SDRs over a network with a modern management interface.
+
+---
+
+## Architecture
+
+```
+                    ┌─────────────────────────┐
+                    │     rtltcp-rust          │
+                    │                          │
+   USB ─────────── │  Device Manager          │
+   RTL-SDR 0..N    │    ├─ RTL-SDR driver     │ ──── TCP :1234
+   AirSpy HF+      │    ├─ AirSpy HF+ driver │ ──── TCP :1235
+   AirSpy           │    └─ AirSpy driver     │ ──── TCP :1236
+                    │                          │
+                    │  HTTP API (:8080)        │ ──── REST endpoints
+                    │  TUI Dashboard           │ ──── SSH terminal
+                    │  Config (TOML)           │
+                    └─────────────────────────┘
+```
+
+Each device runs in its own tokio task with dedicated USB I/O and TCP streaming threads. The TUI and HTTP API share device state through `Arc<Mutex<>>` with 1 Hz status broadcasts.
+
+---
+
+## Tech Stack
+
+- **Language**: Rust (2021 edition)
+- **Async Runtime**: tokio
+- **HTTP API**: axum
+- **TUI**: ratatui + crossterm
+- **Hardware FFI**: rtlsdr_sys, libairspyhf, libairspy
+- **Cross-compilation**: `cross` + custom Docker images
+- **Config**: TOML with serde
 
 ---
 
@@ -54,27 +87,6 @@ This server manages all devices from a single process with shared state, a TUI f
 | AirSpy | 6 MHz | 12-bit (native) | continues after AirSpy HF+ |
 
 All three device types are auto-detected on startup. AirSpy HF+ and AirSpy support are compile-time features enabled by default.
-
----
-
-## Architecture
-
-```
-                    ┌─────────────────────────┐
-                    │     rtltcp-rust          │
-                    │                          │
-   USB ─────────── │  Device Manager          │
-   RTL-SDR 0..N    │    ├─ RTL-SDR driver     │ ──── TCP :1234
-   AirSpy HF+      │    ├─ AirSpy HF+ driver │ ──── TCP :1235
-   AirSpy           │    └─ AirSpy driver     │ ──── TCP :1236
-                    │                          │
-                    │  HTTP API (:8080)        │ ──── REST endpoints
-                    │  TUI Dashboard           │ ──── SSH terminal
-                    │  Config (TOML)           │
-                    └─────────────────────────┘
-```
-
-Each device runs in its own tokio task with dedicated USB I/O and TCP streaming threads. The TUI and HTTP API share device state through `Arc<Mutex<>>` with 1 Hz status broadcasts.
 
 ---
 
@@ -156,18 +168,6 @@ Ratatui-based dashboard, interactive frequency/gain/sample rate adjustment, chan
 
 ### Phase 4: Network Optimization (Planned)
 Compression (LZ4/zstd), UDP transport with Forward Error Correction, "Mac Tunnel" client for remote desktop control.
-
----
-
-## Tech Stack
-
-- **Language**: Rust (2021 edition)
-- **Async Runtime**: tokio
-- **HTTP API**: axum
-- **TUI**: ratatui + crossterm
-- **Hardware FFI**: rtlsdr_sys, libairspyhf, libairspy
-- **Cross-compilation**: `cross` + custom Docker images
-- **Config**: TOML with serde
 
 ---
 

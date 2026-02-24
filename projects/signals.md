@@ -17,8 +17,9 @@ section: signal-processing
 
 - [Concept](#concept)
 - [Architecture](#architecture)
-- [Terminal Interface](#terminal-interface)
 - [Hardware](#hardware)
+- [Tech Stack](#tech-stack)
+- [Terminal Interface](#terminal-interface)
 - [Signal Census](#signal-census)
 - [ML Classification](#ml-classification)
 - [Autonomous Missions](#autonomous-missions)
@@ -28,7 +29,6 @@ section: signal-processing
 - [REST API](#rest-api)
 - [Health and Resilience](#health-and-resilience)
 - [Development Roadmap](#development-roadmap)
-- [Tech Stack](#tech-stack)
 
 ## Concept
 
@@ -72,15 +72,6 @@ Version 2.0 adds a central WebSocket server that multiplexes real-time spectrum 
 
 ---
 
-## Terminal Interface
-
-![Spectra TUI](/images/spectra-tui.png)
-*Rust TUI showing live spectrum, waterfall (Kitty graphics protocol), and device controls.*
-
-The Rust TUI renders a pixel-level waterfall using the Kitty graphics protocol for true-color, full-resolution display directly in the terminal. Spectrum graphs use block-character rendering with configurable color palettes (twilight, inferno, viridis, ice, gray). Keyboard controls handle retuning, gain adjustment, and device switching without leaving the terminal.
-
----
-
 ## Hardware
 
 Four SDR types cover the spectrum from HF through L-band:
@@ -93,6 +84,29 @@ Four SDR types cover the spectrum from HF through L-band:
 | **RTL-SDR v3/v4** | ADS-B (1090 MHz), satellite (137 MHz) | 24–1766 MHz |
 
 Antenna array: Diamond D-130 discone (wideband), MLA-30 active loop (HF), TA1 turnstile (satellite), dedicated 1090 MHz (ADS-B), with mast-mounted Mini-Kits LNA for weak signals.
+
+---
+
+## Tech Stack
+
+**Core (Python):** FastAPI, uvicorn, NumPy, SciPy, Polars, DuckDB, asyncio, Skyfield, httpx, Pydantic
+
+**Frontend (TypeScript):** React 19, Vite, MapLibre GL, WebGL
+
+**TUI (Rust):** ratatui, crossterm, rustfft, Kitty graphics protocol, axum (backend)
+
+**ML:** CoreML, PyTorch, ONNX Runtime (RadioML 2018.01A training data)
+
+**Infrastructure:** uv (package management), systemd (edge services), Docker (optional)
+
+---
+
+## Terminal Interface
+
+![Spectra TUI](/images/spectra-tui.png)
+*Rust TUI showing live spectrum, waterfall (Kitty graphics protocol), and device controls.*
+
+The Rust TUI renders a pixel-level waterfall using the Kitty graphics protocol for true-color, full-resolution display directly in the terminal. Spectrum graphs use block-character rendering with configurable color palettes (twilight, inferno, viridis, ice, gray). Keyboard controls handle retuning, gain adjustment, and device switching without leaving the terminal.
 
 ---
 
@@ -197,20 +211,6 @@ WebSocket protocol: one JSON metadata message followed by binary uint8 spectrum 
 | 3 | Autonomy — Signal Census, scanning, satellites, missions | Complete |
 | 6 | Verification — health monitoring, auto-reconnect, E2E tests | Complete |
 | 7 | Performance — ring buffer, GPU FFT, batch updates | Planned |
-
----
-
-## Tech Stack
-
-**Core (Python):** FastAPI, uvicorn, NumPy, SciPy, Polars, DuckDB, asyncio, Skyfield, httpx, Pydantic
-
-**Frontend (TypeScript):** React 19, Vite, MapLibre GL, WebGL
-
-**TUI (Rust):** ratatui, crossterm, rustfft, Kitty graphics protocol, axum (backend)
-
-**ML:** CoreML, PyTorch, ONNX Runtime (RadioML 2018.01A training data)
-
-**Infrastructure:** uv (package management), systemd (edge services), Docker (optional)
 
 ---
 

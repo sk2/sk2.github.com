@@ -14,15 +14,15 @@ section: projects
 ## Contents
 
 - [Concept](#concept)
-- [The Problem](#the-problem)
 - [Architecture](#architecture)
+- [Tech Stack](#tech-stack)
+- [Integration with AuroraPhoto](#integration-with-auroraphoto)
+- [The Problem](#the-problem)
 - [Phase 1: Substorm Trigger Engine](#phase-1-substorm-trigger-engine)
 - [Phase 2: Localized Planning & Site Selection](#phase-2-localized-planning-site-selection)
 - [Phase 3: Intelligent Advice & Remote Access](#phase-3-intelligent-advice-remote-access)
 - [Phase 4: Historical Playback Engine](#phase-4-historical-playback-engine)
 - [Example Output](#example-output)
-- [Tech Stack](#tech-stack)
-- [Integration with AuroraPhoto](#integration-with-auroraphoto)
 - [Roadmap](#roadmap)
 
 ## Concept
@@ -30,18 +30,6 @@ section: projects
 A specialized tool for Australian aurora observers that solves the "should I drive 60 minutes?" problem. It combines real-time solar wind data (NOAA), substorm trigger logic (Bz/HP trends), and local weather (ACCESS-G model) to provide actionable advice.
 
 Providing a single, definitive "Go/No-Go" score that accounts for both space weather potential and local terrestrial conditions (travel time, clouds, moon).
-
----
-
-## The Problem
-
-Existing tools like the Glendale app are powerful but complex. Australian observers face unique challenges:
-- **Geographic disadvantage**: Need strong events (Kp 6-7+) to see aurora at southern Australian latitudes
-- **Travel time investment**: 60-90 minute drives to dark sites required
-- **Local weather gaps**: Most tools use global models, not Australian-specific forecasts
-- **Decision paralysis**: Multiple data sources provide conflicting signals
-
-The question this tool answers: "If I leave now, will I see aurora when I arrive in 90 minutes?"
 
 ---
 
@@ -97,6 +85,37 @@ The question this tool answers: "If I leave now, will I see aurora when I arrive
       │  Historical Playback │
       └─────────────────────┘
 ```
+
+---
+
+## Tech Stack
+
+- **Language**: TypeScript (Node.js)
+- **Data Sources**: NOAA SWPC (solar wind, hemispheric power), Open-Meteo API (ACCESS-G weather model)
+- **LLM**: OpenAI GPT-4o-mini for advice generation
+- **Alerting**: Telegram Bot API with subscriber management
+- **Testing**: Jest with ts-jest (ESM support)
+
+---
+
+## Integration with AuroraPhoto
+
+AuroraData handles the *planning* side (when to go, where to go), while AuroraPhoto handles the *capture* side (automated camera control, HFR focus):
+
+1. **AuroraData**: "Strong event predicted, leave now for Victor Harbor"
+2. **AuroraPhoto**: Automated multi-camera capture once on-site
+
+---
+
+## The Problem
+
+Existing tools like the Glendale app are powerful but complex. Australian observers face unique challenges:
+- **Geographic disadvantage**: Need strong events (Kp 6-7+) to see aurora at southern Australian latitudes
+- **Travel time investment**: 60-90 minute drives to dark sites required
+- **Local weather gaps**: Most tools use global models, not Australian-specific forecasts
+- **Decision paralysis**: Multiple data sources provide conflicting signals
+
+The question this tool answers: "If I leave now, will I see aurora when I arrive in 90 minutes?"
 
 ---
 
@@ -183,25 +202,6 @@ Telegram: Alert sent to 12 subscribers
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 RECOMMENDATION: GO NOW
 ```
-
----
-
-## Tech Stack
-
-- **Language**: TypeScript (Node.js)
-- **Data Sources**: NOAA SWPC (solar wind, hemispheric power), Open-Meteo API (ACCESS-G weather model)
-- **LLM**: OpenAI GPT-4o-mini for advice generation
-- **Alerting**: Telegram Bot API with subscriber management
-- **Testing**: Jest with ts-jest (ESM support)
-
----
-
-## Integration with AuroraPhoto
-
-AuroraData handles the *planning* side (when to go, where to go), while AuroraPhoto handles the *capture* side (automated camera control, HFR focus):
-
-1. **AuroraData**: "Strong event predicted, leave now for Victor Harbor"
-2. **AuroraPhoto**: Automated multi-camera capture once on-site
 
 ---
 

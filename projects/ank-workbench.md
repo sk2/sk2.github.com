@@ -5,7 +5,7 @@ section: network-automation
 
 # ANK Workbench
 
-<span class="status-badge status-updated">Recently Updated</span> · **Python backend (FastAPI or Flask) · React or Vue frontend — Leverages existing Python ecosystem for ANK components · meets modern UX expectations**
+<span class="status-badge status-updated">Recently Updated</span>
 
 [← Back to Network Automation](../network-automation)
 
@@ -36,10 +36,6 @@ Network engineers can design, validate, and visualize network changes in one com
 
 ---
 
-· **Python backend (FastAPI or Flask) · React or Vue frontend — Leverages existing Python ecosystem for ANK components · meets modern UX expectations**
-
----
-
 ## Screenshots
 
 ![Projects](/images/workbench-projects.png)
@@ -53,6 +49,9 @@ Network engineers can design, validate, and visualize network changes in one com
 
 ![Visualization](/images/workbench-visualize.png)
 *Visualization view — explore topology, physical, logical, and protocol layers with configurable overlays, routing table inspection, and multi-format export.*
+
+
+·
 
 ---
 

@@ -21,6 +21,23 @@ Clean, understandable, stable codebase that reliably tracks aircraft in real-tim
 
 ---
 
+## Architecture
+
+**v1.0 Foundation :**
+Established distributed multi-beam architecture using ProcessPoolExecutor for parallel surveillance channels. CFAR detection  implemented and verified.
+
+**v2.0 Real-Time Analysis :**
+
+Currently implementing analysis and association logic . The system now maintains analysis across multiple beams with detection-level recording for storage efficiency.
+
+**Key Features:**
+- **Multi-Beam Processing**: Parallel surveillance channels across 5-channel coherent array
+- **CFAR Detection**: Constant False Alarm Rate detection complete
+- **Analysis Management**: Per-beam analysis with cross-beam fusion planned for v3
+- **Real-Time Operation**: Signal analysis with sub-second latency
+
+---
+
 ## Core Principles
 
 **Signal Reflection and Processing:**
@@ -40,23 +57,6 @@ Clean, understandable, stable codebase that reliably tracks aircraft in real-tim
 **Why This Approach:**
 - **Cost-Effective**: Uses existing RF infrastructure for experiments
 - **Educational**: Practical exploration of bistatic geometry and signal processing techniques
-
----
-
-## Architecture
-
-**v1.0 Foundation :**
-Established distributed multi-beam architecture using ProcessPoolExecutor for parallel surveillance channels. CFAR detection  implemented and verified.
-
-**v2.0 Real-Time Analysis :**
-
-Currently implementing analysis and association logic . The system now maintains analysis across multiple beams with detection-level recording for storage efficiency.
-
-**Key Features:**
-- **Multi-Beam Processing**: Parallel surveillance channels across 5-channel coherent array
-- **CFAR Detection**: Constant False Alarm Rate detection complete
-- **Analysis Management**: Per-beam analysis with cross-beam fusion planned for v3
-- **Real-Time Operation**: Signal analysis with sub-second latency
 
 ---
 

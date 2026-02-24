@@ -5,7 +5,7 @@ section: network-automation
 
 # NetVis
 
-<span class="status-badge status-updated">Recently Updated</span> · **Rust**
+<span class="status-badge status-updated">Recently Updated</span>
 
 [← Back to Network Automation](../network-automation)
 
@@ -16,12 +16,12 @@ section: network-automation
 ## Contents
 
 - [Concept](#concept)
+- [Tech Stack](#tech-stack)
+- [Integration with the Network Modeling & Configuration Library](#integration-with-the-network-modeling-configuration-library)
 - [Key Features](#key-features)
 - [Example: Quick Start](#example-quick-start)
-- [Integration with the Network Modeling & Configuration Library](#integration-with-the-network-modeling-configuration-library)
 - [Example Gallery](#example-gallery)
 - [Milestones](#milestones)
-- [Tech Stack](#tech-stack)
 
 ## Concept
 
@@ -31,7 +31,24 @@ Transform network topologies into clear, information-dense visualizations using 
 
 ---
 
-· **Rust**
+## Tech Stack
+
+Rust, petgraph, fjadra (d3-force port), SVG/PDF/PNG rendering, WASM-ready
+
+---
+
+## Integration with the Network Modeling & Configuration Library
+
+Network Modeling & Configuration Library topologies export directly to the Network Visualization Engine format:
+```python
+topo.export_for_netvis(
+    "output.json",
+    layout="hierarchical",
+    node_metadata=True  # Include device types, roles for styling
+)
+```
+
+The Network Visualization Engine reads the exported topology and applies advanced layout algorithms, producing publication-quality diagrams that reflect the logical structure captured in the Network Modeling & Configuration Library.
 
 ---
 
@@ -122,21 +139,6 @@ Written: output.svg (6.5 KB)
 
 ---
 
-## Integration with the Network Modeling & Configuration Library
-
-Network Modeling & Configuration Library topologies export directly to the Network Visualization Engine format:
-```python
-topo.export_for_netvis(
-    "output.json",
-    layout="hierarchical",
-    node_metadata=True  # Include device types, roles for styling
-)
-```
-
-The Network Visualization Engine reads the exported topology and applies advanced layout algorithms, producing publication-quality diagrams that reflect the logical structure captured in the Network Modeling & Configuration Library.
-
----
-
 ## Example Gallery
 
 ### Enterprise Campus Network
@@ -208,15 +210,7 @@ Stable API, deterministic rendering, and spatial indexing.
 - Spatial indexing foundation, curved edge collision detection
 - Stable public API with versioned schemas, structured diagnostics
 
-**Roadmap:**
-
 - **v1.4 Advanced Operations & Interaction** — Visual topology diffing, live traffic flow simulation, interactive ARIA-enabled SVG, sub-graph layout composition, multi-page poster export
-
----
-
-## Tech Stack
-
-Rust, petgraph, fjadra (d3-force port), SVG/PDF/PNG rendering, WASM-ready
 
 ---
 

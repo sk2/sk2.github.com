@@ -5,7 +5,7 @@ section: network-automation
 
 # Network Simulator
 
-<span class="status-badge status-updated">Recently Updated</span> · **Rust**
+<span class="status-badge status-updated">Recently Updated</span>
 
 [← Back to Network Automation](../network-automation)
 
@@ -16,15 +16,15 @@ section: network-automation
 ## Contents
 
 - [Concept](#concept)
+- [Use Cases](#use-cases)
+- [Tech Stack](#tech-stack)
 - [Why the Network Simulator?](#why-the-network-simulator)
 - [Quick Start — Three-Router OSPF Example](#quick-start-three-router-ospf-example)
 - [Demo](#demo)
 - [Daemon Mode — Real-Time Network Interaction](#daemon-mode-real-time-network-interaction)
 - [Protocol Support](#protocol-support)
 - [Example: IS-IS L1/L2 Hierarchy with Real Output](#example-is-is-l1l2-hierarchy-with-real-output)
-- [Use Cases](#use-cases)
 - [Milestones](#milestones)
-- [Tech Stack](#tech-stack)
 - [Roadmap](#roadmap)
 
 ## Concept
@@ -38,7 +38,20 @@ Validate network configurations at scale with protocol-level fidelity before dep
 
 ---
 
-· **Rust**
+## Use Cases
+
+- **Agentic AI & Network Automation Development**: Rapidly prototype and test automation agents, DevOps pipelines, and AI-driven network operations with seconds-long iteration cycles instead of minutes spinning up containers
+- **Configuration Generation Testing**: Validate Network Modeling & Configuration Library-generated configs in simulation before deploying to Containerlab — catch errors in the generation logic early
+- **Network Automation Prototyping**: Develop configuration management tools, automated provisioning systems, and orchestration scripts against realistic network topologies without infrastructure overhead
+- **Pre-deployment Validation**: Catch routing loops, black holes, and misconfigurations before production
+- **Convergence Analysis**: Measure failover time and validate backup paths
+- **Training**: Safe environment for learning routing protocol behavior and automation development
+
+---
+
+## Tech Stack
+
+Rust, Tokio for async execution, petgraph for topology representation, gRPC for daemon IPC, ratatui for TUI
 
 ---
 
@@ -762,17 +775,6 @@ IS-IS events: 18 hellos, 4 LSPs, 2 SPF runs
 
 ---
 
-## Use Cases
-
-- **Agentic AI & Network Automation Development**: Rapidly prototype and test automation agents, DevOps pipelines, and AI-driven network operations with seconds-long iteration cycles instead of minutes spinning up containers
-- **Configuration Generation Testing**: Validate Network Modeling & Configuration Library-generated configs in simulation before deploying to Containerlab — catch errors in the generation logic early
-- **Network Automation Prototyping**: Develop configuration management tools, automated provisioning systems, and orchestration scripts against realistic network topologies without infrastructure overhead
-- **Pre-deployment Validation**: Catch routing loops, black holes, and misconfigurations before production
-- **Convergence Analysis**: Measure failover time and validate backup paths
-- **Training**: Safe environment for learning routing protocol behavior and automation development
-
----
-
 ## Milestones
 
 **v1.0 MVP** (Shipped Jan 24, 2026)
@@ -831,18 +833,10 @@ EVPN control plane and VXLAN dataplane for data center fabrics.
 - Multi-tenancy with bridge domains and VRF routing
 - Requirements definition phase
 
-**Roadmap:**
-
 - **v1.8 Data Center Fabric & EVPN** — VXLAN overlay with BGP EVPN (Type 2/3/5 routes), ESI multi-homing and LACP simulation, multicast foundation (PIM-SM, IGMP/MLD)
 - **v1.9 Chaos Engineering & Performance** — Scripted chaos injection with blast radius analysis, BGP hijack simulation, SoA memory layout and zero-copy parallel execution, incremental FIB updates, QoS with WRR and priority queuing
 - **v2.0 Intelligent Simulation** — Distributed engine with remote participation via gRPC, simulation time machine with state snapshot and rewind debugging, LLM-powered troubleshooting CLI
 - **v2.1 Ecosystem & Digital Twin** — Hybrid real-sim bridge via TUN/TAP for host connectivity, config ingestion from Cisco/Juniper to netsim YAML
-
----
-
-## Tech Stack
-
-Rust, Tokio for async execution, petgraph for topology representation, gRPC for daemon IPC, ratatui for TUI
 
 ---
 

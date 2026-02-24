@@ -24,6 +24,14 @@ An autonomous distributed SIGINT system. It monitors the RF spectrum, identifies
 
 ---
 
+---
+
+---
+
+---
+
+---
+
 ## Features
 
 ### Phase 1 Complete: Foundation ✅
@@ -95,8 +103,8 @@ An autonomous distributed SIGINT system. It monitors the RF spectrum, identifies
 
 ### Roadmap
 
-- **Phase 4: Research & Evolution** — Advanced ML/DSP including de-noising, blind signal separation, emitter identification, vector search, and beamforming
-- **Phase 7: Performance Optimization** — GPU acceleration, waterfall ring buffer optimization, memory profiling, batch updates
+-  — Advanced ML/DSP including de-noising, blind signal separation, emitter identification, vector search, and beamforming
+-  — GPU acceleration, waterfall ring buffer optimization, memory profiling, batch updates
 
 ---
 

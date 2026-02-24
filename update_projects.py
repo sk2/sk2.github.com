@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Update website projects page and individual project pages from project metadata.
-Enforces a clean, mature, and professional style with precise navigation.
+Enforces a clean, mature, and professional style with a focus on product narrative.
 """
 
 import argparse
@@ -68,14 +68,13 @@ FM_SECTIONS = {
     "data": "data-analytics"
 }
 
-# The sequence of sections for the detailed page
-# We will merge the first few into "Concept"
+# Section groups for narrative flow
 INTRO_SECTIONS = ["Concept", "The Insight", "Overview", "What This Is", "Core Value"]
-REMAINING_SECTIONS = [
-    "Problem It Solves", "Features", "Key Capabilities", "Architecture", 
-    "Technical Depth", "Security Model", "Implementation Details", 
-    "Protocols Implemented", "Performance", "Metrics", "Use Cases", 
-    "Integration", "Hardware", "Agents", "Components", "Screenshots"
+PRODUCT_SECTIONS = ["Problem It Solves", "Features", "Key Capabilities", "Use Cases", "Screenshots"]
+TECHNICAL_SECTIONS = [
+    "Architecture", "Technical Depth", "Security Model", "Implementation Details", 
+    "Protocols Implemented", "Performance", "Metrics", "Integration", 
+    "Hardware", "Agents", "Components", "Tech Stack"
 ]
 
 def extract_sections(content: str) -> Dict[str, str]:
@@ -91,8 +90,7 @@ def extract_sections(content: str) -> Dict[str, str]:
 def generate_toc(content: str) -> str:
     """Generate a table of contents from ## headers."""
     headers = re.findall(r'^##\s+([^#\n]+)\s*$', content, re.MULTILINE)
-    headers = [h.strip() for h in headers if h.strip() not in ["Contents"]]
-    
+    headers = [h.strip() for h in headers if h.strip() not in ["Contents", "Quick Facts"]]
     if len(headers) < 4: return ""
     links = []
     for h in headers:
@@ -109,16 +107,18 @@ def get_back_links(category: str) -> str:
         slug = FM_SECTIONS[category]
         title = slug.replace('-', ' ').title()
         links.append(f"[← Back to {title}](../{slug})")
-    
     links.append("[← Back to Projects](../projects)")
     return "\n\n".join(links)
 
 
 def clean_text(text: str) -> str:
-    """Strip phase and progress info from text."""
+    """Aggressively strip phases, progress, and metadata clutter."""
     text = re.sub(r'\(Phase.*?\)', '', text)
     text = re.sub(r'Phase \d+.*?\d+', '', text)
+    text = re.sub(r'\*\*Phase \d+.*?\*\*', '', text)
     text = re.sub(r'\d+%', '', text)
+    text = re.sub(r'^\s*·\s*\*\*.*?\*\*\s*$', '', text, flags=re.MULTILINE)
+    text = re.sub(r'^\s*\*\*Roadmap:\*\*\s*$', '', text, flags=re.MULTILINE)
     return text.strip()
 
 
@@ -156,50 +156,36 @@ def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
             s_str = match.group(1).split('\n')[0]
             stack.extend([s.strip() for s in re.split(r'[,;·]', s_str) if s.strip()])
             break
-    
     current_status, last_activity_date = "", None
     state_md = planning_dir / "STATE.md"
     if state_md.exists():
-        state_content = state_md.read_text()
-        la_match = re.search(r'Last activity:\s*(.+)', state_content)
+        state_content = state_md.read_text(); la_match = re.search(r'Last activity:\s*(.+)', state_content)
         if la_match:
-            activity_text = la_match.group(1).strip()
-            date_match = re.search(r'(\d{4}-\d{2}-\d{2})', activity_text)
+            activity_text = la_match.group(1).strip(); date_match = re.search(r'(\d{4}-\d{2}-\d{2})', activity_text)
             if date_match:
-                try:
-                    last_activity_date = datetime.strptime(date_match.group(1), "%Y-%m-%d")
-                except ValueError:
-                    pass
+                try: last_activity_date = datetime.strptime(date_match.group(1), "%Y-%m-%d")
+                except ValueError: pass
             current_status = activity_text
-
     status_detail = "Active"
     if last_activity_date:
         today = datetime(2026, 2, 24)
-        if today - last_activity_date <= timedelta(days=7):
-            status_detail = "Recently Updated"
-        else:
-            status_detail = f"Last Active: {last_activity_date.strftime('%Y-%m-%d')}"
-
+        if today - last_activity_date <= timedelta(days=7): status_detail = "Recently Updated"
+        else: status_detail = f"Last Active: {last_activity_date.strftime('%Y-%m-%d')}"
     roadmap_summary = []
     roadmap_md = planning_dir / "ROADMAP.md"
     if roadmap_md.exists():
-        roadmap_content = roadmap_md.read_text()
-        ms_matches = re.finditer(r'^- (?:◆|❍|[\w\s]+)\s+\*\*(.*?)\*\*(.*?)$', roadmap_content, re.MULTILINE)
+        roadmap_content = roadmap_md.read_text(); ms_matches = re.finditer(r'^- (?:◆|❍|[\w\s]+)\s+\*\*(.*?)\*\*(.*?)$', roadmap_content, re.MULTILINE)
         for match in ms_matches:
             ms_name = clean_text(match.group(1))
             roadmap_summary.append(ms_name)
             if len(roadmap_summary) >= 3: break
-
     return ProjectInfo(name=project_name, slug=slug, path=project_path, category=cat, status="active", status_detail=status_detail, stack=stack, sections=all_sections, current_status=current_status, roadmap_summary=roadmap_summary, last_activity_date=last_activity_date)
 
 
 def generate_status_badge(project: ProjectInfo) -> str:
     detail = project.status_detail or "Active"
     cls = "status-updated" if detail == "Recently Updated" else "status-active"
-    badge = f'<span class="status-badge {cls}">{detail}</span>'
-    if project.stack:
-        badge += f" · **{' · '.join(project.stack)}**"
-    return badge
+    return f'<span class="status-badge {cls}">{detail}</span>'
 
 
 def update_existing_file(content: str, project: ProjectInfo) -> str:
@@ -212,62 +198,51 @@ def update_existing_file(content: str, project: ProjectInfo) -> str:
         if ":" in line: new_fm_lines.append(line)
     if not any(l.startswith("section:") for l in new_fm_lines) and project.category in FM_SECTIONS:
         new_fm_lines.append(f"section: {FM_SECTIONS[project.category]}")
-    
     body = content[fm_match.end():].strip() if fm_match else content.strip()
     
     # Global cleanup
-    body = re.sub(r'</?details>', '', body)
-    body = re.sub(r'<summary>.*?</summary>', '', body)
-    body = re.sub(r'^---\s*$', '', body, flags=re.MULTILINE)
-    body = re.sub(r'^# .*?\n', '', body, flags=re.MULTILINE)
-    body = re.sub(r'<span class="status-badge.*?>.*?</span>', '', body)
-    body = re.sub(r'\[← Back to .*?\]\(.*?\)', '', body)
-    body = re.sub(r'\| \[Development Philosophy\].*?$', '', body, flags=re.MULTILINE)
-    body = re.sub(r'^\s*\|\s*$', '', body, flags=re.MULTILINE)
+    body = re.sub(r'</?details>', '', body); body = re.sub(r'<summary>.*?</summary>', '', body)
+    body = re.sub(r'^---\s*$', '', body, flags=re.MULTILINE); body = re.sub(r'^# .*?\n', '', body, flags=re.MULTILINE)
+    body = re.sub(r'<span class="status-badge.*?>.*?</span>', '', body); body = re.sub(r'\[← Back to .*?\]\(.*?\)', '', body)
+    body = re.sub(r'\| \[Development Philosophy\].*?$', '', body, flags=re.MULTILINE); body = re.sub(r'^\s*\|\s*$', '', body, flags=re.MULTILINE)
+    body = re.sub(r'\*\*(.*? · .*?)\*\*', '', body); body = re.sub(r'^\s*·\s*\*\*.*?\*\*\s*$', '', body, flags=re.MULTILINE)
     
     sections = re.split(r'^(?=##\s)', body, flags=re.MULTILINE)
-    clean_sections = []
-    existing_headers = []
+    clean_sections_map = {}
     for sec in sections:
         sec = sec.strip()
-        if not sec or sec.startswith("## Contents"): continue
-        if any(sec.startswith(f"## {h}") for h in ["Roadmap", "Current Status", "Quick Facts"] + INTRO_SECTIONS): continue
-        if sec.startswith("- v") or sec.startswith("- Phase") or sec.startswith("- Milestone"): continue
-        if sec.startswith("|") and "**Status**" in sec: continue
-        sec = re.sub(r'^---\s*$', '', sec, flags=re.MULTILINE).strip()
-        sec = clean_text(sec)
-        if sec:
-            clean_sections.append(sec)
-            h_match = re.match(r'##\s+(.*?)$', sec, re.MULTILINE)
-            if h_match: existing_headers.append(h_match.group(1).strip())
-    
-    for sec_name in REMAINING_SECTIONS:
-        if sec_name in project.sections and sec_name not in existing_headers:
-            body_text = clean_text(project.sections[sec_name])
-            clean_sections.append(f"## {sec_name}\n\n{body_text}")
+        if not sec or sec.startswith("## Contents") or any(sec.startswith(f"## {h}") for h in ["Roadmap", "Current Status", "Quick Facts"] + INTRO_SECTIONS): continue
+        if sec.startswith("- v") or sec.startswith("- Phase") or sec.startswith("- Milestone") or (sec.startswith("|") and "**Status**" in sec): continue
+        sec = re.sub(r'^---\s*$', '', sec, flags=re.MULTILINE).strip(); sec = clean_text(sec)
+        h_match = re.match(r'##\s+(.*?)$', sec, re.MULTILINE)
+        if h_match: clean_sections_map[h_match.group(1).strip()] = sec
+
+    for sec_name in PRODUCT_SECTIONS + TECHNICAL_SECTIONS:
+        if sec_name in project.sections and sec_name not in clean_sections_map:
+            clean_sections_map[sec_name] = f"## {sec_name}\n\n{clean_text(project.sections[sec_name])}"
             
-    # Cohesive Concept merge
     concept_parts = []
     for sec_name in INTRO_SECTIONS:
-        if sec_name in project.sections:
-            concept_parts.append(clean_text(project.sections[sec_name]))
-    
+        if sec_name in project.sections: concept_parts.append(clean_text(project.sections[sec_name]))
     concept_body = "\n\n".join(concept_parts) if concept_parts else "Developing..."
     
     back_links = get_back_links(project.category)
     header_block = f"# {project.name}\n\n{generate_status_badge(project)}\n\n{back_links}"
-    
     fm_block = f"---\n" + "\n".join(new_fm_lines) + f"\n---"
     
-    body_content = [f"## Concept\n\n{concept_body}"]
-    body_content.extend(clean_sections)
+    final_sections = [f"## Concept\n\n{concept_body}"]
+    for h in PRODUCT_SECTIONS:
+        if h in clean_sections_map: final_sections.append(clean_sections_map[h])
+    for h in TECHNICAL_SECTIONS:
+        if h in clean_sections_map: final_sections.append(clean_sections_map[h])
+    for h, sec in clean_sections_map.items():
+        if h not in PRODUCT_SECTIONS + TECHNICAL_SECTIONS + INTRO_SECTIONS + ["Concept"]: final_sections.append(sec)
     
     if project.roadmap_summary:
-        body_content.append("## Roadmap\n\n" + "\n".join([f"- {item}" for item in project.roadmap_summary]))
+        final_sections.append("## Roadmap\n\n" + "\n".join([f"- {item}" for item in project.roadmap_summary]))
     
-    final_body = "\n\n---\n\n".join(body_content)
+    final_body = "\n\n---\n\n".join(final_sections)
     toc = generate_toc(final_body)
-    
     return fm_block + "\n\n" + header_block + "\n\n---\n\n" + toc + final_body + "\n\n---\n\n" + back_links + "\n"
 
 
@@ -275,31 +250,20 @@ def generate_detailed_page(project: ProjectInfo) -> str:
     fm = f"---\nlayout: default"
     if project.category in FM_SECTIONS: fm += f"\nsection: {FM_SECTIONS[project.category]}"
     fm += "\n---"
-    
     back_links = get_back_links(project.category)
     header = f"# {project.name}\n\n{generate_status_badge(project)}\n\n{back_links}"
-    
-    # Cohesive Concept merge
     concept_parts = []
     for sec_name in INTRO_SECTIONS:
-        if sec_name in project.sections:
-            concept_parts.append(clean_text(project.sections[sec_name]))
+        if sec_name in project.sections: concept_parts.append(clean_text(project.sections[sec_name]))
     concept_body = "\n\n".join(concept_parts) if concept_parts else "Developing..."
-
-    content_lines = [f"## Concept\n\n{concept_body}"]
-    
-    for sec in REMAINING_SECTIONS:
+    final_sections = [f"## Concept\n\n{concept_body}"]
+    for sec in PRODUCT_SECTIONS + TECHNICAL_SECTIONS:
         body = project.sections.get(sec)
-        if body:
-            body = clean_text(body)
-            content_lines.append(f"## {sec}\n\n{body}")
-    
+        if body: final_sections.append(f"## {sec}\n\n{clean_text(body)}")
     if project.roadmap_summary:
-        content_lines.append("## Roadmap\n\n" + "\n".join([f"- {item}" for item in project.roadmap_summary]))
-    
-    assembled_content = "\n\n---\n\n".join(content_lines)
+        final_sections.append("## Roadmap\n\n" + "\n".join([f"- {item}" for item in project.roadmap_summary]))
+    assembled_content = "\n\n---\n\n".join(final_sections)
     toc = generate_toc(assembled_content)
-    
     return fm + "\n\n" + header + "\n\n---\n\n" + toc + assembled_content + "\n\n---\n\n" + back_links + "\n"
 
 
@@ -317,12 +281,10 @@ def generate_projects_index(projects: list[ProjectInfo]) -> str:
             for k in ["Concept", "The Insight", "Overview", "What This Is", "Core Value"]:
                 if k in p.sections:
                     summary = p.sections[k].strip().split('\n\n')[0]
-                    summary = re.sub(r'!\[.*?\]\(.*?\)', '', summary).strip()
-                    summary = clean_text(summary)
+                    summary = clean_text(re.sub(r'!\[.*?\]\(.*?\)', '', summary))
                     if summary: break
             summary = summary.replace("high-performance", "fast").replace("blazing-fast", "fast").replace("cutting-edge", "modern")
-            sents = re.split(r'(?<=[.!?])\s+', summary)
-            summary = ' '.join(sents[:3])
+            sents = re.split(r'(?<=[.!?])\s+', summary); summary = ' '.join(sents[:3])
             lines.append(f"### [{p.name}](projects/{p.slug})\n")
             lines.append(f"{generate_status_badge(p)}")
             lines.append(f"\n\n{summary}\n\n")
@@ -331,9 +293,7 @@ def generate_projects_index(projects: list[ProjectInfo]) -> str:
 
 
 def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--scan-dirs", nargs="+", default=["~/dev", "~/PycharmProjects", "~/RustroverProjects"])
-    args = parser.parse_args()
+    parser = argparse.ArgumentParser(); parser.add_argument("--scan-dirs", nargs="+", default=["~/dev", "~/PycharmProjects", "~/RustroverProjects"]); args = parser.parse_args()
     projects = []
     for d in args.scan_dirs:
         p = Path(d).expanduser()
@@ -343,33 +303,29 @@ def main():
                 info = parse_project_metadata(pd)
                 if info: projects.append(info)
     projects_dir = Path("projects")
-    scanned_slugs = {p.slug for p in projects}
-    scanned_names = {p.name for p in projects}
+    scanned_slugs = {p.slug for p in projects}; scanned_names = {p.name for p in projects}
     for legacy_md in sorted(projects_dir.glob("*.md")):
         if legacy_md.stem not in scanned_slugs:
-            content = legacy_md.read_text()
-            name_match = re.search(r'^#\s+(.+)$', content, re.MULTILINE)
+            content = legacy_md.read_text(); name_match = re.search(r'^#\s+(.+)$', content, re.MULTILINE)
             if name_match:
                 name = name_match.group(1).strip()
                 if name in scanned_names: continue
                 projects.append(ProjectInfo(name=name, slug=legacy_md.stem, path=legacy_md, category="experimental", status="active", sections=extract_sections(content)))
     for p in projects:
         pp = projects_dir / f"{p.slug}.md"
-        if pp.exists():
-            p.line_count = len(pp.read_text().splitlines())
-        else:
-            p.line_count = 0
+        if pp.exists(): p.line_count = len(pp.read_text().splitlines())
+        else: p.line_count = 0
     for p in projects:
         pp = projects_dir / f"{p.slug}.md"
         if pp.exists():
             content = pp.read_text()
-            metadata_headers = [h for h in REMAINING_SECTIONS + INTRO_SECTIONS if h in p.sections]
+            metadata_headers = [h for h in PRODUCT_SECTIONS + TECHNICAL_SECTIONS + INTRO_SECTIONS if h in p.sections]
             file_headers = re.findall(r'^##\s+(.*?)$', content, re.MULTILINE)
             missing_some = any(h not in file_headers and h != "Concept" for h in metadata_headers)
             if len(content.split('\n')) > 30 or missing_some:
                 pp.write_text(update_existing_file(content, p))
                 continue
-        pp.write_text(generate_detailed_page(p))
+        pp.write_text(generate_detailed_page(project=p))
     Path("projects.md").write_text(generate_projects_index(projects))
     print("Sync complete.")
 

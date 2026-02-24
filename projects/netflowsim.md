@@ -16,16 +16,45 @@ section: network-automation
 ## Contents
 
 - [Concept](#concept)
+- [Use Cases](#use-cases)
+- [Tech Stack](#tech-stack)
+- [Performance Metrics](#performance-metrics)
 - [Why Flow-Based Simulation](#why-flow-based-simulation)
 - [Key Features](#key-features)
 - [Example Usage](#example-usage)
-- [Performance Metrics](#performance-metrics)
-- [Tech Stack](#tech-stack)
-- [Use Cases](#use-cases)
 
 ## Concept
 
 `netflowsim` provides rapid, massive-scale network performance analysis by using analytic queuing models and Monte Carlo simulations instead of packet-level discrete event simulation. It enables network engineers to validate topologies and routing strategies against billions of flow iterations in seconds, identify bottlenecks probabilistically, and test network resilience under failure scenarios.
+
+---
+
+## Use Cases
+
+- **Topology Validation**: Test network designs before deployment
+- **Routing Strategy Comparison**: Evaluate different routing algorithms
+- **Capacity Planning**: Identify congestion points under load
+- **What-If Analysis**: Model link failures and capacity changes
+- **Integration Testing**: Validate packet simulator routing logic
+
+---
+
+## Tech Stack
+
+- **Language**: Rust
+- **Graph Library**: Petgraph
+- **Parallelism**: Rayon (multi-core processing)
+- **Serialization**: Serde (JSON), GeoJSON
+- **Visualization**: Martin (Tileserver), MVT (Mapbox Vector Tiles)
+
+---
+
+## Performance Metrics
+
+- **Throughput**: 1M+ flows/second (baseline)
+- **Scale**: Tested with 10k+ node topologies
+- **Latency**: Sub-second results for typical network sizes
+- **Accuracy**: Validated against M/M/1 and M/D/1 theoretical values
 
 ---
 
@@ -110,35 +139,6 @@ Traced 16384 source-destination pairs
 ECMP paths found: 2841
 Routing matrix written to routing.json
 ```
-
----
-
-## Performance Metrics
-
-- **Throughput**: 1M+ flows/second (baseline)
-- **Scale**: Tested with 10k+ node topologies
-- **Latency**: Sub-second results for typical network sizes
-- **Accuracy**: Validated against M/M/1 and M/D/1 theoretical values
-
----
-
-## Tech Stack
-
-- **Language**: Rust
-- **Graph Library**: Petgraph
-- **Parallelism**: Rayon (multi-core processing)
-- **Serialization**: Serde (JSON), GeoJSON
-- **Visualization**: Martin (Tileserver), MVT (Mapbox Vector Tiles)
-
----
-
-## Use Cases
-
-- **Topology Validation**: Test network designs before deployment
-- **Routing Strategy Comparison**: Evaluate different routing algorithms
-- **Capacity Planning**: Identify congestion points under load
-- **What-If Analysis**: Model link failures and capacity changes
-- **Integration Testing**: Validate packet simulator routing logic
 
 ---
 

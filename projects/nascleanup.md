@@ -24,6 +24,14 @@ A Rust-based CLI tool for deduplicating and organizing large file shares. Optimi
 
 ---
 
+---
+
+---
+
+---
+
+---
+
 ## Architecture
 
 - **Language:** Rust (for performance and safety).

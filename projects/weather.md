@@ -7,7 +7,7 @@ section: data-analytics
 
 <span class="status-badge status-active">Phase 2/4 (75%)</span>
 
-[← Back to Projects](../projects)
+[← Back to Data Analytics](../data-analytics) | [← Back to Projects](../projects)
 
 ---
 
@@ -45,4 +45,4 @@ The primary goal is to bypass the complexity of BOM's FTP delivery and binary fo
 
 ---
 
-[← Back to Projects](../projects)
+[← Back to Data Analytics](../data-analytics) | [← Back to Projects](../projects)

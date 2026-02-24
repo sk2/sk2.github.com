@@ -78,6 +78,7 @@ def extract_sections(content: str) -> Dict[str, str]:
 
 
 def generate_toc(content: str) -> str:
+    """Generate a table of contents from ## headers."""
     headers = re.findall(r'^##\s+([^#\n]+)\s*$', content, re.MULTILINE)
     headers = [h.strip() for h in headers if h.strip() != "Contents"]
     if len(headers) < 4: return ""
@@ -88,6 +89,17 @@ def generate_toc(content: str) -> str:
         slug = re.sub(r'-+', '-', slug)
         links.append(f"- [{h}](#{slug})")
     return "## Contents\n\n" + "\n".join(links) + "\n\n"
+
+
+def get_back_links(category: str) -> str:
+    links = []
+    if category in FM_SECTIONS:
+        slug = FM_SECTIONS[category]
+        title = slug.replace('-', ' ').title()
+        links.append(f"[← Back to {title}](../{slug})")
+    
+    links.append("[← Back to Projects](../projects)")
+    return " | ".join(links)
 
 
 def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
@@ -175,7 +187,7 @@ def update_existing_file(content: str, project: ProjectInfo) -> str:
     
     body = content[fm_match.end():].strip() if fm_match else content.strip()
     
-    # Global cleanup: remove all rules, footers, generated fragments
+    # Global cleanup
     body = re.sub(r'</?details>', '', body)
     body = re.sub(r'<summary>.*?</summary>', '', body)
     body = re.sub(r'^---\s*$', '', body, flags=re.MULTILINE)
@@ -194,8 +206,6 @@ def update_existing_file(content: str, project: ProjectInfo) -> str:
         if any(sec.startswith(f"## {h}") for h in ["Roadmap", "Current Status", "Quick Facts"]): continue
         if sec.startswith("- v") or sec.startswith("- Phase") or sec.startswith("- Milestone"): continue
         if sec.startswith("|") and "**Status**" in sec: continue
-        
-        # Strip internal rules from section
         sec = re.sub(r'^---\s*$', '', sec, flags=re.MULTILINE).strip()
         if sec:
             clean_sections.append(sec)
@@ -206,26 +216,25 @@ def update_existing_file(content: str, project: ProjectInfo) -> str:
         if sec_name in project.sections and sec_name not in existing_headers:
             clean_sections.append(f"## {sec_name}\n\n{project.sections[sec_name]}")
             
-    header_block = f"# {project.name}\n\n{generate_status_badge(project)}\n\n[← Back to Projects](../projects)"
+    back_links = get_back_links(project.category)
+    header_block = f"# {project.name}\n\n{generate_status_badge(project)}\n\n{back_links}"
     gen_sections = [generate_quick_facts(project).strip()]
     if project.roadmap_summary:
         gen_sections.append("## Roadmap\n\n" + "\n".join([f"- {item}" for item in project.roadmap_summary]))
     
     fm_block = f"---\n" + "\n".join(new_fm_lines) + f"\n---"
-    
     body_content = []
     concept_sec = next((s for s in clean_sections if s.startswith("## Concept")), None)
     if concept_sec:
         body_content.append(concept_sec)
         clean_sections.remove(concept_sec)
-    
     body_content.extend(gen_sections)
     body_content.extend(clean_sections)
     
     final_body = "\n\n---\n\n".join(body_content)
     toc = generate_toc(final_body)
     
-    return fm_block + "\n\n" + header_block + "\n\n---\n\n" + toc + final_body + "\n\n---\n\n[← Back to Projects](../projects)\n"
+    return fm_block + "\n\n" + header_block + "\n\n---\n\n" + toc + final_body + "\n\n---\n\n" + back_links + "\n"
 
 
 def generate_detailed_page(project: ProjectInfo) -> str:
@@ -233,7 +242,8 @@ def generate_detailed_page(project: ProjectInfo) -> str:
     if project.category in FM_SECTIONS: fm += f"\nsection: {FM_SECTIONS[project.category]}"
     fm += "\n---"
     
-    header = f"# {project.name}\n\n{generate_status_badge(project)}\n\n[← Back to Projects](../projects)"
+    back_links = get_back_links(project.category)
+    header = f"# {project.name}\n\n{generate_status_badge(project)}\n\n{back_links}"
     
     content_lines = []
     found_first = False
@@ -251,7 +261,7 @@ def generate_detailed_page(project: ProjectInfo) -> str:
     assembled_content = "\n\n---\n\n".join(content_lines)
     toc = generate_toc(assembled_content)
     
-    return fm + "\n\n" + header + "\n\n---\n\n" + toc + assembled_content + "\n\n---\n\n[← Back to Projects](../projects)\n"
+    return fm + "\n\n" + header + "\n\n---\n\n" + toc + assembled_content + "\n\n---\n\n" + back_links + "\n"
 
 
 def generate_projects_index(projects: list[ProjectInfo]) -> str:

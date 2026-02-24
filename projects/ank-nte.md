@@ -7,7 +7,7 @@ section: network-automation
 
 <span class="status-badge status-active">Phase 06/15 (96%)</span>
 
-[← Back to Projects](../projects)
+[← Back to Network Automation](../network-automation) | [← Back to Projects](../projects)
 
 ---
 
@@ -45,4 +45,4 @@ The engine must be correct and observable — mutations never silently corrupt s
 
 ---
 
-[← Back to Projects](../projects)
+[← Back to Network Automation](../network-automation) | [← Back to Projects](../projects)

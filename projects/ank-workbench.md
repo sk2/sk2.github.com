@@ -7,7 +7,7 @@ section: network-automation
 
 <span class="status-badge status-active">Phase 42/47 (100%)</span>
 
-[← Back to Projects](../projects)
+[← Back to Network Automation](../network-automation) | [← Back to Projects](../projects)
 
 ---
 
@@ -70,4 +70,4 @@ Network engineers can design, validate, and visualize network changes in one com
 
 ---
 
-[← Back to Projects](../projects)
+[← Back to Network Automation](../network-automation) | [← Back to Projects](../projects)

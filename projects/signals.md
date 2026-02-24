@@ -7,7 +7,7 @@ section: signal-processing
 
 <span class="status-badge status-active">Phase 7/7</span>
 
-[← Back to Projects](../projects)
+[← Back to Signal Processing](../signal-processing) | [← Back to Projects](../projects)
 
 ---
 
@@ -229,4 +229,4 @@ Transform raw radio spectrum data into an actionable "Signal Census" through aut
 
 ---
 
-[← Back to Projects](../projects)
+[← Back to Signal Processing](../signal-processing) | [← Back to Projects](../projects)

@@ -7,7 +7,7 @@ section: projects
 
 <span class="status-badge status-active">** Phase 7: Interactive Inbox Triage TUI — COMPLETE</span>
 
-[← Back to Projects](../projects)
+[← Back to Data Analytics](../data-analytics) | [← Back to Projects](../projects)
 
 ---
 
@@ -232,4 +232,4 @@ inbox = use_tool("omnifocus_db", action="inbox")
 
 ---
 
-[← Back to Projects](../projects)
+[← Back to Data Analytics](../data-analytics) | [← Back to Projects](../projects)

@@ -7,7 +7,7 @@ section: agentic-systems
 
 <span class="status-badge status-active">Phase 4/5 (71%)</span>
 
-[← Back to Projects](../projects)
+[← Back to Agentic Systems](../agentic-systems) | [← Back to Projects](../projects)
 
 ---
 
@@ -93,4 +93,4 @@ A native SwiftUI training application for iPad and Apple TV that bridges profess
 
 ---
 
-[← Back to Projects](../projects)
+[← Back to Agentic Systems](../agentic-systems) | [← Back to Projects](../projects)

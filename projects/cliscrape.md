@@ -7,7 +7,7 @@ section: network-automation
 
 <span class="status-badge status-active">Phase 7/11 (50%)</span>
 
-[← Back to Projects](../projects)
+[← Back to Data Analytics](../data-analytics) | [← Back to Projects](../projects)
 
 ---
 
@@ -136,4 +136,4 @@ The one thing that must work perfectly: **Extremely fast, reliable parsing of se
 
 ---
 
-[← Back to Projects](../projects)
+[← Back to Data Analytics](../data-analytics) | [← Back to Projects](../projects)

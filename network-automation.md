@@ -4,17 +4,17 @@ layout: default
 
 # Network Automation
 
-A modular toolchain for the modeling, simulation, and analysis of large-scale data networks. This ecosystem bridges the gap between high-level architectural intent and technical execution through formal graph transformations and deterministic execution.
+A modular toolchain for the modeling, simulation, and analysis of large-scale data networks. This ecosystem bridges the gap between high-level architectural design and technical execution through formal graph transformations and deterministic execution.
 
 The tools are designed to work together as a pipeline, allowing engineers to move from initial topology generation to protocol-level verification and performance analysis within a unified workflow.
 
-A typical workflow is: ingest topology + intent, compile candidate configurations, simulate convergence and failure scenarios, then visualize and audit outputs before deployment.
+A typical workflow is: ingest topology + high-level requirements, compile candidate configurations, simulate convergence and failure scenarios, then visualize and audit outputs before deployment.
 
 In practice the feedback loop is fast enough to feel interactive: many simulation runs complete in milliseconds for typical design iterations.
 
-If you are new to the ecosystem: start with the **Network Modeling Engine**, then use the **Network Simulator** for verification and **Network Visualization Engine** for review.
+If you are new to the ecosystem: start with **Configuration Generation (AutoNetkit)**, then use the **Network Simulator** for verification and the **Network Visualization Engine** for review.
 
-**Inputs:** topology and high-level intent (plus brownfield state when available).
+**Inputs:** topology and high-level requirements (plus brownfield state when available).
 
 **Outputs:** reviewable configs/diffs, simulation results, diagrams, and audit artifacts.
 
@@ -60,8 +60,8 @@ We build specialized engines that handle specific stages of the network lifecycl
 ## Primary Systems
 
 - **[Network Simulator:](/projects/netsim)** Run deterministic protocol convergence and failover assertions on candidate designs before deployment.
-- **[Brownfield Ingestion & Analysis:](/projects/configparsing)** Extract structured intent and topology relationships from legacy CLI and documentation for audits and migration workflows.
-- **[Network Modeling Engine:](/projects/ank-pydantic)** Define intent and topology once, then query and transform it into protocol layers for the rest of the toolchain.
+ - **[Brownfield Ingestion & Analysis:](/projects/configparsing)** Extract structured topology and relationships from legacy CLI and documentation for audits and migration workflows.
+- **[Configuration Generation (AutoNetkit):](/projects/autonetkit)** Generate device configurations from a high-level network design using a compiler-style transformation pipeline.
 - **[Network Visualization Engine:](/projects/netvis)** Render large, multi-layer networks into diagrams for design review, topology validation, and analysis.
 - **[Automation Workbench:](/projects/ank-workbench)** Use a single interface to design, simulate, visualize, and audit across the ecosystem.
 
@@ -74,11 +74,11 @@ We build specialized engines that handle specific stages of the network lifecycl
 
 ## Legacy
 
-- **[Configuration Generation (AutoNetkit):](/projects/autonetkit)** The original compiler-based configuration generator from the thesis-era work. It established the transformation pipeline and proved multi-vendor config generation at scale, but it is no longer the primary in-progress modeling layer. It remains useful as reference architecture and historical context.
+- **[Network Modeling Engine (ank-pydantic):](/projects/ank-pydantic)** A newer type-safe modeling layer used for programmatic topology workflows. Still evolving; not the primary entry point for the public toolchain description.
 
 ## Foundations
 
-This ecosystem borrows from earlier research on automated network configuration, including the "Whiteboard to Build" model. The goal here is practical: take a high-level intent and produce verifiable, reviewable outputs.
+This ecosystem borrows from earlier research on automated network configuration, including the "Whiteboard to Build" model. The goal here is practical: take a high-level design and produce verifiable, reviewable outputs.
 
 - **[Network Modeling Foundations:](/projects/autonetkit-foundation)** The original research and implementation details that established the core abstractions for automated configuration.
 

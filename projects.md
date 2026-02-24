@@ -186,7 +186,7 @@ A headless, autonomous astrophotography controller designed for low-power Linux 
 
 ### [Satellites](projects/satellites)
 
-<span class="status-badge status-active">Phase 5/6 (80%)</span>
+<span class="status-badge status-active">Phase 6/6 (52%)</span>
 
 
 A terminal-based satellite tracker that displays real-time satellite positions on a world map, predicts passes over the user's location, and shows transmission/frequency data. Built with Rust, ratatui, and the SGP4 orbital propagation algorithm. Aimed at amateur radio operators, space enthusiasts, and anyone who wants to know what's overhead.
@@ -264,7 +264,7 @@ A data engineering pipeline to fetch, process, and serve high-resolution weather
 
 ### [matrix-profile-rs](projects/matrix-time-series)
 
-<span class="status-badge status-active">Phase 9/11 (97%)</span>
+<span class="status-badge status-active">Phase 9/11 (82%)</span>
 
 
 Time series analysis typically requires either slow Python libraries or complex manual implementation. **matrix-profile-rs** provides Matrix Profile algorithms (STOMP, SCRIMP++, SCAMP) in native Rust with ergonomic APIs for motif discovery and anomaly detection, achieving C-level performance with Python-level usability through Polars integration.

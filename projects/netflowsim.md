@@ -55,7 +55,7 @@ The engine uses M/M/1 and M/D/1 queuing models implemented in a highly paralleli
 
 ## Current Status
 
-2026-02-23 — Completed 09-07 simulation throughput optimization
+2026-02-24 — Completed 10-02 time-series integration into simulation loops
 
 ---
 

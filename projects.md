@@ -10,28 +10,12 @@ Focused on network engineering, autonomous systems, and signal processing.
 
 ## 🌐 Network Engineering
 
-### [Network Simulator](projects/netsim)
-
-<span class="status-badge status-active">Recently Updated</span>
-
-
-A Rust-based network simulator that models packet-level behavior for routing protocols. It provides a middle ground between pure algorithmic analysis (like C-BGP) and full emulation (like Containerlab) — larger scale and smaller footprint than emulation, higher fidelity than algorithmic simulation. Used for smoke testing and design validation of network configurations.
-
-
-### [Network Modeling Engine](projects/ank-pydantic)
-
-<span class="status-badge status-active">Recently Updated</span>
-
-
-A modern framework for defining and querying network intent, acting as the primary topology engine for the ANK ecosystem. Built with type-safe Pydantic models and a fast Rust core (NTE), it provides the canonical network model used by the generator, simulator, and visualization tools.
-
-
 ### [Configuration Generation (AutoNetkit)](projects/autonetkit)
 
 <span class="status-badge status-active">Active</span>
 
 
-Legacy configuration generation engine from the thesis-era work. Established the transformation pipeline and proved multi-vendor config generation at scale.
+A compiler-based framework for automated network provisioning. AutoNetkit transforms high-level network designs into validated device configurations across heterogeneous hardware and protocol environments.
 
 
 ### [Brownfield Ingestion & Analysis](projects/configparsing)
@@ -80,6 +64,22 @@ A Rust-based topology generation engine that consolidates complex network graph 
 
 
 The original research that established the principles of automated network configuration. This work introduced the **Whiteboard → Plan → Build** transformation model, which allows engineers to work with high-level design abstractions while the system handles the technical implementation details.
+
+
+### [Network Simulator](projects/netsim)
+
+<span class="status-badge status-active">Recently Updated</span>
+
+
+A Rust-based network simulator that models packet-level behavior for routing protocols. It provides a middle ground between pure algorithmic analysis (like C-BGP) and full emulation (like Containerlab) — larger scale and smaller footprint than emulation, higher fidelity than algorithmic simulation. Used for smoke testing and design validation of network configurations.
+
+
+### [Configuration Engine](projects/ank-pydantic)
+
+<span class="status-badge status-active">Recently Updated</span>
+
+
+A modern configuration engine for defining a network model and compiling it into a consistent, reviewable plan for downstream tooling. Built with type-safe Pydantic models and a fast Rust core (NTE), it provides a predictable, programmable way to manage large-scale topology data and derived configuration state.
 
 
 ### [Orchestrator (Device Interaction Runner)](projects/orchestrator)
@@ -322,7 +322,7 @@ A fast, keyboard-driven Rust text UI (TUI) task manager inspired by OmniFocus, b
 A Python script that automates post-imaging-session file organization for astrophotography. It batch-imports FITS files from ASIAIR backup locations, organizes them by target and observation night, copies matching calibration frames, and prepares the directory structure for PixInsight's WBPP (Weighted Batch Preprocessing) workflow.
 
 
-### [soundarray](projects/soundarray)
+### [Sound Array](projects/soundarray)
 
 <span class="status-badge status-active">Active</span>
 

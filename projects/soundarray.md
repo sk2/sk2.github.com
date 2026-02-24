@@ -3,7 +3,7 @@ layout: default
 section: projects
 ---
 
-# soundarray
+# Sound Array
 
 <span class="status-badge status-active">Active</span>
 

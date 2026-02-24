@@ -63,13 +63,14 @@ ECOSYSTEM_MAP = {
 }
 
 PROJECT_ALIASES = {
-    "ank_pydantic": "Network Modeling Engine",
-    "ank-pydantic": "Network Modeling Engine",
+    "ank_pydantic": "Configuration Engine",
+    "ank-pydantic": "Configuration Engine",
     "cliscrape": "CLI Parser",
     "rtltcp": "Radio Streaming Server",
     "auroradata": "Aurora Advisor",
     "netflowsim": "Performance Simulator",
     "netsim": "Network Simulator",
+    "network-simulator": "Network Simulator",
     "topogen": "Topology Generator",
     "ank-nte": "Topology Engine Core",
     "ank-workbench": "Automation Workbench",
@@ -79,15 +80,29 @@ PROJECT_ALIASES = {
     "passive": "Signal Reflection Analysis",
     "signals": "Spectrum Analysis",
     "configparsing": "Brownfield Ingestion & Analysis",
+    "soundarray": "Sound Array",
+}
+
+# Canonical URL mapping: consolidate alternate slugs into a single published page.
+# This ensures the rich simulator page remains the primary destination, even if other
+# sources refer to the pretty slug.
+CANONICAL_SLUG = {
+    "network-simulator": "netsim",
 }
 
 # GOLDEN MASTER CONTENT: Used to ensure high-value technical detail is never lost.
 PROJECT_CONTENT_OVERRIDES = {
+    "network-simulator": {
+        # This key should not normally be used because network-simulator is canonicalized to netsim.
+        # Kept defensively in case a future source bypasses canonicalization.
+        "Concept": "This page is kept for backward-compatible linking. The canonical, detailed documentation lives on the main Network Simulator page.",
+    },
     "autonetkit": {
-        "Concept": "A compiler-based framework for automated network provisioning. AutoNetkit transforms high-level architectural intent into validated device configurations across heterogeneous hardware and protocol environments.\n\nTraditional network configuration is often manual and vendor-specific. AutoNetkit introduces a declarative approach where engineers define the architectural intent—the 'Whiteboard' model—and the engine automatically handles the complex transformations required to generate the underlying protocol parameters and CLI commands.",
+        "Concept": "A compiler-based framework for automated network provisioning. AutoNetkit transforms high-level network designs into validated device configurations across heterogeneous hardware and protocol environments.\n\nTraditional network configuration is often manual and vendor-specific. AutoNetkit introduces a declarative approach where engineers define the network design, and the engine handles the transformations required to generate the underlying protocol parameters and CLI commands.\n\nThe current work is focused on a modern compiler pipeline: a stable intermediate representation, explicit transformation passes, and predictable code generation for multiple targets.",
+        "Roadmap Direction": "- **Intermediate Representations (IR):** A canonical, network-wide model that separates design requirements from device-specific implementation details.\n- **Compiler Passes:** Validation and rewrite passes that make changes explainable (and reversible) rather than implicit side effects.\n- **Deterministic Output:** Stable ordering and repeatable generation to support diffs, review, and CI gating.\n- **Multi-Target Backends:** Separate backends for vendor CLIs and structured formats (e.g., JSON/YAML) to support tooling and audit workflows.",
         "Features": "- **Automated IP Addressing**: Intelligent allocation of loopbacks and link subnets across multiple protocol layers.\n- **Protocol Orchestration**: Automatic generation of consistent OSPF areas, IS-IS levels, and BGP peering relationships (iBGP/eBGP).\n- **Multi-Vendor Support**: Compiles intent into native configuration formats for Cisco (IOS, XR, NX-OS), Juniper (JunOS), and Arista (EOS).\n- **Visual Feedback**: Generates real-time topological diagrams to verify the physical and logical structure of the design.",
         "Architecture": "AutoNetkit employs a multi-stage transformation pipeline:\n1. **Specification Abstraction**: Captures the high-level design intent.\n2. **Intermediate Representation**: A network-wide graph model that maintains cross-vendor consistency.\n3. **Device Specialization**: Transforms the abstract model into device-specific protocol state.\n4. **Template Assembly**: Generates the final CLI commands using verified vendor templates.",
-        "Impact": "AutoNetkit was integrated into Cisco's **Virtual Internet Routing Lab (VIRL)** platform as the primary configuration engine. It has been used to successfully generate valid configurations for core-network topologies with over 1,000 devices in seconds, demonstrating significant scalability and practical utility in production-grade engineering environments.",
+        "Impact": "Earlier iterations of AutoNetkit were integrated into industry tooling for automated lab provisioning. That integration reflects the lineage of the approach, not the current in-progress implementation.\n\nTo avoid confusion with the current configuration engine, this page focuses on the ideas and the compiler-style approach rather than tying claims to any specific modern implementation.",
     },
     "configparsing": {
         "Concept": "A specialized framework for **Brownfield Ingestion and Analysis**. It extracts high-level architectural intent and topology relationships from legacy network state—including vendor-specific CLI configurations and unstructured PDF documentation—normalizing them into a vendor-neutral model.\n\nThis system bridges the gap between existing deployments and the modern, declarative ANK toolchain. By leveraging LLM-powered RAG pipelines, it identifies complex protocol relationships and link roles that are often hidden in thousands of lines of manual configuration.",
@@ -95,14 +110,13 @@ PROJECT_CONTENT_OVERRIDES = {
         "Technical Depth": "The system acts as the 'External Discovery' input for the Workbench, bridging the gap between existing brownfield deployments and the modern, declarative design toolchain.",
     },
     "ank-pydantic": {
-        "Concept": "A modern framework for defining and querying network intent, acting as the primary **topology engine** for the ANK ecosystem. Built with type-safe Pydantic models and a fast Rust core (NTE), it provides a consistent, programmable way to manage large-scale topology data. Features a two-stage transformation model (Whiteboard → Plan → Protocol Layers) and a composable lazy query API.",
+        "Concept": "A modern configuration engine for defining a network model and compiling it into a consistent, reviewable plan for downstream tooling. Built with type-safe Pydantic models and a fast Rust core (NTE), it provides a predictable, programmable way to manage large-scale topology data and derived configuration state.\n\nA Python library for modeling and querying network topologies, backed by a high-performance Rust core (`ank_nte`). Uses an explicit intermediate representation and transformation passes (design -> plan -> protocol layers), with type-safe models for nodes/edges/layers and a composable query API.",
     },
-    "network-simulator": {
-        "Screenshots": "![OSPF Convergence Analysis](/images/ospf.png)\n*Protocol Verification — Visualizing OSPF adjacency states and convergence patterns across a 50-node simulated topology.*",
-    },
+    # Prefer the rich long-form simulator page as the canonical one.
+    # The pretty slug (network-simulator) is retained, but its content is sourced from netsim.
     "autonetkit-foundation": {
         "Concept": "The original research that established the principles of automated network configuration. This work introduced the **Whiteboard → Plan → Build** transformation model, which allows engineers to work with high-level design abstractions while the system handles the technical implementation details.",
-        "Research Contribution": "- **Abstractions**: Identified the fundamental primitives needed to represent network intent independently of vendor syntax.\n- **Transformations**: Developed graph-based algorithms to automatically calculate IP addresses, OSPF areas, and BGP peerings.\n- **Scalability**: Verified that automated generation can handle core-network topologies with hundreds of devices in seconds.\n- **Industry Impact**: Integrated into Cisco's Virtual Internet Routing Lab (VIRL) for automated lab provisioning.",
+        "Research Contribution": "- **Abstractions**: Identified the fundamental primitives needed to represent network intent independently of vendor syntax.\n- **Transformations**: Developed graph-based algorithms to automatically calculate IP addresses, OSPF areas, and BGP peerings.\n- **Scalability**: Verified that automated generation can handle core-network topologies with hundreds of devices in seconds.\n- **Industry Impact (Legacy)**: Earlier iterations were integrated into industry tooling for automated lab provisioning.",
     },
     "topogen": {
         "Concept": "A Rust-based topology generation engine that consolidates complex network graph algorithms into a unified, high-performance library. It enables the creation of realistic, validated network structures ranging from small lab setups to massive data center and backbone environments.",
@@ -300,7 +314,15 @@ def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
     }
     slug = slug_mappings.get(slug, slug)
 
-    if slug in PROJECT_ALIASES:
+    # Canonical slug mapping: consolidate alternate slugs to a single published page.
+    # Keep old slugs in ECOSYSTEM_MAP for categorization, but generate content under the canonical slug.
+    canonical_from = slug
+    slug = CANONICAL_SLUG.get(slug, slug)
+
+    # Apply display-name alias based on original slug first, then canonical slug.
+    if canonical_from in PROJECT_ALIASES:
+        project_name = PROJECT_ALIASES[canonical_from]
+    elif slug in PROJECT_ALIASES:
         project_name = PROJECT_ALIASES[slug]
 
     sections = extract_sections(content)
@@ -488,9 +510,7 @@ def generate_projects_index(projects: list[ProjectInfo]) -> str:
         "",
     ]
     # Exclude internal/planning artifacts and pages we don't want listed publicly.
-    hidden_slugs = {
-        "ank-pydantic",
-    }
+    hidden_slugs = set()
 
     visible_projects = [p for p in projects if p.slug not in hidden_slugs]
 
@@ -572,11 +592,14 @@ def main():
     scanned_slugs = {p.slug for p in projects}
     for slug in PROJECT_CONTENT_OVERRIDES:
         if slug not in scanned_slugs:
+            canonical = CANONICAL_SLUG.get(slug, slug)
+            if canonical in scanned_slugs:
+                continue
             name = PROJECT_ALIASES.get(slug, slug.title())
             projects.append(
                 ProjectInfo(
                     name=name,
-                    slug=slug,
+                    slug=canonical,
                     path=projects_dir / f"{slug}.md",
                     category="network",
                     status="active",

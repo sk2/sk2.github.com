@@ -24,7 +24,7 @@ The original research that established the principles of automated network confi
 - **Abstractions**: Identified the fundamental primitives needed to represent network intent independently of vendor syntax.
 - **Transformations**: Developed graph-based algorithms to automatically calculate IP addresses, OSPF areas, and BGP peerings.
 - **Scalability**: Verified that automated generation can handle core-network topologies with hundreds of devices in seconds.
-- **Industry Impact (Legacy)**: Earlier iterations were integrated into Cisco's Virtual Internet Routing Lab (VIRL) for automated lab provisioning.
+- **Industry Impact (Legacy)**: Earlier iterations were integrated into industry tooling for automated lab provisioning.
 
 ---
 

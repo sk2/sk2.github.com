@@ -48,7 +48,7 @@ The engine is implemented in Rust for maximum performance, allowing for the sub-
 
 ## Current Status
 
-2026-02-22 — Completed 30-04 (CLI integration with collect-all, error export, threshold config)
+2026-02-24 — Completed 31-03 (node capacity validator + tests)
 
 ---
 

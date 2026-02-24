@@ -30,15 +30,6 @@ The current work is focused on a modern compiler pipeline: a stable intermediate
 
 ---
 
-## Roadmap Direction
-
-- **Intermediate Representations (IR):** A canonical, network-wide model that separates design intent from device-specific implementation details.
-- **Compiler Passes:** Validation and rewrite passes that make changes explainable (and reversible) rather than implicit side effects.
-- **Deterministic Output:** Stable ordering and repeatable generation to support diffs, review, and CI gating.
-- **Multi-Target Backends:** Separate backends for vendor CLIs and structured formats (e.g., JSON/YAML) to support tooling and audit workflows.
-
----
-
 ## Features
 
 - **Automated IP Addressing**: Intelligent allocation of loopbacks and link subnets across multiple protocol layers.
@@ -60,7 +51,9 @@ AutoNetkit employs a multi-stage transformation pipeline:
 
 ## Impact
 
-Earlier iterations of AutoNetkit were integrated into Cisco's Virtual Internet Routing Lab (VIRL) as a configuration engine for lab provisioning. That industry integration reflects the lineage of the approach, not the current in-progress implementation.
+Earlier iterations of AutoNetkit were integrated into industry tooling for automated lab provisioning. That integration reflects the lineage of the approach, not the current in-progress implementation.
+
+To avoid confusion with the current configuration engine, this page focuses on the ideas and the compiler-style approach rather than tying claims to any specific modern implementation.
 
 ---
 

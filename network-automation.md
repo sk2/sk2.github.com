@@ -6,34 +6,34 @@ layout: default
 
 A modular toolchain for the modeling, simulation, and analysis of large-scale data networks. This ecosystem bridges the gap between high-level architectural intent and technical execution through formal graph transformations and deterministic execution.
 
-The tools are designed to work together as a composable pipeline, allowing engineers to move from initial topology generation to protocol-level verification and performance analysis within a unified workflow.
+The tools are designed to work together as a pipeline, allowing engineers to move from initial topology generation to protocol-level verification and performance analysis within a unified workflow.
 
 ## The Toolchain
 
-We build specialized engines that handle specific stages of the network lifecycle, from discovery and design to final validation.
+We build specialized engines that handle specific stages of the network lifecycle—from **ingesting brownfield state** to final protocol-level validation.
 
 ```
-      ┌───────────────┐               ┌───────────────┐
-      │ Source of Truth │               │   External    │
-      │ (NetBox/YAML)   │               │   Discovery   │
-      └───────┬───────┘               └───────┬───────┘
-              │                               │
-              └───────────────┬───────────────┘
+      ┌────────────────────────┐               ┌────────────────────┐
+      │ Source of Truth Products │             │ Brownfield / Legacy │
+      │ (NetBox / YAML)        │               │ CLI / PDF Ingest    │
+      └────────┬───────────────┘               └───────┬────────────┘
+              │                                       │
+              └───────────────┬───────────────────────┘
                               │
 ┌─────────────────────────────▼───────────────────────────┐
 │              Network Automation Workbench               │
-│             Design · Simulate · Visualize               │
+│          Design · Verify · Audit · Visualize            │
 └───────────────────────────┬─────────────────────────────┘
                             │
             ┌───────────────┴───────────────┐
     ┌───────▼───────┐               ┌───────▼───────┐
-    │    Design     │               │   Analysis    │
+    │    Design     │               │    Verify     │
     │  Modeling &   │               │ Simulation &  │
     │ Configuration │               │ Visualization │
     └───────┬───────┘               └───────┬───────┘
             │                               │
     ┌───────▼───────┐               ┌───────▼───────┐
-    │  Modeling Lib │               │   Simulator   │
+    │ Modeling Eng  │               │   Simulator   │
     │   Generator   │               │ Visualization │
     │   CLI Parser  │               │ Traffic Sim   │
     └───────┬───────┘               └───────┬───────┘
@@ -45,15 +45,15 @@ We build specialized engines that handle specific stages of the network lifecycl
                     └───────────────┘
 ```
 
-**Data flows from design to analysis.** The Workbench provides a single interface for the entire process—either starting from a clean slate using generators, or ingesting existing state from a Source of Truth or through automated CLI parsing.
+**Data flows from design to validation.** The Workbench provides a single interface for the entire process—either starting from a clean slate using generators, or **modernizing existing state** through automated CLI parsing and configuration analysis.
 
 ## Primary Systems
 
-- **[Configuration Generation (AutoNetkit):](/projects/autonetkit)** A framework for automated network provisioning. It uses a compiler-based approach to transform high-level design specifications into validated device configurations, supporting a wide range of network protocols and hardware vendors.
-- **[Network Modeling Library:](/projects/ank-pydantic)** A modern framework for defining and querying network intent. Built with type-safe Pydantic models and a fast Rust core, it provides a consistent, programmable way to manage large-scale topology data.
-- **[Network Simulator:](/projects/network-simulator)** A deterministic engine for validating network designs. It simulates the packet-level behavior of routing protocols like OSPF, IS-IS, and BGP, enabling engineers to verify convergence and failover scenarios before deployment.
-- **[Network Visualization Engine:](/projects/netvis)** A layout engine that transforms dense, multi-layer topologies into structured diagrams. It employs advanced algorithms to reduce visual complexity, making the architecture of large systems intuitive and actionable.
-- **[Automation Workbench:](/projects/ank-workbench)** A unified web interface that integrates the individual tools into a cohesive engineering environment. It allows for interactive topology editing, simulation control, and real-time protocol observability.
+- **[Network Simulator:](/projects/network-simulator)** A deterministic engine for **pre-deployment verification**. It simulates the packet-level behavior of routing protocols like OSPF, IS-IS, and BGP, enabling engineers to verify convergence and failover scenarios before deployment.
+- **[Brownfield Ingestion & Analysis:](/projects/configparsing)** A framework for extracting structured intent from legacy vendor-specific CLI data. It bridges the gap between existing deployments and modern automation, enabling automated audits and migration workflows.
+- **[Configuration Generation (AutoNetkit):](/projects/autonetkit)** A framework for automated network provisioning. It transforms high-level design specifications into validated device configurations through a compiler-based transformation pipeline.
+- **[Network Visualization Engine:](/projects/netvis)** A layout engine that transforms dense, multi-layer topologies into clear, structured diagrams. It employs advanced algorithms to reduce visual complexity, making the architecture of large systems intuitive and actionable.
+- **[Automation Workbench:](/projects/ank-workbench)** A unified web interface that integrates the individual tools into a cohesive engineering environment for interactive topology editing and real-time protocol observability.
 
 ## Specialized Tools
 

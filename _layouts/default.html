@@ -138,6 +138,43 @@
       .site-content img {
         cursor: zoom-in;
       }
+
+      /* Expandable code blocks */
+      .code-wrapper {
+        position: relative;
+        margin-bottom: 1.5rem;
+        border-radius: 6px;
+        overflow: hidden;
+      }
+      .code-content {
+        max-height: 300px;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+      }
+      .code-content.expanded {
+        max-height: none;
+      }
+      .code-expand-btn {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        padding: 10px;
+        background: linear-gradient(transparent, rgba(30, 30, 30, 0.9) 40%);
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        font-size: 0.85rem;
+        font-weight: 500;
+        text-align: center;
+        display: none;
+        z-index: 10;
+      }
+      .code-content.expanded + .code-expand-btn {
+        position: static;
+        background: rgba(30, 30, 30, 0.9);
+      }
     </style>
 
     <script>
@@ -151,6 +188,42 @@
             hljs.highlightElement(block);
           });
         }
+
+        // Expandable code blocks
+        document.querySelectorAll('pre').forEach(function(pre) {
+          const code = pre.querySelector('code');
+          if (!code) return;
+          
+          const lines = code.textContent.trim().split('\n').length;
+          if (lines > 15) {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'code-wrapper';
+            
+            const content = document.createElement('div');
+            content.className = 'code-content';
+            
+            const btn = document.createElement('button');
+            btn.className = 'code-expand-btn';
+            btn.textContent = 'Show more (' + (lines - 10) + ' lines)';
+            btn.style.display = 'block';
+            
+            pre.parentNode.insertBefore(wrapper, pre);
+            content.appendChild(pre);
+            wrapper.appendChild(content);
+            wrapper.appendChild(btn);
+            
+            btn.addEventListener('click', function() {
+              if (content.classList.contains('expanded')) {
+                content.classList.remove('expanded');
+                btn.textContent = 'Show more (' + (lines - 10) + ' lines)';
+                wrapper.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+              } else {
+                content.classList.add('expanded');
+                btn.textContent = 'Show less';
+              }
+            });
+          }
+        });
 
         // Lightbox
         var lightbox = document.getElementById('lightbox');

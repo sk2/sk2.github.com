@@ -100,8 +100,8 @@ devices:
 
 
 
-<details>
-<summary>Show Code (49 lines)</summary>
+
+
 
 ```yaml
     interfaces:
@@ -155,7 +155,7 @@ script:
     command: ping 10.0.3.10
 ```
 
-</details>
+
 
 
 
@@ -663,8 +663,8 @@ devices:
 
 
 
-<details>
-<summary>Show Code (40 lines)</summary>
+
+
 
 ```yaml
       net: "49.0001.0000.0000.0002.00"
@@ -709,7 +709,7 @@ script:
     command: show ip route
 ```
 
-</details>
+
 
 
 

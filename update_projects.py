@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
 Update website projects page and individual project pages from project metadata.
-Enforces a clean, understated, and powerful style with navigation and collapsible code.
+Enforces a clean, understated, and powerful style with navigation.
+Note: Long code blocks are handled automatically by the site's layout (CSS/JS).
 """
 
 import argparse
@@ -65,29 +66,8 @@ def extract_sections(content: str) -> Dict[str, str]:
     return sections
 
 
-def wrap_long_code_blocks(content: str, threshold: int = 30) -> str:
-    """Wrap code blocks longer than threshold lines in a details tag."""
-    def replacer(match):
-        code = match.group(0).strip()
-        lines = code.split("\n")
-        # Subtract 2 for the backtick lines
-        content_lines = len(lines) - 2
-        if content_lines > threshold:
-            summary = "Show Code"
-            # Try to find a comment or first line that might serve as a better summary
-            first_line = lines[1].strip() if len(lines) > 1 else ""
-            if first_line.startswith("#") or first_line.startswith("//") or first_line.startswith("$"):
-                summary = f"Code: {first_line.lstrip('#/$ ').strip()}"
-            
-            return f"<details>\n<summary>{summary} ({content_lines} lines)</summary>\n\n{code}\n\n</details>"
-        return code
-
-    return re.sub(r'```.*?```', replacer, content, flags=re.DOTALL)
-
-
 def generate_toc(content: str) -> str:
     """Generate a table of contents from ## headers."""
-    # Find all ## headers that aren't "Contents"
     headers = re.findall(r'^##\s+([^#\n]+)\s*$', content, re.MULTILINE)
     headers = [h.strip() for h in headers if h.strip() != "Contents"]
     
@@ -96,7 +76,6 @@ def generate_toc(content: str) -> str:
     
     links = []
     for h in headers:
-        # Simple slugification
         slug = h.lower().replace(" ", "-")
         slug = re.sub(r'[^a-z0-9-]', '', slug)
         slug = re.sub(r'-+', '-', slug)
@@ -207,7 +186,7 @@ def update_existing_file(content: str, project: ProjectInfo) -> str:
         
     body = content[fm_match.end():].strip() if fm_match else content.strip()
     
-    # Global cleanup of generated elements
+    # Aggressively remove all generated elements
     body = re.sub(r'</?details>', '', body)
     body = re.sub(r'<summary>.*?</summary>', '', body)
     body = re.sub(r'\[← Back to .*?\]\(.*?\)', '', body)
@@ -241,7 +220,6 @@ def update_existing_file(content: str, project: ProjectInfo) -> str:
     body_content.extend(clean_sections)
     
     assembled_body = "\n\n---\n\n".join(body_content)
-    assembled_body = wrap_long_code_blocks(assembled_body)
     
     toc = generate_toc(assembled_body)
     if toc:
@@ -273,7 +251,6 @@ def generate_detailed_page(project: ProjectInfo) -> str:
         content_lines.append("")
     
     assembled_content = "\n".join(content_lines)
-    assembled_content = wrap_long_code_blocks(assembled_content)
     
     toc = generate_toc(assembled_content)
     if toc:

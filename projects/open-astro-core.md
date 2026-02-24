@@ -6,6 +6,8 @@ layout: default
 
 <span class="status-badge status-active">Active</span>
 
+
+
 [← Back to Projects](../projects)
 
 ---
@@ -13,7 +15,6 @@ layout: default
 ## Contents
 
 - [Concept](#concept)
-- [Quick Facts](#quick-facts)
 - [What This Is](#what-this-is)
 - [Components](#components)
 - [Core Value](#core-value)
@@ -22,15 +23,6 @@ layout: default
 
 OpenAstro Core is a high-performance Rust library providing shared astronomical logic, hardware drivers, and protocol implementations for the OpenAstro ecosystem.
 It exists to keep coordinate math and device/protocol behavior consistent across downstream OpenAstro apps.
-
----
-
-## Quick Facts
-
-| | |
-|---|---|
-| **Status** | Active |
-| **Language** | N/A |
 
 ---
 

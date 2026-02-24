@@ -7,6 +7,8 @@ section: signal-processing
 
 <span class="status-badge status-active">Phase 7/7</span>
 
+
+
 [← Back to Signal Processing](../signal-processing)
 
 [← Back to Projects](../projects)
@@ -16,7 +18,6 @@ section: signal-processing
 ## Contents
 
 - [Concept](#concept)
-- [Quick Facts](#quick-facts)
 - [Architecture](#architecture)
 - [Terminal Interface](#terminal-interface)
 - [Hardware](#hardware)
@@ -35,15 +36,6 @@ section: signal-processing
 ## Concept
 
 Monitor the local radio spectrum autonomously, classify every detected signal using ML, and maintain a persistent "Signal Census" — a queryable database of all RF activity over time. Distributed across Raspberry Pi edge nodes and a Mac mini core, the system runs unattended, sweeping bands, scheduling satellite passes, and logging what it finds.
-
----
-
-## Quick Facts
-
-| | |
-|---|---|
-| **Status** | Phase 7/7 |
-| **Language** | N/A |
 
 ---
 

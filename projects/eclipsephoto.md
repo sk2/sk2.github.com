@@ -7,6 +7,8 @@ section: photography
 
 <span class="status-badge status-active">** 1 - Hardware & Data Foundation</span>
 
+
+
 [← Back to Projects](../projects)
 
 ---
@@ -14,7 +16,6 @@ section: photography
 ## Contents
 
 - [Concept](#concept)
-- [Quick Facts](#quick-facts)
 - [What This Is](#what-this-is)
 - [Key Features](#key-features)
 - [Architecture](#architecture)
@@ -24,15 +25,6 @@ section: photography
 ## Concept
 
 Reliability and autonomy for a "one-shot" astronomical event. The system handles guiding, exposure ramping (Holy Grail), and error recovery (watchdogs) so the photographer can experience the eclipse while the system secures the data.
-
----
-
-## Quick Facts
-
-| | |
-|---|---|
-| **Status** | ** 1 - Hardware & Data Foundation |
-| **Language** | N/A |
 
 ---
 

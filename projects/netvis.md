@@ -7,6 +7,8 @@ section: network-automation
 
 <span class="status-badge status-active">Phase 72 - Editing Operations (complete)</span>
 
+**Rust**
+
 [← Back to Network Automation](../network-automation)
 
 [← Back to Projects](../projects)
@@ -16,7 +18,6 @@ section: network-automation
 ## Contents
 
 - [Concept](#concept)
-- [Quick Facts](#quick-facts)
 - [What This Is](#what-this-is)
 - [Key Features](#key-features)
 - [Example: Quick Start](#example-quick-start)
@@ -29,15 +30,6 @@ section: network-automation
 ## Concept
 
 Network visualization often fails at scale because layout algorithms treat all nodes and edges equally, producing cluttered "hairball" diagrams. The **Network Visualization Engine** treats topologies as hierarchical structures and uses domain-aware layout constraints—including isometric views and edge bundling—to reflect engineering intent.
-
----
-
-## Quick Facts
-
-| | |
-|---|---|
-| **Status** | Phase 72 - Editing Operations (complete) |
-| **Language** | Rust |
 
 ---
 

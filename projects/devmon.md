@@ -6,23 +6,9 @@ layout: default
 
 <span class="status-badge status-active">Active</span>
 
+
+
 [← Back to Projects](../projects)
-
----
-
-## Contents
-
-- [Quick Facts](#quick-facts)
-- [The Insight](#the-insight)
-- [Features](#features)
-- [Architecture](#architecture)
-
-## Quick Facts
-
-| | |
-|---|---|
-| **Status** | Active |
-| **Language** | N/A |
 
 ---
 

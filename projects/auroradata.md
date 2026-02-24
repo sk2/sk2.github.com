@@ -7,6 +7,8 @@ section: projects
 
 <span class="status-badge status-active">** Not started</span>
 
+
+
 [← Back to Projects](../projects)
 
 ---
@@ -14,7 +16,6 @@ section: projects
 ## Contents
 
 - [Concept](#concept)
-- [Quick Facts](#quick-facts)
 - [Roadmap](#roadmap)
 - [The Problem](#the-problem)
 - [Architecture](#architecture)
@@ -31,15 +32,6 @@ section: projects
 ## Concept
 
 Aurora hunting in Australia requires a 60+ minute drive to dark sites, but most tools do not help answer the critical question: "Should I leave *now*?" AuroraData combines real-time solar wind monitoring, substorm trigger detection, local weather forecasts, and travel time to produce a single "Go/No-Go" score with site-specific recommendations.
-
----
-
-## Quick Facts
-
-| | |
-|---|---|
-| **Status** | ** Not started |
-| **Language** | N/A |
 
 ---
 

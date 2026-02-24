@@ -7,6 +7,8 @@ section: data-analytics
 
 <span class="status-badge status-active">Phase 10/11 (82%)</span>
 
+
+
 [← Back to Data Analytics](../data-analytics)
 
 [← Back to Projects](../projects)
@@ -15,7 +17,6 @@ section: data-analytics
 
 ## Contents
 
-- [Quick Facts](#quick-facts)
 - [The Insight](#the-insight)
 - [What This Is](#what-this-is)
 - [Problem It Solves](#problem-it-solves)
@@ -23,15 +24,6 @@ section: data-analytics
 - [Architecture](#architecture)
 - [Use Cases](#use-cases)
 - [Core Value](#core-value)
-
-## Quick Facts
-
-| | |
-|---|---|
-| **Status** | Phase 10/11 (82%) |
-| **Language** | N/A |
-
----
 
 ## The Insight
 

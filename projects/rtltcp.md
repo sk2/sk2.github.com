@@ -7,6 +7,8 @@ section: signal-processing
 
 <span class="status-badge status-active">Phase 5/6 (100%)</span>
 
+
+
 [← Back to Signal Processing](../signal-processing)
 
 [← Back to Projects](../projects)
@@ -16,7 +18,6 @@ section: signal-processing
 ## Contents
 
 - [Concept](#concept)
-- [Quick Facts](#quick-facts)
 - [What This Is](#what-this-is)
 - [Why a Unified Server](#why-a-unified-server)
 - [Supported Hardware](#supported-hardware)
@@ -31,15 +32,6 @@ section: signal-processing
 ## Concept
 
 A single Rust binary that auto-detects every connected SDR, streams each over the standard `rtl_tcp` protocol, and provides a TUI dashboard and HTTP API for monitoring and control — designed for headless Raspberry Pi deployment.
-
----
-
-## Quick Facts
-
-| | |
-|---|---|
-| **Status** | Phase 5/6 (100%) |
-| **Language** | N/A |
 
 ---
 

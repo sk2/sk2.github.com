@@ -7,6 +7,8 @@ section: photography
 
 <span class="status-badge status-active">** 2. Control</span>
 
+
+
 [← Back to Projects](../projects)
 
 ---
@@ -14,7 +16,6 @@ section: photography
 ## Contents
 
 - [Concept](#concept)
-- [Quick Facts](#quick-facts)
 - [What This Is](#what-this-is)
 - [Key Features](#key-features)
 - [Architecture](#architecture)
@@ -25,15 +26,6 @@ section: photography
 ## Concept
 
 A headless, autonomous astrophotography controller designed for low-power Linux devices (RPi/Jetson). It manages hardware, executes imaging sequences, and ensures rig safety — set up, start the sequence, and go to sleep with confidence.
-
----
-
-## Quick Facts
-
-| | |
-|---|---|
-| **Status** | ** 2. Control |
-| **Language** | N/A |
 
 ---
 

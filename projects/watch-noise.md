@@ -7,6 +7,8 @@ section: projects
 
 <span class="status-badge status-active">Active</span>
 
+
+
 [← Back to Projects](../projects)
 
 ---
@@ -14,7 +16,6 @@ section: projects
 ## Contents
 
 - [Concept](#concept)
-- [Quick Facts](#quick-facts)
 - [What This Is](#what-this-is)
 - [StillState Features](#stillstate-features)
 - [Audio Architecture](#audio-architecture)
@@ -25,15 +26,6 @@ section: projects
 
 - **StillState:** Reclaiming silence and rest in shared or noisy environments through intelligent, adaptive audio
 - **FlowState:** Achieving and maintaining a "Steady State" of focus through task-linked audio and genetic evolution
-
----
-
-## Quick Facts
-
-| | |
-|---|---|
-| **Status** | Active |
-| **Language** | N/A |
 
 ---
 

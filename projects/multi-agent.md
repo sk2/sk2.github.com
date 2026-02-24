@@ -7,6 +7,8 @@ section: agentic-systems
 
 <span class="status-badge status-active">Phase 21/23 (100%)</span>
 
+**Agents can be Go · Python · or Rust**
+
 [← Back to Agentic Systems](../agentic-systems)
 
 [← Back to Projects](../projects)
@@ -16,7 +18,6 @@ section: agentic-systems
 ## Contents
 
 - [Concept](#concept)
-- [Quick Facts](#quick-facts)
 - [What This Is](#what-this-is)
 - [Problem It Solves](#problem-it-solves)
 - [Features](#features)
@@ -28,15 +29,6 @@ section: agentic-systems
 ## Concept
 
 Multi-agent coordination requires strict security boundaries to prevent lateral movement. This assistant demonstrates **containerized isolation** where agents (HealthKit, Home Automation, etc.) coordinate via a NATS message broker. By using per-subject ACLs and a "deny-by-default" security posture, the system ensures that compromise of a single agent cannot cascade through the infrastructure.
-
----
-
-## Quick Facts
-
-| | |
-|---|---|
-| **Status** | Phase 21/23 (100%) |
-| **Language** | Agents can be Go, Python, or Rust |
 
 ---
 

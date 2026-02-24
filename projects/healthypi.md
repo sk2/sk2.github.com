@@ -7,6 +7,8 @@ section: signal-processing
 
 <span class="status-badge status-active">** Phase 7 - Ingest CLI + HealthyPi 6 Serial MVP</span>
 
+
+
 [← Back to Agentic Systems](../agentic-systems)
 
 [← Back to Projects](../projects)
@@ -16,7 +18,6 @@ section: signal-processing
 ## Contents
 
 - [Concept](#concept)
-- [Quick Facts](#quick-facts)
 - [What This Is](#what-this-is)
 - [Key Features](#key-features)
 - [Architecture](#architecture)
@@ -27,15 +28,6 @@ section: signal-processing
 ## Concept
 
 A modular, agent-aware health monitoring ecosystem that translates raw biometric data from HealthyPi hardware into actionable insights and automated interventions — bridging high-fidelity biometric wearables with daily health management.
-
----
-
-## Quick Facts
-
-| | |
-|---|---|
-| **Status** | ** Phase 7 - Ingest CLI + HealthyPi 6 Serial MVP |
-| **Language** | N/A |
 
 ---
 

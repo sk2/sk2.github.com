@@ -6,26 +6,18 @@ layout: default
 
 <span class="status-badge status-active">Active</span>
 
+
+
 [← Back to Projects](../projects)
 
 ---
 
 ## Contents
 
-- [Quick Facts](#quick-facts)
 - [The Insight](#the-insight)
 - [What This Is](#what-this-is)
 - [Problem It Solves](#problem-it-solves)
 - [Features](#features)
-
-## Quick Facts
-
-| | |
-|---|---|
-| **Status** | Active |
-| **Language** | N/A |
-
----
 
 ## The Insight
 

@@ -7,6 +7,8 @@ section: signal-processing
 
 <span class="status-badge status-active">Phase 8/10 (83%)</span>
 
+
+
 [← Back to Signal Processing](../signal-processing)
 
 [← Back to Projects](../projects)
@@ -16,7 +18,6 @@ section: signal-processing
 ## Contents
 
 - [Concept](#concept)
-- [Quick Facts](#quick-facts)
 - [What This Is](#what-this-is)
 - [Core Principles](#core-principles)
 - [Architecture](#architecture)
@@ -25,15 +26,6 @@ section: signal-processing
 ## Concept
 
 Ambient RF signals reflect off objects in the environment. By processing these reflections with coherent multi-channel receivers, we can extract bistatic range and Doppler shift information — an interesting signal processing challenge.
-
----
-
-## Quick Facts
-
-| | |
-|---|---|
-| **Status** | Phase 8/10 (83%) |
-| **Language** | N/A |
 
 ---
 

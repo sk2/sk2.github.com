@@ -7,6 +7,8 @@ section: projects
 
 <span class="status-badge status-active">Phase 1/5 (0%)</span>
 
+
+
 [← Back to Projects](../projects)
 
 ---
@@ -14,7 +16,6 @@ section: projects
 ## Contents
 
 - [Concept](#concept)
-- [Quick Facts](#quick-facts)
 - [Why Generative](#why-generative)
 - [Multi-Level Energy Model](#multi-level-energy-model)
 - [Sound Design](#sound-design)
@@ -29,15 +30,6 @@ section: projects
 ## Concept
 
 A tool for exploring composition ideas through generative algorithms. A multi-level energy model drives every musical decision — from macro-level track arc (intro, build, peak, breakdown) down to per-16th-note accent patterns — producing coherent tracks with musical tension and release.
-
----
-
-## Quick Facts
-
-| | |
-|---|---|
-| **Status** | Phase 1/5 (0%) |
-| **Language** | N/A |
 
 ---
 

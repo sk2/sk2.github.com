@@ -7,6 +7,8 @@ section: photography
 
 <span class="status-badge status-active">** Phase 1: Star Sharpness Foundation</span>
 
+
+
 [← Back to Projects](../projects)
 
 ---
@@ -14,7 +16,6 @@ section: photography
 ## Contents
 
 - [Concept](#concept)
-- [Quick Facts](#quick-facts)
 - [What This Is](#what-this-is)
 - [Key Features](#key-features)
 - [Architecture](#architecture)
@@ -24,15 +25,6 @@ section: photography
 ## Concept
 
 Provides precise, automated control over exposure and focus specifically optimized for aurora "bursts" and star sharpness, while offering field-ready composition tools.
-
----
-
-## Quick Facts
-
-| | |
-|---|---|
-| **Status** | ** Phase 1: Star Sharpness Foundation |
-| **Language** | N/A |
 
 ---
 

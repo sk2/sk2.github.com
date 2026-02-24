@@ -7,31 +7,17 @@ section: network-automation
 
 <span class="status-badge status-active">Phase 6/9 (53%)</span>
 
+
+
 [← Back to Network Automation](../network-automation)
 
 [← Back to Projects](../projects)
 
 ---
 
-## Contents
-
-- [Concept](#concept)
-- [Quick Facts](#quick-facts)
-- [What This Is](#what-this-is)
-- [Core Value](#core-value)
-
 ## Concept
 
 A fast, simple, and ergonomic Rust library and CLI for network device interaction and automated testing. Provides the essential PyATS capabilities—testbed management, CLI parsing, and state verification—without the complexity, as a focused component in a broader network automation toolkit.
-
----
-
-## Quick Facts
-
-| | |
-|---|---|
-| **Status** | Phase 6/9 (53%) |
-| **Language** | N/A |
 
 ---
 

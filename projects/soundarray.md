@@ -7,6 +7,8 @@ section: signal-processing
 
 <span class="status-badge status-active">Active</span>
 
+
+
 [← Back to Projects](../projects)
 
 ---
@@ -14,7 +16,6 @@ section: signal-processing
 ## Contents
 
 - [Concept](#concept)
-- [Quick Facts](#quick-facts)
 - [What This Is](#what-this-is)
 - [Key Features](#key-features)
 - [Processing Pipeline](#processing-pipeline)
@@ -24,15 +25,6 @@ section: signal-processing
 ## Concept
 
 The ability to capture, localize, and classify complex soundscapes on edge devices or via remote streaming, providing structured insights to an agent framework.
-
----
-
-## Quick Facts
-
-| | |
-|---|---|
-| **Status** | Active |
-| **Language** | N/A |
 
 ---
 

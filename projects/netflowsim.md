@@ -7,6 +7,8 @@ section: network-automation
 
 <span class="status-badge status-active">Phase 9/13 (100%)</span>
 
+
+
 [← Back to Data Analytics](../data-analytics)
 
 [← Back to Projects](../projects)
@@ -16,7 +18,6 @@ section: network-automation
 ## Contents
 
 - [Concept](#concept)
-- [Quick Facts](#quick-facts)
 - [What This Is](#what-this-is)
 - [Why Flow-Based Simulation](#why-flow-based-simulation)
 - [Key Features](#key-features)
@@ -29,15 +30,6 @@ section: network-automation
 ## Concept
 
 `netflowsim` provides rapid, massive-scale network performance analysis by using analytic queuing models and Monte Carlo simulations instead of packet-level discrete event simulation. It enables network engineers to validate topologies and routing strategies against billions of flow iterations in seconds.
-
----
-
-## Quick Facts
-
-| | |
-|---|---|
-| **Status** | Phase 9/13 (100%) |
-| **Language** | N/A |
 
 ---
 

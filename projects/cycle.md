@@ -7,6 +7,8 @@ section: agentic-systems
 
 <span class="status-badge status-active">Phase 4/5 (71%)</span>
 
+
+
 [← Back to Agentic Systems](../agentic-systems)
 
 [← Back to Projects](../projects)
@@ -16,7 +18,6 @@ section: agentic-systems
 ## Contents
 
 - [Concept](#concept)
-- [Quick Facts](#quick-facts)
 - [What This Is](#what-this-is)
 - [Key Features](#key-features)
 - [Architecture](#architecture)
@@ -27,15 +28,6 @@ section: agentic-systems
 ## Concept
 
 A native SwiftUI training application for iPad and Apple TV that bridges professional cycling hardware (KICKR Core) with dynamic AI-driven workout logic via NATS, visualized in a SceneKit environment.
-
----
-
-## Quick Facts
-
-| | |
-|---|---|
-| **Status** | Phase 4/5 (71%) |
-| **Language** | N/A |
 
 ---
 

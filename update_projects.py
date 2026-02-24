@@ -177,10 +177,6 @@ def generate_status_badge(project: ProjectInfo) -> str:
     return f'<span class="status-badge {cls}">{detail}</span>'
 
 
-def generate_quick_facts(project: ProjectInfo) -> str:
-    return f"## Quick Facts\n\n| | |\n|---|---|\n| **Status** | {project.status_detail or project.status.capitalize()} |\n| **Language** | {', '.join(project.stack) if project.stack else 'N/A'} |\n"
-
-
 def update_existing_file(content: str, project: ProjectInfo) -> str:
     fm_match = re.match(r'^---\n(.*?)\n---', content, re.DOTALL)
     fm_lines = fm_match.group(1).split('\n') if fm_match else ["layout: default"]
@@ -224,19 +220,20 @@ def update_existing_file(content: str, project: ProjectInfo) -> str:
             clean_sections.append(f"## {sec_name}\n\n{project.sections[sec_name]}")
             
     back_links = get_back_links(project.category)
-    header_block = f"# {project.name}\n\n{generate_status_badge(project)}\n\n{back_links}"
-    gen_sections = [generate_quick_facts(project).strip()]
-    if project.roadmap_summary:
-        gen_sections.append("## Roadmap\n\n" + "\n".join([f"- {item}" for item in project.roadmap_summary]))
+    metadata_line = f"**{' · '.join(project.stack)}**" if project.stack else ""
+    header_block = f"# {project.name}\n\n{generate_status_badge(project)}\n\n{metadata_line}\n\n{back_links}"
     
     fm_block = f"---\n" + "\n".join(new_fm_lines) + f"\n---"
+    
     body_content = []
     concept_sec = next((s for s in clean_sections if s.startswith("## Concept")), None)
     if concept_sec:
         body_content.append(concept_sec)
         clean_sections.remove(concept_sec)
     
-    body_content.extend(gen_sections)
+    if project.roadmap_summary:
+        body_content.append("## Roadmap\n\n" + "\n".join([f"- {item}" for item in project.roadmap_summary]))
+    
     body_content.extend(clean_sections)
     
     final_body = "\n\n---\n\n".join(body_content)
@@ -251,7 +248,8 @@ def generate_detailed_page(project: ProjectInfo) -> str:
     fm += "\n---"
     
     back_links = get_back_links(project.category)
-    header = f"# {project.name}\n\n{generate_status_badge(project)}\n\n{back_links}"
+    metadata_line = f"**{' · '.join(project.stack)}**" if project.stack else ""
+    header = f"# {project.name}\n\n{generate_status_badge(project)}\n\n{metadata_line}\n\n{back_links}"
     
     content_lines = []
     found_first = False
@@ -262,7 +260,6 @@ def generate_detailed_page(project: ProjectInfo) -> str:
             found_first = True
             content_lines.append(f"## {heading}\n\n{body}")
     
-    content_lines.append(generate_quick_facts(project).strip())
     if project.roadmap_summary:
         content_lines.append("## Roadmap\n\n" + "\n".join([f"- {item}" for item in project.roadmap_summary]))
     
@@ -274,13 +271,9 @@ def generate_detailed_page(project: ProjectInfo) -> str:
 
 def generate_projects_index(projects: list[ProjectInfo]) -> str:
     lines = ["---", "layout: default", "---", "", "# Projects", "", "Focused on network engineering, autonomous systems, and signal processing.", "", "---", ""]
-    
-    # Mature logic: sort by line count (surrogate for detail/maturity)
     sorted_projects = sorted(projects, key=lambda x: x.line_count, reverse=True)
-    
     categorized = {k: [] for k in CATEGORY_MAP.keys()}
     for p in sorted_projects: categorized[p.category].append(p)
-    
     for cat_key, (title, desc, link) in CATEGORY_MAP.items():
         projs = categorized[cat_key]
         if not projs: continue
@@ -314,7 +307,6 @@ def main():
                 if not pd.is_dir() or "-clean-" in pd.name or "backup" in pd.name.lower(): continue
                 info = parse_project_metadata(pd)
                 if info: projects.append(info)
-    
     projects_dir = Path("projects")
     scanned_slugs = {p.slug for p in projects}
     scanned_names = {p.name for p in projects}
@@ -326,15 +318,12 @@ def main():
                 name = name_match.group(1).strip()
                 if name in scanned_names: continue
                 projects.append(ProjectInfo(name=name, slug=legacy_md.stem, path=legacy_md, category="experimental", status="active", sections=extract_sections(content)))
-    
-    # Post-process: calculate line counts for maturity sorting
     for p in projects:
         pp = projects_dir / f"{p.slug}.md"
         if pp.exists():
             p.line_count = len(pp.read_text().splitlines())
         else:
             p.line_count = 0
-
     for p in projects:
         pp = projects_dir / f"{p.slug}.md"
         if pp.exists():

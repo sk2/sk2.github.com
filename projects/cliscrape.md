@@ -7,6 +7,8 @@ section: network-automation
 
 <span class="status-badge status-active">Phase 7/11 (50%)</span>
 
+
+
 [← Back to Data Analytics](../data-analytics)
 
 [← Back to Projects](../projects)
@@ -16,7 +18,6 @@ section: network-automation
 ## Contents
 
 - [Concept](#concept)
-- [Quick Facts](#quick-facts)
 - [Key Features](#key-features)
 - [Performance](#performance)
 - [Architecture](#architecture)
@@ -28,15 +29,6 @@ section: network-automation
 ## Concept
 
 Network automation relies on parsing unstructured CLI output from devices. TextFSM handles this but suffers from Python's GIL limitations and slow regex execution. This Rust-based parser replicates TextFSM's state-machine semantics with native performance — parse massive `show tech-support` outputs in milliseconds, not seconds.
-
----
-
-## Quick Facts
-
-| | |
-|---|---|
-| **Status** | Phase 7/11 (50%) |
-| **Language** | N/A |
 
 ---
 

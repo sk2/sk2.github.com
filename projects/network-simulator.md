@@ -7,6 +7,8 @@ section: network-automation
 
 <span class="status-badge status-active">Phase 66/67 (100%)</span>
 
+**Rust**
+
 [← Back to Network Automation](../network-automation)
 
 [← Back to Projects](../projects)
@@ -16,7 +18,6 @@ section: network-automation
 ## Contents
 
 - [Concept](#concept)
-- [Quick Facts](#quick-facts)
 - [Roadmap](#roadmap)
 - [Why the Network Simulator?](#why-the-network-simulator)
 - [Quick Start — Three-Router OSPF Example](#quick-start-three-router-ospf-example)
@@ -33,15 +34,6 @@ section: network-automation
 ## Concept
 
 Developing agentic AI systems and network automation tools requires rapid iteration. Spinning up containers for every test cycle takes minutes; simulation takes seconds. This simulator enables fast prototyping of network automation agents, DevOps pipelines, and AI-driven network operations — validate configurations and agent logic in simulation before committing to heavyweight container deployments.
-
----
-
-## Quick Facts
-
-| | |
-|---|---|
-| **Status** | Phase 66/67 (100%) |
-| **Language** | Rust |
 
 ---
 

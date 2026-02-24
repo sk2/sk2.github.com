@@ -7,6 +7,8 @@ section: projects
 
 <span class="status-badge status-active">** Phase 7: Interactive Inbox Triage TUI — COMPLETE</span>
 
+
+
 [← Back to Data Analytics](../data-analytics)
 
 [← Back to Projects](../projects)
@@ -16,7 +18,6 @@ section: projects
 ## Contents
 
 - [Concept](#concept)
-- [Quick Facts](#quick-facts)
 - [What This Is](#what-this-is)
 - [Core Value](#core-value)
 - [The Problem](#the-problem)
@@ -31,15 +32,6 @@ section: projects
 ## Concept
 
 OmniFocus 4's AppleScript and app-based APIs are slow—too slow for AI agents that need instant context. **OmniFocus DB** bypasses these layers with direct SQLite database access, providing near-instant retrieval of projects and tasks in token-efficient formats optimized for agent consumption.
-
----
-
-## Quick Facts
-
-| | |
-|---|---|
-| **Status** | ** Phase 7: Interactive Inbox Triage TUI — COMPLETE |
-| **Language** | N/A |
 
 ---
 

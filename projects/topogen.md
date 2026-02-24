@@ -7,6 +7,8 @@ section: network-automation
 
 <span class="status-badge status-active">Phase 30 - Core Validation Architecture</span>
 
+
+
 [← Back to Network Automation](../network-automation)
 
 [← Back to Projects](../projects)
@@ -16,7 +18,6 @@ section: network-automation
 ## Contents
 
 - [Concept](#concept)
-- [Quick Facts](#quick-facts)
 - [Roadmap](#roadmap)
 - [What This Is](#what-this-is)
 - [Key Features](#key-features)
@@ -32,18 +33,9 @@ Generating realistic, validated network topologies for testing often requires cu
 
 ---
 
-## Quick Facts
-
-| | |
-|---|---|
-| **Status** | Phase 30 - Core Validation Architecture |
-| **Language** | N/A |
-
----
-
 ## Roadmap
 
-- Plans: TBD
+- Plans: 4 plans
 
 ---
 

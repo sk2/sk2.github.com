@@ -21,7 +21,7 @@ Transform raw radio spectrum data into an actionable "Signal Census" through aut
 
 ## Current Status
 
-** 2026-02-24 — Completed 04-05 SigMF fixture denoising eval gap closure; /15)
+** 2026-02-24 — Completed 13-06 edge sparse ingest server + demand-control API
 
 ---
 

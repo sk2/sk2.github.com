@@ -128,7 +128,7 @@ Polars DataFrame (via to_dataframe()) or Rust types
 
 ## Current Status
 
-2026-02-24 — Completed 10-02-PLAN.md: motif/discord notifications + dispatcher helper
+2026-02-24 — Completed 11-01-PLAN.md: Series.streaming(m) + PolarsStreamingState + mp_* schema
 
 ---
 

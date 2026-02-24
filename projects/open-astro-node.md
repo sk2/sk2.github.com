@@ -116,4 +116,16 @@ Rust (Axum, Tokio, SQLite), React (TypeScript, Tailwind CSS), INDI, PHD2, ASTAP 
 
 ---
 
+---
+
+[← Back to Projects](../projects)
+
+---
+
+---
+
+[← Back to Projects](../projects)
+
+---
+
 [← Back to Projects](../projects)

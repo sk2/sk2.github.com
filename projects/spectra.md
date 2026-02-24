@@ -247,4 +247,16 @@ Edge Pi → SpyServer/rtl_tcp → Mac mini Core
 
 ---
 
+---
+
+[← Back to Projects](../projects)
+
+---
+
+---
+
+[← Back to Projects](../projects)
+
+---
+
 [← Back to Projects](../projects)

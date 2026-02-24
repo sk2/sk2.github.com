@@ -65,8 +65,7 @@ A Python library for modeling and querying network topologies with type-safe Pyd
 
 
 
-<details>
-<summary>Show Code (42 lines)</summary>
+
 
 ```yaml
 topology:
@@ -79,6 +78,10 @@ topology:
       - P1:
           role: core
           data:
+```
+
+
+```yaml
             pop: West
             platform: iosxr
             loopback: 10.0.0.1/32
@@ -89,6 +92,11 @@ topology:
 
       - P3:
           role: core
+```
+<details>
+<summary>Show remaining 20 lines</summary>
+
+```yaml
           data:
             pop: East
             platform: iosxr
@@ -115,12 +123,15 @@ topology:
 
 
 
+
+
+
+
 **Build Protocol Layers:**
 
 
 
-<details>
-<summary>Show Code (23 lines)</summary>
+
 
 ```python
 from autonetkit import Topology
@@ -133,6 +144,10 @@ topology = Topology.from_yaml("transitnet.yaml")
 # AutoNetkit
 isis_layer = build_isis_layer(
     topology,
+```
+
+
+```python
     level=2,
     area="49.0001",
     parent_layer="physical"
@@ -146,7 +161,9 @@ mpls_layer = build_mpls_layer(
 )
 ```
 
-</details>
+
+
+
 
 
 
@@ -154,8 +171,7 @@ mpls_layer = build_mpls_layer(
 
 
 
-<details>
-<summary>Show Code (45 lines)</summary>
+
 
 ```cisco
 hostname P1
@@ -168,6 +184,10 @@ interface GigabitEthernet0/0/0/0
  ipv4 address 10.1.0.1 255.255.255.252
 !
 interface GigabitEthernet0/0/0/2
+```
+
+
+```cisco
  description to PE1
  ipv4 address 10.1.0.5 255.255.255.252
 !
@@ -178,6 +198,11 @@ router isis CORE
   metric-style wide
  !
  interface Loopback0
+```
+<details>
+<summary>Show remaining 23 lines</summary>
+
+```cisco
   passive
   address-family ipv4 unicast
  !
@@ -207,14 +232,17 @@ mpls ldp
 
 
 
+
+
+
+
 ### L3VPN Configuration
 
 **Input:** Add customer sites to PE routers:
 
 
 
-<details>
-<summary>Code: AutoNetkit (25 lines)</summary>
+
 
 ```yaml
 # AutoNetkit
@@ -227,6 +255,10 @@ mpls ldp
           loopback: 192.168.1.1/32
         endpoints:
           - Gi0/0
+```
+
+
+```yaml
 
     - CE2:
         role: ce
@@ -242,7 +274,9 @@ mpls ldp
     - [PE3, Gi0/0/0/1, CE2, Gi0/0]  # PE-CE link
 ```
 
-</details>
+
+
+
 
 
 
@@ -266,8 +300,7 @@ l3vpn_layer = build_l3vpn_layer(
 
 
 
-<details>
-<summary>Show Code (33 lines)</summary>
+
 
 ```cisco
 vrf NETCORP
@@ -280,6 +313,10 @@ vrf NETCORP
   !
  !
 !
+```
+
+
+```cisco
 interface GigabitEthernet0/0/0/1
  description to CE1 (NetCorp)
  vrf NETCORP
@@ -290,6 +327,11 @@ router bgp 65000
   rd 65000:100
   address-family ipv4 unicast
    redistribute connected
+```
+<details>
+<summary>Show remaining 11 lines</summary>
+
+```cisco
   !
   neighbor 10.100.1.2
    remote-as 65100
@@ -304,6 +346,10 @@ router bgp 65000
 ```
 
 </details>
+
+
+
+
 
 
 
@@ -329,8 +375,7 @@ with open("transitnet.clab.yml", "w") as f:
 
 
 
-<details>
-<summary>Show Code (33 lines)</summary>
+
 
 ```yaml
 name: transitnet
@@ -343,6 +388,10 @@ topology:
     P1:
       kind: cisco_xrv9k
       image: vrnetlab/vr-xrv9k:7.3.2
+```
+
+
+```yaml
       mgmt-ipv4: 172.20.20.11
       binds:
         - ./configs/P1.cfg:/config/startup-config.cfg
@@ -353,6 +402,11 @@ topology:
       mgmt-ipv4: 172.20.20.13
       binds:
         - ./configs/P3.cfg:/config/startup-config.cfg
+```
+<details>
+<summary>Show remaining 11 lines</summary>
+
+```yaml
 
     PE1:
       kind: cisco_xrv9k
@@ -370,12 +424,15 @@ topology:
 
 
 
+
+
+
+
 **Deploy and Verify:**
 
 
 
-<details>
-<summary>Code: AutoNetkit (35 lines)</summary>
+
 
 ```bash
 # AutoNetkit
@@ -388,6 +445,10 @@ sudo containerlab inspect -t transitnet.clab.yml
 # AutoNetkit
 # AutoNetkit
 # AutoNetkit
+```
+
+
+```bash
 # AutoNetkit
 # AutoNetkit
 # AutoNetkit
@@ -398,6 +459,11 @@ docker exec -it clab-transitnet-P1 show isis neighbors
 # AutoNetkit
 # AutoNetkit
 # AutoNetkit
+```
+<details>
+<summary>Show remaining 13 lines</summary>
+
+```bash
 # AutoNetkit
 # AutoNetkit
 
@@ -414,6 +480,10 @@ docker exec -it clab-transitnet-P1 show mpls ldp neighbor
 ```
 
 </details>
+
+
+
+
 
 
 
@@ -461,8 +531,7 @@ Define topologies in YAML for rapid prototyping:
 
 
 
-<details>
-<summary>Show Code (33 lines)</summary>
+
 
 ```yaml
 topology:
@@ -475,6 +544,10 @@ topology:
       - P1:
           role: core
           data:
+```
+
+
+```yaml
             pop: West
             platform: iosxr
             loopback: 10.0.0.1/32
@@ -485,6 +558,11 @@ topology:
       - PE1:
           role: pe
           data:
+```
+<details>
+<summary>Show remaining 11 lines</summary>
+
+```yaml
             pop: West
             platform: iosxr
             loopback: 10.0.0.11/32
@@ -499,6 +577,10 @@ topology:
 ```
 
 </details>
+
+
+
+
 
 
 
@@ -590,6 +672,18 @@ Python (Pydantic), Rust core (`petgraph`-backed), PyO3 bindings
 ---
 
 [← Back to Network Automation](../network-automation)
+
+---
+
+---
+
+[← Back to Projects](../projects)
+
+---
+
+---
+
+[← Back to Projects](../projects)
 
 ---
 

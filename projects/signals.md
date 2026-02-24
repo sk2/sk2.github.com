@@ -248,4 +248,16 @@ WebSocket protocol: one JSON metadata message followed by binary uint8 spectrum 
 
 ---
 
+---
+
+[← Back to Projects](../projects)
+
+---
+
+---
+
+[← Back to Projects](../projects)
+
+---
+
 [← Back to Projects](../projects)

@@ -105,4 +105,16 @@ Currently implementing analysis and association logic (Phase 6). The system now 
 
 ---
 
+---
+
+[← Back to Projects](../projects)
+
+---
+
+---
+
+[← Back to Projects](../projects)
+
+---
+
 [← Back to Projects](../projects)

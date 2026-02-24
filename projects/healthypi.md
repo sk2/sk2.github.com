@@ -125,4 +125,16 @@ Python (Pydantic, NeuroKit2, SciPy), Swift (SwiftUI, HealthKit), NATS messaging,
 
 ---
 
+---
+
+[← Back to Projects](../projects)
+
+---
+
+---
+
+[← Back to Projects](../projects)
+
+---
+
 [← Back to Projects](../projects)

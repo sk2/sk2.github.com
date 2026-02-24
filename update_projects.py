@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Update website projects page and individual project pages from project metadata.
-Enforces a clean, understated, and powerful style with navigation and collapsible code.
+Enforces a clean, understated, and powerful style with navigation and partial-view code blocks.
 """
 
 import argparse
@@ -65,21 +65,28 @@ def extract_sections(content: str) -> Dict[str, str]:
     return sections
 
 
-def wrap_long_code_blocks(content: str, threshold: int = 20) -> str:
-    """Wrap code blocks longer than threshold lines in a details tag."""
+def wrap_long_code_blocks(content: str, threshold: int = 10) -> str:
+    """Wrap code blocks longer than threshold lines in a details tag, showing the first few lines."""
     def replacer(match):
-        code = match.group(0)
-        lines = code.strip().split("\n")
-        if len(lines) > threshold:
-            summary = "Show Code"
-            # Try to find a comment or first line that might serve as a better summary
-            first_line = lines[1].strip() if len(lines) > 1 else ""
-            if first_line.startswith("#") or first_line.startswith("//") or first_line.startswith("$"):
-                summary = f"Code: {first_line.lstrip('#/$ ').strip()}"
+        full_code = match.group(0).strip()
+        lines = full_code.split("\n")
+        # Subtract 2 for the backtick lines
+        content_lines = len(lines) - 2
+        if content_lines > threshold + 5: # Only split if it's significantly longer
+            fence_start = lines[0]
+            fence_end = "```"
             
-            return f"<details>\n<summary>{summary} ({len(lines)} lines)</summary>\n\n{code}\n\n</details>"
-        return code
+            # First 10 lines of content
+            visible_content = "\n".join(lines[1:threshold+1])
+            hidden_content = "\n".join(lines[threshold+1:-1])
+            
+            first_block = f"{fence_start}\n{visible_content}\n{fence_end}"
+            second_block = f"{fence_start}\n{hidden_content}\n{fence_end}"
+            
+            return f"{first_block}\n<details>\n<summary>Show remaining {content_lines - threshold} lines</summary>\n\n{second_block}\n\n</details>"
+        return full_code
 
+    # Identify code blocks
     return re.sub(r'```.*?```', replacer, content, flags=re.DOTALL)
 
 
@@ -200,7 +207,7 @@ def update_existing_file(content: str, project: ProjectInfo) -> str:
         
     body = content[fm_match.end():].strip() if fm_match else content.strip()
     
-    # Remove all but the very first details wrapping to prevent nesting
+    # Aggressively remove previous details/summary to prevent nesting/ghosting
     body = re.sub(r'</details>', '', body)
     body = re.sub(r'<details>\s*<summary>.*?</summary>', '', body)
 
@@ -232,6 +239,7 @@ def update_existing_file(content: str, project: ProjectInfo) -> str:
     body_content.extend(clean_sections)
     
     assembled_body = "\n\n---\n\n".join(body_content)
+    # Apply code wrapping
     assembled_body = wrap_long_code_blocks(assembled_body)
     
     toc = generate_toc(assembled_body)
@@ -264,6 +272,7 @@ def generate_detailed_page(project: ProjectInfo) -> str:
         content_lines.append("")
     
     assembled_content = "\n".join(content_lines)
+    # Apply code wrapping
     assembled_content = wrap_long_code_blocks(assembled_content)
     
     toc = generate_toc(assembled_content)

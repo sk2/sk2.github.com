@@ -64,6 +64,10 @@ Macro (Track Arc)
 
         Micro (Groove Accents)
           16th-note accent patterns for swing and syncopation
+```
+
+
+```
           Drives velocity and timing variations
 
           Sub-Channels (Per-Element)
@@ -150,6 +154,18 @@ Without `--output`, the engine launches an interactive TUI with real-time playba
 - **Playback**: cpal (real-time audio)
 - **TUI**: ratatui + crossterm
 - **RNG**: Seeded rand for reproducible generation
+
+---
+
+---
+
+[← Back to Projects](../projects)
+
+---
+
+---
+
+[← Back to Projects](../projects)
 
 ---
 

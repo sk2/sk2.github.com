@@ -148,8 +148,7 @@ Agent: "You have 3 flagged items due today: PR review, dentist appointment, and 
 
 
 
-<details>
-<summary>Show Code (30 lines)</summary>
+
 
 ```
 ┌────────────────────────────────┐
@@ -162,6 +161,10 @@ Agent: "You have 3 flagged items due today: PR review, dentist appointment, and 
 │   OmniFocus.sqlite Database    │
 │    ~/Library/Group Containers/ │
 └────────┬───────────────────────┘
+```
+
+
+```
          │ Direct Read
          ↓
 ┌────────────────────────────────┐
@@ -172,6 +175,11 @@ Agent: "You have 3 flagged items due today: PR review, dentist appointment, and 
     ┌────┼────┬─────────┐
     │    │    │         │
 ┌───▼──┐ │ ┌──▼───┐ ┌──▼────┐
+```
+<details>
+<summary>Show remaining 8 lines</summary>
+
+```
 │ CLI  │ │ │ MCP  │ │Future │
 │      │ │ │Server│ │ Web   │
 └──────┘ │ └──────┘ └───────┘
@@ -233,6 +241,18 @@ inbox = use_tool("omnifocus_db", action="inbox")
 ---
 
 [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
+
+---
+
+[← Back to Projects](../projects)
+
+---
+
+---
+
+[← Back to Projects](../projects)
 
 ---
 

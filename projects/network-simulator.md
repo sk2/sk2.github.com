@@ -69,8 +69,7 @@ Create `ospf-triangle.yaml`:
 
 
 
-<details>
-<summary>Show Code (71 lines)</summary>
+
 
 ```yaml
 name: ospf-triangle
@@ -83,6 +82,10 @@ devices:
     interfaces:
       - name: eth0
         ip: 10.0.12.1/24
+```
+
+
+```yaml
         ospf: { area: 0, cost: 10 }
       - name: eth1
         ip: 10.0.13.1/24
@@ -93,6 +96,11 @@ devices:
   - name: r2
     type: router
     router_id: 2.2.2.2
+```
+<details>
+<summary>Show remaining 49 lines</summary>
+
+```yaml
     interfaces:
       - name: eth0
         ip: 10.0.12.2/24
@@ -148,12 +156,15 @@ script:
 
 
 
+
+
+
+
 Run the simulation:
 
 
 
-<details>
-<summary>Code: netsim run ospf-triangle.yaml (23 lines)</summary>
+
 
 ```bash
 $ netsim run ospf-triangle.yaml
@@ -166,6 +177,10 @@ $ netsim run ospf-triangle.yaml
 [t=20ms] Network converged
 
 [t=20ms] r1> show ip route
+```
+
+
+```bash
 10.0.1.0/24   directly connected (eth2)
 10.0.3.0/24   via 10.0.13.3 [OSPF/110] metric=11
 10.0.12.0/24  directly connected (eth0)
@@ -179,7 +194,9 @@ Round-trip path: h1 -> r1 -> r3 -> h3 -> r3 -> r1 -> h1
 Simulation complete: 120ms simulated, 0.034s real time (3529x speedup)
 ```
 
-</details>
+
+
+
 
 
 
@@ -231,6 +248,10 @@ Destination       Next Hop        Metric  Interface
 10.0.23.0/24      10.0.12.2       20      eth0 (OSPF)
 
 # Network Simulator
+```
+
+
+```bash
 $ netsim exec my-network h1 "ping 10.0.3.10"
 Ping 10.0.3.10: 5/5 packets received, 0% loss
 
@@ -238,6 +259,8 @@ Ping 10.0.3.10: 5/5 packets received, 0% loss
 $ netsim exec my-network r1 "show ip route --json"
 [{"destination":"10.0.1.0/24","next_hop":"—","metric":0,"interface":"eth2","source":"connected"}, ...]
 ```
+
+
 
 ### Attach an Interactive Console
 
@@ -249,8 +272,7 @@ Opens a full interactive REPL session on the device. You're effectively "logged 
 
 
 
-<details>
-<summary>Show Code (25 lines)</summary>
+
 
 ```
 r1> sh ip ro
@@ -263,6 +285,10 @@ Destination       Next Hop        Metric  Interface
 
 r1> show interfaces
 Interface  IP Address      MAC Address        Admin   Status
+```
+
+
+```
 eth0       10.0.12.1/24    02:00:00:00:01:00  up      up
 eth1       10.0.13.1/24    02:00:00:00:01:01  up      up
 eth2       10.0.1.1/24     02:00:00:00:01:02  up      up
@@ -278,7 +304,9 @@ IP Address      MAC Address        State     Age  Interface
 10.0.13.3       02:00:00:00:03:00  Resolved  396  eth1
 ```
 
-</details>
+
+
+
 
 
 
@@ -295,6 +323,10 @@ Destination       Next Hop        Metric  Interface
 10.0.13.0/24      —               0       eth1 (connected)
 10.0.3.0/24       10.0.13.3       11      eth1 (OSPF)
 10.0.23.0/24      10.0.13.3       21      eth1 (OSPF)
+```
+
+
+```
    ← traffic to r2 now routes via r3 (metric increased from 20 to 21)
 
 r1> interface no shutdown eth0
@@ -304,6 +336,8 @@ Interface eth0 admin-up
 r1> sh ip ro
    ← routes restored to original paths after reconvergence
 ```
+
+
 
 **JSON output on any show command** for structured data:
 
@@ -376,8 +410,7 @@ Press Enter on a device to open an interactive console session. Press `l` at any
 
 
 
-<details>
-<summary>Code: Network Simulator (22 lines)</summary>
+
 
 ```bash
 # Network Simulator
@@ -390,6 +423,10 @@ sp-core         48305  45m 12s  topologies/transitnet-sp-core.yaml
 $ netsim daemon status my-network
 Daemon: my-network
 PID: 48291
+```
+
+
+```bash
 Uptime: 2h 15m 30s
 Tick interval: 100ms
 Topology: examples/ospf-triangle.yaml
@@ -402,8 +439,6 @@ $ netsim daemon stop my-network
 $ netsim daemon list --clean
 ```
 
-</details>
-
 ---
 
 ---
@@ -414,8 +449,7 @@ Start a daemon, run automated validation, collect results, tear down:
 
 
 
-<details>
-<summary>Code: !/bin/bash (25 lines)</summary>
+
 
 ```bash
 #!/bin/bash
@@ -428,6 +462,10 @@ netsim daemon start ci-test topology.yaml --tick-interval 10ms
 sleep 2
 
 # Network Simulator
+```
+
+
+```bash
 ROUTES=$(netsim exec ci-test r1 "show ip route --json")
 OSPF=$(netsim exec ci-test r1 "show ospf neighbors --json")
 PING=$(netsim exec ci-test h1 "ping 10.0.3.10")
@@ -443,7 +481,9 @@ netsim daemon stop ci-test
 echo "All validations passed"
 ```
 
-</details>
+
+
+
 
 
 
@@ -453,8 +493,7 @@ Test link failure and reconvergence interactively:
 
 
 
-<details>
-<summary>Code: Network Simulator (26 lines)</summary>
+
 
 ```bash
 # Network Simulator
@@ -467,6 +506,10 @@ Neighbor ID     Interface  State   Priority  Dead Time
 3.3.3.3         eth1       Full    1         36s
 
 # Network Simulator
+```
+
+
+```bash
 $ netsim exec failover-test r1 "interface shutdown eth0"
 Interface eth0 admin-down
 
@@ -483,7 +526,9 @@ Neighbor ID     Interface  State   Priority  Dead Time
 3.3.3.3         eth1       Full    1         36s
 ```
 
-</details>
+
+
+
 
 
 
@@ -602,8 +647,7 @@ Service provider topology demonstrating IS-IS hierarchical routing:
 
 
 
-<details>
-<summary>Show Code (62 lines)</summary>
+
 
 ```yaml
 name: isis-hierarchy
@@ -616,6 +660,10 @@ devices:
       net: "49.0001.0000.0000.0001.00"
       level: l1
     interfaces:
+```
+
+
+```yaml
       - name: eth0
         ip: 10.1.0.1/24
         isis: { metric: 10 }
@@ -626,6 +674,11 @@ devices:
   - name: r2
     type: router
     isis:
+```
+<details>
+<summary>Show remaining 40 lines</summary>
+
+```yaml
       net: "49.0001.0000.0000.0002.00"
       level: l1l2 # Area border router
     interfaces:
@@ -672,12 +725,15 @@ script:
 
 
 
+
+
+
+
 **Simulation Output:**
 
 
 
-<details>
-<summary>Code: netsim run isis-hierarchy.yaml (40 lines)</summary>
+
 
 ```bash
 $ netsim run isis-hierarchy.yaml
@@ -690,6 +746,10 @@ $ netsim run isis-hierarchy.yaml
 [t=8ms] IS-IS: LSP flooding in progress
 [t=12ms] IS-IS: SPF calculation complete (L1 and L2)
 [t=12ms] Network converged
+```
+
+
+```bash
 
 [t=12ms] r2> show isis neighbors
 System ID       Interface  State  Level  Holdtime
@@ -700,6 +760,11 @@ System ID       Interface  State  Level  Holdtime
 IS-IS Level-1 Link State Database:
 LSPID                 LSP Seq Num  Checksum  Lifetime  Attributes
 0000.0000.0001.00-00  0x00000003   0x4a2e    864       L1
+```
+<details>
+<summary>Show remaining 18 lines</summary>
+
+```bash
 0000.0000.0002.00-00  0x00000003   0x5c1a    864       L1L2
 
 IS-IS Level-2 Link State Database:
@@ -811,6 +876,18 @@ Rust, Tokio for async execution, petgraph for topology representation, gRPC for 
 ---
 
 [← Back to Network Automation](../network-automation)
+
+---
+
+---
+
+[← Back to Projects](../projects)
+
+---
+
+---
+
+[← Back to Projects](../projects)
 
 ---
 

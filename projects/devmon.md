@@ -173,4 +173,16 @@ Automatically highlights projects that are "Active" but have zero "Ready" plans.
 
 ---
 
+---
+
+[← Back to Projects](../projects)
+
+---
+
+---
+
+[← Back to Projects](../projects)
+
+---
+
 [← Back to Projects](../projects)

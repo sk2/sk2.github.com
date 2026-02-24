@@ -232,7 +232,7 @@ When maintaining or expanding this website, strictly adhere to these architectur
 - **Prefer specifics to adjectives.** Instead of "high-performance", state what it does: "processes 10k-node topologies in under a second", "126,000 lines of Rust", "1,350 tests". When numbers aren't available, describe the mechanism: "Rust-native graph engine", "compiled layout algorithms". Let the reader infer performance.
 - **Avoid "high-performance".** This phrase appears generic and marketing-adjacent. Prefer: "fast", "native-speed", "Rust-native", or just describe the architecture and let it speak.
 - **No templated section headers.** Avoid formulaic headings like "What It Is", "Problem It Solves", "Why This Tool?". Use natural, specific headings or fold the content into the introduction.
-- **Show, don't overwhelm.** Use raw code blocks and CLI outputs for technical substance. Long code blocks (>20 lines) are automatically summarized with a collapsible `<details>` element to maintain page flow while keeping evidence accessible.
+- **Show, don't overwhelm.** Use raw code blocks and CLI outputs for technical substance. Long code blocks (>10 lines) show the first 10 lines and hide the remainder within a collapsible `<details>` element to maintain page flow.
 - **Understated, confident, technical.** Write as an engineer explaining work to a peer. No superlatives, no hype, no exclamation marks.
 - **Lead with the core idea.** Every project page begins with a short section explaining the technical problem and architectural approach — not a sales pitch. Use the heading "Concept" (not "The Insight", "The Idea", or "Overview").
 - **Tight prose.** Follow Strunk & White. Remove loose sentences. Let technical outcomes and realistic examples carry the weight.

@@ -186,7 +186,7 @@ A headless, autonomous astrophotography controller designed for low-power Linux 
 
 ### [Satellites](projects/satellites)
 
-<span class="status-badge status-active">Phase 4/6 (100%)</span>
+<span class="status-badge status-active">Phase 5/6 (70%)</span>
 
 
 A terminal-based satellite tracker that displays real-time satellite positions on a world map, predicts passes over the user's location, and shows transmission/frequency data. Built with Rust, ratatui, and the SGP4 orbital propagation algorithm. Aimed at amateur radio operators, space enthusiasts, and anyone who wants to know what's overhead.

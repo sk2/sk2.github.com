@@ -65,8 +65,7 @@ The question this tool answers: "If I leave now, will I see aurora when I arrive
 
 
 
-<details>
-<summary>Show Code (37 lines)</summary>
+
 
 ```
 ┌──────────────────────────────────────────────────┐
@@ -79,6 +78,10 @@ The question this tool answers: "If I leave now, will I see aurora when I arrive
       ┌────────▼────────────┐
       │  Substorm Analyzer  │
       │  Bz southward turns │
+```
+
+
+```
       │  HP step detection   │
       │  120-min trend buffer│
       └────────┬────────────┘
@@ -89,6 +92,11 @@ The question this tool answers: "If I leave now, will I see aurora when I arrive
       │  Cloud cover (30%)  │
       │  Travel time (20%)  │
       │  Moon phase (10%)   │
+```
+<details>
+<summary>Show remaining 15 lines</summary>
+
+```
       └────────┬────────────┘
                │
       ┌────────▼────────────┐
@@ -154,8 +162,7 @@ Backtesting and validation against real storm events:
 
 
 
-<details>
-<summary>Show Code (28 lines)</summary>
+
 
 ```
 Location: Adelaide, SA
@@ -168,6 +175,10 @@ Space Weather:
   HP: 45 GW → 68 GW (building substorm)
   Speed: 580 km/s (elevated)
   Arrival: ~43 minutes
+```
+
+
+```
 
 Site Recommendations:
   1. Victor Harbor — Score: 82 (GO)
@@ -178,6 +189,11 @@ Site Recommendations:
 
 LLM Advice:
   "Strong substorm building with favorable Bz.
+```
+<details>
+<summary>Show remaining 6 lines</summary>
+
+```
    Leave within 30 minutes for Victor Harbor
    to arrive during peak activity window."
 
@@ -206,6 +222,18 @@ AuroraData handles the *planning* side (when to go, where to go), while AuroraPh
 
 1. **AuroraData**: "Strong event predicted, leave now for Victor Harbor"
 2. **AuroraPhoto**: Automated multi-camera capture once on-site
+
+---
+
+---
+
+[← Back to Projects](../projects)
+
+---
+
+---
+
+[← Back to Projects](../projects)
 
 ---
 

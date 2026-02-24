@@ -5,7 +5,7 @@ section: projects
 
 # Satellites
 
-<span class="status-badge status-active">Phase 4/6 (100%)</span>
+<span class="status-badge status-active">Phase 5/6 (70%)</span>
 
 [← Back to Projects](../projects)
 
@@ -36,7 +36,7 @@ A terminal-based satellite tracker that plots real-time satellite positions on a
 
 | | |
 |---|---|
-| **Status** | Phase 4/6 (100%) |
+| **Status** | Phase 5/6 (70%) |
 | **Language** | N/A |
 
 ---
@@ -138,6 +138,18 @@ Pass prediction propagates at 60-second intervals over 24 hours, detects elevati
 - **Coordinates**: map_3d (ECI → ECEF → Geodetic → AER)
 - **HTTP**: reqwest (async JSON API calls)
 - **CLI**: clap 4
+
+---
+
+---
+
+[← Back to Projects](../projects)
+
+---
+
+---
+
+[← Back to Projects](../projects)
 
 ---
 

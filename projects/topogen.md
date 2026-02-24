@@ -98,8 +98,7 @@ Output written to: topology.yaml
 Generated output (excerpt):
 
 
-<details>
-<summary>Show Code (35 lines)</summary>
+
 
 ```yaml
 name: dc-lab-leaf-spine-2s-4l-100g
@@ -112,6 +111,10 @@ nodes:
   - name: spine-2
     type: spine
     tier: 1
+```
+
+
+```yaml
   - name: leaf-1
     type: leaf
     tier: 2
@@ -122,6 +125,11 @@ nodes:
     type: leaf
     tier: 2
   - name: leaf-4
+```
+<details>
+<summary>Show remaining 13 lines</summary>
+
+```yaml
     type: leaf
     tier: 2
 
@@ -204,6 +212,18 @@ Rust core, PyO3 for Python bindings, Maturin build system
 ---
 
 [← Back to Network Automation](../network-automation)
+
+---
+
+---
+
+[← Back to Projects](../projects)
+
+---
+
+---
+
+[← Back to Projects](../projects)
 
 ---
 

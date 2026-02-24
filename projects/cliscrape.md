@@ -148,4 +148,16 @@ Rust's zero-cost abstractions and compiled regex engine deliver 10-50x faster pa
 
 ---
 
+---
+
+[← Back to Projects](../projects)
+
+---
+
+---
+
+[← Back to Projects](../projects)
+
+---
+
 [← Back to Projects](../projects)

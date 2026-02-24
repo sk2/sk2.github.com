@@ -78,8 +78,7 @@ interface GigabitEthernet0/0
 **Juniper JunOS Example:**
 
 
-<details>
-<summary>Show Code (21 lines)</summary>
+
 
 ```
 interfaces {
@@ -92,6 +91,10 @@ interfaces {
     }
 }
 protocols {
+```
+
+
+```
     ospf {
         area 0.0.0.0 {
             interface ge-0/0/0.0 {
@@ -103,7 +106,9 @@ protocols {
 }
 ```
 
-</details>
+
+
+
 
 
 
@@ -272,6 +277,18 @@ Network diagram generation:
 ---
 
 [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
+
+---
+
+[← Back to Projects](../projects)
+
+---
+
+---
+
+[← Back to Projects](../projects)
 
 ---
 

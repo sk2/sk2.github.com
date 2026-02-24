@@ -17,8 +17,6 @@ layout: default
 - [Features](#features)
 - [Architecture](#architecture)
 
----
-
 ## Quick Facts
 
 | | |
@@ -62,96 +60,6 @@ Automatically highlights projects that are "Active" but have zero "Ready" plans.
 **UI Framework**: `ratatui` / `textual` for the TUI dashboard
 **Scanning**: Integrated `ripgrep` support for high-performance file discovery
 **Configuration**: TOML-based project and workspace configuration
-
----
-
----
-
- | [Development Philosophy](../development)
-
----
-
----
-
- | [Development Philosophy](../development)
-
----
-
----
-
- | [Development Philosophy](../development)
-
----
-
----
-
- | [Development Philosophy](../development)
-
----
-
----
-
- | [Development Philosophy](../development)
-
----
-
----
-
- | [Development Philosophy](../development)
-
----
-
----
-
- | [Development Philosophy](../development)
-
----
-
----
-
- | [Development Philosophy](../development)
-
----
-
----
-
- | [Development Philosophy](../development)
-
----
-
----
-
- | [Development Philosophy](../development)
-
----
-
----
-
- | [Development Philosophy](../development)
-
----
-
----
-
- | [Development Philosophy](../development)
-
----
-
----
-
- | [Development Philosophy](../development)
-
----
-
----
-
- | [Development Philosophy](../development)
-
----
-
----
-
- | [Development Philosophy](../development)
 
 ---
 

@@ -19,8 +19,6 @@ layout: default
 - [Integration with HealthyPi](#integration-with-healthypi)
 - [Tech Stack](#tech-stack)
 
----
-
 ## Concept
 
 Heart Rate Variability (HRV) reveals stress, recovery, and autonomic nervous system state through timing variations between heartbeats. Most consumer devices only report derived metrics without providing the underlying RR interval data needed for analysis. This Rust-based driver connects directly to Bluetooth LE heart rate monitors, streams raw RR intervals in real-time, computes time-domain HRV metrics, and logs sessions to columnar Parquet files for downstream analysis.
@@ -89,12 +87,6 @@ Designed to complement the [HealthyPi](healthypi) ecosystem:
 | HRV Analysis | `cardio-rs` |
 | Storage | Apache Arrow, Parquet |
 | Platform | macOS (Linux planned) |
-
----
-
----
-
- | 
 
 <style>
 .status-badge {

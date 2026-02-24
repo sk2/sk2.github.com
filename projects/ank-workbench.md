@@ -18,8 +18,6 @@ section: network-automation
 - [Screenshots](#screenshots)
 - [Core Value](#core-value)
 
----
-
 ## Quick Facts
 
 | | |
@@ -47,12 +45,6 @@ ANK Workbench is the **glue layer** that coordinates the entire network automati
 
 **Workflow:** Generate/model topology → Run simulation → Visualize results → Export configs
 **Value:** Complete pipeline in one interface, no tool-switching or manual integration
-
----
-
----
-
- | [Development Philosophy](../development)
 
 ---
 

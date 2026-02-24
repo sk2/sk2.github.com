@@ -17,8 +17,6 @@ layout: default
 - [What This Is](#what-this-is)
 - [Core Value](#core-value)
 
----
-
 ## Concept
 
 Photo Tour is a smart, interactive photography assistant designed for field use.

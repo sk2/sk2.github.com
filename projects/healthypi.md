@@ -22,8 +22,6 @@ section: signal-processing
 - [Tech Stack](#tech-stack)
 - [Core Value](#core-value)
 
----
-
 ## Concept
 
 A modular, agent-aware health monitoring ecosystem that translates raw biometric data from HealthyPi hardware into actionable insights and automated interventions — bridging high-fidelity biometric wearables with daily health management.

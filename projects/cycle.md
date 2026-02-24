@@ -22,8 +22,6 @@ section: agentic-systems
 - [Tech Stack](#tech-stack)
 - [Core Value](#core-value)
 
----
-
 ## Concept
 
 A native SwiftUI training application for iPad and Apple TV that bridges professional cycling hardware (KICKR Core) with dynamic AI-driven workout logic via NATS, visualized in a SceneKit environment.

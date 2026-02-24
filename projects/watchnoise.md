@@ -17,8 +17,6 @@ layout: default
 - [What This Is](#what-this-is)
 - [Core Value](#core-value)
 
----
-
 ## Concept
 
 **Wave** is an evolutionary ambient audio ecosystem designed to manage the user's sensory environment across rest and work.

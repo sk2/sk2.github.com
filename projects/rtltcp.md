@@ -26,8 +26,6 @@ section: signal-processing
 - [Tech Stack](#tech-stack)
 - [Core Value](#core-value)
 
----
-
 ## Concept
 
 A single Rust binary that auto-detects every connected SDR, streams each over the standard `rtl_tcp` protocol, and provides a TUI dashboard and HTTP API for monitoring and control — designed for headless Raspberry Pi deployment.

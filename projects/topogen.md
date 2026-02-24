@@ -24,8 +24,6 @@ section: network-automation
 - [Tech Stack](#tech-stack)
 - [Core Value](#core-value)
 
----
-
 ## Concept
 
 Generating realistic, validated network topologies for testing often requires custom, brittle scripts. The **Topology Generator** consolidates topology generation logic into a Rust core, producing structured data center and WAN graphs with consistent YAML output for the simulation and visualization ecosystem.

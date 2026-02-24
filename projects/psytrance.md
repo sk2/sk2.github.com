@@ -26,8 +26,6 @@ section: projects
 - [What This Is](#what-this-is)
 - [Core Value](#core-value)
 
----
-
 ## Concept
 
 A tool for exploring composition ideas through generative algorithms. A multi-level energy model drives every musical decision — from macro-level track arc (intro, build, peak, breakdown) down to per-16th-note accent patterns — producing coherent tracks with musical tension and release.

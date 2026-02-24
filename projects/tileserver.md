@@ -11,18 +11,18 @@ section: data-analytics
 
 ---
 
+## Concept
+
+Serve dynamic vector tiles (MVT) from massive geospatial datasets (millions of points) with sub-second latency, enabling interactive visualization in Kepler.gl without pre-rendering static tilesets.
+
+---
+
 ## Quick Facts
 
 | | |
 |---|---|
 | **Status** | Active |
 | **Language** | N/A |
-
----
-
-## Core Value
-
-Serve dynamic vector tiles (MVT) from massive geospatial datasets (millions of points) with sub-second latency, enabling interactive visualization in Kepler.gl without pre-rendering static tilesets.
 
 ---
 

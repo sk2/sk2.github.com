@@ -26,8 +26,6 @@ section: projects
 - [Requirements](#requirements)
 - [Integration with Agents](#integration-with-agents)
 
----
-
 ## Concept
 
 OmniFocus 4's AppleScript and app-based APIs are slow—too slow for AI agents that need instant context. **OmniFocus DB** bypasses these layers with direct SQLite database access, providing near-instant retrieval of projects and tasks in token-efficient formats optimized for agent consumption.
@@ -231,12 +229,6 @@ inbox = use_tool("omnifocus_db", action="inbox")
 - Add to `claude_desktop_config.json` MCP servers
 - Instant OmniFocus context in every conversation
 - "What should I work on next?" answered from live database
-
----
-
----
-
- | [Development Philosophy](../development)
 
 ---
 

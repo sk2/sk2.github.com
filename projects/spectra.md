@@ -18,8 +18,6 @@ layout: default
 - [Features](#features)
 - [Architecture](#architecture)
 
----
-
 ## Quick Facts
 
 | | |
@@ -178,48 +176,6 @@ Edge Pi → SpyServer/rtl_tcp → Mac mini Core
                                     ↓
                 Desktop/Web Visualizers
 ```
-
----
-
----
-
- | [Development Philosophy](../development)
-
----
-
----
-
- | [Development Philosophy](../development)
-
----
-
----
-
- | [Development Philosophy](../development)
-
----
-
----
-
- | [Development Philosophy](../development)
-
----
-
----
-
- | [Development Philosophy](../development)
-
----
-
----
-
- | [Development Philosophy](../development)
-
----
-
----
-
- | [Development Philosophy](../development)
 
 ---
 

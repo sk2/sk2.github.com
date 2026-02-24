@@ -20,8 +20,6 @@ section: signal-processing
 - [Architecture](#architecture)
 - [Core Value](#core-value)
 
----
-
 ## Concept
 
 Ambient RF signals reflect off objects in the environment. By processing these reflections with coherent multi-channel receivers, we can extract bistatic range and Doppler shift information — an interesting signal processing challenge.

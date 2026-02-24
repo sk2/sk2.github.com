@@ -18,8 +18,6 @@ layout: default
 - [Components](#components)
 - [Core Value](#core-value)
 
----
-
 ## Concept
 
 OpenAstro Core is a high-performance Rust library providing shared astronomical logic, hardware drivers, and protocol implementations for the OpenAstro ecosystem.

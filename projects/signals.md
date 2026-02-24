@@ -30,8 +30,6 @@ section: signal-processing
 - [Tech Stack](#tech-stack)
 - [Core Value](#core-value)
 
----
-
 ## Concept
 
 Monitor the local radio spectrum autonomously, classify every detected signal using ML, and maintain a persistent "Signal Census" — a queryable database of all RF activity over time. Distributed across Raspberry Pi edge nodes and a Mac mini core, the system runs unattended, sweeping bands, scheduling satellite passes, and logging what it finds.

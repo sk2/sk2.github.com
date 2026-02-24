@@ -18,8 +18,6 @@ section: network-automation
 - [What This Is](#what-this-is)
 - [Core Value](#core-value)
 
----
-
 ## Concept
 
 A fast, simple, and ergonomic Rust library and CLI for network device interaction and automated testing. Provides the essential PyATS capabilities—testbed management, CLI parsing, and state verification—without the complexity, as a focused component in a broader network automation toolkit.

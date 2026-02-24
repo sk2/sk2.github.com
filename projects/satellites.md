@@ -5,7 +5,7 @@ section: projects
 
 # Satellites
 
-<span class="status-badge status-active">Phase 3/6 (30%)</span>
+<span class="status-badge status-active">Phase 5/6 (80%)</span>
 
 [← Back to Projects](../projects)
 
@@ -26,8 +26,6 @@ section: projects
 - [What This Is](#what-this-is)
 - [Core Value](#core-value)
 
----
-
 ## Concept
 
 A terminal-based satellite tracker that plots real-time satellite positions on a world map, predicts passes over your location, and displays transmission frequencies from SatNOGS. Built with Rust, ratatui, and the SGP4 orbital propagation algorithm.
@@ -38,7 +36,7 @@ A terminal-based satellite tracker that plots real-time satellite positions on a
 
 | | |
 |---|---|
-| **Status** | Phase 3/6 (30%) |
+| **Status** | Phase 5/6 (80%) |
 | **Language** | N/A |
 
 ---

@@ -18,8 +18,6 @@ section: data-analytics
 - [Overview](#overview)
 - [Core Value](#core-value)
 
----
-
 ## Concept
 
 A data engineering pipeline to fetch, process, and serve high-resolution weather model data from the Australian Bureau of Meteorology (BOM). Specifically targeting the ACCESS (Australian Community Climate and Earth-System Simulator) model outputs.

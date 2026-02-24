@@ -23,8 +23,6 @@ section: network-automation
 - [Milestones](#milestones)
 - [Tech Stack](#tech-stack)
 
----
-
 ## Concept
 
 Network topology modeling typically forces a choice between the speed of untyped graph libraries (NetworkX) and the rigidity of database-backed sources of truth. **AutoNetkit** eliminates this trade-off by using Pydantic for schema validation and a Rust core (`petgraph`) for graph traversals. It is a modern reimagining of the original AutoNetkit research, reclaiming the name for a production-ready automation library.

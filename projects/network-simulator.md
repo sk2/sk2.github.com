@@ -28,8 +28,6 @@ section: network-automation
 - [What This Is](#what-this-is)
 - [Core Value](#core-value)
 
----
-
 ## Concept
 
 Developing agentic AI systems and network automation tools requires rapid iteration. Spinning up containers for every test cycle takes minutes; simulation takes seconds. This simulator enables fast prototyping of network automation agents, DevOps pipelines, and AI-driven network operations — validate configurations and agent logic in simulation before committing to heavyweight container deployments.
@@ -361,9 +359,7 @@ r1> show ospf neighbors --json
 - **GRE tunnels** — `gre tunnel set` for overlay configuration
 - **MPLS OAM** — `mpls ping`, `mpls traceroute` for label-switched path verification
 
----
 
----
 
 ### TUI Daemon Selector
 
@@ -404,9 +400,7 @@ Press Enter to select a daemon, then **Level 2 — Device selector** shows all d
 
 Press Enter on a device to open an interactive console session. Press `l` at any point to open the **log viewer** showing real-time daemon events (protocol state changes, adjacency transitions, convergence events).
 
----
 
----
 
 ### Daemon Management
 
@@ -437,9 +431,7 @@ $ netsim daemon stop my-network
 $ netsim daemon list --clean
 ```
 
----
 
----
 
 ### CI/CD Integration Example
 

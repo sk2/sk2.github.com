@@ -22,8 +22,6 @@ section: data-analytics
 - [Use Cases](#use-cases)
 - [Core Value](#core-value)
 
----
-
 ## Quick Facts
 
 | | |
@@ -141,12 +139,6 @@ Polars DataFrame (via to_dataframe()) or Rust types
 - Find repeating load patterns for capacity planning
 - Detect anomalous system behavior
 - Example: Server load pattern analysis for autoscaling
-
----
-
----
-
- | [Development Philosophy](../development)
 
 ---
 

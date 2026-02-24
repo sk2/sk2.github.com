@@ -23,8 +23,6 @@ section: network-automation
 - [What This Is](#what-this-is)
 - [Core Value](#core-value)
 
----
-
 ## Concept
 
 Network automation relies on parsing unstructured CLI output from devices. TextFSM handles this but suffers from Python's GIL limitations and slow regex execution. This Rust-based parser replicates TextFSM's state-machine semantics with native performance — parse massive `show tech-support` outputs in milliseconds, not seconds.
@@ -108,12 +106,6 @@ Rust's zero-cost abstractions and compiled regex engine deliver 10-50x faster pa
 | TUI | `ratatui` + `crossterm` |
 | Parsing | Custom lexer/parser |
 | Templates | TextFSM + YAML/TOML |
-
----
-
----
-
- | 
 
 <style>
 .status-badge {

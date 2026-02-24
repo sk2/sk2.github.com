@@ -21,8 +21,6 @@ section: projects
 - [Milestones](#milestones)
 - [Tech Stack](#tech-stack)
 
----
-
 ## Concept
 
 - **StillState:** Reclaiming silence and rest in shared or noisy environments through intelligent, adaptive audio

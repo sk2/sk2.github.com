@@ -3,11 +3,21 @@ layout: default
 section: signal-processing
 ---
 
-# RF Signal Analysis
+# Signal Reflection Analysis
 
-<span class="status-badge status-active">Phase 7/10 (60%)</span>
+<span class="status-badge status-active">Phase 7/10 (97%)</span>
 
-[← Back to Signal Processing](../signal-processing)
+[← Back to Projects](../projects)
+
+---
+
+## Contents
+
+- [Concept](#concept)
+- [Quick Facts](#quick-facts)
+- [What This Is](#what-this-is)
+- [Core Principles](#core-principles)
+- [Architecture](#architecture)
 
 ---
 
@@ -15,19 +25,22 @@ section: signal-processing
 
 Ambient RF signals reflect off objects in the environment. By processing these reflections with coherent multi-channel receivers, we can extract bistatic range and Doppler shift information — an interesting signal processing challenge.
 
+---
+
 ## Quick Facts
 
 | | |
 |---|---|
-| **Status** | Phase 7/10 (60%) |
+| **Status** | Phase 7/10 (97%) |
 | **Language** | N/A |
-| **Started** | 2026 |
 
 ---
 
 ## What This Is
 
 An experimental signal processing project exploring how to analyze reflections of ambient radio signals. The system uses coherent multi-channel RF data to study bistatic geometry and Doppler effects.
+
+---
 
 ## Core Principles
 
@@ -49,6 +62,8 @@ An experimental signal processing project exploring how to analyze reflections o
 - **Cost-Effective**: Uses existing RF infrastructure for experiments
 - **Educational**: Practical exploration of bistatic geometry and signal processing techniques
 
+---
+
 ## Architecture
 
 **v1.0 Foundation (Phases 1-4, Complete):**
@@ -64,10 +79,18 @@ Currently implementing analysis and association logic (Phase 6). The system now 
 - **Analysis Management**: Per-beam analysis with cross-beam fusion planned for v3
 - **Real-Time Operation**: Signal analysis with sub-second latency
 
-## Current Status
-
-Phase 6 in progress. Clean, understandable, stable codebase that reliably analyzes signals in real-time. Phase 5 (CFAR Detection) complete and verified.
+---
 
 ---
 
 [← Back to Signal Processing](../signal-processing)
+
+---
+
+---
+
+[← Back to Projects](../projects)
+
+---
+
+[← Back to Projects](../projects)

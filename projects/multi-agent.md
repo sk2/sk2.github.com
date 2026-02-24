@@ -7,14 +7,28 @@ section: agentic-systems
 
 <span class="status-badge status-active">Phase 21/23 (100%)</span>
 
-[← Back to Agentic Systems](../agentic-systems)
+[← Back to Projects](../projects)
 
 ---
 
+## Contents
+
+- [Concept](#concept)
+- [Quick Facts](#quick-facts)
+- [What This Is](#what-this-is)
+- [Problem It Solves](#problem-it-solves)
+- [Features](#features)
+- [Architecture](#architecture)
+- [Security Model](#security-model)
+- [Individual Agents](#individual-agents)
+
+---
 
 ## Concept
 
 Multi-agent coordination requires strict security boundaries to prevent lateral movement. This assistant demonstrates **containerized isolation** where agents (HealthKit, Home Automation, etc.) coordinate via a NATS message broker. By using per-subject ACLs and a "deny-by-default" security posture, the system ensures that compromise of a single agent cannot cascade through the infrastructure.
+
+---
 
 ## Quick Facts
 
@@ -22,7 +36,6 @@ Multi-agent coordination requires strict security boundaries to prevent lateral 
 |---|---|
 | **Status** | Phase 21/23 (100%) |
 | **Language** | Agents can be Go, Python, or Rust |
-| **Started** | 2026 |
 
 ---
 
@@ -31,6 +44,8 @@ Multi-agent coordination requires strict security boundaries to prevent lateral 
 A security-first framework for coordinating specialized agents. It uses NATS for communication and Docker for isolated execution. The orchestrator handles high-level reasoning and workflow execution, while agents perform deterministic tasks.
 
 The system includes 13+ specialized agents: HealthKit, HealthyPi, Hue (home automation), Climate, Calendar, Weather, RSS, Backup Monitor, Screen Time, Network Monitor, Workflow Engine, Notification Gateway, and Audit Anomaly detection. See [Individual Agents](#individual-agents) section below for details.
+
+---
 
 ## Problem It Solves
 
@@ -62,6 +77,8 @@ AI agent systems need strong security boundaries to prevent compromise from casc
 - Complete audit trail via OpenTelemetry
 - Pre-approval workflow for sensitive actions
 - Lightweight deterministic agents with cloud LLM orchestrator
+
+---
 
 ## Features
 
@@ -171,6 +188,8 @@ Each agent runs in isolated Docker container:
 - Polling: Periodic queries to external services
 - Reactive: Respond to events on message queue
 
+---
+
 ## Security Model
 
 ### Capability-Based Authorization
@@ -223,6 +242,8 @@ OpenTelemetry tracing for all operations:
 - Security incident investigation
 - Compliance reporting
 
+---
+
 ## Individual Agents
 
 **The system includes 13+ specialized agents**, each designed for a specific domain with minimal privileges and explicit security boundaries:
@@ -254,4 +275,16 @@ All agents communicate exclusively via NATS with subject-based ACLs. Each agent'
 
 ---
 
+---
+
 [← Back to Agentic Systems](../agentic-systems)
+
+---
+
+---
+
+[← Back to Projects](../projects)
+
+---
+
+[← Back to Projects](../projects)

@@ -5,9 +5,20 @@ section: signal-processing
 
 # soundarray
 
-<span class="status-badge status-active">Active Development</span>
+<span class="status-badge status-active">Active</span>
 
-[← Back to Signal Processing](../signal-processing)
+[← Back to Projects](../projects)
+
+---
+
+## Contents
+
+- [Concept](#concept)
+- [Quick Facts](#quick-facts)
+- [What This Is](#what-this-is)
+- [Key Features](#key-features)
+- [Processing Pipeline](#processing-pipeline)
+- [Tech Stack](#tech-stack)
 
 ---
 
@@ -15,19 +26,22 @@ section: signal-processing
 
 The ability to capture, localize, and classify complex soundscapes on edge devices or via remote streaming, providing structured insights to an agent framework.
 
+---
+
 ## Quick Facts
 
 | | |
 |---|---|
 | **Status** | Active |
 | **Language** | N/A |
-| **Started** | 2026 |
 
 ---
 
 ## What This Is
 
 A spatial audio processing system using Raspberry Pi and microphone arrays. It combines sound source localization (Time of Arrival, beamforming) with ML-based classification (vehicles, wildlife) using ODAS for DSP and YAMNet for edge inference, publishing structured detections to an agent framework via MQTT.
+
+---
 
 ## Key Features
 
@@ -36,6 +50,8 @@ A spatial audio processing system using Raspberry Pi and microphone arrays. It c
 - **Adaptive Beamforming**: Directional sound isolation via ODAS — separate overlapping sources
 - **Edge Classification**: YAMNet (521 classes) on TensorFlow Lite, optimized for ARM/NEON — vehicles, birds, bats, engines
 - **Agent Integration**: JSON payloads to MQTT for analyst agent consumption with confidence scores
+
+---
 
 ## Processing Pipeline
 
@@ -53,12 +69,7 @@ YAMNet TFLite Inference
 JSON/MQTT → Agent Framework
 ```
 
-## Roadmap
-
-- **Phase 1: Audio Foundation** — Multi-channel synchronized capture, remote streaming, valid WAV/PCM output
-- **Phase 2: Spatial Intelligence** — Real-time azimuth reporting, beamformed mono isolation, moving source tracking
-- **Phase 3: Intelligent Classification** — Vehicle/bird identification from beamformed audio, sustainable Pi CPU load, confidence scoring
-- **Phase 4: Agent Dispatch & Monitoring** — MQTT payloads with spatial metadata, CLI dashboard, analyst agent integration
+---
 
 ## Tech Stack
 
@@ -66,4 +77,16 @@ C++ (ODAS), Python (librosa, NumPy, PyAudio), TensorFlow Lite (YAMNet), MQTT (Mo
 
 ---
 
+---
+
 [← Back to Signal Processing](../signal-processing)
+
+---
+
+---
+
+[← Back to Projects](../projects)
+
+---
+
+[← Back to Projects](../projects)

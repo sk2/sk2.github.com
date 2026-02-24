@@ -4,9 +4,20 @@ layout: default
 
 # HRV Monitor
 
-<span class="status-badge status-active">Active Development</span>
+<span class="status-badge status-active">Active</span>
 
-[← Back to Signal Processing](../signal-processing) | [← Back to Projects](../projects)
+[← Back to Projects](../projects)
+
+---
+
+## Contents
+
+- [Concept](#concept)
+- [Quick Facts](#quick-facts)
+- [Key Features](#key-features)
+- [Architecture](#architecture)
+- [Integration with HealthyPi](#integration-with-healthypi)
+- [Tech Stack](#tech-stack)
 
 ---
 
@@ -16,6 +27,15 @@ Heart Rate Variability (HRV) reveals stress, recovery, and autonomic nervous sys
 
 ![HRV Monitor TUI](/images/hrv.png)
 *Live RR interval tracking with rolling 60-second charts and computed HRV metrics.*
+
+---
+
+## Quick Facts
+
+| | |
+|---|---|
+| **Status** | Active |
+| **Language** | N/A |
 
 ---
 
@@ -72,10 +92,6 @@ Designed to complement the [HealthyPi](healthypi) ecosystem:
 
 ---
 
-## Current Status
-
-Active development. Core functionality complete: BLE scanning, device connection, real-time metric computation, session logging. Next: Linux support, frequency-domain metrics (LF/HF ratio), integration with HealthyPi agent workflows.
-
 ---
 
 [← Back to Signal Processing](../signal-processing) | [← Back to Projects](../projects)
@@ -94,3 +110,13 @@ Active development. Core functionality complete: BLE scanning, device connection
   color: white;
 }
 </style>
+
+---
+
+---
+
+[← Back to Projects](../projects)
+
+---
+
+[← Back to Projects](../projects)

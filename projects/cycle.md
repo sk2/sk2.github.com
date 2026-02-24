@@ -7,7 +7,19 @@ section: agentic-systems
 
 <span class="status-badge status-active">Phase 4/5 (71%)</span>
 
-[← Back to Agentic Systems](../agentic-systems)
+[← Back to Projects](../projects)
+
+---
+
+## Contents
+
+- [Concept](#concept)
+- [Quick Facts](#quick-facts)
+- [What This Is](#what-this-is)
+- [Key Features](#key-features)
+- [Architecture](#architecture)
+- [Milestones](#milestones)
+- [Tech Stack](#tech-stack)
 
 ---
 
@@ -15,19 +27,22 @@ section: agentic-systems
 
 A native SwiftUI training application for iPad and Apple TV that bridges professional cycling hardware (KICKR Core) with dynamic AI-driven workout logic via NATS, visualized in a SceneKit environment.
 
+---
+
 ## Quick Facts
 
 | | |
 |---|---|
 | **Status** | Phase 4/5 (71%) |
 | **Language** | N/A |
-| **Started** | 2026 |
 
 ---
 
 ## What This Is
 
 An indoor cycling app that connects to a Wahoo KICKR Core via Bluetooth FTMS, receives AI-driven workout commands through a NATS agent bridge, and renders an immersive procedurally-generated 3D terrain synchronized to your effort. The AI agent controls trainer resistance in real-time based on workout logic, while the app provides live metrics and an engaging visual experience.
+
+---
 
 ## Key Features
 
@@ -36,6 +51,8 @@ An indoor cycling app that connects to a Wahoo KICKR Core via Bluetooth FTMS, re
 - **3D Terrain Visualization**: Infinite procedurally-generated low-poly SceneKit terrain at sustained 60fps, visual speed synchronized with trainer output
 - **Biometric Integration**: Heart rate relay from Apple Watch, HealthKit workout recording
 - **TV-Optimized UI**: 10-foot viewing distance design, color-coded intensity zones, tvOS focus navigation
+
+---
 
 ## Architecture
 
@@ -49,6 +66,8 @@ SwiftUI App (iPad / Apple TV)
     └── WatchConnectivity → Heart Rate
 ```
 
+---
+
 ## Milestones
 
 **Phase 1: Core Connectivity** (80% Complete)
@@ -61,10 +80,24 @@ BLE discovery, FTMS control, NATS connection, and live metrics display.
 - **Phase 4: Heart Rate & Health** — Apple Watch integration, HealthKit storage
 - **Phase 5: Polish & UI** — Polished HUD, tvOS optimization, 10-foot UI
 
+---
+
 ## Tech Stack
 
 Swift (SwiftUI, SceneKit, CoreBluetooth, HealthKit), NATS messaging, iPadOS/tvOS
 
 ---
 
+---
+
 [← Back to Agentic Systems](../agentic-systems)
+
+---
+
+---
+
+[← Back to Projects](../projects)
+
+---
+
+[← Back to Projects](../projects)

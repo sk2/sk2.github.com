@@ -7,7 +7,23 @@ section: signal-processing
 
 <span class="status-badge status-active">Phase 5/6 (100%)</span>
 
-[← Back to Signal Processing](../signal-processing)
+[← Back to Projects](../projects)
+
+---
+
+## Contents
+
+- [Concept](#concept)
+- [Quick Facts](#quick-facts)
+- [What This Is](#what-this-is)
+- [Why a Unified Server](#why-a-unified-server)
+- [Supported Hardware](#supported-hardware)
+- [Architecture](#architecture)
+- [TUI Dashboard](#tui-dashboard)
+- [HTTP API](#http-api)
+- [Raspberry Pi Deployment](#raspberry-pi-deployment)
+- [Development Roadmap](#development-roadmap)
+- [Tech Stack](#tech-stack)
 
 ---
 
@@ -15,13 +31,14 @@ section: signal-processing
 
 A single Rust binary that auto-detects every connected SDR, streams each over the standard `rtl_tcp` protocol, and provides a TUI dashboard and HTTP API for monitoring and control — designed for headless Raspberry Pi deployment.
 
+---
+
 ## Quick Facts
 
 | | |
 |---|---|
 | **Status** | Phase 5/6 (100%) |
 | **Language** | N/A |
-| **Started** | 2026 |
 
 ---
 
@@ -31,6 +48,8 @@ A multi-SDR streaming server that replaces the separate C-based servers (`rtl_tc
 
 ![rtltcp-rust TUI](/images/rtltcp-server-tui.png)
 *TUI dashboard showing 8 RTL-SDR devices and an AirSpy HF+ streaming on a Raspberry Pi.*
+
+---
 
 ## Why a Unified Server
 
@@ -42,6 +61,8 @@ Existing C-based implementations have three problems:
 
 This server manages all devices from a single process with shared state, a TUI for live adjustment over SSH, and an HTTP API for programmatic monitoring.
 
+---
+
 ## Supported Hardware
 
 | Device | Default Sample Rate | Bits | Port Assignment |
@@ -51,6 +72,8 @@ This server manages all devices from a single process with shared state, a TUI f
 | AirSpy | 6 MHz | 12-bit (native) | continues after AirSpy HF+ |
 
 All three device types are auto-detected on startup. AirSpy HF+ and AirSpy support are compile-time features enabled by default.
+
+---
 
 ## Architecture
 
@@ -71,6 +94,8 @@ All three device types are auto-detected on startup. AirSpy HF+ and AirSpy suppo
 
 Each device runs in its own tokio task with dedicated USB I/O and TCP streaming threads. The TUI and HTTP API share device state through `Arc<Mutex<>>` with 1 Hz status broadcasts.
 
+---
+
 ## TUI Dashboard
 
 The TUI provides real-time monitoring and live control over SSH:
@@ -80,6 +105,8 @@ The TUI provides real-time monitoring and live control over SSH:
 - **Interactive controls**: Change frequency (`f`), gain (`g`), sample rate (`s`), toggle devices (`t`)
 - **Log viewer**: Tabbed view with scrollable log output
 - **Status feedback**: Color-coded confirmation of commands
+
+---
 
 ## HTTP API
 
@@ -112,6 +139,8 @@ curl http://localhost:8080/api/v1/devices
 | GET | `/api/v1/devices` | All devices with status |
 | GET | `/api/v1/devices/:name` | Single device by name |
 
+---
+
 ## Raspberry Pi Deployment
 
 Docker-based cross-compilation for all Pi models:
@@ -133,6 +162,8 @@ STRIP=1 ./deploy-to-pi.sh pi@raspberrypi.local
 | `armv7-unknown-linux-gnueabihf` | Pi 2/3 (32-bit) |
 | `arm-unknown-linux-gnueabihf` | Pi Zero/1 |
 
+---
+
 ## Development Roadmap
 
 ### Phase 1: Hardware Foundation (Complete)
@@ -147,6 +178,8 @@ Ratatui-based dashboard, interactive frequency/gain/sample rate adjustment, chan
 ### Phase 4: Network Optimization (Planned)
 Compression (LZ4/zstd), UDP transport with Forward Error Correction, "Mac Tunnel" client for remote desktop control.
 
+---
+
 ## Tech Stack
 
 - **Language**: Rust (2021 edition)
@@ -159,4 +192,16 @@ Compression (LZ4/zstd), UDP transport with Forward Error Correction, "Mac Tunnel
 
 ---
 
+---
+
 [← Back to Signal Processing](../signal-processing)
+
+---
+
+---
+
+[← Back to Projects](../projects)
+
+---
+
+[← Back to Projects](../projects)

@@ -1,12 +1,22 @@
 ---
 layout: default
+section: network-automation
 ---
 
 # ANK Workbench
 
-<span class="status-badge status-active">Phase 36/39 (44%)</span>
+<span class="status-badge status-active">Phase 42/47 (100%)</span>
 
 [← Back to Projects](../projects)
+
+---
+
+## Quick Facts
+
+| | |
+|---|---|
+| **Status** | Phase 42/47 (100%) |
+| **Language** | Python backend (FastAPI or Flask), React or Vue frontend — Leverages existing Python ecosystem for ANK components, meets modern UX expectations |
 
 ---
 
@@ -31,4 +41,16 @@ ANK Workbench is the **glue layer** that coordinates the entire network automati
 
 ---
 
+---
+
 [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
+
+---
+
+[← Back to Projects](../projects)
+
+---
+
+[← Back to Projects](../projects)

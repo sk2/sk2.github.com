@@ -1,10 +1,6 @@
 ---
 layout: default
 section: projects
-## Current Status
-
-2026-02-16 - Closed out phase 7 (summaries, state update)
-
 ---
 
 # OmniFocus DB CLI (omnifocus-db)
@@ -13,16 +9,30 @@ section: projects
 
 [← Back to Projects](../projects)
 
-## Current Status
-
-2026-02-16 - Closed out phase 7 (summaries, state update)
-
 ---
 
+## Contents
+
+- [Concept](#concept)
+- [Quick Facts](#quick-facts)
+- [What This Is](#what-this-is)
+- [Core Value](#core-value)
+- [The Problem](#the-problem)
+- [The Solution](#the-solution)
+- [Key Features](#key-features)
+- [Use Cases](#use-cases)
+- [Architecture](#architecture)
+- [Tech Stack](#tech-stack)
+- [Requirements](#requirements)
+- [Integration with Agents](#integration-with-agents)
+
+---
 
 ## Concept
 
 OmniFocus 4's AppleScript and app-based APIs are slow—too slow for AI agents that need instant context. **OmniFocus DB** bypasses these layers with direct SQLite database access, providing near-instant retrieval of projects and tasks in token-efficient formats optimized for agent consumption.
+
+---
 
 ## Quick Facts
 
@@ -30,11 +40,6 @@ OmniFocus 4's AppleScript and app-based APIs are slow—too slow for AI agents t
 |---|---|
 | **Status** | ** Phase 7: Interactive Inbox Triage TUI — COMPLETE |
 | **Language** | N/A |
-| **Started** | 2026 |
-
-## Current Status
-
-2026-02-16 - Closed out phase 7 (summaries, state update)
 
 ---
 
@@ -42,11 +47,15 @@ OmniFocus 4's AppleScript and app-based APIs are slow—too slow for AI agents t
 
 A fast CLI tool for direct database access to OmniFocus 4. Designed specifically for AI agent context and fast triaging, it bypasses slow AppleScript/TypeScript layers to read directly from the OmniFocus SQLite database.
 
+---
+
 ## Core Value
 
 - **Zero-Latency Context**: Near-instant retrieval of projects and tasks without OmniFocus app overhead
 - **Agent-Optimized**: Dense, low-token representations of task lists for efficient LLM context
 - **Safety First**: Read-only access by default to prevent database corruption
+
+---
 
 ## The Problem
 
@@ -59,6 +68,8 @@ A fast CLI tool for direct database access to OmniFocus 4. Designed specifically
 - Need instant context: "What's in my inbox?"
 - Token efficiency matters: Raw OmniFocus XML is verbose
 - Real-time triaging: Can't wait seconds for each query
+
+---
 
 ## The Solution
 
@@ -73,6 +84,8 @@ XML/Text Output
 ```
 
 **Performance Improvement:** ~200x faster for typical queries
+
+---
 
 ## Key Features
 
@@ -94,6 +107,8 @@ XML/Text Output
 ### MCP Integration
 - **Model Context Protocol Server**: Direct integration with Claude and other LLM tools
 - **Streaming Context**: Real-time task list updates in agent conversations
+
+---
 
 ## Use Cases
 
@@ -126,6 +141,8 @@ User: "What's urgent in my OmniFocus?"
 Agent: [omnifocus-db query in 5ms]
 Agent: "You have 3 flagged items due today: PR review, dentist appointment, and team standup prep."
 ```
+
+---
 
 ## Architecture
 
@@ -160,6 +177,8 @@ Agent: "You have 3 flagged items due today: PR review, dentist appointment, and 
     └──────────┘
 ```
 
+---
+
 ## Tech Stack
 
 - **Language**: Python (fast iteration, robust SQLite support)
@@ -167,6 +186,8 @@ Agent: "You have 3 flagged items due today: PR review, dentist appointment, and 
 - **Platform**: macOS (OmniFocus 4 Direct Version)
 - **Output**: JSON, compact text, or MCP protocol
 - **Safety**: Read-only, lock detection
+
+---
 
 ## Requirements
 
@@ -181,6 +202,8 @@ Agent: "You have 3 flagged items due today: PR review, dentist appointment, and 
 - **Write Operations**: Deferred to ensure stability; triaging is advisory only
 - **Legacy Support**: No OmniFocus 2 or 3 support
 - **UI/GUI**: Headless CLI/API tool only
+
+---
 
 ## Integration with Agents
 
@@ -198,10 +221,18 @@ inbox = use_tool("omnifocus_db", action="inbox")
 - Instant OmniFocus context in every conversation
 - "What should I work on next?" answered from live database
 
-## Current Status
-
-2026-02-16 - Closed out phase 7 (summaries, state update)
+---
 
 ---
 
 [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
+
+---
+
+[← Back to Projects](../projects)
+
+---
+
+[← Back to Projects](../projects)

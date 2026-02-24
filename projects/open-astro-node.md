@@ -7,7 +7,19 @@ section: photography
 
 <span class="status-badge status-active">** 2. Control</span>
 
-[← Back to Photography](../photography)
+[← Back to Projects](../projects)
+
+---
+
+## Contents
+
+- [Concept](#concept)
+- [Quick Facts](#quick-facts)
+- [What This Is](#what-this-is)
+- [Key Features](#key-features)
+- [Architecture](#architecture)
+- [Milestones](#milestones)
+- [Tech Stack](#tech-stack)
 
 ---
 
@@ -15,19 +27,22 @@ section: photography
 
 A headless, autonomous astrophotography controller designed for low-power Linux devices (RPi/Jetson). It manages hardware, executes imaging sequences, and ensures rig safety — set up, start the sequence, and go to sleep with confidence.
 
+---
+
 ## Quick Facts
 
 | | |
 |---|---|
 | **Status** | ** 2. Control |
 | **Language** | N/A |
-| **Started** | 2026 |
 
 ---
 
 ## What This Is
 
 An autonomous astrophotography controller that runs on Raspberry Pi or Jetson, managing cameras (via INDI/gphoto2) and mounts (ZWO AM5, Benro Polaris). It provides both a responsive web UI and a terminal TUI for remote control, with a "Goodnight Protocol" safety system that monitors star quality, battery, and weather to protect equipment.
+
+---
 
 ## Key Features
 
@@ -36,6 +51,8 @@ An autonomous astrophotography controller that runs on Raspberry Pi or Jetson, m
 - **Dual Interface**: React web UI with night vision mode (strict true-red) and Rust TUI for SSH control
 - **Real-Time State**: WebSocket snapshots at ~1Hz with immediate events, UI prefs persistence
 - **Precision Tracking**: PHD2 guiding integration, meridian flip, plate-solving via ASTAP
+
+---
 
 ## Architecture
 
@@ -52,6 +69,8 @@ Rust Backend (Axum)
     └── Database (SQLite)
 ```
 
+---
+
 ## Milestones
 
 **Phase 1: Foundation** (Complete — 8/8 plans)
@@ -65,10 +84,24 @@ Web UI with night vision mode, TUI for SSH, real-time state transport, targets C
 - **Phase 3: Autonomous Imaging** — Guided calibration wizard (darks/flats), Goodnight Protocol safety shutdown
 - **Phase 4: Precision** — Advanced sequencing (wait for altitude, loop until time), multi-rig sync between nodes
 
+---
+
 ## Tech Stack
 
 Rust (Axum, Tokio, SQLite), React (TypeScript, Tailwind CSS), INDI, PHD2, ASTAP plate-solving
 
 ---
 
+---
+
 [← Back to Photography](../photography)
+
+---
+
+---
+
+[← Back to Projects](../projects)
+
+---
+
+[← Back to Projects](../projects)

@@ -1,5 +1,6 @@
 ---
 layout: default
+section: network-automation
 ---
 
 # Orchestrator (Device Interaction Runner)
@@ -10,7 +11,7 @@ layout: default
 
 ---
 
-## What This Is
+## Concept
 
 An orchestration runner for coordinating **device interactions** across real/testbed networks. It executes runs with retries, timeouts, bounded concurrency, and durable artifacts (logs, results, snapshots) that plug into the broader automation ecosystem.
 
@@ -20,4 +21,19 @@ This is inspired by Tower/AWX-style job execution, but it is purpose-built for o
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+## Quick Facts
+
+| | |
+|---|---|
+| **Status** | Phase 1/5 (0%) |
+| **Language** | N/A |
+
+---
+
+---
+
+[← Back to Projects](../projects)
+
+---
+
+[← Back to Projects](../projects)

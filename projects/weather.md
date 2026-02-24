@@ -1,5 +1,6 @@
 ---
 layout: default
+section: data-analytics
 ---
 
 # Weather (BOM ACCESS Pipeline)
@@ -10,14 +11,17 @@ layout: default
 
 ---
 
-## Overview
+## Concept
 
 A data engineering pipeline to fetch, process, and serve high-resolution weather model data from the Australian Bureau of Meteorology (BOM). Specifically targeting the ACCESS (Australian Community Climate and Earth-System Simulator) model outputs.
 
-## Current Status
+## Quick Facts
 
-2026-02-14 - Completed 02-04-PLAN.md (Phase 2 complete)
+| | |
+|---|---|
+| **Status** | Phase 2/4 (75%) |
+| **Language** | N/A |
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+[← Back to Projects](../projects)

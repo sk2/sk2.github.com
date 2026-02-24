@@ -4,15 +4,26 @@ layout: default
 
 # AutoNetkit — The Foundation
 
-<span class="status-badge status-active">PhD 2017</span>
+<span class="status-badge status-active">Active</span>
 
 [← Back to Projects](../projects)
+
+---
+
+## Quick Facts
+
+| | |
+|---|---|
+| **Status** | Active |
+| **Language** | N/A |
 
 ---
 
 ## The Insight
 
 Developing...
+
+---
 
 ## Features
 
@@ -105,19 +116,11 @@ Network diagram generation:
 
 ---
 
-[← Back to Network Automation](../network-automation)
-
 ---
 
 [← Back to Network Automation](../network-automation)
 
 ---
-
-[← Back to Network Automation](../network-automation)
-
----
-
-[← Back to Network Automation](../network-automation)
 
 ---
 
@@ -125,15 +128,35 @@ Network diagram generation:
 
 ---
 
-[← Back to Network Automation](../network-automation)
-
 ---
 
 [← Back to Network Automation](../network-automation)
 
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+---
+
+[← Back to Network Automation](../network-automation)
+
+---
+
+---
+
+[← Back to Network Automation](../network-automation)
+
+---
+
+---
+
+[← Back to Network Automation](../network-automation)
+
+---
+
+---
+
+[← Back to Network Automation](../network-automation)
+
+---
 
 ---
 
@@ -141,7 +164,11 @@ Network diagram generation:
 
 ---
 
+---
+
 [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
 
 ---
 
@@ -149,7 +176,11 @@ Network diagram generation:
 
 ---
 
+---
+
 [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
 
 ---
 
@@ -157,7 +188,11 @@ Network diagram generation:
 
 ---
 
+---
+
 [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
 
 ---
 
@@ -165,7 +200,11 @@ Network diagram generation:
 
 ---
 
+---
+
 [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
 
 ---
 
@@ -173,7 +212,11 @@ Network diagram generation:
 
 ---
 
+---
+
 [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
 
 ---
 
@@ -181,7 +224,11 @@ Network diagram generation:
 
 ---
 
+---
+
 [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
 
 ---
 
@@ -189,7 +236,11 @@ Network diagram generation:
 
 ---
 
+---
+
 [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
 
 ---
 
@@ -197,8 +248,28 @@ Network diagram generation:
 
 ---
 
+---
+
 [← Back to Projects](../projects) | [Development Philosophy](../development)
 
 ---
 
+---
+
 [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
+
+---
+
+[← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
+
+---
+
+[← Back to Projects](../projects)
+
+---
+
+[← Back to Projects](../projects)

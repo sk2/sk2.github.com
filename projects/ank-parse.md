@@ -4,9 +4,28 @@ layout: default
 
 # Network Configuration Parser
 
-<span class="status-badge status-active">Phase 1 — Knowledge Base Ingestion</span>
+<span class="status-badge status-active">Active</span>
 
 [← Back to Projects](../projects)
+
+---
+
+## Contents
+
+- [Quick Facts](#quick-facts)
+- [The Insight](#the-insight)
+- [What This Is](#what-this-is)
+- [Problem It Solves](#problem-it-solves)
+- [Features](#features)
+
+---
+
+## Quick Facts
+
+| | |
+|---|---|
+| **Status** | Active |
+| **Language** | N/A |
 
 ---
 
@@ -14,17 +33,23 @@ layout: default
 
 Developing...
 
+---
+
 ## What This Is
 
 A framework for parsing and analyzing device configurations across multiple networking vendors. The project bridges the gap between unstructured legacy CLI data and structured intent-based models. 
 
 Phase 1 focuses on building the **Knowledge Base**: ingesting thousands of pages of vendor manuals (PDFs) and converting them into high-fidelity Markdown. This creates a searchable, semantically-indexed reference that AI agents can use to accurately interpret vendor-specific syntax.
 
+---
+
 ## Problem It Solves
 
 - **Syntax Fragmentation**: Every vendor (Cisco, Juniper, Arista, Nokia) has a different CLI structure for the same protocol (OSPF, BGP).
 - **Manual Translation**: Engineers spend hours cross-referencing manuals to convert a "design" into "commands."
 - **Data Silos**: Configuration state is locked in text files rather than queryable databases.
+
+---
 
 ## Features
 
@@ -35,7 +60,11 @@ Phase 1 focuses on building the **Knowledge Base**: ingesting thousands of pages
 
 ---
 
+---
+
 [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
 
 ---
 
@@ -43,7 +72,11 @@ Phase 1 focuses on building the **Knowledge Base**: ingesting thousands of pages
 
 ---
 
+---
+
 [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
 
 ---
 
@@ -51,7 +84,11 @@ Phase 1 focuses on building the **Knowledge Base**: ingesting thousands of pages
 
 ---
 
+---
+
 [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
 
 ---
 
@@ -59,7 +96,11 @@ Phase 1 focuses on building the **Knowledge Base**: ingesting thousands of pages
 
 ---
 
+---
+
 [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
 
 ---
 
@@ -67,7 +108,11 @@ Phase 1 focuses on building the **Knowledge Base**: ingesting thousands of pages
 
 ---
 
+---
+
 [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
 
 ---
 
@@ -75,7 +120,11 @@ Phase 1 focuses on building the **Knowledge Base**: ingesting thousands of pages
 
 ---
 
+---
+
 [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
 
 ---
 
@@ -83,7 +132,11 @@ Phase 1 focuses on building the **Knowledge Base**: ingesting thousands of pages
 
 ---
 
+---
+
 [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
 
 ---
 
@@ -91,7 +144,11 @@ Phase 1 focuses on building the **Knowledge Base**: ingesting thousands of pages
 
 ---
 
+---
+
 [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
 
 ---
 
@@ -99,8 +156,22 @@ Phase 1 focuses on building the **Knowledge Base**: ingesting thousands of pages
 
 ---
 
+---
+
 [← Back to Projects](../projects) | [Development Philosophy](../development)
 
 ---
 
+---
+
 [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
+
+---
+
+[← Back to Projects](../projects)
+
+---
+
+[← Back to Projects](../projects)

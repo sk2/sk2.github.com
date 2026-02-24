@@ -1,21 +1,33 @@
 ---
 layout: default
 section: signal-processing
-## Current Status
-
-2026-02-22 — Completed 07-04 Performance verification harness (multi-client WS perf verifier + usage notes)
-
 ---
 
-# SDR Spectrum Analysis
+# Spectrum Analysis
 
 <span class="status-badge status-active">Phase 7/7</span>
 
-[← Back to Signal Processing](../signal-processing)
+[← Back to Projects](../projects)
 
-## Current Status
+---
 
-2026-02-22 — Completed 07-04 Performance verification harness (multi-client WS perf verifier + usage notes)
+## Contents
+
+- [Concept](#concept)
+- [Quick Facts](#quick-facts)
+- [Architecture](#architecture)
+- [Terminal Interface](#terminal-interface)
+- [Hardware](#hardware)
+- [Signal Census](#signal-census)
+- [ML Classification](#ml-classification)
+- [Autonomous Missions](#autonomous-missions)
+- [ADS-B Integration](#ads-b-integration)
+- [Direction Finding](#direction-finding)
+- [Web Frontend](#web-frontend)
+- [REST API](#rest-api)
+- [Health and Resilience](#health-and-resilience)
+- [Development Roadmap](#development-roadmap)
+- [Tech Stack](#tech-stack)
 
 ---
 
@@ -23,17 +35,14 @@ section: signal-processing
 
 Monitor the local radio spectrum autonomously, classify every detected signal using ML, and maintain a persistent "Signal Census" — a queryable database of all RF activity over time. Distributed across Raspberry Pi edge nodes and a Mac mini core, the system runs unattended, sweeping bands, scheduling satellite passes, and logging what it finds.
 
+---
+
 ## Quick Facts
 
 | | |
 |---|---|
 | **Status** | Phase 7/7 |
 | **Language** | N/A |
-| **Started** | 2026 |
-
-## Current Status
-
-2026-02-22 — Completed 07-04 Performance verification harness (multi-client WS perf verifier + usage notes)
 
 ---
 
@@ -71,12 +80,16 @@ Version 2.0 adds a central WebSocket server that multiplexes real-time spectrum 
 
 Phase 8 (WebSocket Foundation) complete. Phase 9 (Signal Intelligence Overlay) in progress — adding live classification stream and web-based detection visualization.
 
+---
+
 ## Terminal Interface
 
 ![Spectra TUI](/images/spectra-tui.png)
 *Rust TUI showing live spectrum, waterfall (Kitty graphics protocol), and device controls.*
 
 The Rust TUI renders a pixel-level waterfall using the Kitty graphics protocol for true-color, full-resolution display directly in the terminal. Spectrum graphs use block-character rendering with configurable color palettes (twilight, inferno, viridis, ice, gray). Keyboard controls handle retuning, gain adjustment, and device switching without leaving the terminal.
+
+---
 
 ## Hardware
 
@@ -91,6 +104,8 @@ Four SDR types cover the spectrum from HF through L-band:
 
 Antenna array: Diamond D-130 discone (wideband), MLA-30 active loop (HF), TA1 turnstile (satellite), dedicated 1090 MHz (ADS-B), with mast-mounted Mini-Kits LNA for weak signals.
 
+---
+
 ## Signal Census
 
 The core concept: every detected signal gets logged to a DuckDB database with timestamp, frequency, power, modulation classification, confidence score, SigIDWiki metadata matches, and bearing (from Kraken direction finding). This builds a persistent picture of the local RF environment over time.
@@ -101,6 +116,8 @@ Queries answer questions like:
 - "Which frequencies had anomalous activity compared to baseline?"
 
 Anomaly detection uses per-band/frequency/hour bucketing with p90+margin flagging — no tuning required.
+
+---
 
 ## ML Classification
 
@@ -113,6 +130,8 @@ Classification augmented by:
 - **Constellation analysis**: Mueller-Muller timing recovery for symbol extraction, EVM (Error Vector Magnitude) against ideal constellation points
 - **SigIDWiki integration**: Semantic MediaWiki queries match detected signals against known frequency allocations, modulation types, and location data (cached with 30-day TTL)
 
+---
+
 ## Autonomous Missions
 
 The missions engine runs unattended scanning operations:
@@ -124,13 +143,19 @@ The missions engine runs unattended scanning operations:
 
 Each mission logs events to `.logs/missions/{run_id}/events.jsonl` for post-session review.
 
+---
+
 ## ADS-B Integration
 
 Ingests Beast/SBS TCP feeds from readsb running on the Pi. Aircraft positions, altitudes, and callsigns appear on the tactical map alongside signal bearings and census hits. Historical observations are queryable via the API for replay.
 
+---
+
 ## Direction Finding
 
 The Kraken SDR's 5-channel coherent receiver enables phase-coherent direction-of-arrival estimation. Signal bearings render as lines on the tactical map, correlating with census entries and ADS-B aircraft positions.
+
+---
 
 ## Web Frontend
 
@@ -143,6 +168,8 @@ React/TypeScript frontend with:
 - **Constellation diagram**: IQ scatter plot with timing recovery overlay
 - **Tactical map**: MapLibre-based with GeoJSON layers for ADS-B aircraft, DoA bearings, and signal census hits
 - **Signal Census view**: Queryable historical database with time-window filtering
+
+---
 
 ## REST API
 
@@ -159,6 +186,8 @@ FastAPI backend with WebSocket support:
 
 WebSocket protocol: one JSON metadata message followed by binary uint8 spectrum frames at 10–20 FPS.
 
+---
+
 ## Health and Resilience
 
 - **Auto-reconnect**: Exponential backoff (1s → 30s cap) for all device connections
@@ -166,6 +195,8 @@ WebSocket protocol: one JSON metadata message followed by binary uint8 spectrum 
 - **Bounded queues**: Frame dropping under load keeps UI responsive
 - **Health tracker**: Per-device connection, streaming, and frame freshness monitoring
 - **E2E verification harness**: Automated testing across 4 data flows
+
+---
 
 ## Development Roadmap
 
@@ -176,6 +207,8 @@ WebSocket protocol: one JSON metadata message followed by binary uint8 spectrum 
 | 3 | Autonomy — Signal Census, scanning, satellites, missions | Complete |
 | 6 | Verification — health monitoring, auto-reconnect, E2E tests | Complete |
 | 7 | Performance — ring buffer, GPU FFT, batch updates | Planned |
+
+---
 
 ## Tech Stack
 
@@ -189,10 +222,18 @@ WebSocket protocol: one JSON metadata message followed by binary uint8 spectrum 
 
 **Infrastructure:** uv (package management), systemd (edge services), Docker (optional)
 
-## Current Status
-
-2026-02-22 — Completed 07-04 Performance verification harness (multi-client WS perf verifier + usage notes)
+---
 
 ---
 
 [← Back to Signal Processing](../signal-processing)
+
+---
+
+---
+
+[← Back to Projects](../projects)
+
+---
+
+[← Back to Projects](../projects)

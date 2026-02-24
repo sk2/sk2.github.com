@@ -1,15 +1,23 @@
 ---
 layout: default
+section: signal-processing
 ---
 
-# Wi-Fi Signal Analysis (KrakenSDR)
+# Wi-Fi Radar
 
-<span class="status-badge status-active">Active Development</span>
+<span class="status-badge status-active">Active</span>
 
 [← Back to Projects](../projects)
 
 ---
 
+## Quick Facts
+
+| | |
+|---|---|
+| **Status** | Active |
+| **Language** | N/A |
+
 ---
 
-[← Back to Projects](../projects) | [Development Philosophy](../development)
+[← Back to Projects](../projects)

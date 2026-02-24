@@ -1,25 +1,30 @@
 ---
 layout: default
 section: network-automation
-## Roadmap
-
-- v1.9 IPv6 Foundation (Proposed) — Phases 68-72
-- v2.0 Enterprise & Campus Protocols (Proposed) — Phases 73-74
-- v2.1 Advanced Transport (Proposed) — Phases 75-77
-
 ---
 
 # Network Simulator
 
-<span class="status-badge status-active">Phase 98/100 (75%)</span>
+<span class="status-badge status-active">Phase 65/67 (99%)</span>
 
-[← Back to Network Automation](../network-automation)
+[← Back to Projects](../projects)
 
-## Roadmap
+---
 
-- v1.9 IPv6 Foundation (Proposed) — Phases 68-72
-- v2.0 Enterprise & Campus Protocols (Proposed) — Phases 73-74
-- v2.1 Advanced Transport (Proposed) — Phases 75-77
+## Contents
+
+- [Concept](#concept)
+- [Quick Facts](#quick-facts)
+- [Roadmap](#roadmap)
+- [Why the Network Simulator?](#why-the-network-simulator)
+- [Quick Start — Three-Router OSPF Example](#quick-start-—-three-router-ospf-example)
+- [Demo](#demo)
+- [Daemon Mode — Real-Time Network Interaction](#daemon-mode-—-real-time-network-interaction)
+- [Protocol Support](#protocol-support)
+- [Example: IS-IS L1/L2 Hierarchy with Real Output](#example-is-is-l1/l2-hierarchy-with-real-output)
+- [Use Cases](#use-cases)
+- [Milestones](#milestones)
+- [Tech Stack](#tech-stack)
 
 ---
 
@@ -27,19 +32,22 @@ section: network-automation
 
 Developing agentic AI systems and network automation tools requires rapid iteration. Spinning up containers for every test cycle takes minutes; simulation takes seconds. This simulator enables fast prototyping of network automation agents, DevOps pipelines, and AI-driven network operations — validate configurations and agent logic in simulation before committing to heavyweight container deployments.
 
+---
+
 ## Quick Facts
 
 | | |
 |---|---|
-| **Status** | Phase 98/100 (75%) |
+| **Status** | Phase 65/67 (99%) |
 | **Language** | Rust |
-| **Started** | 2026 |
+
+---
 
 ## Roadmap
 
-- v1.9 IPv6 Foundation (Proposed) — Phases 68-72
-- v2.0 Enterprise & Campus Protocols (Proposed) — Phases 73-74
-- v2.1 Advanced Transport (Proposed) — Phases 75-77
+- v1.9 Advanced Impairments & Topology Patterns (Proposed) — Phases 97-100
+- v2.0 IPv6 Foundation (Proposed) — Phases 68-72
+- v2.1 Enterprise & Campus Protocols (Proposed) — Phases 73-74
 
 ---
 
@@ -52,6 +60,8 @@ Developing agentic AI systems and network automation tools requires rapid iterat
 - **Daemon mode** — Run simulations as background services, attach interactive consoles with tab completion
 - **Scriptable** — JSON output for CI/CD integration and automated testing
 - **Fast** — Simulate 100+ device topologies in seconds
+
+---
 
 ## Quick Start — Three-Router OSPF Example
 
@@ -163,24 +173,12 @@ Simulation complete: 120ms simulated, 0.034s real time (3529x speedup)
 4. Commands executed — `show ip route`, `ping` ran at scripted times
 5. Results output — ASCII tables showing routing tables and ping responses
 
-## Roadmap
-
-- v1.9 IPv6 Foundation (Proposed) — Phases 68-72
-- v2.0 Enterprise & Campus Protocols (Proposed) — Phases 73-74
-- v2.1 Advanced Transport (Proposed) — Phases 75-77
-
 ---
 
 ## Demo
 
 ![netsim demo](/images/netsim-demo.gif)
 *OSPF triangle: three routers form adjacencies, compute SPF, then a host pings across the network. ARP resolution, traceroute hop-by-hop path discovery, and convergence timing all visible.*
-
-## Roadmap
-
-- v1.9 IPv6 Foundation (Proposed) — Phases 68-72
-- v2.0 Enterprise & Campus Protocols (Proposed) — Phases 73-74
-- v2.1 Advanced Transport (Proposed) — Phases 75-77
 
 ---
 
@@ -300,11 +298,7 @@ r1> show ospf neighbors --json
 - **GRE tunnels** — `gre tunnel set` for overlay configuration
 - **MPLS OAM** — `mpls ping`, `mpls traceroute` for label-switched path verification
 
-## Roadmap
-
-- v1.9 IPv6 Foundation (Proposed) — Phases 68-72
-- v2.0 Enterprise & Campus Protocols (Proposed) — Phases 73-74
-- v2.1 Advanced Transport (Proposed) — Phases 75-77
+---
 
 ---
 
@@ -347,11 +341,7 @@ Press Enter to select a daemon, then **Level 2 — Device selector** shows all d
 
 Press Enter on a device to open an interactive console session. Press `l` at any point to open the **log viewer** showing real-time daemon events (protocol state changes, adjacency transitions, convergence events).
 
-## Roadmap
-
-- v1.9 IPv6 Foundation (Proposed) — Phases 68-72
-- v2.0 Enterprise & Campus Protocols (Proposed) — Phases 73-74
-- v2.1 Advanced Transport (Proposed) — Phases 75-77
+---
 
 ---
 
@@ -380,11 +370,7 @@ $ netsim daemon stop my-network
 $ netsim daemon list --clean
 ```
 
-## Roadmap
-
-- v1.9 IPv6 Foundation (Proposed) — Phases 68-72
-- v2.0 Enterprise & Campus Protocols (Proposed) — Phases 73-74
-- v2.1 Advanced Transport (Proposed) — Phases 75-77
+---
 
 ---
 
@@ -457,12 +443,6 @@ Neighbor ID     Interface  State   Priority  Dead Time
 - **CI/CD integration**: Start daemon, run automated tests via `exec`, collect JSON results, stop daemon
 - **Development workflow**: Keep a topology running while you experiment with agent logic or automation scripts
 - **Structured logging**: Daemon events logged in JSON to `~/.netsim/<name>/daemon.log` for debugging and post-mortem analysis
-
-## Roadmap
-
-- v1.9 IPv6 Foundation (Proposed) — Phases 68-72
-- v2.0 Enterprise & Campus Protocols (Proposed) — Phases 73-74
-- v2.1 Advanced Transport (Proposed) — Phases 75-77
 
 ---
 
@@ -561,12 +541,6 @@ All commands support prefix abbreviation (e.g., `sh ip ro`) and `--json` output 
 | `mpls ftn add/del <prefix> ...` | Manipulate MPLS FTN entries |
 | `bgp vpn-originate <vrf>` | Trigger VPN route origination |
 | `gre tunnel set <iface> ...` | Configure GRE tunnel parameters |
-
-## Roadmap
-
-- v1.9 IPv6 Foundation (Proposed) — Phases 68-72
-- v2.0 Enterprise & Campus Protocols (Proposed) — Phases 73-74
-- v2.1 Advanced Transport (Proposed) — Phases 75-77
 
 ---
 
@@ -680,12 +654,6 @@ Simulation complete: 15ms simulated, 0.008s real time
 IS-IS events: 18 hellos, 4 LSPs, 2 SPF runs
 ```
 
-## Roadmap
-
-- v1.9 IPv6 Foundation (Proposed) — Phases 68-72
-- v2.0 Enterprise & Campus Protocols (Proposed) — Phases 73-74
-- v2.1 Advanced Transport (Proposed) — Phases 75-77
-
 ---
 
 ## Use Cases
@@ -696,12 +664,6 @@ IS-IS events: 18 hellos, 4 LSPs, 2 SPF runs
 - **Pre-deployment Validation**: Catch routing loops, black holes, and misconfigurations before production
 - **Convergence Analysis**: Measure failover time and validate backup paths
 - **Training**: Safe environment for learning routing protocol behavior and automation development
-
-## Roadmap
-
-- v1.9 IPv6 Foundation (Proposed) — Phases 68-72
-- v2.0 Enterprise & Campus Protocols (Proposed) — Phases 73-74
-- v2.1 Advanced Transport (Proposed) — Phases 75-77
 
 ---
 
@@ -770,16 +732,24 @@ EVPN control plane and VXLAN dataplane for data center fabrics.
 - **v2.0 Intelligent Simulation** — Distributed engine with remote participation via gRPC, simulation time machine with state snapshot and rewind debugging, LLM-powered troubleshooting CLI
 - **v2.1 Ecosystem & Digital Twin** — Hybrid real-sim bridge via TUN/TAP for host connectivity, config ingestion from Cisco/Juniper to netsim YAML
 
+---
+
 ## Tech Stack
 
 Rust, Tokio for async execution, petgraph for topology representation, gRPC for daemon IPC, ratatui for TUI
 
-## Roadmap
-
-- v1.9 IPv6 Foundation (Proposed) — Phases 68-72
-- v2.0 Enterprise & Campus Protocols (Proposed) — Phases 73-74
-- v2.1 Advanced Transport (Proposed) — Phases 75-77
+---
 
 ---
 
 [← Back to Network Automation](../network-automation)
+
+---
+
+---
+
+[← Back to Projects](../projects)
+
+---
+
+[← Back to Projects](../projects)

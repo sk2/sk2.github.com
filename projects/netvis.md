@@ -5,30 +5,46 @@ section: network-automation
 
 # NetVis
 
-<span class="status-badge status-active">Phase 43 - Interactive HTML Export (not started)</span>
+<span class="status-badge status-active">Phase 72 - Editing Operations (in progress)</span>
 
-[← Back to Network Automation](../network-automation)
+[← Back to Projects](../projects)
 
 ---
 
+## Contents
+
+- [Concept](#concept)
+- [Quick Facts](#quick-facts)
+- [What This Is](#what-this-is)
+- [Key Features](#key-features)
+- [Example: Quick Start](#example-quick-start)
+- [Integration with the Network Modeling & Configuration Library](#integration-with-the-network-modeling-configuration-library)
+- [Example Gallery](#example-gallery)
+- [Milestones](#milestones)
+- [Tech Stack](#tech-stack)
+
+---
 
 ## Concept
 
 Network visualization often fails at scale because layout algorithms treat all nodes and edges equally, producing cluttered "hairball" diagrams. The **Network Visualization Engine** treats topologies as hierarchical structures and uses domain-aware layout constraints—including isometric views and edge bundling—to reflect engineering intent.
 
+---
+
 ## Quick Facts
 
 | | |
 |---|---|
-| **Status** | Phase 43 - Interactive HTML Export (not started) |
+| **Status** | Phase 72 - Editing Operations (in progress) |
 | **Language** | Rust |
-| **Started** | 2026 |
 
 ---
 
 ## What This Is
 
 A Rust-based network topology layout and visualization engine that transforms complex multi-layer networks into clear, information-dense renderings. Advanced layout algorithms minimize visual complexity while preserving structural clarity.
+
+---
 
 ## Key Features
 
@@ -41,6 +57,8 @@ A Rust-based network topology layout and visualization engine that transforms co
 - **Static Output Formats**: SVG, PDF, PNG (v1 focus)
 - **High-Quality Rendering**: Anti-aliased, publication-ready graphics
 - **Topology Awareness**: Uses `petgraph` for graph analysis
+
+---
 
 ## Example: Quick Start
 
@@ -92,6 +110,8 @@ Rendering to SVG...
 Written: output.svg (6.5 KB)
 ```
 
+---
+
 ## Integration with the Network Modeling & Configuration Library
 
 Network Modeling & Configuration Library topologies export directly to the Network Visualization Engine format:
@@ -105,6 +125,8 @@ topo.export_for_netvis(
 ```
 
 The Network Visualization Engine reads the exported topology and applies advanced layout algorithms, producing publication-quality diagrams that reflect the logical structure captured in the Network Modeling & Configuration Library.
+
+---
 
 ## Example Gallery
 
@@ -143,6 +165,8 @@ The Network Visualization Engine reads the exported topology and applies advance
 ![Theme Showcase](/images/netvis-theme-showcase.png)
 *Device-type-aware rendering with distinct icons for routers, switches, firewalls, servers, and cloud nodes. Bandwidth labels (1G, 10G) on links. Shows the visual fidelity available for smaller, detail-rich diagrams.*
 
+---
+
 ## Milestones
 
 **v1.0 Core Engine** (Shipped Jan 31, 2026)
@@ -179,10 +203,24 @@ Stable API, deterministic rendering, and spatial indexing.
 
 - **v1.4 Advanced Operations & Interaction** — Visual topology diffing, live traffic flow simulation, interactive ARIA-enabled SVG, sub-graph layout composition, multi-page poster export
 
+---
+
 ## Tech Stack
 
 Rust, petgraph, fjadra (d3-force port), SVG/PDF/PNG rendering, WASM-ready
 
 ---
 
+---
+
 [← Back to Network Automation](../network-automation)
+
+---
+
+---
+
+[← Back to Projects](../projects)
+
+---
+
+[← Back to Projects](../projects)

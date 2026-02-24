@@ -5,30 +5,46 @@ section: network-automation
 
 # AutoNetkit
 
-<span class="status-badge status-active">v1.8 — Performance & Optimization</span>
+<span class="status-badge status-active">Active</span>
 
-[← Back to Network Automation](../network-automation)
+[← Back to Projects](../projects)
 
 ---
 
+## Contents
+
+- [Concept](#concept)
+- [Quick Facts](#quick-facts)
+- [What This Is](#what-this-is)
+- [Key Features](#key-features)
+- [Examples](#examples)
+- [YAML Topology Format](#yaml-topology-format)
+- [Available Blueprints](#available-blueprints)
+- [Milestones](#milestones)
+- [Tech Stack](#tech-stack)
+
+---
 
 ## Concept
 
 Network topology modeling typically forces a choice between the speed of untyped graph libraries (NetworkX) and the rigidity of database-backed sources of truth. **AutoNetkit** eliminates this trade-off by using Pydantic for schema validation and a Rust core (`petgraph`) for graph traversals. It is a modern reimagining of the original AutoNetkit research, reclaiming the name for a production-ready automation library.
 
+---
+
 ## Quick Facts
 
 | | |
 |---|---|
-| **Status** | v1.8 — Performance & Optimization |
+| **Status** | Active |
 | **Language** | N/A |
-| **Started** | 2026 |
 
 ---
 
 ## What This Is
 
 A Python library for modeling and querying network topologies with type-safe Pydantic models and a Rust core. Expressive Python API backed by compiled graph algorithms (petgraph), with automatic configuration generation for multi-vendor network deployments.
+
+---
 
 ## Key Features
 
@@ -38,6 +54,8 @@ A Python library for modeling and querying network topologies with type-safe Pyd
 - **Configuration Generation**: Automatic multi-vendor config generation (Cisco IOS/IOS-XR/NX-OS, Juniper JunOS, Arista EOS)
 - **Batteries-Included Blueprints**: Pre-built domain models for ISIS, MPLS, EVPN, L3VPN, IXP
 - **Rust Core (`ank_nte`)**: Graph operations run at native speed with Python FFI bindings
+
+---
 
 ## Examples
 
@@ -489,10 +507,24 @@ Query optimization and large-scale topology support (10k+ nodes).
 - **IP addressing** — Automated IP address allocation and management across topology layers
 - **NSOT integration** — Workflow to import/export topology state with Network Source of Truth systems
 
+---
+
 ## Tech Stack
 
 Python (Pydantic), Rust core (`petgraph`-backed), PyO3 bindings
 
 ---
 
+---
+
 [← Back to Network Automation](../network-automation)
+
+---
+
+---
+
+[← Back to Projects](../projects)
+
+---
+
+[← Back to Projects](../projects)

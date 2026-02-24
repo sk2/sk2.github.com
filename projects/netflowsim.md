@@ -7,14 +7,29 @@ section: network-automation
 
 <span class="status-badge status-active">Phase 9/13 (100%)</span>
 
-[← Back to Network Automation](../network-automation)
+[← Back to Projects](../projects)
 
 ---
 
+## Contents
+
+- [Concept](#concept)
+- [Quick Facts](#quick-facts)
+- [What This Is](#what-this-is)
+- [Why Flow-Based Simulation](#why-flow-based-simulation)
+- [Key Features](#key-features)
+- [Example Usage](#example-usage)
+- [Performance Metrics](#performance-metrics)
+- [Tech Stack](#tech-stack)
+- [Use Cases](#use-cases)
+
+---
 
 ## Concept
 
 `netflowsim` provides rapid, massive-scale network performance analysis by using analytic queuing models and Monte Carlo simulations instead of packet-level discrete event simulation. It enables network engineers to validate topologies and routing strategies against billions of flow iterations in seconds.
+
+---
 
 ## Quick Facts
 
@@ -22,13 +37,14 @@ section: network-automation
 |---|---|
 | **Status** | Phase 9/13 (100%) |
 | **Language** | N/A |
-| **Started** | 2026 |
 
 ---
 
 ## What This Is
 
 Flow-based network simulator that uses analytic queuing models and Monte Carlo simulations for rapid topology and routing validation at massive scale.
+
+---
 
 ## Why Flow-Based Simulation
 
@@ -40,6 +56,8 @@ Traditional approaches force a choice between:
 - **Speed**: 1M+ flows/second on multi-core hardware
 - **Scale**: 10k+ node topologies
 - **Accuracy**: Validated against theoretical benchmarks
+
+---
 
 ## Key Features
 
@@ -77,6 +95,8 @@ Traditional approaches force a choice between:
 - Dynamic routing matrix re-evaluation
 - Failure scenario modeling
 
+---
+
 ## Example Usage
 
 ```bash
@@ -110,12 +130,16 @@ ECMP paths found: 2841
 Routing matrix written to routing.json
 ```
 
+---
+
 ## Performance Metrics
 
 - **Throughput**: 1M+ flows/second (baseline)
 - **Scale**: Tested with 10k+ node topologies
 - **Latency**: Sub-second results for typical network sizes
 - **Accuracy**: Validated against M/M/1 and M/D/1 theoretical values
+
+---
 
 ## Tech Stack
 
@@ -124,6 +148,8 @@ Routing matrix written to routing.json
 - **Parallelism**: Rayon (multi-core processing)
 - **Serialization**: Serde (JSON), GeoJSON
 - **Visualization**: Martin (Tileserver), MVT (Mapbox Vector Tiles)
+
+---
 
 ## Use Cases
 
@@ -135,4 +161,16 @@ Routing matrix written to routing.json
 
 ---
 
+---
+
 [← Back to Network Automation](../network-automation)
+
+---
+
+---
+
+[← Back to Projects](../projects)
+
+---
+
+[← Back to Projects](../projects)

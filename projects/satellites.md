@@ -1,10 +1,6 @@
 ---
 layout: default
 section: projects
-## Current Status
-
-2026-02-21 -- Completed 04-03 Manual TUI verification (approved)
-
 ---
 
 # Satellites
@@ -13,9 +9,20 @@ section: projects
 
 [← Back to Projects](../projects)
 
-## Current Status
+---
 
-2026-02-21 -- Completed 04-03 Manual TUI verification (approved)
+## Contents
+
+- [Concept](#concept)
+- [Quick Facts](#quick-facts)
+- [What This Does](#what-this-does)
+- [TUI Layout](#tui-layout)
+- [Key Features](#key-features)
+- [Data Sources](#data-sources)
+- [Satellite Groups](#satellite-groups)
+- [Coordinate Pipeline](#coordinate-pipeline)
+- [Development Roadmap](#development-roadmap)
+- [Tech Stack](#tech-stack)
 
 ---
 
@@ -23,23 +30,22 @@ section: projects
 
 A terminal-based satellite tracker that plots real-time satellite positions on a world map, predicts passes over your location, and displays transmission frequencies from SatNOGS. Built with Rust, ratatui, and the SGP4 orbital propagation algorithm.
 
+---
+
 ## Quick Facts
 
 | | |
 |---|---|
 | **Status** | Phase 4/6 (100%) |
 | **Language** | N/A |
-| **Started** | 2026 |
-
-## Current Status
-
-2026-02-21 -- Completed 04-03 Manual TUI verification (approved)
 
 ---
 
 ## What This Does
 
 Fetches Two-Line Element (TLE) orbital data from CelesTrak, propagates satellite positions in real time using SGP4, and renders them on a terminal canvas world map. Select a satellite to see its orbital parameters, upcoming passes with rise/set times, and transmitter frequencies from the SatNOGS database.
+
+---
 
 ## TUI Layout
 
@@ -57,6 +63,8 @@ Fetches Two-Line Element (TLE) orbital data from CelesTrak, propagates satellite
 └──────────────────────────────────────────────────┘
 ```
 
+---
+
 ## Key Features
 
 - **Real-time world map**: Satellite positions plotted on a terminal canvas, updated every second
@@ -67,11 +75,15 @@ Fetches Two-Line Element (TLE) orbital data from CelesTrak, propagates satellite
 - **Starlink handling**: Coarser propagation (5-minute steps) for initial screening to manage the large constellation, with refinement near the observer's horizon
 - **Local caching**: TLE and transmitter data cached to disk with configurable TTL (12h/48h defaults)
 
+---
+
 ## Data Sources
 
 - **[CelesTrak](https://celestrak.org)**: TLE/OMM orbital elements in JSON format, grouped by satellite category
 - **[SatNOGS DB](https://db.satnogs.org)**: Satellite transmitter frequencies, modes, and metadata via REST API
 - **IP Geolocation**: Fallback location detection
+
+---
 
 ## Satellite Groups
 
@@ -87,6 +99,8 @@ Fetches Two-Line Element (TLE) orbital data from CelesTrak, propagates satellite
 | `geo` | Geostationary satellites |
 | `science` / `military` / `cubesat` | Specialized groups |
 
+---
+
 ## Coordinate Pipeline
 
 TLE data flows through a multi-stage transformation:
@@ -100,6 +114,8 @@ TLE → SGP4 (ECI position/velocity)
 
 Pass prediction propagates at 60-second intervals over 24 hours, detects elevation zero-crossings, then binary-searches to ~1 second accuracy for AOS/LOS times.
 
+---
+
 ## Development Roadmap
 
 - Phase 1: Project setup + README (complete)
@@ -111,6 +127,8 @@ Pass prediction propagates at 60-second intervals over 24 hours, detects elevati
 - Phase 7: Pass timeline chart + group switching + search
 - Phase 8: GitHub Actions CI + v0.1.0 release
 
+---
+
 ## Tech Stack
 
 - **Language**: Rust (2021 edition)
@@ -121,9 +139,17 @@ Pass prediction propagates at 60-second intervals over 24 hours, detects elevati
 - **HTTP**: reqwest (async JSON API calls)
 - **CLI**: clap 4
 
-## Current Status
+---
 
-2026-02-21 -- Completed 04-03 Manual TUI verification (approved)
+---
+
+[← Back to Projects](../projects)
+
+---
+
+---
+
+[← Back to Projects](../projects)
 
 ---
 

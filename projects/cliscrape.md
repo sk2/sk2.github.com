@@ -3,17 +3,38 @@ layout: default
 section: network-automation
 ---
 
-# CLI Scrape — Network Device Output Parser
+# CLI Parser
 
 <span class="status-badge status-active">Phase 7/11 (50%)</span>
 
-[← Back to Network Automation](../network-automation) | [← Back to Projects](../projects)
+[← Back to Projects](../projects)
+
+---
+
+## Contents
+
+- [Concept](#concept)
+- [Quick Facts](#quick-facts)
+- [Key Features](#key-features)
+- [Performance](#performance)
+- [Architecture](#architecture)
+- [Use Cases](#use-cases)
+- [Tech Stack](#tech-stack)
 
 ---
 
 ## Concept
 
 Network automation relies on parsing unstructured CLI output from devices. TextFSM handles this but suffers from Python's GIL limitations and slow regex execution. This Rust-based parser replicates TextFSM's state-machine semantics with native performance — parse massive `show tech-support` outputs in milliseconds, not seconds.
+
+---
+
+## Quick Facts
+
+| | |
+|---|---|
+| **Status** | Phase 7/11 (50%) |
+| **Language** | N/A |
 
 ---
 
@@ -76,12 +97,6 @@ Rust's zero-cost abstractions and compiled regex engine deliver 10-50x faster pa
 
 ---
 
-## Current Status
-
-Phase 1 in progress — project scaffolding complete, defining lexer/parser for TextFSM files. Roadmap: FSM execution engine → CLI implementation → TUI debugger → modern YAML/TOML template support.
-
----
-
 ## Tech Stack
 
 | Component | Technology |
@@ -91,6 +106,8 @@ Phase 1 in progress — project scaffolding complete, defining lexer/parser for 
 | TUI | `ratatui` + `crossterm` |
 | Parsing | Custom lexer/parser |
 | Templates | TextFSM + YAML/TOML |
+
+---
 
 ---
 
@@ -110,3 +127,13 @@ Phase 1 in progress — project scaffolding complete, defining lexer/parser for 
   color: white;
 }
 </style>
+
+---
+
+---
+
+[← Back to Projects](../projects)
+
+---
+
+[← Back to Projects](../projects)

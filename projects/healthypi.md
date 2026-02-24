@@ -1,21 +1,25 @@
 ---
 layout: default
 section: signal-processing
-## Current Status
-
-2026-02-20 - v1.1 roadmap created
-
 ---
 
 # HealthyPi Ecosystem
 
 <span class="status-badge status-active">** Phase 7 - Ingest CLI + HealthyPi 6 Serial MVP</span>
 
-[← Back to Signal Processing](../signal-processing)
+[← Back to Projects](../projects)
 
-## Current Status
+---
 
-2026-02-20 - v1.1 roadmap created
+## Contents
+
+- [Concept](#concept)
+- [Quick Facts](#quick-facts)
+- [What This Is](#what-this-is)
+- [Key Features](#key-features)
+- [Architecture](#architecture)
+- [Milestones](#milestones)
+- [Tech Stack](#tech-stack)
 
 ---
 
@@ -23,23 +27,22 @@ section: signal-processing
 
 A modular, agent-aware health monitoring ecosystem that translates raw biometric data from HealthyPi hardware into actionable insights and automated interventions — bridging high-fidelity biometric wearables with daily health management.
 
+---
+
 ## Quick Facts
 
 | | |
 |---|---|
 | **Status** | ** Phase 7 - Ingest CLI + HealthyPi 6 Serial MVP |
 | **Language** | N/A |
-| **Started** | 2026 |
-
-## Current Status
-
-2026-02-20 - v1.1 roadmap created
 
 ---
 
 ## What This Is
 
 A health monitoring platform that connects HealthyPi hardware (HealthyPi 6 Pi HAT and HealthyPi Move wearable) to an analysis engine, virtual patient simulator, and agentic intelligence layer. It processes ECG, PPG, EDA, IMU, and EEG signals for HRV analysis, stress scoring, and sleep quality assessment — with a virtual patient simulator for hardware-free development.
+
+---
 
 ## Key Features
 
@@ -48,6 +51,8 @@ A health monitoring platform that connects HealthyPi hardware (HealthyPi 6 Pi HA
 - **Virtual Patient Simulator**: Synthetic waveform generation via NeuroKit2 with scriptable scenarios (resting, stress response, deep sleep) — mock interface indistinguishable from real hardware at the NATS level
 - **Agentic Integration**: Registered with the multi-agent orchestrator for autonomous health queries, capability-based authorization with Ed25519 tokens
 - **Desktop & Mobile Interfaces**: macOS menu bar app with real-time health status, iOS/WatchOS prototype with HealthKit sync
+
+---
 
 ## Architecture
 
@@ -63,6 +68,8 @@ NATS (health.healthypi.*)
     ├── iOS/WatchOS App
     └── Multi-Agent Orchestrator
 ```
+
+---
 
 ## Milestones
 
@@ -86,14 +93,24 @@ macOS menu bar app with real-time ambient health status (Green/Yellow/Red).
 - Reconnection handling and test coverage (complete)
 - HealthKit bidirectional sync, iOS dashboard, WatchOS app (remaining)
 
+---
+
 ## Tech Stack
 
 Python (Pydantic, NeuroKit2, SciPy), Swift (SwiftUI, HealthKit), NATS messaging, pytest (286 tests)
 
-## Current Status
-
-2026-02-20 - v1.1 roadmap created
+---
 
 ---
 
 [← Back to Signal Processing](../signal-processing)
+
+---
+
+---
+
+[← Back to Projects](../projects)
+
+---
+
+[← Back to Projects](../projects)

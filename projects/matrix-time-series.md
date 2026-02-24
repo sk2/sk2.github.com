@@ -1,12 +1,34 @@
 ---
 layout: default
+section: data-analytics
 ---
 
 # matrix-profile-rs
 
-<span class="status-badge status-active">Phase 8/11 (73%)</span>
+<span class="status-badge status-active">Phase 9/11 (100%)</span>
 
 [← Back to Projects](../projects)
+
+---
+
+## Contents
+
+- [Quick Facts](#quick-facts)
+- [The Insight](#the-insight)
+- [What This Is](#what-this-is)
+- [Problem It Solves](#problem-it-solves)
+- [Features](#features)
+- [Architecture](#architecture)
+- [Use Cases](#use-cases)
+
+---
+
+## Quick Facts
+
+| | |
+|---|---|
+| **Status** | Phase 9/11 (100%) |
+| **Language** | N/A |
 
 ---
 
@@ -14,11 +36,15 @@ layout: default
 
 Time series analysis benefits from high-performance libraries for motif discovery and anomaly detection. **matrix-profile-rs** provides Matrix Profile algorithms (STOMP, SCRIMP++, SCAMP) in native Rust with ergonomic APIs for motif discovery and anomaly detection, providing high performance with Python-level usability through Polars integration.
 
+---
+
 ## What This Is
 
 A high-performance Rust implementation of Matrix Profile algorithms for time series analysis with SIMD acceleration, out-of-memory tiling support, and Polars ecosystem integration. Matrix Profiles enable pattern discovery, anomaly detection, and similarity search in univariate time series without domain knowledge or parameter tuning.
 
 Think of it as "find repeating patterns and anomalies in any time series data" with a simple API: `df.select(pl.col("ts").mp().stomp(m=20))` for Polars users, or direct Rust APIs for maximum performance and scale.
+
+---
 
 ## Problem It Solves
 
@@ -37,6 +63,8 @@ matrix-profile-rs provides production-quality implementations with:
 - Clean APIs (`.motifs(k=3)` instead of array indexing)
 - Scalability (N>10^6 via memory-efficient tiling)
 - Polars integration (treat Matrix Profiles as DataFrame operations)
+
+---
 
 ## Features
 
@@ -59,6 +87,8 @@ matrix-profile-rs provides production-quality implementations with:
 - ⏳ Disk-backed tiling for N>10^8
 - ⏳ Streaming API for real-time updates
 - ⏳ Additional SIMD targets (AVX-512)
+
+---
 
 ## Architecture
 
@@ -87,6 +117,8 @@ Polars DataFrame (via to_dataframe()) or Rust types
 - **Tiling Module**: Memory-efficient computation for datasets exceeding RAM
 - **Polars Integration**: Native `.mp()` namespace on Series, DataFrame I/O with metadata columns
 
+---
+
 ## Use Cases
 
 **Predictive Maintenance:**
@@ -111,4 +143,16 @@ Polars DataFrame (via to_dataframe()) or Rust types
 
 ---
 
+---
+
 [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
+
+---
+
+[← Back to Projects](../projects)
+
+---
+
+[← Back to Projects](../projects)

@@ -4,15 +4,35 @@ layout: default
 
 # GSD Project Monitor
 
-<span class="status-badge status-active">Stable</span>
+<span class="status-badge status-active">Active</span>
 
 [← Back to Projects](../projects)
+
+---
+
+## Contents
+
+- [Quick Facts](#quick-facts)
+- [The Insight](#the-insight)
+- [Features](#features)
+- [Architecture](#architecture)
+
+---
+
+## Quick Facts
+
+| | |
+|---|---|
+| **Status** | Active |
+| **Language** | N/A |
 
 ---
 
 ## The Insight
 
 Developing...
+
+---
 
 ## Features
 
@@ -45,7 +65,11 @@ Automatically highlights projects that are "Active" but have zero "Ready" plans.
 
 ---
 
+---
+
 [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
 
 ---
 
@@ -53,7 +77,11 @@ Automatically highlights projects that are "Active" but have zero "Ready" plans.
 
 ---
 
+---
+
 [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
 
 ---
 
@@ -61,7 +89,11 @@ Automatically highlights projects that are "Active" but have zero "Ready" plans.
 
 ---
 
+---
+
 [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
 
 ---
 
@@ -69,7 +101,11 @@ Automatically highlights projects that are "Active" but have zero "Ready" plans.
 
 ---
 
+---
+
 [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
 
 ---
 
@@ -77,7 +113,11 @@ Automatically highlights projects that are "Active" but have zero "Ready" plans.
 
 ---
 
+---
+
 [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
 
 ---
 
@@ -85,7 +125,11 @@ Automatically highlights projects that are "Active" but have zero "Ready" plans.
 
 ---
 
+---
+
 [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
 
 ---
 
@@ -93,7 +137,11 @@ Automatically highlights projects that are "Active" but have zero "Ready" plans.
 
 ---
 
+---
+
 [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
 
 ---
 
@@ -101,4 +149,16 @@ Automatically highlights projects that are "Active" but have zero "Ready" plans.
 
 ---
 
+---
+
 [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
+
+---
+
+[← Back to Projects](../projects)
+
+---
+
+[← Back to Projects](../projects)

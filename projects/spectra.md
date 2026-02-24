@@ -4,9 +4,28 @@ layout: default
 
 # Project Spectra
 
-<span class="status-badge status-active">Phase 6/7 — Operational Readiness</span>
+<span class="status-badge status-active">Active</span>
 
 [← Back to Projects](../projects)
+
+---
+
+## Contents
+
+- [Quick Facts](#quick-facts)
+- [The Insight](#the-insight)
+- [What This Is](#what-this-is)
+- [Features](#features)
+- [Architecture](#architecture)
+
+---
+
+## Quick Facts
+
+| | |
+|---|---|
+| **Status** | Active |
+| **Language** | N/A |
 
 ---
 
@@ -14,9 +33,13 @@ layout: default
 
 Developing...
 
+---
+
 ## What This Is
 
 An autonomous distributed SIGINT system. It monitors the RF spectrum, identifies modulations via ML, and tracks aircraft (ADS-B) and satellites. It leverages NATS for coordination and Polars for data indexing.
+
+---
 
 ## Features
 
@@ -94,7 +117,11 @@ An autonomous distributed SIGINT system. It monitors the RF spectrum, identifies
 
 ---
 
+---
+
 [← Back to Signal Processing](../signal-processing)
+
+---
 
 ## Architecture
 
@@ -160,7 +187,11 @@ Edge Pi → SpyServer/rtl_tcp → Mac mini Core
 
 ---
 
+---
+
 [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
 
 ---
 
@@ -168,7 +199,11 @@ Edge Pi → SpyServer/rtl_tcp → Mac mini Core
 
 ---
 
+---
+
 [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
 
 ---
 
@@ -176,7 +211,11 @@ Edge Pi → SpyServer/rtl_tcp → Mac mini Core
 
 ---
 
+---
+
 [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
 
 ---
 
@@ -184,4 +223,16 @@ Edge Pi → SpyServer/rtl_tcp → Mac mini Core
 
 ---
 
+---
+
 [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
+
+---
+
+[← Back to Projects](../projects)
+
+---
+
+[← Back to Projects](../projects)

@@ -1,10 +1,6 @@
 ---
 layout: default
 section: projects
-## Roadmap
-
-- Scope (not prioritized):
-
 ---
 
 # AuroraData - Aurora Planning & Substorm Advisor
@@ -13,9 +9,22 @@ section: projects
 
 [← Back to Projects](../projects)
 
-## Roadmap
+---
 
-- Scope (not prioritized):
+## Contents
+
+- [Concept](#concept)
+- [Quick Facts](#quick-facts)
+- [Roadmap](#roadmap)
+- [The Problem](#the-problem)
+- [Architecture](#architecture)
+- [Phase 1: Substorm Trigger Engine](#phase-1-substorm-trigger-engine)
+- [Phase 2: Localized Planning & Site Selection](#phase-2-localized-planning-site-selection)
+- [Phase 3: Intelligent Advice & Remote Access](#phase-3-intelligent-advice-remote-access)
+- [Phase 4: Historical Playback Engine](#phase-4-historical-playback-engine)
+- [Example Output](#example-output)
+- [Tech Stack](#tech-stack)
+- [Integration with AuroraPhoto](#integration-with-auroraphoto)
 
 ---
 
@@ -23,17 +32,20 @@ section: projects
 
 Aurora hunting in Australia requires a 60+ minute drive to dark sites, but most tools do not help answer the critical question: "Should I leave *now*?" AuroraData combines real-time solar wind monitoring, substorm trigger detection, local weather forecasts, and travel time to produce a single "Go/No-Go" score with site-specific recommendations.
 
+---
+
 ## Quick Facts
 
 | | |
 |---|---|
 | **Status** | ** Not started |
 | **Language** | N/A |
-| **Started** | 2026 |
+
+---
 
 ## Roadmap
 
-- Scope (not prioritized):
+- Scope (not prioritized): 
 
 ---
 
@@ -46,6 +58,8 @@ Existing tools like the Glendale app are powerful but complex. Australian observ
 - **Decision paralysis**: Multiple data sources provide conflicting signals
 
 The question this tool answers: "If I leave now, will I see aurora when I arrive in 90 minutes?"
+
+---
 
 ## Architecture
 
@@ -87,6 +101,8 @@ The question this tool answers: "If I leave now, will I see aurora when I arrive
       └─────────────────────┘
 ```
 
+---
+
 ## Phase 1: Substorm Trigger Engine
 
 Real-time space weather monitoring with substorm detection:
@@ -94,6 +110,8 @@ Real-time space weather monitoring with substorm detection:
 - **Substorm Triggers**: Bz southward turns (> 5 nT shift) combined with HP step changes (30-minute rolling window)
 - **TOA Estimation**: Solar wind arrival time calculated from speed: `(1,500,000 / speed) / 60` minutes
 - **Opportunity Scoring**: `(abs(Bz) * 5) + (Speed / 10)`, capped at 100, blended with terrestrial potential at 60/40
+
+---
 
 ## Phase 2: Localized Planning & Site Selection
 
@@ -104,12 +122,16 @@ Multi-criteria site scoring with Australian-specific weather:
 - **Weather Reliability**: MAE thresholds — `< 10 = HIGH`, `10-20 = MEDIUM`, `> 20 = LOW` reliability
 - **Decision Output**: `>= 70 = GO`, `>= 40 = MAYBE`, `< 40 = NO-GO` with contextual warnings
 
+---
+
 ## Phase 3: Intelligent Advice & Remote Access
 
 LLM-generated recommendations and automated alerting:
 - **Pipeline Architecture**: Analysis logic extracted into pure `pipeline.ts` function — no console output, no dotenv imports, fully reusable
 - **LLM Advice**: GPT-4o-mini generates natural-language recommendations (max 300 tokens) with graceful degradation when API key is absent
 - **Telegram Bot**: Automated alerts with 15-minute check interval, 1-hour cooldown between broadcasts, JSON file persistence for subscribers, auto-removal on send failure
+
+---
 
 ## Phase 4: Historical Playback Engine
 
@@ -118,6 +140,8 @@ Backtesting and validation against real storm events:
 - **HP History Support**: Uses last two injected HP points for jump detection
 - **Playback Runner**: Simulates pipeline decisions against historical events with parallel site scoring
 - **Analysis Report**: 3-hour prediction window for realistic accuracy evaluation
+
+---
 
 ## Example Output
 
@@ -150,6 +174,8 @@ Telegram: Alert sent to 12 subscribers
 RECOMMENDATION: GO NOW
 ```
 
+---
+
 ## Tech Stack
 
 - **Language**: TypeScript (Node.js)
@@ -158,6 +184,8 @@ RECOMMENDATION: GO NOW
 - **Alerting**: Telegram Bot API with subscriber management
 - **Testing**: Jest with ts-jest (ESM support)
 
+---
+
 ## Integration with AuroraPhoto
 
 AuroraData handles the *planning* side (when to go, where to go), while AuroraPhoto handles the *capture* side (automated camera control, HFR focus):
@@ -165,9 +193,17 @@ AuroraData handles the *planning* side (when to go, where to go), while AuroraPh
 1. **AuroraData**: "Strong event predicted, leave now for Victor Harbor"
 2. **AuroraPhoto**: Automated multi-camera capture once on-site
 
-## Roadmap
+---
 
-- Scope (not prioritized):
+---
+
+[← Back to Projects](../projects)
+
+---
+
+---
+
+[← Back to Projects](../projects)
 
 ---
 

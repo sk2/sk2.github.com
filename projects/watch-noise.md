@@ -5,9 +5,21 @@ section: projects
 
 # Wave
 
-<span class="status-badge status-active">v1.1 — Adaptive Audio Features</span>
+<span class="status-badge status-active">Active</span>
 
 [← Back to Projects](../projects)
+
+---
+
+## Contents
+
+- [Concept](#concept)
+- [Quick Facts](#quick-facts)
+- [What This Is](#what-this-is)
+- [StillState Features](#stillstate-features)
+- [Audio Architecture](#audio-architecture)
+- [Milestones](#milestones)
+- [Tech Stack](#tech-stack)
 
 ---
 
@@ -16,13 +28,14 @@ section: projects
 - **StillState:** Reclaiming silence and rest in shared or noisy environments through intelligent, adaptive audio
 - **FlowState:** Achieving and maintaining a "Steady State" of focus through task-linked audio and genetic evolution
 
+---
+
 ## Quick Facts
 
 | | |
 |---|---|
-| **Status** | v1.1 — Adaptive Audio Features |
-| **Language** | Swift (SwiftUI) |
-| **Started** | 2026 |
+| **Status** | Active |
+| **Language** | N/A |
 
 ---
 
@@ -33,6 +46,8 @@ section: projects
 1. **StillState (Watch):** An adaptive sleep sounds app for Apple Watch with personalized frequency calibration, heartbeat synchronization, and microphone-based environmental monitoring.
 2. **FlowState (Mac):** A productivity-focused menu bar app that links procedural audio to active tasks and a genetic evolution system (planned).
 
+---
+
 ## StillState Features
 
 - **Procedural Noise Engine**: White, brown, and blended noise with live hot-swap
@@ -41,6 +56,8 @@ section: projects
 - **Heartbeat Synchronization**: 4 BPM presets (50-65 BPM) with conservative 5-8% amplitude modulation
 - **Adaptive Masking**: Microphone-based ambient noise monitoring with vDSP-accelerated analysis, dynamic volume adjustment (1.0-1.5x)
 - **Sleep-Optimized UI**: Large touch targets, Bluetooth-only routing, indefinite background playback
+
+---
 
 ## Audio Architecture
 
@@ -53,6 +70,8 @@ Base Generator (White / Brown / Blended)
 ```
 
 All wrappers use pre-allocated buffers with lock-free parameter reads — no allocations in the audio thread.
+
+---
 
 ## Milestones
 
@@ -72,9 +91,23 @@ Ear-print calibration, heartbeat synchronization, microphone monitoring infrastr
 - **v1.3 Distribution & Enhancement** — Advanced adaptive sensitivity, user feedback integration
 - **FlowState (macOS)** — Genetic system integration, audio DNA evolution, flow-locking with task coupling, pomodoro synchronization
 
+---
+
 ## Tech Stack
 
 Swift (SwiftUI, AVAudioEngine, Accelerate/vDSP), watchOS, CoreAudio, HealthKit
+
+---
+
+---
+
+[← Back to Projects](../projects)
+
+---
+
+---
+
+[← Back to Projects](../projects)
 
 ---
 

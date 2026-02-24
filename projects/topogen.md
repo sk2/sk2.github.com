@@ -1,28 +1,35 @@
 ---
 layout: default
 section: network-automation
-## Roadmap
-
-- Plans: TBD
-
 ---
 
 # TopoGen - Network Topology Generator
 
 <span class="status-badge status-active">Phase 30 - Core Validation Architecture</span>
 
-[← Back to Network Automation](../network-automation)
-
-## Roadmap
-
-- Plans: TBD
+[← Back to Projects](../projects)
 
 ---
 
+## Contents
+
+- [Concept](#concept)
+- [Quick Facts](#quick-facts)
+- [Roadmap](#roadmap)
+- [What This Is](#what-this-is)
+- [Key Features](#key-features)
+- [Example: Data Center Leaf-Spine](#example-data-center-leaf-spine)
+- [Python API](#python-api)
+- [Milestones](#milestones)
+- [Tech Stack](#tech-stack)
+
+---
 
 ## Concept
 
 Generating realistic, validated network topologies for testing often requires custom, brittle scripts. The **Topology Generator** consolidates topology generation logic into a Rust core, producing structured data center and WAN graphs with consistent YAML output for the simulation and visualization ecosystem.
+
+---
 
 ## Quick Facts
 
@@ -30,7 +37,8 @@ Generating realistic, validated network topologies for testing often requires cu
 |---|---|
 | **Status** | Phase 30 - Core Validation Architecture |
 | **Language** | N/A |
-| **Started** | 2026 |
+
+---
 
 ## Roadmap
 
@@ -41,6 +49,8 @@ Generating realistic, validated network topologies for testing often requires cu
 ## What This Is
 
 A Rust library with Python bindings for generating realistic network topologies. Consolidates scattered topology generation logic from AutoNetKit, simulation tools, and visualization tools into one well-tested implementation.
+
+---
 
 ## Key Features
 
@@ -55,6 +65,8 @@ A Rust library with Python bindings for generating realistic network topologies.
 - **Output Converters**: YAML, ContainerLab topology files, AutoNetKit GraphML
 - **Three Interfaces**: CLI, Python API, and config-driven YAML/TOML input
 - **Validation**: Structural and design-pattern compliance checks
+
+---
 
 ## Example: Data Center Leaf-Spine
 
@@ -120,6 +132,8 @@ links:
   # ... (full mesh: 4 leaves × 2 spines = 8 links)
 ```
 
+---
+
 ## Python API
 
 ```python
@@ -139,6 +153,8 @@ topo.export_json("topology.json")
 from ank_pydantic import Topology
 ank_topo = topo.to_ank_pydantic()
 ```
+
+---
 
 ## Milestones
 
@@ -170,14 +186,24 @@ Output converters, traffic patterns, and POP design patterns.
 - **Multi-layer topology generation** — Explicit underlay/overlay layer dependencies, overlay-to-underlay path mapping, cross-layer capacity validation
 - **Eyeball network generator** — Access-aggregation-core hierarchy for ISP topologies, inbound-heavy traffic ratios, peering and transit policy configuration
 
+---
+
 ## Tech Stack
 
 Rust core, PyO3 for Python bindings, Maturin build system
 
-## Roadmap
-
-- Plans: TBD
+---
 
 ---
 
 [← Back to Network Automation](../network-automation)
+
+---
+
+---
+
+[← Back to Projects](../projects)
+
+---
+
+[← Back to Projects](../projects)

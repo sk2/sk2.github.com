@@ -4,9 +4,27 @@ layout: default
 
 # nascleanup
 
-<span class="status-badge status-active">Active Development</span>
+<span class="status-badge status-active">Active</span>
 
 [← Back to Projects](../projects)
+
+---
+
+## Contents
+
+- [Quick Facts](#quick-facts)
+- [The Insight](#the-insight)
+- [What This Is](#what-this-is)
+- [Architecture](#architecture)
+
+---
+
+## Quick Facts
+
+| | |
+|---|---|
+| **Status** | Active |
+| **Language** | N/A |
 
 ---
 
@@ -14,9 +32,13 @@ layout: default
 
 Developing...
 
+---
+
 ## What This Is
 
 A Rust-based CLI tool for deduplicating and organizing large file shares. Optimized for Docker execution on DSM, it uses an indexing layer for fast file comparison and metadata management.
+
+---
 
 ## Architecture
 
@@ -28,11 +50,17 @@ A Rust-based CLI tool for deduplicating and organizing large file shares. Optimi
 
 ---
 
+---
+
 [← Back to Projects](../projects)
 
 ---
 
+---
+
 [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
 
 ---
 
@@ -40,7 +68,11 @@ A Rust-based CLI tool for deduplicating and organizing large file shares. Optimi
 
 ---
 
+---
+
 [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
 
 ---
 
@@ -48,7 +80,11 @@ A Rust-based CLI tool for deduplicating and organizing large file shares. Optimi
 
 ---
 
+---
+
 [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
 
 ---
 
@@ -56,7 +92,11 @@ A Rust-based CLI tool for deduplicating and organizing large file shares. Optimi
 
 ---
 
+---
+
 [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
 
 ---
 
@@ -64,7 +104,11 @@ A Rust-based CLI tool for deduplicating and organizing large file shares. Optimi
 
 ---
 
+---
+
 [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
 
 ---
 
@@ -72,7 +116,11 @@ A Rust-based CLI tool for deduplicating and organizing large file shares. Optimi
 
 ---
 
+---
+
 [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
 
 ---
 
@@ -80,7 +128,11 @@ A Rust-based CLI tool for deduplicating and organizing large file shares. Optimi
 
 ---
 
+---
+
 [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
 
 ---
 
@@ -88,7 +140,11 @@ A Rust-based CLI tool for deduplicating and organizing large file shares. Optimi
 
 ---
 
+---
+
 [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
 
 ---
 
@@ -96,7 +152,11 @@ A Rust-based CLI tool for deduplicating and organizing large file shares. Optimi
 
 ---
 
+---
+
 [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
 
 ---
 
@@ -104,7 +164,11 @@ A Rust-based CLI tool for deduplicating and organizing large file shares. Optimi
 
 ---
 
+---
+
 [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
 
 ---
 
@@ -112,7 +176,11 @@ A Rust-based CLI tool for deduplicating and organizing large file shares. Optimi
 
 ---
 
+---
+
 [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
 
 ---
 
@@ -120,7 +188,11 @@ A Rust-based CLI tool for deduplicating and organizing large file shares. Optimi
 
 ---
 
+---
+
 [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
 
 ---
 
@@ -128,8 +200,22 @@ A Rust-based CLI tool for deduplicating and organizing large file shares. Optimi
 
 ---
 
+---
+
 [← Back to Projects](../projects) | [Development Philosophy](../development)
 
 ---
 
+---
+
 [← Back to Projects](../projects) | [Development Philosophy](../development)
+
+---
+
+---
+
+[← Back to Projects](../projects)
+
+---
+
+[← Back to Projects](../projects)

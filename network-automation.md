@@ -10,6 +10,14 @@ The tools are designed to work together as a pipeline, allowing engineers to mov
 
 A typical workflow is: ingest topology + intent, compile candidate configurations, simulate convergence and failure scenarios, then visualize and audit outputs before deployment.
 
+In practice the feedback loop is fast enough to feel interactive: many simulation runs complete in milliseconds for typical design iterations.
+
+If you are new to the ecosystem: start with the **Network Modeling Engine**, then use the **Network Simulator** for verification and **Network Visualization Engine** for review.
+
+**Inputs:** topology and high-level intent (plus brownfield state when available).
+
+**Outputs:** reviewable configs/diffs, simulation results, diagrams, and audit artifacts.
+
 ## The Toolchain
 
 We build specialized engines that handle specific stages of the network lifecycle—from **ingesting brownfield state** to final protocol-level validation.

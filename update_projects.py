@@ -63,8 +63,8 @@ ECOSYSTEM_MAP = {
 }
 
 PROJECT_ALIASES = {
-    "ank_pydantic": "Network Modeling Library",
-    "ank-pydantic": "Network Modeling Library",
+    "ank_pydantic": "Network Modeling Engine",
+    "ank-pydantic": "Network Modeling Engine",
     "cliscrape": "CLI Parser",
     "rtltcp": "Radio Streaming Server",
     "auroradata": "Aurora Advisor",
@@ -78,16 +78,21 @@ PROJECT_ALIASES = {
     "netvis": "Visualization Engine",
     "passive": "Signal Reflection Analysis",
     "signals": "Spectrum Analysis",
-    "configparsing": "Configuration Analysis",
+    "configparsing": "Brownfield Ingestion & Analysis",
 }
 
 # GOLDEN MASTER CONTENT: Used to ensure high-value technical detail is never lost.
 PROJECT_CONTENT_OVERRIDES = {
     "autonetkit": {
-        "Concept": "A compiler-based framework for automated network provisioning. AutoNetkit transforms high-level design specifications into validated device configurations across heterogeneous hardware and protocol environments.\n\nTraditional network configuration is often manual and vendor-specific. AutoNetkit introduces a declarative approach where engineers define the architectural intent—the 'Whiteboard' model—and the engine automatically handles the complex transformations required to generate the underlying protocol parameters and CLI commands.",
+        "Concept": "A compiler-based framework for automated network provisioning. AutoNetkit transforms high-level architectural intent into validated device configurations across heterogeneous hardware and protocol environments.\n\nTraditional network configuration is often manual and vendor-specific. AutoNetkit introduces a declarative approach where engineers define the architectural intent—the 'Whiteboard' model—and the engine automatically handles the complex transformations required to generate the underlying protocol parameters and CLI commands.",
         "Features": "- **Automated IP Addressing**: Intelligent allocation of loopbacks and link subnets across multiple protocol layers.\n- **Protocol Orchestration**: Automatic generation of consistent OSPF areas, IS-IS levels, and BGP peering relationships (iBGP/eBGP).\n- **Multi-Vendor Support**: Compiles intent into native configuration formats for Cisco (IOS, XR, NX-OS), Juniper (JunOS), and Arista (EOS).\n- **Visual Feedback**: Generates real-time topological diagrams to verify the physical and logical structure of the design.",
         "Architecture": "AutoNetkit employs a multi-stage transformation pipeline:\n1. **Specification Abstraction**: Captures the high-level design intent.\n2. **Intermediate Representation**: A network-wide graph model that maintains cross-vendor consistency.\n3. **Device Specialization**: Transforms the abstract model into device-specific protocol state.\n4. **Template Assembly**: Generates the final CLI commands using verified vendor templates.",
         "Impact": "AutoNetkit was integrated into Cisco's **Virtual Internet Routing Lab (VIRL)** platform as the primary configuration engine. It has been used to successfully generate valid configurations for core-network topologies with over 1,000 devices in seconds, demonstrating significant scalability and practical utility in production-grade engineering environments."
+    },
+    "configparsing": {
+        "Concept": "A specialized framework for **Brownfield Ingestion and Analysis**. It extracts high-level architectural intent and topology relationships from legacy network state—including vendor-specific CLI configurations and unstructured PDF documentation—normalizing them into a vendor-neutral model.\n\nThis system bridges the gap between existing deployments and the modern, declarative ANK toolchain. By leveraging LLM-powered RAG pipelines, it identifies complex protocol relationships and link roles that are often hidden in thousands of lines of manual configuration.",
+        "Use Cases": "- **Automated Network Audit**: Identify inconsistencies and compliance drifts across legacy multi-vendor estates.\n- **Migration Planning**: Automatically generate \"As-Is\" topology models and protocol relationships for hardware refresh or greenfield migrations.\n- **Intent Extraction**: Transform manual device configurations into structured, declarative models.",
+        "Technical Depth": "The system acts as the 'External Discovery' input for the Workbench, bridging the gap between existing brownfield deployments and the modern, declarative design toolchain."
     },
     "autonetkit-foundation": {
         "Concept": "The original research that established the principles of automated network configuration. This work introduced the **Whiteboard → Plan → Build** transformation model, which allows engineers to work with high-level design abstractions while the system handles the technical implementation details.",

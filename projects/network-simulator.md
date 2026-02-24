@@ -24,6 +24,13 @@ Validate network configurations at scale with protocol-level fidelity before dep
 
 ---
 
+## Screenshots
+
+![OSPF Convergence Analysis](/images/ospf.png)
+*Protocol Verification — Visualizing OSPF adjacency states and convergence patterns across a 50-node simulated topology.*
+
+---
+
 ## Current Status
 
 2026-02-24 — Completed 68-05-PLAN.md

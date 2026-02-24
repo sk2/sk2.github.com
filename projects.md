@@ -42,12 +42,12 @@ A compiler-based framework for automated network provisioning. AutoNetkit transf
 A Rust-based network topology layout and visualization engine. Takes complex multi-layer network topologies (via petgraph) and renders them using advanced layout algorithms that reduce visual complexity while preserving structural clarity. Outputs static formats (SVG, PDF, PNG) for v1, with interactive browser embedding planned for future integration with other tooling.
 
 
-### [Configuration Analysis](projects/configparsing)
+### [Brownfield Ingestion & Analysis](projects/configparsing)
 
 <span class="status-badge status-active">Recently Updated</span>
 
 
-A framework for extracting high-level intent from legacy network state. It uses machine learning and layout-aware text extraction to transform vendor-specific CLI configurations and documentation into vendor-neutral network models.
+A specialized framework for extracting high-level architectural intent and topology relationships from legacy network state. It bridges the gap between manual CLI configurations and modern automation by identifying protocol relationships and topology from unstructured data using LLM-powered RAG pipelines.
 
 
 ### [Topology Engine Core](projects/ank-nte)
@@ -82,12 +82,12 @@ An orchestration runner for coordinating **device interactions** across real/tes
 The original research that established the principles of automated network configuration. This work introduced the **Whiteboard → Plan → Build** transformation model, which allows engineers to work with high-level design abstractions while the system handles the technical implementation details.
 
 
-### [Network Modeling Library](projects/ank-pydantic)
+### [Network Modeling Engine](projects/ank-pydantic)
 
 <span class="status-badge status-active">Recently Updated</span>
 
 
-A Python library for modeling and querying network topologies, backed by a fast Rust core (`ank_nte`). Features a two-stage transformation model (Whiteboard → Plan → Protocol Layers), type-safe Pydantic models for nodes/edges/layers, and a composable lazy query API with Rust-backed execution. Ships with "batteries-included" domain models (ISIS, MPLS, EVPN, L3VPN, IXP) in the blueprints/ module.
+A Python library for modeling and querying network topologies, backed by a fast Rust core (`ank_nte`). Features a two-stage transformation model (Whiteboard → Plan → Protocol Layers), type-safe Pydantic models for nodes/edges/layers, and a composable lazy query API with Rust-backed execution (NTE Engine). Ships with "batteries-included" domain models (ISIS, MPLS, EVPN, L3VPN, IXP) in the blueprints/ module.
 
 
 ### [Network Automation Ecosystem - Overall Architecture Definition](projects/automationarch)

@@ -3,7 +3,7 @@ layout: default
 section: network-automation
 ---
 
-# Configuration Analysis
+# Brownfield Ingestion & Analysis
 
 <span class="status-badge status-active">Recently Updated</span>
 
@@ -13,28 +13,21 @@ section: network-automation
 
 ---
 
-## Contents
-
-- [Concept](#concept)
-- [Features](#features)
-- [Technical Depth](#technical-depth)
-- [Current Status](#current-status)
-
 ## Concept
 
-A framework for extracting high-level intent from legacy network state. It uses machine learning and layout-aware text extraction to transform vendor-specific CLI configurations and documentation into vendor-neutral network models.
+A specialized framework for **Brownfield Modernization** and **Automated Audits**. It extracts high-level architectural intent and topology relationships from legacy network state—including vendor-specific CLI configurations and unstructured PDF documentation—normalizing them into a vendor-neutral model.
 
-A network automation framework that decouples network configuration from vendor-specific syntax. It uses LLM-powered RAG to extract network-level intent and topology relationships from vendor documentation and CLI configurations, normalizing them into a vendor-neutral topology graph model inspired by AutoNetKit. The system enables cross-vendor configuration generation and validation through semantic simulation.
+This system bridges the gap between existing "un-automated" deployments and the modern, declarative ANK toolchain. By leveraging LLM-powered RAG pipelines, it identifies complex protocol relationships and link roles that are often hidden in thousands of lines of manual configuration.
 
-Extract network-level topology relationships (protocol adjacencies, link roles, VLAN membership) from vendor-specific CLI and documentation with high accuracy, enabling truly vendor-independent network configuration.
+Extract network-level intent (protocol adjacencies, link roles, VLAN membership) from legacy data with high accuracy, enabling truly vendor-independent network modernization and compliance verification.
 
 ---
 
-## Features
+## Use Cases
 
-- **Layout-Aware Ingestion**: Processes vendor manuals and configuration files using PDF structural analysis to maintain technical context.
-- **Semantic Normalization**: Maps vendor-specific syntax (Cisco, Juniper, Arista) into standardized topology relationships and protocol attributes.
-- **AI-Assisted Extraction**: Leverages LLM-powered RAG pipelines to identify intent and architectural patterns from unstructured technical data.
+- **Automated Network Audit**: Rapidly identify inconsistencies and compliance drifts across legacy multi-vendor estates.
+- **Migration Planning**: Automatically generate "As-Is" topology models and protocol relationships for hardware refresh or greenfield migrations.
+- **Intent Extraction**: Transform manual, "pet-like" device configurations into structured, "cattle-like" declarative models.
 
 ---
 

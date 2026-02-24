@@ -7,8 +7,6 @@ section: photography
 
 <span class="status-badge status-active">Active</span>
 
-
-
 [← Back to Projects](../projects)
 
 ---
@@ -16,21 +14,15 @@ section: photography
 ## Contents
 
 - [Concept](#concept)
-- [What This Is](#what-this-is)
 - [Key Features](#key-features)
 - [Architecture](#architecture)
 - [Tech Stack](#tech-stack)
-- [Core Value](#core-value)
 
 ## Concept
 
+An automated astrophotography system designed to capture high-quality aurora and night sky imagery. The project uses Raspberry Pi "nodes" connected via USB to Sony a7R V/a7 IV cameras, controlled and assisted by an iPhone companion app.
+
 Provides precise, automated control over exposure and focus specifically optimized for aurora "bursts" and star sharpness, while offering field-ready composition tools.
-
----
-
-## What This Is
-
-An automated aurora and night sky photography system using Raspberry Pi "nodes" connected via USB to Sony cameras (a7R V / a7 IV), controlled and assisted by an iPhone companion app. The system monitors star sharpness (HFR) in real-time, dynamically responds to aurora bursts by adjusting exposure, and coordinates multiple nodes for panoramic capture.
 
 ---
 
@@ -61,12 +53,6 @@ Raspberry Pi Capture Nodes
 ## Tech Stack
 
 Python (SEP, OpenCV, Rawpy, FastAPI, MQTT), Sony Camera Remote SDK, Swift (SwiftUI), Raspberry Pi
-
----
-
-## Core Value
-
-Provides precise, automated control over exposure and focus specifically optimized for aurora "bursts" and star sharpness, while offering field-ready composition tools.
 
 ---
 

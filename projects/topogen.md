@@ -7,8 +7,6 @@ section: network-automation
 
 <span class="status-badge status-updated">Recently Updated</span>
 
-
-
 [← Back to Network Automation](../network-automation)
 
 [← Back to Projects](../projects)
@@ -18,30 +16,18 @@ section: network-automation
 ## Contents
 
 - [Concept](#concept)
-- [Roadmap](#roadmap)
-- [What This Is](#what-this-is)
 - [Key Features](#key-features)
 - [Example: Data Center Leaf-Spine](#example-data-center-leaf-spine)
 - [Python API](#python-api)
 - [Milestones](#milestones)
 - [Tech Stack](#tech-stack)
-- [Core Value](#core-value)
+- [Roadmap](#roadmap)
 
 ## Concept
 
-Generating realistic, validated network topologies for testing often requires custom, brittle scripts. The **Topology Generator** consolidates topology generation logic into a Rust core, producing structured data center and WAN graphs with consistent YAML output for the simulation and visualization ecosystem.
+A Rust-based network topology generator with Python bindings that consolidates scattered topology generation logic from AutoNetKit, simulation tools, and visualization tools. Generates realistic data center, WAN, and random graph topologies with proper structure, design patterns, and realistic parameters. Outputs custom YAML format for use across the network engineering tool ecosystem.
 
----
-
-## Roadmap
-
-- Plans:
-
----
-
-## What This Is
-
-A Rust library with Python bindings for generating realistic network topologies. Consolidates scattered topology generation logic from AutoNetKit, simulation tools, and visualization tools into one well-tested implementation.
+Network engineers can quickly generate realistic, validated network topologies without implementing complex algorithms from scratch.
 
 ---
 
@@ -199,9 +185,9 @@ Rust core, PyO3 for Python bindings, Maturin build system
 
 ---
 
-## Core Value
+## Roadmap
 
-Network engineers can quickly generate realistic, validated network topologies without implementing complex algorithms from scratch.
+- Plans:
 
 ---
 

@@ -7,8 +7,6 @@ section: signal-processing
 
 <span class="status-badge status-updated">Recently Updated</span>
 
-
-
 [← Back to Agentic Systems](../agentic-systems)
 
 [← Back to Projects](../projects)
@@ -18,22 +16,14 @@ section: signal-processing
 ## Contents
 
 - [Concept](#concept)
-- [What This Is](#what-this-is)
 - [Key Features](#key-features)
 - [Architecture](#architecture)
 - [Milestones](#milestones)
 - [Tech Stack](#tech-stack)
-- [Core Value](#core-value)
 
 ## Concept
 
-A modular, agent-aware health monitoring ecosystem that translates raw biometric data from HealthyPi hardware into actionable insights and automated interventions — bridging high-fidelity biometric wearables with daily health management.
-
----
-
-## What This Is
-
-A health monitoring platform that connects HealthyPi hardware (HealthyPi 6 Pi HAT and HealthyPi Move wearable) to an analysis engine, virtual patient simulator, and agentic intelligence layer. It processes ECG, PPG, EDA, IMU, and EEG signals for HRV analysis, stress scoring, and sleep quality assessment — with a virtual patient simulator for hardware-free development.
+A modular, agent-aware health monitoring ecosystem that translates raw biometric data from HealthyPi hardware (6 and Move) into actionable insights and automated interventions.
 
 ---
 
@@ -91,12 +81,6 @@ macOS menu bar app with real-time ambient health status (Green/Yellow/Red).
 ## Tech Stack
 
 Python (Pydantic, NeuroKit2, SciPy), Swift (SwiftUI, HealthKit), NATS messaging, pytest (286 tests)
-
----
-
-## Core Value
-
-A modular, agent-aware health monitoring ecosystem that translates raw biometric data from HealthyPi hardware (6 and Move) into actionable insights and automated interventions.
 
 ---
 

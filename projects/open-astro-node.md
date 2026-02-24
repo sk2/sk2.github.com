@@ -7,8 +7,6 @@ section: photography
 
 <span class="status-badge status-active">Active</span>
 
-
-
 [← Back to Projects](../projects)
 
 ---
@@ -16,22 +14,14 @@ section: photography
 ## Contents
 
 - [Concept](#concept)
-- [What This Is](#what-this-is)
 - [Key Features](#key-features)
 - [Architecture](#architecture)
 - [Milestones](#milestones)
 - [Tech Stack](#tech-stack)
-- [Overview](#overview)
 
 ## Concept
 
-A headless, autonomous astrophotography controller designed for low-power Linux devices (RPi/Jetson). It manages hardware, executes imaging sequences, and ensures rig safety — set up, start the sequence, and go to sleep with confidence.
-
----
-
-## What This Is
-
-An autonomous astrophotography controller that runs on Raspberry Pi or Jetson, managing cameras (via INDI/gphoto2) and mounts (ZWO AM5, Benro Polaris). It provides both a responsive web UI and a terminal TUI for remote control, with a "Goodnight Protocol" safety system that monitors star quality, battery, and weather to protect equipment.
+A headless, autonomous astrophotography controller designed for low-power Linux devices (RPi/Jetson). It manages hardware, executes imaging sequences, and ensures rig safety.
 
 ---
 
@@ -80,12 +70,6 @@ Web UI with night vision mode, TUI for SSH, real-time state transport, targets C
 ## Tech Stack
 
 Rust (Axum, Tokio, SQLite), React (TypeScript, Tailwind CSS), INDI, PHD2, ASTAP plate-solving
-
----
-
-## Overview
-
-A headless, autonomous astrophotography controller designed for low-power Linux devices (RPi/Jetson). It manages hardware, executes imaging sequences, and ensures rig safety.
 
 ---
 

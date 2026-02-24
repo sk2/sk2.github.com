@@ -5,9 +5,7 @@ section: network-automation
 
 # Network Simulator
 
-<span class="status-badge status-updated">Recently Updated</span>
-
-**Rust**
+<span class="status-badge status-updated">Recently Updated</span> · **Rust**
 
 [← Back to Network Automation](../network-automation)
 
@@ -18,7 +16,6 @@ section: network-automation
 ## Contents
 
 - [Concept](#concept)
-- [Roadmap](#roadmap)
 - [Why the Network Simulator?](#why-the-network-simulator)
 - [Quick Start — Three-Router OSPF Example](#quick-start-three-router-ospf-example)
 - [Demo](#demo)
@@ -28,24 +25,20 @@ section: network-automation
 - [Use Cases](#use-cases)
 - [Milestones](#milestones)
 - [Tech Stack](#tech-stack)
-- [What This Is](#what-this-is)
-- [Core Value](#core-value)
+- [Roadmap](#roadmap)
 
 ## Concept
 
-Developing agentic AI systems and network automation tools requires rapid iteration. Spinning up containers for every test cycle takes minutes; simulation takes seconds. This simulator enables fast prototyping of network automation agents, DevOps pipelines, and AI-driven network operations — validate configurations and agent logic in simulation before committing to heavyweight container deployments.
+A Rust-based network simulator that models packet-level behavior for routing protocols. It provides a middle ground between pure algorithmic analysis (like C-BGP) and full emulation (like Containerlab) — larger scale and smaller footprint than emulation, higher fidelity than algorithmic simulation. Used for smoke testing and design validation of network configurations.
+
+**Current state:** v1.7 shipped. Planning v1.8.
+**Future Roadmap Ideas:** See [.planning/FUTURE_IDEAS.md](FUTURE_IDEAS.md) for long-term innovation and technical debt backlog.
+
+Validate network configurations at scale with protocol-level fidelity before deploying to real infrastructure.
 
 ---
 
-## Roadmap
-
-- v1.9 Advanced Impairments & Topology Patterns
-- v1.10 Engine Hardening & Protocol Fidelity
-- v1.11 Advanced Analysis & Assertions
-
----
-
-**Rust**
+· **Rust**
 
 ---
 
@@ -853,18 +846,11 @@ Rust, Tokio for async execution, petgraph for topology representation, gRPC for 
 
 ---
 
-## What This Is
+## Roadmap
 
-A Rust-based network simulator that models packet-level behavior for routing protocols. It provides a middle ground between pure algorithmic analysis (like C-BGP) and full emulation (like Containerlab) — larger scale and smaller footprint than emulation, higher fidelity than algorithmic simulation. Used for smoke testing and design validation of network configurations.
-
-**Current state:** v1.7 shipped. Planning v1.8.
-**Future Roadmap Ideas:** See [.planning/FUTURE_IDEAS.md](FUTURE_IDEAS.md) for long-term innovation and technical debt backlog.
-
----
-
-## Core Value
-
-Validate network configurations at scale with protocol-level fidelity before deploying to real infrastructure.
+- v1.9 Advanced Impairments & Topology Patterns
+- v1.10 Engine Hardening & Protocol Fidelity
+- v1.11 Advanced Analysis & Assertions
 
 ---
 

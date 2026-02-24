@@ -7,8 +7,6 @@ section: network-automation
 
 <span class="status-badge status-updated">Recently Updated</span>
 
-
-
 [← Back to Data Analytics](../data-analytics)
 
 [← Back to Projects](../projects)
@@ -18,24 +16,16 @@ section: network-automation
 ## Contents
 
 - [Concept](#concept)
-- [What This Is](#what-this-is)
 - [Why Flow-Based Simulation](#why-flow-based-simulation)
 - [Key Features](#key-features)
 - [Example Usage](#example-usage)
 - [Performance Metrics](#performance-metrics)
 - [Tech Stack](#tech-stack)
 - [Use Cases](#use-cases)
-- [Core Value](#core-value)
 
 ## Concept
 
-`netflowsim` provides rapid, massive-scale network performance analysis by using analytic queuing models and Monte Carlo simulations instead of packet-level discrete event simulation. It enables network engineers to validate topologies and routing strategies against billions of flow iterations in seconds.
-
----
-
-## What This Is
-
-Flow-based network simulator that uses analytic queuing models and Monte Carlo simulations for rapid topology and routing validation at massive scale.
+`netflowsim` provides rapid, massive-scale network performance analysis by using analytic queuing models and Monte Carlo simulations instead of packet-level discrete event simulation. It enables network engineers to validate topologies and routing strategies against billions of flow iterations in seconds, identify bottlenecks probabilistically, and test network resilience under failure scenarios.
 
 ---
 
@@ -149,12 +139,6 @@ Routing matrix written to routing.json
 - **Capacity Planning**: Identify congestion points under load
 - **What-If Analysis**: Model link failures and capacity changes
 - **Integration Testing**: Validate packet simulator routing logic
-
----
-
-## Core Value
-
-`netflowsim` provides rapid, massive-scale network performance analysis by using analytic queuing models and Monte Carlo simulations instead of packet-level discrete event simulation. It enables network engineers to validate topologies and routing strategies against billions of flow iterations in seconds, identify bottlenecks probabilistically, and test network resilience under failure scenarios.
 
 ---
 

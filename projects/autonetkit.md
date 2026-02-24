@@ -7,8 +7,6 @@ section: network-automation
 
 <span class="status-badge status-active">Active</span>
 
-
-
 [← Back to Projects](../projects)
 
 ---
@@ -16,7 +14,6 @@ section: network-automation
 ## Contents
 
 - [Concept](#concept)
-- [What This Is](#what-this-is)
 - [Key Features](#key-features)
 - [Examples](#examples)
 - [YAML Topology Format](#yaml-topology-format)
@@ -30,9 +27,11 @@ Network topology modeling typically forces a choice between the speed of untyped
 
 ---
 
-## What This Is
-
 A Python library for modeling and querying network topologies with type-safe Pydantic models and a Rust core. Expressive Python API backed by compiled graph algorithms (petgraph), with automatic configuration generation for multi-vendor network deployments.
+
+---
+
+---
 
 ---
 

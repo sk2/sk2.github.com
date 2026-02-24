@@ -6,28 +6,21 @@ layout: default
 
 <span class="status-badge status-active">Active</span>
 
-
-
 [← Back to Projects](../projects)
 
 ---
 
-## Contents
-
-- [The Insight](#the-insight)
-- [What This Is](#what-this-is)
-- [Features](#features)
-- [Architecture](#architecture)
-
-## The Insight
+## Concept
 
 Developing...
 
 ---
 
-## What This Is
-
 An autonomous distributed SIGINT system. It monitors the RF spectrum, identifies modulations via ML, and tracks aircraft (ADS-B) and satellites. It leverages NATS for coordination and Polars for data indexing.
+
+---
+
+---
 
 ---
 

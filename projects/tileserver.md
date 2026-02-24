@@ -7,8 +7,6 @@ section: data-analytics
 
 <span class="status-badge status-active">Active</span>
 
-
-
 [← Back to Data Analytics](../data-analytics)
 
 [← Back to Projects](../projects)
@@ -16,12 +14,6 @@ section: data-analytics
 ---
 
 ## Concept
-
-Serve dynamic vector tiles (MVT) from massive geospatial datasets (millions of points) with sub-second latency, enabling interactive visualization in Kepler.gl without pre-rendering static tilesets.
-
----
-
-## Core Value
 
 Serve dynamic vector tiles (MVT) from massive geospatial datasets (millions of points) with sub-second latency, enabling interactive visualization in Kepler.gl without pre-rendering static tilesets.
 

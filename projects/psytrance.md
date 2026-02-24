@@ -7,8 +7,6 @@ section: projects
 
 <span class="status-badge status-updated">Recently Updated</span>
 
-
-
 [← Back to Projects](../projects)
 
 ---
@@ -24,12 +22,12 @@ section: projects
 - [Usage](#usage)
 - [Output](#output)
 - [Tech Stack](#tech-stack)
-- [What This Is](#what-this-is)
-- [Core Value](#core-value)
 
 ## Concept
 
-A tool for exploring composition ideas through generative algorithms. A multi-level energy model drives every musical decision — from macro-level track arc (intro, build, peak, breakdown) down to per-16th-note accent patterns — producing coherent tracks with musical tension and release.
+A generative psytrance synthesis engine with real-time TUI controls. Creates complete tracks driven by a multi-level energy model, with live playback, step editing, and WAV export. Currently produces high-quality procedural psytrance but lacks workflow features for capturing ideas and iterating efficiently.
+
+Energy-driven generative music that sounds professional and lets users quickly explore variations.
 
 ---
 
@@ -142,18 +140,6 @@ Without `--output`, the engine launches an interactive TUI with real-time playba
 - **Playback**: cpal (real-time audio)
 - **TUI**: ratatui + crossterm
 - **RNG**: Seeded rand for reproducible generation
-
----
-
-## What This Is
-
-A generative psytrance synthesis engine with real-time TUI controls. Creates complete tracks driven by a multi-level energy model, with live playback, step editing, and WAV export. Currently produces high-quality procedural psytrance but lacks workflow features for capturing ideas and iterating efficiently.
-
----
-
-## Core Value
-
-Energy-driven generative music that sounds professional and lets users quickly explore variations.
 
 ---
 

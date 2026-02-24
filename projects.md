@@ -12,7 +12,7 @@ Focused on network engineering, autonomous systems, and signal processing.
 
 ### [Network Simulator](projects/network-simulator)
 
-<span class="status-badge status-updated">Recently Updated</span>
+<span class="status-badge status-updated">Recently Updated</span> · **Rust**
 
 
 A Rust-based network simulator that models packet-level behavior for routing protocols. It provides a middle ground between pure algorithmic analysis (like C-BGP) and full emulation (like Containerlab) — larger scale and smaller footprint than emulation, higher fidelity than algorithmic simulation. Used for smoke testing and design validation of network configurations.
@@ -20,7 +20,7 @@ A Rust-based network simulator that models packet-level behavior for routing pro
 
 ### [NetVis](projects/netvis)
 
-<span class="status-badge status-updated">Recently Updated</span>
+<span class="status-badge status-updated">Recently Updated</span> · **Rust**
 
 
 A Rust-based network topology layout and visualization engine. Takes complex multi-layer network topologies (via petgraph) and renders them using advanced layout algorithms that reduce visual complexity while preserving structural clarity. Outputs static formats (SVG, PDF, PNG) for v1, with interactive browser embedding planned for future integration with other tooling.
@@ -36,7 +36,7 @@ A Rust-based network topology generator with Python bindings that consolidates s
 
 ### [ANK Workbench](projects/ank-workbench)
 
-<span class="status-badge status-updated">Recently Updated</span>
+<span class="status-badge status-updated">Recently Updated</span> · **Python backend (FastAPI or Flask) · React or Vue frontend — Leverages existing Python ecosystem for ANK components · meets modern UX expectations**
 
 
 **An orchestration platform** that integrates the ANK ecosystem tools (TopoGen, ank_pydantic, Network Simulator, NetVis) into one seamless workflow.
@@ -66,6 +66,14 @@ NTE (Network Topology Engine) is a Rust-based graph topology engine with Python 
 A Python library for modeling and querying network topologies, backed by a fast Rust core (`ank_nte`). Features a two-stage transformation model (Whiteboard → Plan → Protocol Layers), type-safe Pydantic models for nodes/edges/layers, and a composable lazy query API with Rust-backed execution. Ships with "batteries-included" domain models (ISIS, MPLS, EVPN, L3VPN, IXP) in the blueprints/ module.
 
 
+### [Network Automation Ecosystem](projects/automationarch)
+
+<span class="status-badge status-updated">Recently Updated</span>
+
+
+This project aims to comprehensively define the **overall architecture of the Network Automation Ecosystem**. This involves understanding how the existing and planned tools (such as `topogen`, `autonetkit`, `netsim`, `netflowsim`, `netvis`, and the `Workbench`), along with strategic initiatives like the "Intelligence Layer," integrate to form a cohesive, unified, and differentiated product.
+
+
 ### [Network Configuration Analysis](projects/configparsing)
 
 <span class="status-badge status-updated">Recently Updated</span>
@@ -80,14 +88,6 @@ A network automation framework that decouples network configuration from vendor-
 
 
 A fast, simple, and ergonomic Rust library and CLI for network device interaction and automated testing. Provides the essential PyATS capabilities—testbed management, CLI parsing, and state verification—without the complexity, as a focused component in a broader network automation toolkit.
-
-
-### [Network Automation Ecosystem](projects/automationarch)
-
-<span class="status-badge status-updated">Recently Updated</span>
-
-
-This project aims to comprehensively define the **overall architecture of the Network Automation Ecosystem**. This involves understanding how the existing and planned tools (such as `topogen`, `autonetkit`, `netsim`, `netflowsim`, `netvis`, and the `Workbench`), along with strategic initiatives like the "Intelligence Layer," integrate to form a cohesive, unified, and differentiated product.
 
 
 ## 📡 Radio Systems
@@ -206,7 +206,7 @@ Photo Tour is a smart, interactive photography assistant designed for field use.
 
 ### [Secure Multi-Agent Personal Assistant](projects/multi-agent)
 
-<span class="status-badge status-updated">Recently Updated</span>
+<span class="status-badge status-updated">Recently Updated</span> · **Agents can be Go · Python · or Rust**
 
 
 A security-first multi-agent system that coordinates specialized containerized agents (health monitoring, home automation, data aggregation, workflow automation) through a message broker architecture. Each agent runs in isolation with minimal privileges and communicates only through validated message queues, demonstrating production-ready patterns for deploying AI agents in security-critical infrastructure environments. The orchestrator uses cloud LLM reasoning (GPT-4/Claude) while agents remain lightweight and deterministic.
@@ -246,7 +246,7 @@ A Python-based CLI that bypasses slow AppleScript/TypeScript layers to read dire
 Time series analysis typically requires either slow Python libraries or complex manual implementation. **matrix-profile-rs** provides Matrix Profile algorithms (STOMP, SCRIMP++, SCAMP) in native Rust with ergonomic APIs for motif discovery and anomaly detection, achieving C-level performance with Python-level usability through Polars integration.
 
 
-### [CLI Parser](projects/cliscrape)
+### [Network Output Parser](projects/cliscrape)
 
 <span class="status-badge status-active">Active</span>
 
@@ -339,6 +339,14 @@ Heart Rate Variability (HRV) reveals stress, recovery, and autonomic nervous sys
 An exploration-focused audio processing system using Raspberry Pi and microphone arrays. It focuses on spatial audio (ToA, beamforming) and classification (vehicles, wildlife) using an "analyst" agent approach.
 
 
+### [GSD Project Monitor](projects/devmon)
+
+<span class="status-badge status-active">Active</span>
+
+
+Developing...
+
+
 ### [Network Configuration Parser](projects/ank-parse)
 
 <span class="status-badge status-active">Active</span>
@@ -347,7 +355,7 @@ An exploration-focused audio processing system using Raspberry Pi and microphone
 Developing...
 
 
-### [GSD Project Monitor](projects/devmon)
+### [nascleanup](projects/nascleanup)
 
 <span class="status-badge status-active">Active</span>
 
@@ -361,14 +369,6 @@ Developing...
 
 
 A fast, keyboard-driven Rust text UI (TUI) task manager inspired by OmniFocus, built around a GTD workflow. It stores data in an owned SQLite database, supports projects and hierarchical contexts/tags, and is optimized for rapid inbox processing (triage + tagging) with minimal friction.
-
-
-### [nascleanup](projects/nascleanup)
-
-<span class="status-badge status-active">Active</span>
-
-
-Developing...
 
 
 ### [ASIAIR Import Tool](projects/import-asiair)

@@ -7,8 +7,6 @@ section: signal-processing
 
 <span class="status-badge status-updated">Recently Updated</span>
 
-
-
 [← Back to Signal Processing](../signal-processing)
 
 [← Back to Projects](../projects)
@@ -18,7 +16,6 @@ section: signal-processing
 ## Contents
 
 - [Concept](#concept)
-- [What This Is](#what-this-is)
 - [Why a Unified Server](#why-a-unified-server)
 - [Supported Hardware](#supported-hardware)
 - [Architecture](#architecture)
@@ -27,20 +24,12 @@ section: signal-processing
 - [Raspberry Pi Deployment](#raspberry-pi-deployment)
 - [Development Roadmap](#development-roadmap)
 - [Tech Stack](#tech-stack)
-- [Core Value](#core-value)
 
 ## Concept
 
-A single Rust binary that auto-detects every connected SDR, streams each over the standard `rtl_tcp` protocol, and provides a TUI dashboard and HTTP API for monitoring and control — designed for headless Raspberry Pi deployment.
+A cross-platform (targeted at Raspberry Pi) server that interfaces with multiple SDR devices (RTL-SDR, AirSpy HF+) and streams raw IQ samples over the network using the industry-standard `rtl_tcp` protocol. It features a built-in TUI for live configuration and device management.
 
----
-
-## What This Is
-
-A multi-SDR streaming server that replaces the separate C-based servers (`rtl_tcp`, `hfp_tcp`, `airspy_tcp`) with a single async Rust binary. It auto-detects all connected hardware, assigns each device its own TCP port, and streams raw IQ samples using the industry-standard `rtl_tcp` protocol. Any existing SDR client (GQRX, SDR#, CubicSDR) connects without modification.
-
-![rtltcp-rust TUI](/images/rtltcp-server-tui.png)
-*TUI dashboard showing 8 RTL-SDR devices and an AirSpy HF+ streaming on a Raspberry Pi.*
+The ability to reliably and efficiently stream high-fidelity IQ data from multiple SDRs over a network with a modern management interface.
 
 ---
 
@@ -179,12 +168,6 @@ Compression (LZ4/zstd), UDP transport with Forward Error Correction, "Mac Tunnel
 - **Hardware FFI**: rtlsdr_sys, libairspyhf, libairspy
 - **Cross-compilation**: `cross` + custom Docker images
 - **Config**: TOML with serde
-
----
-
-## Core Value
-
-The ability to reliably and efficiently stream high-fidelity IQ data from multiple SDRs over a network with a modern management interface.
 
 ---
 

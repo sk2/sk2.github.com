@@ -6,21 +6,21 @@ layout: default
 
 <span class="status-badge status-active">Active</span>
 
-
-
 [← Back to Projects](../projects)
 
 ---
 
-## The Insight
+## Concept
 
 Developing...
 
 ---
 
-## What This Is
-
 A Rust-based CLI tool for deduplicating and organizing large file shares. Optimized for Docker execution on DSM, it uses an indexing layer for fast file comparison and metadata management.
+
+---
+
+---
 
 ---
 

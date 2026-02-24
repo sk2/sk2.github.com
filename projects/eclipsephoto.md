@@ -7,8 +7,6 @@ section: photography
 
 <span class="status-badge status-active">Active</span>
 
-
-
 [← Back to Projects](../projects)
 
 ---
@@ -16,21 +14,15 @@ section: photography
 ## Contents
 
 - [Concept](#concept)
-- [What This Is](#what-this-is)
 - [Key Features](#key-features)
 - [Architecture](#architecture)
 - [Tech Stack](#tech-stack)
-- [Core Value](#core-value)
 
 ## Concept
 
+A "fire and forget" Raspberry Pi-based controller for autonomous solar eclipse photography. It coordinates a camera (via gphoto2) and a high-end mount (ZWO AM5 / Benro Polaris via INDI) to capture a complete eclipse sequence from C1 to C4 without manual intervention.
+
 Reliability and autonomy for a "one-shot" astronomical event. The system handles guiding, exposure ramping (Holy Grail), and error recovery (watchdogs) so the photographer can experience the eclipse while the system secures the data.
-
----
-
-## What This Is
-
-A "fire and forget" Raspberry Pi-based controller for autonomous solar eclipse photography. It coordinates a camera (via gphoto2) and a high-end mount (ZWO AM5 / Benro Polaris via INDI) to capture a complete eclipse sequence from C1 (First Contact) to C4 (Fourth Contact) without manual intervention.
 
 ---
 
@@ -60,12 +52,6 @@ Raspberry Pi
 ## Tech Stack
 
 Python (asyncio, multiprocessing), OpenCV, INDI, gphoto2, TSL2591 light sensor, FastAPI, ZeroMQ
-
----
-
-## Core Value
-
-Reliability and autonomy for a "one-shot" astronomical event. The system handles guiding, exposure ramping (Holy Grail), and error recovery (watchdogs) so the photographer can experience the eclipse while the system secures the data.
 
 ---
 

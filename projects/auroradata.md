@@ -7,8 +7,6 @@ section: projects
 
 <span class="status-badge status-active">Active</span>
 
-
-
 [← Back to Projects](../projects)
 
 ---
@@ -16,7 +14,6 @@ section: projects
 ## Contents
 
 - [Concept](#concept)
-- [Roadmap](#roadmap)
 - [The Problem](#the-problem)
 - [Architecture](#architecture)
 - [Phase 1: Substorm Trigger Engine](#phase-1-substorm-trigger-engine)
@@ -26,18 +23,13 @@ section: projects
 - [Example Output](#example-output)
 - [Tech Stack](#tech-stack)
 - [Integration with AuroraPhoto](#integration-with-auroraphoto)
-- [What This Is](#what-this-is)
-- [Core Value](#core-value)
+- [Roadmap](#roadmap)
 
 ## Concept
 
-Aurora hunting in Australia requires a 60+ minute drive to dark sites, but most tools do not help answer the critical question: "Should I leave *now*?" AuroraData combines real-time solar wind monitoring, substorm trigger detection, local weather forecasts, and travel time to produce a single "Go/No-Go" score with site-specific recommendations.
+A specialized tool for Australian aurora observers that solves the "should I drive 60 minutes?" problem. It combines real-time solar wind data (NOAA), substorm trigger logic (Bz/HP trends), and local weather (ACCESS-G model) to provide actionable advice.
 
----
-
-## Roadmap
-
-- Scope (not prioritized):
+Providing a single, definitive "Go/No-Go" score that accounts for both space weather potential and local terrestrial conditions (travel time, clouds, moon).
 
 ---
 
@@ -213,15 +205,9 @@ AuroraData handles the *planning* side (when to go, where to go), while AuroraPh
 
 ---
 
-## What This Is
+## Roadmap
 
-A specialized tool for Australian aurora observers that solves the "should I drive 60 minutes?" problem. It combines real-time solar wind data (NOAA), substorm trigger logic (Bz/HP trends), and local weather (ACCESS-G model) to provide actionable advice.
-
----
-
-## Core Value
-
-Providing a single, definitive "Go/No-Go" score that accounts for both space weather potential and local terrestrial conditions (travel time, clouds, moon).
+- Scope (not prioritized):
 
 ---
 

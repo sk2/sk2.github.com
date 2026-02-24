@@ -5,9 +5,7 @@ section: network-automation
 
 # NetVis
 
-<span class="status-badge status-updated">Recently Updated</span>
-
-**Rust**
+<span class="status-badge status-updated">Recently Updated</span> · **Rust**
 
 [← Back to Network Automation](../network-automation)
 
@@ -18,31 +16,22 @@ section: network-automation
 ## Contents
 
 - [Concept](#concept)
-- [What This Is](#what-this-is)
 - [Key Features](#key-features)
 - [Example: Quick Start](#example-quick-start)
 - [Integration with the Network Modeling & Configuration Library](#integration-with-the-network-modeling-configuration-library)
 - [Example Gallery](#example-gallery)
 - [Milestones](#milestones)
 - [Tech Stack](#tech-stack)
-- [Core Value](#core-value)
 
 ## Concept
 
-Network visualization often fails at scale because layout algorithms treat all nodes and edges equally, producing cluttered "hairball" diagrams. The **Network Visualization Engine** treats topologies as hierarchical structures and uses domain-aware layout constraints—including isometric views and edge bundling—to reflect engineering intent.
+A Rust-based network topology layout and visualization engine. Takes complex multi-layer network topologies (via petgraph) and renders them using advanced layout algorithms that reduce visual complexity while preserving structural clarity. Outputs static formats (SVG, PDF, PNG) for v1, with interactive browser embedding planned for future integration with other tooling.
 
-
-**Rust**
-
----
-
-**Rust**
+Transform network topologies into clear, information-dense visualizations using algorithms that minimize edge crossings, bundle related connections, and respect hierarchical/geographic structure — enabling understanding of networks that would otherwise be visual noise.
 
 ---
 
-## What This Is
-
-A Rust-based network topology layout and visualization engine that transforms complex multi-layer networks into clear, information-dense renderings. Advanced layout algorithms minimize visual complexity while preserving structural clarity.
+· **Rust**
 
 ---
 
@@ -228,12 +217,6 @@ Stable API, deterministic rendering, and spatial indexing.
 ## Tech Stack
 
 Rust, petgraph, fjadra (d3-force port), SVG/PDF/PNG rendering, WASM-ready
-
----
-
-## Core Value
-
-Transform network topologies into clear, information-dense visualizations using algorithms that minimize edge crossings, bundle related connections, and respect hierarchical/geographic structure — enabling understanding of networks that would otherwise be visual noise.
 
 ---
 

@@ -6,8 +6,6 @@ layout: default
 
 <span class="status-badge status-active">Active</span>
 
-
-
 [← Back to Projects](../projects)
 
 ---
@@ -26,6 +24,10 @@ Heart Rate Variability (HRV) reveals stress, recovery, and autonomic nervous sys
 
 ![HRV Monitor TUI](/images/hrv.png)
 *Live RR interval tracking with rolling 60-second charts and computed HRV metrics.*
+
+---
+
+---
 
 ---
 

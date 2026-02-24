@@ -7,31 +7,17 @@ section: signal-processing
 
 <span class="status-badge status-updated">Recently Updated</span>
 
-
-
 [← Back to Signal Processing](../signal-processing)
 
 [← Back to Projects](../projects)
 
 ---
 
-## Contents
-
-- [Concept](#concept)
-- [What This Is](#what-this-is)
-- [Core Principles](#core-principles)
-- [Architecture](#architecture)
-- [Core Value](#core-value)
-
 ## Concept
 
-Ambient RF signals reflect off objects in the environment. By processing these reflections with coherent multi-channel receivers, we can extract bistatic range and Doppler shift information — an interesting signal processing challenge.
+A distributed multi-beam passive radar system based on KrakenSDR hardware. Pi handles data acquisition, Mac/Linux handles compute-intensive DSP. All 4 surveillance channels process in parallel with independent Range-Doppler visualization, per-beam configuration, and real-time performance monitoring. v2 adds per-beam target tracking with geographic visualization, ADS-B correlation, and detection recording for offline analysis.
 
----
-
-## What This Is
-
-An experimental signal processing project exploring how to analyze reflections of ambient radio signals. The system uses coherent multi-channel RF data to study bistatic geometry and Doppler effects.
+Clean, understandable, stable codebase that reliably tracks aircraft in real-time.
 
 ---
 
@@ -71,12 +57,6 @@ Currently implementing analysis and association logic . The system now maintains
 - **CFAR Detection**: Constant False Alarm Rate detection complete
 - **Analysis Management**: Per-beam analysis with cross-beam fusion planned for v3
 - **Real-Time Operation**: Signal analysis with sub-second latency
-
----
-
-## Core Value
-
-Clean, understandable, stable codebase that reliably tracks aircraft in real-time.
 
 ---
 

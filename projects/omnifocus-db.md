@@ -7,8 +7,6 @@ section: projects
 
 <span class="status-badge status-active">Last Active: 2026-02-16</span>
 
-
-
 [← Back to Data Analytics](../data-analytics)
 
 [← Back to Projects](../projects)
@@ -18,8 +16,6 @@ section: projects
 ## Contents
 
 - [Concept](#concept)
-- [What This Is](#what-this-is)
-- [Core Value](#core-value)
 - [The Problem](#the-problem)
 - [The Solution](#the-solution)
 - [Key Features](#key-features)
@@ -31,21 +27,11 @@ section: projects
 
 ## Concept
 
-OmniFocus 4's AppleScript and app-based APIs are slow—too slow for AI agents that need instant context. **OmniFocus DB** bypasses these layers with direct SQLite database access, providing near-instant retrieval of projects and tasks in token-efficient formats optimized for agent consumption.
+A Python-based CLI that bypasses slow AppleScript/TypeScript layers to read directly from the OmniFocus SQLite database on macOS. It provides structured, token-efficient data (JSON/Text) to agents for lightning-fast project listing, inbox analysis, and context gathering.
 
----
-
-## What This Is
-
-A fast CLI tool for direct database access to OmniFocus 4. Designed specifically for AI agent context and fast triaging, it bypasses slow AppleScript/TypeScript layers to read directly from the OmniFocus SQLite database.
-
----
-
-## Core Value
-
-- **Zero-Latency Context**: Near-instant retrieval of projects and tasks without OmniFocus app overhead
-- **Agent-Optimized**: Dense, low-token representations of task lists for efficient LLM context
-- **Safety First**: Read-only access by default to prevent database corruption
+- **Zero-Latency Context:** Near-instant retrieval of projects and tasks without the overhead of the OmniFocus app or AppleScript.
+- **Agent-Optimized:** Focused on providing dense, low-token representations of the user's task list.
+- **Safety First:** Read-only access by default to prevent database corruption while OmniFocus is active.
 
 ---
 

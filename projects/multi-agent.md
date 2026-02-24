@@ -5,9 +5,7 @@ section: agentic-systems
 
 # Secure Multi-Agent Personal Assistant
 
-<span class="status-badge status-updated">Recently Updated</span>
-
-**Agents can be Go · Python · or Rust**
+<span class="status-badge status-updated">Recently Updated</span> · **Agents can be Go · Python · or Rust**
 
 [← Back to Agentic Systems](../agentic-systems)
 
@@ -18,32 +16,21 @@ section: agentic-systems
 ## Contents
 
 - [Concept](#concept)
-- [What This Is](#what-this-is)
 - [Problem It Solves](#problem-it-solves)
 - [Features](#features)
 - [Architecture](#architecture)
 - [Security Model](#security-model)
 - [Individual Agents](#individual-agents)
-- [Core Value](#core-value)
 
 ## Concept
 
-Multi-agent coordination requires strict security boundaries to prevent lateral movement. This assistant demonstrates **containerized isolation** where agents (HealthKit, Home Automation, etc.) coordinate via a NATS message broker. By using per-subject ACLs and a "deny-by-default" security posture, the system ensures that compromise of a single agent cannot cascade through the infrastructure.
+A security-first multi-agent system that coordinates specialized containerized agents (health monitoring, home automation, data aggregation, workflow automation) through a message broker architecture. Each agent runs in isolation with minimal privileges and communicates only through validated message queues, demonstrating production-ready patterns for deploying AI agents in security-critical infrastructure environments. The orchestrator uses cloud LLM reasoning (GPT-4/Claude) while agents remain lightweight and deterministic.
 
-
-**Agents can be Go · Python · or Rust**
-
----
-
-**Agents can be Go · Python · or Rust**
+Complete isolation between agents such that compromise of one agent cannot cascade to others or the orchestrator—demonstrating that secure multi-agent systems are practical for both personal and production infrastructure use cases.
 
 ---
 
-## What This Is
-
-A security-first framework for coordinating specialized agents. It uses NATS for communication and Docker for isolated execution. The orchestrator handles high-level reasoning and workflow execution, while agents perform deterministic tasks.
-
-The system includes 13+ specialized agents: HealthKit, HealthyPi, Hue (home automation), Climate, Calendar, Weather, RSS, Backup Monitor, Screen Time, Network Monitor, Workflow Engine, Notification Gateway, and Audit Anomaly detection. See [Individual Agents](#individual-agents) section below for details.
+· **Agents can be Go · Python · or Rust**
 
 ---
 
@@ -272,12 +259,6 @@ OpenTelemetry tracing for all operations:
 - **Audit Anomaly Agent** (Python): Monitors OpenTelemetry logs for security events and unusual patterns.
 
 All agents communicate exclusively via NATS with subject-based ACLs. Each agent's capabilities are explicitly defined, and actions requiring elevated privileges trigger the pre-approval workflow.
-
----
-
-## Core Value
-
-Complete isolation between agents such that compromise of one agent cannot cascade to others or the orchestrator—demonstrating that secure multi-agent systems are practical for both personal and production infrastructure use cases.
 
 ---
 

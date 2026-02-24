@@ -6,15 +6,17 @@ layout: default
 
 <span class="status-badge status-active">Active</span>
 
-
-
 [← Back to Projects](../projects)
 
 ---
 
-## The Insight
+## Concept
 
 Developing...
+
+---
+
+---
 
 ---
 

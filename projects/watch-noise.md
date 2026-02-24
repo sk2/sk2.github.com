@@ -7,8 +7,6 @@ section: projects
 
 <span class="status-badge status-active">Active</span>
 
-
-
 [← Back to Projects](../projects)
 
 ---
@@ -16,7 +14,6 @@ section: projects
 ## Contents
 
 - [Concept](#concept)
-- [What This Is](#what-this-is)
 - [StillState Features](#stillstate-features)
 - [Audio Architecture](#audio-architecture)
 - [Milestones](#milestones)
@@ -29,12 +26,14 @@ section: projects
 
 ---
 
-## What This Is
-
 **Wave** is an evolutionary ambient audio ecosystem designed to manage the user's sensory environment across rest and work.
 
 1. **StillState (Watch):** An adaptive sleep sounds app for Apple Watch with personalized frequency calibration, heartbeat synchronization, and microphone-based environmental monitoring.
 2. **FlowState (Mac):** A productivity-focused menu bar app that links procedural audio to active tasks and a genetic evolution system (planned).
+
+---
+
+---
 
 ---
 

@@ -7,8 +7,6 @@ section: signal-processing
 
 <span class="status-badge status-updated">Recently Updated</span>
 
-
-
 [← Back to Signal Processing](../signal-processing)
 
 [← Back to Projects](../projects)
@@ -31,11 +29,10 @@ section: signal-processing
 - [Health and Resilience](#health-and-resilience)
 - [Development Roadmap](#development-roadmap)
 - [Tech Stack](#tech-stack)
-- [Core Value](#core-value)
 
 ## Concept
 
-Monitor the local radio spectrum autonomously, classify every detected signal using ML, and maintain a persistent "Signal Census" — a queryable database of all RF activity over time. Distributed across Raspberry Pi edge nodes and a Mac mini core, the system runs unattended, sweeping bands, scheduling satellite passes, and logging what it finds.
+Transform raw radio spectrum data into an actionable "Signal Census" through automated detection, ML classification, and distributed acquisition.
 
 ---
 
@@ -214,12 +211,6 @@ WebSocket protocol: one JSON metadata message followed by binary uint8 spectrum 
 **ML:** CoreML, PyTorch, ONNX Runtime (RadioML 2018.01A training data)
 
 **Infrastructure:** uv (package management), systemd (edge services), Docker (optional)
-
----
-
-## Core Value
-
-Transform raw radio spectrum data into an actionable "Signal Census" through automated detection, ML classification, and distributed acquisition.
 
 ---
 

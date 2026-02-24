@@ -6,30 +6,23 @@ layout: default
 
 <span class="status-badge status-active">Active</span>
 
-
-
 [← Back to Projects](../projects)
 
 ---
 
-## Contents
-
-- [The Insight](#the-insight)
-- [What This Is](#what-this-is)
-- [Problem It Solves](#problem-it-solves)
-- [Features](#features)
-
-## The Insight
+## Concept
 
 Developing...
 
 ---
 
-## What This Is
-
 A framework for parsing and analyzing device configurations across multiple networking vendors. The project bridges the gap between unstructured legacy CLI data and structured intent-based models. 
 
 Phase 1 focuses on building the **Knowledge Base**: ingesting thousands of pages of vendor manuals (PDFs) and converting them into high-fidelity Markdown. This creates a searchable, semantically-indexed reference that AI agents can use to accurately interpret vendor-specific syntax.
+
+---
+
+---
 
 ---
 

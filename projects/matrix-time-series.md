@@ -7,8 +7,6 @@ section: data-analytics
 
 <span class="status-badge status-updated">Recently Updated</span>
 
-
-
 [← Back to Data Analytics](../data-analytics)
 
 [← Back to Projects](../projects)
@@ -17,25 +15,21 @@ section: data-analytics
 
 ## Contents
 
-- [The Insight](#the-insight)
-- [What This Is](#what-this-is)
+- [Concept](#concept)
 - [Problem It Solves](#problem-it-solves)
 - [Features](#features)
 - [Architecture](#architecture)
 - [Use Cases](#use-cases)
-- [Core Value](#core-value)
 
-## The Insight
+## Concept
 
-Time series analysis benefits from high-performance libraries for motif discovery and anomaly detection. **matrix-profile-rs** provides Matrix Profile algorithms (STOMP, SCRIMP++, SCAMP) in native Rust with ergonomic APIs for motif discovery and anomaly detection, providing high performance with Python-level usability through Polars integration.
-
----
-
-## What This Is
+Time series analysis typically requires either slow Python libraries or complex manual implementation. **matrix-profile-rs** provides Matrix Profile algorithms (STOMP, SCRIMP++, SCAMP) in native Rust with ergonomic APIs for motif discovery and anomaly detection, achieving C-level performance with Python-level usability through Polars integration.
 
 A high-performance Rust implementation of Matrix Profile algorithms for time series analysis with SIMD acceleration, out-of-memory tiling support, and Polars ecosystem integration. Matrix Profiles enable pattern discovery, anomaly detection, and similarity search in univariate time series without domain knowledge or parameter tuning.
 
 Think of it as "find repeating patterns and anomalies in any time series data" with a simple API: `df.select(pl.col("ts").mp().stomp(m=20))` for Polars users, or direct Rust APIs for maximum performance and scale.
+
+**Performance at scale with ergonomic APIs** — achieve 2.5x speedup via SIMD, handle datasets larger than RAM via tiling, while maintaining simple `.motifs(k)` / `.discords(k)` interfaces.
 
 ---
 
@@ -133,12 +127,6 @@ Polars DataFrame (via to_dataframe()) or Rust types
 - Find repeating load patterns for capacity planning
 - Detect anomalous system behavior
 - Example: Server load pattern analysis for autoscaling
-
----
-
-## Core Value
-
-**Performance at scale with ergonomic APIs** — achieve 2.5x speedup via SIMD, handle datasets larger than RAM via tiling, while maintaining simple `.motifs(k)` / `.discords(k)` interfaces.
 
 ---
 

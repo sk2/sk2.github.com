@@ -7,8 +7,6 @@ section: agentic-systems
 
 <span class="status-badge status-updated">Recently Updated</span>
 
-
-
 [← Back to Agentic Systems](../agentic-systems)
 
 [← Back to Projects](../projects)
@@ -18,22 +16,14 @@ section: agentic-systems
 ## Contents
 
 - [Concept](#concept)
-- [What This Is](#what-this-is)
 - [Key Features](#key-features)
 - [Architecture](#architecture)
 - [Milestones](#milestones)
 - [Tech Stack](#tech-stack)
-- [Core Value](#core-value)
 
 ## Concept
 
-A native SwiftUI training application for iPad and Apple TV that bridges professional cycling hardware (KICKR Core) with dynamic AI-driven workout logic via NATS, visualized in a SceneKit environment.
-
----
-
-## What This Is
-
-An indoor cycling app that connects to a Wahoo KICKR Core via Bluetooth FTMS, receives AI-driven workout commands through a NATS agent bridge, and renders an immersive procedurally-generated 3D terrain synchronized to your effort. The AI agent controls trainer resistance in real-time based on workout logic, while the app provides live metrics and an engaging visual experience.
+A native SwiftUI training application for iPad and Apple TV that bridges professional cycling hardware (KICKR Core) with dynamic AI-driven workout logic via NATS, visualized in a high-performance SceneKit environment.
 
 ---
 
@@ -78,12 +68,6 @@ BLE discovery, FTMS control, NATS connection, and live metrics display.
 ## Tech Stack
 
 Swift (SwiftUI, SceneKit, CoreBluetooth, HealthKit), NATS messaging, iPadOS/tvOS
-
----
-
-## Core Value
-
-A native SwiftUI training application for iPad and Apple TV that bridges professional cycling hardware (KICKR Core) with dynamic AI-driven workout logic via NATS, visualized in a high-performance SceneKit environment.
 
 ---
 

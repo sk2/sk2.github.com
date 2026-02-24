@@ -1,5 +1,6 @@
 ---
 layout: default
+section: projects
 ---
 
 # OpenAstro Node
@@ -11,8 +12,6 @@ layout: default
 ---
 
 ## Concept
-
-### Overview
 
 A headless, autonomous astrophotography controller designed for low-power Linux devices (RPi/Jetson). It manages hardware, executes imaging sequences, and ensures rig safety.
 

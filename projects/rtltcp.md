@@ -5,7 +5,7 @@ section: signal-processing
 
 # Radio Streaming Server
 
-<span class="status-badge status-updated">Recently Updated</span>
+<span class="status-badge status-active">Recently Updated</span>
 
 [← Back to Signal Processing](../signal-processing)
 
@@ -15,11 +15,7 @@ section: signal-processing
 
 ## Concept
 
-### What This Is
-
 A cross-platform (targeted at Raspberry Pi) server that interfaces with multiple SDR devices (RTL-SDR, AirSpy HF+) and streams raw IQ samples over the network using the industry-standard `rtl_tcp` protocol. It features a built-in TUI for live configuration and device management.
-
-### Core Value
 
 The ability to reliably and efficiently stream high-fidelity IQ data from multiple SDRs over a network with a modern management interface.
 

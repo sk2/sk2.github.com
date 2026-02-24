@@ -5,7 +5,7 @@ section: agentic-systems
 
 # HealthyPi Ecosystem
 
-<span class="status-badge status-updated">Recently Updated</span>
+<span class="status-badge status-active">Recently Updated</span>
 
 [← Back to Autonomous Systems](../agentic-systems)
 
@@ -14,8 +14,6 @@ section: agentic-systems
 ---
 
 ## Concept
-
-### Core Value
 
 A modular, agent-aware health monitoring ecosystem that translates raw biometric data from HealthyPi hardware (6 and Move) into actionable insights and automated interventions.
 

@@ -5,7 +5,7 @@ section: network-automation
 
 # Automation Workbench
 
-<span class="status-badge status-updated">Recently Updated</span>
+<span class="status-badge status-active">Recently Updated</span>
 
 [← Back to Network Automation](../network-automation)
 
@@ -14,8 +14,6 @@ section: network-automation
 ---
 
 ## Concept
-
-### What This Is
 
 **An orchestration platform** that integrates the ANK ecosystem tools (TopoGen, ank_pydantic, Network Simulator, NetVis) into one seamless workflow.
 
@@ -33,8 +31,6 @@ ANK Workbench is the **glue layer** that coordinates the entire network automati
 
 **Workflow:** Generate/model topology → Run simulation → Visualize results → Export configs
 **Value:** Complete pipeline in one interface, no tool-switching or manual integration
-
-### Core Value
 
 Network engineers can design, validate, and visualize network changes in one complete workflow without switching between separate tools or manually gluing components together.
 

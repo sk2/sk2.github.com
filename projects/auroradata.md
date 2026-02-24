@@ -1,5 +1,6 @@
 ---
 layout: default
+section: projects
 ---
 
 # Aurora Advisor
@@ -12,11 +13,7 @@ layout: default
 
 ## Concept
 
-### What This Is
-
 A specialized tool for Australian aurora observers that solves the "should I drive 60 minutes?" problem. It combines real-time solar wind data (NOAA), substorm trigger logic (Bz/HP trends), and local weather (ACCESS-G model) to provide actionable advice.
-
-### Core Value
 
 Providing a single, definitive "Go/No-Go" score that accounts for both space weather potential and local terrestrial conditions (travel time, clouds, moon).
 

@@ -5,7 +5,7 @@ section: agentic-systems
 
 # Cycle Agent
 
-<span class="status-badge status-updated">Recently Updated</span>
+<span class="status-badge status-active">Recently Updated</span>
 
 [← Back to Autonomous Systems](../agentic-systems)
 
@@ -14,8 +14,6 @@ section: agentic-systems
 ---
 
 ## Concept
-
-### Core Value
 
 A native SwiftUI training application for iPad and Apple TV that bridges professional cycling hardware (KICKR Core) with dynamic AI-driven workout logic via NATS, visualized in a high-performance SceneKit environment.
 

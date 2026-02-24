@@ -3,9 +3,9 @@ layout: default
 section: network-automation
 ---
 
-# Network Automation Ecosystem
+# Network Automation Ecosystem - Overall Architecture Definition
 
-<span class="status-badge status-updated">Recently Updated</span>
+<span class="status-badge status-active">Recently Updated</span>
 
 [← Back to Network Automation](../network-automation)
 
@@ -14,8 +14,6 @@ section: network-automation
 ---
 
 ## Concept
-
-### What This Is
 
 This project aims to comprehensively define the **overall architecture of the Network Automation Ecosystem**. This involves understanding how the existing and planned tools (such as `topogen`, `autonetkit`, `netsim`, `netflowsim`, `netvis`, and the `Workbench`), along with strategic initiatives like the "Intelligence Layer," integrate to form a cohesive, unified, and differentiated product.
 

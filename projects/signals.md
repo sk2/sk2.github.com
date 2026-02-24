@@ -5,7 +5,7 @@ section: signal-processing
 
 # Spectrum Analysis
 
-<span class="status-badge status-updated">Recently Updated</span>
+<span class="status-badge status-active">Recently Updated</span>
 
 [← Back to Signal Processing](../signal-processing)
 
@@ -14,8 +14,6 @@ section: signal-processing
 ---
 
 ## Concept
-
-### Core Value
 
 Transform raw radio spectrum data into an actionable "Signal Census" through automated detection, ML classification, and distributed acquisition.
 

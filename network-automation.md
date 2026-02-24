@@ -15,7 +15,7 @@ We build specialized engines that handle specific stages of the network lifecycl
 ```
       ┌────────────────────────┐               ┌────────────────────┐
       │ Source of Truth Products │             │ Brownfield / Legacy │
-      │ (NetBox / YAML)        │               │ CLI / PDF Ingest    │
+      │                        │               │ CLI / PDF Ingest    │
       └────────┬───────────────┘               └───────┬────────────┘
               │                                       │
               └───────────────┬───────────────────────┘

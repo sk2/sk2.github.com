@@ -4,7 +4,7 @@ layout: default
 
 # Simon Knight
 
-I am a telecommunications engineer and software researcher building systems that bridge the gap between high-level intent and technical execution. My work focuses on the modeling, simulation, and coordination of complex infrastructure—transforming design logic into executable, verifiable reality.
+I am a telecommunications engineer and software researcher. I build systems that bridge the gap between high-level intent and technical execution, focusing on the modeling, simulation, and coordination of complex infrastructure.
 
 ## Focus
 
@@ -14,18 +14,20 @@ I am a telecommunications engineer and software researcher building systems that
 - **Signal Processing:** Processing radio and biometric signals for monitoring and analysis.
 - **Autonomous Systems:** Designing secure systems for multi-agent coordination and infrastructure automation.
 
-## Research
-
-My research at the University of South Australia (2017) on automated network configuration led to **AutoNetkit**, which was integrated into Cisco's VIRL platform.
-
-- [Read my thesis](thesis)
-- [View CV](cv)
-
 ## Featured Work
 
-- **[Network Simulator:](/projects/network-simulator)** A tool for testing network designs by simulating how data moves through them at scale.
-- **[Network Visualization:](/projects/netvis)** An engine that transforms complex network topologies into clear renderings.
-- **[Signal Analysis:](/signal-processing)** Experiments in radio spectrum monitoring and signal reflection analysis.
+- **[Network Simulator:](/projects/network-simulator)** A deterministic simulator for validating large-scale network designs. It allows for the rapid testing of complex routing protocols, enabling engineers to verify network behavior and convergence before deployment.
+- **[Network Visualization:](/projects/netvis)** A layout engine that transforms dense, multi-layer topologies into clear, structured diagrams. By applying advanced algorithms to complex graph data, it makes the architecture of large-scale systems intuitive and readable.
+- **[Signal Analysis:](/signal-processing)** Research into autonomous radio spectrum monitoring and signal analysis. This work focuses on building acquisition pipelines and processing systems for RF, audio, and biometric signals.
+
+## Background
+
+My work is grounded in a background in telecommunications engineering and economics. I completed a Bachelor of Engineering in Telecommunications with First Class Honours and a Bachelor of Economics at the University of Adelaide.
+
+I later pursued research at the University of South Australia, where I earned a PhD in Computer Science (2017). My research focused on the abstractions and transformations required for automated network configuration, leading to the development of the AutoNetkit modeling framework.
+
+- [Read my PhD thesis](thesis)
+- [View CV](cv)
 
 [View all projects](projects)
 

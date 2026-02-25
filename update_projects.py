@@ -232,6 +232,12 @@ DETAILED_SECTIONS = [
     "Research Contribution",
     "Impact",
     "Automation",
+    "Usage",
+    "Available Commands",
+    "Output Formats",
+    "Development Status",
+    "Roadmap",
+    "Quick Facts",
 ]
 
 

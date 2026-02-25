@@ -33,7 +33,7 @@ netsim is a deterministic, tick-based network protocol simulator that validates 
 
 Network engineers need to validate configurations before deploying to production. Current options:
 
-- **Full emulation** (GNS3, EVE-NG): Runs actual device images. Slow, resource-intensive, requires licensing.
+- **Full emulation** (Containerlab, GNS3, EVE-NG): Runs device images and real network stacks. Slower and more resource-intensive than protocol simulation.
 - **Real hardware labs**: Expensive, requires physical space, limited scale.
 - **Production testing**: Risky, causes outages when configs have errors.
 

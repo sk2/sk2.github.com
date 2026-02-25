@@ -16,7 +16,7 @@ An autonomous system for monitoring the radio spectrum. It identifies signals an
 
 ---
 
-### Radio Streaming Server
+### SDR Streaming Server
 [Full Details →](projects/rtltcp)
 A server that manages multiple radio devices and streams data over a network for remote analysis.
 

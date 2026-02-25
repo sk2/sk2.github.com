@@ -3,7 +3,7 @@ layout: default
 section: signal-processing
 ---
 
-# Passive Radar - KrakenSDR Multi-Beam System
+# Signal Reflection - KrakenSDR Multi-Beam System
 
 <span class="status-badge status-active">Recently Updated</span>
 
@@ -15,7 +15,7 @@ section: signal-processing
 
 ## Concept
 
-A distributed multi-beam passive radar system based on KrakenSDR hardware. Pi handles data acquisition, Mac/Linux handles compute-intensive DSP. All 4 surveillance channels process in parallel with independent Range-Doppler visualization, per-beam configuration, and real-time performance monitoring. v2 adds per-beam target tracking with geographic visualization, ADS-B correlation, and detection recording for offline analysis.
+A distributed multi-beam signal reflection analysis system based on KrakenSDR hardware. Pi handles data acquisition, Mac/Linux handles compute-intensive DSP. All 4 reflection channels process in parallel with independent Range-Doppler visualization, per-beam configuration, and real-time performance monitoring. v2 adds per-beam target tracking with geographic visualization, ADS-B correlation, and detection recording for offline analysis.
 
 Clean, understandable, stable codebase that reliably tracks aircraft in real-time.
 

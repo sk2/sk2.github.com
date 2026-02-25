@@ -22,6 +22,19 @@ The project pages are synchronized from local development directories using `upd
     - `Last Active: [Date]`: For older work.
     - No internal metrics (Phases, Percentages) are shown on the public site.
 
+### Workflow Gap (Important)
+
+The current workflow has a known failure mode: rich, manually written project pages in `projects/` can be clobbered by a regeneration run.
+
+What we want instead is two-track content management:
+
+- **Stable content (canonical narrative):** Concept, architecture, technical depth, screenshots/diagrams.
+- **Fresh content (incremental updates):** recent milestone notes, phase/plan references, notable changes since the last release.
+
+This repo does not yet have a reliable, well-documented source-of-truth location for the stable content. Before running bulk regeneration, confirm where the authoritative project documents live (e.g., per-project `.planning/PROJECT.md`) and ensure the sync script is sourcing from them.
+
+Action item (not tonight): define and document a workflow that preserves stable content while appending incremental updates, without rewrites or large-scale content loss.
+
 ## Design & Writing Philosophy
 
 ### Tone: Understated, Confident, Technical

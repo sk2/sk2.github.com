@@ -108,7 +108,7 @@ This project aims to comprehensively define the **overall architecture of the Ne
 
 ## 📡 Radio Systems
 
-### [Radio Streaming Server](projects/rtltcp)
+### [SDR Streaming Server](projects/rtltcp)
 
 <span class="status-badge status-active">Recently Updated</span>
 
@@ -116,12 +116,12 @@ This project aims to comprehensively define the **overall architecture of the Ne
 A cross-platform (targeted at Raspberry Pi) server that interfaces with multiple SDR devices (RTL-SDR, AirSpy HF+) and streams raw IQ samples over the network using the industry-standard `rtl_tcp` protocol. It features a built-in TUI for live configuration and device management.
 
 
-### [Passive Radar - KrakenSDR Multi-Beam System](projects/rf-signal-analysis)
+### [Signal Reflection - KrakenSDR Multi-Beam System](projects/rf-signal-analysis)
 
 <span class="status-badge status-active">Recently Updated</span>
 
 
-A distributed multi-beam passive radar system based on KrakenSDR hardware. Pi handles data acquisition, Mac/Linux handles compute-intensive DSP. All 4 surveillance channels process in parallel with independent Range-Doppler visualization, per-beam configuration, and real-time performance monitoring.
+A distributed multi-beam signal reflection analysis system based on KrakenSDR hardware. Pi handles data acquisition, Mac/Linux handles compute-intensive DSP. All 4 reflection channels process in parallel with independent Range-Doppler visualization, per-beam configuration, and real-time performance monitoring.
 
 
 ### [Spectrum Analysis](projects/signals)
@@ -132,12 +132,12 @@ A distributed multi-beam passive radar system based on KrakenSDR hardware. Pi ha
 Transform raw radio spectrum data into an actionable "Signal Census" through automated detection, ML classification, and distributed acquisition.
 
 
-### [Wi-Fi Radar (KrakenSDR)](projects/wifi-signal-analysis)
+### [Wi-Fi Signal Reflection (KrakenSDR)](projects/wifi-signal-analysis)
 
 <span class="status-badge status-active">Active</span>
 
 
-Passive radar system that utilizes existing Wi-Fi signals for through-wall human detection and localization, leveraging the KrakenSDR coherent radio array.
+Signal reflection system that utilizes existing Wi-Fi signals for through-wall human detection and localization, leveraging the KrakenSDR coherent radio array.
 
 
 ## 🏥 Health & Biometrics

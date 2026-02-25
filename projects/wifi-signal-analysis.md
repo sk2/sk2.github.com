@@ -15,7 +15,7 @@ section: signal-processing
 
 ## Concept
 
-Passive radar system that utilizes existing Wi-Fi signals for through-wall human detection and localization, leveraging the KrakenSDR coherent radio array.
+Signal reflection system that utilizes existing Wi-Fi signals for through-wall human detection and localization, leveraging the KrakenSDR coherent radio array.
 
 ---
 

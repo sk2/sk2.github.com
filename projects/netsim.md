@@ -192,6 +192,35 @@ netsim run topology.yaml -f json -o results.json
 netsim run large-topology.yaml --max-ticks 50000
 ```
 
+### Daemon Mode (Interactive)
+
+```bash
+# Start the daemon
+netsim daemon --topology topology.yaml
+
+# Connect with the CLI
+netsim cli --target localhost:50051
+
+# Example session
+show ip route
+show bgp neighbors
+interface eth0 shutdown
+interface eth0 no shutdown
+```
+
+### Scenario Runs
+
+```bash
+# Validate convergence and dump JSON for CI
+netsim run topology.yaml --run-until converged -f json -o results.json
+
+# Inject a link failure at a specific time window
+netsim run topology.yaml --event "tick=200,link_down=r1:eth0-r2:eth0" --event "tick=800,link_up=r1:eth0-r2:eth0"
+
+# Run a longer scenario and cap ticks
+netsim run large-topology.yaml --max-ticks 50000
+```
+
 ### Available Commands
 
 **Diagnostics:**

@@ -18,6 +18,7 @@ section: network-automation
 - [Concept](#concept)
 - [Architecture](#architecture)
 - [Technical Depth](#technical-depth)
+- [Tech Stack](#tech-stack)
 - [Current Status](#current-status)
 
 ## Concept
@@ -42,9 +43,19 @@ The engine implements a 'Write-Through' model with Python bindings via PyO3. Mut
 
 ---
 
+## Tech Stack
+
+- Rust 2021 workspace with feature-flagged backends
+- Graph structure: `petgraph` `StableDiGraph`
+- Datastores: Polars DataFrame store (default), DuckDB backend, Lite in-memory store
+- Python bindings: PyO3 + maturin; `pyo3-log`/logging bridge planned
+- Service mode: Axum HTTP + WebSocket server (`nte-server`) for remote execution
+
+---
+
 ## Current Status
 
-2026-02-24 — Verified  (Graph Metadata Foundation)
+2026-02-25 — Completed 08-03-PLAN.md
 
 ---
 

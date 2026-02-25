@@ -35,6 +35,16 @@ This repo does not yet have a reliable, well-documented source-of-truth location
 
 Action item (not tonight): define and document a workflow that preserves stable content while appending incremental updates, without rewrites or large-scale content loss.
 
+### Current Working Convention (Temporary)
+
+Until a better workflow exists, treat `/Users/simonknight/dev` as the canonical project root on this machine:
+
+- Stable content lives in each project at `.planning/PROJECT.md`
+- Recency/status lives in `.planning/STATE.md` ("Last activity")
+- The website is regenerated from those sources via `python3 update_projects.py --scan-dirs /Users/simonknight/dev`
+
+If the scan dirs are missing, do not run regeneration: it will collapse long-form pages into stubs.
+
 ## Design & Writing Philosophy
 
 ### Tone: Understated, Confident, Technical

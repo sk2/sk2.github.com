@@ -231,19 +231,43 @@ DETAILED_SECTIONS = [
     "Tech Stack",
     "Research Contribution",
     "Impact",
+    "Automation",
 ]
 
 
 def extract_sections(content: str) -> Dict[str, str]:
-    sections = {}
-    matches = re.finditer(
-        r"^##\s+(.*?)\s*$(.*?)(?=^##\s|\Z)", content, re.MULTILINE | re.DOTALL
-    )
-    for match in matches:
-        header = match.group(1).strip()
-        body = match.group(2).strip()
+    # Parse level-2 headings ("## ...") into a section map.
+    # Important: do not treat headings inside fenced code blocks as section
+    # boundaries.
+    sections: Dict[str, str] = {}
+
+    in_code_fence = False
+    current_header: Optional[str] = None
+    current_lines: list[str] = []
+
+    for line in content.splitlines():
+        if re.match(r"^\s*```", line):
+            in_code_fence = not in_code_fence
+
+        if not in_code_fence:
+            m = re.match(r"^##\s+(.+?)\s*$", line)
+            if m:
+                if current_header is not None:
+                    body = "\n".join(current_lines).strip()
+                    if body:
+                        sections[current_header] = body
+                current_header = m.group(1).strip()
+                current_lines = []
+                continue
+
+        if current_header is not None:
+            current_lines.append(line)
+
+    if current_header is not None:
+        body = "\n".join(current_lines).strip()
         if body:
-            sections[header] = body
+            sections[current_header] = body
+
     return sections
 
 
@@ -326,6 +350,11 @@ def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
         project_name = PROJECT_ALIASES[slug]
 
     sections = extract_sections(content)
+
+    # Preserve rich long-form content if upstream docs provide it. Some projects
+    # historically used headings like "The Insight" and "Technical Depth" with
+    # code examples; these should not be dropped during regeneration.
+    # (No-op here other than ensuring we don't later filter these out.)
     if slug in PROJECT_CONTENT_OVERRIDES:
         for sec, body in PROJECT_CONTENT_OVERRIDES[slug].items():
             sections[sec] = body
@@ -473,7 +502,9 @@ def generate_detailed_page(project: ProjectInfo) -> str:
     ]:
         if s in project.sections:
             intro_parts.append(clean_text(project.sections[s]))
-    body_list = [f"## Concept\n\n" + "\n\n".join(intro_parts)]
+    body_list = []
+    if intro_parts:
+        body_list.append(f"## Concept\n\n" + "\n\n".join(intro_parts))
     for s in DETAILED_SECTIONS:
         if s in project.sections and s not in [
             "Concept",
@@ -571,12 +602,22 @@ def main():
     parser.add_argument(
         "--scan-dirs",
         nargs="+",
-        default=["~/dev", "~/PycharmProjects", "~/RustroverProjects"],
+        default=["~/dev"],
     )
     args = parser.parse_args()
+
+    # If a regen run happens without the real project folders present, the output
+    # collapses into short stubs. Prefer failing loudly over silently clobbering
+    # long-form pages.
+    scan_paths = [Path(d).expanduser() for d in args.scan_dirs]
+    existing = [p for p in scan_paths if p.exists()]
+    if not existing:
+        raise SystemExit(
+            "No --scan-dirs paths exist. Refusing to regenerate project pages. "
+            "Pass valid project roots (e.g. --scan-dirs ~/dev)."
+        )
     projects = []
-    for d in args.scan_dirs:
-        p = Path(d).expanduser()
+    for p in existing:
         if p.exists():
             for pd in sorted(p.iterdir()):
                 if (

@@ -15,7 +15,9 @@ section: network-automation
 
 ## Concept
 
-This page is kept for backward-compatible linking. The canonical, detailed documentation lives on the main Network Simulator page.
+This page is kept for backward-compatible linking.
+
+The canonical documentation is here: **[/projects/netsim](/projects/netsim)**.
 
 ---
 

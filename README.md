@@ -45,6 +45,20 @@ Until a better workflow exists, treat `/Users/simonknight/dev` as the canonical 
 
 If the scan dirs are missing, do not run regeneration: it will collapse long-form pages into stubs.
 
+### Simulator Page Notes
+
+The Network Simulator page is generated from `/Users/simonknight/dev/network-simulator/.planning/PROJECT.md`.
+
+If you want the public page to demonstrate real usage, put runnable examples directly into the upstream doc using fenced code blocks (```yaml, ```bash, ```python). The site layout will collapse/expand long blocks automatically.
+
+Important: do not edit `sk2.github.com/projects/netsim.md` by hand. It is generated.
+
+### Common Failure Modes
+
+- Running `update_projects.py` without the correct `--scan-dirs` available regenerates stubs and overwrites rich pages.
+- Editing files under `projects/` works briefly and then gets wiped on the next regen.
+- If a project section isn't showing up, ensure the upstream doc uses a level-2 heading (`## Section Name`) and that the generator includes it in `DETAILED_SECTIONS`.
+
 ## Design & Writing Philosophy
 
 ### Tone: Understated, Confident, Technical

@@ -5,21 +5,11 @@ section: projects
 
 # matrix-profile-rs
 
-<span class="status-badge status-active">Recently Updated</span>
-
-[← Back to Data Analytics](../data-analytics)
+<span class="status-badge status-active">Active</span>
 
 [← Back to Projects](../projects)
 
 ---
-
-## Contents
-
-- [Concept](#concept)
-- [Features](#features)
-- [Use Cases](#use-cases)
-- [Architecture](#architecture)
-- [Current Status](#current-status)
 
 ## Concept
 
@@ -97,14 +87,24 @@ matrix-profile-rs provides production-quality implementations with:
 
 ---
 
-## Architecture
+## Quick Facts
 
-### Algorithm Stack
+| | |
+|---|---|
+| **Status** | Active |
+
+---
+
+## # Algorithm Stack
+
 - **STOMP**: Iterative exact algorithm using QT recurrence for sliding dot products
 - **SCAMP**: Parallel exact algorithm with centered kernels for numerical stability
 - **SCRIMP++**: Anytime algorithm providing approximate results that improve over time (budget-based)
 
-### Data Flow
+---
+
+## # Data Flow
+
 ```
 Time Series Data (Array1<f64> or Polars Series)
     ↓
@@ -117,7 +117,10 @@ Discovery APIs → .top_k_motifs() / .top_k_discords()
 Polars DataFrame (via to_dataframe()) or Rust types
 ```
 
-### Key Components
+---
+
+## # Key Components
+
 - **Core Engine**: Parallel computation using Rayon, SIMD-optimized kernels (2.5x speedup)
 - **Result Type**: Binding-friendly `MatrixProfile` with Vec-backed buffers and metadata
 - **Discovery API**: High-level methods for pattern extraction with deterministic tie-breaking
@@ -125,13 +128,5 @@ Polars DataFrame (via to_dataframe()) or Rust types
 - **Polars Integration**: Native `.mp()` namespace on Series, DataFrame I/O with metadata columns
 
 ---
-
-## Current Status
-
-2026-02-24 — Completed 11-01-PLAN.md: Series.streaming(m) + PolarsStreamingState + mp_* schema
-
----
-
-[← Back to Data Analytics](../data-analytics)
 
 [← Back to Projects](../projects)

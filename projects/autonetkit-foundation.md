@@ -28,6 +28,14 @@ The original research that established the principles of automated network confi
 
 ---
 
+## Quick Facts
+
+| | |
+|---|---|
+| **Status** | Active |
+
+---
+
 [← Back to Network Automation](../network-automation)
 
 [← Back to Projects](../projects)

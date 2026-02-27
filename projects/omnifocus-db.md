@@ -5,9 +5,7 @@ section: projects
 
 # OmniFocus DB CLI (omnifocus-db)
 
-<span class="status-badge status-active">Last Active: 2026-02-16</span>
-
-[← Back to Data Analytics](../data-analytics)
+<span class="status-badge status-active">Active</span>
 
 [← Back to Projects](../projects)
 
@@ -23,12 +21,12 @@ A Python-based CLI that bypasses slow AppleScript/TypeScript layers to read dire
 
 ---
 
-## Current Status
+## Quick Facts
 
-** 2026-02-16 - Closed out phase 7 (summaries, state update)
+| | |
+|---|---|
+| **Status** | Active |
 
 ---
-
-[← Back to Data Analytics](../data-analytics)
 
 [← Back to Projects](../projects)

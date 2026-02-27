@@ -7,7 +7,7 @@ section: network-automation
 
 <span class="status-badge status-active">Active</span>
 
-[← Back to Data Analytics](../data-analytics)
+[← Back to Network Automation](../network-automation)
 
 [← Back to Projects](../projects)
 
@@ -23,10 +23,6 @@ section: network-automation
 ## Concept
 
 A high-performance parsing engine for network device output. It transforms semi-structured CLI text into structured data (JSON/YAML) using an optimized state machine. Designed as a modern, ergonomic alternative to legacy tools like TextFSM, it provides significantly faster execution while maintaining full compatibility with existing template libraries.
-
-### Core Value
-
-Enable rapid, reliable extraction of network state. The engine is built for speed and correctness, ensuring that automation pipelines can process device data with sub-millisecond latency and high structural accuracy.
 
 ---
 
@@ -59,6 +55,20 @@ The engine is built on a custom regex-based state machine implemented in Rust. I
 
 ---
 
-[← Back to Data Analytics](../data-analytics)
+## Quick Facts
+
+| | |
+|---|---|
+| **Status** | Active |
+
+---
+
+## # Core Value
+
+Enable rapid, reliable extraction of network state. The engine is built for speed and correctness, ensuring that automation pipelines can process device data with sub-millisecond latency and high structural accuracy.
+
+---
+
+[← Back to Network Automation](../network-automation)
 
 [← Back to Projects](../projects)

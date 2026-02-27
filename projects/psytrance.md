@@ -5,7 +5,7 @@ section: projects
 
 # Psytrance Generator
 
-<span class="status-badge status-active">Recently Updated</span>
+<span class="status-badge status-active">Active</span>
 
 [← Back to Projects](../projects)
 
@@ -19,9 +19,11 @@ Energy-driven generative music that sounds professional and lets users quickly e
 
 ---
 
-## Current Status
+## Quick Facts
 
-2026-02-21 — Roadmap created
+| | |
+|---|---|
+| **Status** | Active |
 
 ---
 

@@ -17,6 +17,7 @@ from datetime import datetime, timedelta
 class ProjectInfo:
     name: str
     slug: str
+    original_slug: str
     path: Path
     category: str
     status: str
@@ -35,6 +36,7 @@ ECOSYSTEM_MAP = {
     "netsim": "network-automation",
     "ank_pydantic": "network-automation",
     "ank-pydantic": "network-automation",
+    "compilation": "network-automation",
     "ank_nte": "network-automation",
     "ank-nte": "network-automation",
     "ank_workbench": "network-automation",
@@ -48,6 +50,7 @@ ECOSYSTEM_MAP = {
     "autonetkit-foundation": "network-automation",
     "netflowsim": "network-automation",
     "netvis": "network-automation",
+    "netC": "network-automation",
     "signals": "signal-processing",
     "spectra": "signal-processing",
     "rtltcp": "signal-processing",
@@ -63,14 +66,16 @@ ECOSYSTEM_MAP = {
 }
 
 PROJECT_ALIASES = {
-    "ank_pydantic": "Configuration Engine",
-    "ank-pydantic": "Configuration Engine",
+    "ank_pydantic": "Network Modeling & Configuration Library",
+    "ank-pydantic": "Network Modeling & Configuration Library",
     "cliscrape": "CLI Parser",
     "rtltcp": "Radio Streaming Server",
     "auroradata": "Aurora Advisor",
     "netflowsim": "Performance Simulator",
+    "netC": "Configuration Engine (netC)",
     "netsim": "Network Simulator",
     "network-simulator": "Network Simulator",
+    "compilation": "Network Compilation Engine",
     "topogen": "Topology Generator",
     "ank-nte": "Topology Engine Core",
     "ank-workbench": "Automation Workbench",
@@ -92,10 +97,24 @@ CANONICAL_SLUG = {
 
 # GOLDEN MASTER CONTENT: Used to ensure high-value technical detail is never lost.
 PROJECT_CONTENT_OVERRIDES = {
-    "network-simulator": {
-        # This key should not normally be used because network-simulator is canonicalized to netsim.
-        # Kept defensively in case a future source bypasses canonicalization.
-        "Concept": "This page is kept for backward-compatible linking. The canonical, detailed documentation lives on the main Network Simulator page.",
+    "netsim": {
+        "Concept": "Deterministic tick-based network protocol simulator validating configurations before production deployment. It provides protocol-level fidelity with same-topology-same-results guarantees, allowing engineers to verify control-plane behavior without the overhead of full VM emulation.\n\nUnlike packet-level simulators that focus on bit-level accuracy, this engine focuses on **protocol convergence and state validation**. It mirrors the behavior of real router operating systems, including the separation of RIB and FIB, allowing for the empirical testing of complex routing policies and failure scenarios.",
+        "Protocols Implemented": "- **Routing**: OSPF (point-to-point, Area 0, LSA Types 1/2, Dijkstra SPF), IS-IS (L1/L2 hierarchical, LSP flooding), BGP (iBGP/eBGP, communities, route propagation).\n- **MPLS**: LDP label distribution, label push/swap/pop operations, MPLS OAM.\n- **Resilience**: BFD (bidirectional forwarding detection, async mode).\n- **Tunneling**: GRE encapsulation, VRF isolation (L3VPN foundations).\n- **Layer 2/3**: ARP request/reply, ICMP echo (ping), Time Exceeded (traceroute).",
+        "Architecture": "- **Tick-based execution**: Deterministic, reproducible simulations (~1ms per tick).\n- **RIB/FIB separation**: Mirrors real router behavior for high-fidelity state validation.\n- **Convergence detection**: Automatically detects network stabilization to minimize simulation time.\n- **Scripted commands**: Diagnostics can be executed at specific ticks or immediately after convergence.",
+        "Performance": "Simulates 100+ device topologies in seconds. Generates structured JSON output for seamless integration into CI/CD pipelines.",
+    },
+    "ank-workbench": {
+        "Concept": "**An orchestration platform** that integrates the ANK ecosystem tools (TopoGen, ank_pydantic, Network Simulator, NetVis) into one seamless workflow. It serves as the **glue layer** that coordinates the entire network automation pipeline, allowing engineers to generate topologies, model networks declaratively, run lightweight simulations, and visualize results from a unified interface.\n\n```\n┌──────────────────────────────────────────────────────────────────┐\n│                        ANK Workbench                             │\n│         (Orchestration · Web UI · Workflow Management)           │\n│   ┌──────────────┬──────────────┬──────────────┬──────────────┐ │\n│   │   TopoGen    │ ank-pydantic │   Simulator  │    NetVis    │ │\n└───┴──────────────┴──────────────┴──────────────┴──────────────┴─┘\n```",
+        "Key Capabilities": "- **Design-First Workflow**: Declarative Pydantic models → lightweight simulation → integrated topology/config/behavior visualization.\n- **Persistent Help System**: Non-modal drawer with contextual tips and route-aware visibility.\n- **Sample Gallery**: Curated offline topologies ranging from 2-node starters to 12-node spine-leaf data centers.\n- **Intelligent Empty States**: Cause-specific UI patterns with outcome previews to guide new users.\n- **Guided Tour**: 8-step workflow coverage with CSS-only spotlight for rapid onboarding.",
+        "Visuals": "The Workbench provides real-time feedback through integrated NetVis overlays, allowing for the inspection of physical, logical, and protocol layers alongside routing table state and simulation diagnostics.",
+    },
+    "ank-pydantic": {
+        "Concept": "A Python-native configuration engine for defining a network model and compiling it into a consistent, reviewable plan. It solves the 'type safety vs performance' problem by combining the ergonomics of Pydantic models with a fast Rust graph core (NTE).\n\nAs one of the two primary modeling tools in the ecosystem, it offers a high-level, developer-friendly interface for building complex network designs. It uses an explicit intermediate representation and transformation passes (design -> plan -> protocol layers) to ensure architectural consistency across the entire topology.",
+        "Features": "- **Type-Safe Modeling**: Device, interface, and relationship models with strict Pydantic validation.\n- **Rust-Backed Operations**: High-performance graph traversals and queries via PyO3 and petgraph.\n- **Rich Query API**: Chainable filters and traversals that replace manual graph walking with declarative intent.\n- **Multi-Layer Support**: Native modeling of physical, logical, and protocol views within a single graph structure.\n- **Multi-Vendor Generation**: Compiles intent into validated configurations for 11+ major networking platforms.",
+    },
+    "compilation": {
+        "Concept": "A native Rust-based configuration compiler that serves as a high-performance alternative to the Python-based modeling engine. While sharing the same underlying data models and 'Whiteboard -> Build' philosophy, this tool is built for maximum execution speed and formal verification during the compilation process.\n\nIt treats network design as 'source code' that is parsed, validated, and transformed through multiple intermediate representations (IR). By modeling the network as a set of interconnected state machines, the engine can verify that the generated configuration is not only syntactically correct but also logically sound across massive multi-vendor estates.",
+        "Technical Depth": "- **High-Performance Pipeline**: Native Rust implementation optimized for sub-second compilation of 10,000+ node graphs.\n- **Static Analysis**: Detects reachability issues, protocol mismatches, and configuration drifts during the build phase.\n- **Deterministic Output**: Ensures that the same input design always produces identical, bit-compatible configuration output.\n- **Architectural Invariants**: Formally enforces design rules (e.g., 'no single point of failure in the core') as part of the compilation logic.",
     },
     "autonetkit": {
         "Concept": "A compiler-based framework for automated network provisioning. AutoNetkit transforms high-level network designs into validated device configurations across heterogeneous hardware and protocol environments.\n\nTraditional network configuration is often manual and vendor-specific. AutoNetkit introduces a declarative approach where engineers define the network design, and the engine handles the transformations required to generate the underlying protocol parameters and CLI commands.\n\nThe current work is focused on a modern compiler pipeline: a stable intermediate representation, explicit transformation passes, and predictable code generation for multiple targets.",
@@ -108,9 +127,6 @@ PROJECT_CONTENT_OVERRIDES = {
         "Concept": "A specialized framework for **Brownfield Ingestion and Analysis**. It extracts high-level architectural intent and topology relationships from legacy network state—including vendor-specific CLI configurations and unstructured PDF documentation—normalizing them into a vendor-neutral model.\n\nThis system bridges the gap between existing deployments and the modern, declarative ANK toolchain. By leveraging LLM-powered RAG pipelines, it identifies complex protocol relationships and link roles that are often hidden in thousands of lines of manual configuration.",
         "Use Cases": '- **Automated Network Audit**: Identify inconsistencies and compliance drifts across legacy multi-vendor estates.\n- **Migration Planning**: Automatically generate "As-Is" topology models and protocol relationships for hardware refresh or greenfield migrations.\n- **Intent Extraction**: Transform manual device configurations into structured, declarative models.',
         "Technical Depth": "The system acts as the 'External Discovery' input for the Workbench, bridging the gap between existing brownfield deployments and the modern, declarative design toolchain.",
-    },
-    "ank-pydantic": {
-        "Concept": "A modern configuration engine for defining a network model and compiling it into a consistent, reviewable plan for downstream tooling. Built with type-safe Pydantic models and a fast Rust core (NTE), it provides a predictable, programmable way to manage large-scale topology data and derived configuration state.\n\nA Python library for modeling and querying network topologies, backed by a high-performance Rust core (`ank_nte`). Uses an explicit intermediate representation and transformation passes (design -> plan -> protocol layers), with type-safe models for nodes/edges/layers and a composable query API.",
     },
     # Prefer the rich long-form simulator page as the canonical one.
     # The pretty slug (network-simulator) is retained, but its content is sourced from netsim.
@@ -132,6 +148,10 @@ PROJECT_CONTENT_OVERRIDES = {
         "Concept": "A performance analysis engine that utilizes analytic queuing models and Monte Carlo simulations to validate network capacity at scale. Unlike packet-level simulators, netflowsim focuses on probabilistic outcomes across billions of traffic flows.",
         "Use Cases": "- **Capacity Planning**: Identify bottleneck links and compute-bound nodes before traffic growth impacts production.\n- **Resilience Testing**: Probabilistically analyze the impact of link or node failures on overall network throughput and latency.\n- **Routing Strategy Validation**: Compare the performance of different traffic engineering strategies (e.g., ECMP vs RSVP-TE) against realistic demand matrices.",
         "Technical Depth": "The engine uses M/M/1 and M/D/1 queuing models implemented in a highly parallelized Rust execution environment. It leverages the Rayon crate to distribute Monte Carlo iterations across all available CPU cores, enabling the analysis of massive traffic scenarios in seconds.",
+    },
+    "netC": {
+        "Concept": "A modern, type-safe configuration engine that serves as a successor and sibling to the original AutoNetkit research. It implements the same 'Whiteboard -> Plan -> Build' transformation model but utilizes a modern, schema-enforced pipeline to ensure configuration correctness across heterogeneous network fleets.",
+        "Technical Depth": "Sitting alongside the core ANK toolchain, netC focuses on the high-fidelity transformation of network intent into vendor-specific device states. It provides the protocol-level intelligence needed to generate consistent OSPF, BGP, and MPLS configurations while maintaining strict type safety via a Pydantic-based model layer.",
     },
     # NOTE: Keep each project key unique; later entries overwrite earlier ones.
 }
@@ -185,8 +205,10 @@ CATEGORY_MAP = {
 # Only applies within a category; anything not listed falls through to the default sort.
 CATEGORY_ORDER = {
     "network": [
-        "network-simulator",
+        "netsim",
         "autonetkit",
+        "compilation",
+        "netC",
         "configparsing",
         "netvis",
         "ank-nte",
@@ -195,6 +217,7 @@ CATEGORY_ORDER = {
         "cliscrape",
         "netflowsim",
         "autonetkit-foundation",
+        "ank-pydantic",
     ]
 }
 
@@ -213,10 +236,12 @@ DETAILED_SECTIONS = [
     "Overview",
     "What This Is",
     "Problem It Solves",
+    "Core Value",
     "Features",
     "Key Capabilities",
     "Use Cases",
     "Screenshots",
+    "Visuals",
     "Architecture",
     "Technical Depth",
     "Security Model",
@@ -235,16 +260,35 @@ DETAILED_SECTIONS = [
     "Usage",
     "Available Commands",
     "Output Formats",
-    "Development Status",
-    "Roadmap",
     "Quick Facts",
 ]
+
+# Sections that, if manually polished in the website repo, should be preserved.
+# These will NOT be overwritten by raw metadata from .planning/PROJECT.md.
+STABLE_SECTIONS = {
+    "Concept",
+    "The Insight",
+    "Overview",
+    "What This Is",
+    "Problem It Solves",
+    "Core Value",
+    "Architecture",
+    "Technical Depth",
+    "Features",
+    "Key Capabilities",
+    "Use Cases",
+    "Screenshots",
+    "Visuals",
+    "Implementation Details",
+    "Tech Stack",
+    "Research Contribution",
+    "Impact",
+    "Quick Facts",
+}
 
 
 def extract_sections(content: str) -> Dict[str, str]:
     # Parse level-2 headings ("## ...") into a section map.
-    # Important: do not treat headings inside fenced code blocks as section
-    # boundaries.
     sections: Dict[str, str] = {}
 
     in_code_fence = False
@@ -256,13 +300,25 @@ def extract_sections(content: str) -> Dict[str, str]:
             in_code_fence = not in_code_fence
 
         if not in_code_fence:
-            m = re.match(r"^##\s+(.+?)\s*$", line)
+            # Skip auto-generated footers and table of contents
+            if line.strip().startswith("[← Back to"):
+                continue
+            if line.strip() == "---":
+                continue
+
+            # Look for level-2 headings as section boundaries
+            m = re.match(r"^##\s*(.+?)\s*$", line)
             if m:
+                header = m.group(1).strip()
+                if header in ["Contents"]:
+                    current_header = None
+                    continue
+                
                 if current_header is not None:
                     body = "\n".join(current_lines).strip()
                     if body:
                         sections[current_header] = body
-                current_header = m.group(1).strip()
+                current_header = header
                 current_lines = []
                 continue
 
@@ -271,6 +327,7 @@ def extract_sections(content: str) -> Dict[str, str]:
 
     if current_header is not None:
         body = "\n".join(current_lines).strip()
+        body = re.sub(r"\n+---+\s*$", "", body)
         if body:
             sections[current_header] = body
 
@@ -284,6 +341,9 @@ def clean_text(text: str) -> str:
     text = re.sub(r"\*\*Phase \d+.*?\*\*", "", text)
     text = re.sub(r"\d+%", "", text)
     text = re.sub(r"^\s*·\s*\*\*.*?\*\*\s*$", "", text, flags=re.MULTILINE)
+    # Strip trailing horizontal rules and whitespace
+    text = text.strip()
+    text = re.sub(r"\n+---+\s*$", "", text)
     return text.strip()
 
 
@@ -360,10 +420,11 @@ def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
     # Preserve rich long-form content if upstream docs provide it. Some projects
     # historically used headings like "The Insight" and "Technical Depth" with
     # code examples; these should not be dropped during regeneration.
-    # (No-op here other than ensuring we don't later filter these out.)
-    if slug in PROJECT_CONTENT_OVERRIDES:
-        for sec, body in PROJECT_CONTENT_OVERRIDES[slug].items():
-            sections[sec] = body
+    # Check both the canonical slug and the original source slug for overrides.
+    for s_key in [slug, canonical_from]:
+        if s_key in PROJECT_CONTENT_OVERRIDES:
+            for sec, body in PROJECT_CONTENT_OVERRIDES[s_key].items():
+                sections[sec] = body
 
     cat = "experimental"
     s = slug.lower()
@@ -477,6 +538,7 @@ def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
     return ProjectInfo(
         name=project_name,
         slug=slug,
+        original_slug=canonical_from,
         path=project_path,
         category=cat,
         status="active",
@@ -490,6 +552,16 @@ def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
 
 
 def generate_detailed_page(project: ProjectInfo) -> str:
+    # Auto-generate Quick Facts if not present
+    if "Quick Facts" not in project.sections:
+        facts = []
+        if project.status_detail:
+            facts.append(f"| **Status** | {project.status_detail} |")
+        if project.stack:
+            facts.append(f"| **Stack** | {', '.join(project.stack)} |")
+        if facts:
+            project.sections["Quick Facts"] = "| | |\n|---|---|\n" + "\n".join(facts)
+
     eco_slug = ECOSYSTEM_MAP.get(project.slug, "projects")
     fm = f"---\nlayout: default\nsection: {eco_slug}\n---\n\n"
     status_badge = (
@@ -498,6 +570,7 @@ def generate_detailed_page(project: ProjectInfo) -> str:
     back_links = get_back_links(project.category)
     header = f"# {project.name}\n\n{status_badge}\n\n{back_links}\n\n---\n\n"
     intro_parts = []
+    processed_sections = set()
     for s in [
         "Concept",
         "The Insight",
@@ -508,19 +581,24 @@ def generate_detailed_page(project: ProjectInfo) -> str:
     ]:
         if s in project.sections:
             intro_parts.append(clean_text(project.sections[s]))
+            processed_sections.add(s)
+            
     body_list = []
     if intro_parts:
         body_list.append(f"## Concept\n\n" + "\n\n".join(intro_parts))
+    
+    # First, append standard sections in the preferred narrative order
     for s in DETAILED_SECTIONS:
-        if s in project.sections and s not in [
-            "Concept",
-            "The Insight",
-            "Overview",
-            "What This Is",
-            "Problem It Solves",
-            "Core Value",
-        ]:
+        if s in project.sections and s not in processed_sections:
             body_list.append(f"## {s}\n\n{clean_text(project.sections[s])}")
+            processed_sections.add(s)
+            
+    # Then, append any other remaining sections that weren't in the standard list
+    # to ensure NO content is lost during the merge/cleanup.
+    for s, content in project.sections.items():
+        if s not in processed_sections and s not in ["Current Status", "Roadmap", "Contents"]:
+            body_list.append(f"## {s}\n\n{clean_text(content)}")
+
     if project.current_status:
         body_list.append(f"## Current Status\n\n{clean_text(project.current_status)}")
     if project.roadmap_summary:
@@ -528,8 +606,11 @@ def generate_detailed_page(project: ProjectInfo) -> str:
             "## Roadmap\n\n"
             + "\n".join([f"- {item}" for item in project.roadmap_summary])
         )
+    
     final_body = "\n\n---\n\n".join(body_list)
     toc = generate_toc(final_body)
+    
+    # Ensure only one separator between header and body, and before back-links
     return fm + header + toc + final_body + f"\n\n---\n\n{back_links}\n"
 
 
@@ -647,6 +728,7 @@ def main():
                 ProjectInfo(
                     name=name,
                     slug=canonical,
+                    original_slug=slug,
                     path=projects_dir / f"{slug}.md",
                     category="network",
                     status="active",
@@ -654,8 +736,66 @@ def main():
                     sections=PROJECT_CONTENT_OVERRIDES[slug],
                 )
             )
+
+    # Maintenance: Identify existing project pages in the projects/ directory that 
+    # were not scanned or explicitly overridden. This ensures they still get 
+    # formatting fixes, Quick Facts, and footer cleanup.
+    processed_slugs = {p.slug for p in projects}
+    for pp in sorted(projects_dir.glob("*.md")):
+        slug = pp.stem
+        if slug in processed_slugs or slug == "todo":
+            continue
+        
+        # Load metadata from existing page
+        content = pp.read_text()
+        name_match = re.search(r"^#\s+(.+)$", content, re.MULTILINE)
+        name = name_match.group(1).strip() if name_match else slug.title()
+        
+        # Extract ALL existing sections to preserve them
+        existing_sections = extract_sections(content)
+        
+        # Simple category detection from frontmatter or slug
+        cat = "experimental"
+        if 'section: network-automation' in content: cat = "network"
+        elif 'section: signal-processing' in content: cat = "sdr"
+        elif 'section: agentic-systems' in content: cat = "agents"
+        elif 'section: data-analytics' in content: cat = "data"
+        
+        projects.append(
+            ProjectInfo(
+                name=name,
+                slug=slug,
+                original_slug=slug,
+                path=pp,
+                category=cat,
+                status="active",
+                status_detail="Active",
+                sections=existing_sections,
+            )
+        )
+
     for p in projects:
         pp = projects_dir / f"{p.slug}.md"
+        
+        # Merge logic: if the page already exists, preserve stable sections that have 
+        # been manually polished.
+        if pp.exists():
+            existing_content = pp.read_text()
+            existing_sections = extract_sections(existing_content)
+            for sec in STABLE_SECTIONS:
+                if sec in existing_sections:
+                    # Check if it was an explicit golden master override in the script.
+                    # Overrides take precedence over manual edits for high-value content.
+                    is_override = False
+                    for s_key in [p.slug, p.original_slug]:
+                        if s_key in PROJECT_CONTENT_OVERRIDES and sec in PROJECT_CONTENT_OVERRIDES[s_key]:
+                            is_override = True
+                            break
+                    
+                    if not is_override:
+                        # Prefer the locally polished version
+                        p.sections[sec] = existing_sections[sec]
+        
         p.line_count = len(generate_detailed_page(p).splitlines())
         pp.write_text(generate_detailed_page(p))
     Path("projects.md").write_text(generate_projects_index(projects))

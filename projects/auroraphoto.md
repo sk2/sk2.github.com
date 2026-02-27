@@ -19,4 +19,12 @@ Provides precise, automated control over exposure and focus specifically optimiz
 
 ---
 
+## Quick Facts
+
+| | |
+|---|---|
+| **Status** | Active |
+
+---
+
 [← Back to Projects](../projects)

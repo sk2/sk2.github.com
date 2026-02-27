@@ -5,7 +5,7 @@ section: projects
 
 # Wave (StillState & FlowState)
 
-<span class="status-badge status-active">Recently Updated</span>
+<span class="status-badge status-active">Active</span>
 
 [← Back to Projects](../projects)
 
@@ -23,9 +23,11 @@ section: projects
 
 ---
 
-## Current Status
+## Quick Facts
 
-2026-02-21 — Completed 26-01 FlowState Hotkeys + Quick Actions
+| | |
+|---|---|
+| **Status** | Active |
 
 ---
 

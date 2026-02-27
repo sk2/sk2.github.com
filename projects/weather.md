@@ -5,9 +5,7 @@ section: projects
 
 # Weather (BOM ACCESS Pipeline)
 
-<span class="status-badge status-active">Last Active: 2026-02-14</span>
-
-[← Back to Data Analytics](../data-analytics)
+<span class="status-badge status-active">Active</span>
 
 [← Back to Projects](../projects)
 
@@ -21,12 +19,12 @@ The primary goal is to bypass the complexity of BOM's FTP delivery and binary fo
 
 ---
 
-## Current Status
+## Quick Facts
 
-** 2026-02-14 - Completed 02-04-PLAN.md
+| | |
+|---|---|
+| **Status** | Active |
 
 ---
-
-[← Back to Data Analytics](../data-analytics)
 
 [← Back to Projects](../projects)

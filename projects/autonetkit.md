@@ -19,6 +19,7 @@ section: network-automation
 - [Features](#features)
 - [Architecture](#architecture)
 - [Impact](#impact)
+- [Roadmap Direction](#roadmap-direction)
 
 ## Concept
 
@@ -54,6 +55,23 @@ AutoNetkit employs a multi-stage transformation pipeline:
 Earlier iterations of AutoNetkit were integrated into industry tooling for automated lab provisioning. That integration reflects the lineage of the approach, not the current in-progress implementation.
 
 To avoid confusion with the current configuration engine, this page focuses on the ideas and the compiler-style approach rather than tying claims to any specific modern implementation.
+
+---
+
+## Quick Facts
+
+| | |
+|---|---|
+| **Status** | Active |
+
+---
+
+## Roadmap Direction
+
+- **Intermediate Representations (IR):** A canonical, network-wide model that separates design requirements from device-specific implementation details.
+- **Compiler Passes:** Validation and rewrite passes that make changes explainable (and reversible) rather than implicit side effects.
+- **Deterministic Output:** Stable ordering and repeatable generation to support diffs, review, and CI gating.
+- **Multi-Target Backends:** Separate backends for vendor CLIs and structured formats (e.g., JSON/YAML) to support tooling and audit workflows.
 
 ---
 

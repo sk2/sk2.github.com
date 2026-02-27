@@ -19,9 +19,11 @@ Providing a single, definitive "Go/No-Go" score that accounts for both space wea
 
 ---
 
-## Roadmap
+## Quick Facts
 
-- **Scope (not prioritized):** 
+| | |
+|---|---|
+| **Status** | Active |
 
 ---
 

@@ -5,9 +5,7 @@ section: projects
 
 # Orchestrator (Device Interaction Runner)
 
-<span class="status-badge status-active">Recently Updated</span>
-
-[← Back to Network Automation](../network-automation)
+<span class="status-badge status-active">Active</span>
 
 [← Back to Projects](../projects)
 
@@ -25,12 +23,12 @@ Run the same device workflow reliably across lab/real targets, with deterministi
 
 ---
 
-## Current Status
+## Quick Facts
 
-2026-02-22 — Roadmap initialized
+| | |
+|---|---|
+| **Status** | Active |
 
 ---
-
-[← Back to Network Automation](../network-automation)
 
 [← Back to Projects](../projects)

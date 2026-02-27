@@ -5,7 +5,7 @@ section: agentic-systems
 
 # HealthyPi Ecosystem
 
-<span class="status-badge status-active">Recently Updated</span>
+<span class="status-badge status-active">Active</span>
 
 [← Back to Autonomous Systems](../agentic-systems)
 
@@ -19,9 +19,11 @@ A modular, agent-aware health monitoring ecosystem that translates raw biometric
 
 ---
 
-## Current Status
+## Quick Facts
 
-** 2026-02-20 - v1.1 roadmap created
+| | |
+|---|---|
+| **Status** | Active |
 
 ---
 

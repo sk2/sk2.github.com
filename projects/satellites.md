@@ -5,7 +5,7 @@ section: projects
 
 # Satellites
 
-<span class="status-badge status-active">Recently Updated</span>
+<span class="status-badge status-active">Active</span>
 
 [← Back to Projects](../projects)
 
@@ -19,9 +19,11 @@ Real-time satellite positions rendered on a terminal world map with pass predict
 
 ---
 
-## Current Status
+## Quick Facts
 
-** 2026-02-24 -- Phase 5 executed + verified (manual approval)
+| | |
+|---|---|
+| **Status** | Active |
 
 ---
 

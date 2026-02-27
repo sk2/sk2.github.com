@@ -5,7 +5,7 @@ section: network-automation
 
 # Device Interaction Framework
 
-<span class="status-badge status-active">Recently Updated</span>
+<span class="status-badge status-active">Active</span>
 
 [← Back to Network Automation](../network-automation)
 
@@ -21,9 +21,11 @@ Enable rapid, type-safe validation of network device state through streamlined d
 
 ---
 
-## Current Status
+## Quick Facts
 
-2026-02-22 — Completed 06-02: Fluent Verification API
+| | |
+|---|---|
+| **Status** | Active |
 
 ---
 

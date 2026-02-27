@@ -5,7 +5,7 @@ section: signal-processing
 
 # Spectrum Analysis
 
-<span class="status-badge status-active">Recently Updated</span>
+<span class="status-badge status-active">Active</span>
 
 [← Back to Signal Processing](../signal-processing)
 
@@ -19,9 +19,11 @@ Transform raw radio spectrum data into an actionable "Signal Census" through aut
 
 ---
 
-## Current Status
+## Quick Facts
 
-** 2026-02-24 — Completed 13-06 edge sparse ingest server + demand-control API
+| | |
+|---|---|
+| **Status** | Active |
 
 ---
 

@@ -12,7 +12,7 @@ A typical workflow is: ingest topology + high-level requirements, compile candid
 
 In practice the feedback loop is fast enough to feel interactive: many simulation runs complete in milliseconds for typical design iterations.
 
-If you are new to the ecosystem: start with **ank-pydantic** for modeling and configuration, then use the **Network Simulator** for verification and the **Network Visualization Engine** for review.
+If you are new to the ecosystem: start with **ank-pydantic** (Python) or the **Network Compilation Engine** (Rust) for modeling and configuration, then use the **Network Simulator** for verification and the **Network Visualization Engine** for review.
 
 **Inputs:** topology and high-level requirements (plus brownfield state when available).
 
@@ -42,16 +42,17 @@ We build specialized engines that handle specific stages of the network lifecycl
     │ Configuration │               │ Visualization │
     └───────┬───────┘               └───────┬───────┘
             │                               │
-    ┌───────▼───────┐               ┌───────▼───────┐
-    │ Modeling Eng  │               │ Network       │
-    │ Generator     │               │ Simulator     │
-    │ CLI Parser    │               │ NetVis        │
-    └───────┬───────┘               └───────┬───────┘
-            │                               │
-            └───────────────┬───────────────┘
+    ┌───────┴───────┐               ┌───────▼───────┐
+    │ ank-pydantic  │               │ Network       │
+    │ (Python)      │               │ Simulator     │
+    ├───────────────┤               │ NetVis        │
+    │ Rust Compiler │               └───────┬───────┘
+    │ (Rust)        │                       │
+    └───────┬───────┘               ┌───────▼───────┐
+            │                       │ Topology Core │
+            └───────────────┬───────┴───────────────┘
                     ┌───────▼───────┐
-                    │ Topology Core │
-                    │ (NTE Engine)  │
+                    │  NTE Engine   │
                     └───────────────┘
 ```
 
@@ -61,7 +62,8 @@ We build specialized engines that handle specific stages of the network lifecycl
 
 - **[Network Simulator:](/projects/netsim)** Run deterministic protocol convergence and failover assertions on candidate designs before deployment.
 - **[Brownfield Ingestion & Analysis:](/projects/configparsing)** Extract structured topology and relationships from legacy CLI and documentation for audits and migration workflows.
-- **[Configuration Engine (ank-pydantic):](/projects/ank-pydantic)** Model a network and compile it into a consistent, reviewable configuration plan for downstream tools.
+- **[Configuration Engine (ank-pydantic):](/projects/ank-pydantic)** A Python-native engine to model a network and compile it into a consistent, reviewable configuration plan.
+- **[Network Compilation Engine:](/projects/compilation)** A high-performance Rust-based alternative for formal network configuration compilation and static verification.
 - **[Network Visualization Engine:](/projects/netvis)** Render large, multi-layer networks into diagrams for design review, topology validation, and analysis.
 - **[Automation Workbench:](/projects/ank-workbench)** Use a single interface to design, simulate, visualize, and audit across the ecosystem.
 

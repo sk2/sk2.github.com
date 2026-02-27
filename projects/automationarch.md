@@ -5,7 +5,7 @@ section: network-automation
 
 # Network Automation Ecosystem - Overall Architecture Definition
 
-<span class="status-badge status-active">Recently Updated</span>
+<span class="status-badge status-active">Active</span>
 
 [← Back to Network Automation](../network-automation)
 
@@ -21,9 +21,11 @@ The output of this project will be a clearer, more formalized architectural unde
 
 ---
 
-## Current Status
+## Quick Facts
 
-2026-02-23 - Completed plan 10.3-01
+| | |
+|---|---|
+| **Status** | Active |
 
 ---
 

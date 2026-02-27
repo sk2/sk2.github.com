@@ -19,6 +19,14 @@ Signal reflection system that utilizes existing Wi-Fi signals for through-wall h
 
 ---
 
+## Quick Facts
+
+| | |
+|---|---|
+| **Status** | Active |
+
+---
+
 [← Back to Signal Processing](../signal-processing)
 
 [← Back to Projects](../projects)

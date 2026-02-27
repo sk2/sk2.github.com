@@ -1,5 +1,6 @@
 ---
 layout: default
+section: projects
 ---
 
 # Network Topology Engine
@@ -13,16 +14,6 @@ layout: default
 ## Concept
 
 Graph operations on network topologies demand native performance — Python's NetworkX caps out on large topologies. The Network Topology Engine provides a Rust-native topology engine with Python bindings, giving the Network Modeling & Configuration Library the speed of compiled code with the ergonomics of Python.
-
-### What This Is
-
-The Network Topology Engine is the Rust backend that powers the Network Modeling & Configuration Library's graph operations. Originally embedded within the Network Modeling & Configuration Library as `ank_nte`, it has been extracted into its own repository as the engine matured and its scope grew beyond a simple backing store.
-
-It provides native-speed graph algorithms, query execution, and data storage for network topology operations. It uses `petgraph`'s `StableDiGraph` for topology representation and Polars for columnar data storage.
-
----
-
----
 
 ---
 
@@ -44,33 +35,25 @@ The Network Topology Engine is organized as a Cargo workspace with specialized c
 
 ---
 
----
-
----
-
 ## Tech Stack
 
 Rust, petgraph (StableDiGraph), Polars, DuckDB, PyO3/Maturin for Python bindings
 
 ---
 
-[← Back to Network Automation](../network-automation)
+## Quick Facts
+
+| | |
+|---|---|
+| **Status** | Active |
 
 ---
 
+## # What This Is
 
+The Network Topology Engine is the Rust backend that powers the Network Modeling & Configuration Library's graph operations. Originally embedded within the Network Modeling & Configuration Library as `ank_nte`, it has been extracted into its own repository as the engine matured and its scope grew beyond a simple backing store.
 
----
-
-[← Back to Projects](../projects)
-
----
-
-
-
----
-
-[← Back to Projects](../projects)
+It provides native-speed graph algorithms, query execution, and data storage for network topology operations. It uses `petgraph`'s `StableDiGraph` for topology representation and Polars for columnar data storage.
 
 ---
 

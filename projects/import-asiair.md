@@ -5,7 +5,7 @@ section: projects
 
 # ASIAIR Import Tool
 
-<span class="status-badge status-active">Last Active: 2026-02-11</span>
+<span class="status-badge status-active">Active</span>
 
 [← Back to Projects](../projects)
 
@@ -19,9 +19,11 @@ Eliminates manual file sorting after imaging sessions - scan hundreds of frames,
 
 ---
 
-## Current Status
+## Quick Facts
 
-2026-02-11 —  plans across 4 waves
+| | |
+|---|---|
+| **Status** | Active |
 
 ---
 

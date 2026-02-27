@@ -19,4 +19,12 @@ Enable high-fidelity HDR solar composites by providing sub-pixel alignment of ec
 
 ---
 
+## Quick Facts
+
+| | |
+|---|---|
+| **Status** | Active |
+
+---
+
 [← Back to Projects](../projects)

@@ -12,38 +12,25 @@ This repository is the source for `sk2.github.com` / `sk2.id.au`, built with Jek
 
 ## Maintenance Protocol
 
-The project pages are synchronized from local development directories using `update_projects.py`. To maintain professional quality and prevent content regression, follow this "Source of Truth" protocol:
+The project pages are synchronized from local development directories using `update_projects.py`. To maintain professional quality and prevent content regression, the site uses a **Two-Track** content management model:
 
-1.  **Metadata is Master:** Primary project descriptions are pulled from `.planning/PROJECT.md` in each project's folder.
-2.  **Golden Master Overrides:** High-value technical content (Architecture, Impact, Research Foundations) for key projects is hardcoded in the `PROJECT_CONTENT_OVERRIDES` dictionary within `update_projects.py`. This ensures critical detail is never lost during a sync.
-3.  **Clean Room Generation:** The sync script completely rebuilds project pages from scratch. **Never manually edit files in the `projects/` directory**, as they are overwritten on every sync.
-4.  **Activity-Based Status:** Project statuses are automatically derived from the `Last activity` date in each project's `STATE.md`.
-    - `Recently Updated`: Work within the last 7 days.
-    - `Last Active: [Date]`: For older work.
-    - No internal metrics (Phases, Percentages) are shown on the public site.
+1.  **Stable Content (Polished Narrative):** Canonical technical detail—Concept, Architecture, Tech Stack, Visuals—lives directly in the `projects/*.md` files within this repo. Once you polish these sections, `update_projects.py` will preserve them during subsequent syncs.
+2.  **Fresh Content (Automated Sync):** Current activity, milestones, and status are automatically pulled from external `.planning/STATE.md` and `ROADMAP.md` in each project's folder (using the `--scan-dirs` flag).
+3.  **Golden Master Overrides:** Critical technical content can also be hardcoded in the `PROJECT_CONTENT_OVERRIDES` dictionary within `update_projects.py` for absolute persistence across all environments.
 
-### Workflow Gap (Important)
+### Maintenance Workflow
 
-The current workflow has a known failure mode: rich, manually written project pages in `projects/` can be clobbered by a regeneration run.
+- **To Improve Content:** Edit the markdown files directly in `projects/*.md`. Use the "Stable" section headers (e.g., `## Concept`, `## Architecture`) to ensure your changes are preserved.
+- **To Update Status:** Run `python3 update_projects.py --scan-dirs ~/dev`. This will sync the "Fresh" sections (Roadmap, Current Status) and the status badge while leaving your polished "Stable" sections intact.
+- **Cleanup:** Running the sync script automatically fixes common formatting issues, duplicates, and ensures consistent navigation links across the site.
 
-What we want instead is two-track content management:
+### Workflow Improvements
 
-- **Stable content (canonical narrative):** Concept, architecture, technical depth, screenshots/diagrams.
-- **Fresh content (incremental updates):** recent milestone notes, phase/plan references, notable changes since the last release.
+The previous "Clean Room Generation" model (which clobbered manual edits) has been replaced with a **Synchronization & Merge** model. 
 
-This repo does not yet have a reliable, well-documented source-of-truth location for the stable content. Before running bulk regeneration, confirm where the authoritative project documents live (e.g., per-project `.planning/PROJECT.md`) and ensure the sync script is sourcing from them.
-
-Action item (not tonight): define and document a workflow that preserves stable content while appending incremental updates, without rewrites or large-scale content loss.
-
-### Current Working Convention (Temporary)
-
-Until a better workflow exists, treat `/Users/simonknight/dev` as the canonical project root on this machine:
-
-- Stable content lives in each project at `.planning/PROJECT.md`
-- Recency/status lives in `.planning/STATE.md` ("Last activity")
-- The website is regenerated from those sources via `python3 update_projects.py --scan-dirs /Users/simonknight/dev`
-
-If the scan dirs are missing, do not run regeneration: it will collapse long-form pages into stubs.
+- **Protected Sections:** If a section header is in the `STABLE_SECTIONS` list (see `update_projects.py`), the script will prioritize the local `projects/*.md` version over the external `.planning/PROJECT.md`.
+- **Duplicate Prevention:** The script now automatically detects and strips duplicate footers and horizontal rules that were previously a source of "page churn".
+- **Auto-Quick Facts:** If a `## Quick Facts` section is missing, the script will generate a basic one from metadata, which you can then manually polish.
 
 ### Simulator Page Notes
 

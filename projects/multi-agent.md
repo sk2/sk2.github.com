@@ -5,22 +5,11 @@ section: agentic-systems
 
 # Secure Multi-Agent Personal Assistant
 
-<span class="status-badge status-active">Phase 21/23 (100%)</span>
+<span class="status-badge status-active">Active</span>
+
+[← Back to Autonomous Systems](../agentic-systems)
 
 [← Back to Projects](../projects)
-
----
-
-## Contents
-
-- [Concept](#concept)
-- [Quick Facts](#quick-facts)
-- [What This Is](#what-this-is)
-- [Problem It Solves](#problem-it-solves)
-- [Features](#features)
-- [Architecture](#architecture)
-- [Security Model](#security-model)
-- [Individual Agents](#individual-agents)
 
 ---
 
@@ -28,26 +17,9 @@ section: agentic-systems
 
 Multi-agent coordination requires strict security boundaries to prevent lateral movement. This assistant demonstrates **containerized isolation** where agents (HealthKit, Home Automation, etc.) coordinate via a NATS message broker. By using per-subject ACLs and a "deny-by-default" security posture, the system ensures that compromise of a single agent cannot cascade through the infrastructure.
 
----
-
-## Quick Facts
-
-| | |
-|---|---|
-| **Status** | Phase 21/23 (100%) |
-| **Language** | Agents can be Go, Python, or Rust |
-
----
-
-## What This Is
-
 A security-first framework for coordinating specialized agents. It uses NATS for communication and Docker for isolated execution. The orchestrator handles high-level reasoning and workflow execution, while agents perform deterministic tasks.
 
 The system includes 13+ specialized agents: HealthKit, HealthyPi, Hue (home automation), Climate, Calendar, Weather, RSS, Backup Monitor, Screen Time, Network Monitor, Workflow Engine, Notification Gateway, and Audit Anomaly detection. See [Individual Agents](#individual-agents) section below for details.
-
----
-
-## Problem It Solves
 
 AI agent systems need strong security boundaries to prevent compromise from cascading:
 
@@ -80,9 +52,16 @@ AI agent systems need strong security boundaries to prevent compromise from casc
 
 ---
 
-## Features
+## Quick Facts
 
-### Pre-Approval Workflow
+| | |
+|---|---|
+| **Status** |  () |
+| **Language** | Agents can be Go, Python, or Rust |
+
+---
+
+## # Pre-Approval Workflow
 
 Sensitive actions require user confirmation:
 
@@ -100,7 +79,9 @@ Sensitive actions require user confirmation:
 - Message sending
 - Data deletion
 
-### Real-Time Monitoring
+---
+
+## # Real-Time Monitoring
 
 macOS-native dashboard shows agent activity:
 
@@ -117,22 +98,22 @@ macOS-native dashboard shows agent activity:
 - Revoke capability tokens
 - Manual workflow triggers
 
-### Explanation of Actions
+---
+
+## # Explanation of Actions
 
 Agents provide reasoning for proposed actions:
 
 ```
 Health Agent: "Suggesting 10-minute walk break"
 Reason: "Sedentary for 3 hours, heart rate variability declining"
-Data: { sitting_time: 180, hrv_trend: -15%, step_count: 450 }
+Data: { sitting_time: 180, hrv_trend: -, step_count: 450 }
 Confidence: 0.85
 ```
 
 ---
 
-## Architecture
-
-### Message Broker: NATS
+## # Message Broker: NATS
 
 NATS provides security primitives and communication infrastructure:
 
@@ -149,7 +130,9 @@ NATS provides security primitives and communication infrastructure:
 - Queue groups for load balancing
 - Key-value store for state
 
-### Orchestrator
+---
+
+## # Orchestrator
 
 Central coordination with cloud LLM reasoning:
 
@@ -165,7 +148,9 @@ Central coordination with cloud LLM reasoning:
 - Lightweight agent design offloads intelligence
 - Mac mini resources dedicated to running containers
 
-### Containerized Agents
+---
+
+## # Containerized Agents
 
 Each agent runs in isolated Docker container:
 
@@ -190,9 +175,7 @@ Each agent runs in isolated Docker container:
 
 ---
 
-## Security Model
-
-### Capability-Based Authorization
+## # Capability-Based Authorization
 
 Agents receive time-limited signed tokens:
 
@@ -211,7 +194,9 @@ capability_token = {
 - Scoped to specific NATS subjects
 - Orchestrator issues tokens on-demand
 
-### Network Isolation
+---
+
+## # Network Isolation
 
 Per-agent network policies:
 
@@ -225,7 +210,9 @@ Per-agent network policies:
 - All communication via NATS
 - No direct connections allowed
 
-### Audit Trail
+---
+
+## # Audit Trail
 
 OpenTelemetry tracing for all operations:
 
@@ -244,71 +231,6 @@ OpenTelemetry tracing for all operations:
 
 ---
 
-## Individual Agents
-
-**The system includes 13+ specialized agents**, each designed for a specific domain with minimal privileges and explicit security boundaries:
-
-### Health & Biometrics
-- **HealthKit Agent** (Swift): Extracts metrics from Apple Health (heart rate, sleep, activity). Runs on macOS host only (no container) due to HealthKit framework requirements.
-- **HealthyPi Agent** (Python): Processes real-time biometric signals (ECG, PPG, EDA) from HealthyPi hardware, performs HRV analysis, and publishes health events.
-
-### Home & Environment
-- **Hue Agent** (Python): Controls Philips Hue lights based on time of day, presence detection, and automation rules. Scoped network access to Hue Bridge API only.
-- **Climate Agent** (Python): Monitors temperature, humidity, and adjusts HVAC settings. Isolated network tier.
-
-### Data Aggregation
-- **Calendar Agent** (Swift): Reads upcoming events from Apple Calendar/EventKit. macOS host execution only.
-- **Weather Agent** (Python): Fetches forecasts and current conditions. Scoped to weather API endpoints.
-- **RSS Agent** (Python): Aggregates news feeds and notifies on keywords. Full internet tier with content filtering.
-
-### Monitoring & Maintenance
-- **Backup Monitor** (Rust): Verifies Time Machine and NAS backup integrity. Checks disk usage and staleness. Alerts on failures.
-- **Screen Time Agent** (Swift): Tracks application usage patterns from macOS. Host-only execution.
-- **Network Monitor** (Rust): Tracks bandwidth, latency, and detects anomalies in local network traffic.
-
-### Automation & Coordination
-- **Workflow Engine** (Python): Executes multi-step workflows involving multiple agents. Coordinates approval flow for sensitive actions.
-- **Notification Gateway** (Python): Sends notifications via multiple channels (iOS, email, Slack). Full internet access.
-- **Audit Anomaly Agent** (Python): Monitors OpenTelemetry logs for security events and unusual patterns.
-
-All agents communicate exclusively via NATS with subject-based ACLs. Each agent's capabilities are explicitly defined, and actions requiring elevated privileges trigger the pre-approval workflow.
-
----
-
----
-
-[← Back to Agentic Systems](../agentic-systems)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
-
----
-
-[← Back to Projects](../projects)
-
----
+[← Back to Autonomous Systems](../agentic-systems)
 
 [← Back to Projects](../projects)

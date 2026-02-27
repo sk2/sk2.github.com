@@ -5,7 +5,7 @@ section: agentic-systems
 
 # Cycle Agent
 
-<span class="status-badge status-active">Recently Updated</span>
+<span class="status-badge status-active">Active</span>
 
 [← Back to Autonomous Systems](../agentic-systems)
 
@@ -19,9 +19,11 @@ A native SwiftUI training application for iPad and Apple TV that bridges profess
 
 ---
 
-## Current Status
+## Quick Facts
 
-2026-02-21 - Completed 04-01-PLAN.md
+| | |
+|---|---|
+| **Status** | Active |
 
 ---
 

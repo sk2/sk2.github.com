@@ -1,5 +1,6 @@
 ---
 layout: default
+section: projects
 ---
 
 # nascleanup
@@ -16,16 +17,6 @@ Developing...
 
 ---
 
----
-
----
-
----
-
----
-
----
-
 ## Architecture
 
 - **Language:** Rust (for performance and safety).
@@ -36,23 +27,11 @@ Developing...
 
 ---
 
-[← Back to Projects](../projects)
+## Quick Facts
 
----
-
-
-
----
-
-[← Back to Projects](../projects)
-
----
-
-
-
----
-
-[← Back to Projects](../projects)
+| | |
+|---|---|
+| **Status** | Active |
 
 ---
 

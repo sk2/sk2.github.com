@@ -3,7 +3,7 @@ layout: default
 section: projects
 ---
 
-# OpenAstro Node
+# Test Project
 
 <span class="status-badge status-active">Active</span>
 
@@ -13,7 +13,13 @@ section: projects
 
 ## Concept
 
-A headless, autonomous astrophotography controller designed for low-power Linux devices (RPi/Jetson). It manages hardware, executes imaging sequences, and ensures rig safety.
+This is a test project concept from external source.
+
+---
+
+## Architecture
+
+Polished architecture: this version has better wording and more detail than the raw external source.
 
 ---
 
@@ -21,7 +27,7 @@ A headless, autonomous astrophotography controller designed for low-power Linux 
 
 | | |
 |---|---|
-| **Status** | Active |
+| **Status** | Recently Updated |
 
 ---
 

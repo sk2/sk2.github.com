@@ -5,7 +5,7 @@ section: network-automation
 
 # Automation Workbench
 
-<span class="status-badge status-active">Recently Updated</span>
+<span class="status-badge status-active">Active</span>
 
 [← Back to Network Automation](../network-automation)
 
@@ -13,26 +13,35 @@ section: network-automation
 
 ---
 
+## Contents
+
+- [Concept](#concept)
+- [Key Capabilities](#key-capabilities)
+- [Screenshots](#screenshots)
+- [Visuals](#visuals)
+
 ## Concept
 
-**An orchestration platform** that integrates the ANK ecosystem tools (TopoGen, ank_pydantic, Network Simulator, NetVis) into one seamless workflow.
+**An orchestration platform** that integrates the ANK ecosystem tools (TopoGen, ank_pydantic, Network Simulator, NetVis) into one seamless workflow. It serves as the **glue layer** that coordinates the entire network automation pipeline, allowing engineers to generate topologies, model networks declaratively, run lightweight simulations, and visualize results from a unified interface.
 
-ANK Workbench is the **glue layer** that coordinates the entire network automation pipeline. Engineers can generate topologies, model networks declaratively, run lightweight simulations, and visualize results—all from a unified web interface. No more context switching between separate tools or manually stitching components together.
-
-**The Integration Vision:**
 ```
 ┌──────────────────────────────────────────────────────────────────┐
 │                        ANK Workbench                             │
 │         (Orchestration · Web UI · Workflow Management)           │
 │   ┌──────────────┬──────────────┬──────────────┬──────────────┐ │
-│   │   TopoGen    │ ank_pydantic │   Simulator  │    NetVis    │ │
+│   │   TopoGen    │ ank-pydantic │   Simulator  │    NetVis    │ │
 └───┴──────────────┴──────────────┴──────────────┴──────────────┴─┘
 ```
 
-**Workflow:** Generate/model topology → Run simulation → Visualize results → Export configs
-**Value:** Complete pipeline in one interface, no tool-switching or manual integration
+---
 
-Network engineers can design, validate, and visualize network changes in one complete workflow without switching between separate tools or manually gluing components together.
+## Key Capabilities
+
+- **Design-First Workflow**: Declarative Pydantic models → lightweight simulation → integrated topology/config/behavior visualization.
+- **Persistent Help System**: Non-modal drawer with contextual tips and route-aware visibility.
+- **Sample Gallery**: Curated offline topologies ranging from 2-node starters to 12-node spine-leaf data centers.
+- **Intelligent Empty States**: Cause-specific UI patterns with outcome previews to guide new users.
+- **Guided Tour**: 8-step workflow coverage with CSS-only spotlight for rapid onboarding.
 
 ---
 
@@ -52,9 +61,17 @@ Network engineers can design, validate, and visualize network changes in one com
 
 ---
 
-## Current Status
+## Visuals
 
-2026-02-24 — Completed 44-03-PLAN.md
+The Workbench provides real-time feedback through integrated NetVis overlays, allowing for the inspection of physical, logical, and protocol layers alongside routing table state and simulation diagnostics.
+
+---
+
+## Quick Facts
+
+| | |
+|---|---|
+| **Status** | Active |
 
 ---
 

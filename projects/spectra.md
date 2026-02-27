@@ -1,10 +1,13 @@
 ---
 layout: default
+section: signal-processing
 ---
 
 # Project Spectra
 
 <span class="status-badge status-active">Active</span>
+
+[← Back to Signal Processing](../signal-processing)
 
 [← Back to Projects](../projects)
 
@@ -16,19 +19,15 @@ Developing...
 
 ---
 
----
+## Quick Facts
+
+| | |
+|---|---|
+| **Status** | Active |
 
 ---
 
----
-
----
-
----
-
-## Features
-
-### Phase 1 Complete: Foundation ✅
+## # Phase 1 Complete: Foundation ✅
 
 **SDR Protocol Support:**
 - SpyServer client (NumPy-based IQ streaming)
@@ -54,7 +53,9 @@ Developing...
 - Network bandwidth optimization
 - Mock servers for deterministic testing
 
-### Phase 2 Complete: Intelligence ✅
+---
+
+## # Phase 2 Complete: Intelligence ✅
 
 **ML Classification:**
 - CNN modulation classifier with CoreML inference on Mac Neural Engine
@@ -70,7 +71,9 @@ Developing...
 - FM/AM/SSB demodulation pipeline
 - Audio output for monitored signals
 
-### Phase 3 Complete: Autonomy ✅
+---
+
+## # Phase 3 Complete: Autonomy ✅
 
 **Automated Collection:**
 - Priority-based band sweeping and scheduled collection windows
@@ -81,13 +84,17 @@ Developing...
 - Baseline and anomaly detection for new or unusual signals
 - Signal Census maintenance with automated updates
 
-### Phase 5 Complete: Spectrum Autopilot ✅
+---
+
+## # Phase 5 Complete: Spectrum Autopilot ✅
 
 **Mission-Driven Scanning:**
 - Automated scanning behavior driven by mission parameters
 - Automated briefing generation
 
-### Phase 6 Complete: Verification & Operational Readiness ✅
+---
+
+## # Phase 6 Complete: Verification & Operational Readiness ✅
 
 **Infrastructure Verification:**
 - End-to-end verification harness with mock testing
@@ -95,26 +102,16 @@ Developing...
 - Auto-reconnect with exponential backoff (1s→30s) and per-device failure isolation
 - Real hardware validation ready but deferred
 
-### Roadmap
+---
+
+## # Roadmap
 
 -  — Advanced ML/DSP including de-noising, blind signal separation, emitter identification, vector search, and beamforming
 -  — GPU acceleration, waterfall ring buffer optimization, memory profiling, batch updates
 
 ---
 
----
-
----
-
----
-
----
-
----
-
-## Architecture
-
-### Edge Nodes: Raspberry Pi
+## # Edge Nodes: Raspberry Pi
 
 Multiple Pi units with specialized SDRs:
 
@@ -138,7 +135,9 @@ Multiple Pi units with specialized SDRs:
 - Utility scanning
 - Low-cost backup
 
-### Core: Mac mini M-Series
+---
+
+## # Core: Mac mini M-Series
 
 Central processing and ML inference:
 
@@ -162,7 +161,9 @@ Central processing and ML inference:
 - WebGL waterfall (browser)
 - Real-time spectrum display
 
-### Network Architecture
+---
+
+## # Network Architecture
 
 ```
 Edge Pi → SpyServer/rtl_tcp → Mac mini Core
@@ -176,24 +177,6 @@ Edge Pi → SpyServer/rtl_tcp → Mac mini Core
 
 ---
 
-[← Back to Projects](../projects)
-
----
-
-
-
----
-
-[← Back to Projects](../projects)
-
----
-
-
-
----
-
-[← Back to Projects](../projects)
-
----
+[← Back to Signal Processing](../signal-processing)
 
 [← Back to Projects](../projects)

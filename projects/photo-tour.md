@@ -20,4 +20,12 @@ In the field, you can see what the camera sees and get actionable guidance/contr
 
 ---
 
+## Quick Facts
+
+| | |
+|---|---|
+| **Status** | Active |
+
+---
+
 [← Back to Projects](../projects)

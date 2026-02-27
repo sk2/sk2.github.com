@@ -5,7 +5,7 @@ section: signal-processing
 
 # Signal Reflection - KrakenSDR Multi-Beam System
 
-<span class="status-badge status-active">Recently Updated</span>
+<span class="status-badge status-active">Active</span>
 
 [← Back to Signal Processing](../signal-processing)
 
@@ -21,9 +21,11 @@ Clean, understandable, stable codebase that reliably tracks aircraft in real-tim
 
 ---
 
-## Current Status
+## Quick Facts
 
-2026-02-24 — Completed 17-02-PLAN.md
+| | |
+|---|---|
+| **Status** | Active |
 
 ---
 

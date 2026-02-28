@@ -5,13 +5,21 @@ section: agentic-systems
 
 # Secure Multi-Agent Personal Assistant
 
-<span class="status-badge status-active">Active</span>
+<span class="status-badge status-active">Recently Updated</span>
 
 [← Back to Autonomous Systems](../agentic-systems)
 
 [← Back to Projects](../projects)
 
 ---
+
+## Contents
+
+- [Concept](#concept)
+- [Context](#context)
+- [Constraints](#constraints)
+- [Key Decisions](#key-decisions)
+- [Current Status](#current-status)
 
 ## Concept
 
@@ -50,6 +58,22 @@ AI agent systems need strong security boundaries to prevent compromise from casc
 - Pre-approval workflow for sensitive actions
 - Lightweight deterministic agents with cloud LLM orchestrator
 
+A security-first multi-agent system that coordinates specialized containerized agents (health monitoring, home automation, data aggregation, workflow automation) through a message broker architecture. Each agent runs in isolation with minimal privileges and communicates only through validated message queues, demonstrating production-ready patterns for deploying AI agents in security-critical infrastructure environments. The orchestrator uses cloud LLM reasoning (GPT-4/Claude) while agents remain lightweight and deterministic.
+
+Complete isolation between agents such that compromise of one agent cannot cascade to others or the orchestrator—demonstrating that secure multi-agent systems are practical for both personal and production infrastructure use cases.
+
+A security-first multi-agent system that coordinates specialized containerized agents (health monitoring, home automation, data aggregation, workflow automation) through a message broker architecture. Each agent runs in isolation with minimal privileges and communicates only through validated message queues, demonstrating production-ready patterns for deploying AI agents in security-critical infrastructure environments. The orchestrator uses cloud LLM reasoning (GPT-4/Claude) while agents remain lightweight and deterministic.
+
+Complete isolation between agents such that compromise of one agent cannot cascade to others or the orchestrator—demonstrating that secure multi-agent systems are practical for both personal and production infrastructure use cases.
+
+A security-first multi-agent system that coordinates specialized containerized agents (health monitoring, home automation, data aggregation, workflow automation) through a message broker architecture. Each agent runs in isolation with minimal privileges and communicates only through validated message queues, demonstrating production-ready patterns for deploying AI agents in security-critical infrastructure environments. The orchestrator uses cloud LLM reasoning (GPT-4/Claude) while agents remain lightweight and deterministic.
+
+Complete isolation between agents such that compromise of one agent cannot cascade to others or the orchestrator—demonstrating that secure multi-agent systems are practical for both personal and production infrastructure use cases.
+
+A security-first multi-agent system that coordinates specialized containerized agents (health monitoring, home automation, data aggregation, workflow automation) through a message broker architecture. Each agent runs in isolation with minimal privileges and communicates only through validated message queues, demonstrating production-ready patterns for deploying AI agents in security-critical infrastructure environments. The orchestrator uses cloud LLM reasoning (GPT-4/Claude) while agents remain lightweight and deterministic.
+
+Complete isolation between agents such that compromise of one agent cannot cascade to others or the orchestrator—demonstrating that secure multi-agent systems are practical for both personal and production infrastructure use cases.
+
 ---
 
 ## Quick Facts
@@ -61,173 +85,103 @@ AI agent systems need strong security boundaries to prevent compromise from casc
 
 ---
 
-## # Pre-Approval Workflow
+## # Validated
 
-Sensitive actions require user confirmation:
-
-```
-1. Agent requests capability token for sensitive action
-2. Orchestrator prompts user via macOS notification
-3. User approves/denies with reason
-4. Orchestrator issues token or rejects request
-5. Action logged to audit trail
-```
-
-**Sensitive Actions:**
-- Financial transactions
-- Home automation commands
-- Message sending
-- Data deletion
+(None yet — ship to validate)
 
 ---
 
-## # Real-Time Monitoring
+## # Active
 
-macOS-native dashboard shows agent activity:
-
-**Displayed Information:**
-- Active agents and container status
-- Message throughput on NATS
-- Recent agent actions
-- Pending approvals
-- Anomaly alerts
-
-**Controls:**
-- Start/stop individual agents
-- View logs per agent
-- Revoke capability tokens
-- Manual workflow triggers
-
----
-
-## # Explanation of Actions
-
-Agents provide reasoning for proposed actions:
-
-```
-Health Agent: "Suggesting 10-minute walk break"
-Reason: "Sedentary for 3 hours, heart rate variability declining"
-Data: { sitting_time: 180, hrv_trend: -, step_count: 450 }
-Confidence: 0.85
-```
+- [ ] Orchestrator coordinates agents via message broker (NATS or RabbitMQ)
+- [ ] Each agent runs in isolated container with scoped credentials
+- [ ] Agent-to-agent communication blocked by network policies
+- [ ] Capability-based authorization with time-limited, signed tokens
+- [ ] Complete audit trail of all agent actions and message flow
+- [ ] Pre-approval workflow for sensitive agent actions
+- [ ] Real-time monitoring dashboard showing agent activity
+- [ ] Agents explain reasoning for proposed actions
+- [ ] Health monitoring agent that tracks Apple Health metrics
+- [ ] Home automation agent that controls Hue lights
+- [ ] Data aggregation agent that queries across services
+- [ ] Screen Time agent (macOS native usage metrics)
+- [ ] Backup Integrity agent (Time Machine/Arq monitoring)
+- [ ] Daily Burn agent (Financial transaction summaries)
+- [ ] Readwise agent (Reading highlights recall)
+- [ ] Unified Notification agent (iMessage/Telegram/Slack gateway)
+- [ ] Audit Anomaly agent (Security monitoring of agent activity)
+- [ ] One complete end-to-end workflow (e.g., bedtime routine)
+- [ ] Per-agent network policies (some internet access, some isolated)
+- [ ] Security validation demonstrating isolation guarantees
+- [ ] Documentation as case study for infrastructure agent deployment
 
 ---
 
-## # Message Broker: NATS
+## # Out of Scope
 
-NATS provides security primitives and communication infrastructure:
-
-**Security Features:**
-- TLS 1.3 encryption in transit
-- Per-queue ACL (Access Control Lists)
-- Subject-based routing and filtering
-- Message signing and verification
-- Connection authentication
-
-**Communication Patterns:**
-- Request/response for agent queries
-- Publish/subscribe for events
-- Queue groups for load balancing
-- Key-value store for state
+- MCP protocol integration — Message broker provides better security boundaries and audit trail for zero-trust architecture
+- Local LLMs in agents (v1) — Keep agents lightweight and deterministic; orchestrator does reasoning via cloud API
+- Agent-to-agent direct communication — Violates isolation model; all coordination through orchestrator
+- Real-time event streaming from services — Start with polling and request/response patterns; event-driven can come later
+- Mobile interface — macOS-native focus initially
+- Multi-user support — Single-user personal assistant for v1
 
 ---
 
-## # Orchestrator
+## Context
 
-Central coordination with cloud LLM reasoning:
+**Security Research Background:**
 
-**Responsibilities:**
-- Plans multi-agent workflows
-- Routes requests to appropriate agents
-- Coordinates complex multi-step operations
-- Enforces pre-approval for sensitive actions
-- Maintains audit log
+Three reference documents inform this architecture:
+1. Agent Communication Patterns - Message Brokers and Event Systems
+2. Agent Container Isolation - Security Best Practices
+3. Multi-Agent Workflow Architecture - Secure Orchestration Patterns
 
-**LLM Integration:**
-- GPT-4 or Claude API for reasoning
-- Lightweight agent design offloads intelligence
-- Mac mini resources dedicated to running containers
+These establish proven patterns for air-gapped agents, defense-in-depth isolation, and capability-based security.
 
----
+**Technical Environment:**
 
-## # Containerized Agents
+- Primary Node: Mac mini M4 Pro (Main orchestrator, NATS server, high-priority agents)
+- Secondary Node: Mac mini (Distributed agent node, resource-heavy or specialized integrations)
+- Connectivity: NATS over LAN (TLS 1.3 secured)
+- macOS native deployment with Docker containers for agent isolation
 
-Each agent runs in isolated Docker container:
+**Key Architectural Decisions:**
 
-**Isolation Mechanisms:**
-- Separate network namespace
-- Read-only root filesystem
-- Dropped Linux capabilities
-- Seccomp profiles
-- Resource limits (CPU/memory)
-
-**Communication:**
-- NATS client only
-- No direct agent-to-agent contact
-- Scoped credentials per agent
-- Network policies enforce boundaries
-
-**Agent Types:**
-- Stateless: Process requests and return results
-- Stateful: Maintain internal state via NATS KV
-- Polling: Periodic queries to external services
-- Reactive: Respond to events on message queue
+- Message broker over MCP: Better security primitives (per-queue ACLs, TLS enforcement, message signing)
+- Lightweight agents over autonomous: Orchestrator centralization allows better audit and approval workflows
+- Containerized agents: Each agent in separate container with seccomp profiles, read-only filesystems, capability dropping
+- Hybrid integration: Some agents poll APIs, some react to events, orchestrator coordinates timing
 
 ---
 
-## # Capability-Based Authorization
+## Constraints
 
-Agents receive time-limited signed tokens:
-
-```python
-capability_token = {
-    "agent": "health-monitoring",
-    "allowed_subjects": ["health.data.read", "health.insights.write"],
-    "expiration": 1234567890,
-    "signature": "ed25519_signature_here"
-}
-```
-
-**Properties:**
-- Ed25519 signing prevents tampering
-- Expiration limits compromise window
-- Scoped to specific NATS subjects
-- Orchestrator issues tokens on-demand
+- **Resource**: Mac mini M4 Pro limits simultaneous container count and memory usage — lightweight agent design is essential
+- **Security**: Zero-trust isolation model is non-negotiable — agents treated as potentially compromised at all times
+- **Observability**: All actions must be auditable — no agent operations without logging
+- **Language**: Agents can be Go, Python, or Rust — whatever fits the integration best
+- **Network**: Per-agent egress policies — sensitive agents get no internet, API agents get scoped access only
 
 ---
 
-## # Network Isolation
+## Key Decisions
 
-Per-agent network policies:
+| Decision | Rationale | Outcome |
+|----------|-----------|---------|
+| Message broker for communication | Provides validated intermediary, prevents direct agent-to-agent contact, enables fine-grained ACLs and audit logging | — Pending |
+| Cloud LLM for orchestrator reasoning | Mac mini resources reserved for running containers; orchestrator needs sophisticated planning | — Pending |
+| Lightweight deterministic agents | Reduces attack surface, simplifies security analysis, concentrates intelligence in auditable orchestrator | — Pending |
+| Docker containers for isolation | Provides namespaces, cgroups, seccomp, network policies on macOS | — Pending |
+| Capability tokens for authorization | Time-limited signed tokens prevent privilege escalation and enable fine-grained access control | — Pending |
 
-**Internet Access Tiers:**
-- **Isolated**: No internet (data aggregation, sensitive agents)
-- **Scoped**: Specific API endpoints only (home automation, health)
-- **Full**: General internet (notification gateway, backup monitor)
-
-**Agent-to-Agent:**
-- Blocked by default
-- All communication via NATS
-- No direct connections allowed
+*Last updated: 2026-02-02 after initialization*
 
 ---
 
-## # Audit Trail
+## Current Status
 
-OpenTelemetry tracing for all operations:
-
-**Logged Information:**
-- All agent actions with timestamps
-- Message flow between agents
-- Capability token issuance
-- Pre-approval decisions
-- Failures and errors
-
-**Analysis:**
-- Audit anomaly agent monitors logs
-- Detection of unusual patterns
-- Security incident investigation
-- Compliance reporting
+2026-02-21 — Completed  (Dashboard milestone achievements included in snapshot payload)
 
 ---
 

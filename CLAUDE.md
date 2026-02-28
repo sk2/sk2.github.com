@@ -18,6 +18,8 @@ Use full product names in all prose text:
 |-----------|------------------|
 | `NetVis` | Network Visualization Engine |
 | `ank_pydantic` | Network Modeling & Configuration Library |
+| `ank_netcfg` | Network Configuration Framework |
+| `netassure` | Network Analysis Engine |
 | `netsim` | Network Simulator |
 | `TopoGen` | Topology Generator |
 | `ank-parse` | Network Configuration Parser |

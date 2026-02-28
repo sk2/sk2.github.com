@@ -7,7 +7,7 @@ section: network-automation
 
 <span class="status-badge status-active">Active</span>
 
-[← Back to Network Automation](../network-automation)
+[← Back to Data Analytics](../data-analytics)
 
 [← Back to Projects](../projects)
 
@@ -69,6 +69,6 @@ Enable rapid, reliable extraction of network state. The engine is built for spee
 
 ---
 
-[← Back to Network Automation](../network-automation)
+[← Back to Data Analytics](../data-analytics)
 
 [← Back to Projects](../projects)

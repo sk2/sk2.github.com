@@ -3,9 +3,9 @@ layout: default
 section: network-automation
 ---
 
-# Network Visualization Engine
+# Visualization Engine
 
-<span class="status-badge status-active">Active</span>
+<span class="status-badge status-active">Recently Updated</span>
 
 [← Back to Network Automation](../network-automation)
 
@@ -17,13 +17,34 @@ section: network-automation
 
 - [Concept](#concept)
 - [Architecture](#architecture)
-- [Metrics](#metrics)
 - [Tech Stack](#tech-stack)
-- [Key Features](#key-features)
+- [Current Milestone: v1.8 - Temporal & Interaction](#current-milestone-v18-temporal-interaction)
+- [Planning Workflow](#planning-workflow)
+- [Context](#context)
+- [Constraints](#constraints)
+- [Key Decisions](#key-decisions)
+- [Ecosystem Context](#ecosystem-context)
+- [Current Status](#current-status)
 
 ## Concept
 
 Network visualization often fails at scale because layout algorithms treat all nodes and edges equally, producing cluttered "hairball" diagrams. The **Network Visualization Engine** treats topologies as hierarchical structures and uses domain-aware layout constraints—including isometric views and edge bundling—to reflect engineering intent.
+
+A Rust-based network topology layout and visualization engine. Takes complex multi-layer network topologies (via petgraph) and renders them using advanced layout algorithms that reduce visual complexity while preserving structural clarity. Outputs static formats (SVG, PDF, PNG) for v1, with interactive browser embedding planned for future integration with other tooling.
+
+Transform network topologies into clear, information-dense visualizations using algorithms that minimize edge crossings, bundle related connections, and respect hierarchical/geographic structure — enabling understanding of networks that would otherwise be visual noise.
+
+A Rust-based network topology layout and visualization engine. Takes complex multi-layer network topologies (via petgraph) and renders them using advanced layout algorithms that reduce visual complexity while preserving structural clarity. Outputs static formats (SVG, PDF, PNG) for v1, with interactive browser embedding planned for future integration with other tooling.
+
+Transform network topologies into clear, information-dense visualizations using algorithms that minimize edge crossings, bundle related connections, and respect hierarchical/geographic structure — enabling understanding of networks that would otherwise be visual noise.
+
+A Rust-based network topology layout and visualization engine. Takes complex multi-layer network topologies (via petgraph) and renders them using advanced layout algorithms that reduce visual complexity while preserving structural clarity. Outputs static formats (SVG, PDF, PNG) for v1, with interactive browser embedding planned for future integration with other tooling.
+
+Transform network topologies into clear, information-dense visualizations using algorithms that minimize edge crossings, bundle related connections, and respect hierarchical/geographic structure — enabling understanding of networks that would otherwise be visual noise.
+
+A Rust-based network topology layout and visualization engine. Takes complex multi-layer network topologies (via petgraph) and renders them using advanced layout algorithms that reduce visual complexity while preserving structural clarity. Outputs static formats (SVG, PDF, PNG) for v1, with interactive browser embedding planned for future integration with other tooling.
+
+Transform network topologies into clear, information-dense visualizations using algorithms that minimize edge crossings, bundle related connections, and respect hierarchical/geographic structure — enabling understanding of networks that would otherwise be visual noise.
 
 ---
 
@@ -34,12 +55,6 @@ Network visualization often fails at scale because layout algorithms treat all n
 - Multi-layer support with isometric/starburst layouts
 - Edge refinement: force-directed edge bundling (FDEB), obstacle-aware routing
 - Customizable styling system with type-safe builder pattern
-
----
-
-## Metrics
-
-582 tests (554 unit + 28 integration), 17 example topologies, CLI tool
 
 ---
 
@@ -57,17 +72,193 @@ Rust, petgraph, fjadra (d3-force port), SVG/PDF/PNG rendering, WASM-ready
 
 ---
 
-## Key Features
+## Current Milestone: v1.8 - Temporal & Interaction
 
-- **Advanced Layout Algorithms**:
-  - Force-directed layout with configurable parameters
-  - Hierarchical layout for tree-like topologies
-  - Geographic layout for physical infrastructure
-  - Edge bundling to reduce visual clutter
-- **Multi-Layer Support**: Visualize L2, L3, and logical layers simultaneously
-- **Static Output Formats**: SVG, PDF, PNG (v1 focus)
-- **High-Quality Rendering**: Anti-aliased, publication-ready graphics
-- **Topology Awareness**: Uses `petgraph` for graph analysis
+**Goal:** Transform NetVis into a complete network visualization toolkit by adding temporal analysis, interactive filtering, live monitoring, and diagram annotation capabilities.
+
+**Target features:**
+- **Time-series topology evolution** - Scrub timeline to visualize network changes over time, highlight diffs between snapshots, export evolution animations, query "when did X appear"
+- **Interactive query/filtering** - Show/hide by device type, protocol layer, tag/group; path/connectivity queries without re-layout
+- **Live traffic flow animation** - CSS-animated pulses for NOC displays, presentations, simulation playback, and performance/utilization visualization
+- **Annotation & markup** - Text notes, visual callouts (circles/arrows/boxes), persistent storage, layered annotations with show/hide
+
+**Strategic vision:** v1.8 establishes the **interaction foundation** (temporal + filtering + annotation) that v1.9 will build upon with 3D visualization, tiled exports, and collaboration features.
+
+**Out of scope:**
+- Real-time data source integration (no live SNMP/NetFlow collection) - users provide traffic data
+- Multi-user collaborative editing - single-user annotation only (multi-user deferred to v1.9)
+- Web-based topology editor - visualization-focused, topology authoring stays CLI/code-based
+- Advanced 3D rendering - current isometric projection only (full 3D rotation/perspective deferred to v1.9)
+
+**Previous Milestones:**
+- v1.7 - Interactive Browser Editor 
+- v1.4 - Production Scale & Real-World Integration 
+- v1.3 - Embed Readiness & API Stability 
+- v1.2 - Visual Polish & Production Hardening 
+- v1.1 - Network Analysis & Operations 
+- v1.0.0 - Release Preparation
+
+---
+
+## # Validated
+
+All  features from original roadmap:
+- ✓ petgraph-based input API for topology definition
+- ✓ Isometric multi-layer layout (Physical → L2 → IP → OSPF → iBGP → eBGP stacking)
+- ✓ Edge bundling (hierarchical and force-directed bundling algorithms)
+- ✓ Bezier edge routing with crossing/collision reduction
+- ✓ Starburst/radial layout for containment groups (ASes, data centers, VLANs)
+- ✓ Force-directed positioning with weighted edges (peering-aware, using fjadra)
+- ✓ Radial tree layout for hierarchical structures
+- ✓ Multiple node type support (routers, switches, servers, broadcast domains)
+- ✓ Edge weight visualization (line thickness, style differentiation)
+- ✓ SVG output
+- ✓ PDF output
+- ✓ PNG output
+- ✓ Configuration API for layout selection and parameters
+- ✓ CLI tool with JSON/YAML topology loading
+
+v1.2 Visual Polish & Production Hardening (shipped 2026-02-09):
+- ✓ SVG filter infrastructure with signature-based deduplication — v1.2
+- ✓ Visual effects (drop shadows, glow, gradients, inner shadows) with semantic guardrails — v1.2
+- ✓ WCAG 3:1 non-text contrast enforcement via automated parameter tuning — v1.2
+- ✓ High-Contrast theme with AAA (21:1) contrast and redundant emphasis channels — v1.2
+- ✓ Label collision avoidance with perpendicular-FIRST edge placement strategy — v1.2
+- ✓ Export quality diagnostics for SVG/PNG/PDF material diffs — v1.2
+
+v1.3 Embed Readiness & API Stability (shipped 2026-02-16):
+- ✓ Deterministic rendering with golden fixture suite (55 SVG + 8 PNG + 8 PDF baselines) — v1.3
+- ✓ Structured diagnostics envelope (v1.0 schema) with JSON/YAML/NDJSON CLI output — v1.3
+- ✓ Multi-surface embedding API: contracts::v1 boundary, Rust facade, WASM envelope — v1.3
+- ✓ R*-tree spatial label placement with scored candidates and viewport-aware sizing — v1.3
+- ✓ CI governance: overlap gate, API drift detection, SemVer checks, versioned JSON Schemas — v1.3
+- ✓ Rust SVG quality analyzer with label distance metrics (zero Python dependency) — v1.3
+
+---
+
+## # Active
+
+v1.0.0 Release preparation:
+- [ ] CLI user guide documentation
+- [ ] Topology file format reference (JSON/YAML schema)
+- [ ] Configuration file reference (NetVisConfig schema)
+- [ ] Basic rustdoc on public APIs (module-level + core types)
+- [ ] GitHub Actions CI pipeline (test, clippy, fmt, docs)
+- [ ] Criterion benchmarks for layouts and rendering
+- [ ] Package metadata for crates.io
+- [ ] CHANGELOG.md for v1.0.0
+- [ ] Security audit and preparation
+
+---
+
+## # Out of Scope
+
+v1.0 feature development (complete):
+- Python bindings — deferred to v1.1+ after release
+- Browser/WASM embedding — deferred to v1.1+
+- Interactive features (click events, zoom, show/hide) — deferred to v1.1+
+- Topology discovery/parsing — users provide topology files
+- Real-time animation — static output only
+
+v1.0.0 release scope exclusions:
+- Comprehensive library API documentation — CLI-first, defer detailed rustdoc to v1.1
+- Examples for Rust library usage — have CLI examples, defer programmatic examples
+- Advanced benchmarking (GPU, parallelization) — basic criterion benchmarks only
+- Multi-platform CI testing — Linux/macOS only initially
+
+---
+
+## Planning Workflow
+
+**Inbox Processing:**
+Before starting milestone planning, review `inbox.md` in the project root for captured feature ideas and tasks. Categorize items as:
+- **Current milestone:** Add to active requirements if critical
+- **Future milestone:** Reference in out-of-scope or defer to next version
+- **Research needed:** Flag for investigation before commitment
+
+This ensures no ideas are lost and provides a backlog for future planning cycles.
+
+---
+
+## Context
+
+**Background:**
+This project builds on visualization concepts from academic work on Abstract Network Models, which represent networks across multiple protocol layers (Physical, Layer 2, IP Address, OSPF, iBGP, eBGP) with cross-layer associations. The goal is to make these visualizations programmatically accessible.
+
+**Related project:**
+Will eventually integrate with a "Topology Visualisation and Querying" tool (React-based) as an embedded visualization component with bidirectional communication (click events out, highlight commands in). This informs the need to design for browser embedding even though it's not v1 scope.
+
+**Inspiration sources:**
+- D3.js radial tree and hierarchical edge bundling
+- Datashader/edgebundle hammer bundling algorithm
+- Topology Zoo geographic network maps
+- Edward Tufte's principles on information density and visual clarity
+- fjadra (Rust port of d3-force) for force simulation
+
+**Architecture vision:**
+```
+[Topology Sources] → [Input/petgraph] → [Core Layout Engine] → [Output/Render]
+                                               ↓
+                                    Multiple layout algorithms
+                                    composable and configurable
+```
+
+---
+
+## Constraints
+
+- **Language**: Rust — required for performance of iterative layout algorithms (force-directed convergence, edge bundling optimization)
+- **Graph library**: petgraph — well-maintained, performant, good API for network topology representation
+- **Force simulation**: fjadra — Rust port of d3-force, WebAssembly-friendly, designed for interactive performance
+- **Design philosophy**: Tufte-inspired — maximize information density, minimize chartjunk, clarity over decoration
+
+---
+
+## Key Decisions
+
+| Decision | Rationale | Outcome |
+|----------|-----------|---------|
+| Rust for implementation | Iterative algorithms (force-directed, bundling) need performance; future WASM target | ✓ Good (v1.2: 51K LOC, WASM working) |
+| petgraph for graph structure | Mature, performant, good Rust ecosystem fit | ✓ Good |
+| fjadra for force simulation | d3-force semantics in Rust, WASM-ready, active development | ✓ Good |
+| Library-first architecture | Primary use case is programmatic generation, not GUI tool | ✓ Good |
+| Static output for v1 | Reduce scope; interactive features layered on later | ✓ Good |
+| Defer Python bindings | Get core right first; bindings are mechanical once API is stable | ✓ Good (shipped v1.1) |
+| SVG filters over raster post-processing (v1.2) | Maintain vector fidelity, theme-aware, resolution-independent | ✓ Good |
+| Tufte-first design philosophy (v1.2) | Effects must enhance information, not decorate | ✓ Good (semantic guardrails prevent chartjunk) |
+| Effect budget system >50 elements (v1.2) | Prevent performance cliff from excessive SVG filters | ✓ Good (auto-disable with warnings) |
+| Signature-based filter deduplication (v1.2) | Reduce SVG bloat, share identical filter definitions | ✓ Good (O(1) reuse lookup) |
+| Quantized EffectParams buckets (v1.2) | Enable WCAG tuning while preserving filter dedup | ✓ Good (0..=10 buckets) |
+| WCAG 3:1 automated enforcement (v1.2) | Accessibility compliance without manual tuning | ✓ Good (auto-adjust + numeric warnings) |
+| Text-anchor alignment for labels (v1.2) | Break geometric constraint (close + side + no truncation) | ✓ Good (10px spacing vs 150-233px) |
+| Perpendicular-FIRST offset strategy (v1.2) | Keep edge labels visually connected while avoiding strokes | ✓ Good (zero overlap warnings) |
+
+---
+
+## Ecosystem Context
+
+This project is part of a seven-tool network automation ecosystem. netvis provides topology visualization and rendering — the "visualize" stage of the pipeline.
+
+**Role:** Render network topologies as high-quality static output (SVG/PNG/PDF) or interactive visualizations (WASM). Consume topology data from any upstream tool.
+
+**Key integration points:**
+- Renders topologies from topogen (YAML), ank-pydantic (JSON), or netflowsim (GeoJSON with stats)
+- WASM target enables embedding directly in the workbench browser UI
+- Python bindings (PyO3) for programmatic rendering in Python workflows
+- Geographic layout mode consumes lat/lon coordinates from topogen's geo module
+- Contract-first versioned API (`contracts::v1`) for stable embedding
+
+**Architecture documents:**
+- [Ecosystem Architecture Overview](../../automationarch/README.md) — full ecosystem design, data flow, workflows
+- [Ecosystem Critical Review](../../automationarch/REVIEW.md) — maturity assessment, integration gaps, strategic priorities
+
+*Last updated: 2026-02-22 after v1.7 milestone initialization*
+
+---
+
+## Current Status
+
+2026-02-27 — Completed
 
 ---
 

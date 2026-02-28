@@ -3,7 +3,7 @@ layout: default
 section: network-automation
 ---
 
-# Configuration Engine (netC)
+# Network Configuration Framework
 
 <span class="status-badge status-active">Active</span>
 
@@ -17,11 +17,13 @@ section: network-automation
 
 A modern, type-safe configuration engine that serves as a successor and sibling to the original AutoNetkit research. It implements the same 'Whiteboard -> Plan -> Build' transformation model but utilizes a modern, schema-enforced pipeline to ensure configuration correctness across heterogeneous network fleets.
 
+Deterministic, auditable, CI/CD-friendly network compiler.
+
 ---
 
 ## Technical Depth
 
-Sitting alongside the core ANK toolchain, netC focuses on the high-fidelity transformation of network intent into vendor-specific device states. It provides the protocol-level intelligence needed to generate consistent OSPF, BGP, and MPLS configurations while maintaining strict type safety via a Pydantic-based model layer.
+Sitting alongside the core ANK toolchain, ank_netcfg focuses on the high-fidelity transformation of network intent into vendor-specific device states. It provides the protocol-level intelligence needed to generate consistent OSPF, BGP, and MPLS configurations while maintaining strict type safety via a Pydantic-based model layer.
 
 ---
 
@@ -30,6 +32,12 @@ Sitting alongside the core ANK toolchain, netC focuses on the high-fidelity tran
 | | |
 |---|---|
 | **Status** | Active |
+
+---
+
+## Current State
+
+complete. Foundation established for declarative transformation engine and vendor-neutral configuration generation.
 
 ---
 

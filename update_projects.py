@@ -50,7 +50,9 @@ ECOSYSTEM_MAP = {
     "autonetkit-foundation": "network-automation",
     "netflowsim": "network-automation",
     "netvis": "network-automation",
-    "netC": "network-automation",
+    "ank_netcfg": "network-automation",
+    "ank-netcfg": "network-automation",
+    "netassure": "network-automation",
     "signals": "signal-processing",
     "spectra": "signal-processing",
     "rtltcp": "signal-processing",
@@ -72,7 +74,9 @@ PROJECT_ALIASES = {
     "rtltcp": "Radio Streaming Server",
     "auroradata": "Aurora Advisor",
     "netflowsim": "Performance Simulator",
-    "netC": "Configuration Engine (netC)",
+    "ank_netcfg": "Network Configuration Framework",
+    "ank-netcfg": "Network Configuration Framework",
+    "netassure": "Network Analysis Engine",
     "netsim": "Network Simulator",
     "network-simulator": "Network Simulator",
     "compilation": "Network Compilation Engine",
@@ -93,6 +97,7 @@ PROJECT_ALIASES = {
 # sources refer to the pretty slug.
 CANONICAL_SLUG = {
     "network-simulator": "netsim",
+    "ank-netcfg": "ank-netcfg",  # Consolidate ank_netcfg variants to hyphenated form
 }
 
 # GOLDEN MASTER CONTENT: Used to ensure high-value technical detail is never lost.
@@ -149,9 +154,15 @@ PROJECT_CONTENT_OVERRIDES = {
         "Use Cases": "- **Capacity Planning**: Identify bottleneck links and compute-bound nodes before traffic growth impacts production.\n- **Resilience Testing**: Probabilistically analyze the impact of link or node failures on overall network throughput and latency.\n- **Routing Strategy Validation**: Compare the performance of different traffic engineering strategies (e.g., ECMP vs RSVP-TE) against realistic demand matrices.",
         "Technical Depth": "The engine uses M/M/1 and M/D/1 queuing models implemented in a highly parallelized Rust execution environment. It leverages the Rayon crate to distribute Monte Carlo iterations across all available CPU cores, enabling the analysis of massive traffic scenarios in seconds.",
     },
-    "netC": {
+    "ank-netcfg": {
         "Concept": "A modern, type-safe configuration engine that serves as a successor and sibling to the original AutoNetkit research. It implements the same 'Whiteboard -> Plan -> Build' transformation model but utilizes a modern, schema-enforced pipeline to ensure configuration correctness across heterogeneous network fleets.",
-        "Technical Depth": "Sitting alongside the core ANK toolchain, netC focuses on the high-fidelity transformation of network intent into vendor-specific device states. It provides the protocol-level intelligence needed to generate consistent OSPF, BGP, and MPLS configurations while maintaining strict type safety via a Pydantic-based model layer.",
+        "Technical Depth": "Sitting alongside the core ANK toolchain, ank_netcfg focuses on the high-fidelity transformation of network intent into vendor-specific device states. It provides the protocol-level intelligence needed to generate consistent OSPF, BGP, and MPLS configurations while maintaining strict type safety via a Pydantic-based model layer.",
+    },
+    "netassure": {
+        "Concept": "A multi-paradigm computational analysis tool for network topology verification, prediction, and optimization. It provides five complementary analysis approaches: formal verification (header space analysis, reachability), graph algorithms (centrality, community detection), failure cascade modeling (percolation theory, Monte Carlo), machine learning (GNN-based failure prediction), and optimization (topology tuning, design suggestions).\n\nUnlike single-purpose tools, netassure operates on three data sources simultaneously—static topology from autonetkit, simulation results from netsim/netflowsim, and runtime telemetry from production systems—providing comprehensive analysis across the entire network lifecycle.",
+        "Architecture": "**Hybrid Rust + Python design** optimized for performance and flexibility:\n- **Rust core** handles deterministic, performance-critical algorithms (formal verification via Z3, graph operations via petgraph, cascade modeling)\n- **Python layer** provides ML capabilities (PyTorch Geometric for GNN models), telemetry integration (Prometheus, BMP, NetFlow), and statistical optimization\n- **PyO3 bindings** enable seamless integration, allowing Python code to invoke high-performance Rust algorithms without serialization overhead",
+        "Key Capabilities": "- **Formal Verification**: Header Space Analysis, reachability checking, loop detection, equivalence verification using Z3\n- **Graph Analysis**: Centrality metrics, community detection, path diversity, network robustness quantification\n- **Failure Cascade Modeling**: Percolation theory simulations, Monte Carlo analysis (1000+ iterations), load redistribution scenarios\n- **Machine Learning**: GNN-based failure prediction, traffic forecasting, anomaly detection trained on simulation data\n- **Optimization**: Topology optimization suggestions, protocol parameter tuning, design constraint solving",
+        "Tech Stack": "Rust (petgraph, rustworkx, z3-rs, rayon, PyO3), Python (PyTorch, PyTorch Geometric, MLflow, Prometheus client, Polars)",
     },
     # NOTE: Keep each project key unique; later entries overwrite earlier ones.
 }
@@ -208,7 +219,8 @@ CATEGORY_ORDER = {
         "netsim",
         "autonetkit",
         "compilation",
-        "netC",
+        "ank-netcfg",
+        "netassure",
         "configparsing",
         "netvis",
         "ank-nte",

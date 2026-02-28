@@ -17,7 +17,6 @@ I believe that the most effective engineering solutions come from a combination 
 - **[Network Visualization:](/projects/netvis)** A layout engine designed to transform dense, multi-layer topologies into clear, structured diagrams. It employs advanced algorithms to handle complex graph data, making the structure of large networks intuitive and actionable.
 - **[Network Modeling Engine:](/projects/ank-pydantic)** A modern Python library for defining and querying network topologies, backed by a high-performance Rust core (NTE). It provides a type-safe API for managing network intent and generating configurations at scale.
 - **[Brownfield Ingestion & Analysis:](/projects/configparsing)** A framework for extracting structured intent from legacy network state. It bridges the gap between manual CLI configurations and modern automation by identifying protocol relationships and topology from unstructured data.
-- **[Topology Zoo:](https://topology-zoo.org/)** A curated database of real-world network topologies from ISPs and research networks, used in academic research for network analysis and algorithm validation. Cited by over 2,000 papers.
 
 ## Background
 

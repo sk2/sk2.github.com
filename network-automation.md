@@ -69,6 +69,7 @@ We build specialized engines that handle specific stages of the network lifecycl
 
 ## Specialized Tools
 
+- **[Network Analysis Engine:](/projects/netassure)** A multi-paradigm analysis tool providing formal verification, graph algorithms, failure cascade modeling, GNN-based prediction, and topology optimization. It operates on static topology, simulation results, and runtime telemetry for comprehensive network analysis.
 - **[Topology Core (NTE):](/projects/ank-nte)** The high-performance graph engine at the center of the ecosystem. It handles large-scale topology operations and queries with high precision and speed.
 - **[Topology Generator:](/projects/topogen)** A tool for quickly creating realistic network structures. It supports standard patterns for data centers, backbones, and random graph models for large-scale testing.
 - **[CLI Parser:](/projects/cliscrape)** A fast, ergonomic tool for extracting structured data from network device outputs, turning unstructured text into actionable information for analysis and validation.

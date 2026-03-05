@@ -18,6 +18,7 @@ section: network-automation
 
 ## Contents
 
+- [Interactive Playground (WASM Mock Demo)](#interactive-playground-wasm-mock-demo)
 - [Technical Reports](#technical-reports)
 - [Code Samples](#code-samples)
 - [Quick start](#quick-start)
@@ -36,6 +37,172 @@ section: network-automation
 - [Constraints](#constraints)
 - [Key Decisions](#key-decisions)
 - [Ecosystem Context](#ecosystem-context)
+
+## Interactive Playground (WASM Mock Demo)
+
+This interactive widget demonstrates the core generation algorithms, running locally in your browser. 
+
+<div class="playground-container" style="background: #1e1e2e; padding: 20px; border-radius: 8px; margin: 20px 0;">
+  <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+    <div style="flex: 1; min-width: 250px;">
+      <h4 style="margin-top: 0; color: #cdd6f4;">Generator Settings</h4>
+      <label style="color: #a6adc8; font-size: 14px; display: block; margin-bottom: 5px;">Algorithm</label>
+      <select id="topo-algo" style="width: ; padding: 8px; border-radius: 4px; border: 1px solid #45475a; background: #313244; color: #cdd6f4; margin-bottom: 15px;">
+        <option value="spine-leaf">Spine-Leaf Data Center</option>
+        <option value="barabasi">Barabási-Albert (Scale-Free)</option>
+        <option value="erdos">Erdős-Rényi (Random)</option>
+      </select>
+      
+      <label style="color: #a6adc8; font-size: 14px; display: block; margin-bottom: 5px;">Node Count: <span id="node-count-val">50</span></label>
+      <input type="range" id="topo-nodes" min="10" max="200" value="50" style="width: ; margin-bottom: 15px;">
+      
+      <button id="topo-gen-btn" style="background: #89b4fa; color: #11111b; border: none; padding: 10px 20px; border-radius: 4px; font-weight: 600; cursor: pointer; width: ;">Generate Topology</button>
+    </div>
+    
+    <div style="flex: 2; min-width: 300px; background: #11111b; border-radius: 6px; position: relative; height: 300px; overflow: hidden;">
+       <canvas id="topo-canvas" width="600" height="300" style="width: ; height: ;"></canvas>
+       <div id="topo-stats" style="position: absolute; bottom: 10px; left: 10px; color: #a6adc8; font-size: 12px; font-family: monospace;">
+         Nodes: 0 | Edges: 0 | Gen Time: 0ms
+       </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Simple force-directed graph simulation to mock the WASM output visually
+  document.addEventListener('DOMContentLoaded', () => {
+    const canvas = document.getElementById('topo-canvas');
+    const ctx = canvas.getContext('2d');
+    const btn = document.getElementById('topo-gen-btn');
+    const algoSelect = document.getElementById('topo-algo');
+    const nodesInput = document.getElementById('topo-nodes');
+    const nodesVal = document.getElementById('node-count-val');
+    const stats = document.getElementById('topo-stats');
+    
+    let nodes = [];
+    let edges = [];
+    let animationId;
+    
+    const resize = () => {
+      canvas.width = canvas.parentElement.clientWidth;
+      canvas.height = canvas.parentElement.clientHeight;
+    };
+    window.addEventListener('resize', resize);
+    resize();
+    
+    nodesInput.addEventListener('input', (e) => { nodesVal.textContent = e.target.value; });
+    
+    const generate = () => {
+      cancelAnimationFrame(animationId);
+      const numNodes = parseInt(nodesInput.value);
+      const algo = algoSelect.value;
+      const start = performance.now();
+      
+      nodes = Array.from({length: numNodes}, (_, i) => ({
+        id: i,
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: 0, vy: 0
+      }));
+      edges = [];
+      
+      if (algo === 'barabasi') {
+        for (let i = 1; i < numNodes; i++) {
+          const targets = Math.min(i, 2);
+          for (let j = 0; j < targets; j++) {
+            const target = Math.floor(Math.random() * i);
+            edges.push({source: i, target: target});
+          }
+        }
+      } else if (algo === 'spine-leaf') {
+        const spines = Math.max(2, Math.floor(numNodes * 0.2));
+        const leaves = numNodes - spines;
+        for (let i = 0; i < leaves; i++) {
+          for (let j = 0; j < spines; j++) {
+            edges.push({source: i, target: leaves + j});
+          }
+        }
+      } else {
+        const p = 4 / numNodes;
+        for (let i = 0; i < numNodes; i++) {
+          for (let j = i + 1; j < numNodes; j++) {
+            if (Math.random() < p) edges.push({source: i, target: j});
+          }
+        }
+      }
+      
+      const end = performance.now();
+      stats.textContent = `Nodes: ${nodes.length} | Edges: ${edges.length} | Gen Time: ${(end-start).toFixed(2)}ms`;
+      
+      simulate();
+    };
+    
+    const simulate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          let dx = nodes[j].x - nodes[i].x;
+          let dy = nodes[j].y - nodes[i].y;
+          let dist = Math.sqrt(dx*dx + dy*dy) || 1;
+          if (dist < 80) {
+            let force = 60 / (dist * dist);
+            nodes[i].vx -= (dx/dist) * force;
+            nodes[i].vy -= (dy/dist) * force;
+            nodes[j].vx += (dx/dist) * force;
+            nodes[j].vy += (dy/dist) * force;
+          }
+        }
+      }
+      
+      edges.forEach(e => {
+        let n1 = nodes[e.source];
+        let n2 = nodes[e.target];
+        let dx = n2.x - n1.x;
+        let dy = n2.y - n1.y;
+        let dist = Math.sqrt(dx*dx + dy*dy) || 1;
+        let force = (dist - 40) * 0.05;
+        n1.vx += (dx/dist) * force;
+        n1.vy += (dy/dist) * force;
+        n2.vx -= (dx/dist) * force;
+        n2.vy -= (dy/dist) * force;
+      });
+      
+      ctx.strokeStyle = 'rgba(166, 173, 200, 0.3)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      
+      nodes.forEach(n => {
+        n.vx += (canvas.width/2 - n.x) * 0.02;
+        n.vy += (canvas.height/2 - n.y) * 0.02;
+        n.x += n.vx * 0.5;
+        n.y += n.vy * 0.5;
+        n.vx *= 0.8;
+        n.vy *= 0.8;
+      });
+      
+      edges.forEach(e => {
+        ctx.moveTo(nodes[e.source].x, nodes[e.source].y);
+        ctx.lineTo(nodes[e.target].x, nodes[e.target].y);
+      });
+      ctx.stroke();
+      
+      ctx.fillStyle = '#f38ba8';
+      nodes.forEach(n => {
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, 3, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      
+      animationId = requestAnimationFrame(simulate);
+    };
+    
+    btn.addEventListener('click', generate);
+    setTimeout(generate, 500);
+  });
+</script>
+
+---
 
 ## Technical Reports
 
@@ -442,170 +609,6 @@ layers:
     underlay: physical
     strategy: shortest-path
 ```
-
-## Interactive Playground (WASM Mock Demo)
-
-This interactive widget demonstrates the core generation algorithms, running locally in your browser. 
-
-<div class="playground-container" style="background: #1e1e2e; padding: 20px; border-radius: 8px; margin: 20px 0;">
-  <div style="display: flex; gap: 20px; flex-wrap: wrap;">
-    <div style="flex: 1; min-width: 250px;">
-      <h4 style="margin-top: 0; color: #cdd6f4;">Generator Settings</h4>
-      <label style="color: #a6adc8; font-size: 14px; display: block; margin-bottom: 5px;">Algorithm</label>
-      <select id="topo-algo" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #45475a; background: #313244; color: #cdd6f4; margin-bottom: 15px;">
-        <option value="spine-leaf">Spine-Leaf Data Center</option>
-        <option value="barabasi">Barabási-Albert (Scale-Free)</option>
-        <option value="erdos">Erdős-Rényi (Random)</option>
-      </select>
-      
-      <label style="color: #a6adc8; font-size: 14px; display: block; margin-bottom: 5px;">Node Count: <span id="node-count-val">50</span></label>
-      <input type="range" id="topo-nodes" min="10" max="200" value="50" style="width: 100%; margin-bottom: 15px;">
-      
-      <button id="topo-gen-btn" style="background: #89b4fa; color: #11111b; border: none; padding: 10px 20px; border-radius: 4px; font-weight: 600; cursor: pointer; width: 100%;">Generate Topology</button>
-    </div>
-    
-    <div style="flex: 2; min-width: 300px; background: #11111b; border-radius: 6px; position: relative; height: 300px; overflow: hidden;">
-       <canvas id="topo-canvas" width="600" height="300" style="width: 100%; height: 100%;"></canvas>
-       <div id="topo-stats" style="position: absolute; bottom: 10px; left: 10px; color: #a6adc8; font-size: 12px; font-family: monospace;">
-         Nodes: 0 | Edges: 0 | Gen Time: 0ms
-       </div>
-    </div>
-  </div>
-</div>
-
-<script>
-  // Simple force-directed graph simulation to mock the WASM output visually
-  document.addEventListener('DOMContentLoaded', () => {
-    const canvas = document.getElementById('topo-canvas');
-    const ctx = canvas.getContext('2d');
-    const btn = document.getElementById('topo-gen-btn');
-    const algoSelect = document.getElementById('topo-algo');
-    const nodesInput = document.getElementById('topo-nodes');
-    const nodesVal = document.getElementById('node-count-val');
-    const stats = document.getElementById('topo-stats');
-    
-    let nodes = [];
-    let edges = [];
-    let animationId;
-    
-    const resize = () => {
-      canvas.width = canvas.parentElement.clientWidth;
-      canvas.height = canvas.parentElement.clientHeight;
-    };
-    window.addEventListener('resize', resize);
-    resize();
-    
-    nodesInput.addEventListener('input', (e) => { nodesVal.textContent = e.target.value; });
-    
-    const generate = () => {
-      cancelAnimationFrame(animationId);
-      const numNodes = parseInt(nodesInput.value);
-      const algo = algoSelect.value;
-      const start = performance.now();
-      
-      nodes = Array.from({length: numNodes}, (_, i) => ({
-        id: i,
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        vx: 0, vy: 0
-      }));
-      edges = [];
-      
-      if (algo === 'barabasi') {
-        for (let i = 1; i < numNodes; i++) {
-          const targets = Math.min(i, 2);
-          for (let j = 0; j < targets; j++) {
-            const target = Math.floor(Math.random() * i);
-            edges.push({source: i, target: target});
-          }
-        }
-      } else if (algo === 'spine-leaf') {
-        const spines = Math.max(2, Math.floor(numNodes * 0.2));
-        const leaves = numNodes - spines;
-        for (let i = 0; i < leaves; i++) {
-          for (let j = 0; j < spines; j++) {
-            edges.push({source: i, target: leaves + j});
-          }
-        }
-      } else {
-        const p = 4 / numNodes;
-        for (let i = 0; i < numNodes; i++) {
-          for (let j = i + 1; j < numNodes; j++) {
-            if (Math.random() < p) edges.push({source: i, target: j});
-          }
-        }
-      }
-      
-      const end = performance.now();
-      stats.textContent = `Nodes: ${nodes.length} | Edges: ${edges.length} | Gen Time: ${(end-start).toFixed(2)}ms`;
-      
-      simulate();
-    };
-    
-    const simulate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
-      for (let i = 0; i < nodes.length; i++) {
-        for (let j = i + 1; j < nodes.length; j++) {
-          let dx = nodes[j].x - nodes[i].x;
-          let dy = nodes[j].y - nodes[i].y;
-          let dist = Math.sqrt(dx*dx + dy*dy) || 1;
-          if (dist < 80) {
-            let force = 60 / (dist * dist);
-            nodes[i].vx -= (dx/dist) * force;
-            nodes[i].vy -= (dy/dist) * force;
-            nodes[j].vx += (dx/dist) * force;
-            nodes[j].vy += (dy/dist) * force;
-          }
-        }
-      }
-      
-      edges.forEach(e => {
-        let n1 = nodes[e.source];
-        let n2 = nodes[e.target];
-        let dx = n2.x - n1.x;
-        let dy = n2.y - n1.y;
-        let dist = Math.sqrt(dx*dx + dy*dy) || 1;
-        let force = (dist - 40) * 0.05;
-        n1.vx += (dx/dist) * force;
-        n1.vy += (dy/dist) * force;
-        n2.vx -= (dx/dist) * force;
-        n2.vy -= (dy/dist) * force;
-      });
-      
-      ctx.strokeStyle = 'rgba(166, 173, 200, 0.3)';
-      ctx.lineWidth = 1;
-      ctx.beginPath();
-      
-      nodes.forEach(n => {
-        n.vx += (canvas.width/2 - n.x) * 0.02;
-        n.vy += (canvas.height/2 - n.y) * 0.02;
-        n.x += n.vx * 0.5;
-        n.y += n.vy * 0.5;
-        n.vx *= 0.8;
-        n.vy *= 0.8;
-      });
-      
-      edges.forEach(e => {
-        ctx.moveTo(nodes[e.source].x, nodes[e.source].y);
-        ctx.lineTo(nodes[e.target].x, nodes[e.target].y);
-      });
-      ctx.stroke();
-      
-      ctx.fillStyle = '#f38ba8';
-      nodes.forEach(n => {
-        ctx.beginPath();
-        ctx.arc(n.x, n.y, 3, 0, Math.PI * 2);
-        ctx.fill();
-      });
-      
-      animationId = requestAnimationFrame(simulate);
-    };
-    
-    btn.addEventListener('click', generate);
-    setTimeout(generate, 500);
-  });
-</script>
 
 ---
 

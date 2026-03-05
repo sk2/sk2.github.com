@@ -131,12 +131,12 @@ CATEGORY_MAP = {
 }
 
 DETAILED_SECTIONS = [
-    "Concept", "Technical Reports", "Code Samples", "Visuals", "Usage", 
+    "Concept", "Interactive Playground (WASM Mock Demo)", "Technical Reports", "Code Samples", "Visuals", "Usage", 
     "Architecture", "Features", "Current Status", "Roadmap", "Quick Facts",
 ]
 
 ALWAYS_UPDATE_SECTIONS = {"Technical Reports", "Code Samples", "Visuals", "Current Status", "Roadmap"}
-STABLE_SECTIONS = {"Concept", "Architecture", "Features", "Quick Facts", "Usage"}
+STABLE_SECTIONS = {"Concept", "Interactive Playground (WASM Mock Demo)", "Architecture", "Features", "Quick Facts", "Usage"}
 
 FM_SECTIONS = {"network": "network-automation", "sdr": "signal-processing", "agents": "agentic-systems", "health": "agentic-systems", "data": "data-analytics"}
 

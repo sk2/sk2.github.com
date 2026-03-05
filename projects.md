@@ -14,7 +14,7 @@ Focused on network engineering, autonomous systems, and signal processing.
 
 <ul class="recent-activity-list">
 <li><strong>2026-03-05</strong>: <a href="projects/configparsing">Brownfield Ingestion & Analysis</a> — <em>Completed 07-01-PLAN.md</em></li>
-<li><strong>2026-03-05</strong>: <a href="projects/netassure">Network Analysis Engine</a> — <em>Completed 02-03-PLAN.md</em></li>
+<li><strong>2026-03-05</strong>: <a href="projects/netassure">Network Analysis Engine</a> — <em>Completed 02-02-PLAN.md</em></li>
 <li><strong>2026-03-05</strong>: <a href="projects/netflowsim">Performance Simulator</a> — <em>Archived Criterion 50k/75k/100k reports;  near-complete</em></li>
 <li><strong>2026-03-05</strong>: <a href="projects/netsim">Network Simulator</a> — <em>Code hygiene + test stabilization + clippy cleanup PR merged</em></li>
 <li><strong>2026-03-05</strong>: <a href="projects/orchestrator">Orchestrator (Device Interaction Runner)</a> — <em>2026-03-05 - Completed 02-05-PLAN.md</em></li>

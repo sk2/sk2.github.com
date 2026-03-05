@@ -104,6 +104,15 @@ PROJECT_CONTENT_OVERRIDES = {
         "Concept": "Deterministic tick-based network protocol simulator validating configurations before production deployment. It provides protocol-level fidelity with same-topology-same-results guarantees, allowing engineers to verify control-plane behavior without the overhead of full VM emulation.\n\nUnlike packet-level simulators that focus on bit-level accuracy, this engine focuses on **protocol convergence and state validation**. It mirrors the behavior of real router operating systems, including the separation of RIB and FIB, allowing for the empirical testing of complex routing policies and failure scenarios.",
         "Visuals": "### Basic Validation\n![Simulator Demo](/images/netsim-basic-demo.gif)\n\n### Interactive Daemon Mode\n![Daemon Demo](/images/netsim-daemon-demo.gif)\n",
     },
+    "netvis": {
+        "Visuals": "### Network Visualisation Examples\n\n![Geographic WAN](/images/geographic_wan.png)\n\n![Bundled Mesh](/images/bundled_mesh.png)\n\n![Hierarchical Datacenter](/images/hierarchical_datacenter.png)\n\n![Labels Dense](/images/labels_dense.png)\n\n![Force Directed Basic](/images/force_directed_basic.png)\n"
+    },
+    "ank-netcfg": {
+        "Usage": "### DSL Transformation Example\n\n```rust\n// Define a transformation rule in the netcfg DSL\nlet nxos_transform = TransformationSpec {\n    name: \"nxos_lowering\".to_string(),\n    when: Some(\"device_os == 'nxos'\".to_string()),\n    rules: vec![\n        RewriteRule {\n            match_expr: \"kind == 'interface' && name.startsWith('Ethernet')\".to_string(),\n            apply: HashMap::from([\n                (\"name\".to_string(), \"name + '/1'\".to_string()),\n                (\"mtu\".to_string(), \"9216\".to_string()), // Force Jumbo frames\n            ]),\n        }\n    ],\n};\n```"
+    },
+    "topogen": {
+        "Usage": "### Topology DSL Example\n\n```yaml\n# Example: Multi-layer POP underlay with mesh overlay\nname: multi-layer-pop-backbone\ntype: multi-layer\n\nlayers:\n  - name: physical\n    type: pop\n    count: 5\n    redundancy: n+1\n\n  - name: backbone\n    type: mesh\n    node_count: 4\n    underlay: physical\n    strategy: shortest-path\n```"
+    }
 }
 
 CATEGORY_MAP = {
@@ -125,6 +134,8 @@ DETAILED_SECTIONS = [
 
 ALWAYS_UPDATE_SECTIONS = {"Technical Reports", "Code Samples", "Visuals", "Current Status", "Roadmap"}
 STABLE_SECTIONS = {"Concept", "Architecture", "Features", "Quick Facts", "Usage"}
+
+FM_SECTIONS = {"network": "network-automation", "sdr": "signal-processing", "agents": "agentic-systems", "health": "agentic-systems", "data": "data-analytics"}
 
 # Generate global slug list for cross-linking
 ALL_SLUGS = set(list(CANONICAL_SLUG.values()) + list(CANONICAL_SLUG.keys()) + list(ECOSYSTEM_MAP.keys()))
@@ -182,8 +193,6 @@ def generate_toc(content: str) -> str:
     links = [f"- [{h}](#{re.sub(r'-+', '-', re.sub(r'[^a-z0-9-]', '', h.lower().replace(' ', '-')))})" for h in headers]
     return "## Contents\n\n" + "\n".join(links) + "\n\n"
 
-FM_SECTIONS = {"network": "network-automation", "sdr": "signal-processing", "agents": "agentic-systems", "health": "agentic-systems", "data": "data-analytics"}
-
 def get_back_links(category: str) -> str:
     links = []
     if category in FM_SECTIONS:
@@ -202,7 +211,7 @@ def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
     name_match = re.search(r"^#\s+(.+)$", content, re.MULTILINE)
     project_name = name_match.group(1).strip() if name_match else project_path.name
     slug = project_path.name.lower().replace("_", "-").replace(" ", "-")
-    slug_mappings = {"multi-agent-assistant": "multi-agent", "passive": "rf-signal-analysis", "wifi-radar": "wifi-signal-analysis", "ank_pydantic": "ank-pydantic", "ank_nte": "ank-nte", "ank_workbench": "ank-workbench", "network-simulator": "netsim"}
+    slug_mappings = {"multi-agent-assistant": "multi-agent", "passive": "rf-signal-analysis", "wifi-radar": "wifi-signal-analysis", "ank_pydantic": "ank-pydantic", "ank_nte": "ank-nte", "ank_workbench": "ank-workbench", "network-simulator": "netsim", "ank_netcfg": "ank-netcfg"}
     slug = slug_mappings.get(slug, slug)
     slug = CANONICAL_SLUG.get(slug, slug)
     if slug in PROJECT_ALIASES: project_name = PROJECT_ALIASES[slug]
@@ -221,7 +230,6 @@ def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
     elif any(x in s for x in ["netflow", "polars", "tileserver", "matrix-time-series", "weather", "omnifocus-db", "cliscrape", "nascleanup", "devmon"]): cat = "data"
     elif any(x in s for x in ["netvis", "ank", "topogen", "netsim", "autonetkit", "network", "configparsing", "nte", "orchestrator", "automationarch", "netflowsim"]): cat = "network"
     
-    # Extract Stack from constraints or environment
     stack = []
     if (project_path / "Cargo.toml").exists(): stack.append("Rust")
     if (project_path / "pyproject.toml").exists() or (project_path / "requirements.txt").exists(): stack.append("Python")
@@ -249,13 +257,17 @@ def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
                 break
                 
     code_samples = []
-    for search_dir in [project_path / "examples", project_path / "tests" / "python"]:
+    # Search in examples/ and tests/python/ (for Query API)
+    search_dirs = [project_path / "examples", project_path / "tests" / "python", project_path / "netcfg-core" / "tests"]
+    for search_dir in search_dirs:
         if search_dir.exists():
-            for f in sorted(search_dir.glob("*")):
-                if f.is_file() and f.suffix in [".yaml", ".py", ".rs", ".md"] and f.stat().st_size < 10000:
+            for f in sorted(search_dir.rglob("*")):
+                if f.is_file() and f.suffix in [".yaml", ".py", ".rs", ".md"] and f.stat().st_size < 15000:
                     lang = f.suffix[1:] if f.suffix != ".md" else "markdown"
+                    if lang == "rs": lang = "rust"
+                    if lang == "py": lang = "python"
                     code_samples.append(f"### {f.name}\n\n```{lang}\n{f.read_text()}\n```")
-    if code_samples: sections["Code Samples"] = "\n\n".join(code_samples[:8])
+    if code_samples: sections["Code Samples"] = "\n\n".join(code_samples[:10])
     
     current_status, last_activity_date = "", None
     state_md = planning_dir / "STATE.md"
@@ -293,9 +305,7 @@ def generate_detailed_page(project: ProjectInfo) -> str:
         
     eco_slug = ECOSYSTEM_MAP.get(project.slug, "projects")
     fm = f"---\nlayout: default\nsection: {eco_slug}\n---\n\n"
-    
     stack_html = " ".join([f'<span class="stack-badge">{s}</span>' for s in project.stack])
-    
     header = f"# {project.name}\n\n<div class=\"badges-row\">\n  <span class=\"status-badge status-active\">{project.status_detail}</span>\n  {stack_html}\n</div>\n\n{get_back_links(project.category)}\n\n---\n\n"
     
     if project.assets:
@@ -309,10 +319,8 @@ def generate_detailed_page(project: ProjectInfo) -> str:
             img_lines.append(f"![{asset.stem}](/images/{asset.name})")
         
         if "Visuals" not in PROJECT_CONTENT_OVERRIDES.get(project.slug, {}):
-            if img_lines:
-                project.sections["Visuals"] = "\n\n".join(img_lines[:5])
-            elif "Visuals" in project.sections:
-                del project.sections["Visuals"]
+            if img_lines: project.sections["Visuals"] = "\n\n".join(img_lines[:8])
+            elif "Visuals" in project.sections: del project.sections["Visuals"]
     
     if project.docs:
         doc_lines = []
@@ -333,7 +341,6 @@ def generate_detailed_page(project: ProjectInfo) -> str:
                 project.sections[sec] = existing_sections[sec]
 
     body_list, processed_sections = [], set()
-    
     if project.hero_asset:
         body_list.append(f"![Hero Image](/images/{project.hero_asset.name})\n")
         
@@ -360,9 +367,7 @@ def generate_detailed_page(project: ProjectInfo) -> str:
 
 def generate_projects_index(projects: list[ProjectInfo]) -> str:
     lines = ["---", "layout: default", "---", "", "# Projects", "", "Focused on network engineering, autonomous systems, and signal processing.", "", "---", ""]
-    
     lines.append('<div class="search-container"><input type="text" id="projectSearch" placeholder="Search projects, stack, or descriptions..." onkeyup="filterProjects()"></div>\n')
-    
     valid_dates = [p for p in projects if p.last_activity_date]
     recent = sorted(valid_dates, key=lambda x: x.last_activity_date, reverse=True)[:5]
     if recent:
@@ -372,11 +377,9 @@ def generate_projects_index(projects: list[ProjectInfo]) -> str:
             status_text = clean_text(p.current_status).split("—")[-1].strip()
             lines.append(f'<li><strong>{p.last_activity_date.strftime("%Y-%m-%d")}</strong>: <a href="projects/{p.slug}">{p.name}</a> — <em>{status_text}</em></li>')
         lines.append('</ul>\n\n---\n')
-
     sorted_projs = sorted(projects, key=lambda p: (list(CATEGORY_MAP.keys()).index(p.category), p.name))
     categorized = {k: [] for k in CATEGORY_MAP.keys()}
     for p in sorted_projs: categorized[p.category].append(p)
-    
     for cat_key, (title, desc, link) in CATEGORY_MAP.items():
         projs = categorized[cat_key]
         if not projs: continue
@@ -388,19 +391,14 @@ def generate_projects_index(projects: list[ProjectInfo]) -> str:
                 if k in p.sections:
                     summary = " ".join(re.split(r"(?<=[.!?])\s+", clean_text(re.sub(r"!\[.*?\]\(.*?\)", "", p.sections[k])))[:3])
                     if summary: break
-            
             stack_html = "".join([f'<span class="stack-badge">{s}</span>' for s in p.stack])
-            
             lines.append(f'<div class="project-card" data-search="{p.name.lower()} {summary.lower()} {" ".join(p.stack).lower()} {p.slug.lower()}">')
             lines.append(f'  <h3 style="margin-top:0; margin-bottom: 0.5rem;"><a href="projects/{p.slug}">{p.name}</a></h3>')
             lines.append(f'  <div class="badges-row" style="margin-bottom: 0.8rem;"><span class="status-badge status-active">{p.status_detail}</span> {stack_html}</div>')
-            if p.hero_asset:
-                lines.append(f'  <img src="../images/{p.hero_asset.name}" class="project-thumbnail" alt="{p.name} diagram" />')
+            if p.hero_asset: lines.append(f'  <img src="../images/{p.hero_asset.name}" class="project-thumbnail" alt="{p.name} diagram" />')
             lines.append(f'  <p style="font-size: 0.9em; margin-top: 0;">{summary}</p>')
-            lines.append('</div>')
-            lines.append("")
+            lines.append('</div>\n')
         lines.append('</div>\n')
-
     lines.append("""
 <style>
 .project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
@@ -416,7 +414,6 @@ def generate_projects_index(projects: list[ProjectInfo]) -> str:
 .recent-activity-list li { margin-bottom: 0.5rem; }
 section { margin-bottom: 2em; }
 </style>
-
 <script>
 function filterProjects() {
     var input, filter, cards, card, i, txtValue;
@@ -426,11 +423,7 @@ function filterProjects() {
     for (i = 0; i < cards.length; i++) {
         card = cards[i];
         txtValue = card.getAttribute('data-search');
-        if (txtValue.indexOf(filter) > -1) {
-            card.style.display = "";
-        } else {
-            card.style.display = "none";
-        }
+        if (txtValue.indexOf(filter) > -1) { card.style.display = ""; } else { card.style.display = "none"; }
     }
 }
 </script>

@@ -20,6 +20,21 @@ section: network-automation
 
 - [Technical Reports](#technical-reports)
 - [Code Samples](#code-samples)
+- [LLDP/CDP discovery JSON](#lldpcdp-discovery-json)
+- [NetBox](#netbox)
+- [Notes](#notes)
+- [v1.2 Effects Showcase](#v12-effects-showcase)
+- [Template Example Outputs](#template-example-outputs)
+- [Files](#files)
+- [How to Regenerate](#how-to-regenerate)
+- [Notes](#notes)
+- [Summary](#summary)
+- [Issues Requiring Attention](#issues-requiring-attention)
+- [How To Regenerate](#how-to-regenerate)
+- [Visual Inspection Checklist](#visual-inspection-checklist)
+- [Expected Passing Characteristics](#expected-passing-characteristics)
+- [Source](#source)
+- [Metadata](#metadata)
 - [Visuals](#visuals)
 - [What This Is](#what-this-is)
 - [Core Value](#core-value)
@@ -47,9 +62,283 @@ section: network-automation
 
 ## Code Samples
 
+### README.md
+
+```markdown
+# Adapter Examples
+
+This directory contains runnable scripts that demonstrate the end-to-end workflow:
+
+external data -> `netvis import` -> topology YAML -> `netvis --input` -> SVG
+
+All outputs are written to `target/` (gitignored by default).
+
+## LLDP/CDP discovery JSON
+
+Script: `examples/adapters/lldp-import.sh`
+
+Runs an LLDP import from a JSON file and renders an SVG.
+
+Run (from repo root):
+
+```bash
+bash examples/adapters/lldp-import.sh
+```
+
+Optional: pass a custom discovery JSON path:
+
+```bash
+bash examples/adapters/lldp-import.sh /path/to/discovery.json
+```
+
+Expected outputs:
+
+- `target/lldp-imported.yaml`
+- `target/lldp-imported.svg`
+
+Sample input: `examples/adapters/sample-lldp.json`
+
+## NetBox
+
+Script: `examples/adapters/netbox-import.sh`
+
+Requires a NetBox API token via env var (the script never prints it).
+
+Environment variables:
+
+- `NETBOX_TOKEN` (required)
+- `NETBOX_URL` (recommended)
+
+Run:
+
+```bash
+export NETBOX_URL=https://netbox.example.com
+export NETBOX_TOKEN=...   # read-only token
+bash examples/adapters/netbox-import.sh
+```
+
+You can also pass the NetBox URL as the first argument to override `NETBOX_URL`:
+
+```bash
+bash examples/adapters/netbox-import.sh https://netbox.example.com
+```
+
+Expected outputs:
+
+- `target/netbox-imported.yaml`
+- `target/netbox-imported.svg`
+
+## Notes
+
+- These scripts run `cargo run --features cli --bin netvis ...`. The first run may take a while to compile.
+- If you have a `netvis` binary on your PATH already, you can run the equivalent `netvis import ...` commands directly.
+
+```
+
+### pdf-export.yaml
+
+```yaml
+# PDF Export Configuration for Documents and Presentations
+#
+# This YAML shows recommended PDF export settings for different use cases.
+# Use with the Rust API: PdfOptions::default().page_size(...).title(...)
+#
+# For CLI usage, the output file extension (.pdf) triggers PDF export:
+#   netvis --input topology.yaml --output diagram.pdf
+#
+# The settings below document PdfOptions API fields.
+
+# Document Metadata (embedded in PDF properties)
+metadata:
+  title: "Network Topology Diagram"
+  author: "NetVis"
+  subject: "Infrastructure Documentation"
+  keywords: "network, topology, diagram"
+
+# Page Settings
+page_size: content_size   # Options: content_size (default), a4, letter, custom
+# For custom size:
+# page_size:
+#   custom:
+#     width_mm: 297
+#     height_mm: 210
+
+# Margins (in millimeters)
+margins_mm: 5.0
+
+# DPI for coordinate mapping (default: 72.0)
+dpi: 72.0
+
+# Recommended render settings for PDF output
+render:
+  theme: print            # Print theme has high contrast for paper
+  width: 1200
+  height: 900
+
+# Use Cases:
+#
+# 1. Technical Documentation:
+#    - page_size: a4 or letter
+#    - margins_mm: 10-15 for binding
+#    - theme: print (black lines on white)
+#
+# 2. Presentations:
+#    - page_size: content_size (fits slide exactly)
+#    - theme: light or network
+#    - Larger width (1600+) for detail
+#
+# 3. Posters/Large Format:
+#    - page_size: custom (A1, A0, etc.)
+#    - margins_mm: 20+
+#    - High DPI (150-300) for quality
+
+```
+
+### png-print.yaml
+
+```yaml
+# PNG Export Configuration for High-Quality Printing
+#
+# This YAML shows recommended PNG settings for print output.
+# Optimized for physical documents, posters, and professional printing.
+#
+# Use with the Rust API: PngOptions::default().dpi(300).scale(2.0)...
+#
+# CLI export example:
+#   netvis --input topology.yaml --output diagram.png --width 2550 --height 3300
+#
+# The settings below document PngOptions API fields.
+
+# High Resolution for Print
+dpi: 300                  # Print standard (300 DPI minimum)
+scale: 2.0                # 2x rasterization for crisp edges
+
+# Dimensions (pixels at 300 DPI)
+# Letter size: 8.5" x 11" at 300 DPI = 2550 x 3300 pixels
+# A4 size: 210mm x 297mm at 300 DPI = 2480 x 3508 pixels
+width: 2550
+height: 3300
+
+# Quality Settings
+compression: high         # Best compression for archival quality
+                          # Larger file but maximum quality
+
+# Background for Paper
+background: white         # White for standard paper printing
+                          # Use theme background color for specialty paper
+
+# Antialiasing
+antialias: true           # Smooth edges are critical for print
+
+# Recommended render settings for print
+render:
+  theme: print            # High contrast, optimized for paper
+  width: 1200             # Scene width (scaled to print dimensions)
+  height: 900
+  labels: label
+
+# Common Print Sizes at 300 DPI:
+#
+# Letter (8.5" x 11"):
+#   width: 2550, height: 3300 (portrait)
+#   width: 3300, height: 2550 (landscape)
+#
+# A4 (210mm x 297mm):
+#   width: 2480, height: 3508 (portrait)
+#   width: 3508, height: 2480 (landscape)
+#
+# Tabloid (11" x 17"):
+#   width: 3300, height: 5100
+#
+# A3 (297mm x 420mm):
+#   width: 3508, height: 4961
+#
+# Use Cases:
+#
+# 1. Technical Document Insert:
+#    - width: 2550, height: 1800 (half page)
+#    - dpi: 300
+#    - theme: print
+#
+# 2. Wall Poster (A1/A0):
+#    - width: 7016+ (A1 at 300 DPI)
+#    - dpi: 150-200 (can reduce for very large)
+#    - scale: 3.0 or higher
+#
+# 3. Presentation Handout:
+#    - dpi: 150 (sufficient for handouts)
+#    - compression: balanced
+
+```
+
+### png-web.yaml
+
+```yaml
+# PNG Export Configuration for Web Display
+#
+# This YAML shows recommended PNG settings for web/screen use.
+# Optimized for dashboards, documentation sites, and embedding.
+#
+# Use with the Rust API: PngOptions::default().dpi(72).compression(...)
+#
+# CLI export is automatic when output ends in .png:
+#   netvis --input topology.yaml --output diagram.png --width 1200 --height 800
+#
+# The settings below document PngOptions API fields.
+
+# Resolution
+dpi: 72                   # Web standard (72 or 96 DPI)
+scale: 1.0                # 1x for web, 2x for retina
+
+# Dimensions (in pixels)
+width: 1200
+height: 800
+
+# Compression
+compression: fast         # Options: fast, balanced (default), high
+                          # 'fast' is fine for web - smaller file, quick load
+
+# Background
+background: white         # Options: white, transparent, or hex color (#rrggbb)
+                          # Use 'transparent' for overlays on colored backgrounds
+
+# Antialiasing
+antialias: true           # Always true for smooth edges on screen
+
+# Recommended render settings for web PNG
+render:
+  theme: dark             # Dark theme common for dashboards/NOC displays
+  width: 1200
+  height: 800
+  labels: label
+
+# Use Cases:
+#
+# 1. Dashboard/NOC Display:
+#    - theme: dark
+#    - width: 1920, height: 1080 (full HD)
+#    - scale: 1.0
+#
+# 2. Documentation Site:
+#    - theme: light
+#    - width: 800-1200
+#    - compression: fast
+#    - background: white
+#
+# 3. Retina/HiDPI Display:
+#    - scale: 2.0 (doubles pixel count)
+#    - Keeps file sizes reasonable with good quality
+#
+# 4. Email Attachment:
+#    - width: 800 (smaller for email clients)
+#    - compression: high
+#    - background: white
+
+```
+
 ### export_formats.rs
 
-```rs
+```rust
 //! End-to-end export formats example.
 //!
 //! Demonstrates the complete workflow from graph creation through layout,
@@ -186,217 +475,223 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ```
 
-### profile_5000.rs
+### production-view.yaml
 
-```rs
-//! Release-mode profiling harness for the 5000-node acceptance pipeline.
-//!
-//! This example mirrors the end-to-end acceptance benchmark shape:
-//! - Deterministic spine-leaf topology with ~5000 nodes
-//! - Force-directed layout
-//! - SVG render with auto LOD
-//!
-//! Prints a single parseable timing line for external capture:
-//! ```text
-//! PROFILE_5000 layout_ms=1234 render_ms=567 total_ms=1801
-//! ```
-//!
-//! Usage:
-//! ```bash
-//! cargo run --release --example profile_5000
-//! ```
-
-use std::time::Instant;
-
-use netvis::traits::{Layout, Renderer};
-use netvis::{EdgeData, ForceDirectedLayout, NetVisGraph, NodeData, SvgRenderer};
-
-/// Create a deterministic spine-leaf topology with approximately `n` nodes.
-///
-/// This is identical to the topology generator used in `benches/end_to_end.rs`
-/// to ensure profiling reflects the acceptance benchmark workload.
-fn create_spine_leaf(n: usize) -> NetVisGraph {
-    let mut graph = NetVisGraph::with_capacity(n, n * 2);
-    let mut ids = Vec::with_capacity(n);
-
-    // Create spine layer (roughly sqrt(n)/5 spines, clamped).
-    let spine_count = ((n as f64).sqrt() / 5.0).max(2.0) as usize;
-    for i in 0..spine_count {
-        ids.push(graph.add_node(NodeData::new(format!("spine-{}", i))));
-    }
-
-    // Create leaf layer and connect to spines.
-    let leaf_count = spine_count * 5;
-    for i in 0..leaf_count {
-        let leaf_id = graph.add_node(NodeData::new(format!("leaf-{}", i)));
-        ids.push(leaf_id);
-
-        // Connect to primary spine.
-        let spine_idx = i % spine_count;
-        graph.add_edge(ids[spine_idx], leaf_id, EdgeData::default());
-
-        // Connect to adjacent spine for redundancy.
-        let alt_spine = (i + 1) % spine_count;
-        graph.add_edge(ids[alt_spine], leaf_id, EdgeData::default());
-    }
-
-    // Fill remaining nodes as servers.
-    let server_start = ids.len();
-    let remaining = n.saturating_sub(server_start);
-    for i in 0..remaining {
-        let server_id = graph.add_node(NodeData::new(format!("srv-{}", i)));
-        ids.push(server_id);
-
-        // Connect to a leaf.
-        let leaf_idx = spine_count + (i % leaf_count);
-        graph.add_edge(ids[leaf_idx], server_id, EdgeData::default());
-    }
-
-    graph
-}
-
-fn main() {
-    // Enable deterministic mode for repeatability.
-    let _det = netvis::DeterministicMode::enable();
-
-    let total_start = Instant::now();
-
-    // Build the 5000-node spine-leaf topology.
-    let graph = create_spine_leaf(5000);
-
-    // Layout phase.
-    let layout_start = Instant::now();
-    let layout = ForceDirectedLayout::new();
-    let scene = layout.layout(&graph).expect("layout failed");
-    let layout_ms = layout_start.elapsed().as_millis() as u64;
-
-    // Render phase with auto LOD (matching acceptance benchmark).
-    let render_start = Instant::now();
-    let renderer = SvgRenderer::default().with_auto_lod(scene.nodes.len());
-    let _svg = renderer
-        .render(&scene, 1920.0, 1080.0)
-        .expect("render failed");
-    let render_ms = render_start.elapsed().as_millis() as u64;
-
-    let total_ms = total_start.elapsed().as_millis() as u64;
-
-    // Print the parseable timing line.
-    println!(
-        "PROFILE_5000 layout_ms={} render_ms={} total_ms={}",
-        layout_ms, render_ms, total_ms
-    );
-}
+```yaml
+name: "Production Infrastructure"
+show:
+  tags: [production]
+hide:
+  types: [hub]
+  tags: [decommissioned]
 
 ```
 
-### quickstart.rs
+### routers-only.yaml
 
-```rs
-use std::path::Path;
-
-use netvis::{EdgeData, ForceDirectedLayout, Layout, NetVisGraph, NodeData, Renderer, SvgRenderer};
-
-fn main() -> Result<(), Box<dyn std::error::Error>> {
-    // Tiny sample graph (6 nodes, 7 edges).
-    let mut graph = NetVisGraph::new();
-
-    let r1 = graph.add_node(NodeData::new("r1").node_type("router"));
-    let r2 = graph.add_node(NodeData::new("r2").node_type("router"));
-    let s1 = graph.add_node(NodeData::new("s1").node_type("switch"));
-    let s2 = graph.add_node(NodeData::new("s2").node_type("switch"));
-    let h1 = graph.add_node(NodeData::new("h1").node_type("host"));
-    let h2 = graph.add_node(NodeData::new("h2").node_type("host"));
-
-    graph.add_edge(r1, s1, EdgeData::new(1.0));
-    graph.add_edge(r1, s2, EdgeData::new(1.0));
-    graph.add_edge(r2, s1, EdgeData::new(1.0));
-    graph.add_edge(r2, s2, EdgeData::new(1.0));
-    graph.add_edge(s1, h1, EdgeData::new(1.0));
-    graph.add_edge(s2, h2, EdgeData::new(1.0));
-    graph.add_edge(s1, s2, EdgeData::new(0.5));
-
-    // Deterministic seed keeps output stable across runs.
-    let layout = ForceDirectedLayout::new().seed(42);
-    let scene = layout.layout(&graph)?;
-
-    if scene.is_empty() {
-        println!("scene: empty (nothing to render)");
-        return Ok(());
-    }
-
-    std::fs::create_dir_all("target")?;
-    let out_path = Path::new("target/quickstart.svg");
-    SvgRenderer::default().render_to_file(&scene, 800.0, 600.0, out_path)?;
-    println!("svg: {}", out_path.display());
-
-    println!("nodes: {}", graph.node_count());
-    println!("edges: {}", graph.edge_count());
-
-    let b = scene.bounds;
-    println!(
-        "bounds: min=({:.2},{:.2}) max=({:.2},{:.2})",
-        b.min.x, b.min.y, b.max.x, b.max.y
-    );
-
-    Ok(())
-}
+```yaml
+show:
+  types: [router, firewall]
 
 ```
 
-### research_intersect.rs
+### README.md
 
-```rs
-use kurbo::{Line, Point};
-use std::time::Instant;
+```markdown
+# NetVis Example Gallery
 
-fn segment_intersect(l1: Line, l2: Line) -> Option<Point> {
-    let p = l1.crossing_point(l2)?;
-    let is_on_segment = |l: Line, pt: Point| -> bool {
-        let dx = l.p1.x - l.p0.x;
-        let dy = l.p1.y - l.p0.y;
-        let len2 = dx * dx + dy * dy;
-        if len2 == 0.0 {
-            return false;
-        }
-        let px = pt.x - l.p0.x;
-        let py = pt.y - l.p0.y;
-        let t = (px * dx + py * dy) / len2;
-        (0.0..=1.0).contains(&t)
-    };
+This directory contains pre-rendered SVG outputs for layout template examples and the v1.2 visual effects showcase.
 
-    if is_on_segment(l1, p) && is_on_segment(l2, p) {
-        Some(p)
-    } else {
-        None
-    }
-}
+## v1.2 Effects Showcase
 
-fn main() {
-    let n = 10_000;
-    let mut edges = Vec::with_capacity(n);
-    for i in 0..n {
-        let x1 = (i as f64) * 0.1;
-        let y1 = (i as f64) * 0.2;
-        let x2 = x1 + 10.0;
-        let y2 = y1 + 5.0;
-        edges.push(Line::new(Point::new(x1, y1), Point::new(x2, y2)));
-    }
+The gallery demonstrates visual effects (drop shadows, glow) across different topology types and real-world scenarios.
 
-    let start = Instant::now();
-    let mut intersections = 0;
-    for i in 0..edges.len() {
-        for j in i + 1..edges.len() {
-            if segment_intersect(edges[i], edges[j]).is_some() {
-                intersections += 1;
-            }
-        }
-    }
-    let elapsed = start.elapsed();
-    println!(
-        "Found {} intersections among {} edges in {:?}",
-        intersections, n, elapsed
-    );
-}
+### Topology Types
+
+| Topology | File | Description |
+|----------|------|-------------|
+| Mesh | `gallery-mesh-effects.yaml` | Dense mesh with emphasis on critical paths |
+| Ring | `gallery-ring-effects.yaml` | Ring topology with root node highlight |
+| Tree | `gallery-tree-effects.yaml` | Hierarchical layout with tiered shadows |
+| Geographic | `gallery-geo-effects.yaml` | WAN with geographic positioning |
+
+### Effect Comparison
+
+| File | Purpose |
+|------|---------|
+| `gallery-effects-comparison.yaml` | Side-by-side comparison of no effects, subtle, and emphasis |
+
+### Real-World Scenarios
+
+| Scenario | File | Key Effects |
+|----------|------|-------------|
+| Datacenter | `gallery-datacenter-realworld.yaml` | Spine emphasis, firewall glow |
+| Campus | `gallery-campus-realworld.yaml` | Core emphasis, wireless controller glow |
+| WAN | `gallery-wan-realworld.yaml` | HQ selection glow, regional hierarchy |
+
+### Rendering Gallery Examples
+
+All examples render in both light and dark themes:
+
+```bash
+# Light theme
+netvis -i examples/topologies/gallery-mesh-effects.yaml --theme light -o examples/outputs/gallery-mesh-effects-light.svg
+
+# Dark theme
+netvis -i examples/topologies/gallery-mesh-effects.yaml --theme dark -o examples/outputs/gallery-mesh-effects-dark.svg
+```
+
+### Available Effects
+
+- `drop-shadow-subtle`: Subtle depth for secondary elements
+- `drop-shadow-emphasis`: Strong depth for primary elements
+- `glow-selection`: Highlight selected/active elements
+
+---
+
+## Template Example Outputs
+
+Pre-rendered SVG outputs for all layout template examples.
+
+## Files
+
+### Spine-Leaf Template
+
+- `template-spine-leaf-small.svg` (12 nodes) - 2-tier datacenter fabric
+- `template-spine-leaf-medium.svg` (30 nodes) - 3-tier fabric with pods
+- `template-spine-leaf-large.svg` (556 nodes) - 5-tier mega datacenter
+
+### Hub-Spoke Template
+
+- `template-hub-spoke-small.svg` (9 nodes) - Enterprise WAN
+- `template-hub-spoke-medium.svg` (25 nodes) - Global regional hierarchy
+- `template-hub-spoke-large.svg` (620 nodes) - Global enterprise WAN
+
+### Ring Template
+
+- `template-ring-small.svg` (8 nodes) - Campus backbone ring
+- `template-ring-medium.svg` (20 nodes) - Metro dual ring
+- `template-ring-large.svg` (500 nodes) - 5 metro transport rings
+
+### Multi-Tier Template
+
+- `template-multi-tier-small.svg` (10 nodes) - 3-tier web app
+- `template-multi-tier-medium.svg` (35 nodes) - Production microservices
+- `template-multi-tier-large.svg` (550 nodes) - Large Kubernetes cluster
+
+## How to Regenerate
+
+To regenerate these outputs, run:
+
+```bash
+# Small/Medium examples with template specified
+netvis --input examples/topologies/template-spine-leaf-small.yaml --template spine-leaf --output examples/outputs/template-spine-leaf-small.svg
+netvis --input examples/topologies/template-hub-spoke-small.yaml --template hub-spoke --output examples/outputs/template-hub-spoke-small.svg
+netvis --input examples/topologies/template-multi-tier-small.yaml --template multi-tier --output examples/outputs/template-multi-tier-small.svg
+
+# Ring uses force_directed from the YAML file
+netvis --input examples/topologies/template-ring-small.yaml --output examples/outputs/template-ring-small.svg
+
+# Large examples (500+ nodes each)
+netvis --input examples/topologies/template-spine-leaf-large.yaml --template spine-leaf --output examples/outputs/template-spine-leaf-large.svg
+netvis --input examples/topologies/template-hub-spoke-large.yaml --template hub-spoke --output examples/outputs/template-hub-spoke-large.svg
+netvis --input examples/topologies/template-ring-large.yaml --output examples/outputs/template-ring-large.svg
+netvis --input examples/topologies/template-multi-tier-large.yaml --template multi-tier --output examples/outputs/template-multi-tier-large.svg
+```
+
+## Notes
+
+- Ring examples use `layout: force_directed` instead of the ring template because the radial layout algorithm requires tree-like graphs, and rings have cycles.
+- Large examples (500+ nodes) are programmatically generated and may take 1-2 seconds to render.
+- All SVG files can be viewed in any modern web browser.
+
+```
+
+### quality-report.md
+
+```markdown
+# SVG Quality Analysis Report
+
+**Files analyzed:** 8
+
+## Summary
+
+| File | Status | Text | Font Range | Overlaps | Vision | Issues | Warnings |
+|------|--------|------|------------|----------|--------|--------|----------|
+| gallery-effects-comparison-light.svg | ISSUES | 21 | 9-22px | 32 | - | 2 | 1 |
+| gallery-campus-realworld-light.svg | ISSUES | 32 | 14-22px | 18 | - | 1 | 1 |
+| gallery-geo-effects-light.svg | ISSUES | 9 | 11-11px | 2 | - | 1 | 0 |
+| gallery-mesh-effects-light.svg | ISSUES | 31 | 14-22px | 10 | - | 1 | 1 |
+| gallery-ring-effects-light.svg | ISSUES | 21 | 14-22px | 22 | - | 1 | 1 |
+| gallery-wan-realworld-light.svg | ISSUES | 15 | 14-14px | 14 | - | 1 | 1 |
+| gallery-datacenter-realworld-light.svg | OK | 0 | - | 0 | - | 0 | 0 |
+| gallery-tree-effects-light.svg | OK | 0 | - | 0 | - | 0 | 0 |
+
+## Issues Requiring Attention
+
+### gallery-campus-realworld-light.svg
+
+- 6 critical text overlap(s) (> overlap)
+
+### gallery-effects-comparison-light.svg
+
+- 9 text element(s) with font-size < 10px (too small)
+- 18 critical text overlap(s) (> overlap)
+
+### gallery-geo-effects-light.svg
+
+- 2 critical text overlap(s) (> overlap)
+
+### gallery-mesh-effects-light.svg
+
+- 6 critical text overlap(s) (> overlap)
+
+### gallery-ring-effects-light.svg
+
+- 6 critical text overlap(s) (> overlap)
+
+### gallery-wan-realworld-light.svg
+
+- 6 critical text overlap(s) (> overlap)
+
+```
+
+### README.md
+
+```markdown
+# Rendering Verification Artifacts
+
+These files are generated to visually verify NetVis rendering quality (anti-aliasing, stroke crispness, and scale behavior) before + visual effects work.
+
+## How To Regenerate
+
+Run:
+
+```bash
+cargo test verification::rendering_quality::generate_visual_reference -- --ignored --nocapture
+```
+
+## Visual Inspection Checklist
+
+- Curves: no stair-stepping on Bezier curves at 1x/2x/3x (zoom in and pan along long edges)
+- Strokes: 1px strokes look crisp (no gray blur) at typical viewer zoom levels
+- Text: labels remain readable; glyph edges look smooth (not jagged)
+
+## Expected Passing Characteristics
+
+- Smooth edges on curves and node outlines (anti-aliasing active)
+- 2x and 3x PNGs are exact pixel-scale multiples of 1x
+- SVG `viewBox` + `preserveAspectRatio` preserve layout when viewport size changes
+
+## Source
+
+- Topology: `examples/topologies/basic.yaml`
+- Renderer: `src/render/svg.rs` via `SvgRenderer::render`
+
+## Metadata
+
+- Generated (unix seconds): 1770157724
+
 
 ```
 
@@ -404,15 +699,17 @@ fn main() {
 
 ## Visuals
 
-![annotated-noc-demo](/images/annotated-noc-demo.svg)
+### Network Visualisation Examples
 
-![traffic-noc-demo](/images/traffic-noc-demo.svg)
+![Geographic WAN](/images/geographic_wan.png)
 
-![annotated-noc-demo](/images/annotated-noc-demo.svg)
+![Bundled Mesh](/images/bundled_mesh.png)
 
-![traffic-noc-demo](/images/traffic-noc-demo.svg)
+![Hierarchical Datacenter](/images/hierarchical_datacenter.png)
 
-![hero-diagram.DCMNxwfa](/images/hero-diagram.DCMNxwfa.svg)
+![Labels Dense](/images/labels_dense.png)
+
+![Force Directed Basic](/images/force_directed_basic.png)
 
 ---
 

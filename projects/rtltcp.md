@@ -31,7 +31,7 @@ section: signal-processing
 
 ### rte1_probe.rs
 
-```rs
+```rust
 //! Minimal RTE1 extended protocol probe.
 //!
 //! Connects to an rtltcp-rust server, negotiates the extended protocol,

@@ -25,6 +25,7 @@ section: network-automation
 - [Python examples (by use case)](#python-examples-by-use-case)
 - [Topology type mapping](#topology-type-mapping)
 - [Validation policy](#validation-policy)
+- [Usage](#usage)
 - [What This Is](#what-this-is)
 - [Core Value](#core-value)
 - [Current Milestone: v1.5 - Intent-Based Overlays & Schematic Enrichment](#current-milestone-v15-intent-based-overlays-schematic-enrichment)
@@ -229,6 +230,217 @@ python:
   - examples/python/workflows/workflow_multilayer_pop_to_containerlab.py
   - examples/python/workflows/workflow_eyeball_to_autonetkit.py
 
+```
+
+### eyeball--regional-1k-subscribers--seed42.yaml
+
+```yaml
+# Title: Eyeball access ISP (regional template, 1k subscribers)
+# Goal: Access ISP hierarchy (access -> aggregation -> core) with peering/transit endpoints.
+# Run:
+#   topogen generate --config examples/configs/access-isp/eyeball--regional-1k-subscribers--seed42.yaml --output topology.yaml
+#   topogen validate topology.yaml
+# Tweak:
+#   - subscriber_count: number of subscriber host nodes.
+#   - template: small-isp|regional-isp|large-isp|mobile-network.
+#   - tiers: 3|4.
+
+name: eyeball-regional-1k
+seed: 42
+
+type: eyeball
+template: regional-isp
+subscriber_count: 1000
+tiers: 3
+redundancy: standard
+peering_to_transit_split: 0.7
+
+```
+
+### fat-tree--lab-k4-cisco--seed42.yaml
+
+```yaml
+# Title: Fat-tree lab (k=4, Cisco interface names)
+# Goal: Small, realistic datacenter topology for labs and demos.
+# Run:
+#   topogen generate examples/configs/datacenter-lab/fat-tree--lab-k4-cisco--seed42.yaml --output topology.yaml
+#   topogen validate topology.yaml
+# Tweak:
+#   - k: even >= 2; controls size (pods and switch counts).
+#   - vendor: cisco|arista|juniper|default (interface naming convention).
+#   - core_bandwidth_gbps / agg_bandwidth_gbps: link bandwidths in Gbps.
+
+name: dc-lab-fat-tree-k4-cisco
+seed: 42
+vendor: cisco
+
+type: fat-tree
+k: 4
+core_bandwidth_gbps: 400.0
+agg_bandwidth_gbps: 100.0
+
+```
+
+### leaf-spine--lab-2spine-4leaf-100g--seed42.yaml
+
+```yaml
+# Title: Leaf-spine lab (2 spines, 4 leaves, 100G)
+# Goal: A compact 2-tier Clos for lab validation and quick iteration.
+# Run:
+#   topogen generate examples/configs/datacenter-lab/leaf-spine--lab-2spine-4leaf-100g--seed42.yaml --output topology.yaml
+#   topogen validate topology.yaml
+# Tweak:
+#   - spines / leaves: scale the fabric size.
+#   - spine_bandwidth_gbps: leaf<->spine bandwidth in Gbps.
+#   - full_mesh: set false for partial connectivity experiments.
+
+name: dc-lab-leaf-spine-2s-4l-100g
+seed: 42
+
+type: leaf-spine
+spines: 2
+leaves: 4
+full_mesh: true
+spine_bandwidth_gbps: 100.0
+
+```
+
+### fat-tree--scale-k8--seed7.yaml
+
+```yaml
+# Title: Fat-tree scale (k=8)
+# Goal: Production-scale fat-tree to test larger fabrics and performance.
+# Run:
+#   topogen generate examples/configs/datacenter-scale/fat-tree--scale-k8--seed7.yaml --output topology.yaml
+#   topogen validate topology.yaml
+# Tweak:
+#   - k: even >= 2; k=8 creates 80 switches.
+#   - core_bandwidth_gbps / agg_bandwidth_gbps: link bandwidths in Gbps.
+
+name: dc-scale-fat-tree-k8
+seed: 7
+
+type: fat-tree
+k: 8
+core_bandwidth_gbps: 400.0
+agg_bandwidth_gbps: 400.0
+
+```
+
+### leaf-spine--prod-4spine-16leaf-400g--seed99.yaml
+
+```yaml
+# Title: Leaf-spine production (4 spines, 16 leaves, 400G)
+# Goal: Modern, redundant spine layer with higher-speed fabric links.
+# Run:
+#   topogen generate examples/configs/datacenter-scale/leaf-spine--prod-4spine-16leaf-400g--seed99.yaml --output topology.yaml
+#   topogen validate topology.yaml
+# Tweak:
+#   - spines / leaves: scale redundancy and rack count.
+#   - spine_bandwidth_gbps: leaf<->spine bandwidth in Gbps.
+
+name: dc-prod-leaf-spine-4s-16l-400g
+seed: 99
+
+type: leaf-spine
+spines: 4
+leaves: 16
+full_mesh: true
+spine_bandwidth_gbps: 400.0
+
+```
+
+### hierarchical--na-eu-20nodes-variable-standard--seed4242.yaml
+
+```yaml
+# Title: Enterprise WAN (hierarchical, NA+EU, 20 nodes)
+# Goal: Multi-region 3-tier WAN (access/distribution/core) with realistic link profiles.
+# Run:
+#   topogen generate examples/configs/enterprise-wan/hierarchical--na-eu-20nodes-variable-standard--seed4242.yaml --output topology.yaml
+#   topogen validate topology.yaml
+# Tweak:
+#   - node_count: total WAN sites/POPs.
+#   - regions: which geo regions are included.
+#   - bandwidth_profile: modern|variable.
+#   - redundancy: minimal|standard|high.
+
+name: enterprise-wan-na-eu-20
+seed: 4242
+
+type: hierarchical
+node_count: 20
+regions: ["NA", "EU"]
+bandwidth_profile: variable
+redundancy: standard
+
+```
+
+### mesh--global-6nodes-tier1-modern--seed42.yaml
+
+```yaml
+# Title: Global backbone mesh (6 nodes, Tier-1, modern)
+# Goal: Small full-mesh backbone for CDN / Tier-1 interconnect experiments.
+# Run:
+#   topogen generate examples/configs/global-backbone/mesh--global-6nodes-tier1-modern--seed42.yaml --output topology.yaml
+#   topogen validate topology.yaml
+# Tweak:
+#   - node_count: size of the mesh.
+#   - city_tier: 1|2|3 (Tier-1 are major global hubs).
+#   - bandwidth_profile: modern|variable.
+
+name: wan-global-mesh-6-tier1-modern
+seed: 42
+
+type: mesh
+node_count: 6
+city_tier: 1
+bandwidth_profile: modern
+
+```
+
+### barabasi-albert--scale-free-n100-m3--seed42.yaml
+
+```yaml
+# Title: Scale-free graph (Barabasi-Albert, n=100, m=3)
+# Goal: Model a hub-heavy network with a power-law-ish degree distribution.
+# Run:
+#   topogen generate examples/configs/modeling/barabasi-albert--scale-free-n100-m3--seed42.yaml --output topology.yaml
+#   topogen validate topology.yaml
+# Tweak:
+#   - n: number of nodes.
+#   - m: new edges per node (higher m -> denser graph).
+
+name: modeling-ba-n100-m3
+seed: 42
+
+type: barabasi-albert
+n: 100
+m: 3
+
+```
+
+---
+
+## Usage
+
+### Topology DSL Example
+
+```yaml
+# Example: Multi-layer POP underlay with mesh overlay
+name: multi-layer-pop-backbone
+type: multi-layer
+
+layers:
+  - name: physical
+    type: pop
+    count: 5
+    redundancy: n+1
+
+  - name: backbone
+    type: mesh
+    node_count: 4
+    underlay: physical
+    strategy: shortest-path
 ```
 
 ---

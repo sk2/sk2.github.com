@@ -23,6 +23,15 @@ section: network-automation
 - [Code Samples](#code-samples)
 - [Index](#index)
 - [Running Examples](#running-examples)
+- [Topology](#topology)
+- [Features](#features)
+- [Running the Simulation](#running-the-simulation)
+- [Verification Commands](#verification-commands)
+- [Key Concepts](#key-concepts)
+- [Troubleshooting](#troubleshooting)
+- [Architecture Notes](#architecture-notes)
+- [What's Next?](#whats-next)
+- [References](#references)
 - [Visuals](#visuals)
 - [Usage](#usage)
 - [Architecture](#architecture)
@@ -810,6 +819,442 @@ script:
   - at: converged + 3s
     device: app1
     command: ping 10.1.3.11
+
+```
+
+### datacenter-disaster.yaml
+
+```yaml
+# Datacenter Disaster Scenario - Correlated Failures
+#
+# Demonstrates realistic datacenter outage scenarios with:
+# - Rack-level correlated failures (all devices in rack fail together)
+# - Threshold-based cascades (when too many uplinks fail, spine fails)
+# - Auto-recovery after fixed duration (simulating power restoration)
+#
+# Topology: 2 spines, 4 leaves in 2 racks
+
+name: datacenter-disaster
+description: Realistic datacenter outage with rack failure and threshold cascades
+
+devices:
+  # Spine layer
+  - name: spine-1
+    type: router
+    router_id: 1.1.1.1
+    metadata:
+      tier: spine
+    interfaces:
+      - name: eth0
+        ip: 10.1.0.1/31
+      - name: eth1
+        ip: 10.1.0.3/31
+      - name: eth2
+        ip: 10.1.0.5/31
+      - name: eth3
+        ip: 10.1.0.7/31
+
+  - name: spine-2
+    type: router
+    router_id: 1.1.1.2
+    metadata:
+      tier: spine
+    interfaces:
+      - name: eth0
+        ip: 10.1.0.9/31
+      - name: eth1
+        ip: 10.1.0.11/31
+      - name: eth2
+        ip: 10.1.0.13/31
+      - name: eth3
+        ip: 10.1.0.15/31
+
+  # Leaf layer - Rack 1
+  - name: leaf-1
+    type: router
+    router_id: 2.2.2.1
+    metadata:
+      tier: leaf
+      rack: rack-1
+    interfaces:
+      - name: eth0
+        ip: 10.1.0.0/31
+      - name: eth1
+        ip: 10.1.0.8/31
+      - name: eth2
+        ip: 10.2.1.1/24
+
+  - name: leaf-2
+    type: router
+    router_id: 2.2.2.2
+    metadata:
+      tier: leaf
+      rack: rack-1
+    interfaces:
+      - name: eth0
+        ip: 10.1.0.2/31
+      - name: eth1
+        ip: 10.1.0.10/31
+      - name: eth2
+        ip: 10.2.2.1/24
+
+  # Leaf layer - Rack 2
+  - name: leaf-3
+    type: router
+    router_id: 2.2.2.3
+    metadata:
+      tier: leaf
+      rack: rack-2
+    interfaces:
+      - name: eth0
+        ip: 10.1.0.4/31
+      - name: eth1
+        ip: 10.1.0.12/31
+      - name: eth2
+        ip: 10.2.3.1/24
+
+  - name: leaf-4
+    type: router
+    router_id: 2.2.2.4
+    metadata:
+      tier: leaf
+      rack: rack-2
+    interfaces:
+      - name: eth0
+        ip: 10.1.0.6/31
+      - name: eth1
+        ip: 10.1.0.14/31
+      - name: eth2
+        ip: 10.2.4.1/24
+
+links:
+  # Spine-1 to Leaves
+  - endpoints: [spine-1:eth0, leaf-1:eth0]
+    latency_ms: 1
+  - endpoints: [spine-1:eth1, leaf-2:eth0]
+    latency_ms: 1
+  - endpoints: [spine-1:eth2, leaf-3:eth0]
+    latency_ms: 1
+  - endpoints: [spine-1:eth3, leaf-4:eth0]
+    latency_ms: 1
+
+  # Spine-2 to Leaves
+  - endpoints: [spine-2:eth0, leaf-1:eth1]
+    latency_ms: 1
+  - endpoints: [spine-2:eth1, leaf-2:eth1]
+    latency_ms: 1
+  - endpoints: [spine-2:eth2, leaf-3:eth1]
+    latency_ms: 1
+  - endpoints: [spine-2:eth3, leaf-4:eth1]
+    latency_ms: 1
+
+# Failure pattern 1: Rack-1 power failure at tick 1000
+failure_patterns:
+  - name: rack-1-power-loss
+    trigger: !at_tick
+      tick: 1000
+    selector:
+      all: true  # Will be filtered by metadata in action
+    action: fail_both  # Fail devices and their links
+    recovery: !after_ticks
+      ticks: 500  # Power restored after 500 ticks (500ms)
+
+# Failure pattern 2: Random spine link flap for testing convergence
+  - name: spine-link-flapping
+    trigger: !at_tick
+      tick: 2000
+    selector:
+      device_tier: [spine, leaf]
+    action: fail_random_link
+    recovery: !flapping
+      interval: 50   # Flap every 50 ticks
+      count: 10      # 10 state changes (5 down/up cycles)
+
+# Cascade rule 1: Metadata-based rack cascade
+# When rack-1 devices fail, all devices with rack: rack-1 metadata fail
+cascade_rules:
+  - name: rack-failure-cascade
+    trigger: !dependency_based
+      primary_selector:
+        all: true
+      cascade_selector:
+        all: true
+      relationship: !same_metadata
+        key: rack
+        value: rack-1
+    action: fail_both
+    recovery: !after_ticks
+      ticks: 500  # Same as primary recovery
+    blast_radius: 10  # Limit cascade scope
+
+# Cascade rule 2: Threshold-based spine overload
+# When  of uplinks to spine fail, spine itself fails
+  - name: spine-overload-cascade
+    trigger: !threshold
+      check_selector:
+        device_tier: [leaf, spine]
+      min_percentage: 0.5  #  threshold
+      action_selector:
+        all: true
+    action: fail_devices
+    recovery: !permanent
+
+```
+
+### dc-fabric-README.md
+
+```markdown
+# EVPN Data Center Fabric Example
+
+This topology demonstrates a complete BGP EVPN with VXLAN overlay for L2 connectivity across a spine-leaf data center fabric.
+
+## Topology
+
+```
+         Spine1 ----------- Spine2
+           |  \           /  |
+           |   \         /   |
+           |    \       /    |
+           |     \     /     |
+          Leaf1   Leaf2   Leaf3   Leaf4
+           |       |       |       |
+         Host1   Host2   Host3   Host4
+        (VNI 100) (VNI 100) (VNI 200) (VNI 200)
+```
+
+- **2 Spines**: BGP Route Reflectors for EVPN control plane
+- **4 Leaves**: VTEPs (VXLAN Tunnel Endpoints) with bridge domains
+- **4 Hosts**: End systems attached to leaves (2 per VNI)
+
+## Features
+
+- **EVPN Type-2**: MAC/IP advertisement for unicast forwarding
+- **EVPN Type-3**: VTEP membership and flood list auto-discovery
+- **VXLAN**: VNI 100 (tenant-a), VNI 200 (tenant-b) for L2 overlay
+- **ARP Suppression**: Reduces BUM flooding using EVPN Type-2 routes
+- **Multi-tenancy**: VNI isolation (VNI 100 and VNI 200)
+- **BGP Route Reflector**: Spines reflect EVPN routes to leaves (scalable design)
+
+## Running the Simulation
+
+```bash
+netsim run examples/dc-fabric.yaml --ticks 5000
+```
+
+Or for faster convergence testing:
+
+```bash
+cargo run --package netsim-cli -- run examples/dc-fabric.yaml --ticks 2000 --exit
+```
+
+## Verification Commands
+
+### Show EVPN Routes
+
+Attach to any leaf to inspect EVPN routes:
+
+```bash
+netsim attach Leaf1
+show bgp evpn
+```
+
+**Expected output:**
+- Type-3 routes from all 4 VTEPs (Leaf1-4) advertising VTEP participation
+- Type-2 routes for Host MACs after hosts generate traffic
+
+### Filter EVPN Routes
+
+```bash
+# Type-2 routes only (MAC/IP)
+show bgp evpn type 2
+
+# Type-3 routes only (VTEP membership)
+show bgp evpn type 3
+
+# VNI 100 only
+show bgp evpn vni 100
+
+# Specific next-hop VTEP
+show bgp evpn next-hop 10.255.1.2
+
+# JSON output (for programmatic parsing)
+show bgp evpn json
+```
+
+### Show MAC Address Table
+
+```bash
+show mac address-table
+```
+
+**Expected output:**
+- Local MACs learned on eth3 (entry_type: dynamic)
+- Remote MACs from other VTEPs (entry_type: evpn)
+
+Example:
+```
+VNI      MAC Address          Port             Type       Age        Moves
+------------------------------------------------------------------------------------
+100      aa:bb:cc:dd:ee:01    eth3             dynamic    0          0
+100      aa:bb:cc:dd:ee:02    vtep-10.255.1.2  evpn       0          0
+```
+
+### Show BGP Sessions
+
+```bash
+show bgp summary
+```
+
+**Expected output:**
+- 2 established sessions to Spine1 and Spine2
+
+### Test Connectivity
+
+#### Same VNI (should succeed)
+
+```bash
+# From Host1 to Host2 (both VNI 100)
+ping 192.168.1.20 --source Host1
+```
+
+**Expected:** Successful ping. Traffic encapsulated in VXLAN (VNI 100) and forwarded via VTEP tunnel.
+
+#### Cross-VNI (should fail - isolation)
+
+```bash
+# From Host1 (VNI 100) to Host3 (VNI 200)
+ping 192.168.2.10 --source Host1
+```
+
+**Expected:** Ping fails. VNI 100 and VNI 200 are isolated (different tenants).
+
+#### Verify ARP Suppression
+
+```bash
+# After initial ping from Host1 to Host2:
+# 1. Leaf1 learns Host1 MAC (data plane)
+# 2. Leaf1 originates Type-2 route for Host1 MAC + IP
+# 3. Leaf2 imports Type-2 route, populates ARP cache
+# 4. When Host2 ARPs for 192.168.1.10:
+#    - Leaf2 suppresses ARP (replies locally via EVPN Type-2 data)
+#    - ARP does NOT flood to other VTEPs
+```
+
+To observe ARP suppression, enable packet capture:
+
+```bash
+# Run with capture enabled
+netsim run examples/dc-fabric.yaml --capture-all --ticks 2000
+
+# Inspect capture for ARP requests
+# You should see ARP request from host, but NO ARP flood to remote VTEPs
+```
+
+## Key Concepts
+
+### Route Distinguisher (RD)
+
+Unique per VTEP to create unique VPN routes in BGP.
+- Leaf1 VNI 100: `65001:100`
+- Leaf2 VNI 100: `65002:100`
+
+RD allows same MAC/IP to be advertised from multiple VTEPs without conflict.
+
+### Route Target (RT)
+
+Shared across all VTEPs in the same VNI for import/export filtering.
+- VNI 100: `RT:65000:100` (import and export)
+- VNI 200: `RT:65000:200` (import and export)
+
+RT determines which EVPN routes are imported into which bridge domain.
+
+### MAC Mobility
+
+Sequence numbers track MAC moves across VTEPs.
+- Higher sequence wins
+- IP tiebreaker: lower IP wins (if sequence is equal)
+
+Visible in `show bgp evpn` output (Seq column for Type-2 routes).
+
+### Flood List
+
+Auto-populated from Type-3 routes.
+- Each VTEP originates Type-3 for its VNIs
+- Remote VTEPs import Type-3, add to flood list
+- BUM traffic flooded to all VTEPs in flood list
+
+## Troubleshooting
+
+### No EVPN routes visible
+
+**Check:** BGP sessions established?
+```bash
+show bgp summary
+```
+
+**Fix:** Verify IP reachability between spines and leaves (may need static routes or IGP).
+
+### MAC not learned
+
+**Check:** Is interface in bridge domain?
+```bash
+show mac address-table
+```
+
+**Fix:** Verify interface is listed in `bridge_domains.interfaces` in YAML.
+
+### Ping fails within same VNI
+
+**Check 1:** Are both VTEPs advertising Type-3 routes?
+```bash
+show bgp evpn type 3
+```
+
+**Check 2:** Are MACs present in FDB?
+```bash
+show mac address-table
+```
+
+**Fix:** Run longer (increase --ticks) to allow convergence.
+
+### JSON output malformed
+
+**Check:** Use `json` flag:
+```bash
+show bgp evpn json
+```
+
+If BGP not configured, error is JSON-formatted:
+```json
+{"error": "BGP not configured"}
+```
+
+## Architecture Notes
+
+This topology uses **BGP Route Reflectors** (spines) to scale EVPN:
+- Leaves are RR clients (do not need full mesh iBGP)
+- Spines reflect EVPN routes between leaves
+- Reduces BGP session count from O(n²) to O(2n)
+
+For production, consider:
+- **Multiple RRs** for redundancy (already in this example: Spine1 and Spine2)
+- **Anycast VTEP** for multi-homing 
+- **LACP/LAG** for link redundancy 
+- **EVPN Type-5** for L3 inter-VNI routing 
+
+## What's Next?
+
+After understanding this example, explore:
+1. ** & IRB)**: Add L3 routing between VNIs
+2. ** (LACP/LAG)**: Add link aggregation to leaves
+3. ** (EVPN Multi-Homing)**: Add dual-homed hosts with active-active forwarding
+
+## References
+
+- RFC 7432: BGP MPLS-Based Ethernet VPN
+- RFC 8365: BGP EVPN Overlay for VXLAN
+- RFC 7432 Section 15: MAC Mobility
+- [EVPN CONTEXT.md](../../.planning/phases/63-bgp-evpn-type-2-3/63-CONTEXT.md) (design decisions)
 
 ```
 

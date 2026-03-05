@@ -24,6 +24,16 @@ section: network-automation
 - [Inputs vs Expected Outputs](#inputs-vs-expected-outputs)
 - [Derived Overlay View Contract (`netauto/overlay-view/v0`)](#derived-overlay-view-contract-netautooverlay-viewv0)
 - [Reviewer Workflow (One Command)](#reviewer-workflow-one-command)
+- [What This Fixture Demonstrates](#what-this-fixture-demonstrates)
+- [How To Validate](#how-to-validate)
+- [Topology Intent](#topology-intent)
+- [Overlay Scenarios Covered (RFC-02)](#overlay-scenarios-covered-rfc-02)
+- [How To Validate](#how-to-validate)
+- [What this topology represents](#what-this-topology-represents)
+- [Files in this fixture](#files-in-this-fixture)
+- [Overlay scenarios covered](#overlay-scenarios-covered)
+- [Fold rules used for overlay.view.json](#fold-rules-used-for-overlayviewjson)
+- [Review / verification](#review-verification)
 - [What This Is](#what-this-is)
 - [Why We're Doing This](#why-were-doing-this)
 - [Success Metrics](#success-metrics)
@@ -142,6 +152,537 @@ Validate one fixture:
 ```bash
 python3 scripts/check-fixtures --fixture examples/minimal-lab
 ```
+
+```
+
+### README.md
+
+```markdown
+# Edge Cases Fixture: Error + Reconnect/Dedupe (RFC-02)
+
+This fixture is intentionally small and "semantic": it exists to make RFC-02 reconnect/replay and dedupe behavior reviewable and deterministic.
+
+- Pinned RFC-02 contract: `netauto/live-overlay-stream/v1.0`
+  - Schema: `rfc/rfc-02/live-overlay-stream/v1.0/schema.json`
+  - Semantics: [rfc/rfc-02/live-overlay-stream/v1.0/ACCEPTANCE.md](rfc/rfc-02/live-overlay-stream/v1.0/ACCEPTANCE.md)
+- Pinned RFC-01 contract: `netauto/operational-topology/v1.0`
+  - Schema: `rfc/rfc-01/operational-topology/v1.0/schema.json`
+
+## What This Fixture Demonstrates
+
+### 1) Reconnect / Backfill
+
+In this transcript, a reconnect/backfill is represented by replaying a snapshot with:
+
+- `replay: true`
+- `cursor.after_event_id` set to the last event id the consumer had processed (exclusive)
+
+See `expected/overlay/golden.ndjson` for the replayed `topology.snapshot` and `telemetry.snapshot` events.
+
+### 2) Deduplication (event_id first-wins)
+
+Consumers MUST dedupe by `event_id` (idempotency under retries/replays). The repo-local gate (`scripts/check-fixtures`) folds the NDJSON transcript in order and ignores duplicate `event_id` values (first occurrence wins).
+
+This fixture includes at least one duplicated `event_id` line in `expected/overlay/golden.ndjson` to make that behavior explicit and reviewable.
+
+### 3) In-band Error Event
+
+The transcript includes an in-band `error` event (`type: "error"`). The derived overlay view produced by `scripts/check-fixtures`:
+
+- Appends error details to `errors[]`
+- Does not mutate topology or telemetry state
+
+See `expected/overlay/overlay.view.json` for the folded `errors` list.
+
+## How To Validate
+
+Install pinned validation deps:
+
+```bash
+python3 -m pip install -r rfc/rfc-02/live-overlay-stream/v1.0/requirements.txt
+```
+
+Validate this fixture end-to-end:
+
+```bash
+python3 scripts/check-fixtures --fixture examples/edge-cases
+```
+
+```
+
+### network.design.yaml
+
+```yaml
+schema: netauto/design/v2.0
+base_topology: network.topo.yaml
+topology_id: edge-cases-01
+description: "Minimal intent for the tiny edge-cases topology."
+
+protocols:
+  ospf:
+    area: 0
+    interfaces:
+      - node: ec-spine-01:p1
+        cost: 10
+      - node: ec-spine-01:p2
+        cost: 10
+      - node: ec-leaf-01:p1
+        cost: 10
+      - node: ec-leaf-02:p1
+        cost: 10
+
+```
+
+### network.topo.yaml
+
+```yaml
+schema: netauto/topology/v2.0
+topology_id: edge-cases-01
+description: "Tiny topology used to exercise RFC-02 overlay semantics."
+
+nodes:
+  - id: ec-spine-01
+    role: spine
+    site: lab
+    interfaces:
+      - id: p1
+        vendor_name: Ethernet1
+      - id: p2
+        vendor_name: Ethernet2
+
+  - id: ec-leaf-01
+    role: leaf
+    site: lab
+    interfaces:
+      - id: p1
+        vendor_name: Ethernet1
+
+  - id: ec-leaf-02
+    role: leaf
+    site: lab
+    interfaces:
+      - id: p1
+        vendor_name: Ethernet1
+
+links:
+  - id: ec-spine-01:p1--ec-leaf-01:p1
+    endpoints:
+      - node_id: ec-spine-01
+        interface_id: p1
+      - node_id: ec-leaf-01
+        interface_id: p1
+
+  - id: ec-spine-01:p2--ec-leaf-02:p1
+    endpoints:
+      - node_id: ec-spine-01
+        interface_id: p2
+      - node_id: ec-leaf-02
+        interface_id: p1
+
+```
+
+### README.md
+
+```markdown
+# Leaf/Spine Fixture: Topology Mutations + Telemetry Overlays
+
+This fixture is a small-but-realistic leaf/spine fabric intended to be a credible review artifact beyond the tiny lab.
+
+- Pinned RFC-02 contract: `netauto/live-overlay-stream/v1.0`
+  - Schema: `rfc/rfc-02/live-overlay-stream/v1.0/schema.json`
+  - Semantics: `rfc/rfc-02/live-overlay-stream/v1.0/ACCEPTANCE.md`
+- Pinned RFC-01 contract: `netauto/operational-topology/v1.0`
+  - Schema: `rfc/rfc-01/operational-topology/v1.0/schema.json`
+
+## Topology Intent
+
+`network.topo.yaml` describes a modest DC fabric:
+
+- 2 spines: `ls-spine-01`, `ls-spine-02`
+- 4 leaves: `ls-leaf-01` .. `ls-leaf-04`
+- Leaves are dual-homed to both spines (uplinks are modeled as logical interfaces `p1`, `p2`).
+
+The inputs are designed to be readable and to keep IDs stable and predictable.
+
+## Overlay Scenarios Covered (RFC-02)
+
+The overlay transcript `expected/overlay/golden.ndjson` is the mutation showcase:
+
+1. Baseline `topology.snapshot` for the initial fabric (2 spines + 3 leaves).
+2. Topology mutations:
+   - `topology.node.add` + `topology.edge.add`: a new leaf (`ls-leaf-04`) is added and dual-homed.
+   - `topology.edge.remove`: an uplink is removed (maintenance / failure).
+   - `topology.node.remove` (with explicit `topology.edge.remove`): a leaf (`ls-leaf-03`) is decommissioned.
+3. Telemetry overlays:
+   - `telemetry.snapshot`: initial metrics for nodes and edges in the final folded topology.
+   - `telemetry.delta`: incremental metric updates (merge semantics per `rfc/rfc-02/live-overlay-stream/v1.0/ACCEPTANCE.md`).
+
+The derived view `expected/overlay/overlay.view.json` is a deterministic fold of the transcript as recomputed by `scripts/check-fixtures`.
+
+## How To Validate
+
+Install pinned validation deps:
+
+```bash
+python3 -m pip install -r rfc/rfc-02/live-overlay-stream/v1.0/requirements.txt
+```
+
+Validate this fixture end-to-end:
+
+```bash
+python3 scripts/check-fixtures --fixture examples/leaf-spine
+```
+
+```
+
+### network.design.yaml
+
+```yaml
+schema: netauto/design/v2.0
+base_topology: network.topo.yaml
+topology_id: leaf-spine-01
+description: "Minimal intent for the leaf/spine fabric (OSPF underlay)."
+
+protocols:
+  ospf:
+    area: 0
+    interfaces:
+      - node: ls-spine-01:p1
+        cost: 10
+      - node: ls-spine-01:p2
+        cost: 10
+      - node: ls-spine-01:p3
+        cost: 10
+      - node: ls-spine-01:p4
+        cost: 10
+      - node: ls-spine-02:p1
+        cost: 10
+      - node: ls-spine-02:p2
+        cost: 10
+      - node: ls-spine-02:p3
+        cost: 10
+      - node: ls-spine-02:p4
+        cost: 10
+      - node: ls-leaf-01:p1
+        cost: 10
+      - node: ls-leaf-01:p2
+        cost: 10
+      - node: ls-leaf-02:p1
+        cost: 10
+      - node: ls-leaf-02:p2
+        cost: 10
+      - node: ls-leaf-03:p1
+        cost: 10
+      - node: ls-leaf-03:p2
+        cost: 10
+      - node: ls-leaf-04:p1
+        cost: 10
+      - node: ls-leaf-04:p2
+        cost: 10
+
+```
+
+### network.topo.yaml
+
+```yaml
+schema: netauto/topology/v2.0
+topology_id: leaf-spine-01
+description: "Small-but-realistic leaf/spine fabric (2 spines, 4 leaves)."
+
+nodes:
+  - id: ls-spine-01
+    role: spine
+    site: dc1
+    vendor: arista
+    model: 7800R
+    interfaces:
+      - id: p1
+        vendor_name: Ethernet1
+      - id: p2
+        vendor_name: Ethernet2
+      - id: p3
+        vendor_name: Ethernet3
+      - id: p4
+        vendor_name: Ethernet4
+
+  - id: ls-spine-02
+    role: spine
+    site: dc1
+    vendor: arista
+    model: 7800R
+    interfaces:
+      - id: p1
+        vendor_name: Ethernet1
+      - id: p2
+        vendor_name: Ethernet2
+      - id: p3
+        vendor_name: Ethernet3
+      - id: p4
+        vendor_name: Ethernet4
+
+  - id: ls-leaf-01
+    role: leaf
+    site: dc1
+    vendor: arista
+    model: 7050X
+    interfaces:
+      - id: p1
+        vendor_name: Ethernet49
+      - id: p2
+        vendor_name: Ethernet50
+
+  - id: ls-leaf-02
+    role: leaf
+    site: dc1
+    vendor: arista
+    model: 7050X
+    interfaces:
+      - id: p1
+        vendor_name: Ethernet49
+      - id: p2
+        vendor_name: Ethernet50
+
+  - id: ls-leaf-03
+    role: leaf
+    site: dc1
+    vendor: arista
+    model: 7050X
+    interfaces:
+      - id: p1
+        vendor_name: Ethernet49
+      - id: p2
+        vendor_name: Ethernet50
+
+  - id: ls-leaf-04
+    role: leaf
+    site: dc1
+    vendor: arista
+    model: 7050X
+    interfaces:
+      - id: p1
+        vendor_name: Ethernet49
+      - id: p2
+        vendor_name: Ethernet50
+
+links:
+  - id: ls-spine-01:p1--ls-leaf-01:p1
+    endpoints:
+      - node_id: ls-spine-01
+        interface_id: p1
+      - node_id: ls-leaf-01
+        interface_id: p1
+
+  - id: ls-spine-02:p1--ls-leaf-01:p2
+    endpoints:
+      - node_id: ls-spine-02
+        interface_id: p1
+      - node_id: ls-leaf-01
+        interface_id: p2
+
+  - id: ls-spine-01:p2--ls-leaf-02:p1
+    endpoints:
+      - node_id: ls-spine-01
+        interface_id: p2
+      - node_id: ls-leaf-02
+        interface_id: p1
+
+  - id: ls-spine-02:p2--ls-leaf-02:p2
+    endpoints:
+      - node_id: ls-spine-02
+        interface_id: p2
+      - node_id: ls-leaf-02
+        interface_id: p2
+
+  - id: ls-spine-01:p3--ls-leaf-03:p1
+    endpoints:
+      - node_id: ls-spine-01
+        interface_id: p3
+      - node_id: ls-leaf-03
+        interface_id: p1
+
+  - id: ls-spine-02:p3--ls-leaf-03:p2
+    endpoints:
+      - node_id: ls-spine-02
+        interface_id: p3
+      - node_id: ls-leaf-03
+        interface_id: p2
+
+  - id: ls-spine-01:p4--ls-leaf-04:p1
+    endpoints:
+      - node_id: ls-spine-01
+        interface_id: p4
+      - node_id: ls-leaf-04
+        interface_id: p1
+
+  - id: ls-spine-02:p4--ls-leaf-04:p2
+    endpoints:
+      - node_id: ls-spine-02
+        interface_id: p4
+      - node_id: ls-leaf-04
+        interface_id: p2
+
+```
+
+### README.md
+
+```markdown
+# minimal-lab (canonical fixture)
+
+This fixture is the smallest readable project that demonstrates:
+
+- RFC-01 sidecars: `*.topo.yaml` + `*.design.yaml` and their stable ids
+- RFC-02 manifest wiring (`netauto.project`) + the pinned overlay stream artifacts
+
+If you only read one example, read this one.
+
+## What this topology represents
+
+A tiny 3-node routed lab:
+
+- `r1` -- `r2` -- `r3`
+
+Each node uses logical interface ids (`p1`, `p2`, ...) that are stable across runs.
+Vendor interface names (if present) are metadata only.
+
+## Files in this fixture
+
+Inputs (human-authored):
+
+- `netauto.project`
+  - RFC-02 manifest example that wires layers and a telemetry hook.
+- `network.topo.yaml`
+  - RFC-01 topology sidecar (physical world + interface mapping).
+- `network.design.yaml`
+  - RFC-01 design sidecar (logical intent) referencing topology ids.
+
+Committed expected outputs (review/re-audit artifacts):
+
+- `expected/network.operational.json`
+  - Must validate against the pinned OperationalTopology v1.0 schema.
+- `expected/network.results.json`
+  - Minimal illustrative output (no pinned schema; intentionally small).
+- `expected/overlay/golden.ndjson`
+  - Must validate line-by-line against the pinned LiveOverlayStream v1.0 schema.
+- `expected/overlay/overlay.view.json`
+  - Deterministic fold of `golden.ndjson` (recomputed by `scripts/check-fixtures`).
+
+## Overlay scenarios covered
+
+This transcript keeps the story short:
+
+1. `topology.snapshot` baseline nodes/edges
+2. `telemetry.snapshot` baseline metrics for the same ids
+3. `telemetry.delta` updates a subset of metrics
+
+## Fold rules used for overlay.view.json
+
+These match the deterministic implementation in `scripts/check-fixtures`:
+
+- Process events in transcript order.
+- Dedupe by `event_id` (first occurrence wins).
+- `topology.snapshot` replaces topology node/edge sets.
+- `telemetry.snapshot` replaces telemetry maps.
+- `telemetry.delta` merges metrics (keys present overwrite; absent unchanged; `null` allowed).
+- `error` events append to `errors` and do not mutate topology/telemetry.
+- Cross-check: telemetry references must exist in the final folded topology state.
+
+## Review / verification
+
+Install pinned validation deps:
+
+```bash
+python3 -m pip install -r rfc/rfc-02/live-overlay-stream/v1.0/requirements.txt
+```
+
+Validate this fixture:
+
+```bash
+python3 scripts/check-fixtures --fixture examples/minimal-lab
+```
+
+Useful references:
+
+- `RFC-01.md`
+- `RFC-02.md`
+- `rfc/rfc-02/live-overlay-stream/v1.0/ACCEPTANCE.md`
+
+```
+
+### network.design.yaml
+
+```yaml
+# RFC-01 design sidecar (logical intent)
+#
+# There is no pinned schema for this file yet; it is included as a readable
+# example of how design references stable topology ids.
+
+schema: netauto/design/v2.0
+base_topology: "./network.topo.yaml"
+
+addressing:
+  loopbacks:
+    r1: "10.0.0.1/32"
+    r2: "10.0.0.2/32"
+    r3: "10.0.0.3/32"
+
+protocols:
+  ospf:
+    area: 0
+    interfaces:
+      - node: "r1:p1"
+        cost: 10
+      - node: "r2:p1"
+        cost: 10
+      - node: "r2:p2"
+        cost: 10
+      - node: "r3:p1"
+        cost: 10
+
+```
+
+### network.topo.yaml
+
+```yaml
+# RFC-01 topology sidecar (human-authored for this fixture)
+#
+# Purpose: demonstrate stable logical ids (node ids + interface ids) that can be
+# referenced by other sidecars and by RFC-02 overlay events.
+
+nodes:
+  - id: r1
+    role: router
+    interfaces:
+      - id: p1
+        vendor_name: "Gi0/0"
+      - id: p2
+        vendor_name: "Gi0/1"
+
+  - id: r2
+    role: router
+    interfaces:
+      - id: p1
+        vendor_name: "Gi0/0"
+      - id: p2
+        vendor_name: "Gi0/1"
+
+  - id: r3
+    role: router
+    interfaces:
+      - id: p1
+        vendor_name: "Gi0/0"
+
+links:
+  - endpoints:
+      - node: r1
+        interface: p1
+      - node: r2
+        interface: p1
+
+  - endpoints:
+      - node: r2
+        interface: p2
+      - node: r3
+        interface: p1
 
 ```
 

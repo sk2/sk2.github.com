@@ -191,7 +191,7 @@ Clean, understandable, stable codebase that reliably tracks aircraft in real-tim
 
 ## Current Status
 
-2026-03-01 — Completed  (Rust Intelligence).
+2026-03-05 — Completed 36-02-PLAN.md
 
 ---
 

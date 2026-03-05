@@ -34,7 +34,7 @@ section: network-automation
 
 ### scale_validation.rs
 
-```rs
+```rust
 //! Full-scale validation runner for  empirical testing.
 //!
 //! Runs ScaleValidator at 25k, 50k, 75k, 100k node scales to validate:

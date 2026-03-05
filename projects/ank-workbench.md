@@ -15,29 +15,43 @@ section: network-automation
 
 ## Contents
 
-- [Concept](#concept)
-- [Key Capabilities](#key-capabilities)
+- [Technical Reports](#technical-reports)
+- [Current Status](#current-status)
+- [What This Is](#what-this-is)
+- [Core Value](#core-value)
 - [Screenshots](#screenshots)
-- [Visuals](#visuals)
 - [Current Milestone: Ecosystem Maintenance & Operations](#current-milestone-ecosystem-maintenance-operations)
+- [What We've Built](#what-weve-built)
+- [Requirements](#requirements)
 - [Context](#context)
 - [Constraints](#constraints)
 - [Key Decisions](#key-decisions)
 - [Ecosystem Context](#ecosystem-context)
 - [Current Status](#current-status)
 
-## Concept
+## Technical Reports
 
-**An orchestration platform** that integrates the ANK ecosystem tools (TopoGen, ank_pydantic, Network Simulator, NetVis) into one seamless workflow. It serves as the **glue layer** that coordinates the entire network automation pipeline, allowing engineers to generate topologies, model networks declaratively, run lightweight simulations, and visualize results from a unified interface.
+- [Download Technical Report: paper.pdf](/assets/docs/ank-workbench-paper.pdf)
+- [Download Technical Report: techreport.pdf](/assets/docs/ank-workbench-techreport.pdf)
 
-```
-┌──────────────────────────────────────────────────────────────────┐
-│                        ANK Workbench                             │
-│         (Orchestration · Web UI · Workflow Management)           │
-│   ┌──────────────┬──────────────┬──────────────┬──────────────┐ │
-│   │   TopoGen    │ ank-pydantic │   Simulator  │    NetVis    │ │
-└───┴──────────────┴──────────────┴──────────────┴──────────────┴─┘
-```
+---
+
+## Current Status
+
+**Last shipped:** v4.2 UX Polish & Accessibility — shipped 2026-03-04
+**Ready to plan:** Maintenance & Feature Backlog
+
+---
+
+## Quick Facts
+
+| | |
+|---|---|
+| **Status** | Recently Updated |
+
+---
+
+## What This Is
 
 **An orchestration platform** that integrates the ANK ecosystem tools (TopoGen, ank_pydantic, Network Simulator, NetVis) into one seamless workflow.
 
@@ -56,17 +70,11 @@ ANK Workbench is the **glue layer** that coordinates the entire network automati
 **Workflow:** Generate/model topology → Run simulation → Visualize results → Export configs
 **Value:** Complete pipeline in one interface, no tool-switching or manual integration
 
-Network engineers can design, validate, and visualize network changes in one complete workflow without switching between separate tools or manually gluing components together.
-
 ---
 
-## Key Capabilities
+## Core Value
 
-- **Design-First Workflow**: Declarative Pydantic models → lightweight simulation → integrated topology/config/behavior visualization.
-- **Persistent Help System**: Non-modal drawer with contextual tips and route-aware visibility.
-- **Sample Gallery**: Curated offline topologies ranging from 2-node starters to 12-node spine-leaf data centers.
-- **Intelligent Empty States**: Cause-specific UI patterns with outcome previews to guide new users.
-- **Guided Tour**: 8-step workflow coverage with CSS-only spotlight for rapid onboarding.
+Network engineers can design, validate, and visualize network changes in one complete workflow without switching between separate tools or manually gluing components together.
 
 ---
 
@@ -86,20 +94,6 @@ Network engineers can design, validate, and visualize network changes in one com
 
 ---
 
-## Visuals
-
-The Workbench provides real-time feedback through integrated NetVis overlays, allowing for the inspection of physical, logical, and protocol layers alongside routing table state and simulation diagnostics.
-
----
-
-## Quick Facts
-
-| | |
-|---|---|
-| **Status** | Active |
-
----
-
 ## Current Milestone: Ecosystem Maintenance & Operations
 
 **Goal:** The ANK Workbench is now functionally complete, type-safe, and covered by end-to-end testing. The project enters a maintenance phase, waiting for future strategic shifts like an AI-driven Model Context Protocol (MCP) server or real-time collaborative editing.
@@ -107,6 +101,12 @@ The Workbench provides real-time feedback through integrated NetVis overlays, al
 **Target features:** 
 - All 93 phases across the 5 major milestones have been completed.
 - The project is now in a maintenance and operational state.
+
+---
+
+## What We've Built
+
+
 
 ---
 
@@ -308,6 +308,12 @@ Large-topology visualization performance:
 - Scale navigation with search, selection, focus modes 
 
 **Note:** Paused to pursue v1.3. Can be resumed or integrated into future milestones.
+
+---
+
+## Requirements
+
+
 
 ---
 

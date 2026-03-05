@@ -3,7 +3,7 @@ layout: default
 section: projects
 ---
 
-# EclipsePhoto
+# Project: EclipsePhoto
 
 <span class="status-badge status-active">Active</span>
 
@@ -11,23 +11,31 @@ section: projects
 
 ---
 
-## Concept
+## Contents
 
-A "fire and forget" Raspberry Pi-based controller for autonomous solar eclipse photography. It coordinates a camera (via gphoto2) and a high-end mount (ZWO AM5 / Benro Polaris via INDI) to capture a complete eclipse sequence from C1 to C4 without manual intervention.
-
-The system prioritizes reliability and autonomy for "one-shot" astronomical events, handling crescent-aware guiding, exposure ramping (Holy Grail), and error recovery via watchdogs. By automating the technical execution, it allows the photographer to experience the eclipse while the system ensures data integrity and capture success.
-
-A "fire and forget" Raspberry Pi-based controller for autonomous solar eclipse photography. It coordinates a camera (via gphoto2) and a high-end mount (ZWO AM5 / Benro Polaris via INDI) to capture a complete eclipse sequence from C1 to C4 without manual intervention.
-
-Reliability and autonomy for a "one-shot" astronomical event. The system handles guiding, exposure ramping (Holy Grail), and error recovery (watchdogs) so the photographer can experience the eclipse while the system secures the data.
-
----
+- [What This Is](#what-this-is)
+- [Core Value](#core-value)
+- [Key Features](#key-features)
+- [Requirements](#requirements)
+- [Key Decisions](#key-decisions)
 
 ## Quick Facts
 
 | | |
 |---|---|
 | **Status** | Active |
+
+---
+
+## What This Is
+
+A "fire and forget" Raspberry Pi-based controller for autonomous solar eclipse photography. It coordinates a camera (via gphoto2) and a high-end mount (ZWO AM5 / Benro Polaris via INDI) to capture a complete eclipse sequence from C1 to C4 without manual intervention.
+
+---
+
+## Core Value
+
+Reliability and autonomy for a "one-shot" astronomical event. The system handles guiding, exposure ramping (Holy Grail), and error recovery (watchdogs) so the photographer can experience the eclipse while the system secures the data.
 
 ---
 
@@ -38,6 +46,12 @@ Reliability and autonomy for a "one-shot" astronomical event. The system handles
 - **INDI Integration:** Native control for AM5 and Polaris mounts.
 - **Mission Control Interface:** Mobile app (FastAPI/BLE) for telemetry (guiding accuracy, exposure curves, sensor health) rather than live-streaming.
 - **Resilience:** USB watchdog, auto-resume on power failure, and "best-effort" background data backup.
+
+---
+
+## Requirements
+
+
 
 ---
 

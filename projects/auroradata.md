@@ -13,23 +13,13 @@ section: projects
 
 ## Contents
 
-- [Concept](#concept)
+- [What This Is](#what-this-is)
 - [Why We're Building It](#why-were-building-it)
+- [Core Value](#core-value)
 - [Current Milestone: v2.0 - Advanced Forecasting System](#current-milestone-v20-advanced-forecasting-system)
 - [Key Decisions](#key-decisions)
+- [Requirements](#requirements)
 - [Roadmap](#roadmap)
-
-## Concept
-
-A specialized tool for Australian aurora observers that solves the "should I drive 60 minutes?" problem. It combines real-time solar wind data (NOAA), substorm trigger logic (Bz/HP trends), and local weather (ACCESS-G model) to provide actionable advice.
-
-Providing a single, definitive "Go/No-Go" score that accounts for both space weather potential and local terrestrial conditions (travel time, clouds, moon).
-
-A specialized tool for Australian aurora observers that solves the "should I drive 60 minutes?" problem. It combines real-time solar wind data (NOAA), substorm trigger logic (Bz/HP trends), and local weather (ACCESS-G model) to provide actionable advice.
-
-Providing a single, definitive "Go/No-Go" score that accounts for both space weather potential and local terrestrial conditions (travel time, clouds, moon).
-
----
 
 ## Quick Facts
 
@@ -39,9 +29,21 @@ Providing a single, definitive "Go/No-Go" score that accounts for both space wea
 
 ---
 
+## What This Is
+
+A specialized tool for Australian aurora observers that solves the "should I drive 60 minutes?" problem. It combines real-time solar wind data (NOAA), substorm trigger logic (Bz/HP trends), and local weather (ACCESS-G model) to provide actionable advice.
+
+---
+
 ## Why We're Building It
 
 Existing tools like the Glendale app are powerful but difficult to use, and many sources lack the localized Australian context and travel-time "trade-off" logic required for confident planning. This tool aims to maximize observation success by providing a clear, advice-driven indicator of when to leave for a site.
+
+---
+
+## Core Value
+
+Providing a single, definitive "Go/No-Go" score that accounts for both space weather potential and local terrestrial conditions (travel time, clouds, moon).
 
 ---
 
@@ -63,6 +65,12 @@ Existing tools like the Glendale app are powerful but difficult to use, and many
 - **Primary Data:** NOAA SWPC JSON products (Solar Wind) and Text products (Hemispheric Power).
 - **Weather Model:** ACCESS-G via Open-Meteo for Australian accuracy.
 - **Future Expansion:** Design hooks for "Astro Predictor" (seeing, transparency) and Telegram alerts.
+
+---
+
+## Requirements
+
+
 
 ---
 

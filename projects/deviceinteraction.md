@@ -15,21 +15,94 @@ section: network-automation
 
 ## Contents
 
-- [Concept](#concept)
+- [Code Samples](#code-samples)
+- [What This Is](#what-this-is)
+- [Core Value](#core-value)
 - [Current Milestone: v1.1 Complete Testing Stack](#current-milestone-v11-complete-testing-stack)
+- [Requirements](#requirements)
 - [Context](#context)
 - [Constraints](#constraints)
 - [Key Decisions](#key-decisions)
 
-## Concept
+## Code Samples
 
-A fast, simple, and ergonomic Rust library and CLI for network device interaction and automated testing. It provides essential PyATS capabilities—testbed management, CLI parsing, and state verification—without the complexity, serving as a focused component in a broader network automation toolkit.
+### connectivity-check.yaml
 
-The framework enables rapid, type-safe validation of network device state by streamlining the entire interaction loop: connecting to devices (real, simulated, or mocked), executing commands, parsing structured output, and verifying correctness—all with the performance and safety guarantees of Rust.
+```yaml
+# Example Verification Suite
+# Demonstrates common network state checks.
 
-A fast, simple, and ergonomic Rust library and CLI for network device interaction and automated testing. Provides the essential PyATS capabilities—testbed management, CLI parsing, and state verification—without the complexity, as a focused component in a broader network automation toolkit.
+name: "Connectivity Audit"
+tests:
+  # Check if the uplink interface is up on the spine
+  - device: "spine-1"
+    check: "interface_up"
+    interface: "GigabitEthernet0/1"
+    within: "30s"
 
-Enable rapid, type-safe validation of network device state through streamlined device interaction: connect to devices (real, simulated, or mocked), execute commands, parse structured output, and verify correctness—all with the performance and safety guarantees of Rust.
+  # Check for a critical route
+  - device: "spine-1"
+    check: "route_exists"
+    destination: "10.0.0.0/8"
+
+  # Verify connectivity to an external target
+  - device: "spine-1"
+    check: "ping"
+    target: "8.8.8.8"
+    threshold: 0.0
+
+```
+
+### lab-testbed.yaml
+
+```yaml
+# Example Testbed for Device Interaction Framework
+# This testbed demonstrates a mix of Mock and real SSH devices.
+
+testbed:
+  name: example-lab
+  credentials:
+    default:
+      username: admin
+      password: admin_password
+
+devices:
+  # A core spine router using Mock backend for development
+  spine-1:
+    type: router
+    os: cisco_ios
+    role: spine
+    tags: [core, datacenter-1]
+    connections:
+      mock:
+        protocol: mock
+        ip: 127.0.0.1
+
+  # A leaf switch using SSH for production
+  leaf-1:
+    type: switch
+    os: cisco_ios
+    role: leaf
+    tags: [access, rack-1]
+    connections:
+      ssh:
+        protocol: ssh
+        ip: 10.1.1.10
+        port: 22
+
+  # Another leaf switch
+  leaf-2:
+    type: switch
+    os: cisco_ios
+    role: leaf
+    tags: [access, rack-2]
+    connections:
+      ssh:
+        protocol: ssh
+        ip: 10.1.1.11
+        port: 22
+
+```
 
 ---
 
@@ -41,6 +114,18 @@ Enable rapid, type-safe validation of network device state through streamlined d
 
 ---
 
+## What This Is
+
+A fast, simple, and ergonomic Rust library and CLI for network device interaction and automated testing. Provides the essential PyATS capabilities—testbed management, CLI parsing, and state verification—without the complexity, as a focused component in a broader network automation toolkit.
+
+---
+
+## Core Value
+
+Enable rapid, type-safe validation of network device state through streamlined device interaction: connect to devices (real, simulated, or mocked), execute commands, parse structured output, and verify correctness—all with the performance and safety guarantees of Rust.
+
+---
+
 ## Current Milestone: v1.1 Complete Testing Stack
 
 **Goal:** Complete the original vision by adding code-first verification framework and user-facing CLI tool, enabling end-to-end device testing workflow.
@@ -49,6 +134,12 @@ Enable rapid, type-safe validation of network device state through streamlined d
 - Verification Framework — State assertion API with composable logic and typed results
 - CLI Tool — Interactive and one-shot commands (connect, exec, verify)
 - Testing & Examples — Example testbeds, E2E tests, verification scripts
+
+---
+
+## Requirements
+
+
 
 ---
 

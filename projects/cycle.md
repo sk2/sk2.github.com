@@ -3,9 +3,9 @@ layout: default
 section: agentic-systems
 ---
 
-# Cycle Agent
+# Project: Cycle Agent
 
-<span class="status-badge status-active">Recently Updated</span>
+<span class="status-badge status-active">Last Active: 2026-02-21</span>
 
 [← Back to Autonomous Systems](../agentic-systems)
 
@@ -15,33 +15,23 @@ section: agentic-systems
 
 ## Contents
 
-- [Concept](#concept)
+- [Core Value](#core-value)
 - [Target Audience](#target-audience)
 - [Success Criteria](#success-criteria)
 - [Constraints](#constraints)
 - [Current Status](#current-status)
 
-## Concept
-
-A native SwiftUI training application for iPad and Apple TV that bridges professional cycling hardware (KICKR Core) with dynamic AI-driven workout logic via NATS, visualized in a high-performance SceneKit environment.
-
-A native SwiftUI training application for iPad and Apple TV that bridges professional cycling hardware (KICKR Core) with dynamic AI-driven workout logic via NATS, visualized in a high-performance SceneKit environment.
-
-A native SwiftUI training application for iPad and Apple TV that bridges professional cycling hardware (KICKR Core) with dynamic AI-driven workout logic via NATS, visualized in a high-performance SceneKit environment.
-
-A native SwiftUI training application for iPad and Apple TV that bridges professional cycling hardware (KICKR Core) with dynamic AI-driven workout logic via NATS, visualized in a high-performance SceneKit environment.
-
-A native SwiftUI training application for iPad and Apple TV that bridges professional cycling hardware (KICKR Core) with dynamic AI-driven workout logic via NATS, visualized in a high-performance SceneKit environment.
-
-A native SwiftUI training application for iPad and Apple TV that bridges professional cycling hardware (KICKR Core) with dynamic AI-driven workout logic via NATS, visualized in a high-performance SceneKit environment.
-
----
-
 ## Quick Facts
 
 | | |
 |---|---|
-| **Status** | Active |
+| **Status** | Last Active: 2026-02-21 |
+
+---
+
+## Core Value
+
+A native SwiftUI training application for iPad and Apple TV that bridges professional cycling hardware (KICKR Core) with dynamic AI-driven workout logic via NATS, visualized in a high-performance SceneKit environment.
 
 ---
 

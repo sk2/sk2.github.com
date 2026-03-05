@@ -5,7 +5,7 @@ section: agentic-systems
 
 # HealthyPi Ecosystem
 
-<span class="status-badge status-active">Recently Updated</span>
+<span class="status-badge status-active">Last Active: 2026-02-20</span>
 
 [← Back to Autonomous Systems](../agentic-systems)
 
@@ -15,34 +15,24 @@ section: agentic-systems
 
 ## Contents
 
-- [Concept](#concept)
+- [Core Value](#core-value)
 - [Vision](#vision)
 - [Constraints](#constraints)
 - [Target Outcomes](#target-outcomes)
 - [Current Milestone: v1.1 Hardware Ingest (HealthyPi 6 + Move)](#current-milestone-v11-hardware-ingest-healthypi-6-move)
 - [Current Status](#current-status)
 
-## Concept
-
-A modular, agent-aware health monitoring ecosystem that translates raw biometric data from HealthyPi hardware (6 and Move) into actionable insights and automated interventions.
-
-A modular, agent-aware health monitoring ecosystem that translates raw biometric data from HealthyPi hardware (6 and Move) into actionable insights and automated interventions.
-
-A modular, agent-aware health monitoring ecosystem that translates raw biometric data from HealthyPi hardware (6 and Move) into actionable insights and automated interventions.
-
-A modular, agent-aware health monitoring ecosystem that translates raw biometric data from HealthyPi hardware (6 and Move) into actionable insights and automated interventions.
-
-A modular, agent-aware health monitoring ecosystem that translates raw biometric data from HealthyPi hardware (6 and Move) into actionable insights and automated interventions.
-
-A modular, agent-aware health monitoring ecosystem that translates raw biometric data from HealthyPi hardware (6 and Move) into actionable insights and automated interventions.
-
----
-
 ## Quick Facts
 
 | | |
 |---|---|
-| **Status** | Active |
+| **Status** | Last Active: 2026-02-20 |
+
+---
+
+## Core Value
+
+A modular, agent-aware health monitoring ecosystem that translates raw biometric data from HealthyPi hardware (6 and Move) into actionable insights and automated interventions.
 
 ---
 

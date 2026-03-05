@@ -13,45 +13,37 @@ section: projects
 
 ## Contents
 
-- [Concept](#concept)
+- [What This Is](#what-this-is)
+- [Core Value](#core-value)
+- [Requirements](#requirements)
 - [Context](#context)
 - [Constraints](#constraints)
 - [Key Decisions](#key-decisions)
 - [Current Status](#current-status)
 
-## Concept
+## Quick Facts
+
+| | |
+|---|---|
+| **Status** | Recently Updated |
+
+---
+
+## What This Is
 
 A generative psytrance synthesis engine with real-time TUI controls. Creates complete tracks driven by a multi-level energy model, with live playback, step editing, and WAV export. Currently produces high-quality procedural psytrance but lacks workflow features for capturing ideas and iterating efficiently.
 
-Energy-driven generative music that sounds professional and lets users quickly explore variations.
+---
 
-A generative psytrance synthesis engine with real-time TUI controls. Creates complete tracks driven by a multi-level energy model, with live playback, step editing, and WAV export. Currently produces high-quality procedural psytrance but lacks workflow features for capturing ideas and iterating efficiently.
-
-Energy-driven generative music that sounds professional and lets users quickly explore variations.
-
-A generative psytrance synthesis engine with real-time TUI controls. Creates complete tracks driven by a multi-level energy model, with live playback, step editing, and WAV export. Currently produces high-quality procedural psytrance but lacks workflow features for capturing ideas and iterating efficiently.
-
-Energy-driven generative music that sounds professional and lets users quickly explore variations.
-
-A generative psytrance synthesis engine with real-time TUI controls. Creates complete tracks driven by a multi-level energy model, with live playback, step editing, and WAV export. Currently produces high-quality procedural psytrance but lacks workflow features for capturing ideas and iterating efficiently.
-
-Energy-driven generative music that sounds professional and lets users quickly explore variations.
-
-A generative psytrance synthesis engine with real-time TUI controls. Creates complete tracks driven by a multi-level energy model, with live playback, step editing, and WAV export. Currently produces high-quality procedural psytrance but lacks workflow features for capturing ideas and iterating efficiently.
-
-Energy-driven generative music that sounds professional and lets users quickly explore variations.
-
-A generative psytrance synthesis engine with real-time TUI controls. Creates complete tracks driven by a multi-level energy model, with live playback, step editing, and WAV export. Currently produces high-quality procedural psytrance but lacks workflow features for capturing ideas and iterating efficiently.
+## Core Value
 
 Energy-driven generative music that sounds professional and lets users quickly explore variations.
 
 ---
 
-## Quick Facts
+## Requirements
 
-| | |
-|---|---|
-| **Status** | Active |
+
 
 ---
 

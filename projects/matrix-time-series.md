@@ -16,80 +16,30 @@ section: projects
 ## Contents
 
 - [Concept](#concept)
+- [Architecture](#architecture)
 - [Features](#features)
-- [Use Cases](#use-cases)
+- [Current Status](#current-status)
+- [What This Is](#what-this-is)
+- [Core Value](#core-value)
 - [Current Milestone: v1.1 Streaming](#current-milestone-v11-streaming)
+- [Problem It Solves](#problem-it-solves)
+- [Requirements](#requirements)
+- [Context](#context)
 - [Key Decisions](#key-decisions)
+- [Use Cases](#use-cases)
 - [Why Rust + Polars?](#why-rust-polars)
 - [Technical Details](#technical-details)
 - [Current Status](#current-status)
 
 ## Concept
 
-Time series analysis often requires a trade-off between slow Python libraries and complex manual implementations. **matrix-profile-rs** eliminates this friction by providing Matrix Profile algorithms (STOMP, SCRIMP++, SCAMP) in native Rust, achieving C-level performance with the ergonomic usability of a Polars-integrated API.
-
-The library enables pattern discovery (motifs), anomaly detection (discords), and similarity search in univariate time series without requiring domain knowledge or parameter tuning. With 2.5x SIMD speedups and memory-efficient tiling for datasets exceeding RAM (N>10⁶), it allows users to treat complex Matrix Profile operations as simple DataFrame transformations: `df.select(pl.col("ts").mp().stomp(m=20))`.
-
 Time series analysis typically requires either slow Python libraries or complex manual implementation. **matrix-profile-rs** provides Matrix Profile algorithms (STOMP, SCRIMP++, SCAMP) in native Rust with ergonomic APIs for motif discovery and anomaly detection, achieving C-level performance with Python-level usability through Polars integration.
-
-A high-performance Rust implementation of Matrix Profile algorithms for time series analysis with SIMD acceleration, out-of-memory tiling support, and Polars ecosystem integration. Matrix Profiles enable pattern discovery, anomaly detection, and similarity search in univariate time series without domain knowledge or parameter tuning.
-
-Think of it as "find repeating patterns and anomalies in any time series data" with a simple API: `df.select(pl.col("ts").mp().stomp(m=20))` for Polars users, or direct Rust APIs for maximum performance and scale.
-
-Time series analysis requires identifying:
-- **Repeating patterns** (motifs): "This sensor pattern happened 15 times before failure"
-- **Anomalies** (discords): "This heartbeat segment is unlike any other"
-- **Similar segments**: "Find all sequences similar to this known good pattern"
-
-Existing solutions:
-- **Python libraries (stumpy)**: Slow, JIT dependencies, awkward array manipulation
-- **Manual implementation**: Complex algorithms, easy to get wrong, poor performance
-- **Academic prototypes**: Not production-ready, missing ergonomics
-
-matrix-profile-rs provides production-quality implementations with:
-- Native performance (2.5x SIMD speedup, no JIT warmup)
-- Clean APIs (`.motifs(k=3)` instead of array indexing)
-- Scalability (N>10^6 via memory-efficient tiling)
-- Polars integration (treat Matrix Profiles as DataFrame operations)
-
-**Performance at scale with ergonomic APIs** — achieve 2.5x speedup via SIMD, handle datasets larger than RAM via tiling, while maintaining simple `.motifs(k)` / `.discords(k)` interfaces.
 
 ---
 
-## Usage
+## Architecture
 
-**Polars Integration (Recommended):**
-```python
-import polars as pl
-import matrix_profile_rs
 
-df = pl.read_csv("telemetry.csv")
-
-# Compute Matrix Profile using STOMP algorithm
-# 'ts' is the time series column, m=50 is the window size
-df = df.select([
-    pl.col("ts"),
-    pl.col("ts").mp().stomp(m=50).alias("mp")
-])
-
-# Extract top-3 motifs (repeating patterns)
-motifs = df.select(pl.col("mp").mp().top_k_motifs(k=3))
-```
-
-**Rust Native API:**
-```rust
-use matrix_profile_rs::{Stomp, MatrixProfile};
-
-let data = vec![1.0, 2.1, 1.9, 1.1, 2.0, 1.8];
-let m = 3;
-
-// High-performance parallel computation
-let mp = Stomp::new(&data, m)
-    .with_threads(4)
-    .compute()?;
-
-println!("Motifs: {:?}", mp.top_k_motifs(2));
-```
 
 ---
 
@@ -117,27 +67,11 @@ println!("Motifs: {:?}", mp.top_k_motifs(2));
 
 ---
 
-## Use Cases
+## Current Status
 
-**Predictive Maintenance:**
-- Find recurring degradation patterns before failure
-- Detect anomalous sensor behavior
-- Example: Motor vibration patterns indicating bearing wear
-
-**Healthcare:**
-- Identify irregular heartbeat patterns
-- Find repeating movement patterns in activity data
-- Example: ECG anomaly detection for arrhythmia screening
-
-**Finance:**
-- Discover recurring market microstructures
-- Detect anomalous trading patterns
-- Example: Flash crash pattern recognition
-
-**Operations:**
-- Find repeating load patterns for capacity planning
-- Detect anomalous system behavior
-- Example: Server load pattern analysis for autoscaling
+**v1.0 MVP Shipped (2026-02-22)**
+**Current Milestone**: v1.1 Streaming (defining requirements)
+**Progress**: v1.0  complete, v1.1  (planning phase)
 
 ---
 
@@ -145,7 +79,21 @@ println!("Motifs: {:?}", mp.top_k_motifs(2));
 
 | | |
 |---|---|
-| **Status** | Active |
+| **Status** | Recently Updated |
+
+---
+
+## What This Is
+
+A high-performance Rust implementation of Matrix Profile algorithms for time series analysis with SIMD acceleration, out-of-memory tiling support, and Polars ecosystem integration. Matrix Profiles enable pattern discovery, anomaly detection, and similarity search in univariate time series without domain knowledge or parameter tuning.
+
+Think of it as "find repeating patterns and anomalies in any time series data" with a simple API: `df.select(pl.col("ts").mp().stomp(m=20))` for Polars users, or direct Rust APIs for maximum performance and scale.
+
+---
+
+## Core Value
+
+**Performance at scale with ergonomic APIs** — achieve 2.5x speedup via SIMD, handle datasets larger than RAM via tiling, while maintaining simple `.motifs(k)` / `.discords(k)` interfaces.
 
 ---
 
@@ -158,6 +106,32 @@ println!("Motifs: {:?}", mp.top_k_motifs(2));
 - Sliding window: Maintain fixed-size profile over rolling time window
 - Callbacks/notifications: Alert when patterns or anomalies detected in real-time
 - Polars integration: Streaming support in Polars extension trait
+
+---
+
+## Problem It Solves
+
+Time series analysis requires identifying:
+- **Repeating patterns** (motifs): "This sensor pattern happened 15 times before failure"
+- **Anomalies** (discords): "This heartbeat segment is unlike any other"
+- **Similar segments**: "Find all sequences similar to this known good pattern"
+
+Existing solutions:
+- **Python libraries (stumpy)**: Slow, JIT dependencies, awkward array manipulation
+- **Manual implementation**: Complex algorithms, easy to get wrong, poor performance
+- **Academic prototypes**: Not production-ready, missing ergonomics
+
+matrix-profile-rs provides production-quality implementations with:
+- Native performance (2.5x SIMD speedup, no JIT warmup)
+- Clean APIs (`.motifs(k=3)` instead of array indexing)
+- Scalability (N>10^6 via memory-efficient tiling)
+- Polars integration (treat Matrix Profiles as DataFrame operations)
+
+---
+
+## Requirements
+
+
 
 ---
 
@@ -242,6 +216,12 @@ Polars DataFrame (via to_dataframe()) or Rust types
 
 ---
 
+## Context
+
+
+
+---
+
 ## # Codebase State
 
 **Shipped v1.0 (2026-02-22):** 8,705 LOC Rust across 7 phases, 26 plans
@@ -295,6 +275,30 @@ None yet — v1.0 is initial release. Expecting feedback on:
 | Ignore scale tests for CI | N=10k test takes 98s, larger tests minutes | Green CI, manual validation for releases | ✓ Good |
 | Feature-gate Polars integration | Keep default build dependency-light | Default build green, Polars optional | ✓ Good |
 | SCRIMP++ budget-based anytime | User-controlled trade-off: speed vs accuracy |  budget finds motifs  of time | ✓ Good |
+
+---
+
+## Use Cases
+
+**Predictive Maintenance:**
+- Find recurring degradation patterns before failure
+- Detect anomalous sensor behavior
+- Example: Motor vibration patterns indicating bearing wear
+
+**Healthcare:**
+- Identify irregular heartbeat patterns
+- Find repeating movement patterns in activity data
+- Example: ECG anomaly detection for arrhythmia screening
+
+**Finance:**
+- Discover recurring market microstructures
+- Detect anomalous trading patterns
+- Example: Flash crash pattern recognition
+
+**Operations:**
+- Find repeating load patterns for capacity planning
+- Detect anomalous system behavior
+- Example: Server load pattern analysis for autoscaling
 
 ---
 

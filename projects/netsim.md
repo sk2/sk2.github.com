@@ -16,9 +16,17 @@ section: network-automation
 ## Contents
 
 - [Concept](#concept)
+- [Technical Reports](#technical-reports)
+- [Code Samples](#code-samples)
+- [Index](#index)
+- [Running Examples](#running-examples)
+- [Usage](#usage)
 - [Architecture](#architecture)
+- [Roadmap](#roadmap)
+- [The Insight](#the-insight)
+- [Overview](#overview)
+- [Problem It Solves](#problem-it-solves)
 - [Protocols Implemented](#protocols-implemented)
-- [Performance](#performance)
 - [Automation](#automation)
 - [Examples](#examples)
 - [Development Status](#development-status)
@@ -37,9 +45,873 @@ Deterministic tick-based network protocol simulator validating configurations be
 
 Unlike packet-level simulators that focus on bit-level accuracy, this engine focuses on **protocol convergence and state validation**. It mirrors the behavior of real router operating systems, including the separation of RIB and FIB, allowing for the empirical testing of complex routing policies and failure scenarios.
 
+---
+
+## Technical Reports
+
+- [Download Technical Report: paper.pdf](/assets/docs/netsim-paper.pdf)
+- [Download Technical Report: techreport.pdf](/assets/docs/netsim-techreport.pdf)
+
+---
+
+## Code Samples
+
+### README.md
+
+```markdown
+# Network Simulator Examples
+
+A collection of topology scenarios for the Network Simulator, ranging from basic connectivity to advanced protocol designs.
+
+## Index
+
+### Core & Basics
+- **[simple.yaml](simple.yaml)**: Minimal two-host direct connection.
+- **[mixed-network.yaml](mixed-network.yaml)**: Demonstrates Routers, Switches, and Hubs in a single topology.
+- **[ospf-triangle.yaml](ospf-triangle.yaml)**: Basic OSPF triangle with three routers and hosts.
+
+### Routing Protocols (Advanced)
+- **[isis-hierarchical.yaml](isis-hierarchical.yaml)**: **(New)** Multi-area IS-IS with Level 1, Level 2, and L1L2 routers.
+- **[bgp-rr-loop.yaml](docs-bgp-rr-loop.yaml)**: iBGP Route Reflection with ORIGINATOR_ID and CLUSTER_LIST loop prevention.
+- **[bgp-community-policy.yaml](bgp-community-policy.yaml)**: **(New)** BGP standard communities (NO_EXPORT, NO_ADVERTISE) and propagation.
+- **[ospf-basic.yaml](docs-ospf-basic.yaml)**: Standard OSPF two-router setup with ping/traceroute validation.
+
+### High Availability & Tunnels
+- **[bfd-fast-failover.yaml](bfd-fast-failover.yaml)**: **(New)** Demonstrates BFD-triggered sub-second failover for OSPF and BGP.
+- **[gre-overlay.yaml](gre-overlay.yaml)**: **(New)** GRE tunnel over an OSPF underlay, including recursion checks and keepalives.
+
+### MPLS & LDP
+- **[mpls-ldp-oam.yaml](docs-mpls-ldp-oam.yaml)**: LDP signaling, MPLS forwarding, and OAM (LSP Ping/Traceroute).
+
+### L3VPN & Segment Routing
+- **[l3vpn-service-provider.yaml](l3vpn-service-provider.yaml)**: **(New)** L3VPN with VRF isolation, VPNv4 routing, and MPLS transport. [Sample Output](l3vpn-service-provider.md)
+- **[sr-mpls-transport.yaml](sr-mpls-transport.yaml)**: **(New)** Segment Routing MPLS with SRGB, Node-SID, and label-switched paths. [Sample Output](sr-mpls-transport.md)
+
+### Scale & Benchmarking
+- **[data-center.yaml](data-center.yaml)**: Large-scale leaf-spine data center topology.
+- **[service-provider.yaml](service-provider.yaml)**: Hierarchical OSPF design with 148+ devices.
+- **[large-enterprise.yaml](large-enterprise.yaml)**: Complex three-tier enterprise model with 400+ devices.
+- **[wan-mesh.yaml](wan-mesh.yaml)**: Full-mesh WAN connectivity.
+
+### Traffic & Names
+- **[names-traffic-small.yaml](names-traffic-small.yaml)**: Demonstrates the `names:` registry and basic traffic generation.
+- **[names-traffic-medium.yaml](names-traffic-medium.yaml)**: More complex traffic generation patterns.
+
+## Running Examples
+
+To run an example and see the results:
+```bash
+netsim run examples/isis-hierarchical.yaml
+```
+
+To validate a file's syntax and build logic without running the simulation:
+```bash
+netsim validate examples/isis-hierarchical.yaml
+```
+
+```
+
+### bfd-fast-failover.yaml
+
+```yaml
+name: bfd-fast-failover
+description: |
+  BFD fast failover example demonstrating OSPF and BGP reaction to link failures.
+  
+  Topology:
+  - Triangle of routers (r1, r2, r3)
+  - r1 and r2 have a primary link with BFD enabled.
+  - OSPF and BGP run over the links.
+  
+  Scenario:
+  - Simulation converges.
+  - Event at tick 1000: r1-r2 interface goes down.
+  - Observation: BFD detects failure, OSPF/BGP tear down sessions immediately without waiting for protocol dead timers.
+
+devices:
+  - name: r1
+    type: router
+    router_id: 1.1.1.1
+    interfaces:
+      - name: to-r2
+        ip: 10.0.12.1/24
+        ospf: { area: 0, bfd: true }
+      - name: to-r3
+        ip: 10.0.13.1/24
+        ospf: { area: 0 }
+    bgp:
+      as: 65001
+      neighbors:
+        - ip: 10.0.12.2
+          remote_as: 65002
+          bfd: true
+    bfd:
+      default_min_tx: 100
+      default_min_rx: 100
+      default_multiplier: 3
+
+  - name: r2
+    type: router
+    router_id: 2.2.2.2
+    interfaces:
+      - name: to-r1
+        ip: 10.0.12.2/24
+        ospf: { area: 0, bfd: true }
+      - name: to-r3
+        ip: 10.0.23.2/24
+        ospf: { area: 0 }
+    bgp:
+      as: 65002
+      neighbors:
+        - ip: 10.0.12.1
+          remote_as: 65001
+          bfd: true
+    bfd:
+      default_min_tx: 100
+      default_min_rx: 100
+      default_multiplier: 3
+
+  - name: r3
+    type: router
+    router_id: 3.3.3.3
+    interfaces:
+      - name: to-r1
+        ip: 10.0.13.3/24
+        ospf: { area: 0 }
+      - name: to-r2
+        ip: 10.0.23.3/24
+        ospf: { area: 0 }
+
+links:
+  - endpoints: [r1:to-r2, r2:to-r1]
+  - endpoints: [r1:to-r3, r3:to-r1]
+  - endpoints: [r2:to-r3, r3:to-r2]
+
+events:
+  - at: 1000
+    interface_down: { device: r1, interface: to-r2 }
+    label: primary-link-failure
+
+script:
+  - at: 500
+    device: r1
+    command: show bfd
+  - at: 500
+    device: r1
+    command: show bgp summary
+  - at: 1010  # Immediately after failure
+    device: r1
+    command: show bfd
+  - at: 1010
+    device: r1
+    command: show bgp summary
+  - at: 1010
+    device: r1
+    command: show ospf neighbors
+  - at: 1500  # After reconvergence
+    device: r1
+    command: show ip route
+
+```
+
+### bgp-community-policy.yaml
+
+```yaml
+name: bgp-community-policy
+description: |
+  BGP propagation example across multiple ASes.
+  
+  Topology:
+  - AS 65001 (r1): Originator.
+  - AS 65002 (r2): Intermediate Transit.
+  - AS 65003 (r3): External Peer.
+  
+  Scenario:
+  - r1 originates a network.
+  - Observation: r2 and r3 receive the route.
+
+  Simulator note:
+  - Well-known community semantics (NO_EXPORT / NO_ADVERTISE) are implemented in the core,
+    but YAML does not currently provide a route-origination attachment surface to set
+    communities on originated prefixes.
+
+devices:
+  - name: r1
+    type: router
+    router_id: 1.1.1.1
+    interfaces:
+      - name: lo0
+        ip: 1.1.1.1/32
+        ospf: { area: 0 }
+      - name: eth0
+        ip: 10.0.12.1/24
+        ospf: { area: 0 }
+    bgp:
+      as: 65001
+      networks: ["10.1.0.0/24"]
+      neighbors:
+        - ip: 10.0.12.2
+          remote_as: 65002
+          send_community: true
+
+  - name: r2
+    type: router
+    router_id: 2.2.2.2
+    interfaces:
+      - name: lo0
+        ip: 2.2.2.2/32
+        ospf: { area: 0 }
+      - name: eth0
+        ip: 10.0.12.2/24
+        ospf: { area: 0 }
+      - name: eth1
+        ip: 10.0.23.2/24
+        ospf: { area: 0 }
+    bgp:
+      as: 65002
+      neighbors:
+        - ip: 10.0.12.1
+          remote_as: 65001
+        - ip: 10.0.23.3
+          remote_as: 65003
+
+  - name: r3
+    type: router
+    router_id: 3.3.3.3
+    interfaces:
+      - name: lo0
+        ip: 3.3.3.3/32
+        ospf: { area: 0 }
+      - name: eth0
+        ip: 10.0.23.3/24
+        ospf: { area: 0 }
+    bgp:
+      as: 65003
+      neighbors:
+        - ip: 10.0.23.2
+          remote_as: 65002
+
+links:
+  - endpoints: [r1:eth0, r2:eth0]
+  - endpoints: [r2:eth1, r3:eth0]
+
+script:
+  - at: 2000
+    device: r2
+    command: show bgp summary
+  - at: converged
+    device: r2
+    command: show bgp
+  - at: converged + 500
+    device: r2
+    command: show bgp
+  - at: converged
+    device: r3
+    command: show bgp
+
+```
+
+### bgp-ipv6-multi-as.yaml
+
+```yaml
+name: "BGP IPv6 Multi-AS Topology"
+description: "Reference topology with eBGP, iBGP, route reflection for IPv6"
+routers:
+  - name: R1
+    asn: 65001
+    interfaces:
+      - name: eth0
+        ipv4: "10.0.1.1/24"
+        ipv6: "2001:db8:1::1/64"
+      - name: eth1
+        ipv4: "10.0.12.1/24"
+        ipv6: "2001:db8:12::1/64"
+    bgp:
+      router_id: "1.1.1.1"
+      address_families:
+        - ipv6_unicast
+      neighbors:
+        - peer_ip: "2001:db8:12::2"
+          peer_asn: 65002
+          address_families:
+            - ipv6_unicast
+      redistribute:
+        - connected
+        - static
+        - ospfv3
+
+  - name: R2
+    asn: 65002
+    interfaces:
+      - name: eth0
+        ipv4: "10.0.2.1/24"
+        ipv6: "2001:db8:2::1/64"
+      - name: eth1
+        ipv4: "10.0.12.2/24"
+        ipv6: "2001:db8:12::2/64"
+      - name: eth2
+        ipv4: "10.0.23.2/24"
+        ipv6: "2001:db8:23::2/64"
+    bgp:
+      router_id: "2.2.2.2"
+      address_families:
+        - ipv6_unicast
+      neighbors:
+        - peer_ip: "2001:db8:12::1"
+          peer_asn: 65001
+          address_families:
+            - ipv6_unicast
+        - peer_ip: "2001:db8:23::3"
+          peer_asn: 65002
+          address_families:
+            - ipv6_unicast
+      redistribute:
+        - connected
+
+  - name: R3
+    asn: 65002
+    interfaces:
+      - name: eth0
+        ipv4: "10.0.3.1/24"
+        ipv6: "2001:db8:3::1/64"
+      - name: eth1
+        ipv4: "10.0.23.3/24"
+        ipv6: "2001:db8:23::3/64"
+    bgp:
+      router_id: "3.3.3.3"
+      address_families:
+        - ipv6_unicast
+      route_reflector_client: true
+      neighbors:
+        - peer_ip: "2001:db8:23::2"
+          peer_asn: 65002
+          address_families:
+            - ipv6_unicast
+
+links:
+  - source: R1:eth1
+    target: R2:eth1
+  - source: R2:eth2
+    target: R3:eth1
+
+```
+
+### capture-profiles.yaml
+
+```yaml
+# Minimal topology demonstrating  capture profiles.
+
+# Topology metadata
+name: capture-profiles
+description: Capture profile example with OSPF-only capture on a node
+
+devices:
+  - name: R1
+    type: router
+    router_id: 10.0.0.1
+    interfaces:
+      - name: eth0
+        ip: 10.0.12.1/24
+
+  - name: R2
+    type: router
+    router_id: 10.0.0.2
+    interfaces:
+      - name: eth0
+        ip: 10.0.12.2/24
+
+links:
+  - endpoints: [R1:eth0, R2:eth0]
+
+ospf:
+  routers: [R1, R2]
+
+capture_profiles:
+  ospf_only:
+    filter: "proto ospf"
+    output: "captures/{node}_ospf.pcap"
+    scope:
+      nodes: ["R1"]
+    mode: capture_time
+
+capture:
+  profiles: ["ospf_only"]
+
+```
+
+### chaos-simple.yaml
+
+```yaml
+# Chaos Engineering Example - Simple Failure Injection
+#
+# Demonstrates basic failure patterns and cascade rules for chaos testing.
+# This topology models a simple network where probabilistic link failures
+# test resilience and demonstrate cascade behavior.
+
+name: chaos-simple
+description: Basic chaos monkey pattern with probabilistic failures and cascades
+
+devices:
+  - name: router-1
+    type: router
+    router_id: 1.1.1.1
+    interfaces:
+      - name: eth0
+        ip: 10.0.1.1/24
+      - name: eth1
+        ip: 10.0.2.1/24
+
+  - name: router-2
+    type: router
+    router_id: 2.2.2.2
+    interfaces:
+      - name: eth0
+        ip: 10.0.1.2/24
+      - name: eth1
+        ip: 10.0.3.1/24
+
+  - name: host-1
+    type: host
+    interfaces:
+      - name: eth0
+        ip: 10.0.2.10/24
+        gateway: 10.0.2.1
+
+  - name: host-2
+    type: host
+    interfaces:
+      - name: eth0
+        ip: 10.0.3.10/24
+        gateway: 10.0.3.1
+
+links:
+  - endpoints: [router-1:eth0, router-2:eth0]
+    latency_ms: 1
+
+  - endpoints: [router-1:eth1, host-1:eth0]
+    latency_ms: 1
+
+  - endpoints: [router-2:eth1, host-2:eth0]
+    latency_ms: 1
+
+# Failure pattern: Chaos monkey - random link failures
+failure_patterns:
+  - name: chaos-monkey
+    trigger: !probabilistic
+      check_interval: 100  # Check every 100 ticks
+      probability: 0.1     #  chance of failure at each check
+    selector:
+      all: true  # Target all links
+    action: fail_random_link
+    recovery: !after_ticks
+      ticks: 50  # Recover after 50 ticks (50ms)
+
+# Cascade rule: When router fails, downstream host fails
+cascade_rules:
+  - name: router-failure-cascade
+    trigger: !dependency_based
+      primary_selector:
+        link_name_pattern: "router-*"
+      cascade_selector:
+        link_name_pattern: "host-*"
+      relationship: downstream
+    action: fail_devices
+    recovery: !permanent
+    delay: 10  # 10 tick delay before cascade fires
+
+```
+
+### containerlab-bridge.yaml
+
+```yaml
+# Example topology showing an external TAP bridge.
+#
+# NOTE: This uses a host TAP interface name (e.g. tap0).
+
+devices:
+  - name: sw1
+    type: Switch
+
+  - name: ext0
+    type: External
+    tap:
+      interface_name: tap0
+
+links:
+  - endpoints: ["ext0:tap0", "sw1:port0"]
+
+```
+
+### data-center.yaml
+
+```yaml
+name: data-center
+description: |
+  Data center spine-leaf topology with 2 spine routers and 4 leaf switches.
+  Each leaf connects to both spines for redundancy. Servers are attached
+  to leaf switches.
+
+devices:
+  # Spine layer (routers for L3 routing)
+  - name: spine1
+    type: router
+    router_id: 10.255.1.1
+    interfaces:
+      - name: eth0
+        ip: 10.0.11.1/30
+        ospf: { area: 0, cost: 1 }
+      - name: eth1
+        ip: 10.0.12.1/30
+        ospf: { area: 0, cost: 1 }
+      - name: eth2
+        ip: 10.0.13.1/30
+        ospf: { area: 0, cost: 1 }
+      - name: eth3
+        ip: 10.0.14.1/30
+        ospf: { area: 0, cost: 1 }
+
+  - name: spine2
+    type: router
+    router_id: 10.255.1.2
+    interfaces:
+      - name: eth0
+        ip: 10.0.21.1/30
+        ospf: { area: 0, cost: 1 }
+      - name: eth1
+        ip: 10.0.22.1/30
+        ospf: { area: 0, cost: 1 }
+      - name: eth2
+        ip: 10.0.23.1/30
+        ospf: { area: 0, cost: 1 }
+      - name: eth3
+        ip: 10.0.24.1/30
+        ospf: { area: 0, cost: 1 }
+
+  # Leaf layer (routers with switch ports for servers)
+  - name: leaf1
+    type: router
+    router_id: 10.255.2.1
+    interfaces:
+      - name: spine1
+        ip: 10.0.11.2/30
+        ospf: { area: 0, cost: 1 }
+      - name: spine2
+        ip: 10.0.21.2/30
+        ospf: { area: 0, cost: 1 }
+      - name: servers
+        ip: 10.1.1.1/24
+        ospf: { area: 0, cost: 10 }
+
+  - name: leaf2
+    type: router
+    router_id: 10.255.2.2
+    interfaces:
+      - name: spine1
+        ip: 10.0.12.2/30
+        ospf: { area: 0, cost: 1 }
+      - name: spine2
+        ip: 10.0.22.2/30
+        ospf: { area: 0, cost: 1 }
+      - name: servers
+        ip: 10.1.2.1/24
+        ospf: { area: 0, cost: 10 }
+
+  - name: leaf3
+    type: router
+    router_id: 10.255.2.3
+    interfaces:
+      - name: spine1
+        ip: 10.0.13.2/30
+        ospf: { area: 0, cost: 1 }
+      - name: spine2
+        ip: 10.0.23.2/30
+        ospf: { area: 0, cost: 1 }
+      - name: servers
+        ip: 10.1.3.1/24
+        ospf: { area: 0, cost: 10 }
+
+  - name: leaf4
+    type: router
+    router_id: 10.255.2.4
+    interfaces:
+      - name: spine1
+        ip: 10.0.14.2/30
+        ospf: { area: 0, cost: 1 }
+      - name: spine2
+        ip: 10.0.24.2/30
+        ospf: { area: 0, cost: 1 }
+      - name: servers
+        ip: 10.1.4.1/24
+        ospf: { area: 0, cost: 10 }
+
+  # Access switches for servers
+  - name: tor1
+    type: switch
+    interfaces:
+      - name: uplink
+      - name: port1
+      - name: port2
+      - name: port3
+
+  - name: tor2
+    type: switch
+    interfaces:
+      - name: uplink
+      - name: port1
+      - name: port2
+      - name: port3
+
+  - name: tor3
+    type: switch
+    interfaces:
+      - name: uplink
+      - name: port1
+      - name: port2
+
+  - name: tor4
+    type: switch
+    interfaces:
+      - name: uplink
+      - name: port1
+      - name: port2
+
+  # Servers (rack 1 - web tier)
+  - name: web1
+    type: host
+    interfaces:
+      - name: eth0
+        ip: 10.1.1.10/24
+        gateway: 10.1.1.1
+
+  - name: web2
+    type: host
+    interfaces:
+      - name: eth0
+        ip: 10.1.1.11/24
+        gateway: 10.1.1.1
+
+  - name: web3
+    type: host
+    interfaces:
+      - name: eth0
+        ip: 10.1.1.12/24
+        gateway: 10.1.1.1
+
+  # Servers (rack 2 - app tier)
+  - name: app1
+    type: host
+    interfaces:
+      - name: eth0
+        ip: 10.1.2.10/24
+        gateway: 10.1.2.1
+
+  - name: app2
+    type: host
+    interfaces:
+      - name: eth0
+        ip: 10.1.2.11/24
+        gateway: 10.1.2.1
+
+  - name: app3
+    type: host
+    interfaces:
+      - name: eth0
+        ip: 10.1.2.12/24
+        gateway: 10.1.2.1
+
+  # Servers (rack 3 - database tier)
+  - name: db1
+    type: host
+    interfaces:
+      - name: eth0
+        ip: 10.1.3.10/24
+        gateway: 10.1.3.1
+
+  - name: db2
+    type: host
+    interfaces:
+      - name: eth0
+        ip: 10.1.3.11/24
+        gateway: 10.1.3.1
+
+  # Servers (rack 4 - storage tier)
+  - name: storage1
+    type: host
+    interfaces:
+      - name: eth0
+        ip: 10.1.4.10/24
+        gateway: 10.1.4.1
+
+  - name: storage2
+    type: host
+    interfaces:
+      - name: eth0
+        ip: 10.1.4.11/24
+        gateway: 10.1.4.1
+
+links:
+  # Spine to leaf (full mesh)
+  - endpoints: [spine1:eth0, leaf1:spine1]
+  - endpoints: [spine1:eth1, leaf2:spine1]
+  - endpoints: [spine1:eth2, leaf3:spine1]
+  - endpoints: [spine1:eth3, leaf4:spine1]
+
+  - endpoints: [spine2:eth0, leaf1:spine2]
+  - endpoints: [spine2:eth1, leaf2:spine2]
+  - endpoints: [spine2:eth2, leaf3:spine2]
+  - endpoints: [spine2:eth3, leaf4:spine2]
+
+  # Leaf to ToR switches
+  - endpoints: [leaf1:servers, tor1:uplink]
+  - endpoints: [leaf2:servers, tor2:uplink]
+  - endpoints: [leaf3:servers, tor3:uplink]
+  - endpoints: [leaf4:servers, tor4:uplink]
+
+  # Servers to ToR switches
+  - endpoints: [tor1:port1, web1:eth0]
+  - endpoints: [tor1:port2, web2:eth0]
+  - endpoints: [tor1:port3, web3:eth0]
+
+  - endpoints: [tor2:port1, app1:eth0]
+  - endpoints: [tor2:port2, app2:eth0]
+  - endpoints: [tor2:port3, app3:eth0]
+
+  - endpoints: [tor3:port1, db1:eth0]
+  - endpoints: [tor3:port2, db2:eth0]
+
+  - endpoints: [tor4:port1, storage1:eth0]
+  - endpoints: [tor4:port2, storage2:eth0]
+
+script:
+  # Verify spine routing and OSPF
+  - at: converged
+    device: spine1
+    command: show ip route
+
+  - at: converged
+    device: spine1
+    command: show ospf neighbors
+
+  # Web to database connectivity (cross-rack)
+  - at: converged + 100
+    device: web1
+    command: ping 10.1.3.10
+
+  # Trace path through fabric
+  - at: converged + 2s
+    device: web1
+    command: traceroute 10.1.4.10
+
+  # App to database (adjacent racks)
+  - at: converged + 3s
+    device: app1
+    command: ping 10.1.3.11
+
+```
+
+---
+
+## Usage
+
+
+
+---
+
+## Architecture
+
+
+
+---
+
+## Roadmap
+
+- IPv6 support
+- RSVP-TE for traffic engineering
+- Enhanced MPLS L3VPN features
+- VLANs and 802.1Q tagging
+
+See `.planning/ROADMAP.md` for full roadmap.
+
+- [x] Tick-based execution with deterministic ordering — v1.0
+- [x] Queue-based packet flow between devices — v1.0
+- [x] Convergence detection via FIB stability — v1.0
+- [x] Device trait with interfaces, queues, and counters — v1.0
+- [x] RIB/FIB separation with admin distance selection — v1.0
+- [x] Ethernet framing and IPv4 forwarding — v1.0
+- [x] ARP resolution with cache and request/reply — v1.0
+- [x] ICMP echo, TTL exceeded, destination unreachable — v1.0
+- [x] ping, traceroute, show commands — v1.0
+- [x] OSPF adjacency, LSA flooding, SPF calculation — v1.0
+- [x] Multi-hop routing via LSDB synchronization — v1.0
+
+**v1.1 Scale & Features (15 requirements):**
+- [x] Tokio parallel device processing (REQ-ENGINE-006) — v1.1
+- [x] 100+ device topology benchmarks — v1.1
+- [x] YAML/JSON topology file loading (REQ-TOPO-002) — v1.1
+- [x] Structured logging with tracing (REQ-OBS-001) — v1.1
+- [x] Packet capture export (REQ-OBS-002) — v1.1
+- [x] Multi-access OSPF with DR/BDR (REQ-OSPF-008) — v1.1
+- [x] Latency/loss modeling hooks (REQ-WIRE-002/003) — v1.1
+- [x] iBGP and eBGP routing protocol (REQ-BGP-001) — v1.1
+- [x] Name resolution via centralized registry (REQ-DNS-001) — v1.1
+- [x] Traffic generation (CBR, Poisson, Burst) — v1.1
+- [x] Realistic benchmark scenarios with traffic — v1.1
+
+**v1.2 Engine Hardening (14 requirements):**
+- [x] Quiescence detection (control plane packet tracking) — v1.2
+- [x] Custom convergence hooks (enter/sustain/exit callbacks) — v1.2
+- [x] Dynamic wire removal with graceful/immediate modes — v1.2
+- [x] Dynamic device removal with cascade cleanup — v1.2
+- [x] Tick .2
+
+**v1.3 Automation (11 requirements):**
+- [x] Scheduled events at specific simulation ticks — v1.3
+- [x] Python bindings via PyO3 (netsim-py package) — v1.3
+- [x] REST API for remote simulation control — v1.3
+- [x] OpenAPI documentation and SSE real-time events — v1.3
+
+**v1.4 Observability & Export (47 requirements):**
+- [x] Export Infrastructure (EXP-01 through EXP-08) — v1.4
+  - SimulationClock for tick-to-wallclock conversion
+  - ExportSink trait (file/UDP/memory) with non-blocking I/O
+  - MemoryBudget with VecDeque ring buffers
+  - StreamingWriter for tick-based flushing
+- [x] Pcap Export (PCAP-01 through PCAP-10) — v1.4
+  - Pcap/pcapng file export with Wireshark compatibility
+  - Wall-clock timestamps (microsecond/nanosecond precision)
+  - Per-interface filtering with glob patterns
+- [x] NetFlow v9 Export (NF9-01 through NF9-18) — v1.4
+  - 5-tuple flow aggregation with tick-based timeouts
+  - Template and data record generation via netgauze-flow-pkt
+  - UDP streaming to port 2055
+- [x] IPFIX Export (IPFIX-01 through IPFIX-11) — v1.4
+  - RFC 7011 compliance with version 10 headers
+  - + code reuse via FlowKey/FlowRecord/FlowTable re-exports
+  - Enterprise IE registration API
+
+---
+
+## Quick Facts
+
+| | |
+|---|---|
+| **Status** | Recently Updated |
+
+---
+
+## The Insight
+
 Network simulation usually falls into two traps: it's either too slow (VM-based emulation) or too abstract (mathematical models). **netsim** takes a middle path-deterministic, tick-based protocol simulation. It doesn't emulate the kernel; it simulates the logic of routing protocols. This allows you to validate massive topologies in seconds, ensuring that a configuration change won't cause a routing loop before it ever hits a real router.
 
+---
+
+## Overview
+
 netsim is a deterministic, tick-based network protocol simulator that validates network configurations before production deployment. It provides protocol-level fidelity with guaranteed reproducibility: same topology always produces same results.
+
+---
+
+## Problem It Solves
 
 Network engineers need to validate configurations before deploying to production. Current options:
 
@@ -48,54 +920,6 @@ Network engineers need to validate configurations before deploying to production
 - **Production testing**: Risky, causes outages when configs have errors.
 
 netsim provides fast, deterministic simulation with protocol-level fidelity. Catch routing loops, unreachable hosts, and misconfigurations before touching production.
-
----
-
-## Architecture
-
-- **Tick-based execution**: Deterministic, reproducible simulations (~1ms per tick).
-- **RIB/FIB separation**: Mirrors real router behavior for high-fidelity state validation.
-- **Convergence detection**: Automatically detects network stabilization to minimize simulation time.
-- **Scripted commands**: Diagnostics can be executed at specific ticks or immediately after convergence.
-
----
-
-## Protocols Implemented
-
-- **Routing**: OSPF (point-to-point, Area 0, LSA Types 1/2, Dijkstra SPF), IS-IS (L1/L2 hierarchical, LSP flooding), BGP (iBGP/eBGP, communities, route propagation).
-- **MPLS**: LDP label distribution, label push/swap/pop operations, MPLS OAM.
-- **Resilience**: BFD (bidirectional forwarding detection, async mode).
-- **Tunneling**: GRE encapsulation, VRF isolation (L3VPN foundations).
-- **Layer 2/3**: ARP request/reply, ICMP echo (ping), Time Exceeded (traceroute).
-
----
-
-## Performance
-
-Simulates 100+ device topologies in seconds. Generates structured JSON output for seamless integration into CI/CD pipelines.
-
----
-
-## Automation
-
-```python
-import netsim_py
-
-engine = netsim_py.Engine()
-engine.load_topology("topology.yaml")
-engine.run_until_converged()
-engine.execute_command("router1", "show ip route")
-```
-
-Python API available via PyO3 bindings in `crates/netsim-py` for programmatic access and integration with existing Python workflows.
-
----
-
-## Quick Facts
-
-| | |
-|---|---|
-| **Status** | Active |
 
 ---
 
@@ -123,6 +947,12 @@ Automatically detects when network stabilizes (no routing changes for N ticks). 
 ## # Wires as Devices
 
 Links are first-class simulation participants, enabling future latency/loss modeling without architectural changes.
+
+---
+
+## Protocols Implemented
+
+
 
 ---
 
@@ -307,6 +1137,21 @@ netsim run large-topology.yaml --max-ticks 50000
 
 **ASCII:** Human-readable tables (default)
 **JSON:** Machine-parseable for scripting and CI/CD
+
+---
+
+## Automation
+
+```python
+import netsim_py
+
+engine = netsim_py.Engine()
+engine.load_topology("topology.yaml")
+engine.run_until_converged()
+engine.execute_command("router1", "show ip route")
+```
+
+Python API available via PyO3 bindings in `crates/netsim-py` for programmatic access and integration with existing Python workflows.
 
 ---
 

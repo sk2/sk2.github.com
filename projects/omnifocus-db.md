@@ -3,7 +3,7 @@ layout: default
 section: projects
 ---
 
-# OmniFocus DB CLI (omnifocus-db)
+# Project: OmniFocus DB CLI (omnifocus-db)
 
 <span class="status-badge status-active">Last Active: 2026-02-16</span>
 
@@ -15,56 +15,32 @@ section: projects
 
 ## Contents
 
-- [Concept](#concept)
+- [What This Is](#what-this-is)
+- [Core Value](#core-value)
 - [Stated Constraints](#stated-constraints)
+- [Requirements](#requirements)
 - [Key Decisions](#key-decisions)
 - [Current Status](#current-status)
-
-## Concept
-
-A Python-based CLI that bypasses slow AppleScript/TypeScript layers to read directly from the OmniFocus SQLite database on macOS. It provides structured, token-efficient data (JSON/Text) to agents for lightning-fast project listing, inbox analysis, and context gathering.
-
-- **Zero-Latency Context:** Near-instant retrieval of projects and tasks without the overhead of the OmniFocus app or AppleScript.
-- **Agent-Optimized:** Focused on providing dense, low-token representations of the user's task list.
-- **Safety First:** Read-only access by default to prevent database corruption while OmniFocus is active.
-
-A Python-based CLI that bypasses slow AppleScript/TypeScript layers to read directly from the OmniFocus SQLite database on macOS. It provides structured, token-efficient data (JSON/Text) to agents for lightning-fast project listing, inbox analysis, and context gathering.
-
-- **Zero-Latency Context:** Near-instant retrieval of projects and tasks without the overhead of the OmniFocus app or AppleScript.
-- **Agent-Optimized:** Focused on providing dense, low-token representations of the user's task list.
-- **Safety First:** Read-only access by default to prevent database corruption while OmniFocus is active.
-
-A Python-based CLI that bypasses slow AppleScript/TypeScript layers to read directly from the OmniFocus SQLite database on macOS. It provides structured, token-efficient data (JSON/Text) to agents for lightning-fast project listing, inbox analysis, and context gathering.
-
-- **Zero-Latency Context:** Near-instant retrieval of projects and tasks without the overhead of the OmniFocus app or AppleScript.
-- **Agent-Optimized:** Focused on providing dense, low-token representations of the user's task list.
-- **Safety First:** Read-only access by default to prevent database corruption while OmniFocus is active.
-
-A Python-based CLI that bypasses slow AppleScript/TypeScript layers to read directly from the OmniFocus SQLite database on macOS. It provides structured, token-efficient data (JSON/Text) to agents for lightning-fast project listing, inbox analysis, and context gathering.
-
-- **Zero-Latency Context:** Near-instant retrieval of projects and tasks without the overhead of the OmniFocus app or AppleScript.
-- **Agent-Optimized:** Focused on providing dense, low-token representations of the user's task list.
-- **Safety First:** Read-only access by default to prevent database corruption while OmniFocus is active.
-
-A Python-based CLI that bypasses slow AppleScript/TypeScript layers to read directly from the OmniFocus SQLite database on macOS. It provides structured, token-efficient data (JSON/Text) to agents for lightning-fast project listing, inbox analysis, and context gathering.
-
-- **Zero-Latency Context:** Near-instant retrieval of projects and tasks without the overhead of the OmniFocus app or AppleScript.
-- **Agent-Optimized:** Focused on providing dense, low-token representations of the user's task list.
-- **Safety First:** Read-only access by default to prevent database corruption while OmniFocus is active.
-
-A Python-based CLI that bypasses slow AppleScript/TypeScript layers to read directly from the OmniFocus SQLite database on macOS. It provides structured, token-efficient data (JSON/Text) to agents for lightning-fast project listing, inbox analysis, and context gathering.
-
-- **Zero-Latency Context:** Near-instant retrieval of projects and tasks without the overhead of the OmniFocus app or AppleScript.
-- **Agent-Optimized:** Focused on providing dense, low-token representations of the user's task list.
-- **Safety First:** Read-only access by default to prevent database corruption while OmniFocus is active.
-
----
 
 ## Quick Facts
 
 | | |
 |---|---|
-| **Status** | Active |
+| **Status** | Last Active: 2026-02-16 |
+
+---
+
+## What This Is
+
+A Python-based CLI that bypasses slow AppleScript/TypeScript layers to read directly from the OmniFocus SQLite database on macOS. It provides structured, token-efficient data (JSON/Text) to agents for lightning-fast project listing, inbox analysis, and context gathering.
+
+---
+
+## Core Value
+
+- **Zero-Latency Context:** Near-instant retrieval of projects and tasks without the overhead of the OmniFocus app or AppleScript.
+- **Agent-Optimized:** Focused on providing dense, low-token representations of the user's task list.
+- **Safety First:** Read-only access by default to prevent database corruption while OmniFocus is active.
 
 ---
 
@@ -74,6 +50,12 @@ A Python-based CLI that bypasses slow AppleScript/TypeScript layers to read dire
 - **Target App:** OmniFocus 4 (Direct Version).
 - **Language:** Python (for ease of development and robust SQLite/Agent library support).
 - **Access:** Direct SQLite reading (bypassing Official APIs).
+
+---
+
+## Requirements
+
+
 
 ---
 

@@ -11,33 +11,14 @@ section: projects
 
 ---
 
-## Concept
+## Contents
 
-An exploration-focused audio processing system using Raspberry Pi and microphone arrays. It focuses on spatial audio (ToA, beamforming) and classification (vehicles, wildlife) using an "analyst" agent approach.
-
-The ability to capture, localize, and classify complex soundscapes on edge devices or via remote streaming, providing structured insights to an agent framework.
-
-An exploration-focused audio processing system using Raspberry Pi and microphone arrays. It focuses on spatial audio (ToA, beamforming) and classification (vehicles, wildlife) using an "analyst" agent approach.
-
-The ability to capture, localize, and classify complex soundscapes on edge devices or via remote streaming, providing structured insights to an agent framework.
-
-An exploration-focused audio processing system using Raspberry Pi and microphone arrays. It focuses on spatial audio (ToA, beamforming) and classification (vehicles, wildlife) using an "analyst" agent approach.
-
-The ability to capture, localize, and classify complex soundscapes on edge devices or via remote streaming, providing structured insights to an agent framework.
-
-An exploration-focused audio processing system using Raspberry Pi and microphone arrays. It focuses on spatial audio (ToA, beamforming) and classification (vehicles, wildlife) using an "analyst" agent approach.
-
-The ability to capture, localize, and classify complex soundscapes on edge devices or via remote streaming, providing structured insights to an agent framework.
-
-An exploration-focused audio processing system using Raspberry Pi and microphone arrays. It focuses on spatial audio (ToA, beamforming) and classification (vehicles, wildlife) using an "analyst" agent approach.
-
-The ability to capture, localize, and classify complex soundscapes on edge devices or via remote streaming, providing structured insights to an agent framework.
-
-An exploration-focused audio processing system using Raspberry Pi and microphone arrays. It focuses on spatial audio (ToA, beamforming) and classification (vehicles, wildlife) using an "analyst" agent approach.
-
-The ability to capture, localize, and classify complex soundscapes on edge devices or via remote streaming, providing structured insights to an agent framework.
-
----
+- [What This Is](#what-this-is)
+- [Core Value](#core-value)
+- [Stakeholders](#stakeholders)
+- [Context](#context)
+- [Requirements](#requirements)
+- [Key Decisions](#key-decisions)
 
 ## Quick Facts
 
@@ -47,10 +28,28 @@ The ability to capture, localize, and classify complex soundscapes on edge devic
 
 ---
 
+## What This Is
+
+An exploration-focused audio processing system using Raspberry Pi and microphone arrays. It focuses on spatial audio (ToA, beamforming) and classification (vehicles, wildlife) using an "analyst" agent approach.
+
+---
+
+## Core Value
+
+The ability to capture, localize, and classify complex soundscapes on edge devices or via remote streaming, providing structured insights to an agent framework.
+
+---
+
 ## Stakeholders
 
 - Primary: Developer (exploration & play)
 - Secondary: Agent Framework (consumer of audio analysis)
+
+---
+
+## Context
+
+
 
 ---
 
@@ -67,6 +66,12 @@ The ability to capture, localize, and classify complex soundscapes on edge devic
 - Hardware: Raspberry Pi (v4+).
 - Audio Range: Human audible range (sampling rates ~44.1-48kHz).
 - Platform: Edge (Pi) or remote streaming to desktop.
+
+---
+
+## Requirements
+
+
 
 ---
 

@@ -15,39 +15,20 @@ section: signal-processing
 
 ## Contents
 
-- [Concept](#concept)
+- [Technical Reports](#technical-reports)
+- [What This Is](#what-this-is)
+- [Core Value](#core-value)
 - [Current Milestone: v2.0 Target Tracking & Visualization](#current-milestone-v20-target-tracking-visualization)
 - [Current State (v1.0 shipped 2026-02-16)](#current-state-v10-shipped-2026-02-16)
+- [Requirements](#requirements)
 - [Context](#context)
 - [Constraints](#constraints)
 - [Key Decisions](#key-decisions)
 - [Current Status](#current-status)
 
-## Concept
+## Technical Reports
 
-A distributed multi-beam signal reflection analysis system based on KrakenSDR hardware. Pi handles data acquisition, Mac/Linux handles compute-intensive DSP. All 4 reflection channels process in parallel with independent Range-Doppler visualization, per-beam configuration, and real-time performance monitoring. v2 adds per-beam target tracking with geographic visualization, ADS-B correlation, and detection recording for offline analysis.
-
-Clean, understandable, stable codebase that reliably tracks aircraft in real-time.
-
-A distributed multi-beam signal reflection analysis system based on KrakenSDR hardware. Pi handles data acquisition, Mac/Linux handles compute-intensive DSP. All 4 reflection channels process in parallel with independent Range-Doppler visualization, per-beam configuration, and real-time performance monitoring. v2 adds per-beam target tracking with geographic visualization, ADS-B correlation, and detection recording for offline analysis.
-
-Clean, understandable, stable codebase that reliably tracks aircraft in real-time.
-
-A distributed multi-beam signal reflection analysis system based on KrakenSDR hardware. Pi handles data acquisition, Mac/Linux handles compute-intensive DSP. All 4 reflection channels process in parallel with independent Range-Doppler visualization, per-beam configuration, and real-time performance monitoring. v2 adds per-beam target tracking with geographic visualization, ADS-B correlation, and detection recording for offline analysis.
-
-Clean, understandable, stable codebase that reliably tracks aircraft in real-time.
-
-A distributed multi-beam signal reflection analysis system based on KrakenSDR hardware. Pi handles data acquisition, Mac/Linux handles compute-intensive DSP. All 4 reflection channels process in parallel with independent Range-Doppler visualization, per-beam configuration, and real-time performance monitoring. v2 adds per-beam target tracking with geographic visualization, ADS-B correlation, and detection recording for offline analysis.
-
-Clean, understandable, stable codebase that reliably tracks aircraft in real-time.
-
-A distributed multi-beam signal reflection analysis system based on KrakenSDR hardware. Pi handles data acquisition, Mac/Linux handles compute-intensive DSP. All 4 reflection channels process in parallel with independent Range-Doppler visualization, per-beam configuration, and real-time performance monitoring. v2 adds per-beam target tracking with geographic visualization, ADS-B correlation, and detection recording for offline analysis.
-
-Clean, understandable, stable codebase that reliably tracks aircraft in real-time.
-
-A distributed multi-beam signal reflection analysis system based on KrakenSDR hardware. Pi handles data acquisition, Mac/Linux handles compute-intensive DSP. All 4 reflection channels process in parallel with independent Range-Doppler visualization, per-beam configuration, and real-time performance monitoring. v2 adds per-beam target tracking with geographic visualization, ADS-B correlation, and detection recording for offline analysis.
-
-Clean, understandable, stable codebase that reliably tracks aircraft in real-time.
+- [Download Technical Report: passive-radar-techreport.pdf](/assets/docs/rf-signal-analysis-passive-radar-techreport.pdf)
 
 ---
 
@@ -55,7 +36,19 @@ Clean, understandable, stable codebase that reliably tracks aircraft in real-tim
 
 | | |
 |---|---|
-| **Status** | Active |
+| **Status** | Recently Updated |
+
+---
+
+## What This Is
+
+A distributed multi-beam signal reflection analysis system based on KrakenSDR hardware. Pi handles data acquisition, Mac/Linux handles compute-intensive DSP. All 4 reflection channels process in parallel with independent Range-Doppler visualization, per-beam configuration, and real-time performance monitoring. v2 adds per-beam target tracking with geographic visualization, ADS-B correlation, and detection recording for offline analysis.
+
+---
+
+## Core Value
+
+Clean, understandable, stable codebase that reliably tracks aircraft in real-time.
 
 ---
 
@@ -81,6 +74,12 @@ Clean, understandable, stable codebase that reliably tracks aircraft in real-tim
 - Distributed architecture operational: Pi DAQ → UDP streaming → Mac/Linux processing
 - 4-beam parallel processing via ProcessPoolExecutor
 - Real-time Dash dashboard with 2x2 Range-Doppler grid
+
+---
+
+## Requirements
+
+
 
 ---
 

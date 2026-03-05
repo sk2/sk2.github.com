@@ -13,42 +13,32 @@ section: projects
 
 ## Contents
 
-- [Concept](#concept)
-- [Components](#components)
+- [What This Is](#what-this-is)
+- [Core Value](#core-value)
 - [Architecture Boundary (Core SDK vs Node Runtime)](#architecture-boundary-core-sdk-vs-node-runtime)
 - [Current State](#current-state)
+- [Milestones](#milestones)
+- [Components](#components)
 - [Goals](#goals)
-
-## Concept
-
-A high-performance Rust library providing shared astronomical logic, hardware drivers, and protocol implementations for the OpenAstro ecosystem. It serves as the foundational layer to ensure coordinate math and device behavior remain consistent across all downstream OpenAstro applications.
-
-By centralizing these primitives, the core allows other tools to rely on verified, high-performance implementations of celestial transforms and hardware protocols, reducing duplication and improving system-wide reliability.
-
-OpenAstro Core ("Core SDK") is a high-performance Rust library providing shared astronomical logic, hardware drivers, and protocol implementations for the OpenAstro ecosystem.
-It exists to keep coordinate math, imaging intelligence, and device/protocol behavior consistent across downstream OpenAstro apps.
-
-Downstream apps can rely on correct, consistent coordinate math, imaging intelligence, and device/protocol primitives.
-
----
-
-## Components
-
-- **astro-core**: Shared types (RA, Dec, Angles), coordinate transforms, celestial planning, visibility, and session utilities.
-- **astro-vision**: Image processing — FITS/RAW/SER I/O, statistics, background estimation, star detection, calibration, stacking, registration, exposure intelligence, FITS writing.
-- **astro-sentinel**: AI classification bridge, trigger rules engine, and pipeline API for Sentinel hardware.
-- **astro-indi**: INDI protocol client and device abstraction.
-- **astro-alpaca**: ASCOM Alpaca REST client for modern hardware support.
-- **sony-sdk-rs**: Rust bindings for Sony Camera Remote SDK.
-- **polaris-proto**: Native implementation of the Benro Polaris protocol.
-
----
 
 ## Quick Facts
 
 | | |
 |---|---|
 | **Status** | Active |
+
+---
+
+## What This Is
+
+OpenAstro Core ("Core SDK") is a high-performance Rust library providing shared astronomical logic, hardware drivers, and protocol implementations for the OpenAstro ecosystem.
+It exists to keep coordinate math, imaging intelligence, and device/protocol behavior consistent across downstream OpenAstro apps.
+
+---
+
+## Core Value
+
+Downstream apps can rely on correct, consistent coordinate math, imaging intelligence, and device/protocol primitives.
 
 ---
 
@@ -68,6 +58,12 @@ Downstream apps can rely on correct, consistent coordinate math, imaging intelli
 
 ---
 
+## Milestones
+
+
+
+---
+
 ## # v0.1 Celestial Math *(shipped 2026-02-11)*
 
 Unified `astro-core` coordinate math foundation — angle/RA/Dec primitives, coordinate transforms, time helpers, INDI/Alpaca clients, native drivers, image processing basics, and sentinel triggering.
@@ -83,6 +79,18 @@ Full imaging intelligence engine — sky analysis, exposure recommendations, cal
 ## # v0.3 Advanced Astro *(planned — Phases 11-16)*
 
 Plate solving consumption, co-axial calibration, mosaic planning, planetary imaging, focus/collimation analysis, and pointing models. The features that make this a professional-grade library.
+
+---
+
+## Components
+
+- **astro-core**: Shared types (RA, Dec, Angles), coordinate transforms, celestial planning, visibility, and session utilities.
+- **astro-vision**: Image processing — FITS/RAW/SER I/O, statistics, background estimation, star detection, calibration, stacking, registration, exposure intelligence, FITS writing.
+- **astro-sentinel**: AI classification bridge, trigger rules engine, and pipeline API for Sentinel hardware.
+- **astro-indi**: INDI protocol client and device abstraction.
+- **astro-alpaca**: ASCOM Alpaca REST client for modern hardware support.
+- **sony-sdk-rs**: Rust bindings for Sony Camera Remote SDK.
+- **polaris-proto**: Native implementation of the Benro Polaris protocol.
 
 ---
 

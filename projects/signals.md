@@ -15,25 +15,23 @@ section: signal-processing
 
 ## Contents
 
-- [Concept](#concept)
+- [Technical Reports](#technical-reports)
+- [Visuals](#visuals)
+- [Core Value](#core-value)
 - [Current Milestone: v2.0 — Central Server Integration](#current-milestone-v20-central-server-integration)
 - [Stakeholders](#stakeholders)
 - [Constraints & Assumptions](#constraints-assumptions)
 - [Current Status](#current-status)
 
-## Concept
+## Technical Reports
 
-Transform raw radio spectrum data into an actionable "Signal Census" through automated detection, ML classification, and distributed acquisition.
+- [Download Technical Report: spectra-techreport.pdf](/assets/docs/signals-spectra-techreport.pdf)
 
-Transform raw radio spectrum data into an actionable "Signal Census" through automated detection, ML classification, and distributed acquisition.
+---
 
-Transform raw radio spectrum data into an actionable "Signal Census" through automated detection, ML classification, and distributed acquisition.
+## Visuals
 
-Transform raw radio spectrum data into an actionable "Signal Census" through automated detection, ML classification, and distributed acquisition.
-
-Transform raw radio spectrum data into an actionable "Signal Census" through automated detection, ML classification, and distributed acquisition.
-
-Transform raw radio spectrum data into an actionable "Signal Census" through automated detection, ML classification, and distributed acquisition.
+![search_topk_example](/images/search_topk_example.png)
 
 ---
 
@@ -41,7 +39,13 @@ Transform raw radio spectrum data into an actionable "Signal Census" through aut
 
 | | |
 |---|---|
-| **Status** | Active |
+| **Status** | Recently Updated |
+
+---
+
+## Core Value
+
+Transform raw radio spectrum data into an actionable "Signal Census" through automated detection, ML classification, and distributed acquisition.
 
 ---
 

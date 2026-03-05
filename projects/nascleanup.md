@@ -3,7 +3,7 @@ layout: default
 section: projects
 ---
 
-# NAS Cleanup & Intelligence
+# Project: NAS Cleanup & Intelligence
 
 <span class="status-badge status-active">Recently Updated</span>
 
@@ -15,18 +15,11 @@ section: projects
 
 ## Contents
 
-- [Concept](#concept)
 - [Architecture](#architecture)
-- [Tech Stack](#tech-stack)
 - [Goal](#goal)
 - [Key Components](#key-components)
+- [Tech Stack](#tech-stack)
 - [Current Status](#current-status)
-
-## Concept
-
-Developing...
-
----
 
 ## Architecture
 
@@ -38,18 +31,11 @@ Developing...
 
 ---
 
-## Tech Stack
-
-- **Rust:** `tokio`, `rayon`, `blake3`, `jwalk`, `ignore`, `clap` (CLI), `ratatui` (TUI).
-- **DSM Integration:** `syno-api` (if available/needed), BTRFS ioctls.
-
----
-
 ## Quick Facts
 
 | | |
 |---|---|
-| **Status** | Active |
+| **Status** | Recently Updated |
 
 ---
 
@@ -66,6 +52,13 @@ Develop a high-performance Rust application to manage large-scale Synology NAS f
 - **Deduplicator:** Logic to identify bit-for-bit and fuzzy duplicates.
 - **Cleaner:** Workflow-specific cleanup rules (e.g., ASIair/Astrophotography and Conventional RAW/Sidecar management).
 - **TUI:** Terminal interface for reviewing and acting on findings.
+
+---
+
+## Tech Stack
+
+- **Rust:** `tokio`, `rayon`, `blake3`, `jwalk`, `ignore`, `clap` (CLI), `ratatui` (TUI).
+- **DSM Integration:** `syno-api` (if available/needed), BTRFS ioctls.
 
 ---
 

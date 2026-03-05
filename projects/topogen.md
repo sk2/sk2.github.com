@@ -15,38 +15,218 @@ section: network-automation
 
 ## Contents
 
-- [Concept](#concept)
-- [Features](#features)
-- [Technical Depth](#technical-depth)
+- [Technical Reports](#technical-reports)
+- [Code Samples](#code-samples)
+- [Quick start](#quick-start)
+- [Examples (by use case)](#examples-by-use-case)
+- [Python examples (by use case)](#python-examples-by-use-case)
+- [Topology type mapping](#topology-type-mapping)
+- [Validation policy](#validation-policy)
+- [What This Is](#what-this-is)
+- [Core Value](#core-value)
 - [Current Milestone: v1.5 - Intent-Based Overlays & Schematic Enrichment](#current-milestone-v15-intent-based-overlays-schematic-enrichment)
+- [Latest Release: v1.4 Interactive Editing & Incremental Validation (shipped 2026-03-02)](#latest-release-v14-interactive-editing-incremental-validation-shipped-2026-03-02)
 - [Next Milestone Goals](#next-milestone-goals)
+- [Requirements](#requirements)
 - [Context](#context)
 - [Constraints](#constraints)
 - [Key Decisions](#key-decisions)
 - [Ecosystem Context](#ecosystem-context)
 
-## Concept
+## Technical Reports
 
-A Rust-based topology generation engine that consolidates complex network graph algorithms into a unified, high-performance library. It enables the creation of realistic, validated network structures ranging from small lab setups to massive data center and backbone environments.
-
-A Rust-based network topology generator with Python bindings that consolidates scattered topology generation logic from AutoNetKit, simulation tools, and visualization tools. Generates realistic data center, WAN, and random graph topologies with proper structure, design patterns, and realistic parameters. Outputs custom YAML format for use across the network engineering tool ecosystem.
-
-Network engineers can quickly generate realistic, validated network topologies without implementing complex algorithms from scratch.
+- [Download Technical Report: topogen-techreport.pdf](/assets/docs/topogen-topogen-techreport.pdf)
+- [Download Technical Report: topogen-paper.pdf](/assets/docs/topogen-topogen-paper.pdf)
 
 ---
 
-## Features
+## Code Samples
 
-- **Data Center Patterns**: Generate leaf-spine and fat-tree topologies with realistic tier ratios and oversubscription parameters.
-- **WAN & Backbone Models**: Create ring, mesh, POP-based, and hierarchical structures based on real-world ISP patterns.
-- **Random Graph Models**: Support for Barabási-Albert (scale-free) and Watts-Strogatz (small-world) algorithms for research and scale testing.
-- **Traffic Matrix Generation**: Automatically produce demand matrices using gravity models and distance-based weighting.
+### README.md
 
----
+```markdown
+# TopoGen Example Gallery
 
-## Technical Depth
+Curated config examples live under `examples/configs/`.
+They are organized primarily by use case (directory) and are safe to copy/paste.
 
-The engine is implemented in Rust for maximum performance, allowing for the sub-second generation of 10,000+ node graphs. It exports a standardized YAML format that is consumed across the entire ANK ecosystem, ensuring structural consistency from design to simulation.
+Each config starts with an annotated header block showing how to run it and which knobs to tweak.
+
+## Quick start
+
+```bash
+topogen generate examples/configs/datacenter-lab/fat-tree--lab-k4-cisco--seed42.yaml --output topology.yaml
+topogen validate topology.yaml
+```
+
+## Examples (by use case)
+
+### `datacenter-lab/`
+
+- `examples/configs/datacenter-lab/fat-tree--lab-k4-cisco--seed42.yaml`
+  - Small fat-tree (k=4) with `vendor: cisco` to demonstrate interface renaming.
+- `examples/configs/datacenter-lab/leaf-spine--lab-2spine-4leaf-100g--seed42.yaml`
+  - Tiny leaf-spine fabric for quick validation and iteration.
+- `examples/configs/datacenter-lab/fat-tree--lab-k4--seed42.toml`
+  - Same basic fat-tree lab scenario in TOML format.
+
+### `datacenter-scale/`
+
+- `examples/configs/datacenter-scale/fat-tree--scale-k8--seed7.yaml`
+  - Larger fat-tree (k=8) for scale/perf testing.
+- `examples/configs/datacenter-scale/leaf-spine--prod-4spine-16leaf-400g--seed99.yaml`
+  - Higher-capacity leaf-spine with a redundant spine layer.
+
+### `regional-backbone/`
+
+- `examples/configs/regional-backbone/ring--na-8nodes-modern--seed42.yaml`
+  - Regional WAN ring constrained to NA with a modern bandwidth profile.
+
+### `global-backbone/`
+
+- `examples/configs/global-backbone/mesh--global-6nodes-tier1-modern--seed42.yaml`
+  - Small Tier-1 full-mesh backbone for all-to-all connectivity experiments.
+
+### `enterprise-wan/`
+
+- `examples/configs/enterprise-wan/hierarchical--na-eu-20nodes-variable-standard--seed4242.yaml`
+  - Multi-region (NA+EU) hierarchical WAN with variable bandwidth and standard redundancy.
+
+### `modeling/`
+
+- `examples/configs/modeling/barabasi-albert--scale-free-n100-m3--seed42.yaml`
+  - Scale-free (hub-heavy) random graph model.
+- `examples/configs/modeling/watts-strogatz--small-world-n100-k6-beta0.1--seed42.yaml`
+  - Small-world random graph model with rewiring.
+- `examples/configs/modeling/erdos-renyi--gnp-n50-p0.2--seed42.yaml`
+  - Baseline Erdos-Renyi G(n, p) model.
+
+## Python examples (by use case)
+
+Runnable scripts live under `examples/python/` and are organized by the same use-case directory names as the config gallery.
+
+Notes:
+
+- Scripts print stable stdout: `nodes=... edges=...` or `OK`.
+- If a script writes outputs, it respects `TOPOGEN_EXAMPLE_OUT_DIR` (otherwise uses a temp dir).
+
+### `datacenter-lab/`
+
+- `examples/python/datacenter-lab/generate_fat_tree__k4_cisco_seed42.py`
+  - Small fat-tree (k=4) with Cisco interface naming.
+- `examples/python/datacenter-lab/generate_leaf_spine__2spine_4leaf_100g_seed42.py`
+  - Tiny leaf-spine fabric for quick experiments.
+
+### `datacenter-scale/`
+
+- `examples/python/datacenter-scale/generate_fat_tree__k8_seed7.py`
+  - Larger fat-tree (k=8) for scale/perf sanity checks.
+- `examples/python/datacenter-scale/generate_leaf_spine__4spine_16leaf_400g_seed99.py`
+  - Higher-capacity leaf-spine with 400G spine links.
+
+### `regional-backbone/`
+
+- `examples/python/regional-backbone/generate_ring__na_8nodes_seed42.py`
+  - Regional WAN ring constrained to NA.
+
+### `global-backbone/`
+
+- `examples/python/global-backbone/generate_mesh__global_6nodes_seed42.py`
+  - Small WAN mesh topology (all-to-all).
+
+### `enterprise-wan/`
+
+- `examples/python/enterprise-wan/generate_hierarchical_wan__na_eu_20nodes_seed4242.py`
+  - Multi-region (NA+EU) hierarchical WAN with standard redundancy.
+
+### `modeling/`
+
+- `examples/python/modeling/generate_barabasi_albert__n100_m3_seed42.py`
+  - Scale-free random graph model.
+- `examples/python/modeling/generate_watts_strogatz__n100_k6_beta0.1_seed42.py`
+  - Small-world random graph model.
+- `examples/python/modeling/generate_erdos_renyi__n50_p0.2_seed42.py`
+  - Baseline Erdos-Renyi G(n, p) model.
+
+### `workflows/`
+
+- `examples/python/workflows/workflow_generate_export_restore_isomorphic.py`
+  - End-to-end: generate -> export YAML -> restore -> isomorphism check.
+
+### `parity/` (manual-only)
+
+- `examples/python/parity/seeded_cli_vs_python_isomorphism.py`
+  - Seeded parity demo comparing `topogen generate <config>` output with Python API output.
+
+## Topology type mapping
+
+Use-case directories map back to roadmap topology types as follows:
+
+- Datacenter: `datacenter-lab/`, `datacenter-scale/`
+  - Generators: `fat-tree`, `leaf-spine`
+- WAN: `regional-backbone/`, `global-backbone/`, `enterprise-wan/`
+  - Generators: `ring`, `mesh`, `hierarchical`
+- Random graphs: `modeling/`
+  - Generators: `barabasi-albert`, `watts-strogatz`, `erdos-renyi`
+
+## Validation policy
+
+By default, CI runs a smoke subset of example configs driven by `examples/SMOKE.yaml`.
+
+Maintainers can run the full suite (including ignored tests) locally:
+
+```bash
+cargo test --test examples_configs -- --ignored
+```
+
+Python example validation is opt-in (to keep CI fast):
+
+```bash
+TOPOGEN_RUN_ALL_EXAMPLES=1 python -m pytest -q
+```
+
+```
+
+### SMOKE.yaml
+
+```yaml
+# Authoritative smoke subset of example artifacts executed in CI by default.
+#
+# Paths are repo-relative.
+
+configs:
+  # Datacenter
+  - examples/configs/datacenter-lab/fat-tree--lab-k4-cisco--seed42.yaml
+  # Multi-layer
+  - examples/configs/multi-layer-pop-backbone.yaml
+  # WAN
+  - examples/configs/regional-backbone/ring--na-8nodes-modern--seed42.yaml
+  # Access ISP
+  - examples/configs/access-isp/eyeball--regional-1k-subscribers--seed42.yaml
+  # Random
+  - examples/configs/modeling/barabasi-albert--scale-free-n100-m3--seed42.yaml
+  - examples/configs/modeling/erdos-renyi--gnp-n50-p0.2--seed42.yaml
+
+python:
+  # Datacenter
+  - examples/python/datacenter-lab/generate_fat_tree__k4_cisco_seed42.py
+  - examples/python/datacenter-lab/generate_leaf_spine__2spine_4leaf_100g_seed42.py
+  # WAN
+  - examples/python/regional-backbone/generate_ring__na_8nodes_seed42.py
+  - examples/python/global-backbone/generate_mesh__global_6nodes_seed42.py
+  - examples/python/enterprise-wan/generate_hierarchical_wan__na_eu_20nodes_seed4242.py
+  # Access ISP
+  - examples/python/access-isp/generate_eyeball__regional_1k_seed42.py
+  # Random
+  - examples/python/modeling/generate_barabasi_albert__n100_m3_seed42.py
+  - examples/python/modeling/generate_watts_strogatz__n100_k6_beta0.1_seed42.py
+  - examples/python/modeling/generate_erdos_renyi__n50_p0.2_seed42.py
+  # Workflow
+  - examples/python/workflows/workflow_generate_export_restore_isomorphic.py
+  - examples/python/workflows/workflow_multilayer_pop_to_containerlab.py
+  - examples/python/workflows/workflow_eyeball_to_autonetkit.py
+
+```
 
 ---
 
@@ -55,6 +235,18 @@ The engine is implemented in Rust for maximum performance, allowing for the sub-
 | | |
 |---|---|
 | **Status** | Active |
+
+---
+
+## What This Is
+
+A Rust-based network topology generator with Python bindings that consolidates scattered topology generation logic from AutoNetKit, simulation tools, and visualization tools. Generates realistic data center, WAN, and random graph topologies with proper structure, design patterns, and realistic parameters. Outputs custom YAML format for use across the network engineering tool ecosystem.
+
+---
+
+## Core Value
+
+Network engineers can quickly generate realistic, validated network topologies without implementing complex algorithms from scratch.
 
 ---
 
@@ -71,10 +263,22 @@ The engine is implemented in Rust for maximum performance, allowing for the sub-
 
 ---
 
+## Latest Release: v1.4 Interactive Editing & Incremental Validation (shipped 2026-03-02)
+
+
+
+---
+
 ## Next Milestone Goals
 
 - Define v1.1 requirements (fresh `.planning/REQUIREMENTS.md`)
 - Execute v1.1 Perf+Stability milestone
+
+---
+
+## Requirements
+
+
 
 ---
 

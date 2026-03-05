@@ -15,64 +15,106 @@ section: network-automation
 
 ## Contents
 
-- [Concept](#concept)
-- [Features](#features)
+- [Technical Reports](#technical-reports)
+- [Code Samples](#code-samples)
+- [Usage](#usage)
+- [Visuals](#visuals)
+- [What This Is](#what-this-is)
+- [Core Value](#core-value)
 - [Current Milestone: v2.2 Polish & Developer Experience](#current-milestone-v22-polish-developer-experience)
 - [Previous Milestone: Realignment and Cleanup (Post-netc Split)](#previous-milestone-realignment-and-cleanup-post-netc-split)
 - [Latest Shipped: v2.1 Advanced Python Features (2026-02-28)](#latest-shipped-v21-advanced-python-features-2026-02-28)
 - [Previous Shipped](#previous-shipped)
+- [Requirements](#requirements)
 - [Key Decisions](#key-decisions)
 - [Context](#context)
 - [Constraints](#constraints)
 - [Ecosystem Context](#ecosystem-context)
 - [Current Status](#current-status)
 
-## Concept
+## Technical Reports
 
-A Python-native configuration engine for defining a network model and compiling it into a consistent, reviewable plan. It solves the 'type safety vs performance' problem by combining the ergonomics of Pydantic models with a fast Rust graph core (NTE).
-
-As one of the two primary modeling tools in the ecosystem, it offers a high-level, developer-friendly interface for building complex network designs. It uses an explicit intermediate representation and transformation passes (design -> plan -> protocol layers) to ensure architectural consistency across the entire topology.
-
-A Python library for modeling and querying network topologies, backed by a high-performance Rust core (`ank_nte`). Features a two-stage transformation model (Whiteboard → Plan → Protocol Layers), type-safe Pydantic models for nodes/edges/layers, and a composable lazy query API with Rust-backed execution. Ships with "batteries-included" domain models (ISIS, MPLS, EVPN, L3VPN, IXP) in the blueprints/ module.
-
-A clean, consistent API where there's one obvious way to perform each topology operation — predictable naming, return types, and method signatures across the entire public surface.
+- [Download Technical Report: ank-techreport.pdf](/assets/docs/ank-pydantic-ank-techreport.pdf)
 
 ---
 
+## Code Samples
+
+### README.md
+
+```markdown
+# Examples
+
+Example topologies demonstrating ank-pydantic usage patterns.
+
+This directory contains a mix of:
+- Schema-based YAML examples (recommended): load via `Topology.from_yaml()`
+- Legacy role-based YAML examples: kept for reference
+
+## Contents
+
+| Example | Description |
+|---------|-------------|
+| `house_network/` | Schema-based YAML example with custom models + type mappings |
+| `vlans/` | VLAN topology (legacy role-based YAML format) |
+| `two_hosts/` | Minimal topology (legacy role-based YAML format) |
+| `monte_carlo_reliability/` | Monte Carlo reliability example (Python module) |
+| `themes/` | Theme configuration files used by rendering examples |
+
 ## Usage
 
+### Quick start (schema-based YAML)
+
+From the repo root, load the `house_network` schema-based topology:
+
 ```python
-from ank_pydantic import Topology, q
-from blueprints.models import Router, L3Link
+from pathlib import Path
 
-# Initialize topology
-topo = Topology()
+from ank_pydantic import Topology
+from examples.house_network.models import (
+    EDGE_TYPE_MAPPING,
+    NODE_TYPE_MAPPING,
+    EthernetInterface,
+    Host,
+    Router,
+)
 
-# Add devices with type-safe models
-r1 = topo.nodes.add(Router(name="core-01", model="ios-xr"))
-r2 = topo.nodes.add(Router(name="core-02", model="junos"))
+topology = Topology.from_yaml(
+    Path("examples/house_network/house_topology.yaml"),
+    type_mapping=NODE_TYPE_MAPPING,
+    edge_type_mapping=EDGE_TYPE_MAPPING,
+)
 
-# Connect using fluent API
-topo.links.add(L3Link(endpoints=[r1.eth0, r2.eth0]))
+nodes = topology.get_node_models()
 
-# Powerful, chainable queries
-routers = topo.nodes.query(q.model.contains("ios")) \
-                    .filter(q.tags.has("backbone")) \
-                    .models()
+print("Routers:", sum(isinstance(n, Router) for n in nodes))
+print("Hosts:", sum(isinstance(n, Host) for n in nodes))
+print("Interfaces:", sum(isinstance(n, EthernetInterface) for n in nodes))
+```
 
-# Calculate shortest paths via Rust core
-path = topo.nodes.paths_to(r1, r2)
+Expected output:
+
+```text
+Routers: 1
+Hosts: 3
+Interfaces: 9
+```
+
 ```
 
 ---
 
-## Features
+## Visuals
 
-- **Type-Safe Modeling**: Device, interface, and relationship models with strict Pydantic validation.
-- **Rust-Backed Operations**: High-performance graph traversals and queries via PyO3 and petgraph.
-- **Rich Query API**: Chainable filters and traversals that replace manual graph walking with declarative intent.
-- **Multi-Layer Support**: Native modeling of physical, logical, and protocol views within a single graph structure.
-- **Multi-Vendor Generation**: Compiles intent into validated configurations for 11+ major networking platforms.
+![5_10](/images/5_10.png)
+
+![5_8](/images/5_8.png)
+
+![5_9](/images/5_9.png)
+
+![figure_4_43](/images/figure_4_43.png)
+
+![figure_6_2](/images/figure_6_2.png)
 
 ---
 
@@ -80,7 +122,19 @@ path = topo.nodes.paths_to(r1, r2)
 
 | | |
 |---|---|
-| **Status** | Active |
+| **Status** | Recently Updated |
+
+---
+
+## What This Is
+
+A Python library for modeling and querying network topologies, backed by a high-performance Rust core (`ank_nte`). Features a two-stage transformation model (Whiteboard → Plan → Protocol Layers), type-safe Pydantic models for nodes/edges/layers, and a composable lazy query API with Rust-backed execution. Ships with "batteries-included" domain models (ISIS, MPLS, EVPN, L3VPN, IXP) in the blueprints/ module.
+
+---
+
+## Core Value
+
+A clean, consistent API where there's one obvious way to perform each topology operation — predictable naming, return types, and method signatures across the entire public surface.
 
 ---
 
@@ -144,6 +198,12 @@ path = topo.nodes.paths_to(r1, r2)
 - paths_to optimised to <5ms at 10k via Rust-backed neighbour discovery
 - LazyFrame-based QuerySpec with early termination
 - CI performance gates for automated regression detection
+
+---
+
+## Requirements
+
+
 
 ---
 

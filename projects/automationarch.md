@@ -3,7 +3,7 @@ layout: default
 section: network-automation
 ---
 
-# Network Automation Ecosystem - Overall Architecture Definition
+# PROJECT: Network Automation Ecosystem - Overall Architecture Definition
 
 <span class="status-badge status-active">Recently Updated</span>
 
@@ -15,40 +15,132 @@ section: network-automation
 
 ## Contents
 
-- [Concept](#concept)
+- [Technical Reports](#technical-reports)
+- [Code Samples](#code-samples)
+- [Fixture Layout (Canonical)](#fixture-layout-canonical)
+- [Inputs vs Expected Outputs](#inputs-vs-expected-outputs)
+- [Derived Overlay View Contract (`netauto/overlay-view/v0`)](#derived-overlay-view-contract-netautooverlay-viewv0)
+- [Reviewer Workflow (One Command)](#reviewer-workflow-one-command)
+- [What This Is](#what-this-is)
 - [Why We're Doing This](#why-were-doing-this)
 - [Success Metrics](#success-metrics)
 - [Key Decisions](#key-decisions)
 - [Documentation conventions](#documentation-conventions)
 - [Current State](#current-state)
 - [Current Milestone: v3.0 Implementation & Developer Enablement](#current-milestone-v30-implementation-developer-enablement)
+- [Requirements](#requirements)
 - [Current Status](#current-status)
 
-## Concept
+## Technical Reports
 
-This project aims to comprehensively define the **overall architecture of the Network Automation Ecosystem**. This involves understanding how the existing and planned tools (such as `topogen`, `autonetkit`, `netsim`, `netflowsim`, `netvis`, and the `Workbench`), along with strategic initiatives like the "Intelligence Layer," integrate to form a cohesive, unified, and differentiated product.
+- [Download Technical Report: ecosystem-techreport.pdf](/assets/docs/automationarch-ecosystem-techreport.pdf)
 
-The output of this project will be a clearer, more formalized architectural understanding, enabling the identification and discussion of future sub-projects that contribute to the ecosystem's evolution.
+---
 
-This project aims to comprehensively define the **overall architecture of the Network Automation Ecosystem**. This involves understanding how the existing and planned tools (such as `topogen`, `autonetkit`, `netsim`, `netflowsim`, `netvis`, and the `Workbench`), along with strategic initiatives like the "Intelligence Layer," integrate to form a cohesive, unified, and differentiated product.
+## Code Samples
 
-The output of this project will be a clearer, more formalized architectural understanding, enabling the identification and discussion of future sub-projects that contribute to the ecosystem's evolution.
+### README.md
 
-This project aims to comprehensively define the **overall architecture of the Network Automation Ecosystem**. This involves understanding how the existing and planned tools (such as `topogen`, `autonetkit`, `netsim`, `netflowsim`, `netvis`, and the `Workbench`), along with strategic initiatives like the "Intelligence Layer," integrate to form a cohesive, unified, and differentiated product.
+```markdown
+# Examples: Canonical Fixture Projects
 
-The output of this project will be a clearer, more formalized architectural understanding, enabling the identification and discussion of future sub-projects that contribute to the ecosystem's evolution.
+This directory holds canonical, reviewable fixture *projects* for the pinned RFC contracts.
 
-This project aims to comprehensively define the **overall architecture of the Network Automation Ecosystem**. This involves understanding how the existing and planned tools (such as `topogen`, `autonetkit`, `netsim`, `netflowsim`, `netvis`, and the `Workbench`), along with strategic initiatives like the "Intelligence Layer," integrate to form a cohesive, unified, and differentiated product.
+Each fixture is intended to be:
 
-The output of this project will be a clearer, more formalized architectural understanding, enabling the identification and discussion of future sub-projects that contribute to the ecosystem's evolution.
+- Self-contained (inputs + committed expected outputs)
+- Deterministic (expected outputs are stable for re-audit)
+- Enforceable by one repo-local command
 
-This project aims to comprehensively define the **overall architecture of the Network Automation Ecosystem**. This involves understanding how the existing and planned tools (such as `topogen`, `autonetkit`, `netsim`, `netflowsim`, `netvis`, and the `Workbench`), along with strategic initiatives like the "Intelligence Layer," integrate to form a cohesive, unified, and differentiated product.
+See also: [RFC-01.md](RFC-01.md), [RFC-02.md](RFC-02.md), [rfc/rfc-02/live-overlay-stream/v1.0/ACCEPTANCE.md](rfc/rfc-02/live-overlay-stream/v1.0/ACCEPTANCE.md).
 
-The output of this project will be a clearer, more formalized architectural understanding, enabling the identification and discussion of future sub-projects that contribute to the ecosystem's evolution.
+## Fixture Layout (Canonical)
 
-This project aims to comprehensively define the **overall architecture of the Network Automation Ecosystem**. This involves understanding how the existing and planned tools (such as `topogen`, `autonetkit`, `netsim`, `netflowsim`, `netvis`, and the `Workbench`), along with strategic initiatives like the "Intelligence Layer," integrate to form a cohesive, unified, and differentiated product.
+One directory per fixture project:
 
-The output of this project will be a clearer, more formalized architectural understanding, enabling the identification and discussion of future sub-projects that contribute to the ecosystem's evolution.
+```
+examples/
+  minimal-lab/
+    netauto.project
+    network.topo.yaml
+    network.design.yaml
+    README.md
+    expected/
+      *.operational.json
+      overlay/
+        golden.ndjson
+        overlay.view.json
+```
+
+`scripts/check-fixtures` considers a directory a *fixture root* if it is under `examples/*/` and contains `netauto.project`.
+
+## Inputs vs Expected Outputs
+
+Inputs (human-authored or tool inputs):
+
+- `netauto.project` (RFC-02 manifest concept)
+- `*.topo.yaml` (RFC-01 topology sidecar)
+- `*.design.yaml` (RFC-01 design sidecar)
+- Optional `README.md` narrative per fixture
+
+Expected outputs (committed, stable artifacts for review and re-audit):
+
+- `expected/**/*.operational.json`
+  - Must validate against the pinned OperationalTopology v1.0 schema: `rfc/rfc-01/operational-topology/v1.0/schema.json`
+- `expected/overlay/golden.ndjson`
+  - Must validate line-by-line against the pinned Live Overlay Stream v1.0 schema: `rfc/rfc-02/live-overlay-stream/v1.0/schema.json`
+- `expected/overlay/overlay.view.json`
+  - Must match a deterministic fold of `golden.ndjson` as recomputed by `scripts/check-fixtures`
+
+## Derived Overlay View Contract (`netauto/overlay-view/v0`)
+
+The fixture gate recomputes a derived overlay view from `expected/overlay/golden.ndjson` and compares it (semantic JSON equality) to `expected/overlay/overlay.view.json`.
+
+The derived view is a plain JSON object with stable top-level keys:
+
+- `schema`: constant `netauto/overlay-view/v0`
+- `topology_id`: final scoped topology id
+- `fold`: `{dedupe_by: "event_id", order: "transcript", last_event_id: ...}`
+- `topology`: `{nodes: [...], edges: [...]}` (sorted lists)
+- `telemetry`: `{nodes: {...}, edges: {...}}` (maps)
+- `errors`: list (may be empty)
+
+High-level fold rules:
+
+- Process events in transcript order.
+- Dedupe by `event_id` (first occurrence wins).
+- `topology.snapshot` replaces the topology node/edge sets.
+- `topology.node.add/remove` and `topology.edge.add/remove` mutate topology idempotently.
+- `telemetry.snapshot` replaces node/edge telemetry maps.
+- `telemetry.delta` merges metrics (keys present overwrite; absent unchanged; `null` allowed).
+- `error` events append to `errors` and do not mutate topology or telemetry.
+
+Lightweight cross-checks enforced by the gate:
+
+- All overlay events in a fixture must share the same `topology_id`.
+- Telemetry references must exist in the final folded topology state.
+
+## Reviewer Workflow (One Command)
+
+Install pinned validation dependencies:
+
+```bash
+python3 -m pip install -r rfc/rfc-02/live-overlay-stream/v1.0/requirements.txt
+```
+
+Validate all fixtures:
+
+```bash
+python3 scripts/check-fixtures
+```
+
+Validate one fixture:
+
+```bash
+python3 scripts/check-fixtures --fixture examples/minimal-lab
+```
+
+```
 
 ---
 
@@ -56,7 +148,15 @@ The output of this project will be a clearer, more formalized architectural unde
 
 | | |
 |---|---|
-| **Status** | Active |
+| **Status** | Recently Updated |
+
+---
+
+## What This Is
+
+This project aims to comprehensively define the **overall architecture of the Network Automation Ecosystem**. This involves understanding how the existing and planned tools (such as `topogen`, `autonetkit`, `netsim`, `netflowsim`, `netvis`, and the `Workbench`), along with strategic initiatives like the "Intelligence Layer," integrate to form a cohesive, unified, and differentiated product.
+
+The output of this project will be a clearer, more formalized architectural understanding, enabling the identification and discussion of future sub-projects that contribute to the ecosystem's evolution.
 
 ---
 
@@ -169,6 +269,12 @@ This project directly supports the strategic vision outlined in `STRATEGY.md` an
 - All validation gates passing (check-fixtures, check-links)
 
 </details>
+
+---
+
+## Requirements
+
+
 
 ---
 

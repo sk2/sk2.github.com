@@ -15,47 +15,117 @@ section: network-automation
 
 ## Contents
 
-- [Concept](#concept)
-- [Use Cases](#use-cases)
-- [Technical Depth](#technical-depth)
-- [Tech Stack](#tech-stack)
+- [Code Samples](#code-samples)
+- [Core Value](#core-value)
 - [Primary Objectives](#primary-objectives)
 - [Milestones](#milestones)
 - [Current Milestone: v2.1 Performance Optimization](#current-milestone-v21-performance-optimization)
 - [Current State](#current-state)
+- [Requirements](#requirements)
+- [Tech Stack](#tech-stack)
 - [Ecosystem Context](#ecosystem-context)
 - [Key Decisions](#key-decisions)
 - [Current Status](#current-status)
 
-## Concept
+## Code Samples
 
-A performance analysis engine that utilizes analytic queuing models and Monte Carlo simulations to validate network capacity at scale. Unlike packet-level simulators, netflowsim focuses on probabilistic outcomes across billions of traffic flows.
+### scale_validation.rs
 
-`netflowsim` provides rapid, massive-scale network performance analysis by using analytic queuing models and Monte Carlo simulations instead of packet-level discrete event simulation. It enables network engineers to validate topologies and routing strategies against billions of flow iterations in seconds, identify bottlenecks probabilistically, test network resilience under failure scenarios, and project capacity headroom for carrier-scale networks (100k+ nodes).
+```rs
+//! Full-scale validation runner for  empirical testing.
+//!
+//! Runs ScaleValidator at 25k, 50k, 75k, 100k node scales to validate:
+//! - Runtime < 10 minutes at 100k scale
+//! - Peak memory < 4GB at 100k scale
+//! - Throughput measurements at all scales
+//!
+//! Usage: cargo run --release --example scale_validation
 
----
+use netflowsim::profiling::{ScaleValidator, ScaleTestConfig};
 
-## Use Cases
+fn main() {
+    eprintln!("===  Full-Scale Validation ===");
+    eprintln!();
+    eprintln!("Running validation at 25k, 50k, 75k, 100k node scales...");
+    eprintln!("This may take 10-20 minutes depending on hardware.");
+    eprintln!();
 
-- **Capacity Planning**: Identify bottleneck links and compute-bound nodes before traffic growth impacts production.
-- **Resilience Testing**: Probabilistically analyze the impact of link or node failures on overall network throughput and latency.
-- **Routing Strategy Validation**: Compare the performance of different traffic engineering strategies (e.g., ECMP vs RSVP-TE) against realistic demand matrices.
+    let config = ScaleTestConfig::default(); // Uses [25k, 50k, 75k, 100k]
 
----
+    eprintln!("Configuration:");
+    eprintln!("  Scales: {:?}", config.scales);
+    eprintln!("  Average degree: {}", config.avg_degree);
+    eprintln!("  Iterations: {}", config.iterations);
+    eprintln!("  Flow count: {}", config.flow_count);
+    eprintln!();
 
-## Technical Depth
+    match ScaleValidator::run(config) {
+        Ok(results) => {
+            eprintln!();
+            eprintln!("=== Validation Results ===");
+            eprintln!();
+            eprintln!("{:<10} {:<10} {:<15} {:<12} {:<15} {:<10}",
+                "Nodes", "Edges", "Peak Mem (MB)", "Time (s)", "Flows/sec", "Status");
+            eprintln!("{}", "-".repeat(82));
 
-The engine uses M/M/1 and M/D/1 queuing models implemented in a highly parallelized Rust execution environment. It leverages the Rayon crate to distribute Monte Carlo iterations across all available CPU cores, enabling the analysis of massive traffic scenarios in seconds.
+            for result in &results {
+                let status = if result.passed_targets { "PASS" } else { "FAIL" };
+                eprintln!("{:<10} {:<10} {:<15.2} {:<12.2} {:<15.2e} {:<10}",
+                    result.node_count,
+                    result.edge_count,
+                    result.peak_memory_bytes as f64 / 1_000_000.0,
+                    result.wall_time_secs,
+                    result.flows_per_sec,
+                    status
+                );
+            }
 
----
+            eprintln!();
+            eprintln!("=== Target Analysis ===");
+            eprintln!();
 
-## Tech Stack
+            // Analyze 100k results specifically
+            if let Some(result_100k) = results.iter().find(|r| r.node_count == 100_000) {
+                let runtime_pass = result_100k.wall_time_secs < 600.0;
+                let memory_pass = result_100k.peak_memory_bytes < 4_000_000_000;
+                let throughput_pass = result_100k.flows_per_sec > 1_000_000.0;
 
-- **Language:** Rust
-- **Graph Library:** Petgraph
-- **Parallelism:** Rayon
-- **Serialization:** Serde (JSON), GraphML
-- **Visualization:** Martin (Tileserver), MVT (Mapbox Vector Tiles)
+                eprintln!("100k Node Results:");
+                eprintln!("  Runtime:    {:.2}s / 600s target - {}",
+                    result_100k.wall_time_secs,
+                    if runtime_pass { "✓ PASS" } else { "✗ FAIL" }
+                );
+                eprintln!("  Memory:     {:.2}GB / 4.00GB target - {}",
+                    result_100k.peak_memory_bytes as f64 / 1_000_000_000.0,
+                    if memory_pass { "✓ PASS" } else { "✗ FAIL" }
+                );
+                eprintln!("  Throughput: {:.2e} flows/sec / 1.00e6 target - {}",
+                    result_100k.flows_per_sec,
+                    if throughput_pass { "✓ PASS" } else { "✗ FAIL" }
+                );
+
+                eprintln!();
+                if runtime_pass && memory_pass {
+                    eprintln!("✓ SCALE-01 and SCALE-02 requirements SATISFIED");
+                } else {
+                    eprintln!("✗ SCALE-01 and/or SCALE-02 requirements FAILED");
+                }
+
+                if !throughput_pass {
+                    eprintln!("⚠ SCALE-03 throughput target not met (expected, requires algorithm optimization)");
+                }
+            }
+
+            std::process::exit(0);
+        }
+        Err(e) => {
+            eprintln!("ERROR: Validation failed: {}", e);
+            std::process::exit(1);
+        }
+    }
+}
+
+```
 
 ---
 
@@ -63,7 +133,13 @@ The engine uses M/M/1 and M/D/1 queuing models implemented in a highly paralleli
 
 | | |
 |---|---|
-| **Status** | Active |
+| **Status** | Recently Updated |
+
+---
+
+## Core Value
+
+`netflowsim` provides rapid, massive-scale network performance analysis by using analytic queuing models and Monte Carlo simulations instead of packet-level discrete event simulation. It enables network engineers to validate topologies and routing strategies against billions of flow iterations in seconds, identify bottlenecks probabilistically, test network resilience under failure scenarios, and project capacity headroom for carrier-scale networks (100k+ nodes).
 
 ---
 
@@ -157,6 +233,12 @@ See `.planning/MILESTONES.md` for full milestone history.
 
 ---
 
+## Requirements
+
+
+
+---
+
 ## # Validated (v1.0)
 
 - ✓ Simulate 1M+ flows through 10k+ nodes in under 1 second — v1.0 
@@ -236,6 +318,18 @@ See `.planning/MILESTONES.md` for full milestone history.
 - Network configuration management — focus on analysis, not orchestration
 - 4GB memory target — revised to 8-10GB for full feature set (architectural constraint)
 - 1M flows/sec with all features — baseline achievable, feature overhead optimization deferred to v2.1
+
+---
+
+## Tech Stack
+
+- **Language:** Rust
+- **Graph Library:** Petgraph (StableGraph for dynamic mutations)
+- **Parallelism:** Rayon (parallel Monte Carlo execution)
+- **Serialization:** Serde (JSON), Bincode (checkpoints), Postcard (future)
+- **Visualization:** Plotters (PNG/SVG), Martin (Tileserver), MVT (Mapbox Vector Tiles)
+- **Profiling:** DHAT (heap profiling with feature flag)
+- **Math:** statrs (distributions), manual implementations (Pearson correlation, linear regression)
 
 ---
 

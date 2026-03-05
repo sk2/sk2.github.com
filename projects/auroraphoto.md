@@ -11,17 +11,13 @@ section: projects
 
 ---
 
-## Concept
+## Contents
 
-An automated astrophotography system designed to capture high-quality aurora and night sky imagery. The project uses Raspberry Pi "nodes" connected via USB to Sony a7R V/a7 IV cameras, controlled and assisted by an iPhone companion app.
-
-Provides precise, automated control over exposure and focus specifically optimized for aurora "bursts" and star sharpness, while offering field-ready composition tools.
-
-An automated astrophotography system designed to capture high-quality aurora and night sky imagery. The project uses Raspberry Pi "nodes" connected via USB to Sony a7R V/a7 IV cameras, controlled and assisted by an iPhone companion app.
-
-Provides precise, automated control over exposure and focus specifically optimized for aurora "bursts" and star sharpness, while offering field-ready composition tools.
-
----
+- [What This Is](#what-this-is)
+- [Core Value](#core-value)
+- [Success Criteria](#success-criteria)
+- [Requirements](#requirements)
+- [Key Decisions](#key-decisions)
 
 ## Quick Facts
 
@@ -31,12 +27,30 @@ Provides precise, automated control over exposure and focus specifically optimiz
 
 ---
 
+## What This Is
+
+An automated astrophotography system designed to capture high-quality aurora and night sky imagery. The project uses Raspberry Pi "nodes" connected via USB to Sony a7R V/a7 IV cameras, controlled and assisted by an iPhone companion app.
+
+---
+
+## Core Value
+
+Provides precise, automated control over exposure and focus specifically optimized for aurora "bursts" and star sharpness, while offering field-ready composition tools.
+
+---
+
 ## Success Criteria
 
 - **Precise Focus:** Automated "Star Sharpness" (HFR) monitoring and remote focus adjustment via USB.
 - **Exposure Quality:** Capture sequences that preserve aurora beam definition without overblowing or underexposing.
 - **Reliable Field Connection:** Robust communication between iOS and multiple Pi nodes via Wi-Fi/Hotspot.
 - **Composition Assistance:** Functional iPhone overlay with compass and ML-assisted framing.
+
+---
+
+## Requirements
+
+
 
 ---
 

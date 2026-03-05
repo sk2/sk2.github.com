@@ -5,7 +5,7 @@ section: agentic-systems
 
 # Secure Multi-Agent Personal Assistant
 
-<span class="status-badge status-active">Recently Updated</span>
+<span class="status-badge status-active">Last Active: 2026-02-21</span>
 
 [← Back to Autonomous Systems](../agentic-systems)
 
@@ -15,77 +15,37 @@ section: agentic-systems
 
 ## Contents
 
-- [Concept](#concept)
+- [What This Is](#what-this-is)
+- [Core Value](#core-value)
+- [Requirements](#requirements)
 - [Context](#context)
 - [Constraints](#constraints)
 - [Key Decisions](#key-decisions)
 - [Current Status](#current-status)
 
-## Concept
+## Quick Facts
 
-Multi-agent coordination requires strict security boundaries to prevent lateral movement. This assistant demonstrates **containerized isolation** where agents (HealthKit, Home Automation, etc.) coordinate via a NATS message broker. By using per-subject ACLs and a "deny-by-default" security posture, the system ensures that compromise of a single agent cannot cascade through the infrastructure.
+| | |
+|---|---|
+| **Status** | Last Active: 2026-02-21 |
 
-A security-first framework for coordinating specialized agents. It uses NATS for communication and Docker for isolated execution. The orchestrator handles high-level reasoning and workflow execution, while agents perform deterministic tasks.
+---
 
-The system includes 13+ specialized agents: HealthKit, HealthyPi, Hue (home automation), Climate, Calendar, Weather, RSS, Backup Monitor, Screen Time, Network Monitor, Workflow Engine, Notification Gateway, and Audit Anomaly detection. See [Individual Agents](#individual-agents) section below for details.
-
-AI agent systems need strong security boundaries to prevent compromise from cascading:
-
-**Monolithic Agent Systems:**
-- Single point of failure
-- Compromise spreads to all capabilities
-- Difficult to audit actions
-- No privilege separation
-
-**Direct Agent-to-Agent Communication:**
-- Attack surface grows with agent count
-- Difficult to enforce security policies
-- No centralized audit trail
-- Trust relationships complex to manage
-
-**Weak Isolation:**
-- Shared memory or filesystem
-- Credential leakage between agents
-- No network segmentation
-- Resource contention
-
-**Multi-Agent Assistant provides:**
-- Complete agent isolation via containers
-- Message broker enforces communication boundaries
-- Capability-based authorization with time-limited tokens
-- Network policies prevent direct agent-to-agent contact
-- Complete audit trail via OpenTelemetry
-- Pre-approval workflow for sensitive actions
-- Lightweight deterministic agents with cloud LLM orchestrator
+## What This Is
 
 A security-first multi-agent system that coordinates specialized containerized agents (health monitoring, home automation, data aggregation, workflow automation) through a message broker architecture. Each agent runs in isolation with minimal privileges and communicates only through validated message queues, demonstrating production-ready patterns for deploying AI agents in security-critical infrastructure environments. The orchestrator uses cloud LLM reasoning (GPT-4/Claude) while agents remain lightweight and deterministic.
 
-Complete isolation between agents such that compromise of one agent cannot cascade to others or the orchestrator—demonstrating that secure multi-agent systems are practical for both personal and production infrastructure use cases.
+---
 
-A security-first multi-agent system that coordinates specialized containerized agents (health monitoring, home automation, data aggregation, workflow automation) through a message broker architecture. Each agent runs in isolation with minimal privileges and communicates only through validated message queues, demonstrating production-ready patterns for deploying AI agents in security-critical infrastructure environments. The orchestrator uses cloud LLM reasoning (GPT-4/Claude) while agents remain lightweight and deterministic.
-
-Complete isolation between agents such that compromise of one agent cannot cascade to others or the orchestrator—demonstrating that secure multi-agent systems are practical for both personal and production infrastructure use cases.
-
-A security-first multi-agent system that coordinates specialized containerized agents (health monitoring, home automation, data aggregation, workflow automation) through a message broker architecture. Each agent runs in isolation with minimal privileges and communicates only through validated message queues, demonstrating production-ready patterns for deploying AI agents in security-critical infrastructure environments. The orchestrator uses cloud LLM reasoning (GPT-4/Claude) while agents remain lightweight and deterministic.
-
-Complete isolation between agents such that compromise of one agent cannot cascade to others or the orchestrator—demonstrating that secure multi-agent systems are practical for both personal and production infrastructure use cases.
-
-A security-first multi-agent system that coordinates specialized containerized agents (health monitoring, home automation, data aggregation, workflow automation) through a message broker architecture. Each agent runs in isolation with minimal privileges and communicates only through validated message queues, demonstrating production-ready patterns for deploying AI agents in security-critical infrastructure environments. The orchestrator uses cloud LLM reasoning (GPT-4/Claude) while agents remain lightweight and deterministic.
-
-Complete isolation between agents such that compromise of one agent cannot cascade to others or the orchestrator—demonstrating that secure multi-agent systems are practical for both personal and production infrastructure use cases.
-
-A security-first multi-agent system that coordinates specialized containerized agents (health monitoring, home automation, data aggregation, workflow automation) through a message broker architecture. Each agent runs in isolation with minimal privileges and communicates only through validated message queues, demonstrating production-ready patterns for deploying AI agents in security-critical infrastructure environments. The orchestrator uses cloud LLM reasoning (GPT-4/Claude) while agents remain lightweight and deterministic.
+## Core Value
 
 Complete isolation between agents such that compromise of one agent cannot cascade to others or the orchestrator—demonstrating that secure multi-agent systems are practical for both personal and production infrastructure use cases.
 
 ---
 
-## Quick Facts
+## Requirements
 
-| | |
-|---|---|
-| **Status** |  () |
-| **Language** | Agents can be Go, Python, or Rust |
+
 
 ---
 

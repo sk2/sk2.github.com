@@ -15,26 +15,382 @@ section: network-automation
 
 ## Contents
 
-- [Concept](#concept)
-- [Technical Depth](#technical-depth)
+- [Technical Reports](#technical-reports)
+- [Code Samples](#code-samples)
+- [What This Is](#what-this-is)
 - [Current Milestone: v1.3 Advanced Topology & Production Readiness](#current-milestone-v13-advanced-topology-production-readiness)
 - [Current State (v1.2 Front & Back Ends — shipped)](#current-state-v12-front-back-ends-shipped)
+- [Core Value](#core-value)
+- [Requirements](#requirements)
 - [Key Decisions](#key-decisions)
 - [Constraints](#constraints)
 
-## Concept
+## Technical Reports
 
-A modern, type-safe configuration engine that serves as a successor and sibling to the original AutoNetkit research. It implements the same 'Whiteboard -> Plan -> Build' transformation model but utilizes a modern, schema-enforced pipeline to ensure configuration correctness across heterogeneous network fleets.
-
-Deterministic, auditable, CI/CD-friendly Rust CLI for compiling declarative YAML network blueprints into vendor-neutral configuration artifacts. The `netcfg` binary orchestrates: blueprint parsing → topology transformation → DeviceIR generation → template rendering → traceable config file emission.
-
-Single-binary network compiler: design, transform, and generate configs from YAML blueprints without Python.
+- [Download Technical Report: netcfg-techreport.pdf](/assets/docs/ank-netcfg-netcfg-techreport.pdf)
+- [Download Technical Report: netcfg-paper.pdf](/assets/docs/ank-netcfg-netcfg-paper.pdf)
 
 ---
 
-## Technical Depth
+## Code Samples
 
-Sitting alongside the core ANK toolchain, ank_netcfg focuses on the high-fidelity transformation of network intent into vendor-specific device states. It provides the protocol-level intelligence needed to generate consistent OSPF, BGP, and MPLS configurations while maintaining strict type safety via a Pydantic-based model layer.
+### evpn-vxlan-fabric.yaml
+
+```yaml
+# examples/evpn-vxlan-fabric.yaml
+#
+# Multi-vendor EVPN-VXLAN Spine-Leaf Fabric
+# This blueprint demonstrates:
+#   1. Underlay (OSPF)
+#   2. Control-plane (iBGP EVPN)
+#   3. Overlay (VXLAN VNIs)
+#   4. Advanced Policies (Prefix-lists, Community-lists)
+
+version: 1
+
+imports:
+  - "../docs/library/datacenter-rules.yaml"
+
+layers:
+  # Stage 1: Resource Allocation (ASN, Loopbacks)
+  - name: resources
+    primitives:
+      - type: allocate_resources
+        selector: "nodes[true]"
+        resource_type: "bgp_as"
+        pool: "65001-65001" # Single AS for iBGP fabric
+        strategy: dense
+
+      - type: allocate_resources
+        selector: "nodes[true]"
+        resource_type: "router_id"
+        pool: "10.255.0.1-10.255.0.255"
+        strategy: dense
+
+  # Stage 2: Underlay Connectivity
+  - name: underlay
+    primitives:
+      - type: provision_ips
+        selector: "edges[true]"
+        pool: "10.0.0.0/24"
+        subnet_size: 31
+        strategy: dense
+
+      - type: build_protocol_layer
+        selector: "nodes[true]"
+        layer: ospf
+        config:
+          area: "0.0.0.0"
+        clone_underlying: true
+
+  # Stage 3: EVPN Control Plane
+  - name: control_plane
+    primitives:
+      - type: build_protocol_layer
+        selector: "nodes[true]"
+        layer: bgp
+        config:
+          protocol_type: bgp
+          peer_type: ibgp
+        clone_underlying: false # iBGP usually peered via loopbacks
+
+      - type: mesh_nodes
+        selector: "nodes[layer=='bgp']"
+        mesh_type: full # Simple full-mesh iBGP for this example
+
+  # Stage 4: Advanced Filtering Policies
+  - name: policies
+    primitives:
+      - type: build_prefix_list
+        selector: "nodes[true]"
+        name: "PL-LOOPBACKS"
+        entries:
+          - prefix: "10.255.0.0/24"
+            action: "permit"
+            le: 32
+
+      - type: build_community_list
+        selector: "nodes[true]"
+        name: "CL-EVPN"
+        entries:
+          - community: "65001:1000"
+            action: "permit"
+
+      - type: build_routing_policy
+        selector: "nodes[true]"
+        name: "RP-UNDERLAY-EXPORT"
+        statements:
+          - name: "PERMIT-LOOPBACKS"
+            action: "permit"
+            match_prefix_list: "PL-LOOPBACKS"
+
+  # Stage 5: VXLAN Overlays
+  - name: overlays
+    primitives:
+      - type: build_vxlan
+        selector: "nodes[role=='leaf']"
+        vni_base: 10000
+        mcast_group_base: "239.1.1.1"
+
+      - type: build_evpn
+        selector: "nodes[role=='leaf']"
+        route_distinguisher_base: "auto"
+        route_target_base: "65001:10000"
+
+assertions:
+  - name: "loopback-prefix-check"
+    severity: error
+    select: "nodes[true]"
+    check:
+      type: "field_in_cidr"
+      field: "router_id"
+      cidr: "10.255.0.0/24"
+
+```
+
+### evpn-vxlan-mapping.yaml
+
+```yaml
+# examples/evpn-vxlan-mapping.yaml
+#
+# Multi-vendor DeviceIR mapping for the EVPN-VXLAN fabric.
+# Demonstrates how the same topology data generates vendor-specific CLI stanzas.
+
+rules:
+  # 1. Leaf Configuration
+  - selector: "nodes[role=='leaf']"
+    rules:
+      - stanza:
+          kind: "interface"
+          fields:
+            name: "Loopback0" # Template handles vendor-specific mapping if needed
+            address: "{{ router_id }}/32"
+            description: "Router-ID / VTEP source"
+
+      - stanza:
+          kind: "bgp_neighbor"
+          fields:
+            local_as: "{{ bgp_as }}"
+            peer_ip: "{{ peer_ip }}"
+            remote_as: "{{ remote_as }}"
+            description: "iBGP EVPN Peer"
+            export_policy: "RP-UNDERLAY-EXPORT"
+
+  # 2. Spine Configuration
+  - selector: "nodes[role=='spine']"
+    rules:
+      - stanza:
+          kind: "interface"
+          fields:
+            name: "Loopback0"
+            address: "{{ router_id }}/32"
+            description: "Router-ID"
+
+      - stanza:
+          kind: "ospf_neighbor"
+          fields:
+            interface: "{{ interface }}"
+            area: "0.0.0.0"
+            network_type: "point-to-point"
+
+  # 3. Global Policy Application (Prefix-Lists)
+  - selector: "nodes[true]"
+    rules:
+      - stanza:
+          kind: "prefix_list"
+          key: "PL-LOOPBACKS"
+          fields:
+            entries:
+              - prefix: "10.255.0.0/24"
+                action: "permit"
+                le: 32
+
+```
+
+### multi-protocol-site.yaml
+
+```yaml
+# examples/multi-protocol-site.yaml
+#
+# Multi-protocol site blueprint — demonstrates composing protocol library
+# fragments via imports.
+#
+# Topology: routers in a full mesh.
+#   - All routers run OSPFv3 (IPv6 underlay) with BFD for fast failure detection.
+#   - All routers run VRRP for gateway redundancy.
+#
+# How imports work:
+#   Imported layers are appended after the root blueprint's own layers, so the
+#   physical layer (defined here) is always processed first. Each protocol
+#   fragment declares requires: [physical] to enforce this ordering.
+#
+# Overriding protocol defaults:
+#   Create a supplementary import file that adds another build_protocol_layer
+#   in a new layer after the protocol layer. Config is deep-merged, so you
+#   only need to specify the fields you want to change. Example:
+#
+#     # protocols/overrides/bfd-fast.yaml
+#     version: 1
+#     layers:
+#       - name: bfd_fast
+#         requires: [bfd]
+#         primitives:
+#           - type: build_protocol_layer
+#             selector: "nodes[role='spine']"
+#             layer: bfd
+#             config:
+#               min_tx_ms: 100
+#               min_rx_ms: 100
+#
+#   Then import it after the base protocol:
+#     imports:
+#       - ../protocols/bfd.yaml
+#       - ../protocols/overrides/bfd-fast.yaml
+
+version: 1
+imports:
+  - ../protocols/ospfv3.yaml
+  - ../protocols/bfd.yaml
+  - ../protocols/vrrp.yaml
+
+layers:
+  - name: physical
+    primitives:
+      - type: mesh_nodes
+        selector: "nodes[true]"
+        mesh_type: full
+
+      - type: provision_ips
+        selector: "edges[src>=0]"
+        pool: "10.0.0.0/24"
+        subnet_size: 30
+        strategy: dense
+
+```
+
+### three-site-mesh-mapping.yaml
+
+```yaml
+# examples/three-site-mesh-mapping.yaml
+#
+# Companion mapping for three-site-mesh.yaml.
+# Produces a BGP config file for site-a-r1 demonstrating end-to-end pipeline output.
+#
+# The mapping targets all_nodes and emits a bgp stanza grouped under "site-a-r1".
+# Using kind: "bgp" ensures the rendered output contains BGP keywords.
+#
+# The default fallback template renders: kind={{ kind }} key={{ key }}
+# So each matched node produces a line: "kind=bgp key="
+#
+# Note: the `node` field is used by generate_configs to group output by device.
+# It is not passed to the stanza template renderer.
+
+rules:
+  - selector: "all_nodes"
+    stanza:
+      kind: "bgp"
+      fields:
+        node: "site-a-r1"
+        local_asn: "65001"
+        description: "site-a full-mesh BGP session"
+
+```
+
+### three-site-mesh.yaml
+
+```yaml
+# examples/three-site-mesh.yaml
+#
+# Three-site BGP mesh — canonical reference blueprint for ank_pydantic consumers.
+#
+# This blueprint demonstrates the complete netcfg primitive pipeline:
+#
+#   Stage 1 — MeshNodes: creates full-mesh point-to-point links within each site.
+#              Each site's routers are fully meshed independently (intra-site only).
+#              A full mesh of N nodes produces N*(N-1)/2 edges.
+#
+#   Stage 2 — ProvisionIps: assigns /30 subnets to each P2P link.
+#              Each site has its own /24 address pool — IPs are scoped per-site.
+#              ProvisionIps MUST run after MeshNodes (edges must exist first).
+#              Writes src_ip, dst_ip, subnet to each endpoint node's data.
+#
+#   Stage 3 — BuildProtocolLayer: clones each physical node into a BGP overlay layer.
+#              The BGP node inherits its parent's IP data (src_ip, dst_ip).
+#              BuildProtocolLayer MUST run after ProvisionIps to inherit IP addresses.
+#
+# Address plan:
+#   Site A: 10.1.0.0/24 — routers site-a-r1..r4
+#   Site B: 10.2.0.0/24 — routers site-b-r1..r4
+#   Site C: 10.3.0.0/24 — routers site-c-r1..r4
+#
+# Each /24 provides 64 /30 subnets — more than enough for 6 links per site.
+
+version: 1
+layers:
+  # Stage 1: Create full mesh of P2P links within each site.
+  # Selector "nodes[site=...]" matches nodes whose data_json contains {"site": "..."}.
+  # 4 nodes per site → 4*(4-1)/2 = 6 edges per site → 18 edges total.
+  - name: input
+    primitives:
+      - type: mesh_nodes
+        selector: "nodes[site='a']"
+        mesh_type: full
+        
+
+      - type: mesh_nodes
+        selector: "nodes[site='b']"
+        mesh_type: full
+        
+
+      - type: mesh_nodes
+        selector: "nodes[site='c']"
+        mesh_type: full
+        
+
+  # Stage 2: Assign /30 P2P addresses from per-site pools.
+  # ProvisionIps runs AFTER MeshNodes — edges must exist before IPs can be assigned.
+  # Each /30 uses .1 (src_ip) and .2 (dst_ip) host addresses.
+  # "edges[src>=0]" selects all edges in the physical layer.
+  - name: input
+    primitives:
+      - type: provision_ips
+        selector: "edges[src>=0]"
+        pool: "10.1.0.0/24"
+        subnet_size: 30
+        strategy: dense
+
+  # Stage 3: Build BGP overlay — one BGP node per physical node.
+  # BuildProtocolLayer MUST run after ProvisionIps to inherit src_ip/dst_ip.
+  # The BGP node's data_json is deep-merged from its physical parent, so
+  # the BGP node carries the same IP data that ProvisionIps wrote.
+  - name: input
+    primitives:
+      - type: build_protocol_layer
+        selector: "nodes[true]"
+        layer: bgp
+        config:
+          protocol_type: bgp
+          asn_base: "65000"
+
+```
+
+### validate-test-blueprint.yaml
+
+```yaml
+version: 1
+layers:
+  - name: physical
+    primitives:
+      - type: mesh_nodes
+        selector: "nodes[hostname != '']"
+        mesh_type: "full"
+        edge_properties: {}
+      - type: provision_ips
+        selector: "edges[true]"
+        pool: "10.0.0.0/16"
+        strategy: "dense"
+
+```
 
 ---
 
@@ -43,6 +399,12 @@ Sitting alongside the core ANK toolchain, ank_netcfg focuses on the high-fidelit
 | | |
 |---|---|
 | **Status** | Active |
+
+---
+
+## What This Is
+
+Deterministic, auditable, CI/CD-friendly Rust CLI for compiling declarative YAML network blueprints into vendor-neutral configuration artifacts. The `netcfg` binary orchestrates: blueprint parsing → topology transformation → DeviceIR generation → template rendering → traceable config file emission.
 
 ---
 
@@ -68,6 +430,18 @@ The front and back ends of the compiler are fully functional end-to-end:
 - Path dependency on `ank_nte` prevents standalone crate publication
 - Benchmarks for large topologies (10,000+ nodes) are missing
 - `edge_properties` in `mesh_nodes` remains deferred
+
+---
+
+## Core Value
+
+Single-binary network compiler: design, transform, and generate configs from YAML blueprints without Python.
+
+---
+
+## Requirements
+
+
 
 ---
 

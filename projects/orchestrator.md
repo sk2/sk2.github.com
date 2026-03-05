@@ -15,18 +15,24 @@ section: projects
 
 ## Contents
 
-- [Concept](#concept)
+- [What This Is](#what-this-is)
+- [Core Value](#core-value)
+- [Requirements](#requirements)
 - [Context](#context)
 - [Constraints](#constraints)
 - [Key Decisions](#key-decisions)
 - [Future Direction (Explicitly Not v1)](#future-direction-explicitly-not-v1)
 - [Current Status](#current-status)
 
-## Concept
+## Quick Facts
 
-An orchestration runner for coordinating **device interactions** across real and testbed networks. It executes workflows with retries, timeouts, bounded concurrency, and durable artifacts (logs, results, snapshots) that integrate into the broader automation ecosystem.
+| | |
+|---|---|
+| **Status** | Recently Updated |
 
-Inspired by Tower/AWX-style job execution, the engine is purpose-built for reliable, replayable device runs. It uses `deviceinteraction` as a library for transports and parsing, providing deterministic execution semantics without making external systems a dependency.
+---
+
+## What This Is
 
 An orchestration runner for coordinating **device interactions** across real/testbed networks. It executes runs with retries, timeouts, bounded concurrency, and durable artifacts (logs, results, snapshots) that plug into the broader automation ecosystem.
 
@@ -34,15 +40,17 @@ v1 is explicitly **device-focused** and **uses `deviceinteraction` as a library*
 
 This is inspired by Tower/AWX-style job execution, but it is purpose-built for our use case: reliable, replayable device runs with clean integration boundaries and a clear path to future expansion (including broader workflow graphs) without making AI a dependency.
 
+---
+
+## Core Value
+
 Run the same device workflow reliably across lab/real targets, with deterministic execution semantics and replayable artifacts.
 
 ---
 
-## Quick Facts
+## Requirements
 
-| | |
-|---|---|
-| **Status** | Active |
+
 
 ---
 

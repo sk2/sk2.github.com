@@ -112,7 +112,10 @@ PROJECT_CONTENT_OVERRIDES = {
     },
     "topogen": {
         "Usage": "### Topology DSL Example\n\n```yaml\n# Example: Multi-layer POP underlay with mesh overlay\nname: multi-layer-pop-backbone\ntype: multi-layer\n\nlayers:\n  - name: physical\n    type: pop\n    count: 5\n    redundancy: n+1\n\n  - name: backbone\n    type: mesh\n    node_count: 4\n    underlay: physical\n    strategy: shortest-path\n```"
-    }
+    },
+    "signals": {
+        "Visuals": "### Waterfall & TUI Interface\n\n![Spectra Waterfall](/images/spectra-waterfall-screenshot.png)\n\n### RF Fingerprinting Results\n\n![RF Fingerprinting](/images/rf_fingerprinting_results.png)\n\n### Vector Search (Top-K Matches)\n\n![Vector Search](/images/search_topk_example.png)\n"
+    },
 }
 
 CATEGORY_MAP = {

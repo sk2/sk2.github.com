@@ -22,7 +22,7 @@ section: network-automation
 - [Code Samples](#code-samples)
 - [Usage](#usage)
 - [What This Is](#what-this-is)
-- [Current Milestone: v1.3 Advanced Topology & Production Readiness](#current-milestone-v13-advanced-topology-production-readiness)
+- [Current Milestone: v2.1 Protocol Library & Security Policy DSL](#current-milestone-v21-protocol-library-security-policy-dsl)
 - [Current State (v1.2 Front & Back Ends — shipped)](#current-state-v12-front-back-ends-shipped)
 - [Core Value](#core-value)
 - [Requirements](#requirements)
@@ -222,48 +222,44 @@ rules:
 
 ```rust
 use nte_topology::Topology;
-use std::collections::HashMap;
 use serde_json::json;
+use std::path::Path;
 
 fn main() {
     let mut topo = Topology::new();
     
-    // 2 Spines, 2 Leaves
-    let ids = vec![1, 2, 3, 4];
+    // 2 Spines (1, 2), 2 Leaves (3, 4)
+    let ids = vec![1u32, 2u32, 3u32, 4u32];
     let types = vec!["Router".to_string(); 4];
     let layers = vec!["input".to_string(); 4];
     
-    topo.add_nodes_with_metadata(&ids, &types, &layers).unwrap();
+    topo.add_nodes_with_metadata(&ids, &types, &layers).expect("Add nodes");
     
-    let mut data = Vec::new();
-    // Spine 1 (NX-OS)
-    data.push(json!({"hostname": "spine1", "device_os": "nxos", "role": "spine"}).to_string());
-    // Spine 2 (NX-OS)
-    data.push(json!({"hostname": "spine2", "device_os": "nxos", "role": "spine"}).to_string());
-    // Leaf 1 (EOS)
-    data.push(json!({"hostname": "leaf1", "device_os": "eos", "role": "leaf"}).to_string());
-    // Leaf 2 (EOS)
-    data.push(json!({"hostname": "leaf2", "device_os": "eos", "role": "leaf"}).to_string());
-
-    let df = polars::prelude::DataFrame::new(vec![
-        polars::prelude::Column::from(polars::prelude::Series::new("id".into(), ids)),
-        polars::prelude::Column::from(polars::prelude::Series::new("data_json".into(), data)),
-    ]).unwrap();
-    
+    use polars::prelude::{Column, DataFrame, NamedFrom, Series};
+    // Include 'layer' column in the type-specific DataFrame as well, 
+    // as some versions of the engine may expect it to be present here to reconstruct global state.
+    let df = DataFrame::new(vec![
+        Column::from(Series::new("id".into(), ids)),
+        Column::from(Series::new("layer".into(), layers)),
+        Column::from(Series::new(
+            "data_json".into(),
+            vec![
+                json!({"hostname":"spine1", "device_os": "nxos", "role": "spine"}).to_string(),
+                json!({"hostname":"spine2", "device_os": "nxos", "role": "spine"}).to_string(),
+                json!({"hostname":"leaf1", "device_os": "eos", "role": "leaf"}).to_string(),
+                json!({"hostname":"leaf2", "device_os": "eos", "role": "leaf"}).to_string(),
+            ],
+        )),
+    ])
+    .unwrap();
     topo.set_dataframe("Router".to_string(), df);
-    
-    // Physical Cabling
+
     // spine1 -> leaf1, leaf2
     // spine2 -> leaf1, leaf2
-    let graph = topo.graph_mut();
-    graph.ensure_device_shortcuts(1, 3).unwrap();
-    graph.ensure_device_shortcuts(1, 4).unwrap();
-    graph.ensure_device_shortcuts(2, 3).unwrap();
-    graph.ensure_device_shortcuts(2, 4).unwrap();
-    
-    let bytes = topo.save_to_bytes().unwrap();
-    std::fs::write("fabric_topo.nte", bytes).unwrap();
-    println!("Created fabric_topo.nte");
+    topo.add_edges(&[1, 1, 2, 2], &[3, 4, 3, 4]).expect("Add edges");
+
+    topo.save_to_archive(Path::new("fabric_topo.nte")).expect("Save");
+    println!("fabric_topo.nte created successfully.");
 }
 
 ```
@@ -728,14 +724,18 @@ Deterministic, auditable, CI/CD-friendly Rust CLI for compiling declarative YAML
 
 ---
 
-## Current Milestone: v1.3 Advanced Topology & Production Readiness
+## Current Milestone: v2.1 Protocol Library & Security Policy DSL
 
-**Goal:** Elevate the compiler to production readiness by introducing advanced primitives (route reflectors, edge cloning), an auditable state validation mode, rigorous benchmarking, and decoupling repository dependencies for crate publication.
+**Goal:** Deliver a standard library of importable protocol fragments covering the full simulator protocol set, LaTeX DSL formatting for technical reports, and a first-class security policy DSL with named groups, security zones, zone-based policy, NAT, and assertions.
 
 **Target features:**
-- Advanced Primitives — `mesh_nodes` partial meshes and `build_protocol_layer` overlay edge cloning
-- State Validation — `netcfg validate` mode enforcing addressing plans without mutation
-- Performance & Publishing — `criterion` benchmarking suites and `[ank_nte](../ank_nte)` repository absorption/decoupling
+- Protocol Library — importable YAML fragments for all simulator protocols (OSPF, BGP, IS-IS, LACP, LLDP, ARP, STP, GRE, VXLAN, BGP-EVPN + existing BFD/VRRPv3/RIP/LDP/RSVP-TE)
+- LaTeX DSL Formatter — `listings`-based syntax highlighting for blueprint YAML in the tech report
+- Named Groups — `groups:` section in Blueprint, `$group_name` selectors, `tag_nodes` primitive
+- Security Zones — `kind: security_zone` group type, zone membership from group resolution
+- Zone Policy DSL — `build_zone_policy` primitive with address/service objects, permit/deny rules
+- NAT Policy — `build_nat_policy` primitive for source/destination NAT
+- Policy Assertions — verifiable security invariants on zone membership and zone policy
 
 ---
 
@@ -765,14 +765,17 @@ Single-binary network compiler: design, transform, and generate configs from YAM
 
 ---
 
-## # Active (v1.3)
+## # Active (v2.1)
 
-- [ ] Partial Meshes (hub-and-spoke/route reflectors) (MESH-V2-01)
-- [ ] Overlay Edge Cloning (PROT-V2-01)
-- [ ] State Validation Mode: `netcfg validate` (IPAM-V2-01)
-- [ ] Addressing Plan Enforcement (IPAM-V2-02)
-- [ ] Benchmarking suites for Diff/Render engines (PERF-01)
-- [ ] Repository Decoupling of `[ank_nte](../ank_nte)` (PUB-01)
+- [ ] Remaining protocol fragments: OSPF, BGP, IS-IS, LACP, LLDP, ARP, STP, GRE, VXLAN, BGP-EVPN (PROTO-01–10)
+- [ ] LaTeX DSL formatter for tech report (DOC-01)
+- [ ] Named groups `groups:` section + `$name` selectors (GROUP-01–02)
+- [ ] `tag_nodes` primitive for group membership tagging (GROUP-03)
+- [ ] Nested groups with parent inheritance (GROUP-04)
+- [ ] Security zone group type `kind: security_zone` (ZONE-01–02)
+- [ ] `build_zone_policy` primitive with address/service objects (POLICY-01–04)
+- [ ] `build_nat_policy` primitive for source/destination NAT (NAT-01–02)
+- [ ] Policy assertions for security invariants (ASSERT-01–02)
 
 ---
 
@@ -819,7 +822,7 @@ Single-binary network compiler: design, transform, and generate configs from YAM
 - British English in all documentation
 - GSD workflow for phase-based planning
 
-*Last updated: 2026-03-01 after v1.2 Front & Back Ends milestone*
+*Last updated: 2026-03-06 — Milestone v2.1 started*
 
 ---
 

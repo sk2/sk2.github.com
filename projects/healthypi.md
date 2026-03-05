@@ -6,7 +6,7 @@ section: agentic-systems
 # HealthyPi Ecosystem
 
 <div class="badges-row">
-  <span class="status-badge status-active">Recently Updated</span>
+  <span class="status-badge status-active">Last Active: 2026-02-20</span>
   <span class="stack-badge">Python</span>
 </div>
 

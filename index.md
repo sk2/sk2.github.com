@@ -10,6 +10,8 @@ With a background spanning engineering and economics, I focus on building tools 
 
 I believe that the most effective engineering solutions come from a combination of formal research and practical implementation. Grounded in my PhD work on automated network configuration, I continue to explore how better abstractions can simplify the management of increasingly complex digital and physical networks.
 
+**[🔍 Read the Insights: The Architecture of a Modern Network Automation Ecosystem](ecosystem)**
+
 ## Featured Work
 
 - **[Network Simulator:](/projects/netsim)** A deterministic, tick-based simulator for validating large-scale network designs. It enables pre-deployment verification of routing protocols (OSPF, IS-IS, BGP), catching convergence and failover errors by modeling protocol-level behavior before production deployment.

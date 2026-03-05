@@ -14,10 +14,10 @@ Focused on network engineering, autonomous systems, and signal processing.
 
 <ul class="recent-activity-list">
 <li><strong>2026-03-05</strong>: <a href="projects/configparsing">Brownfield Ingestion & Analysis</a> — <em>Completed 07-01-PLAN.md</em></li>
-<li><strong>2026-03-05</strong>: <a href="projects/netassure">Network Analysis Engine</a> — <em>Completed 02-01-PLAN.md</em></li>
+<li><strong>2026-03-05</strong>: <a href="projects/netassure">Network Analysis Engine</a> — <em>Completed 02-03-PLAN.md</em></li>
 <li><strong>2026-03-05</strong>: <a href="projects/netflowsim">Performance Simulator</a> — <em>Archived Criterion 50k/75k/100k reports;  near-complete</em></li>
+<li><strong>2026-03-05</strong>: <a href="projects/netsim">Network Simulator</a> — <em>Code hygiene + test stabilization + clippy cleanup PR merged</em></li>
 <li><strong>2026-03-05</strong>: <a href="projects/orchestrator">Orchestrator (Device Interaction Runner)</a> — <em>2026-03-05 - Completed 02-05-PLAN.md</em></li>
-<li><strong>2026-03-05</strong>: <a href="projects/rf-signal-analysis">Signal Reflection - KrakenSDR Multi-Beam System</a> — <em>Completed 36-02-PLAN.md</em></li>
 </ul>
 
 ---
@@ -129,7 +129,7 @@ Focused on network engineering, autonomous systems, and signal processing.
 <div class="project-grid">
 <div class="project-card" data-search="healthypi ecosystem  python healthypi">
   <h3 style="margin-top:0; margin-bottom: 0.5rem;"><a href="projects/healthypi">HealthyPi Ecosystem</a></h3>
-  <div class="badges-row" style="margin-bottom: 0.8rem;"><span class="status-badge status-active">Recently Updated</span> <span class="stack-badge">Python</span></div>
+  <div class="badges-row" style="margin-bottom: 0.8rem;"><span class="status-badge status-active">Last Active: 2026-02-20</span> <span class="stack-badge">Python</span></div>
   <p style="font-size: 0.9em; margin-top: 0;"></p>
 </div>
 

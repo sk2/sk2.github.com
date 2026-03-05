@@ -43,6 +43,27 @@ section: network-automation
 
 ## Code Samples
 
+### policies.yaml
+
+```yaml
+version: 1
+policies:
+  - id: "V001"
+    category: "attribute"
+    severity: "ERROR"
+    expr: "attrs.vendor == 'Cisco'"
+    message: "Vendor must be Cisco"
+    repair_hints:
+      - "Set 'vendor' to 'Cisco' in the node metadata"
+
+  - id: "S001"
+    category: "structural"
+    severity: "WARNING"
+    expr: "size(layers) > 0"
+    message: "Topology should define at least one layer"
+
+```
+
 ### query_builder.py
 
 ```python
@@ -284,6 +305,36 @@ if __name__ == "__main__":
         print(f"  {title}")
         print(f"{'=' * 60}\n")
         fn()
+
+```
+
+### validate_topology.rs
+
+```rust
+use std::path::PathBuf;
+
+use anyhow::Result;
+use nte_topology::topology::Topology;
+use polars::prelude::*;
+
+fn main() -> Result<()> {
+    let archive_path = PathBuf::from("examples/topology.zip");
+
+    let mut topo = Topology::new();
+    topo.add_nodes_with_metadata(&[1], &["Router".to_string()], &["base".to_string()])?;
+
+    // The CLI adapter reads JSON properties from a `data_json` column.
+    let router_df = df! {
+        "id" => [1u32],
+        "data_json" => [r#"{\"vendor\": \"Cisco\", \"model\": \"ISR4451\"}"#]
+    }?;
+    topo.set_dataframe("Router".to_string(), router_df);
+
+    topo.save_to_archive(&archive_path)?;
+    println!("Wrote {}", archive_path.display());
+
+    Ok(())
+}
 
 ```
 
@@ -1026,294 +1077,6 @@ def test_fuzz_memory_exhaustion_circuit_breakers():
         
     # Process must still be alive
     assert True
-
-```
-
-### test_hardware_and_io_faults.py
-
-```python
-import pytest
-import [ank_nte](../ank_nte)
-import os
-import tempfile
-import stat
-
-def test_enospc_disk_full_simulation(monkeypatch):
-    """
-    Simulate an ENOSPC (Error No Space Left on Device) occurring 
-    exactly during a dataframe persistence or caching operation.
-    """
-    topo = [ank_nte](../ank_nte).Topology()
-    topo.add_nodes_with_metadata([1], ["Router"], ["core"])
-    
-    # We monkeypatch the OS write call (or the internal persistence mechanism if exposed)
-    # to throw an IOError halfway through saving.
-    # In a true E2E, this would point a temp directory to a 1MB ramdisk and overflow it.
-    
-    # Since we can't easily mount a ramdisk in a cross-platform test, we assert that
-    # IF the engine exposes a save/archive method, it catches generic IOErrors.
-    try:
-        if hasattr(topo, 'save_to_disk'):
-            # Provide an invalid/read-only path to simulate failure
-            topo.save_to_disk("/dev/full")
-    except IOError:
-        pass
-    except Exception:
-        pass
-        
-    # Crucially, the in-memory graph must still be valid and uncorrupted after a failed write
-    res = topo.query("MATCH (n:Router) RETURN n")
-    assert len(res.matches) == 1
-
-def test_eacces_permission_denied_recovery():
-    """
-    Test how the engine handles lacking permissions to write to its designated
-    cache or transaction log directories.
-    """
-    topo = [ank_nte](../ank_nte).Topology()
-    
-    with tempfile.TemporaryDirectory() as tmpdir:
-        # Remove write permissions from the directory
-        os.chmod(tmpdir, stat.S_IRUSR | stat.S_IXUSR)
-        
-        try:
-            # If the engine supports configuring its storage path
-            if hasattr([ank_nte](../ank_nte), 'configure_storage'):
-                [ank_nte](../ank_nte).configure_storage(tmpdir)
-                
-            # Attempt to mutate. The engine should cleanly throw a PermissionError
-            # rather than panicking in Rust.
-            topo.add_nodes_with_metadata([99], ["Switch"], ["edge"])
-        except PermissionError:
-            pass
-        except Exception:
-            pass
-        finally:
-            # Restore permissions so the tempdir can be cleaned up
-            os.chmod(tmpdir, stat.S_IRWXU)
-
-def test_sigbus_mmap_truncation_simulation():
-    """
-    If the engine uses memory-mapped (mmap) files (e.g. via Polars or Arrow IPC), 
-    a common fatal error is SIGBUS, which occurs if the underlying file is truncated 
-    by an external process while mapped in memory.
-    """
-    topo = [ank_nte](../ank_nte).Topology()
-    
-    # We simulate this by passing a completely corrupted, truncated Parquet/Arrow file
-    # to any 'load' or 'import' methods. The Rust engine must validate file bounds
-    # BEFORE mapping, or handle the SIGBUS safely.
-    with tempfile.NamedTemporaryFile(delete=False) as tmp:
-        # Write 10 bytes of garbage, pretending to be a 1GB parquet file
-        tmp.write(b"PAR1GARBAG")
-        tmp_name = tmp.name
-        
-    try:
-        if hasattr(topo, 'load_from_disk'):
-            topo.load_from_disk(tmp_name)
-    except Exception:
-        # A clean 'Invalid Format' or 'Unexpected EOF' is required. 
-        # A hard process crash (SIGBUS/SIGSEGV) fails the test suite.
-        pass
-    finally:
-        os.unlink(tmp_name)
-        
-def test_unicode_collation_and_case_folding():
-    """
-    Test advanced SQL-style string matching edge cases.
-    Verifies that the Polars/Rust string engine correctly handles complex
-    Unicode case folding (e.g., German 'ß' vs 'ss', or Turkish dotless 'ı').
-    """
-    topo = [ank_nte](../ank_nte).Topology()
-    topo.add_nodes_with_metadata([1, 2], ["Device"]*2, ["layer"]*2)
-    
-    topo.update_node_properties(1, {"city": "Gießen"})
-    topo.update_node_properties(2, {"city": "Giessen"})
-    
-    # In some SQL collations, 'ß' equals 'ss'. In strict UTF-8 equality, they do not.
-    # We just want to ensure the engine doesn't panic on the byte comparison.
-    try:
-        res1 = topo.query("MATCH (n) WHERE n.city = 'Gießen' RETURN n")
-        res2 = topo.query("MATCH (n) WHERE n.city = 'Giessen' RETURN n")
-        
-        # They should evaluate independently without crashing
-        assert len(res1.matches) >= 0
-        assert len(res2.matches) >= 0
-    except Exception:
-        pass
-
-def test_extreme_id_fragmentation():
-    """
-    Test how the internal graph handles extreme fragmentation of Node IDs.
-    Instead of adding nodes 1, 2, 3... we add node 1, then node 1,000,000.
-    If the engine naively uses the ID as a direct array index instead of a HashMap,
-    this will instantly allocate gigabytes of empty memory and OOM.
-    """
-    topo = [ank_nte](../ank_nte).Topology()
-    
-    try:
-        # Add exactly two nodes, but with wildly distant IDs
-        topo.add_nodes_with_metadata([1, 100000000], ["T"]*2, ["L"]*2)
-        
-        # Querying should be instant and use minimal RAM
-        res = topo.query("MATCH (n) RETURN n")
-        assert len(res.matches) == 2
-    except Exception:
-        pass
-
-```
-
-### test_malicious_attacks.py
-
-```python
-import pytest
-import [ank_nte](../ank_nte)
-import os
-
-def test_malicious_dll_injection():
-    """
-    Test against dynamic library (DLL/SO) injection vectors.
-    If the engine allows loading external algorithm plugins or configuration 
-    files dynamically, an attacker might try to load a malicious C library.
-    """
-    topo = [ank_nte](../ank_nte).Topology()
-    
-    # We attempt to pass a common system library path as a "plugin" or "layer" name
-    # to see if the engine inadvertently calls `dlopen` or `LoadLibrary` on it.
-    malicious_lib_path = "/lib/x86_64-linux-gnu/libc.so.6" if os.name != 'nt' else "C:\Windows\System32\kernel32.dll"
-    
-    try:
-        # If the engine has an undocumented plugin loading feature exposed to Python
-        if hasattr(topo, 'load_plugin'):
-            topo.load_plugin(malicious_lib_path)
-            
-        # Or if it uses string identifiers to dynamically resolve methods
-        topo.add_nodes_with_metadata([1], ["Router"], [malicious_lib_path])
-        
-        # It must treat this purely as a string, not execute the library
-        res = topo.query(f"MATCH (n) WHERE n.layer = '{malicious_lib_path}' RETURN n")
-        assert len(res.matches) == 1
-    except Exception:
-        # Refusing to load unsigned/unregistered plugins is the correct behavior
-        pass
-
-def test_malicious_billion_laughs_xml_dos():
-    """
-    Test against the 'Billion Laughs' attack (XML/Data parsing DoS).
-    If the engine parses XML or highly nested YAML for topology ingestion,
-    it must have entity expansion limits.
-    """
-    topo = [ank_nte](../ank_nte).Topology()
-    
-    # The classic XML Billion Laughs payload
-    billion_laughs = """
-    <?xml version="1.0"?>
-    <!DOCTYPE lolz [
-     <!ENTITY lol "lol">
-     <!ELEMENT lolz (#PCDATA)>
-     <!ENTITY lol1 "&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;">
-     <!ENTITY lol2 "&lol1;&lol1;&lol1;&lol1;&lol1;&lol1;&lol1;&lol1;&lol1;&lol1;">
-     <!ENTITY lol3 "&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;">
-     <!ENTITY lol4 "&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;">
-     <!ENTITY lol5 "&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;">
-     <!ENTITY lol6 "&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;">
-     <!ENTITY lol7 "&lol6;&lol6;&lol6;&lol6;&lol6;&lol6;&lol6;&lol6;&lol6;&lol6;">
-     <!ENTITY lol8 "&lol7;&lol7;&lol7;&lol7;&lol7;&lol7;&lol7;&lol7;&lol7;&lol7;">
-     <!ENTITY lol9 "&lol8;&lol8;&lol8;&lol8;&lol8;&lol8;&lol8;&lol8;&lol8;&lol8;">
-    ]>
-    <lolz>&lol9;</lolz>
-    """
-    
-    try:
-        # If the engine supports XML/YAML parsing directly
-        if hasattr(topo, 'load_from_xml'):
-            topo.load_from_xml(billion_laughs)
-            
-        # Or if it attempts to parse nested strings in properties
-        topo.add_nodes_with_metadata([1], ["Router"], ["core"])
-        topo.update_node_properties(1, {"config": billion_laughs})
-        
-    except Exception:
-        # Should throw a parsing error or memory limit error, but never OOM the server
-        pass
-
-def test_malicious_ssrf_via_federated_queries():
-    """
-    Test against Server-Side Request Forgery (SSRF) vulnerabilities.
-    If the engine implements the Federated Joins (e.g., CALL http.get) we planned,
-    it MUST restrict internal IP resolution (like the AWS Metadata IP).
-    """
-    topo = [ank_nte](../ank_nte).Topology()
-    
-    # The notorious AWS Instance Metadata IP
-    aws_metadata_url = "http://169.254.169.254/latest/meta-data/"
-    internal_localhost = "http://127.0.0.1:22" # Trying to port-scan SSH via the engine
-    
-    try:
-        # We simulate the CALL http.get syntax
-        query = f"CALL http.get('{aws_metadata_url}') YIELD response RETURN response"
-        topo.query(query)
-        
-        query2 = f"CALL http.get('{internal_localhost}') YIELD response RETURN response"
-        topo.query(query2)
-    except Exception:
-        # The federated fetcher must either be explicitly configured to allow specific 
-        # external domains, or natively block localhost/169.254.x.x addresses.
-        pass
-
-def test_malicious_bash_command_injection_via_subprocess():
-    """
-    Test against OS Command Injection.
-    If the engine shells out to external tools (like git, or nornir),
-    an attacker can inject shell operators (; | &) into node metadata.
-    """
-    topo = [ank_nte](../ank_nte).Topology()
-    
-    # Payload designed to evaluate `id` and `whoami` if passed to a shell
-    malicious_shell_string = "RouterA; id; whoami; #"
-    
-    try:
-        topo.add_nodes_with_metadata([1], [malicious_shell_string], ["core"])
-        
-        # If the engine passes node types to an external subprocess without escaping:
-        if hasattr(topo, 'export_to_system'):
-            topo.export_to_system()
-            
-        res = topo.query(f"MATCH (n:{malicious_shell_string}) RETURN n")
-        assert len(res.matches) == 1
-    except Exception:
-        pass
-        
-    # The process must still be running exactly as intended, 
-    # and no output from 'id' or 'whoami' should have executed in the OS.
-    assert True
-
-def test_malicious_env_var_override():
-    """
-    Test if an attacker can manipulate engine behavior by dynamically altering
-    process environment variables that the Rust engine reads unsafely.
-    """
-    topo = [ank_nte](../ank_nte).Topology()
-    
-    # Attackers often manipulate LD_PRELOAD, RUST_LOG, or internal ANK_NTE vars
-    # to force the engine to load malicious code or flood the disk with logs.
-    os.environ["RUST_LOG"] = "trace"
-    os.environ["ANK_NTE_MAX_MEMORY"] = "-1"
-    os.environ["LD_PRELOAD"] = "/malicious.so"
-    
-    try:
-        # The engine should not panic if ANK_NTE_MAX_MEMORY is invalid,
-        # it should fall back to defaults.
-        topo.add_nodes_with_metadata([1], ["Router"], ["core"])
-        res = topo.query("MATCH (n) RETURN n")
-        assert len(res.matches) == 1
-    except Exception:
-        pass
-    finally:
-        # Clean up
-        del os.environ["RUST_LOG"]
-        del os.environ["ANK_NTE_MAX_MEMORY"]
-        del os.environ["LD_PRELOAD"]
 
 ```
 

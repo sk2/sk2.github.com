@@ -19,6 +19,7 @@ section: signal-processing
 ## Contents
 
 - [Technical Reports](#technical-reports)
+- [Visuals](#visuals)
 - [Core Value](#core-value)
 - [Current Milestone: v2.0 — Central Server Integration](#current-milestone-v20-central-server-integration)
 - [Stakeholders](#stakeholders)
@@ -33,6 +34,22 @@ section: signal-processing
 ## Technical Reports
 
 - [Download Technical Report: spectra-techreport.pdf](/assets/docs/signals-spectra-techreport.pdf)
+
+---
+
+## Visuals
+
+### Waterfall & TUI Interface
+
+![Spectra Waterfall](/images/spectra-waterfall-screenshot.png)
+
+### RF Fingerprinting Results
+
+![RF Fingerprinting](/images/rf_fingerprinting_results.png)
+
+### Vector Search (Top-K Matches)
+
+![Vector Search](/images/search_topk_example.png)
 
 ---
 

@@ -5,7 +5,10 @@ section: projects
 
 # Rust TUI GTD Todo (OmniFocus-inspired)
 
-<span class="status-badge status-active">Last Active: 2026-02-25</span>
+<div class="badges-row">
+  <span class="status-badge status-active">Recently Updated</span>
+  <span class="stack-badge">Rust</span>
+</div>
 
 [← Back to Projects](../projects)
 

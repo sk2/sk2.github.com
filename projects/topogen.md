@@ -5,7 +5,10 @@ section: network-automation
 
 # Topology Generator
 
-<span class="status-badge status-active">Active</span>
+<div class="badges-row">
+  <span class="status-badge status-active">Active</span>
+  <span class="stack-badge">Rust</span> <span class="stack-badge">Python</span>
+</div>
 
 [← Back to Network Automation](../network-automation)
 
@@ -396,14 +399,14 @@ This tool unifies that logic into a single, high-performance library.
 
 This project is part of a seven-tool network automation ecosystem. topogen provides topology generation — the "generate" stage of the pipeline.
 
-**Role:** Generate realistic, validated network topologies with vendor naming, geographic placement, and traffic matrices. Feed topologies into ank-pydantic (modeling), netsim (simulation), netflowsim (traffic analysis), and netvis (visualization).
+**Role:** Generate realistic, validated network topologies with vendor naming, geographic placement, and traffic matrices. Feed topologies into [ank-pydantic](../ank-pydantic) (modeling), [netsim](../netsim) (simulation), [netflowsim](../netflowsim) (traffic analysis), and [netvis](../netvis) (visualization).
 
 **Key integration points:**
-- Exports to ank-pydantic via AutoNetKit YAML (with topology_type, tier, role, region metadata)
-- Exports to netsim directly (netsim YAML with device/wire/traffic structure)
+- Exports to [ank-pydantic](../ank-pydantic) via AutoNetKit YAML (with topology_type, tier, role, region metadata)
+- Exports to [netsim](../netsim) directly ([netsim](../netsim) YAML with device/wire/traffic structure)
 - Exports to ContainerLab YAML for lab deployment
-- Traffic matrix (CSV/JSON) feeds netflowsim
-- GeoJSON export for geographic visualization in netvis
+- Traffic matrix (CSV/JSON) feeds [netflowsim](../netflowsim)
+- GeoJSON export for geographic visualization in [netvis](../netvis)
 
 **Architecture documents:**
 - [Ecosystem Architecture Overview](../../automationarch/README.md) — full ecosystem design, data flow, workflows

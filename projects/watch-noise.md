@@ -5,7 +5,10 @@ section: projects
 
 # Wave (StillState & FlowState)
 
-<span class="status-badge status-active">Last Active: 2026-02-21</span>
+<div class="badges-row">
+  <span class="status-badge status-active">Recently Updated</span>
+  
+</div>
 
 [← Back to Projects](../projects)
 

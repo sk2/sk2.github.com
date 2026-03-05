@@ -5,7 +5,10 @@ section: network-automation
 
 # Network Analysis Engine
 
-<span class="status-badge status-active">Recently Updated</span>
+<div class="badges-row">
+  <span class="status-badge status-active">Recently Updated</span>
+  <span class="stack-badge">Rust</span> <span class="stack-badge">Polars</span>
+</div>
 
 [← Back to Projects](../projects)
 
@@ -79,7 +82,7 @@ Enable exploration and practical application of GNN techniques on real network t
 ## # Out of Scope
 
 - Visualization/UI layer — Other tools consume NetAssure analytics for visualization
-- NTE topology engine implementation — NetAssure consumes from existing NTE (ank_nte)
+- NTE topology engine implementation — NetAssure consumes from existing NTE ([ank_nte](../ank_nte))
 - Historical data storage/replay — v1 focuses on real-time analytics
 - Production deployment infrastructure — v1 is a working prototype
 
@@ -91,7 +94,7 @@ Enable exploration and practical application of GNN techniques on real network t
 NetAssure is a Rust+Python network analysis toolkit with formal verification, graph algorithms, and cascade modeling. It uses petgraph for graph operations, Z3 for SMT solving, and PyO3 for Python bindings.
 
 **External System:**
-NTE (Network Topology Engine at ~/dev/ank_nte) is a Rust-based topology engine with:
+NTE (Network Topology Engine at ~/dev/[ank_nte](../ank_nte)) is a Rust-based topology engine with:
 - petgraph StableDiGraph backend
 - Polars DataFrame storage
 - Python bindings via PyO3

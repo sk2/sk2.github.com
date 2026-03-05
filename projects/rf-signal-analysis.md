@@ -5,7 +5,10 @@ section: signal-processing
 
 # Signal Reflection - KrakenSDR Multi-Beam System
 
-<span class="status-badge status-active">Recently Updated</span>
+<div class="badges-row">
+  <span class="status-badge status-active">Recently Updated</span>
+  <span class="stack-badge">Rust</span> <span class="stack-badge">Python</span>
+</div>
 
 [← Back to Signal Processing](../signal-processing)
 

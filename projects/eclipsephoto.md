@@ -5,7 +5,10 @@ section: projects
 
 # Project: EclipsePhoto
 
-<span class="status-badge status-active">Active</span>
+<div class="badges-row">
+  <span class="status-badge status-active">Active</span>
+  <span class="stack-badge">Python</span>
+</div>
 
 [← Back to Projects](../projects)
 

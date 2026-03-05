@@ -2,6 +2,7 @@
 """
 Update website projects page and individual project pages from project metadata.
 Automated collection of PDFs, images, and code snippets.
+Includes richer cards, hero image extraction, global recent activity, and cross-linking.
 """
 
 import argparse
@@ -9,9 +10,8 @@ import re
 import shutil
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Optional, Dict, List
+from typing import Optional, Dict, List, Tuple
 from datetime import datetime, timedelta
-
 
 @dataclass
 class ProjectInfo:
@@ -30,7 +30,7 @@ class ProjectInfo:
     last_activity_date: Optional[datetime] = None
     assets: List[Path] = field(default_factory=list)
     docs: List[Path] = field(default_factory=list)
-
+    hero_asset: Optional[Path] = None
 
 # SOURCE OF TRUTH: Explicit mapping of projects to ecosystems
 ECOSYSTEM_MAP = {
@@ -102,6 +102,7 @@ CANONICAL_SLUG = {
 PROJECT_CONTENT_OVERRIDES = {
     "netsim": {
         "Concept": "Deterministic tick-based network protocol simulator validating configurations before production deployment. It provides protocol-level fidelity with same-topology-same-results guarantees, allowing engineers to verify control-plane behavior without the overhead of full VM emulation.\n\nUnlike packet-level simulators that focus on bit-level accuracy, this engine focuses on **protocol convergence and state validation**. It mirrors the behavior of real router operating systems, including the separation of RIB and FIB, allowing for the empirical testing of complex routing policies and failure scenarios.",
+        "Visuals": "### Basic Validation\n![Simulator Demo](/images/netsim-basic-demo.gif)\n\n### Interactive Daemon Mode\n![Daemon Demo](/images/netsim-daemon-demo.gif)\n",
     },
 }
 
@@ -118,14 +119,31 @@ CATEGORY_MAP = {
 }
 
 DETAILED_SECTIONS = [
-    "Concept", "Technical Reports", "Code Samples", "Usage", "Visuals",
+    "Concept", "Technical Reports", "Code Samples", "Visuals", "Usage", 
     "Architecture", "Features", "Current Status", "Roadmap", "Quick Facts",
 ]
 
-# Sections that should be updated if new assets/metadata are found, even if polished
 ALWAYS_UPDATE_SECTIONS = {"Technical Reports", "Code Samples", "Visuals", "Current Status", "Roadmap"}
-# Sections that are preserved from the website repo if they exist
 STABLE_SECTIONS = {"Concept", "Architecture", "Features", "Quick Facts", "Usage"}
+
+# Generate global slug list for cross-linking
+ALL_SLUGS = set(list(CANONICAL_SLUG.values()) + list(CANONICAL_SLUG.keys()) + list(ECOSYSTEM_MAP.keys()))
+SLUG_REGEX = re.compile(r'\b(' + '|'.join(re.escape(s) for s in ALL_SLUGS if len(s) > 3) + r')\b')
+
+def linkify_text(text: str, current_slug: str) -> str:
+    """Automatically convert mentions of other projects into internal links."""
+    def replace_func(match):
+        matched_slug = match.group(1)
+        if matched_slug == current_slug or matched_slug == CANONICAL_SLUG.get(current_slug, current_slug):
+            return matched_slug
+        canonical = CANONICAL_SLUG.get(matched_slug, matched_slug)
+        return f"[{matched_slug}](../{canonical})"
+    
+    parts = re.split(r'(\[[^\]]+\]\([^)]+\))', text)
+    for i in range(0, len(parts), 2):
+        parts[i] = SLUG_REGEX.sub(replace_func, parts[i])
+    return "".join(parts)
+
 
 def extract_sections(content: str) -> Dict[str, str]:
     sections: Dict[str, str] = {}
@@ -164,6 +182,8 @@ def generate_toc(content: str) -> str:
     links = [f"- [{h}](#{re.sub(r'-+', '-', re.sub(r'[^a-z0-9-]', '', h.lower().replace(' ', '-')))})" for h in headers]
     return "## Contents\n\n" + "\n".join(links) + "\n\n"
 
+FM_SECTIONS = {"network": "network-automation", "sdr": "signal-processing", "agents": "agentic-systems", "health": "agentic-systems", "data": "data-analytics"}
+
 def get_back_links(category: str) -> str:
     links = []
     if category in FM_SECTIONS:
@@ -172,8 +192,6 @@ def get_back_links(category: str) -> str:
         links.append(f"[← Back to {title}](../{slug})")
     links.append("[← Back to Projects](../projects)")
     return "\n\n".join(links)
-
-FM_SECTIONS = {"network": "network-automation", "sdr": "signal-processing", "agents": "agentic-systems", "health": "agentic-systems", "data": "data-analytics"}
 
 def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
     planning_dir = project_path / ".planning"
@@ -202,17 +220,35 @@ def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
     elif any(x in s for x in ["agent", "multi-agent", "cycle"]): cat = "agents"
     elif any(x in s for x in ["netflow", "polars", "tileserver", "matrix-time-series", "weather", "omnifocus-db", "cliscrape", "nascleanup", "devmon"]): cat = "data"
     elif any(x in s for x in ["netvis", "ank", "topogen", "netsim", "autonetkit", "network", "configparsing", "nte", "orchestrator", "automationarch", "netflowsim"]): cat = "network"
+    
+    # Extract Stack from constraints or environment
+    stack = []
+    if (project_path / "Cargo.toml").exists(): stack.append("Rust")
+    if (project_path / "pyproject.toml").exists() or (project_path / "requirements.txt").exists(): stack.append("Python")
+    if "React" in content or "TypeScript" in content: stack.append("TypeScript")
+    if "Polars" in content: stack.append("Polars")
+    
     assets, docs = [], []
+    hero_asset = None
     docs_dir = project_path / "docs"
     if docs_dir.exists():
         for pdf in docs_dir.rglob("*.pdf"):
             if any(x in pdf.name for x in ["paper.pdf", "techreport.pdf"]): docs.append(pdf)
-    for ext in ["*.png", "*.svg"]:
+    for ext in ["*.png", "*.svg", "*.gif"]:
         for img in project_path.rglob(ext):
-            if any(x in str(img) for x in ["node_modules", ".venv", ".pytest_cache"]): continue
-            if img.parent.name in ["figures", "images", "visuals"] or any(x in img.name for x in ["diagram", "example", "hero"]): assets.append(img)
+            if any(x in str(img) for x in ["node_modules", ".venv", ".pytest_cache", "target"]): continue
+            if img.parent.name in ["figures", "images", "visuals"] or any(x in img.name for x in ["diagram", "example", "hero", "demo"]): 
+                assets.append(img)
+                if not hero_asset and ("hero" in img.name or "architecture" in img.name):
+                    hero_asset = img
+    
+    if not hero_asset and assets:
+        for a in assets:
+            if "diagram" in a.name or "example" in a.name:
+                hero_asset = a
+                break
+                
     code_samples = []
-    # Search in examples/ and tests/python/ (for Query API)
     for search_dir in [project_path / "examples", project_path / "tests" / "python"]:
         if search_dir.exists():
             for f in sorted(search_dir.glob("*")):
@@ -220,6 +256,7 @@ def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
                     lang = f.suffix[1:] if f.suffix != ".md" else "markdown"
                     code_samples.append(f"### {f.name}\n\n```{lang}\n{f.read_text()}\n```")
     if code_samples: sections["Code Samples"] = "\n\n".join(code_samples[:8])
+    
     current_status, last_activity_date = "", None
     state_md = planning_dir / "STATE.md"
     if state_md.exists():
@@ -232,10 +269,11 @@ def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
                 try: last_activity_date = datetime.strptime(date_match.group(1), "%Y-%m-%d")
                 except ValueError: pass
             current_status = activity_text
+    
     status_detail = "Active"
     if last_activity_date:
         today = datetime.now()
-        if today - last_activity_date <= timedelta(days=7): status_detail = "Recently Updated"
+        if today - last_activity_date <= timedelta(days=14): status_detail = "Recently Updated"
         else: status_detail = f"Last Active: {last_activity_date.strftime('%Y-%m-%d')}"
     roadmap_summary = []
     roadmap_md = planning_dir / "ROADMAP.md"
@@ -244,24 +282,37 @@ def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
         for match in ms_matches:
             roadmap_summary.append(f"**{clean_text(match.group(1))}** {clean_text(match.group(2))}")
             if len(roadmap_summary) >= 5: break
-    return ProjectInfo(project_name, slug, project_path.name, project_path, cat, "active", status_detail, sections=sections, current_status=current_status, roadmap_summary=roadmap_summary, last_activity_date=last_activity_date, assets=assets, docs=docs)
+            
+    return ProjectInfo(project_name, slug, project_path.name, project_path, cat, "active", status_detail, stack=stack, sections=sections, current_status=current_status, roadmap_summary=roadmap_summary, last_activity_date=last_activity_date, assets=assets, docs=docs, hero_asset=hero_asset)
 
 def generate_detailed_page(project: ProjectInfo) -> str:
     if "Quick Facts" not in project.sections:
-        project.sections["Quick Facts"] = f"| | |\n|---|---|\n| **Status** | {project.status_detail} |"
+        facts = [f"| **Status** | {project.status_detail} |"]
+        if project.stack: facts.append(f"| **Stack** | {', '.join(project.stack)} |")
+        project.sections["Quick Facts"] = "| | |\n|---|---|\n" + "\n".join(facts)
+        
     eco_slug = ECOSYSTEM_MAP.get(project.slug, "projects")
     fm = f"---\nlayout: default\nsection: {eco_slug}\n---\n\n"
-    header = f"# {project.name}\n\n<span class=\"status-badge status-active\">{project.status_detail}</span>\n\n{get_back_links(project.category)}\n\n---\n\n"
     
-    # Process assets fresh
+    stack_html = " ".join([f'<span class="stack-badge">{s}</span>' for s in project.stack])
+    
+    header = f"# {project.name}\n\n<div class=\"badges-row\">\n  <span class=\"status-badge status-active\">{project.status_detail}</span>\n  {stack_html}\n</div>\n\n{get_back_links(project.category)}\n\n---\n\n"
+    
     if project.assets:
         img_lines = []
         for asset in project.assets:
             dest = Path("images") / asset.name
             try: shutil.copy2(asset, dest)
             except: pass
+            if project.hero_asset and asset.name == project.hero_asset.name:
+                continue
             img_lines.append(f"![{asset.stem}](/images/{asset.name})")
-        project.sections["Visuals"] = "\n\n".join(img_lines[:5])
+        
+        if "Visuals" not in PROJECT_CONTENT_OVERRIDES.get(project.slug, {}):
+            if img_lines:
+                project.sections["Visuals"] = "\n\n".join(img_lines[:5])
+            elif "Visuals" in project.sections:
+                del project.sections["Visuals"]
     
     if project.docs:
         doc_lines = []
@@ -274,48 +325,116 @@ def generate_detailed_page(project: ProjectInfo) -> str:
             doc_lines.append(f"- [Download Technical Report: {doc.name}](/assets/docs/{dest_name})")
         project.sections["Technical Reports"] = "\n".join(doc_lines)
     
-    # Load existing page to preserve stable sections
     dest_path = Path("projects") / f"{project.slug}.md"
     if dest_path.exists():
         existing_sections = extract_sections(dest_path.read_text())
         for sec in STABLE_SECTIONS:
-            if sec in existing_sections and sec not in ALWAYS_UPDATE_SECTIONS:
+            if sec in existing_sections and sec not in ALWAYS_UPDATE_SECTIONS and sec not in PROJECT_CONTENT_OVERRIDES.get(project.slug, {}):
                 project.sections[sec] = existing_sections[sec]
 
     body_list, processed_sections = [], set()
+    
+    if project.hero_asset:
+        body_list.append(f"![Hero Image](/images/{project.hero_asset.name})\n")
+        
     for s in ["Concept", "The Insight", "Overview"]:
         if s in project.sections:
-            body_list.append(f"## Concept\n\n{clean_text(project.sections[s])}")
+            body_list.append(f"## Concept\n\n{linkify_text(clean_text(project.sections[s]), project.slug)}")
             processed_sections.add(s)
             break
+            
     for s in DETAILED_SECTIONS:
         if s in project.sections and s not in processed_sections:
-            body_list.append(f"## {s}\n\n{clean_text(project.sections[s])}")
+            body_list.append(f"## {s}\n\n{linkify_text(clean_text(project.sections[s]), project.slug)}")
             processed_sections.add(s)
+            
     for s, content in project.sections.items():
         if s not in processed_sections and s not in ["Current Status", "Roadmap", "Contents"]:
-            body_list.append(f"## {s}\n\n{clean_text(content)}")
+            body_list.append(f"## {s}\n\n{linkify_text(clean_text(content), project.slug)}")
+            
     if project.current_status: body_list.append(f"## Current Status\n\n{clean_text(project.current_status)}")
     if project.roadmap_summary: body_list.append("## Roadmap\n\n" + "\n".join([f"- {item}" for item in project.roadmap_summary]))
+    
     final_body = "\n\n---\n\n".join(body_list)
     return fm + header + generate_toc(final_body) + final_body + f"\n\n---\n\n{get_back_links(project.category)}\n"
 
 def generate_projects_index(projects: list[ProjectInfo]) -> str:
     lines = ["---", "layout: default", "---", "", "# Projects", "", "Focused on network engineering, autonomous systems, and signal processing.", "", "---", ""]
+    
+    lines.append('<div class="search-container"><input type="text" id="projectSearch" placeholder="Search projects, stack, or descriptions..." onkeyup="filterProjects()"></div>\n')
+    
+    valid_dates = [p for p in projects if p.last_activity_date]
+    recent = sorted(valid_dates, key=lambda x: x.last_activity_date, reverse=True)[:5]
+    if recent:
+        lines.append("## Recent Activity\n")
+        lines.append('<ul class="recent-activity-list">')
+        for p in recent:
+            status_text = clean_text(p.current_status).split("—")[-1].strip()
+            lines.append(f'<li><strong>{p.last_activity_date.strftime("%Y-%m-%d")}</strong>: <a href="projects/{p.slug}">{p.name}</a> — <em>{status_text}</em></li>')
+        lines.append('</ul>\n\n---\n')
+
     sorted_projs = sorted(projects, key=lambda p: (list(CATEGORY_MAP.keys()).index(p.category), p.name))
     categorized = {k: [] for k in CATEGORY_MAP.keys()}
     for p in sorted_projs: categorized[p.category].append(p)
+    
     for cat_key, (title, desc, link) in CATEGORY_MAP.items():
         projs = categorized[cat_key]
         if not projs: continue
         lines.append(f"## {title}\n")
+        lines.append('<div class="project-grid">')
         for p in projs:
             summary = ""
             for k in ["Concept", "The Insight", "Overview", "What This Is"]:
                 if k in p.sections:
                     summary = " ".join(re.split(r"(?<=[.!?])\s+", clean_text(re.sub(r"!\[.*?\]\(.*?\)", "", p.sections[k])))[:3])
                     if summary: break
-            lines.append(f"### [{p.name}](projects/{p.slug})\n\n{summary}\n\n")
+            
+            stack_html = "".join([f'<span class="stack-badge">{s}</span>' for s in p.stack])
+            
+            lines.append(f'<div class="project-card" data-search="{p.name.lower()} {summary.lower()} {" ".join(p.stack).lower()} {p.slug.lower()}">')
+            lines.append(f'  <h3 style="margin-top:0; margin-bottom: 0.5rem;"><a href="projects/{p.slug}">{p.name}</a></h3>')
+            lines.append(f'  <div class="badges-row" style="margin-bottom: 0.8rem;"><span class="status-badge status-active">{p.status_detail}</span> {stack_html}</div>')
+            if p.hero_asset:
+                lines.append(f'  <img src="../images/{p.hero_asset.name}" class="project-thumbnail" alt="{p.name} diagram" />')
+            lines.append(f'  <p style="font-size: 0.9em; margin-top: 0;">{summary}</p>')
+            lines.append('</div>')
+            lines.append("")
+        lines.append('</div>\n')
+
+    lines.append("""
+<style>
+.project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+.project-card { border: 1px solid #dee2e6; border-radius: 8px; padding: 1.2rem; background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.02); display: flex; flex-direction: column;}
+.project-thumbnail { width: 100%; height: 120px; object-fit: cover; border-radius: 4px; margin-bottom: 1rem; border: 1px solid #f1f3f5;}
+.badges-row { display: flex; gap: 0.4rem; flex-wrap: wrap; align-items: center; }
+.status-badge { padding: 0.2em 0.6em; border-radius: 4px; font-size: 0.75em; font-weight: 600; background-color: #e3f2fd; color: #495057; border: 1px solid #dee2e6; }
+.stack-badge { padding: 0.2em 0.6em; border-radius: 4px; font-size: 0.75em; font-weight: 500; background-color: #f8f9fa; color: #6c757d; border: 1px solid #e9ecef;}
+.search-container { margin-bottom: 2rem; }
+#projectSearch { width: 100%; padding: 0.8rem 1rem; border-radius: 6px; border: 1px solid #ced4da; font-size: 1rem; box-sizing: border-box; outline: none; }
+#projectSearch:focus { border-color: #80bdff; box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25); }
+.recent-activity-list { line-height: 1.6; font-size: 0.95em; }
+.recent-activity-list li { margin-bottom: 0.5rem; }
+section { margin-bottom: 2em; }
+</style>
+
+<script>
+function filterProjects() {
+    var input, filter, cards, card, i, txtValue;
+    input = document.getElementById('projectSearch');
+    filter = input.value.toLowerCase();
+    cards = document.getElementsByClassName('project-card');
+    for (i = 0; i < cards.length; i++) {
+        card = cards[i];
+        txtValue = card.getAttribute('data-search');
+        if (txtValue.indexOf(filter) > -1) {
+            card.style.display = "";
+        } else {
+            card.style.display = "none";
+        }
+    }
+}
+</script>
+    """)
     return "\n".join(lines)
 
 def main():

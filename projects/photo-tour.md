@@ -5,7 +5,10 @@ section: projects
 
 # Photo Tour
 
-<span class="status-badge status-active">Active</span>
+<div class="badges-row">
+  <span class="status-badge status-active">Active</span>
+  
+</div>
 
 [← Back to Projects](../projects)
 

@@ -5,7 +5,10 @@ section: signal-processing
 
 # Radio Streaming Server
 
-<span class="status-badge status-active">Last Active: 2026-02-22</span>
+<div class="badges-row">
+  <span class="status-badge status-active">Recently Updated</span>
+  <span class="stack-badge">Rust</span>
+</div>
 
 [← Back to Signal Processing](../signal-processing)
 
@@ -265,7 +268,7 @@ The ability to reliably and efficiently stream high-fidelity IQ data from multip
 - [ ] Multi-threaded architecture to handle multiple SDR streams concurrently.
 - [ ] TUI for viewing status and updating configuration live.
 - [ ] Persistent configuration stored in a TOML file.
-- [ ] Cross-compilation pipeline for Raspberry Pi (ARM).
+- [ ] Cross-[compilation](../compilation) pipeline for Raspberry Pi (ARM).
 
 ---
 

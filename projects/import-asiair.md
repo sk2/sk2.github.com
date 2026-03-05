@@ -5,7 +5,10 @@ section: projects
 
 # ASIAIR Import Tool
 
-<span class="status-badge status-active">Last Active: 2026-02-11</span>
+<div class="badges-row">
+  <span class="status-badge status-active">Last Active: 2026-02-11</span>
+  
+</div>
 
 [← Back to Projects](../projects)
 

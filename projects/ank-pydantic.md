@@ -5,7 +5,10 @@ section: network-automation
 
 # Network Modeling & Configuration Library
 
-<span class="status-badge status-active">Recently Updated</span>
+<div class="badges-row">
+  <span class="status-badge status-active">Recently Updated</span>
+  <span class="stack-badge">Python</span> <span class="stack-badge">Polars</span>
+</div>
 
 [← Back to Network Automation](../network-automation)
 
@@ -70,7 +73,7 @@ From the repo root, load the `house_network` schema-based topology:
 ```python
 from pathlib import Path
 
-from ank_pydantic import Topology
+from [ank_pydantic](../ank_pydantic) import Topology
 from examples.house_network.models import (
     EDGE_TYPE_MAPPING,
     NODE_TYPE_MAPPING,
@@ -128,7 +131,7 @@ Interfaces: 9
 
 ## What This Is
 
-A Python library for modeling and querying network topologies, backed by a high-performance Rust core (`ank_nte`). Features a two-stage transformation model (Whiteboard → Plan → Protocol Layers), type-safe Pydantic models for nodes/edges/layers, and a composable lazy query API with Rust-backed execution. Ships with "batteries-included" domain models (ISIS, MPLS, EVPN, L3VPN, IXP) in the blueprints/ module.
+A Python library for modeling and querying network topologies, backed by a high-performance Rust core (`[ank_nte](../ank_nte)`). Features a two-stage transformation model (Whiteboard → Plan → Protocol Layers), type-safe Pydantic models for nodes/edges/layers, and a composable lazy query API with Rust-backed execution. Ships with "batteries-included" domain models (ISIS, MPLS, EVPN, L3VPN, IXP) in the blueprints/ module.
 
 ---
 
@@ -156,7 +159,7 @@ A clean, consistent API where there's one obvious way to perform each topology o
 
 ## Previous Milestone: Realignment and Cleanup (Post-netc Split)
 
-**Goal:** Clean up the repository and realign the focus of `ank_pydantic` as the "Community Frontend" (Python API) for modeling, rapid prototyping, and hacking, acknowledging that the rigid compiler and "linter" functionality has moved to the `netc` Rust project.
+**Goal:** Clean up the repository and realign the focus of `[ank_pydantic](../ank_pydantic)` as the "Community Frontend" (Python API) for modeling, rapid prototyping, and hacking, acknowledging that the rigid compiler and "linter" functionality has moved to the `netc` Rust project.
 
 **Status:** Completed
 
@@ -351,7 +354,7 @@ A clean, consistent API where there's one obvious way to perform each topology o
 ## Context
 
 **Codebase state (v1.8):**
-- ~960K LOC Python, Rust backend (ank_nte + nte-query + nte-domain)
+- ~960K LOC Python, Rust backend ([ank_nte](../ank_nte) + nte-query + nte-domain)
 - blueprints/ module with domain models organised by type
 - Manager-first API: Topology delegates to specialised managers
 - **Rust-first architecture**: CoreTopology is single source of truth
@@ -438,14 +441,14 @@ A clean, consistent API where there's one obvious way to perform each topology o
 
 This project is part of a seven-tool network automation ecosystem. ank-pydantic provides network modeling and configuration generation — the "model" stage of the pipeline.
 
-**Role:** Transform structural topologies into protocol-configured, vendor-specific network designs. Bridge between topology generation (topogen) and simulation/deployment targets (netsim, ContainerLab).
+**Role:** Transform structural topologies into protocol-configured, vendor-specific network designs. Bridge between topology generation ([topogen](../topogen)) and simulation/deployment targets ([netsim](../netsim), ContainerLab).
 
 **Key integration points:**
-- Consumes topologies from topogen (AutoNetKit YAML export with topology_type, tier, role metadata)
-- Depends on ank_nte as Rust graph engine backend
-- Exports to netsim (`export_netsim()`) for protocol validation
+- Consumes topologies from [topogen](../topogen) (AutoNetKit YAML export with topology_type, tier, role metadata)
+- Depends on [ank_nte](../ank_nte) as Rust graph engine backend
+- Exports to [netsim](../netsim) (`export_netsim()`) for protocol validation
 - Blueprint system (dc-ebgp, wan-ospf, isp-bgp-ospf) adds protocol config to structural topologies
-- IP addressing is owned by ank-pydantic, not topogen (Decision D-1)
+- IP addressing is owned by ank-pydantic, not [topogen](../topogen) (Decision D-1)
 
 **Architecture documents:**
 - [Ecosystem Architecture Overview](../../automationarch/README.md) — full ecosystem design, data flow, workflows

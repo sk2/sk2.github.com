@@ -5,7 +5,10 @@ section: signal-processing
 
 # Project: Wi-Fi Signal Reflection (KrakenSDR)
 
-<span class="status-badge status-active">Active</span>
+<div class="badges-row">
+  <span class="status-badge status-active">Active</span>
+  <span class="stack-badge">Rust</span> <span class="stack-badge">Python</span>
+</div>
 
 [← Back to Signal Processing](../signal-processing)
 
@@ -23,13 +26,13 @@ section: signal-processing
 
 ## Core Value
 
-Signal reflection system that utilizes existing Wi-Fi signals for through-wall human detection and localization, leveraging the KrakenSDR coherent radio array.
+Signal reflection system that utilizes existing Wi-Fi [signals](../signals) for through-wall human detection and localization, leveraging the KrakenSDR coherent radio array.
 
 ---
 
 ## Vision
 
-To bridge the gap between theoretical signal reflection research and a portable, real-time hardware implementation capable of "seeing" movement through obstacles using ubiquitous Wi-Fi signals.
+To bridge the gap between theoretical signal reflection research and a portable, real-time hardware implementation capable of "seeing" movement through obstacles using ubiquitous Wi-Fi [signals](../signals).
 
 ---
 

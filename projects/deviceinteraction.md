@@ -5,7 +5,10 @@ section: network-automation
 
 # Device Interaction Framework
 
-<span class="status-badge status-active">Active</span>
+<div class="badges-row">
+  <span class="status-badge status-active">Active</span>
+  <span class="stack-badge">Rust</span>
+</div>
 
 [← Back to Network Automation](../network-automation)
 
@@ -147,7 +150,7 @@ Enable rapid, type-safe validation of network device state through streamlined d
 
 **Core Connectivity (v1.0):**
 - ✓ Load testbed definitions from YAML (device inventory, topology, connection parameters) — v1.0
-- ✓ Connection abstraction supporting multiple backends (SSH, mock replay, netsim native) — v1.0
+- ✓ Connection abstraction supporting multiple backends (SSH, mock replay, [netsim](../netsim) native) — v1.0
 - ✓ SSH connection pooling and lifecycle management — v1.0
 - ✓ Command execution with proper error handling and timeouts — v1.0
 
@@ -162,7 +165,7 @@ Enable rapid, type-safe validation of network device state through streamlined d
 **Backend Implementations (v1.0):**
 - ✓ Mock SSH backend using pre-recorded command/response fixtures (YAML/JSON) — v1.0
 - ✓ SSH backend for real device connections (using russh) — v1.0
-- ✓ netsim backend integration (SSH-based wrapper) — v1.0
+- ✓ [netsim](../netsim) backend integration (SSH-based wrapper) — v1.0
 
 **Testing & Examples (v1.0):**
 - ✓ Parser fixtures with real Cisco IOS outputs — v1.0 (4 fixture files)
@@ -183,7 +186,7 @@ Enable rapid, type-safe validation of network device state through streamlined d
 
 **Testing & Examples:**
 - [ ] Example testbed YAML files
-- [ ] End-to-end test suite against netsim daemon
+- [ ] End-to-end test suite against [netsim](../netsim) daemon
 - [ ] Example verification scripts demonstrating library usage
 
 ---
@@ -208,18 +211,18 @@ Enable rapid, type-safe validation of network device state through streamlined d
 - **Deliverables:** Foundation (testbed + backend abstraction), Mock backend (fixtures), SSH integration (pooling), Parser framework (4 parsers + registry)
 
 **Known Technical Debt (from v1.0 audit):**
-- di-collect doc test compilation failure (documentation issue)
+- di-collect doc test [compilation](../compilation) failure (documentation issue)
 - Missing integration test for Backend → Parser combined flow
 - Unused imports in parser modules (cleanup opportunity)
 
 **Ecosystem Integration:**
 This tool is one component in a broader network automation toolkit. Related projects:
-- `netsim` (~/dev/network-simulator) — Full-featured network topology simulator with OSPF, IS-IS, BGP, MPLS, daemon mode, interactive CLI
-- This tool enables testing automation against netsim before deploying to real hardware
+- `[netsim](../netsim)` (~/dev/[network-simulator](../netsim)) — Full-featured network topology simulator with OSPF, IS-IS, BGP, MPLS, daemon mode, interactive CLI
+- This tool enables testing automation against [netsim](../netsim) before deploying to real hardware
 
 **Development Workflow:**
 1. Develop parsers using mock fixtures (real vendor outputs) ✓
-2. Test against netsim daemon (dynamic simulation) — partial (backend exists, integration tests pending)
+2. Test against [netsim](../netsim) daemon (dynamic simulation) — partial (backend exists, integration tests pending)
 3. Validate against real devices (production hardware) — ready (SSH backend complete)
 
 **Inspiration:**
@@ -234,7 +237,7 @@ PyATS/Genie provides excellent network automation capabilities but is heavyweigh
 ## Constraints
 
 - **Tech Stack: Rust** — Rust 1.70+ with tokio async runtime; this is non-negotiable for performance and safety goals
-- **Testing Infrastructure: netsim required** — Must integrate with existing netsim project for simulation-based testing
+- **Testing Infrastructure: [netsim](../netsim) required** — Must integrate with existing [netsim](../netsim) project for simulation-based testing
 - **Protocol Support: SSH primary** — SSH is the universal device protocol; Telnet and REST APIs are lower priority
 - **Parser Accuracy: Real vendor outputs** — All parsers must be tested against actual device outputs, not synthetic examples
 - **Performance: Zero-cost abstractions** — Backend abstraction must compile to efficient code; no runtime overhead for trait dispatch in hot paths
@@ -246,11 +249,11 @@ PyATS/Genie provides excellent network automation capabilities but is heavyweigh
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| Three-tier testing strategy (mock → netsim → real) | Enables fast parser development (mock fixtures), dynamic testing (netsim), and production validation (real hardware) without blocking on device availability | ✓ Good — MockBackend enables testing without hardware, SSH backend ready for real devices |
-| Trait-based backend abstraction (`DeviceBackend` trait) | Allows pluggable connection mechanisms (SSH, mock, netsim native) while maintaining type safety and enabling compile-time optimization | ✓ Good — 3 backend implementations (Mock, SSH, Netsim), zero overhead trait dispatch |
-| Start with core commands (route, interfaces, ping, traceroute) | Proves the full stack (connect → parse → verify) works before expanding to 15+ commands; faster path to validation against netsim | ✓ Good — All 4 parsers working with real IOS fixtures, full stack validated |
+| Three-tier testing strategy (mock → [netsim](../netsim) → real) | Enables fast parser development (mock fixtures), dynamic testing ([netsim](../netsim)), and production validation (real hardware) without blocking on device availability | ✓ Good — MockBackend enables testing without hardware, SSH backend ready for real devices |
+| Trait-based backend abstraction (`DeviceBackend` trait) | Allows pluggable connection mechanisms (SSH, mock, [netsim](../netsim) native) while maintaining type safety and enabling compile-time optimization | ✓ Good — 3 backend implementations (Mock, SSH, Netsim), zero overhead trait dispatch |
+| Start with core commands (route, interfaces, ping, traceroute) | Proves the full stack (connect → parse → verify) works before expanding to 15+ commands; faster path to validation against [netsim](../netsim) | ✓ Good — All 4 parsers working with real IOS fixtures, full stack validated |
 | Code-first verification API (not YAML tests) | Rust API provides type safety, IDE support, and composability; YAML adds parsing complexity and loses compile-time checks | — Pending — Verification framework is Phase 5 |
-| Cisco as reference implementation | Most mature netsim support; well-documented CLI; establishes parser patterns before expanding to multi-vendor | ✓ Good — Cisco IOS parser patterns established, extensible to other vendors |
+| Cisco as reference implementation | Most mature [netsim](../netsim) support; well-documented CLI; establishes parser patterns before expanding to multi-vendor | ✓ Good — Cisco IOS parser patterns established, extensible to other vendors |
 | Use russh over thrussh | russh is actively maintained fork with better async support and security updates | ✓ Good — SSH backend works reliably, prompt-delimited execution successful |
 | Parser registry with trait objects | Enables dynamic parser lookup by command name while maintaining type safety through downcasting | ✓ Good — Registry integration tests pass, type-safe API validated |
 | nom for parsing with nom_locate | Provides composable parser combinators with line/column error reporting | ✓ Good — Reusable primitives (ip, interface, protocol), actionable error messages |

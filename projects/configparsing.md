@@ -5,7 +5,10 @@ section: network-automation
 
 # Brownfield Ingestion & Analysis
 
-<span class="status-badge status-active">Recently Updated</span>
+<div class="badges-row">
+  <span class="status-badge status-active">Recently Updated</span>
+  <span class="stack-badge">Python</span>
+</div>
 
 [← Back to Network Automation](../network-automation)
 
@@ -51,7 +54,7 @@ Extract network-level topology relationships (protocol adjacencies, link roles, 
 **Target features:**
 - Broader vendor coverage (Juniper, Nokia, F5, Palo Alto) and protocols (MPLS, SR, SRv6)
 - Higher extraction accuracy with reduced HITL burden
-- Ecosystem integration (RFC-01 compliance, autonetkit interop)
+- Ecosystem integration (RFC-01 compliance, [autonetkit](../autonetkit) interop)
 - Production hardening (observability, batch processing, error handling)
 
 ---
@@ -91,7 +94,7 @@ Extract network-level topology relationships (protocol adjacencies, link roles, 
 ## # Out of Scope
 
 - Real-time streaming telemetry integration — defer to future milestone
-- On-device configuration deployment/rollback — compilation only, not deployment
+- On-device configuration deployment/rollback — [compilation](../compilation) only, not deployment
 - Network discovery/topology mapping from live networks — focuses on configuration abstraction, not discovery
 - Support for legacy/EoL vendor platforms — focuses on modern platforms with good documentation
 
@@ -101,7 +104,7 @@ Extract network-level topology relationships (protocol adjacencies, link roles, 
 
 **v1.0 Status (shipped 2026-02-22):** Full pipeline working end-to-end. Proven that LLM-powered extraction with RAG and human-in-the-loop can successfully translate vendor CLI to/from topology IR. System validated with real-world configs. Built with Python 3.12, FastAPI, ChromaDB, LangChain, and LLM APIs (Claude/GPT-4).
 
-**Ecosystem Position:** This tool is the **vendor translation layer** in a larger network automation ecosystem (automationarch). It consumes vendor documentation and CLI, produces topology IR that feeds into autonetkit for modeling/simulation/visualization. Complementary to (not overlapping with) tools like autonetkit-config (design/compilation), netsim (protocol simulation), and netvis (visualization).
+**Ecosystem Position:** This tool is the **vendor translation layer** in a larger network automation ecosystem ([automationarch](../automationarch)). It consumes vendor documentation and CLI, produces topology IR that feeds into [autonetkit](../autonetkit) for modeling/simulation/visualization. Complementary to (not overlapping with) tools like [autonetkit](../autonetkit)-config (design/[compilation](../compilation)), [netsim](../netsim) (protocol simulation), and [netvis](../netvis) (visualization).
 
 **Key architectural insight:** The intermediate representation is a topology-centric graph model, NOT a device-centric model like YANG. Network-level relationships (OSPF adjacencies, BGP peerings) are genuinely vendor-independent, while device-level configuration varies wildly across vendors. This enables true vendor abstraction.
 
@@ -129,7 +132,7 @@ Extract network-level topology relationships (protocol adjacencies, link roles, 
 | ChromaDB vector store | Lightweight, embedded, good for RAG workloads | ✓ Good — fast retrieval, stable |
 | HITL for quality assurance | LLMs hallucinate; human review essential for production | ✓ Good — v1.0 demonstrated viability with review UI |
 | Confidence + evidence citation | Every extraction needs confidence score and doc/config evidence | ✓ Good — enables intelligent routing to HITL |
-| Ecosystem integration focus | Translation layer only, not orchestration/intent/deployment | ✓ Good — clear boundaries with automationarch tools |
+| Ecosystem integration focus | Translation layer only, not orchestration/intent/deployment | ✓ Good — clear boundaries with [automationarch](../automationarch) tools |
 
 *Last updated: 2026-02-22 after v1.0 completion and v2.0 milestone initialization*
 

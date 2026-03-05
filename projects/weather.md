@@ -5,7 +5,10 @@ section: projects
 
 # Project: Weather (BOM ACCESS Pipeline)
 
-<span class="status-badge status-active">Last Active: 2026-02-14</span>
+<div class="badges-row">
+  <span class="status-badge status-active">Last Active: 2026-02-14</span>
+  <span class="stack-badge">Python</span> <span class="stack-badge">Polars</span>
+</div>
 
 [← Back to Data Analytics](../data-analytics)
 

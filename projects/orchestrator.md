@@ -5,7 +5,10 @@ section: projects
 
 # Orchestrator (Device Interaction Runner)
 
-<span class="status-badge status-active">Recently Updated</span>
+<div class="badges-row">
+  <span class="status-badge status-active">Recently Updated</span>
+  <span class="stack-badge">Python</span>
+</div>
 
 [← Back to Network Automation](../network-automation)
 
@@ -36,7 +39,7 @@ section: projects
 
 An orchestration runner for coordinating **device interactions** across real/testbed networks. It executes runs with retries, timeouts, bounded concurrency, and durable artifacts (logs, results, snapshots) that plug into the broader automation ecosystem.
 
-v1 is explicitly **device-focused** and **uses `deviceinteraction` as a library** for transports/parsing/test primitives. The orchestrator owns run coordination, persistence, and event streaming.
+v1 is explicitly **device-focused** and **uses `[deviceinteraction](../deviceinteraction)` as a library** for transports/parsing/test primitives. The orchestrator owns run coordination, persistence, and event streaming.
 
 This is inspired by Tower/AWX-style job execution, but it is purpose-built for our use case: reliable, replayable device runs with clean integration boundaries and a clear path to future expansion (including broader workflow graphs) without making AI a dependency.
 
@@ -63,7 +66,7 @@ Run the same device workflow reliably across lab/real targets, with deterministi
 ## # Active
 
 - [ ] Provide an API service that can execute a device run and return status + artifacts
-- [ ] Use `deviceinteraction` to execute commands/triggers/verifications against targets and stream structured events
+- [ ] Use `[deviceinteraction](../deviceinteraction)` to execute commands/triggers/verifications against targets and stream structured events
 - [ ] Support core run semantics: bounded concurrency, retries/backoff, timeouts, and cancellation
 
 ---
@@ -88,7 +91,7 @@ Run the same device workflow reliably across lab/real targets, with deterministi
 ## Constraints
 
 - **Operator experience**: API service first — headless execution engine with an HTTP API (CLI/UI can come later as clients)
-- **Integration**: Device-first — v1 integrates with `deviceinteraction` to talk to devices; other targets come via adapters later
+- **Integration**: Device-first — v1 integrates with `[deviceinteraction](../deviceinteraction)` to talk to devices; other targets come via adapters later
 - **Portability**: Must work on a laptop against a small lab, then scale out via concurrency controls and durable run state
 
 ---
@@ -99,15 +102,15 @@ Run the same device workflow reliably across lab/real targets, with deterministi
 |----------|-----------|---------|
 | API-first service | Align with engine role; enables multiple clients (Workbench/CLI/CI) | — Pending |
 | Device-first scope (v1) | Prevent scope creep; ship a useful runner for device interactions | — Pending |
-| Use `deviceinteraction` as a library | Avoid duplicating transports/parsers; keep clean ownership boundaries | — Pending |
+| Use `[deviceinteraction](../deviceinteraction)` as a library | Avoid duplicating transports/parsers; keep clean ownership boundaries | — Pending |
 | Workflow definitions | Start simple; add YAML and/or Python SDK as needed | — Pending |
 
 ---
 
 ## Future Direction (Explicitly Not v1)
 
-- Global/toolchain orchestration (multi-tool DAGs across topogen/autonetkit/netsim/netvis)
-- Simulator-first adapters (e.g. `network-simulator/`) and environment lifecycle management
+- Global/toolchain orchestration (multi-tool DAGs across [topogen](../topogen)/[autonetkit](../autonetkit)/[netsim](../netsim)/[netvis](../netvis))
+- Simulator-first adapters (e.g. `[network-simulator](../netsim)/`) and environment lifecycle management
 - Scheduling, RBAC, approval gates
 
 *Last updated: 2026-02-22 after initialization*

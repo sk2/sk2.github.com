@@ -5,7 +5,10 @@ section: network-automation
 
 # Topology Engine Core
 
-<span class="status-badge status-active">Recently Updated</span>
+<div class="badges-row">
+  <span class="status-badge status-active">Recently Updated</span>
+  <span class="stack-badge">Rust</span> <span class="stack-badge">Python</span> <span class="stack-badge">TypeScript</span> <span class="stack-badge">Polars</span>
+</div>
 
 [← Back to Network Automation](../network-automation)
 
@@ -43,10 +46,10 @@ section: network-automation
 ### query_builder.py
 
 ```py
-"""Examples: Fluent Query Builder for ank_nte
+"""Examples: Fluent Query Builder for [ank_nte](../ank_nte)
 
 Demonstrates the Polars-inspired query API for filtering nodes and links
-without needing ank_pydantic or Pydantic models.
+without needing [ank_pydantic](../ank_pydantic) or Pydantic models.
 
 Run with:
     uv run python examples/query_builder.py
@@ -57,7 +60,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from ank_nte import Topology
+from [ank_nte](../ank_nte) import Topology
 from src.query import Expr, QueryNamespace
 
 
@@ -301,7 +304,7 @@ from pathlib import Path
 import polars as pl
 import pytest
 
-from ank_nte import ArchiveError, Topology
+from [ank_nte](../ank_nte) import ArchiveError, Topology
 
 
 class TestTopologyArchive:
@@ -650,7 +653,7 @@ These tests verify adding and removing edges between nodes.
 """
 
 import pytest
-from ank_nte import Topology, NodeNotFoundError, LengthMismatchError
+from [ank_nte](../ank_nte) import Topology, NodeNotFoundError, LengthMismatchError
 
 
 class TestEdgeOperations:
@@ -930,12 +933,12 @@ handle specific error types.
 """
 
 import pytest
-import ank_nte as nte
+import [ank_nte](../ank_nte) as nte
 
 if not hasattr(nte, "NotAnEndpointError"):
-    pytest.skip("NotAnEndpointError not available in ank_nte", allow_module_level=True)
+    pytest.skip("NotAnEndpointError not available in [ank_nte](../ank_nte)", allow_module_level=True)
 
-from ank_nte import (  # noqa: E402
+from [ank_nte](../ank_nte) import (  # noqa: E402
     Topology,
     NodeNotFoundError,
     LengthMismatchError,
@@ -1179,7 +1182,7 @@ node metadata (types and layers).
 """
 
 import pytest
-from ank_nte import Topology, NodeNotFoundError
+from [ank_nte](../ank_nte) import Topology, NodeNotFoundError
 
 
 class TestNodeOperations:
@@ -1383,11 +1386,11 @@ class TestRemoveNodes:
 ```py
 import pytest
 
-import ank_nte
+import [ank_nte](../ank_nte)
 
 
 def _add_router(
-    t: ank_nte.Topology,
+    t: [ank_nte](../ank_nte).Topology,
     node_id: int,
     layer: str,
     vendor: str | None = None,
@@ -1400,7 +1403,7 @@ def _add_router(
         t.update_node_field(node_id, "asn", asn)
 
 
-def _add_endpoint_for_node(t: ank_nte.Topology, endpoint_id: int, node_id: int):
+def _add_endpoint_for_node(t: [ank_nte](../ank_nte).Topology, endpoint_id: int, node_id: int):
     # Create endpoint node and mark it as endpoint in the graph.
     # Put endpoints in the same layer as their parent nodes for inter-edge validation.
     layer = "base"
@@ -1411,7 +1414,7 @@ def _add_endpoint_for_node(t: ank_nte.Topology, endpoint_id: int, node_id: int):
 
 
 def test_pattern_undirected_connectivity_two_node():
-    t = ank_nte.Topology()
+    t = [ank_nte](../ank_nte).Topology()
 
     _add_router(t, 1, "base")
     _add_router(t, 2, "base")
@@ -1422,18 +1425,18 @@ def test_pattern_undirected_connectivity_two_node():
     # Connectivity edge.
     t.add_inter_edges([101], [102])
 
-    pattern = ank_nte.PatternNode.chain(
+    pattern = [ank_nte](../ank_nte).PatternNode.chain(
         [
-            ank_nte.PatternStep.any_node().with_binding("a"),
-            ank_nte.PatternStep.edge("connectivity"),
-            ank_nte.PatternStep.any_node().with_binding("b"),
+            [ank_nte](../ank_nte).PatternStep.any_node().with_binding("a"),
+            [ank_nte](../ank_nte).PatternStep.edge("connectivity"),
+            [ank_nte](../ank_nte).PatternStep.any_node().with_binding("b"),
         ]
     )
 
-    plan = ank_nte.QueryPlan(pattern).with_mode(ank_nte.MaterialiseMode.collect())
+    plan = [ank_nte](../ank_nte).QueryPlan(pattern).with_mode([ank_nte](../ank_nte).MaterialiseMode.collect())
     res = t.execute_pattern_query(plan)
 
-    assert isinstance(res, ank_nte.PatternMatchResult)
+    assert isinstance(res, [ank_nte](../ank_nte).PatternMatchResult)
     assert res.truncated is False
     assert res.limit > 0
     assert len(res.matches) == 2
@@ -1448,7 +1451,7 @@ def test_pattern_undirected_connectivity_two_node():
 
 
 def test_pattern_same_layer_default_blocks_cross_layer():
-    t = ank_nte.Topology()
+    t = [ank_nte](../ank_nte).Topology()
     _add_router(t, 1, "base")
     _add_router(t, 2, "other")
 
@@ -1457,36 +1460,36 @@ def test_pattern_same_layer_default_blocks_cross_layer():
     # Note: add_inter_edges enforces same-layer, so we can't construct a cross-layer inter edge.
 
     # Phase 7 rejects cross-layer patterns at validation time.
-    pattern = ank_nte.PatternNode.chain(
+    pattern = [ank_nte](../ank_nte).PatternNode.chain(
         [
-            ank_nte.PatternStep.any_node().in_layer("base"),
-            ank_nte.PatternStep.any_edge(),
-            ank_nte.PatternStep.any_node().in_layer("other"),
+            [ank_nte](../ank_nte).PatternStep.any_node().in_layer("base"),
+            [ank_nte](../ank_nte).PatternStep.any_edge(),
+            [ank_nte](../ank_nte).PatternStep.any_node().in_layer("other"),
         ]
     )
-    plan = ank_nte.QueryPlan(pattern).with_mode(ank_nte.MaterialiseMode.collect())
-    with pytest.raises(ank_nte.SchemaError):
+    plan = [ank_nte](../ank_nte).QueryPlan(pattern).with_mode([ank_nte](../ank_nte).MaterialiseMode.collect())
+    with pytest.raises([ank_nte](../ank_nte).SchemaError):
         t.execute_pattern_query(plan)
 
 
 def test_pattern_cross_layer_explicit_conflict_raises():
-    t = ank_nte.Topology()
+    t = [ank_nte](../ank_nte).Topology()
     _add_router(t, 1, "base")
 
-    pattern = ank_nte.PatternNode.chain(
+    pattern = [ank_nte](../ank_nte).PatternNode.chain(
         [
-            ank_nte.PatternStep.any_node().in_layer("base"),
-            ank_nte.PatternStep.any_edge(),
-            ank_nte.PatternStep.any_node().in_layer("other"),
+            [ank_nte](../ank_nte).PatternStep.any_node().in_layer("base"),
+            [ank_nte](../ank_nte).PatternStep.any_edge(),
+            [ank_nte](../ank_nte).PatternStep.any_node().in_layer("other"),
         ]
     )
-    plan = ank_nte.QueryPlan(pattern).with_mode(ank_nte.MaterialiseMode.collect())
-    with pytest.raises(ank_nte.SchemaError):
+    plan = [ank_nte](../ank_nte).QueryPlan(pattern).with_mode([ank_nte](../ank_nte).MaterialiseMode.collect())
+    with pytest.raises([ank_nte](../ank_nte).SchemaError):
         t.execute_pattern_query(plan)
 
 
 def test_pattern_filter_prunes_matches():
-    t = ank_nte.Topology()
+    t = [ank_nte](../ank_nte).Topology()
     _add_router(t, 1, "base", vendor="cisco")
     _add_router(t, 2, "base", vendor="juniper")
 
@@ -1495,19 +1498,19 @@ def test_pattern_filter_prunes_matches():
     t.add_inter_edges([101], [102])
 
     # Phase-7 filter pruning requires a concrete type for the bound node.
-    pattern = ank_nte.PatternNode.chain(
+    pattern = [ank_nte](../ank_nte).PatternNode.chain(
         [
-            ank_nte.PatternStep.node_with_binding("Router", "a").in_layer("base"),
+            [ank_nte](../ank_nte).PatternStep.node_with_binding("Router", "a").in_layer("base"),
         ]
     )
 
-    filt = ank_nte.ExprNode.eq_(
-        ank_nte.ExprNode.binding_field("a", "vendor"),
-        ank_nte.ExprNode.string("cisco"),
+    filt = [ank_nte](../ank_nte).ExprNode.eq_(
+        [ank_nte](../ank_nte).ExprNode.binding_field("a", "vendor"),
+        [ank_nte](../ank_nte).ExprNode.string("cisco"),
     )
     plan = (
-        ank_nte.QueryPlan(pattern)
-        .with_mode(ank_nte.MaterialiseMode.collect())
+        [ank_nte](../ank_nte).QueryPlan(pattern)
+        .with_mode([ank_nte](../ank_nte).MaterialiseMode.collect())
         .with_filter(filt)
     )
     res = t.execute_pattern_query(plan)
@@ -1517,7 +1520,7 @@ def test_pattern_filter_prunes_matches():
 
 
 def test_pattern_filter_missing_field_is_non_match():
-    t = ank_nte.Topology()
+    t = [ank_nte](../ank_nte).Topology()
     _add_router(t, 1, "base")
     _add_router(t, 2, "base")
 
@@ -1525,21 +1528,21 @@ def test_pattern_filter_missing_field_is_non_match():
     _add_endpoint_for_node(t, 102, 2)
     t.add_inter_edges([101], [102])
 
-    pattern = ank_nte.PatternNode.chain(
+    pattern = [ank_nte](../ank_nte).PatternNode.chain(
         [
-            ank_nte.PatternStep.node_with_binding("Router", "a").in_layer("base"),
-            ank_nte.PatternStep.edge("devicelink"),
-            ank_nte.PatternStep.node("Router").in_layer("base"),
+            [ank_nte](../ank_nte).PatternStep.node_with_binding("Router", "a").in_layer("base"),
+            [ank_nte](../ank_nte).PatternStep.edge("devicelink"),
+            [ank_nte](../ank_nte).PatternStep.node("Router").in_layer("base"),
         ]
     )
 
-    filt = ank_nte.ExprNode.eq_(
-        ank_nte.ExprNode.binding_field("a", "vendor"),
-        ank_nte.ExprNode.string("cisco"),
+    filt = [ank_nte](../ank_nte).ExprNode.eq_(
+        [ank_nte](../ank_nte).ExprNode.binding_field("a", "vendor"),
+        [ank_nte](../ank_nte).ExprNode.string("cisco"),
     )
     plan = (
-        ank_nte.QueryPlan(pattern)
-        .with_mode(ank_nte.MaterialiseMode.collect())
+        [ank_nte](../ank_nte).QueryPlan(pattern)
+        .with_mode([ank_nte](../ank_nte).MaterialiseMode.collect())
         .with_filter(filt)
     )
     res = t.execute_pattern_query(plan)
@@ -1547,7 +1550,7 @@ def test_pattern_filter_missing_field_is_non_match():
 
 
 def test_pattern_filter_type_mismatch_raises_type_mismatch_error():
-    t = ank_nte.Topology()
+    t = [ank_nte](../ank_nte).Topology()
     _add_router(t, 1, "base", asn=65000)
     _add_router(t, 2, "base", asn=65001)
 
@@ -1555,29 +1558,29 @@ def test_pattern_filter_type_mismatch_raises_type_mismatch_error():
     _add_endpoint_for_node(t, 102, 2)
     t.add_inter_edges([101], [102])
 
-    pattern = ank_nte.PatternNode.chain(
+    pattern = [ank_nte](../ank_nte).PatternNode.chain(
         [
-            ank_nte.PatternStep.node_with_binding("Router", "a").in_layer("base"),
+            [ank_nte](../ank_nte).PatternStep.node_with_binding("Router", "a").in_layer("base"),
         ]
     )
 
     # Use an ordering comparison to force a strict dtype mismatch.
-    filt = ank_nte.ExprNode.gt_(
-        ank_nte.ExprNode.binding_field("a", "asn"),
-        ank_nte.ExprNode.string("not-an-int"),
+    filt = [ank_nte](../ank_nte).ExprNode.gt_(
+        [ank_nte](../ank_nte).ExprNode.binding_field("a", "asn"),
+        [ank_nte](../ank_nte).ExprNode.string("not-an-int"),
     )
     plan = (
-        ank_nte.QueryPlan(pattern)
-        .with_mode(ank_nte.MaterialiseMode.collect())
+        [ank_nte](../ank_nte).QueryPlan(pattern)
+        .with_mode([ank_nte](../ank_nte).MaterialiseMode.collect())
         .with_filter(filt)
     )
 
-    with pytest.raises(ank_nte.TypeMismatchError):
+    with pytest.raises([ank_nte](../ank_nte).TypeMismatchError):
         t.execute_pattern_query(plan)
 
 
 def test_pattern_truncation_metadata_and_cap():
-    t = ank_nte.Topology()
+    t = [ank_nte](../ank_nte).Topology()
     for nid in [1, 2, 3, 4]:
         _add_router(t, nid, "base")
 
@@ -1589,16 +1592,16 @@ def test_pattern_truncation_metadata_and_cap():
     # Star: 1 -> {2,3,4}
     t.add_inter_edges([101, 101, 101], [102, 103, 104])
 
-    pattern = ank_nte.PatternNode.chain(
+    pattern = [ank_nte](../ank_nte).PatternNode.chain(
         [
-            ank_nte.PatternStep.any_node(),
-            ank_nte.PatternStep.edge("connectivity"),
-            ank_nte.PatternStep.any_node(),
+            [ank_nte](../ank_nte).PatternStep.any_node(),
+            [ank_nte](../ank_nte).PatternStep.edge("connectivity"),
+            [ank_nte](../ank_nte).PatternStep.any_node(),
         ]
     )
     plan = (
-        ank_nte.QueryPlan(pattern)
-        .with_mode(ank_nte.MaterialiseMode.collect())
+        [ank_nte](../ank_nte).QueryPlan(pattern)
+        .with_mode([ank_nte](../ank_nte).MaterialiseMode.collect())
         .with_max_matches(2)
     )
 
@@ -1609,7 +1612,7 @@ def test_pattern_truncation_metadata_and_cap():
 
 
 def test_pattern_deterministic_ordering_repeatable():
-    t = ank_nte.Topology()
+    t = [ank_nte](../ank_nte).Topology()
     _add_router(t, 1, "base", vendor="cisco")
     _add_router(t, 2, "base", vendor="juniper")
 
@@ -1617,14 +1620,14 @@ def test_pattern_deterministic_ordering_repeatable():
     _add_endpoint_for_node(t, 102, 2)
     t.add_inter_edges([101], [102])
 
-    pattern = ank_nte.PatternNode.chain(
+    pattern = [ank_nte](../ank_nte).PatternNode.chain(
         [
-            ank_nte.PatternStep.any_node().with_binding("a"),
-            ank_nte.PatternStep.any_edge(),
-            ank_nte.PatternStep.any_node().with_binding("b"),
+            [ank_nte](../ank_nte).PatternStep.any_node().with_binding("a"),
+            [ank_nte](../ank_nte).PatternStep.any_edge(),
+            [ank_nte](../ank_nte).PatternStep.any_node().with_binding("b"),
         ]
     )
-    plan = ank_nte.QueryPlan(pattern).with_mode(ank_nte.MaterialiseMode.collect())
+    plan = [ank_nte](../ank_nte).QueryPlan(pattern).with_mode([ank_nte](../ank_nte).MaterialiseMode.collect())
 
     r1 = t.execute_pattern_query(plan)
     r2 = t.execute_pattern_query(plan)
@@ -1674,7 +1677,7 @@ The key implementation constraint is that topology operations are "dual write": 
 
 ## What This Is
 
-NTE (Network Topology Engine) is a Rust-based graph topology engine with Python bindings via PyO3, used as the backend for ank_pydantic. It provides a 14-crate Cargo workspace built on petgraph StableDiGraph with pluggable datastores (Polars, DuckDB, Lite). This project covers two milestones: first hardening the existing engine for production reliability, then evaluating LadybugDB as a potential backend replacement.
+NTE (Network Topology Engine) is a Rust-based graph topology engine with Python bindings via PyO3, used as the backend for [ank_pydantic](../ank_pydantic). It provides a 14-crate Cargo workspace built on petgraph StableDiGraph with pluggable datastores (Polars, DuckDB, Lite). This project covers two milestones: first hardening the existing engine for production reliability, then evaluating LadybugDB as a potential backend replacement.
 
 ---
 
@@ -1741,7 +1744,7 @@ The engine must be correct and observable — mutations never silently corrupt s
 - [x] Dual-write safety (error propagation, rollback on failure)
 - [ ] GIL release for O(N) PyO3 methods (`py.allow_threads`)
 - [ ] CI/CD pipeline (GitHub Actions, Clippy, fmt, tests)
-- [ ] One-way dependency: ank_pydantic depends on NTE, never reverse
+- [ ] One-way dependency: [ank_pydantic](../ank_pydantic) depends on NTE, never reverse
 - [ ] Internal/external boolean flag on nodes and edges
 
 **Milestone 2: LadybugDB Evaluation**
@@ -1750,7 +1753,7 @@ The engine must be correct and observable — mutations never silently corrupt s
 - [ ] `TopologyBackend` trait implementation for LadybugBackend
 - [ ] Benchmark at target scales (1k, 5k, 10k nodes)
 - [ ] Query translation: `compile_to_cypher()` for QuerySpec flat filters
-- [ ] Pattern compilation: PatternNode chain to Cypher MATCH clauses
+- [ ] Pattern [compilation](../compilation): PatternNode chain to Cypher MATCH clauses
 - [ ] Concurrent read/write testing under server workloads
 - [ ] Evaluation summary with recommendation
 
@@ -1770,7 +1773,7 @@ The engine must be correct and observable — mutations never silently corrupt s
 
 ## Context
 
-- NTE is consumed by ank_pydantic as its backend engine (sibling repo `../ank_pydantic/`)
+- NTE is consumed by [ank_pydantic](../ank_pydantic) as its backend engine (sibling repo `../[ank_pydantic](../ank_pydantic)/`)
 - The dual-write architecture (petgraph + DataFrameStore) is fully protected by a RAII `DualWriteGuard`  which automatically rolls back graph mutations if DataFrame operations fail.
 - No CI/CD pipeline exists — all testing is manual
 - LadybugDB (formerly using KuzuDB) has a standalone benchmark crate (`ladybug_backend/`) but does NOT implement `TopologyBackend` trait
@@ -1816,12 +1819,12 @@ The engine must be correct and observable — mutations never silently corrupt s
 
 ## Ecosystem Context
 
-This project is part of a seven-tool network automation ecosystem. NTE provides the high-performance graph engine — the foundation that ank-pydantic builds on.
+This project is part of a seven-tool network automation ecosystem. NTE provides the high-performance graph engine — the foundation that [ank-pydantic](../ank-pydantic) builds on.
 
-**Role:** Rust graph engine with petgraph, Polars DataFrames, query engine, and pluggable datastores. Consumed by ank-pydantic as a dependency; potentially usable by other tools (netvis, netflowsim) for zero-conversion topology loading.
+**Role:** Rust graph engine with petgraph, Polars DataFrames, query engine, and pluggable datastores. Consumed by [ank-pydantic](../ank-pydantic) as a dependency; potentially usable by other tools ([netvis](../netvis), [netflowsim](../netflowsim)) for zero-conversion topology loading.
 
 **Key integration points:**
-- Primary consumer: ank-pydantic (Python ↔ Rust FFI via PyO3)
+- Primary consumer: [ank-pydantic](../ank-pydantic) (Python ↔ Rust FFI via PyO3)
 - Bidirectional ID mapping: external IDs (user-facing) ↔ internal petgraph NodeIndex
 - Event sourcing: ring-buffer EventStore for audit/replay (future: live topology bus)
 - Pluggable datastore: Polars (default), DuckDB, Lite backends via feature flags

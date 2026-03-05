@@ -5,7 +5,10 @@ section: network-automation
 
 # Visualization Engine
 
-<span class="status-badge status-active">Recently Updated</span>
+<div class="badges-row">
+  <span class="status-badge status-active">Recently Updated</span>
+  <span class="stack-badge">Rust</span> <span class="stack-badge">Python</span> <span class="stack-badge">TypeScript</span>
+</div>
 
 [← Back to Network Automation](../network-automation)
 
@@ -29,6 +32,11 @@ section: network-automation
 - [Key Decisions](#key-decisions)
 - [Ecosystem Context](#ecosystem-context)
 - [Current Status](#current-status)
+
+![Hero Image](/images/hero-diagram.svg)
+
+
+---
 
 ## Technical Reports
 
@@ -396,11 +404,15 @@ fn main() {
 
 ## Visuals
 
-![hero-diagram](/images/hero-diagram.svg)
+![annotated-noc-demo](/images/annotated-noc-demo.svg)
+
+![traffic-noc-demo](/images/traffic-noc-demo.svg)
+
+![annotated-noc-demo](/images/annotated-noc-demo.svg)
+
+![traffic-noc-demo](/images/traffic-noc-demo.svg)
 
 ![hero-diagram.DCMNxwfa](/images/hero-diagram.DCMNxwfa.svg)
-
-![hero-diagram.DCMNxwfa_Z1HYzg2](/images/hero-diagram.DCMNxwfa_Z1HYzg2.svg)
 
 ---
 
@@ -616,10 +628,10 @@ This project is part of a seven-tool network automation ecosystem. netvis provid
 **Role:** Render network topologies as high-quality static output (SVG/PNG/PDF) or interactive visualizations (WASM). Consume topology data from any upstream tool.
 
 **Key integration points:**
-- Renders topologies from topogen (YAML), ank-pydantic (JSON), or netflowsim (GeoJSON with stats)
+- Renders topologies from [topogen](../topogen) (YAML), [ank-pydantic](../ank-pydantic) (JSON), or [netflowsim](../netflowsim) (GeoJSON with stats)
 - WASM target enables embedding directly in the workbench browser UI
 - Python bindings (PyO3) for programmatic rendering in Python workflows
-- Geographic layout mode consumes lat/lon coordinates from topogen's geo module
+- Geographic layout mode consumes lat/lon coordinates from [topogen](../topogen)'s geo module
 - Contract-first versioned API (`contracts::v1`) for stable embedding
 
 **Architecture documents:**

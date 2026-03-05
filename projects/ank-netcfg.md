@@ -5,7 +5,10 @@ section: network-automation
 
 # Network Configuration Framework
 
-<span class="status-badge status-active">Active</span>
+<div class="badges-row">
+  <span class="status-badge status-active">Active</span>
+  <span class="stack-badge">Rust</span>
+</div>
 
 [← Back to Network Automation](../network-automation)
 
@@ -301,7 +304,7 @@ rules:
 ```yaml
 # examples/three-site-mesh.yaml
 #
-# Three-site BGP mesh — canonical reference blueprint for ank_pydantic consumers.
+# Three-site BGP mesh — canonical reference blueprint for [ank_pydantic](../ank_pydantic) consumers.
 #
 # This blueprint demonstrates the complete netcfg primitive pipeline:
 #
@@ -415,7 +418,7 @@ Deterministic, auditable, CI/CD-friendly Rust CLI for compiling declarative YAML
 **Target features:**
 - Advanced Primitives — `mesh_nodes` partial meshes and `build_protocol_layer` overlay edge cloning
 - State Validation — `netcfg validate` mode enforcing addressing plans without mutation
-- Performance & Publishing — `criterion` benchmarking suites and `ank_nte` repository absorption/decoupling
+- Performance & Publishing — `criterion` benchmarking suites and `[ank_nte](../ank_nte)` repository absorption/decoupling
 
 ---
 
@@ -427,7 +430,7 @@ The front and back ends of the compiler are fully functional end-to-end:
 - **** (Rich Terminal Diagnostics): `miette`-powered source-snippet error reporting for blueprint validation and IP pool exhaustion.
 
 **Known tech debt (v1.3):**
-- Path dependency on `ank_nte` prevents standalone crate publication
+- Path dependency on `[ank_nte](../ank_nte)` prevents standalone crate publication
 - Benchmarks for large topologies (10,000+ nodes) are missing
 - `edge_properties` in `mesh_nodes` remains deferred
 
@@ -452,7 +455,7 @@ Single-binary network compiler: design, transform, and generate configs from YAM
 - [ ] State Validation Mode: `netcfg validate` (IPAM-V2-01)
 - [ ] Addressing Plan Enforcement (IPAM-V2-02)
 - [ ] Benchmarking suites for Diff/Render engines (PERF-01)
-- [ ] Repository Decoupling of `ank_nte` (PUB-01)
+- [ ] Repository Decoupling of `[ank_nte](../ank_nte)` (PUB-01)
 
 ---
 

@@ -5,7 +5,10 @@ section: projects
 
 # matrix-profile-rs
 
-<span class="status-badge status-active">Recently Updated</span>
+<div class="badges-row">
+  <span class="status-badge status-active">Recently Updated</span>
+  <span class="stack-badge">Rust</span> <span class="stack-badge">Polars</span>
+</div>
 
 [← Back to Data Analytics](../data-analytics)
 

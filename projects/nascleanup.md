@@ -5,7 +5,10 @@ section: projects
 
 # Project: NAS Cleanup & Intelligence
 
-<span class="status-badge status-active">Recently Updated</span>
+<div class="badges-row">
+  <span class="status-badge status-active">Recently Updated</span>
+  <span class="stack-badge">Rust</span>
+</div>
 
 [← Back to Data Analytics](../data-analytics)
 

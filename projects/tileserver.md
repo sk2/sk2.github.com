@@ -5,7 +5,10 @@ section: projects
 
 # PROJECT: Tileserver Polars (Rust Optimized)
 
-<span class="status-badge status-active">Active</span>
+<div class="badges-row">
+  <span class="status-badge status-active">Active</span>
+  <span class="stack-badge">Rust</span> <span class="stack-badge">Python</span> <span class="stack-badge">Polars</span>
+</div>
 
 [← Back to Data Analytics](../data-analytics)
 

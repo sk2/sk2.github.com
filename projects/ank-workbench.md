@@ -5,7 +5,10 @@ section: network-automation
 
 # Automation Workbench
 
-<span class="status-badge status-active">Recently Updated</span>
+<div class="badges-row">
+  <span class="status-badge status-active">Recently Updated</span>
+  <span class="stack-badge">Python</span> <span class="stack-badge">TypeScript</span>
+</div>
 
 [← Back to Network Automation](../network-automation)
 
@@ -53,7 +56,7 @@ section: network-automation
 
 ## What This Is
 
-**An orchestration platform** that integrates the ANK ecosystem tools (TopoGen, ank_pydantic, Network Simulator, NetVis) into one seamless workflow.
+**An orchestration platform** that integrates the ANK ecosystem tools (TopoGen, [ank_pydantic](../ank_pydantic), Network Simulator, NetVis) into one seamless workflow.
 
 ANK Workbench is the **glue layer** that coordinates the entire network automation pipeline. Engineers can generate topologies, model networks declaratively, run lightweight simulations, and visualize results—all from a unified web interface. No more context switching between separate tools or manually stitching components together.
 
@@ -63,7 +66,7 @@ ANK Workbench is the **glue layer** that coordinates the entire network automati
 │                        ANK Workbench                             │
 │         (Orchestration · Web UI · Workflow Management)           │
 │   ┌──────────────┬──────────────┬──────────────┬──────────────┐ │
-│   │   TopoGen    │ ank_pydantic │   Simulator  │    NetVis    │ │
+│   │   TopoGen    │ [ank_pydantic](../ank_pydantic) │   Simulator  │    NetVis    │ │
 └───┴──────────────┴──────────────┴──────────────┴──────────────┴─┘
 ```
 
@@ -149,7 +152,7 @@ Graduated the Workbench from a testing/lab environment into a true orchestrator 
 **Delivered:** March 4, 2026 | **Phases:** 3 (81-83)
 
 Integrated dynamic performance analysis and multi-host scaling capabilities, allowing engineers to validate hardware constraints before purchasing:
-- **Deep netflowsim Integration:** Exposed the advanced v2.0 Rust engine to run massive Monte Carlo simulations with customizable queuing models (Pareto, LogNormal). Added interactive UI components for percentiles, bottlenecks, and linear capacity projections.
+- **Deep [netflowsim](../netflowsim) Integration:** Exposed the advanced v2.0 Rust engine to run massive Monte Carlo simulations with customizable queuing models (Pareto, LogNormal). Added interactive UI components for percentiles, bottlenecks, and linear capacity projections.
 - **Distributed Multi-Host Execution:** Modified the `TopologyGenerator` and orchestration layer to automatically slice topologies, allocate VXLAN tunnels, and deploy container instances concurrently across multiple target Docker daemons.
 - **Resource & Capacity Pre-flight:** Implemented intelligent pre-flight capacity validation that sums node requirements and queries actual host hardware, providing a protective modal to warn against or block oversubscribed deployments.
 
@@ -159,7 +162,7 @@ Integrated dynamic performance analysis and multi-host scaling capabilities, all
 
 **Delivered:** March 4, 2026 | **Phases:** 4 (77-80)
 
-Pivoted towards the `automationarch` ecosystem architecture by introducing standard YAML manifests, external provider imports, and actionable dissonance remediation:
+Pivoted towards the `[automationarch](../automationarch)` ecosystem architecture by introducing standard YAML manifests, external provider imports, and actionable dissonance remediation:
 - **NetAuto Manifest Persistence:** Seamlessly save/open project state via `netauto.project` YAML files instead of pure SQLite.
 - **External Provider Import:** Bootstrap topologies directly from external Git or NetBox sources.
 - **Dissonance Remediation Generation:** Generated atomic CLI configuration snippets for Reality vs. Model mismatches.
@@ -279,7 +282,7 @@ Connected ANK ecosystem tools through unified web interface:
 - **Terminal Integration :** Click node → interactive device terminal via WebSocket-to-UDS relay (xterm.js, 10-session limit, exponential backoff reconnection)
 - **Dev Hygiene :** Configurable proxy port, verified production build
 - **Live Observability :** Protocol event timeline (OSPF/BGP/IS-IS), stage-based progress, routing overlays, cross-page highlight
-- **Config Generation :** Generate from ank_pydantic, preview with syntax highlighting, download as .txt or .zip
+- **Config Generation :** Generate from [ank_pydantic](../ank_pydantic), preview with syntax highlighting, download as .txt or .zip
 - **Topology Generation :** 5 patterns (spine-leaf, hub-spoke, mesh, ring, campus-3tier), dynamic parameter forms, preview modal, editor integration with undo
 
 ---
@@ -372,8 +375,8 @@ Large-topology visualization performance:
 **ANK Ecosystem:**
 ANK Workbench is the orchestration layer for a family of specialized tools:
 - **TopoGen** — Generate realistic network topologies (data center, WAN, random graphs)
-- **ank_pydantic** — Model and query network topologies with type-safe Python API (Rust-backed graph operations)
-- **Network Simulator (netsim)** — Deterministic protocol simulation (OSPF, IS-IS, BGP) for validation
+- **[ank_pydantic](../ank_pydantic)** — Model and query network topologies with type-safe Python API (Rust-backed graph operations)
+- **Network Simulator ([netsim](../netsim))** — Deterministic protocol simulation (OSPF, IS-IS, BGP) for validation
 - **NetVis** — Advanced layout and visualization engine (SVG, PDF export)
 - **Traffic Simulator** — Flow-based performance analysis with Monte Carlo simulations
 
@@ -458,9 +461,9 @@ This project is part of a seven-tool network automation ecosystem. The workbench
 **Role:** Coordinate topology editing, validation, simulation, and visualization into a single web-based workflow. The workbench is how non-CLI users experience the ecosystem.
 
 **Key integration points:**
-- Orchestrates topogen, netsim, netvis via subprocess invocation
-- Integrates ank-pydantic via Python API for topology modeling
-- Interactive terminal via netsim gRPC daemon (WebSocket bridge)
+- Orchestrates [topogen](../topogen), [netsim](../netsim), [netvis](../netvis) via subprocess invocation
+- Integrates [ank-pydantic](../ank-pydantic) via Python API for topology modeling
+- Interactive terminal via [netsim](../netsim) gRPC daemon (WebSocket bridge)
 - Real-time workflow progress via WebSocket EventBus
 - Tool binaries discovered via PATH or `*_PATH` environment variables
 

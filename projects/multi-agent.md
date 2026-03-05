@@ -5,7 +5,10 @@ section: agentic-systems
 
 # Secure Multi-Agent Personal Assistant
 
-<span class="status-badge status-active">Last Active: 2026-02-21</span>
+<div class="badges-row">
+  <span class="status-badge status-active">Recently Updated</span>
+  <span class="stack-badge">Python</span>
+</div>
 
 [← Back to Autonomous Systems](../agentic-systems)
 

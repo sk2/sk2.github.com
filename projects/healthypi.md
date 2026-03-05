@@ -5,7 +5,10 @@ section: agentic-systems
 
 # HealthyPi Ecosystem
 
-<span class="status-badge status-active">Last Active: 2026-02-20</span>
+<div class="badges-row">
+  <span class="status-badge status-active">Recently Updated</span>
+  <span class="stack-badge">Python</span>
+</div>
 
 [← Back to Autonomous Systems](../agentic-systems)
 
@@ -46,7 +49,7 @@ To bridge the gap between high-fidelity biometric hardware and daily health mana
 
 - Must support HealthyPi 6 (Pi HAT) and HealthyPi Move (Wearable).
 - Modular architecture to allow agents to consume trends.
-- Integration with existing `./agent-framework` (security-first multi-agent system).
+- Integration with existing `./agent-framework` (security-first [multi-agent](../multi-agent) system).
   - **Key Discovery:** Framework already includes Health Agent with HealthKit integration
   - Leverages: NATS broker (TLS 1.3 + ACLs), Orchestrator (LLM planning), Capability tokens (Ed25519)
   - Pattern: Swift collectors (host) → NATS → Python agents (containers) → Orchestrator

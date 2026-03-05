@@ -5,7 +5,10 @@ section: signal-processing
 
 # Spectrum Analysis
 
-<span class="status-badge status-active">Recently Updated</span>
+<div class="badges-row">
+  <span class="status-badge status-active">Recently Updated</span>
+  <span class="stack-badge">Python</span>
+</div>
 
 [← Back to Signal Processing](../signal-processing)
 
@@ -16,22 +19,20 @@ section: signal-processing
 ## Contents
 
 - [Technical Reports](#technical-reports)
-- [Visuals](#visuals)
 - [Core Value](#core-value)
 - [Current Milestone: v2.0 — Central Server Integration](#current-milestone-v20-central-server-integration)
 - [Stakeholders](#stakeholders)
 - [Constraints & Assumptions](#constraints-assumptions)
 - [Current Status](#current-status)
 
-## Technical Reports
+![Hero Image](/images/search_topk_example.png)
 
-- [Download Technical Report: spectra-techreport.pdf](/assets/docs/signals-spectra-techreport.pdf)
 
 ---
 
-## Visuals
+## Technical Reports
 
-![search_topk_example](/images/search_topk_example.png)
+- [Download Technical Report: spectra-techreport.pdf](/assets/docs/signals-spectra-techreport.pdf)
 
 ---
 

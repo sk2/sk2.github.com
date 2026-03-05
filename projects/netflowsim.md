@@ -5,7 +5,10 @@ section: network-automation
 
 # Performance Simulator
 
-<span class="status-badge status-active">Recently Updated</span>
+<div class="badges-row">
+  <span class="status-badge status-active">Recently Updated</span>
+  <span class="stack-badge">Rust</span>
+</div>
 
 [← Back to Data Analytics](../data-analytics)
 
@@ -198,7 +201,7 @@ See `.planning/MILESTONES.md` for full milestone history.
 - **[v2.0] Multi-region geographic topology modeling** with latency zones
 - **[v2.0] Region-aware traffic generation** with configurable locality bias
 - **[v2.0] Region-filtered statistics and bottlenecks**
-- **[v2.0] GeoJSON export with region metadata** for netvis visualization
+- **[v2.0] GeoJSON export with region metadata** for [netvis](../netvis) visualization
 - **[v2.0] Comprehensive validation suite** (30 scenario feature matrix, 16 Little's Law tests)
 - Dynamic simulation with events
 - N-1 failure analysis
@@ -337,12 +340,12 @@ See `.planning/MILESTONES.md` for full milestone history.
 
 This project is part of a seven-tool network automation ecosystem. netflowsim provides flow-based traffic analysis — the "analyze" stage of the pipeline.
 
-**Role:** Validate network capacity and performance at scale using analytic queuing models and Monte Carlo simulation. Consume topologies and traffic demands from topogen; consume FIBs from netsim for path tracing.
+**Role:** Validate network capacity and performance at scale using analytic queuing models and Monte Carlo simulation. Consume topologies and traffic demands from [topogen](../topogen); consume FIBs from [netsim](../netsim) for path tracing.
 
 **Key integration points:**
-- Consumes GeoJSON topology and traffic CSV from topogen
-- Consumes (planned) FIB routing matrices from netsim for post-simulation traffic analysis
-- Exports GeoJSON with link utilization statistics for netvis geographic rendering
+- Consumes GeoJSON topology and traffic CSV from [topogen](../topogen)
+- Consumes (planned) FIB routing matrices from [netsim](../netsim) for post-simulation traffic analysis
+- Exports GeoJSON with link utilization statistics for [netvis](../netvis) geographic rendering
 - CLI: `netflowsim simulate | generate-routing | verify-routing`
 
 **Architecture documents:**
@@ -355,7 +358,7 @@ This project is part of a seven-tool network automation ecosystem. netflowsim pr
 
 | Decision | Rationale | Outcome | Status |
 |----------|-----------|---------|--------|
-| Recursive path tracing with ECMP | Handles multi-path routing correctly | Works well, cycle detection robust | ✓ Good |
+| Recursive path tracing with ECMP | Handles multi-path routing correctly | Works well, [cycle](../cycle) detection robust | ✓ Good |
 | Interface-to-link resolution via subnet matching | Automates FIB-to-topology mapping | Eliminates manual configuration | ✓ Good |
 | Nearest-rank percentiles | Avoids interpolation complexity | Simple, robust, accurate | ✓ Good |
 | Node bottleneck scoring: 1.0 - ∏(1-p) | Captures "at least one incident link congested" | Identifies aggregate hotspots | ✓ Good |

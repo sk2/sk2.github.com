@@ -5,7 +5,10 @@ section: projects
 
 # OpenAstro Node
 
-<span class="status-badge status-active">Active</span>
+<div class="badges-row">
+  <span class="status-badge status-active">Active</span>
+  <span class="stack-badge">Rust</span> <span class="stack-badge">TypeScript</span>
+</div>
 
 [← Back to Projects](../projects)
 

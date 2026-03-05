@@ -5,7 +5,10 @@ section: network-automation
 
 # PROJECT: Network Automation Ecosystem - Overall Architecture Definition
 
-<span class="status-badge status-active">Recently Updated</span>
+<div class="badges-row">
+  <span class="status-badge status-active">Recently Updated</span>
+  
+</div>
 
 [← Back to Network Automation](../network-automation)
 
@@ -154,7 +157,7 @@ python3 scripts/check-fixtures --fixture examples/minimal-lab
 
 ## What This Is
 
-This project aims to comprehensively define the **overall architecture of the Network Automation Ecosystem**. This involves understanding how the existing and planned tools (such as `topogen`, `autonetkit`, `netsim`, `netflowsim`, `netvis`, and the `Workbench`), along with strategic initiatives like the "Intelligence Layer," integrate to form a cohesive, unified, and differentiated product.
+This project aims to comprehensively define the **overall architecture of the Network Automation Ecosystem**. This involves understanding how the existing and planned tools (such as `[topogen](../topogen)`, `[autonetkit](../autonetkit)`, `[netsim](../netsim)`, `[netflowsim](../netflowsim)`, `[netvis](../netvis)`, and the `Workbench`), along with strategic initiatives like the "Intelligence Layer," integrate to form a cohesive, unified, and differentiated product.
 
 The output of this project will be a clearer, more formalized architectural understanding, enabling the identification and discussion of future sub-projects that contribute to the ecosystem's evolution.
 
@@ -221,8 +224,8 @@ This project directly supports the strategic vision outlined in `STRATEGY.md` an
 - ~3,000 lines of documentation added
 
 **Codebase State:**
-- 9 tool repositories documented (topogen, autonetkit, netsim, netflowsim, netvis, Workbench, configparsing, deviceinteraction, netassure)
-- 5 ADRs (contract-first, interface representation, orchestration, netvis scope, netassure decomposition)
+- 9 tool repositories documented ([topogen](../topogen), [autonetkit](../autonetkit), [netsim](../netsim), [netflowsim](../netflowsim), [netvis](../netvis), Workbench, [configparsing](../configparsing), [deviceinteraction](../deviceinteraction), [netassure](../netassure))
+- 5 ADRs (contract-first, interface representation, orchestration, [netvis](../netvis) scope, [netassure](../netassure) decomposition)
 - 6 RFCs (RFC-01 Topology, RFC-02 Live Stream, RFC-03 Interface Representation, RFC-TELEM-01, RFC-INFER-01, RFC-PRED-01)
 - 41,000+ lines of architecture documentation across 100+ files
 
@@ -235,7 +238,7 @@ This project directly supports the strategic vision outlined in `STRATEGY.md` an
 **Strategic Shift:** From "what to build" (architecture specs) to "how to build it" (implementation guidance)
 
 **Target capabilities:**
-- **netassure Implementation Guides** — API reference, formal verification cookbook, graph algorithm patterns, ML/GNN integration examples
+- **[netassure](../netassure) Implementation Guides** — API reference, formal verification cookbook, graph algorithm patterns, ML/GNN integration examples
 - **Live Hook Developer SDK** — Client library design patterns, WebSocket protocol implementation guide, state reconciliation patterns, event replay handling
 - **CLI Scrape Extension Kit** — Vendor integration guide (adding new platforms), parser development patterns, normalization rule authoring, multi-VRF edge case handling
 - **Workbench Integration Patterns** — Workflow engine implementation guide, orchestration library usage, CLI/TUI feature parity checklist, error handling best practices
@@ -250,11 +253,11 @@ This project directly supports the strategic vision outlined in `STRATEGY.md` an
 ## # v1.1 Architecture Evolution & Refinement (shipped 2026-02-28)
 
 - Resolved 3 open architectural questions (OQ-02, OQ-03, OQ-04) with ADRs and RFCs
-- Created 9-tool ecosystem architecture (added netassure as standalone advanced analysis engine)
+- Created 9-tool ecosystem architecture (added [netassure](../netassure) as standalone advanced analysis engine)
 - Defined comprehensive intelligence layer (telemetry infrastructure, GNN training pipeline, dual deployment, Live Hook integration)
 - Architected CLI scrape tool (8-vendor legacy ingestion, normalization, diff engine, multi-VRF)
 - Established Live Hook architecture (multiplexed WebSocket, fold-on-client state, retention/keyframes for timeline scrubbing)
-- Documented 5 advanced analysis paradigms in netassure (formal verification, graph algorithms, failure cascades, ML/GNN, optimization)
+- Documented 5 advanced analysis paradigms in [netassure](../netassure) (formal verification, graph algorithms, failure cascades, ML/GNN, optimization)
 - Maintained architecture integrity across 38,206 lines of documentation (100+ Markdown files with passing link checks)
 
 ---
@@ -295,7 +298,7 @@ This project directly supports the strategic vision outlined in `STRATEGY.md` an
 - ✓ **OQ-REQ-01, OQ-REQ-02, OQ-REQ-03**: Interface representation investigation (benchmarks, prototypes, RFC-03 decision) — v1.1
 - ✓ **INT-REQ-01, INT-REQ-02, INT-REQ-03, INT-REQ-04**: Intelligence Layer architecture (telemetry, GNN training, inference, Live Hook) — v1.1
 - ✓ **CLI-REQ-01, CLI-REQ-02, CLI-REQ-03, CLI-REQ-04**: CLI Scrape architecture (8-vendor, normalization, diff, multi-VRF) — v1.1
-- ✓ **VIS-REQ-01, VIS-REQ-02, VIS-REQ-03**: netvis decomposition (5 use cases, OQ-04 decision, Live Hook architecture) — v1.1
+- ✓ **VIS-REQ-01, VIS-REQ-02, VIS-REQ-03**: [netvis](../netvis) decomposition (5 use cases, OQ-04 decision, Live Hook architecture) — v1.1
 - ✓ **WB-REQ-01, WB-REQ-02, WB-REQ-03, WB-REQ-04**: Workbench orchestration (OQ-03 decision, workflows, parity, error handling) — v1.1
 
 ---

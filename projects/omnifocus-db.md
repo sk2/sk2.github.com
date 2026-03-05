@@ -5,7 +5,10 @@ section: projects
 
 # Project: OmniFocus DB CLI (omnifocus-db)
 
-<span class="status-badge status-active">Last Active: 2026-02-16</span>
+<div class="badges-row">
+  <span class="status-badge status-active">Last Active: 2026-02-16</span>
+  <span class="stack-badge">Python</span> <span class="stack-badge">TypeScript</span>
+</div>
 
 [← Back to Data Analytics](../data-analytics)
 

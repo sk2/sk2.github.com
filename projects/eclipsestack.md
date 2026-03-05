@@ -5,7 +5,10 @@ section: projects
 
 # EclipseStack
 
-<span class="status-badge status-active">Active</span>
+<div class="badges-row">
+  <span class="status-badge status-active">Active</span>
+  <span class="stack-badge">Rust</span>
+</div>
 
 [← Back to Projects](../projects)
 

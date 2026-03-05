@@ -87,4 +87,9 @@ These horizontal layers provide visibility across the entire lifecycle.
 
 ---
 
+## Architectural Insights
+*   **[Tick-Based Determinism vs. Full Emulation](insights/tick-based-determinism)**: Why we chose a custom Rust protocol simulator over Containerlab for at-scale architectural validation.
+
+---
+
 [← Back to Projects](projects)

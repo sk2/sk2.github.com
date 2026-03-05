@@ -124,6 +124,8 @@ DETAILED_SECTIONS = [
 
 # Sections that should be updated if new assets/metadata are found, even if polished
 ALWAYS_UPDATE_SECTIONS = {"Technical Reports", "Code Samples", "Visuals", "Current Status", "Roadmap"}
+# Sections that are preserved from the website repo if they exist
+STABLE_SECTIONS = {"Concept", "Architecture", "Features", "Quick Facts", "Usage"}
 
 def extract_sections(content: str) -> Dict[str, str]:
     sections: Dict[str, str] = {}
@@ -217,7 +219,7 @@ def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
                 if f.is_file() and f.suffix in [".yaml", ".py", ".rs", ".md"] and f.stat().st_size < 10000:
                     lang = f.suffix[1:] if f.suffix != ".md" else "markdown"
                     code_samples.append(f"### {f.name}\n\n```{lang}\n{f.read_text()}\n```")
-    if code_samples: sections["Code Samples"] = "\n\n".join(code_samples[:8]) # Increased limit to 8 samples
+    if code_samples: sections["Code Samples"] = "\n\n".join(code_samples[:8])
     current_status, last_activity_date = "", None
     state_md = planning_dir / "STATE.md"
     if state_md.exists():
@@ -250,6 +252,8 @@ def generate_detailed_page(project: ProjectInfo) -> str:
     eco_slug = ECOSYSTEM_MAP.get(project.slug, "projects")
     fm = f"---\nlayout: default\nsection: {eco_slug}\n---\n\n"
     header = f"# {project.name}\n\n<span class=\"status-badge status-active\">{project.status_detail}</span>\n\n{get_back_links(project.category)}\n\n---\n\n"
+    
+    # Process assets fresh
     if project.assets:
         img_lines = []
         for asset in project.assets:
@@ -257,7 +261,8 @@ def generate_detailed_page(project: ProjectInfo) -> str:
             try: shutil.copy2(asset, dest)
             except: pass
             img_lines.append(f"![{asset.stem}](/images/{asset.name})")
-        if "Visuals" not in project.sections: project.sections["Visuals"] = "\n\n".join(img_lines[:5]) # Increased to 5 images
+        project.sections["Visuals"] = "\n\n".join(img_lines[:5])
+    
     if project.docs:
         doc_lines = []
         doc_dir = Path("assets/docs")
@@ -268,6 +273,15 @@ def generate_detailed_page(project: ProjectInfo) -> str:
             except: pass
             doc_lines.append(f"- [Download Technical Report: {doc.name}](/assets/docs/{dest_name})")
         project.sections["Technical Reports"] = "\n".join(doc_lines)
+    
+    # Load existing page to preserve stable sections
+    dest_path = Path("projects") / f"{project.slug}.md"
+    if dest_path.exists():
+        existing_sections = extract_sections(dest_path.read_text())
+        for sec in STABLE_SECTIONS:
+            if sec in existing_sections and sec not in ALWAYS_UPDATE_SECTIONS:
+                project.sections[sec] = existing_sections[sec]
+
     body_list, processed_sections = [], set()
     for s in ["Concept", "The Insight", "Overview"]:
         if s in project.sections:

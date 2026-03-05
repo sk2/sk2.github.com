@@ -16,6 +16,7 @@ section: projects
 ## Contents
 
 - [Concept](#concept)
+- [Overview](#overview)
 - [Core Value](#core-value)
 - [Objectives](#objectives)
 - [Context](#context)
@@ -34,6 +35,12 @@ A data engineering pipeline to fetch, process, and serve high-resolution weather
 | | |
 |---|---|
 | **Status** | Last Active: 2026-02-14 |
+
+---
+
+## Overview
+
+A data engineering pipeline to fetch, process, and serve high-resolution weather model data from the Australian Bureau of Meteorology (BOM). Specifically targeting the ACCESS (Australian Community Climate and Earth-System Simulator) model outputs.
 
 ---
 

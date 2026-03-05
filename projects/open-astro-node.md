@@ -11,6 +11,13 @@ section: projects
 
 ---
 
+## Contents
+
+- [Concept](#concept)
+- [Overview](#overview)
+- [Key Features](#key-features)
+- [User Interfaces](#user-interfaces)
+
 ## Concept
 
 A headless, autonomous astrophotography controller designed for low-power Linux devices (RPi/Jetson). It manages hardware, executes imaging sequences, and ensures rig safety.
@@ -22,6 +29,12 @@ A headless, autonomous astrophotography controller designed for low-power Linux 
 | | |
 |---|---|
 | **Status** | Active |
+
+---
+
+## Overview
+
+A headless, autonomous astrophotography controller designed for low-power Linux devices (RPi/Jetson). It manages hardware, executes imaging sequences, and ensures rig safety.
 
 ---
 

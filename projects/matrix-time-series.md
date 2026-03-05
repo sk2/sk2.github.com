@@ -19,6 +19,7 @@ section: projects
 - [Architecture](#architecture)
 - [Features](#features)
 - [Current Status](#current-status)
+- [The Insight](#the-insight)
 - [What This Is](#what-this-is)
 - [Core Value](#core-value)
 - [Current Milestone: v1.1 Streaming](#current-milestone-v11-streaming)
@@ -80,6 +81,12 @@ Time series analysis typically requires either slow Python libraries or complex 
 | | |
 |---|---|
 | **Status** | Recently Updated |
+
+---
+
+## The Insight
+
+Time series analysis typically requires either slow Python libraries or complex manual implementation. **matrix-profile-rs** provides Matrix Profile algorithms (STOMP, SCRIMP++, SCAMP) in native Rust with ergonomic APIs for motif discovery and anomaly detection, achieving C-level performance with Python-level usability through Polars integration.
 
 ---
 

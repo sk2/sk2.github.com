@@ -15,45 +15,32 @@ section: projects
 
 - [Concept](#concept)
 - [Components](#components)
-- [Current Milestone: v0.1 Celestial Math](#current-milestone-v01-celestial-math)
+- [Architecture Boundary (Core SDK vs Node Runtime)](#architecture-boundary-core-sdk-vs-node-runtime)
+- [Current State](#current-state)
 - [Goals](#goals)
 
 ## Concept
 
-OpenAstro Core is a high-performance Rust library providing shared astronomical logic, hardware drivers, and protocol implementations for the OpenAstro ecosystem.
-It exists to keep coordinate math and device/protocol behavior consistent across downstream OpenAstro apps.
+A high-performance Rust library providing shared astronomical logic, hardware drivers, and protocol implementations for the OpenAstro ecosystem. It serves as the foundational layer to ensure coordinate math and device behavior remain consistent across all downstream OpenAstro applications.
 
-Downstream apps can rely on correct, consistent coordinate math and device/protocol primitives.
+By centralizing these primitives, the core allows other tools to rely on verified, high-performance implementations of celestial transforms and hardware protocols, reducing duplication and improving system-wide reliability.
 
-OpenAstro Core is a high-performance Rust library providing shared astronomical logic, hardware drivers, and protocol implementations for the OpenAstro ecosystem.
-It exists to keep coordinate math and device/protocol behavior consistent across downstream OpenAstro apps.
+OpenAstro Core ("Core SDK") is a high-performance Rust library providing shared astronomical logic, hardware drivers, and protocol implementations for the OpenAstro ecosystem.
+It exists to keep coordinate math, imaging intelligence, and device/protocol behavior consistent across downstream OpenAstro apps.
 
-Downstream apps can rely on correct, consistent coordinate math and device/protocol primitives.
-
-OpenAstro Core is a high-performance Rust library providing shared astronomical logic, hardware drivers, and protocol implementations for the OpenAstro ecosystem.
-It exists to keep coordinate math and device/protocol behavior consistent across downstream OpenAstro apps.
-
-Downstream apps can rely on correct, consistent coordinate math and device/protocol primitives.
-
-OpenAstro Core is a high-performance Rust library providing shared astronomical logic, hardware drivers, and protocol implementations for the OpenAstro ecosystem.
-It exists to keep coordinate math and device/protocol behavior consistent across downstream OpenAstro apps.
-
-Downstream apps can rely on correct, consistent coordinate math and device/protocol primitives.
-
-OpenAstro Core is a high-performance Rust library providing shared astronomical logic, hardware drivers, and protocol implementations for the OpenAstro ecosystem.
-It exists to keep coordinate math and device/protocol behavior consistent across downstream OpenAstro apps.
-
-Downstream apps can rely on correct, consistent coordinate math and device/protocol primitives.
+Downstream apps can rely on correct, consistent coordinate math, imaging intelligence, and device/protocol primitives.
 
 ---
 
 ## Components
 
-- **astro-core**: Shared types (RA, Dec, Angles) and utility functions.
+- **astro-core**: Shared types (RA, Dec, Angles), coordinate transforms, celestial planning, visibility, and session utilities.
+- **astro-vision**: Image processing — FITS/RAW/SER I/O, statistics, background estimation, star detection, calibration, stacking, registration, exposure intelligence, FITS writing.
+- **astro-sentinel**: AI classification bridge, trigger rules engine, and pipeline API for Sentinel hardware.
 - **astro-indi**: INDI protocol client and device abstraction.
 - **astro-alpaca**: ASCOM Alpaca REST client for modern hardware support.
-- **sony-sdk-rs (Planned)**: Rust bindings for Sony Camera Remote SDK.
-- **polaris-proto (Planned)**: Native implementation of the Benro Polaris protocol.
+- **sony-sdk-rs**: Rust bindings for Sony Camera Remote SDK.
+- **polaris-proto**: Native implementation of the Benro Polaris protocol.
 
 ---
 
@@ -65,15 +52,37 @@ Downstream apps can rely on correct, consistent coordinate math and device/proto
 
 ---
 
-## Current Milestone: v0.1 Celestial Math
+## Architecture Boundary (Core SDK vs Node Runtime)
 
-**Goal:** Ship a unified `astro-core` coordinate math foundation (types + transforms + tests) that other crates can build on.
+- **Core SDK (this repo):** pure libraries that compute/decide and are testable without hardware.
+- **Node Runtime (`open-astro-node`):** the running system that orchestrates devices/workflows and calls into the Core SDK.
 
-**Target features:**
-- Robust angle/RA/Dec primitives with safe conversions and formatting
-- Coordinate transforms (e.g. equatorial <-> horizontal) with time/location inputs
-- Time helpers needed for transforms (Julian date / sidereal time as required)
-- Test coverage for correctness and edge cases
+---
+
+## Current State
+
+**Shipped:** v0.2 Imaging Intelligence (2026-03-02)
+**Next milestone:** v0.3 Advanced Astro 
+
+8,030 lines of Rust across 7 crates. 163+ unit tests. Pure Rust stack (no C toolchain required).
+
+---
+
+## # v0.1 Celestial Math *(shipped 2026-02-11)*
+
+Unified `astro-core` coordinate math foundation — angle/RA/Dec primitives, coordinate transforms, time helpers, INDI/Alpaca clients, native drivers, image processing basics, and sentinel triggering.
+
+---
+
+## # v0.2 Imaging Intelligence *(shipped 2026-03-02)*
+
+Full imaging intelligence engine — sky analysis, exposure recommendations, calibration, celestial planning, and expanded file I/O.
+
+---
+
+## # v0.3 Advanced Astro *(planned — Phases 11-16)*
+
+Plate solving consumption, co-axial calibration, mosaic planning, planetary imaging, focus/collimation analysis, and pointing models. The features that make this a professional-grade library.
 
 ---
 
@@ -83,7 +92,7 @@ Downstream apps can rely on correct, consistent coordinate math and device/proto
 2. **Performance**: Minimal overhead for high-speed triggering and imaging.
 3. **Safety**: Robust error handling for hardware communication.
 
-*Last updated: 2026-02-10 after starting milestone v0.1*
+*Last updated: 2026-03-02 after v0.2 milestone*
 
 ---
 

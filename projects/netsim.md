@@ -25,7 +25,7 @@ section: network-automation
 - [Context](#context)
 - [Constraints](#constraints)
 - [Key Decisions](#key-decisions)
-- [Current Milestone: v1.8 Data Center Fabric & EVPN](#current-milestone-v18-data-center-fabric-evpn)
+- [Current Milestone: v2.1 Enterprise & Campus Protocols](#current-milestone-v21-enterprise-campus-protocols)
 - [Future Milestones (Proposed)](#future-milestones-proposed)
 - [Ecosystem Context](#ecosystem-context)
 - [Current Status](#current-status)
@@ -330,10 +330,12 @@ Active development with regular protocol additions and improvements.
 
 **Recently Added:**
 
-- BGP support with communities
-- Traffic generation and statistics
-- IP name aliasing for scripts
-- Enhanced JSON output
+- L2 bridge domains, VXLAN data plane, BGP EVPN Type-2/3/5, IRB anycast gateway (v1.8)
+- LACP/LAG with hash-based load distribution, LLDP neighbor discovery (v1.8)
+- EVPN multi-homing with ESI and DF election (v1.8)
+- IPv6 forwarding, NDP, ICMPv6, OSPFv3, MP-BGP IPv6 Unicast (v2.0)
+- Dual-stack integration and benchmarking (v2.0)
+- Wire jitter, pattern-based impairments, traffic matrix patterns, failure injection (v1.9)
 
 ---
 
@@ -353,6 +355,27 @@ Active development with regular protocol additions and improvements.
 - [x] Convergence detection hardening (BGP Loc-RIB stability, IS-IS convergence signal)
 - [x] E2E test suite expansion (cross-protocol failure, ECMP, L3VPN, determinism validation)
 
+**v1.8 Data Center Fabric & EVPN (shipped 2026-02-28):**
+- [x] L2 bridge domains with per-BD FDB, MAC learning, aging, BUM flooding 
+- [x] VXLAN data plane — RFC 7348 encap/decap, VTEP endpoints, head-end replication 
+- [x] BGP EVPN control plane — Type-2 (MAC/IP), Type-3 (IMET), ARP suppression 
+- [x] EVPN Type-5 (IP prefix) + IRB with anycast gateway for inter-subnet routing 
+- [x] LACP/LAG with hash-based load distribution, LACP PDU negotiation 
+- [x] LLDP neighbor discovery with TTL aging, `show lldp neighbors` 
+- [x] EVPN multi-homing — ESI, DF election (service-carving), Type-1/4 routes 
+
+**v1.9 Advanced Impairments & Topology Patterns (shipped 2026-02-28):**
+- [x] Uniform and Gaussian jitter models for wire-level latency variation 
+- [x] Pattern-based link impairments — declarative profiles, selectors, distance-based latency 
+- [x] Gravity-model traffic matrix generation with node importance weighting 
+- [x] Declarative failure injection — time-based, correlated, cascading failures with dry-run 
+
+**v2.0 IPv6 Foundation (shipped 2026-03-01):**
+- [x] IPv6 forwarding with NDP , ICMPv6 
+- [x] OSPFv3 for IPv6 routing 
+- [x] MP-BGP IPv6 Unicast (AFI 2, SAFI 1) 
+- [x] Dual-stack integration and performance benchmarking
+
 ---
 
 ## # Out of Scope
@@ -366,11 +389,11 @@ Active development with regular protocol additions and improvements.
 
 ## Context
 
-**Shipped:** v1.7 SR-MPLS, Daemon Mode & Routing Matrix (2026-02-16)
-- ~192,000 lines of Rust
-- 56 phases, 235 plans across 7 milestones
-- 1,350+ tests passing
-- 8 milestones shipped (v1.0 through v1.7)
+**Shipped:** v1.8 DC Fabric & EVPN (2026-02-28) + v1.9 Impairments & Patterns (2026-02-28) + v2.0 IPv6 Foundation (2026-03-01)
+- ~200,000+ lines of Rust
+- 72+ phases, 302+ plans across 11 milestones shipped
+- 2,200+ tests passing
+- 11 milestones shipped (v1.0 through v1.9, v2.0)
 
 **Tech stack:** Rust, Tokio (parallel), PetGraph (SPF), ipnet (CIDR), comfy-table (CLI), tracing (logging), pcap-file (capture), netgauze-flow-pkt (NetFlow/IPFIX), axum (REST), pyo3 (Python)
 
@@ -421,28 +444,28 @@ Active development with regular protocol additions and improvements.
 
 ---
 
-## Current Milestone: v1.8 Data Center Fabric & EVPN
+## Current Milestone: v2.1 Enterprise & Campus Protocols
 
-**Goal:** Model data center fabric topologies with VXLAN overlay, BGP EVPN control plane, link aggregation, and L2 forwarding — enabling pre-deployment validation of DC designs with machine-readable output.
+**Goal:** Enable validation of campus network designs with gateway redundancy (VRRP) and DHCP relay services across subnets.
 
 **Target features:**
-- L2 forwarding model (bridge domains, MAC learning, FDB tables) as foundation for overlay
-- LACP/LAG link aggregation with member failure handling and hash-based load distribution
-- LLDP neighbor discovery with topology validation
-- VXLAN data plane (encap/decap, VTEP endpoints, VNI-to-bridge-domain mapping)
-- BGP EVPN control plane (Type 2 MAC/IP, Type 3 inclusive multicast, Type 5 IP prefix)
-- EVPN multi-homing with ESI, designated forwarder election, and mass withdrawal
-- JSON output for all show commands (machine-readable automation surface)
+- VRRP (Virtual Router Redundancy Protocol) with master election, priority-based preemption, and sub-second failover
+- DHCP relay agent for cross-subnet DHCP service with Option 82 insertion
+- Integration with routing protocols (VIP route installation, subnet alignment)
+- Observability commands for VRRP state and DHCP relay statistics
+
+**Success criteria:**
+- VRRP master election observable with priority tracking
+- Failover scenarios validated with sub-second convergence timing
+- DHCP relay works across subnets with proper Option 82 handling
+- VRRP VIP routes integrate correctly with FIB
 
 ---
 
 ## Future Milestones (Proposed)
 
-- **v1.9 Advanced Impairments & Topology Patterns** — Phases 97-100
 - **v1.10 Engine Hardening & Protocol Fidelity** — Phases 111-115
 - **v1.11 Advanced Analysis & Assertions** — Phases 116-119
-- **v2.0 IPv6 Foundation** — Phases 68-72
-- **v2.1 Enterprise & Campus Protocols** — Phases 73-74
 - **v2.2 Advanced Transport** — Phases 75-77
 - **v2.3 Multicast** — Phases 78-79
 - **v2.4 Chaos Engineering & Performance** — Phases 80-82
@@ -472,23 +495,23 @@ This project is part of a seven-tool network automation ecosystem. netsim provid
 - [Ecosystem Critical Review](../../automationarch/REVIEW.md) — maturity assessment, integration gaps, strategic priorities
 - [Cross-Project Data Contracts](../../topogen/.planning/ARCHITECTURE.md) — ownership boundaries and format specifications
 
-*Last updated: 2026-02-24 after creating milestone v1.11 and v2.12*
+*Last updated: 2026-03-01 after starting v2.1 Enterprise & Campus Protocols milestone*
 
 ---
 
 ## Current Status
 
-2026-02-28 — Completed 71-02 (IPv6 Loc-RIB and FIB installation)
+2026-03-04 — Completed  (Visual Path Tracing Analysis)
 
 ---
 
 ## Roadmap
 
-- **v1.9 Advanced Impairments & Topology Patterns** (Proposed) — Phases 97-100
 - **v1.10 Engine Hardening & Protocol Fidelity** (Proposed) — Phases 111-115
 - **v1.11 Advanced Analysis & Assertions** (Proposed) — Phases 116-119
-- **v2.0 IPv6 Foundation** (Proposed) — Phases 68-72
-- **v2.1 Enterprise & Campus Protocols** (Proposed) — Phases 73-74
+- **v2.2 Advanced Transport** (Proposed) — Phases 75-77
+- **v2.3 Multicast** (Proposed) — Phases 78-79
+- **v2.4 Chaos Engineering & Performance** (Proposed) — Phases 80-82
 
 ---
 

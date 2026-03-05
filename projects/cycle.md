@@ -33,6 +33,8 @@ A native SwiftUI training application for iPad and Apple TV that bridges profess
 
 A native SwiftUI training application for iPad and Apple TV that bridges professional cycling hardware (KICKR Core) with dynamic AI-driven workout logic via NATS, visualized in a high-performance SceneKit environment.
 
+A native SwiftUI training application for iPad and Apple TV that bridges professional cycling hardware (KICKR Core) with dynamic AI-driven workout logic via NATS, visualized in a high-performance SceneKit environment.
+
 ---
 
 ## Quick Facts

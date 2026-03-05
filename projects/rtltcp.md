@@ -24,9 +24,9 @@ section: signal-processing
 
 ## Concept
 
-A single Rust binary that auto-detects every connected SDR, streams each over the standard `rtl_tcp` protocol, and provides a TUI dashboard and HTTP API for monitoring and control — designed for headless Raspberry Pi deployment.
+A high-performance Rust binary that auto-detects connected SDR hardware (RTL-SDR, AirSpy HF+) and streams IQ samples over the network using the industry-standard `rtl_tcp` protocol. Designed for headless Raspberry Pi deployment, it replaces multiple separate C-based servers with a single async engine.
 
-A multi-SDR streaming server that replaces the separate C-based servers (`rtl_tcp`, `hfp_tcp`, `airspy_tcp`) with a single async Rust binary. It auto-detects all connected hardware, assigns each device its own TCP port, and streams raw IQ samples using the industry-standard `rtl_tcp` protocol. Any existing SDR client (GQRX, SDR#, CubicSDR) connects without modification.
+The system provides a TUI dashboard and HTTP API for real-time monitoring and control, automatically assigning each device its own TCP port. This allows existing SDR clients like GQRX or SDR# to connect without modification, enabling reliable, high-fidelity IQ streaming through a modern management interface.
 
 ![rtltcp-rust TUI](/images/rtltcp-server-tui.png)
 *TUI dashboard showing 8 RTL-SDR devices and an AirSpy HF+ streaming on a Raspberry Pi.*
@@ -35,17 +35,34 @@ A cross-platform (targeted at Raspberry Pi) server that interfaces with multiple
 
 The ability to reliably and efficiently stream high-fidelity IQ data from multiple SDRs over a network with a modern management interface.
 
-A cross-platform (targeted at Raspberry Pi) server that interfaces with multiple SDR devices (RTL-SDR, AirSpy HF+) and streams raw IQ samples over the network using the industry-standard `rtl_tcp` protocol. It features a built-in TUI for live configuration and device management.
+## Usage
 
-The ability to reliably and efficiently stream high-fidelity IQ data from multiple SDRs over a network with a modern management interface.
+**Start with Auto-Discovery:**
+```bash
+# Auto-detects all RTL-SDR and AirSpy devices
+# Assigns ports starting at 1234
+rtltcp-server --auto-discover
+```
 
-A cross-platform (targeted at Raspberry Pi) server that interfaces with multiple SDR devices (RTL-SDR, AirSpy HF+) and streams raw IQ samples over the network using the industry-standard `rtl_tcp` protocol. It features a built-in TUI for live configuration and device management.
+**Custom Port Mapping (TOML):**
+```toml
+# config.toml
+[devices.rtl0]
+serial = "00000001"
+port = 1234
+gain = 20.0
 
-The ability to reliably and efficiently stream high-fidelity IQ data from multiple SDRs over a network with a modern management interface.
+[devices.airspy]
+type = "airspyhf"
+serial = "74A064C832442F0B"
+port = 1235
+```
 
-A cross-platform (targeted at Raspberry Pi) server that interfaces with multiple SDR devices (RTL-SDR, AirSpy HF+) and streams raw IQ samples over the network using the industry-standard `rtl_tcp` protocol. It features a built-in TUI for live configuration and device management.
-
-The ability to reliably and efficiently stream high-fidelity IQ data from multiple SDRs over a network with a modern management interface.
+**Remote Connection:**
+```bash
+# Connect with GQRX or other clients
+gqrx -c rtl_tcp=192.168.1.100:1234
+```
 
 ---
 

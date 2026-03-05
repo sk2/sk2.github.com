@@ -25,6 +25,8 @@ Signal reflection system that utilizes existing Wi-Fi signals for through-wall h
 
 Signal reflection system that utilizes existing Wi-Fi signals for through-wall human detection and localization, leveraging the KrakenSDR coherent radio array.
 
+Signal reflection system that utilizes existing Wi-Fi signals for through-wall human detection and localization, leveraging the KrakenSDR coherent radio array.
+
 ---
 
 ## Quick Facts

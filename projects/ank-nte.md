@@ -105,7 +105,7 @@ The engine implements a 'Write-Through' model with Python bindings via PyO3. Mut
 **Milestone 1: Engine Hardening**
 - [ ] Logging throughout the engine (`log` + `pyo3-log` bridge)
 - [ ] Domain-specific Python exceptions replacing all generic errors
-- [ ] Dual-write safety (error propagation, rollback on failure)
+- [x] Dual-write safety (error propagation, rollback on failure)
 - [ ] GIL release for O(N) PyO3 methods (`py.allow_threads`)
 - [ ] CI/CD pipeline (GitHub Actions, Clippy, fmt, tests)
 - [ ] One-way dependency: ank_pydantic depends on NTE, never reverse
@@ -138,7 +138,7 @@ The engine implements a 'Write-Through' model with Python bindings via PyO3. Mut
 ## Context
 
 - NTE is consumed by ank_pydantic as its backend engine (sibling repo `../ank_pydantic/`)
-- The dual-write architecture (petgraph + DataFrameStore) currently discards errors silently in remove operations (`let _ = self.dataframes.remove_nodes(ids)`)
+- The dual-write architecture (petgraph + DataFrameStore) is fully protected by a RAII `DualWriteGuard`  which automatically rolls back graph mutations if DataFrame operations fail.
 - No CI/CD pipeline exists — all testing is manual
 - LadybugDB (formerly using KuzuDB) has a standalone benchmark crate (`ladybug_backend/`) but does NOT implement `TopologyBackend` trait
 - The backend evaluation is the biggest architectural decision: it shapes diff, snapshots, and wire protocol implementation
@@ -193,7 +193,7 @@ This project is part of a seven-tool network automation ecosystem. NTE provides 
 - Event sourcing: ring-buffer EventStore for audit/replay (future: live topology bus)
 - Pluggable datastore: Polars (default), DuckDB, Lite backends via feature flags
 
-**Critical note:** The dual-write architecture (petgraph + DataFrameStore) lacks rollback. This is the highest-priority hardening item — see v1.0 Phase 1.
+**Critical note:** The dual-write architecture (petgraph + DataFrameStore) was completely hardened with transaction isolation and automatic rollback handling in , and . State divergence is impossible.
 
 **Architecture documents:**
 - [Ecosystem Architecture Overview](../../automationarch/README.md) — full ecosystem design, data flow, workflows
@@ -205,7 +205,7 @@ This project is part of a seven-tool network automation ecosystem. NTE provides 
 
 ## Current Status
 
-2026-02-28 — Completed  (Property Diffing)
+2026-03-04 — Completed  (Zero-copy Mmap CSR Serialization and Traversal).
 
 ---
 

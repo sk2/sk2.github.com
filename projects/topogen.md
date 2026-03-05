@@ -5,7 +5,7 @@ section: network-automation
 
 # Topology Generator
 
-<span class="status-badge status-active">Recently Updated</span>
+<span class="status-badge status-active">Active</span>
 
 [← Back to Network Automation](../network-automation)
 
@@ -18,15 +18,12 @@ section: network-automation
 - [Concept](#concept)
 - [Features](#features)
 - [Technical Depth](#technical-depth)
-- [Latest Release: v1.1 Perf+Stability (shipped 2026-02-22)](#latest-release-v11-perfstability-shipped-2026-02-22)
-- [Current Milestone: v1.2 - Advanced Validation & Realism](#current-milestone-v12-advanced-validation-realism)
+- [Current Milestone: v1.5 - Intent-Based Overlays & Schematic Enrichment](#current-milestone-v15-intent-based-overlays-schematic-enrichment)
 - [Next Milestone Goals](#next-milestone-goals)
 - [Context](#context)
 - [Constraints](#constraints)
 - [Key Decisions](#key-decisions)
 - [Ecosystem Context](#ecosystem-context)
-- [Current Status](#current-status)
-- [Roadmap](#roadmap)
 
 ## Concept
 
@@ -61,27 +58,16 @@ The engine is implemented in Rust for maximum performance, allowing for the sub-
 
 ---
 
-## Latest Release: v1.1 Perf+Stability (shipped 2026-02-22)
+## Current Milestone: v1.5 - Intent-Based Overlays & Schematic Enrichment
 
-TopoGen is now fast and predictable at scale with:
-- **Performance measurement foundation**: Versioned benchmark fixtures, criterion + iai-callgrind infrastructure, CLI diagnostics
-- **CI regression protection**: Non-flaky performance gates using deterministic instruction counts
-- **Export stability**: Streaming YAML writes, atomic file operations, deterministic ordering, progress reporting
-- **Optimization gains**: 3- faster generation,  faster validation, 7- faster exports
+**Goal:** Transform topologies from simple graphs into rich semantic models by formalizing intent-based "overlays" and hierarchical design patterns.
 
-**Previous releases:**
-- v1.0 Production Features (2026-02-21) - Ecosystem exports, geographic realism, traffic matrices, advanced archetypes
-- See [MILESTONES.md](MILESTONES.md) for complete release history
-
----
-
-## Current Milestone: v1.2 - Advanced Validation & Realism
-
-**Goal:** Ensure generated topologies are realistic and usable with deep validation against real-world constraints.
-
-**Shipped:** v1.0 Production Features   2026-02-21
-
-TopoGen now provides production-grade ecosystem integration (ContainerLab / AutoNetKit / netsim exports), geographic realism (city placement + fiber overlays), traffic matrix generation, and advanced topology archetypes (POP, multi-layer, eyeball). Cross-project data contracts are documented and validated end-to-end.
+**Target features:**
+- **Multi-Overlay Tagging**: Formalize `BGP`, `OSPF`, and `Physical` overlay properties on nodes/edges.
+- **Intent-Based Role Assignment**: Automatically tag roles (`spine`/`leaf`, `p`/`pe`/`rr`, `provider`/`customer`) in all generators.
+- **Schematic Grouping**: Formalize "Site", "Pod", and "Zone" hierarchies to support downstream visual grouping.
+- **Relationship Intent**: Tag edges with semantic relationships (`peering`, `upstream`, `transit`) and `SRLG` (fate-sharing) intent.
+- **Whiteboard-Level Property Mapping**: Ensure property names and structures align with AutoNetKit (ANK) whiteboard expectations.
 
 ---
 
@@ -221,18 +207,6 @@ This project is part of a seven-tool network automation ecosystem. topogen provi
 - [Cross-Project Data Contracts](ARCHITECTURE.md) — ownership boundaries and format specifications
 
 *Last updated: 2026-02-21 after v1.1 milestone start*
-
----
-
-## Current Status
-
-2026-02-25 — /5)
-
----
-
-## Roadmap
-
-- **Plans:** 5 plans
 
 ---
 

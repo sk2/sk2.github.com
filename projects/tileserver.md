@@ -32,6 +32,8 @@ Serve dynamic vector tiles (MVT) from massive geospatial datasets (millions of p
 
 Serve dynamic vector tiles (MVT) from massive geospatial datasets (millions of points) with sub-second latency, enabling interactive visualization in Kepler.gl without pre-rendering static tilesets.
 
+Serve dynamic vector tiles (MVT) from massive geospatial datasets (millions of points) with sub-second latency, enabling interactive visualization in Kepler.gl without pre-rendering static tilesets.
+
 ---
 
 ## Quick Facts

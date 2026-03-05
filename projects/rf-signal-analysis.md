@@ -45,6 +45,10 @@ A distributed multi-beam signal reflection analysis system based on KrakenSDR ha
 
 Clean, understandable, stable codebase that reliably tracks aircraft in real-time.
 
+A distributed multi-beam signal reflection analysis system based on KrakenSDR hardware. Pi handles data acquisition, Mac/Linux handles compute-intensive DSP. All 4 reflection channels process in parallel with independent Range-Doppler visualization, per-beam configuration, and real-time performance monitoring. v2 adds per-beam target tracking with geographic visualization, ADS-B correlation, and detection recording for offline analysis.
+
+Clean, understandable, stable codebase that reliably tracks aircraft in real-time.
+
 ---
 
 ## Quick Facts
@@ -108,15 +112,18 @@ Clean, understandable, stable codebase that reliably tracks aircraft in real-tim
 
 ---
 
-## # Out of Scope
+## # Out of Scope / Deferred to Later Milestones
 
-- Cross-beam correlation and target fusion — deferred to v3, requires multi-beam angle estimation and track merging
-- Multi-target tracking across beams (fused track picture) — deferred to v3
-- Raw IQ recording — storage requirements too large (GB/min), detection-level recording sufficient
-- Remote/web access improvements — running locally only
-- Mobile support — desktop-focused
-- Multi-user features — single operator
-- GPU acceleration — defer unless profiling shows necessity
+- GPU acceleration — Implemented in v3.0 High-Performance Edge Compute (CuPy / Rust)
+- Remote/web access improvements — Deferred to v4.0 Field Operations (Web-Based Remote Monitoring)
+- Cross-beam correlation and target fusion — Deferred to v5.0 3D Tracking (Hybrid Track Fusion)
+- Multi-target tracking across beams (fused track picture) — Deferred to v5.0
+- 3D Altitude Estimation (AoA vector + TDOA ellipsoid intersection) — Deferred to v5.0
+- Nvidia Jetson IPC Foundation (NvSCI / Unified Memory for PyO3/Rust) — Deferred to v5.0
+- KrakenSDR 2D DoA (MUSIC + Spatial Smoothing) — Deferred to v5.0
+- Raw IQ recording — Storage requirements too large (GB/min), detection-level recording sufficient
+- Mobile support — Desktop-focused (Web UI mobile-responsive in v4.0)
+- Multi-user features — Single operator
 
 ---
 
@@ -128,6 +135,7 @@ Clean, understandable, stable codebase that reliably tracks aircraft in real-tim
 - 4 surveillance channels (Yagi antennas for reflections)
 - Raspberry Pi (data acquisition)
 - Mac and/or Linux PC (processing)
+- Future Target: Nvidia Jetson for unified edge compute and zero-copy IPC (v5.0)
 
 **Operational Environment:**
 - Located south of airport (target: aircraft traffic to the north)
@@ -166,7 +174,7 @@ Clean, understandable, stable codebase that reliably tracks aircraft in real-tim
 | Phase 1 = foundation before features | Original codebase too unstable to extend | ✓ Good — clean base enabled rapid feature development |
 | Distributed processing (Pi → Mac/Linux) | Pi performance insufficient for expanded processing | ✓ Good — 65-80 FPS streaming achieved |
 | Keep Heimdall-based pipeline | Proven DSP library, avoid rewriting core algorithms | ✓ Good — stable DSP foundation |
-| Defer cross-beam correlation to v3 | Requires multi-beam fusion research, per-beam tracking first | — Pending |
+| Defer cross-beam correlation to v5.0 | Requires multi-beam fusion research and coherent array operation (KrakenSDR DoA) | — Pending |
 | UV for dependency management | Faster, more reliable than pip/conda | ✓ Good — reproducible environments |
 | Asyncio-based distributed architecture | Non-blocking I/O for streaming + control | ✓ Good — clean concurrency model |
 | ProcessPoolExecutor for multi-beam | True parallelism for CPU-bound DSP, bypasses GIL | ✓ Good — 4 beams process independently |
@@ -175,13 +183,13 @@ Clean, understandable, stable codebase that reliably tracks aircraft in real-tim
 | Both beam geometry and ADS-B for geo (v2) | Geometry gives approximate position, ADS-B validates accuracy | — Pending |
 | Detection-level recording, not raw IQ (v2) | Manageable storage, sufficient for tracking algorithm tuning | — Pending |
 
-*Last updated: 2026-02-16 after v2.0 milestone start*
+*Last updated: 2026-03-04 after adding v5.0 research findings*
 
 ---
 
 ## Current Status
 
-2026-02-28 — Completed 11-04 (Added stationary clutter EMA penalty map for near-DC false alarm suppression).
+2026-03-01 — Completed  (Rust Intelligence).
 
 ---
 

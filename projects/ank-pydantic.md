@@ -17,11 +17,10 @@ section: network-automation
 
 - [Concept](#concept)
 - [Features](#features)
-- [Current Milestone: v1.12 Production Deployment](#current-milestone-v112-production-deployment)
-- [Active Milestones (Parallel Work)](#active-milestones-parallel-work)
-- [Planned Milestone: v1.13 Design Validation Framework](#planned-milestone-v113-design-validation-framework)
-- [Latest Shipped: v2.0 Ergonomics, Performance & Decoupling (2026-02-24)](#latest-shipped-v20-ergonomics-performance-decoupling-2026-02-24)
-- [Previous Shipped: v1.8 Performance & Optimization (2026-02-16)](#previous-shipped-v18-performance-optimization-2026-02-16)
+- [Current Milestone: v2.2 Polish & Developer Experience](#current-milestone-v22-polish-developer-experience)
+- [Previous Milestone: Realignment and Cleanup (Post-netc Split)](#previous-milestone-realignment-and-cleanup-post-netc-split)
+- [Latest Shipped: v2.1 Advanced Python Features (2026-02-28)](#latest-shipped-v21-advanced-python-features-2026-02-28)
+- [Previous Shipped](#previous-shipped)
 - [Key Decisions](#key-decisions)
 - [Context](#context)
 - [Constraints](#constraints)
@@ -37,6 +36,33 @@ As one of the two primary modeling tools in the ecosystem, it offers a high-leve
 A Python library for modeling and querying network topologies, backed by a high-performance Rust core (`ank_nte`). Features a two-stage transformation model (Whiteboard → Plan → Protocol Layers), type-safe Pydantic models for nodes/edges/layers, and a composable lazy query API with Rust-backed execution. Ships with "batteries-included" domain models (ISIS, MPLS, EVPN, L3VPN, IXP) in the blueprints/ module.
 
 A clean, consistent API where there's one obvious way to perform each topology operation — predictable naming, return types, and method signatures across the entire public surface.
+
+---
+
+## Usage
+
+```python
+from ank_pydantic import Topology, q
+from blueprints.models import Router, L3Link
+
+# Initialize topology
+topo = Topology()
+
+# Add devices with type-safe models
+r1 = topo.nodes.add(Router(name="core-01", model="ios-xr"))
+r2 = topo.nodes.add(Router(name="core-02", model="junos"))
+
+# Connect using fluent API
+topo.links.add(L3Link(endpoints=[r1.eth0, r2.eth0]))
+
+# Powerful, chainable queries
+routers = topo.nodes.query(q.model.contains("ios")) \
+                    .filter(q.tags.has("backbone")) \
+                    .models()
+
+# Calculate shortest paths via Rust core
+path = topo.nodes.paths_to(r1, r2)
+```
 
 ---
 
@@ -58,60 +84,58 @@ A clean, consistent API where there's one obvious way to perform each topology o
 
 ---
 
-## Current Milestone: v1.12 Production Deployment
+## Current Milestone: v2.2 Polish & Developer Experience
 
-**Goal:** Deploy to real network devices, not just simulators. Real vendor compiler support and deployment workflows.
-
-**Target features:**
-- Cisco IOS-XR compiler (industry standard for SP/DC)
-- Juniper JunOS compiler (enterprise/SP standard)
-- Arista EOS compiler (DC standard)
-- ContainerLab exporter (real device testing environment)
-- Deployment workflows (push configurations, verify, rollback)
-
-**Status:** Not started (defining requirements)
-
-**Note:** v1.10 and v1.11 are also active in parallel.
-
----
-
-## Active Milestones (Parallel Work)
-
-**v1.10: Protocol Design Validation & Config Generation** —  complete (phases 72-74 remaining)
-- Protocol-specific design rules, FRR compiler, netsim exporter
-- Full pipeline: design → validate → compile → simulate
-
-**v1.11: Performance & Ergonomics** — In progress (7/27 plans complete)
-- DataFrame caching, query optimization, FFI batching
-- Flattened API imports, typed accessors, improved errors
-
----
-
-## Planned Milestone: v1.13 Design Validation Framework
-
-**Goal:** Comprehensive "linter for network designs" - validation system with rules engine, severity levels, and auto-fix suggestions.
+**Goal:** Clear accumulated technical debt, improve developer experience via better examples and case studies, and complete architectural cleanup started in v1.3.
 
 **Target features:**
-- Rules engine with severity levels and categories
-- Validation hooks in design workflow
-- Pre-commit checks for design changes
-- Validation reports with actionable fixes
-- Plugin system for custom validation rules
+- ARCH-01: topology.py reduced to <400 lines by moving remaining methods to managers
+- ARCH-02: `packages/ank_pydantic_extras/` analyzed with each component assigned a documented path
+- EXMP-01/02: `batteries_included/` module with sample topologies (datacenter, WAN, campus) and example models/compilers
+- EXMP-03/04: All 6 case studies updated to current Query API; all TODO markers resolved
+- API-01/02: Design functions exposed as fluent Query methods; blueprints/ design rules use Query API
+- DEBT-01/02/03: mypy overload errors, Rust warnings, and NTE workarounds cleaned up
+
+**Status:** In progress (defining requirements)
 
 ---
 
-## Latest Shipped: v2.0 Ergonomics, Performance & Decoupling (2026-02-24)
+## Previous Milestone: Realignment and Cleanup (Post-netc Split)
 
-**Key Achievements (v2.0):**
+**Goal:** Clean up the repository and realign the focus of `ank_pydantic` as the "Community Frontend" (Python API) for modeling, rapid prototyping, and hacking, acknowledging that the rigid compiler and "linter" functionality has moved to the `netc` Rust project.
+
+**Status:** Completed
+
+---
+
+## Latest Shipped: v2.1 Advanced Python Features (2026-02-28)
+
+**Key Achievements (v2.1):**
+- Intelligent design engine with automated attribute allocation
+- Semantic topology diffing with collision reporting
+- Remote topology parity with real-time sync (events, offline replay)
+- Declarative validation engine with repair hints
+
+---
+
+## Previous Shipped
+
+**v2.0 Ergonomics, Performance & Decoupling (2026-02-24):**
 - Dynamic model registration and fluent connectivity templates
 - Proxied `node.data` write-through (including batch-mode safety)
 - Rust push-down for string/regex query evaluation with benchmark evidence
 - Data Mapper + Identity Map for stable Python object identities
 - Advanced analytics surface: centrality, weighted paths (NetworkX fallback), and detached extraction
 
----
+**v1.10 Protocol Design & Config Generation (2026-02-28):**
+- Protocol design rules (ISIS/BGP, OSPF, overlay/service, infrastructure)
+- FRR compiler with template-based config generation
+- Multi-vendor template development (IOS-XR, JunOS, EOS)
+- Netsim environment exporter for simulation workflows
+- Integration golden path (design → validate → compile → simulate)
+- Performance infrastructure with DataFrame and QuerySpec caching
 
-## Previous Shipped: v1.8 Performance & Optimization (2026-02-16)
+**v1.8 Performance & Optimization (2026-02-16):**
 
 **Key Achievements (v1.8):**
 - Profiling baseline and scale fixtures (10k/100k)
@@ -209,22 +233,26 @@ A clean, consistent API where there's one obvious way to perform each topology o
 
 ## # Active
 
-<!-- v1.10 Protocol Design Validation & Config Generation ( complete, phases 72-74 remaining) -->
+<!-- v2.2 Polish & Developer Experience -->
 
-- [ ] FRR compiler end-to-end (interfaces, OSPF, BGP, ISIS, static routes with Jinja2 templates)
-- [ ] Netsim environment exporter (device configs, topology description, simulation parameters)
-- [ ] Integration: standard ruleset + golden-path example (design → validate → compile → simulate)
+**Architecture & Cleanup:**
+- ARCH-01: topology.py <400 lines (move remaining methods to managers)
+- ARCH-02: `ank_pydantic_extras/` components assigned documented paths (integrate / split / deprecate)
 
-<!-- v1.11 Performance & Ergonomics (planned) -->
+**Examples & Documentation:**
+- EXMP-01: `batteries_included/` module with sample topologies for 3 scenarios (datacenter, WAN, campus)
+- EXMP-02: `batteries_included/` example models and compilers users can study and extend
+- EXMP-03: All 6 case studies updated to current Query API (zero `.dataframe()` calls, no `topology.match()`)
+- EXMP-04: All TODO markers in case studies resolved (addressed, deleted, or deferred with rationale)
 
-- [ ] Performance baseline and regression infrastructure (profiling, memory analysis, benchmark suite, CI enforcement)
-- [ ] DataFrame caching layer (LRU cache with mutation invalidation, 80- latency reduction)
-- [ ] QuerySpec result caching (hash-based query result caching with invalidation)
-- [ ] FFI call batching (batch mutation API, reduce 29k → 300 calls, 50- speedup)
-- [ ] Flattened public API (from ank_pydantic import Router, q, Topology)
-- [ ] Typed field accessors (replace getattr/setattr with node.data.field and node.update_fields())
-- [ ] Improved error messages (actionable suggestions, difflib-based recommendations)
-- [ ] Documentation and polish (quickstart guide, API reference, performance guide, migration guide)
+**API Ergonomics:**
+- API-01: Design functions (split, explode) exposed as fluent methods on Query results
+- API-02: Design rule implementations in `blueprints/` use Query API instead of imperative for-loops
+
+**Technical Debt:**
+- DEBT-01: `overload-cannot-match` mypy errors fixed in NodeManager and EndpointManager `add()` methods
+- DEBT-02: Rust diagnostic warnings eliminated (deprecated `add_edge`, dead code in sampler.rs, benchmark harness)
+- DEBT-03: NTE workarounds documented with clear comments and upstream issue references
 
 ---
 
@@ -364,13 +392,13 @@ This project is part of a seven-tool network automation ecosystem. ank-pydantic 
 - [Ecosystem Critical Review](../../automationarch/REVIEW.md) — maturity assessment, integration gaps, strategic priorities
 - [Cross-Project Data Contracts](../../topogen/.planning/ARCHITECTURE.md) — ownership boundaries and format specifications
 
-*Last updated: 2026-02-21 after v1.11 scope definition*
+*Last updated: 2026-02-28 starting milestone v2.2 Polish & Developer Experience*
 
 ---
 
 ## Current Status
 
-2026-02-27 -- Completed 72-05 with canonical fixtures, golden tests, and idempotency validation
+2026-03-01 —  executed (batteries_included module: datacenter, WAN, campus, ISP topologies)
 
 ---
 

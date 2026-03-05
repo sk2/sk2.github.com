@@ -19,7 +19,7 @@ section: network-automation
 - [Key Capabilities](#key-capabilities)
 - [Screenshots](#screenshots)
 - [Visuals](#visuals)
-- [Current Milestone: v1.9 Advanced Traffic & Analysis](#current-milestone-v19-advanced-traffic-analysis)
+- [Current Milestone: Ecosystem Maintenance & Operations](#current-milestone-ecosystem-maintenance-operations)
 - [Context](#context)
 - [Constraints](#constraints)
 - [Key Decisions](#key-decisions)
@@ -100,15 +100,122 @@ The Workbench provides real-time feedback through integrated NetVis overlays, al
 
 ---
 
-## Current Milestone: v1.9 Advanced Traffic & Analysis
+## Current Milestone: Ecosystem Maintenance & Operations
 
-**Goal:** Provide network engineers with predictive, probabilistic analysis of network performance and traffic engineering resilience under various failure scenarios.
+**Goal:** The ANK Workbench is now functionally complete, type-safe, and covered by end-to-end testing. The project enters a maintenance phase, waiting for future strategic shifts like an AI-driven Model Context Protocol (MCP) server or real-time collaborative editing.
 
-**Target features:**
-- Traffic Simulator Integration (Flow-based simulation pipeline)
-- Flow Visualization & Congestion Mapping (Heatmaps, point-to-point flow traces)
-- Traffic Engineering (TE) Modeling (SR Policies, RSVP-TE constraints)
-- Monte Carlo Failure Analysis (Probabilistic resilience testing)
+**Target features:** 
+- All 93 phases across the 5 major milestones have been completed.
+- The project is now in a maintenance and operational state.
+
+---
+
+## # v4.2 UX Polish & Accessibility (Complete)
+
+**Delivered:** March 4, 2026 | **Phases:** 4 (90-93)
+
+Transformed the Workbench from a powerful engineering tool into a polished, professional-grade product by improving developer experience (DevEx) and user interfaces:
+- **Toast Notifications:** Replaced blocking native browser popups with modern, sleek `sonner` slide-in notifications.
+- **Global Command Palette:** Activated a `Cmd+K` palette that allows power users to instantly trigger CI/CD exports and pipeline runs without using a mouse.
+- **Visual Link Drawing:** Upgraded the `NetVisCanvas` interactions to allow engineers to hold Shift and drag wires between nodes, automatically generating the underlying logical interfaces.
+- **Contextual Tooltips:** Embedded educational hover-cards explaining the advanced mathematical parameters.
+
+---
+
+## # v4.1 Codebase Hygiene & Stability (Complete)
+
+**Delivered:** March 4, 2026 | **Phases:** 3 (87-89)
+
+Solidified the foundation of the ANK Workbench after rapid feature development, ensuring long-term maintainability, type safety, and bug-free operation:
+- **Strict Static Type Checking:** Conducted a deep `mypy` pass across the backend orchestrator, eliminating over 200 type warnings, circular dependencies, and runtime attribute errors.
+- **Code Deduplication:** Purged unused legacy components and endpoints, reducing the frontend bundle size and eliminating zombie UI code.
+- **End-to-End Testing:** Initialized Playwright and implemented automated browser testing covering the critical paths.
+
+---
+
+## # v4.0 Production Intent & Orchestration (Complete)
+
+**Delivered:** March 4, 2026 | **Phases:** 3 (84-86)
+
+Graduated the Workbench from a testing/lab environment into a true orchestrator capable of pushing final states into IaC repositories and enterprise CI/CD pipelines:
+- **CI/CD Pipeline Abstraction:** Provided an "Export to CI" modal allowing users to download GitOps bundles with automatically generated GitHub Actions and GitLab CI validation pipelines.
+- **IaC Generation:** Implemented intelligent generators that translate the internal logical topologies into declarative Terraform HCL models and Ansible configuration management playbooks.
+- **Enterprise RBAC:** Introduced JWT-based Role-Based Access Control, explicitly gating "Deploy" actions to Designers/Approvers and "Export to CI" actions exclusively to Approvers/Admins, protecting production infrastructure.
+
+---
+
+## # v3.2 Advanced Analytics & Optimization (Complete)
+
+**Delivered:** March 4, 2026 | **Phases:** 3 (81-83)
+
+Integrated dynamic performance analysis and multi-host scaling capabilities, allowing engineers to validate hardware constraints before purchasing:
+- **Deep netflowsim Integration:** Exposed the advanced v2.0 Rust engine to run massive Monte Carlo simulations with customizable queuing models (Pareto, LogNormal). Added interactive UI components for percentiles, bottlenecks, and linear capacity projections.
+- **Distributed Multi-Host Execution:** Modified the `TopologyGenerator` and orchestration layer to automatically slice topologies, allocate VXLAN tunnels, and deploy container instances concurrently across multiple target Docker daemons.
+- **Resource & Capacity Pre-flight:** Implemented intelligent pre-flight capacity validation that sums node requirements and queries actual host hardware, providing a protective modal to warn against or block oversubscribed deployments.
+
+---
+
+## # v3.1 NetAuto Manifest & Remediation (Complete)
+
+**Delivered:** March 4, 2026 | **Phases:** 4 (77-80)
+
+Pivoted towards the `automationarch` ecosystem architecture by introducing standard YAML manifests, external provider imports, and actionable dissonance remediation:
+- **NetAuto Manifest Persistence:** Seamlessly save/open project state via `netauto.project` YAML files instead of pure SQLite.
+- **External Provider Import:** Bootstrap topologies directly from external Git or NetBox sources.
+- **Dissonance Remediation Generation:** Generated atomic CLI configuration snippets for Reality vs. Model mismatches.
+- **Automated Remediation Application:** Implemented "Push Fix" functionality directly in the Dissonance and LiveConfig panels.
+
+---
+
+## # v2.4 Advanced Telemetry & Developer Experience (Complete)
+
+**Delivered:** March 3, 2026 | **Phases:** 5 (69-73)
+
+Enhanced observability of real-world emulation and the developer experience of managing complex network topologies:
+- **NetFlow/IPFIX Ingestion:** Real-time collection and analysis of network flows.
+- **Event-to-Packet Correlation:** Tracing high-level protocol events down to specific packets.
+- **Vendor Config LSP:** Syntax highlighting and linting for Arista/Cisco configurations.
+- **Orchestrator Separation:** Decoupled the workbench UI from the underlying simulation engine.
+
+---
+
+## # v2.3 Live Observability & Chaos Interaction (Complete)
+
+**Delivered:** March 2, 2026 | **Phases:** 4 (65-68)
+
+Transitioned the Workbench into a live experimental laboratory where engineers can actively perturb the network and visualize the consequences in real-time.
+- **Chaos Engineering Panel:** A dedicated UI to inject faults (link cuts, latency, node reboots) into running ContainerLab topologies.
+- **Live Path Tracing:** Visualizing real `traceroute` executions on the canvas to prove data plane behavior.
+- **Live Heartbeat:** Real-time pulse animations driven by streaming container metrics/traffic.
+- **Log Stream Highlighting:** Intelligent log parsing to highlight critical protocol state changes instantly.
+
+---
+
+## # v2.0 Enterprise Platform (Complete)
+
+**Delivered:** March 1, 2026 | **Phases:** 4 (55-58) | **Code:** +12,450 lines
+
+Transformed the Workbench from a local developer tool into a secure, collaborative, and cloud-scale enterprise platform:
+
+**Security & RBAC :**
+- JWT-based authentication system with secure password hashing.
+- Role-Based Access Control (Admin, Engineer, Viewer) enforced across all API endpoints.
+- Environment-specific API key protection for legacy CLI integration.
+
+**Multi-User Collaboration :**
+- Real-time co-editing of network topologies using WebSockets and Yjs CRDTs.
+- Live user presence indicators and cursor tracking in the Workspace.
+- Conflict-free concurrent topology updates.
+
+**Distributed Cloud Execution :**
+- Offloaded heavy simulation and Container Lab workloads to remote clusters.
+- Native support for SSH-based remote Docker hosts.
+- Multi-context UI with visual indicators for "Local" vs. "Cloud" execution targets.
+
+**Enterprise Audit Trail :**
+- Immutable, system-wide logging of all mutating administrative and engineering actions.
+- Automated "Who, What, When, Where" capture via API middleware and background task tracking.
+- Dedicated Admin Audit UI and project-specific History tabs for compliance review.
 
 ---
 
@@ -362,7 +469,7 @@ This project is part of a seven-tool network automation ecosystem. The workbench
 
 ## Current Status
 
-2026-02-28 — Completed /02/03 all verified).
+2026-03-04 — Completed v4.2 UX Polish & Accessibility milestone.
 
 ---
 

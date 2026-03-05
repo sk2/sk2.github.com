@@ -41,6 +41,10 @@ A terminal-based satellite tracker that displays real-time satellite positions o
 
 Real-time satellite positions rendered on a terminal world map with pass predictions — a single binary, no browser, no GUI dependencies.
 
+A terminal-based satellite tracker that displays real-time satellite positions on a world map, predicts passes over the user's location, and shows transmission/frequency data. Built with Rust, ratatui, and the SGP4 orbital propagation algorithm. Aimed at amateur radio operators, space enthusiasts, and anyone who wants to know what's overhead.
+
+Real-time satellite positions rendered on a terminal world map with pass predictions — a single binary, no browser, no GUI dependencies.
+
 ---
 
 ## Quick Facts
@@ -144,7 +148,7 @@ Real-time satellite positions rendered on a terminal world map with pass predict
 
 ## Current Status
 
-** 2026-02-28 -- Phase 6 executed, verified, and committed
+** 2026-03-01 --  complete
 
 ---
 

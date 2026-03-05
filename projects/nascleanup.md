@@ -3,13 +3,24 @@ layout: default
 section: projects
 ---
 
-# nascleanup
+# NAS Cleanup & Intelligence
 
-<span class="status-badge status-active">Active</span>
+<span class="status-badge status-active">Recently Updated</span>
+
+[← Back to Data Analytics](../data-analytics)
 
 [← Back to Projects](../projects)
 
 ---
+
+## Contents
+
+- [Concept](#concept)
+- [Architecture](#architecture)
+- [Tech Stack](#tech-stack)
+- [Goal](#goal)
+- [Key Components](#key-components)
+- [Current Status](#current-status)
 
 ## Concept
 
@@ -27,6 +38,13 @@ Developing...
 
 ---
 
+## Tech Stack
+
+- **Rust:** `tokio`, `rayon`, `blake3`, `jwalk`, `ignore`, `clap` (CLI), `ratatui` (TUI).
+- **DSM Integration:** `syno-api` (if available/needed), BTRFS ioctls.
+
+---
+
 ## Quick Facts
 
 | | |
@@ -34,5 +52,29 @@ Developing...
 | **Status** | Active |
 
 ---
+
+## Goal
+
+Develop a high-performance Rust application to manage large-scale Synology NAS file systems, focusing on duplicate detection, astrophotography optimization, conventional RAW photography management, and intelligent organization.
+
+---
+
+## Key Components
+
+- **Scanner:** Parallel directory walker utilizing `jwalk` or `rayon`.
+- **Hasher:** `blake3` based content hashing.
+- **Deduplicator:** Logic to identify bit-for-bit and fuzzy duplicates.
+- **Cleaner:** Workflow-specific cleanup rules (e.g., ASIair/Astrophotography and Conventional RAW/Sidecar management).
+- **TUI:** Terminal interface for reviewing and acting on findings.
+
+---
+
+## Current Status
+
+2026-03-03 - Completed 10-01-PLAN.md (Doctor Diagnostics)
+
+---
+
+[← Back to Data Analytics](../data-analytics)
 
 [← Back to Projects](../projects)

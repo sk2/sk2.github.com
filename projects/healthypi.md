@@ -34,6 +34,8 @@ A modular, agent-aware health monitoring ecosystem that translates raw biometric
 
 A modular, agent-aware health monitoring ecosystem that translates raw biometric data from HealthyPi hardware (6 and Move) into actionable insights and automated interventions.
 
+A modular, agent-aware health monitoring ecosystem that translates raw biometric data from HealthyPi hardware (6 and Move) into actionable insights and automated interventions.
+
 ---
 
 ## Quick Facts

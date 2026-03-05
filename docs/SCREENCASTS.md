@@ -1,6 +1,8 @@
 # CLI Screencasts with VHS
 
-To improve the website's "Show, Don't Tell" philosophy, we can use **[vhs](https://github.com/charmbracelet/vhs)** to create automated, high-quality terminal GIFs.
+To improve the website's "Show, Don't Tell" philosophy, we use **[vhs](https://github.com/charmbracelet/vhs)** to create automated, high-quality terminal GIFs.
+
+**Implementation Status:** Demo tape files created and moved to project repositories (e.g., `network-simulator/demos/`). Rendering requires VHS in a compatible environment (Linux or Docker recommended for macOS).
 
 ## Why VHS?
 - **Scriptable**: Write terminal interactions in a `.tape` file.

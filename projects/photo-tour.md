@@ -46,6 +46,11 @@ It helps you compose shots, automate repeatable workflows, and progressively add
 
 In the field, you can see what the camera sees and get actionable guidance/control fast enough to improve the shot.
 
+Photo Tour is a smart, interactive photography assistant designed for field use.
+It helps you compose shots, automate repeatable workflows, and progressively adds intelligent triggering and transition logic.
+
+In the field, you can see what the camera sees and get actionable guidance/control fast enough to improve the shot.
+
 ---
 
 ## Quick Facts

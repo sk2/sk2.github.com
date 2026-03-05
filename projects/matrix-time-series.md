@@ -26,29 +26,9 @@ section: projects
 
 ## Concept
 
-Time series analysis typically requires either slow Python libraries or complex manual implementation. **matrix-profile-rs** provides Matrix Profile algorithms (STOMP, SCRIMP++, SCAMP) in native Rust with ergonomic APIs for motif discovery and anomaly detection, achieving C-level performance with Python-level usability through Polars integration.
+Time series analysis often requires a trade-off between slow Python libraries and complex manual implementations. **matrix-profile-rs** eliminates this friction by providing Matrix Profile algorithms (STOMP, SCRIMP++, SCAMP) in native Rust, achieving C-level performance with the ergonomic usability of a Polars-integrated API.
 
-A high-performance Rust implementation of Matrix Profile algorithms for time series analysis with SIMD acceleration, out-of-memory tiling support, and Polars ecosystem integration. Matrix Profiles enable pattern discovery, anomaly detection, and similarity search in univariate time series without domain knowledge or parameter tuning.
-
-Think of it as "find repeating patterns and anomalies in any time series data" with a simple API: `df.select(pl.col("ts").mp().stomp(m=20))` for Polars users, or direct Rust APIs for maximum performance and scale.
-
-Time series analysis requires identifying:
-- **Repeating patterns** (motifs): "This sensor pattern happened 15 times before failure"
-- **Anomalies** (discords): "This heartbeat segment is unlike any other"
-- **Similar segments**: "Find all sequences similar to this known good pattern"
-
-Existing solutions:
-- **Python libraries (stumpy)**: Slow, JIT dependencies, awkward array manipulation
-- **Manual implementation**: Complex algorithms, easy to get wrong, poor performance
-- **Academic prototypes**: Not production-ready, missing ergonomics
-
-matrix-profile-rs provides production-quality implementations with:
-- Native performance (2.5x SIMD speedup, no JIT warmup)
-- Clean APIs (`.motifs(k=3)` instead of array indexing)
-- Scalability (N>10^6 via memory-efficient tiling)
-- Polars integration (treat Matrix Profiles as DataFrame operations)
-
-**Performance at scale with ergonomic APIs** — achieve 2.5x speedup via SIMD, handle datasets larger than RAM via tiling, while maintaining simple `.motifs(k)` / `.discords(k)` interfaces.
+The library enables pattern discovery (motifs), anomaly detection (discords), and similarity search in univariate time series without requiring domain knowledge or parameter tuning. With 2.5x SIMD speedups and memory-efficient tiling for datasets exceeding RAM (N>10⁶), it allows users to treat complex Matrix Profile operations as simple DataFrame transformations: `df.select(pl.col("ts").mp().stomp(m=20))`.
 
 Time series analysis typically requires either slow Python libraries or complex manual implementation. **matrix-profile-rs** provides Matrix Profile algorithms (STOMP, SCRIMP++, SCAMP) in native Rust with ergonomic APIs for motif discovery and anomaly detection, achieving C-level performance with Python-level usability through Polars integration.
 
@@ -74,77 +54,42 @@ matrix-profile-rs provides production-quality implementations with:
 
 **Performance at scale with ergonomic APIs** — achieve 2.5x speedup via SIMD, handle datasets larger than RAM via tiling, while maintaining simple `.motifs(k)` / `.discords(k)` interfaces.
 
-Time series analysis typically requires either slow Python libraries or complex manual implementation. **matrix-profile-rs** provides Matrix Profile algorithms (STOMP, SCRIMP++, SCAMP) in native Rust with ergonomic APIs for motif discovery and anomaly detection, achieving C-level performance with Python-level usability through Polars integration.
+---
 
-A high-performance Rust implementation of Matrix Profile algorithms for time series analysis with SIMD acceleration, out-of-memory tiling support, and Polars ecosystem integration. Matrix Profiles enable pattern discovery, anomaly detection, and similarity search in univariate time series without domain knowledge or parameter tuning.
+## Usage
 
-Think of it as "find repeating patterns and anomalies in any time series data" with a simple API: `df.select(pl.col("ts").mp().stomp(m=20))` for Polars users, or direct Rust APIs for maximum performance and scale.
+**Polars Integration (Recommended):**
+```python
+import polars as pl
+import matrix_profile_rs
 
-Time series analysis requires identifying:
-- **Repeating patterns** (motifs): "This sensor pattern happened 15 times before failure"
-- **Anomalies** (discords): "This heartbeat segment is unlike any other"
-- **Similar segments**: "Find all sequences similar to this known good pattern"
+df = pl.read_csv("telemetry.csv")
 
-Existing solutions:
-- **Python libraries (stumpy)**: Slow, JIT dependencies, awkward array manipulation
-- **Manual implementation**: Complex algorithms, easy to get wrong, poor performance
-- **Academic prototypes**: Not production-ready, missing ergonomics
+# Compute Matrix Profile using STOMP algorithm
+# 'ts' is the time series column, m=50 is the window size
+df = df.select([
+    pl.col("ts"),
+    pl.col("ts").mp().stomp(m=50).alias("mp")
+])
 
-matrix-profile-rs provides production-quality implementations with:
-- Native performance (2.5x SIMD speedup, no JIT warmup)
-- Clean APIs (`.motifs(k=3)` instead of array indexing)
-- Scalability (N>10^6 via memory-efficient tiling)
-- Polars integration (treat Matrix Profiles as DataFrame operations)
+# Extract top-3 motifs (repeating patterns)
+motifs = df.select(pl.col("mp").mp().top_k_motifs(k=3))
+```
 
-**Performance at scale with ergonomic APIs** — achieve 2.5x speedup via SIMD, handle datasets larger than RAM via tiling, while maintaining simple `.motifs(k)` / `.discords(k)` interfaces.
+**Rust Native API:**
+```rust
+use matrix_profile_rs::{Stomp, MatrixProfile};
 
-Time series analysis typically requires either slow Python libraries or complex manual implementation. **matrix-profile-rs** provides Matrix Profile algorithms (STOMP, SCRIMP++, SCAMP) in native Rust with ergonomic APIs for motif discovery and anomaly detection, achieving C-level performance with Python-level usability through Polars integration.
+let data = vec![1.0, 2.1, 1.9, 1.1, 2.0, 1.8];
+let m = 3;
 
-A high-performance Rust implementation of Matrix Profile algorithms for time series analysis with SIMD acceleration, out-of-memory tiling support, and Polars ecosystem integration. Matrix Profiles enable pattern discovery, anomaly detection, and similarity search in univariate time series without domain knowledge or parameter tuning.
+// High-performance parallel computation
+let mp = Stomp::new(&data, m)
+    .with_threads(4)
+    .compute()?;
 
-Think of it as "find repeating patterns and anomalies in any time series data" with a simple API: `df.select(pl.col("ts").mp().stomp(m=20))` for Polars users, or direct Rust APIs for maximum performance and scale.
-
-Time series analysis requires identifying:
-- **Repeating patterns** (motifs): "This sensor pattern happened 15 times before failure"
-- **Anomalies** (discords): "This heartbeat segment is unlike any other"
-- **Similar segments**: "Find all sequences similar to this known good pattern"
-
-Existing solutions:
-- **Python libraries (stumpy)**: Slow, JIT dependencies, awkward array manipulation
-- **Manual implementation**: Complex algorithms, easy to get wrong, poor performance
-- **Academic prototypes**: Not production-ready, missing ergonomics
-
-matrix-profile-rs provides production-quality implementations with:
-- Native performance (2.5x SIMD speedup, no JIT warmup)
-- Clean APIs (`.motifs(k=3)` instead of array indexing)
-- Scalability (N>10^6 via memory-efficient tiling)
-- Polars integration (treat Matrix Profiles as DataFrame operations)
-
-**Performance at scale with ergonomic APIs** — achieve 2.5x speedup via SIMD, handle datasets larger than RAM via tiling, while maintaining simple `.motifs(k)` / `.discords(k)` interfaces.
-
-Time series analysis typically requires either slow Python libraries or complex manual implementation. **matrix-profile-rs** provides Matrix Profile algorithms (STOMP, SCRIMP++, SCAMP) in native Rust with ergonomic APIs for motif discovery and anomaly detection, achieving C-level performance with Python-level usability through Polars integration.
-
-A high-performance Rust implementation of Matrix Profile algorithms for time series analysis with SIMD acceleration, out-of-memory tiling support, and Polars ecosystem integration. Matrix Profiles enable pattern discovery, anomaly detection, and similarity search in univariate time series without domain knowledge or parameter tuning.
-
-Think of it as "find repeating patterns and anomalies in any time series data" with a simple API: `df.select(pl.col("ts").mp().stomp(m=20))` for Polars users, or direct Rust APIs for maximum performance and scale.
-
-Time series analysis requires identifying:
-- **Repeating patterns** (motifs): "This sensor pattern happened 15 times before failure"
-- **Anomalies** (discords): "This heartbeat segment is unlike any other"
-- **Similar segments**: "Find all sequences similar to this known good pattern"
-
-Existing solutions:
-- **Python libraries (stumpy)**: Slow, JIT dependencies, awkward array manipulation
-- **Manual implementation**: Complex algorithms, easy to get wrong, poor performance
-- **Academic prototypes**: Not production-ready, missing ergonomics
-
-matrix-profile-rs provides production-quality implementations with:
-- Native performance (2.5x SIMD speedup, no JIT warmup)
-- Clean APIs (`.motifs(k=3)` instead of array indexing)
-- Scalability (N>10^6 via memory-efficient tiling)
-- Polars integration (treat Matrix Profiles as DataFrame operations)
-
-**Performance at scale with ergonomic APIs** — achieve 2.5x speedup via SIMD, handle datasets larger than RAM via tiling, while maintaining simple `.motifs(k)` / `.discords(k)` interfaces.
+println!("Motifs: {:?}", mp.top_k_motifs(2));
+```
 
 ---
 
@@ -389,7 +334,7 @@ None yet — v1.0 is initial release. Expecting feedback on:
 
 ## Current Status
 
-2026-02-24 — Completed 11-01-PLAN.md: Series.streaming(m) + PolarsStreamingState + mp_* schema
+2026-03-01 — Completed 14-01-PLAN.md: tokio::Stream wrapper + async callbacks
 
 ---
 

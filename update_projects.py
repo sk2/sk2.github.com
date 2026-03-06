@@ -83,14 +83,14 @@ PROJECT_ALIASES = {
     "network-simulator": "Network Simulator",
     "compilation": "Network Compilation Engine",
     "topogen": "Topology Generator",
-    "ank-nte": "Topology Engine Core",
-    "ank-workbench": "Automation Workbench",
+    "ank-nte": "Network Topology Engine",
+    "ank-workbench": "Network Automation Workbench",
     "autonetkit-foundation": "Network Modeling Foundations",
     "autonetkit": "Configuration Generation (AutoNetkit)",
-    "netvis": "Visualization Engine",
+    "netvis": "Network Visualization Engine",
     "passive": "Signal Reflection Analysis",
     "signals": "Spectrum Analysis",
-    "configparsing": "Brownfield Ingestion & Analysis",
+    "configparsing": "Brownfield Ingestion",
     "soundarray": "Sound Array",
 }
 
@@ -325,6 +325,11 @@ def generate_detailed_page(project: ProjectInfo) -> str:
             dest = Path("images") / asset.name
             try: shutil.copy2(asset, dest)
             except: pass
+            # Create prefixed copy for netsim gifs (project page references netsim-*.gif)
+            if project.slug in ("netsim", "network-simulator") and asset.suffix == ".gif":
+                prefixed = Path("images") / f"netsim-{asset.name}"
+                try: shutil.copy2(asset, prefixed)
+                except: pass
             if project.hero_asset and asset.name == project.hero_asset.name:
                 continue
             img_lines.append(f"![{asset.stem}](/images/{asset.name})")

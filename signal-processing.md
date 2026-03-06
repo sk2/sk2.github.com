@@ -48,4 +48,4 @@ An ecosystem for processing biometric signals from experimental hardware to prov
 
 ---
 
-[← Back to Projects](projects)
+[← Back to Projects](projects) | [Network Automation](network-automation) | [Photography](photography) | [Data & Analytics](data-analytics) | [Autonomous Systems](agentic-systems)

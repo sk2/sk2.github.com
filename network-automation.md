@@ -6,8 +6,14 @@ layout: default
 
 A modular toolchain that takes a network design from whiteboard sketch to validated, deployable configuration. Each tool handles one stage of the lifecycle; together they form an end-to-end pipeline.
 
-**Inputs:** topology and high-level requirements (or legacy CLI configurations for brownfield).
-**Outputs:** reviewable configs, simulation results, diagrams, and audit artifacts.
+![Network Simulator running OSPF convergence](/images/netsim-basic-demo.gif)
+*OSPF convergence in the Network Simulator — one stage in the pipeline.*
+
+## Contents
+- [Pipeline](#pipeline)
+- [Core Platform](#core-platform) — Brownfield Ingestion, Modeling Library, Simulator, Visualization Engine
+- [Supporting Tools](#supporting-tools) — Topology Engine, Configuration Framework, and five more
+- [Foundations](#foundations) — Research origins and design rationale
 
 ---
 
@@ -44,52 +50,64 @@ A modular toolchain that takes a network design from whiteboard sketch to valida
             └─────────────────────────┘
 ```
 
+Code names in the diagram map to the full project names in the sections below.
+
 ---
 
-## The Tools
+## Core Platform
 
-### Ingestion & Generation
+<div class="project-grid">
+<div class="project-card">
+  <h3 class="card-title"><a href="/projects/configparsing">Brownfield Ingestion</a></h3>
+  <div class="badges-row card-badges"><span class="stack-badge">Python</span></div>
+  <p class="card-description">Extracts structured intent from legacy network configurations using LLM-powered RAG, identifying protocol relationships and topology from unstructured CLI output.</p>
+</div>
 
-**[Brownfield Ingestion](/projects/configparsing)** — Extracts structured intent from legacy multi-vendor CLI configurations using LLM-powered RAG. Produces a vendor-neutral "as-is" topology model.
+<div class="project-card">
+  <h3 class="card-title"><a href="/projects/ank-pydantic">Network Modeling Library</a></h3>
+  <div class="badges-row card-badges"><span class="stack-badge">Python</span><span class="stack-badge">Rust</span></div>
+  <p class="card-description">Type-safe Python API for defining network topologies, backed by a Rust graph engine (NTE). Composable query system with domain models for IS-IS, MPLS, EVPN.</p>
+</div>
+
+<div class="project-card">
+  <h3 class="card-title"><a href="/projects/netsim">Network Simulator</a></h3>
+  <div class="badges-row card-badges"><span class="stack-badge">Rust</span></div>
+  <p class="card-description">Deterministic, tick-based protocol simulator that validates routing configurations (OSPF, IS-IS, BGP) before deployment. Models control-plane convergence at protocol level.</p>
+</div>
+
+<div class="project-card">
+  <h3 class="card-title"><a href="/projects/netvis">Visualization Engine</a></h3>
+  <div class="badges-row card-badges"><span class="stack-badge">Rust</span><span class="stack-badge">TypeScript</span></div>
+  <p class="card-description">Layout engine for dense, multi-layer network topologies. Edge bundling, hierarchical stacking, and geographic positioning across thousands of nodes.</p>
+</div>
+</div>
+
+## Supporting Tools
 
 **[Topology Generator](/projects/topogen)** — Generates realistic topologies (Clos fabrics, WAN meshes, random graphs) in milliseconds. Rust engine with Python bindings.
 
-### Modeling
+**[Network Topology Engine](/projects/ank-nte)** — Rust graph engine (14-crate workspace, petgraph StableDiGraph) with pluggable datastores (Polars, DuckDB, Lite). Powers the modeling library.
 
-**[Network Modeling Library](/projects/ank-pydantic)** — Python DSL for type-safe modeling of nodes, edges, and protocol layers. Composable query API backed by the NTE Rust graph engine.
+**[Network Configuration Framework](/projects/ank-netcfg)** — Compiles vendor-neutral graph models into device-specific configurations (Arista EOS, Cisco IOS-XR) through a deterministic blueprint-to-template pipeline.
 
-**[Topology Engine Core (NTE)](/projects/ank-nte)** — Rust graph engine (14-crate workspace, petgraph StableDiGraph) ensuring every topological mutation is structurally sound. Pluggable datastores: Polars, DuckDB, Lite.
-
-### Configuration & Simulation
-
-**[Network Configuration Framework](/projects/ank-netcfg)** — Rust compiler transforming vendor-neutral graph models into device-specific configurations (Arista EOS, Cisco IOS-XR) through a deterministic blueprint-to-template pipeline.
-
-**[Network Simulator](/projects/netsim)** — Tick-based, deterministic protocol simulator. Runs OSPF, BGP, and IS-IS convergence assertions before deployment. Same topology, same results — every time.
-
-### Validation
+**[Device Interaction Framework](/projects/deviceinteraction)** — Deploys generated configurations to lab environments. Testbed management, CLI parsing, and state verification.
 
 **[Performance Simulator](/projects/netflowsim)** — Queueing-theoretic and Monte Carlo analysis on simulated routing tables. Identifies congestion points and blast radii under failure scenarios.
 
 **[Network Analysis Engine](/projects/netassure)** — Formal verification (Z3 theorem proving), GNN-based prediction, and failure cascade modeling across static design, simulation results, and live telemetry.
 
-**[Device Interaction Framework](/projects/deviceinteraction)** — Deploys generated configurations to lab environments. Testbed management, CLI parsing, and state verification.
-
-### Observability
-
-**[Visualization Engine](/projects/netvis)** — Rust layout engine for dense, multi-layer topologies. Edge bundling, hierarchical stacking, SVG/PDF/PNG output.
-
-**[Automation Workbench](/projects/ank-workbench)** — Unified web UI integrating the full pipeline: design, simulate, visualize, and audit from a single interface.
+**[Network Automation Workbench](/projects/ank-workbench)** — Web UI integrating the full pipeline: design, simulate, visualize, and audit from a single interface.
 
 ---
 
 ## Foundations
 
-This toolchain grew from PhD research on automated network configuration — the "Whiteboard to Build" model that compiles declarative intent into validated device configurations through formal graph transformations.
+The toolchain grew from PhD research on automated network configuration — compiling declarative intent into validated device configurations through formal graph transformations.
 
 - **[Network Modeling Foundations](/projects/autonetkit-foundation)** — Original research establishing the core abstractions.
 - **[AutoNetKit](/projects/autonetkit)** — Legacy configuration generation from the thesis-era work.
-- **[Tick-Based Determinism vs. Full Emulation](/insights/tick-based-determinism)** — Why a custom Rust protocol simulator instead of Containerlab.
+- **[Tick-Based Determinism vs. Full Emulation](/insights/tick-based-determinism)** — Why the Network Simulator uses a custom Rust tick engine instead of Containerlab.
 
 ---
 
-[← Back to Projects](projects)
+[← Back to Projects](projects) | [Signal Processing](signal-processing) | [Photography](photography) | [Data & Analytics](data-analytics) | [Autonomous Systems](agentic-systems)

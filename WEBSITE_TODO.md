@@ -1,97 +1,96 @@
 # Website TODO
 
-## Screenshots and Visual Content
+Tracked improvements for flow, readability, navigation, and polish. Items marked [DONE] have been completed.
 
-Add visual content to project pages to provide substance and demonstrate functionality:
+---
 
-### Network Engineering Projects
+## Navigation & Structure
 
-**Network Visualization Engine:**
-- [ ] Example topology visualizations (force-directed, hierarchical, radial)
-- [ ] CLI usage example with output
-- [ ] Side-by-side comparison of different layout algorithms
-- [ ] Edge bundling demonstration
+### 1. Nav/category alignment [DONE]
+Nav dropdown now has 5 categories (Network Automation, Signal Processing, Photography, Data & Analytics, Autonomous Systems) matching the sections in projects.md. Removed the separate "Architecture" nav item.
 
-**Network Modeling & Configuration Library:**
-- [ ] Code example showing type-safe topology definition
-- [ ] Query API usage examples
-- [ ] Generated configuration output samples
+### 2. Category landing page consistency
+Category landing pages vary in depth:
+- `network-automation.md`: thorough (pipeline diagram, categorized tools) [DONE - rewritten]
+- `data-analytics.md`: thorough (pipeline diagram, code examples) — still has hardcoded `<style>` and Rust code
+- `photography.md`: thorough (pipeline diagram, per-tool descriptions) — still has hardcoded `<style>`
+- `signal-processing.md`: thin (one-line descriptions, no pipeline or code)
+- `agentic-systems.md`: thin (three short paragraphs, two links)
 
-**Network Automation Workbench:**
-- [ ] Screenshot of web UI (topology editor, visualization)
-- [ ] Guided tour screenshots
-- [ ] Sample gallery view
-- [ ] Workflow demonstration (design → simulate → visualize)
+**Action:** Flesh out thin pages or fold into projects page. Remove hardcoded `<style>` blocks from data-analytics.md and photography.md.
 
-**Topology Generator:**
-- [ ] CLI usage examples (generate data center, WAN, random topologies)
-- [ ] Generated YAML topology example
-- [ ] Visualization of generated topologies
+### 3. ecosystem.md vs. network-automation.md redundancy [DONE]
+Redirected ecosystem.md to network-automation.md. Updated homepage link. Removed "Architecture" nav item.
 
-**Network Simulator:**
-- [ ] CLI output showing simulation run
-- [ ] Routing table output (`show ip route`)
-- [ ] Ping/traceroute output examples
-- [ ] JSON output sample
+---
 
-### Signal Processing Projects
+## Content & Readability
 
-**Astro:**
-- [ ] TUI screenshot (terminal interface)
-- [ ] Web UI mockup/screenshot (when available)
-- [ ] Example capture/imaging session
+### 4. Homepage "Featured Work" visual hierarchy [DONE]
+Replaced bullet list with project cards using the card grid system.
 
-**HealthyPi:**
-- [ ] Signal plots (ECG, PPG, EDA waveforms)
-- [ ] HRV analysis output
-- [ ] Virtual Patient simulator output
+### 5. Empty project cards [DONE]
+Populated all blank card descriptions in projects.md.
 
-**Spectra:**
-- [ ] Waterfall visualization concept/screenshot
-- [ ] SDR hardware photos
-- [ ] Antenna setup photos
+### 6. Category landing pages: Rust code and hardcoded styles
+Remaining work:
+- `data-analytics.md`: Rust code block (matrix-profile-rs example) and hardcoded `<style>` with `#007bff`, `#28a745`, `#ffc107`
+- `photography.md`: hardcoded `<style>` with non-theme-aware badge colors
 
-### Agent Projects
+**Action:** Replace Rust code with YAML/CLI examples or project page links. Replace `<style>` blocks with theme-aware CSS classes.
 
-**Multi-Agent Assistant:**
-- [ ] Architecture diagram
-- [ ] NATS message flow visualization
-- [ ] Security dashboard screenshot
-- [ ] Agent log output samples
+### 9. Project page bloat [DONE for netsim, netvis]
+Several project pages were 800-1800 lines of concatenated internal docs (decision tables, constraint lists, phase checklists, full YAML topology dumps). Rewrote:
+- `netsim.md`: 1849 lines → ~200 lines. Clean TOC (8 items), 11 GIF demos, protocol list, simulation output, concise status.
+- `netvis.md`: 803 lines → ~160 lines. Gallery with 9 visualization PNGs/SVGs, layout algorithm list, feature summary.
 
-**Cycle Agent:**
-- [ ] UI mockup (terrain visualization)
-- [ ] KICKR Core integration diagram
+**Remaining project pages to audit for similar bloat:**
+- [ ] `ank-pydantic.md`
+- [ ] `ank-workbench.md`
+- [ ] `ank-nte.md`
+- [ ] `ank-netcfg.md`
+- [ ] `topogen.md`
+- [ ] `deviceinteraction.md`
+- [ ] `configparsing.md`
 
-## Content Improvements
+---
 
-- [ ] Create individual project pages (projects/netvis.md, projects/ank-pydantic.md, etc.) using full product names
-- [ ] Convert projects.md to summary page with links to individual pages
-- [ ] Add "Quick Facts" boxes to each project page (year started, language, test count, status)
-- [ ] Include relevant links (GitHub, docs, papers) on each project page
-- [ ] Add "Getting Started" sections with installation/usage for active projects
+## UX & Interaction
 
-## Structure
+### 7. No "back to top" on long project pages
+**Action:** Add a floating "back to top" button (CSS + minimal JS in default.html) that appears after scrolling past the first screen.
 
-```
-projects.md              # Summary page with all projects
-projects/
-  netvis.md             # Detailed page with screenshots
-  ank-pydantic.md
-  ank-workbench.md
-  topogen.md
-  netsim.md
-  astro.md
-  healthypi.md
-  spectra.md
-  multi-agent.md
-  cycle-agent.md
-  autonetkit.md
-```
+### 8. Breadcrumb navigation duplication
+Project pages have hardcoded `[← Back to ...]` links AND the layout-based breadcrumb system. Some pages use both (double navigation), others use neither.
 
-## Update Script Enhancements
+**Action:** Standardize on the layout breadcrumb. Set `section:` in each project page's front matter, then remove inline `← Back to` links from content.
 
-- [ ] Modify update_projects.py to generate individual project pages
-- [ ] Add screenshot/image detection and inclusion
-- [ ] Generate summary page with links to detailed pages
-- [ ] Include quick stats boxes in generated pages
+---
+
+## Visual Content
+
+### Network Engineering
+- [x] Network Simulator: 11 GIF demos (basic, daemon, TUI, enterprise, chaos, self-healing, L3VPN, SR, trace, scale, assertion)
+- [x] Visualization Engine: 9 PNG/SVG gallery images (enterprise, datacenter, ISP, geographic, isometric, radial, theme, NOC, traffic)
+- [ ] Network Automation Workbench: web UI screenshots (workbench-projects.png, workbench-editor.png etc. exist but not referenced)
+- [ ] Topology Generator: CLI usage examples, generated topology visualizations
+
+### Signal Processing
+- [ ] Spectrum Analysis: waterfall visualization (spectra-waterfall.png exists but not referenced in signals.md)
+- [ ] HealthyPi: signal plots (ECG, PPG), HRV analysis output
+
+### Astrophotography
+- [ ] OpenAstro Node: TUI screenshot, web UI mockup
+- [ ] EclipseStack: alignment visualization
+
+### Autonomous Systems
+- [ ] Multi-Agent Assistant: architecture diagram, NATS message flow
+- [ ] Cycle Agent: UI mockup, KICKR Core integration diagram
+
+---
+
+## Update Script
+
+- [ ] Update `update_projects.py` to set `section:` front matter based on category
+- [ ] Remove inline back-link generation from script (breadcrumbs handled by layout)
+- [ ] Ensure `update_projects.py` category taxonomy matches new 5-category structure

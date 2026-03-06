@@ -10,7 +10,7 @@ import re
 import shutil
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Optional, Dict, List, Tuple
+from typing import Optional, Dict, List
 from datetime import datetime, timedelta
 
 @dataclass
@@ -102,13 +102,13 @@ CANONICAL_SLUG = {
 PROJECT_CONTENT_OVERRIDES = {
     "netsim": {
         "Concept": "Deterministic tick-based network protocol simulator validating configurations before production deployment. It provides protocol-level fidelity with same-topology-same-results guarantees, allowing engineers to verify control-plane behavior without the overhead of full VM emulation.\n\nUnlike packet-level simulators that focus on bit-level accuracy, this engine focuses on **protocol convergence and state validation**. It mirrors the behavior of real router operating systems, including the separation of RIB and FIB, allowing for the empirical testing of complex routing policies and failure scenarios.",
-        "Visuals": "### Basic Validation\n![Simulator Demo](/images/netsim-basic-demo.gif)\n\n### Interactive Daemon Mode\n![Daemon Demo](/images/netsim-daemon-demo.gif)\n",
+        "Visuals": "### Basic Validation\n![Simulator Demo](/images/netsim-basic-demo.gif)\n\n### Interactive Daemon Mode\n![Daemon Demo](/images/netsim-daemon-demo.gif)\n\n### Enterprise Case Study\n![Enterprise Case Study](/images/netsim-case-study-enterprise.gif)\n",
     },
     "netvis": {
         "Visuals": "### Network Visualisation Examples\n\n![Geographic WAN](/images/geographic_wan.png)\n\n![Bundled Mesh](/images/bundled_mesh.png)\n\n![Hierarchical Datacenter](/images/hierarchical_datacenter.png)\n\n![Labels Dense](/images/labels_dense.png)\n\n![Force Directed Basic](/images/force_directed_basic.png)\n"
     },
     "ank-netcfg": {
-        "Usage": "### DSL Transformation Example\n\n```rust\n// Define a transformation rule in the netcfg DSL\nlet nxos_transform = TransformationSpec {\n    name: \"nxos_lowering\".to_string(),\n    when: Some(\"device_os == 'nxos'\".to_string()),\n    rules: vec![\n        RewriteRule {\n            match_expr: \"kind == 'interface' && name.startsWith('Ethernet')\".to_string(),\n            apply: HashMap::from([\n                (\"name\".to_string(), \"name + '/1'\".to_string()),\n                (\"mtu\".to_string(), \"9216\".to_string()), // Force Jumbo frames\n            ]),\n        }\n    ],\n};\n```"
+        "Usage": "### DSL Transformation Example\n\n```yaml\n# DSL Transformation Rule\n# Applied when device_os matches 'nxos'\ntransformations:\n  - name: nxos_lowering\n    when: \"device_os == 'nxos'\"\n    rules:\n      - match: \"kind == 'interface' && name.startsWith('Ethernet')\"\n        apply:\n          name: \"name + '/1'\"\n          mtu: 9216  # Force jumbo frames\n```"
     },
     "topogen": {
         "Usage": "### Topology DSL Example\n\n```yaml\n# Example: Multi-layer POP underlay with mesh overlay\nname: multi-layer-pop-backbone\ntype: multi-layer\n\nlayers:\n  - name: physical\n    type: pop\n    count: 5\n    redundancy: n+1\n\n  - name: backbone\n    type: mesh\n    node_count: 4\n    underlay: physical\n    strategy: shortest-path\n```"
@@ -119,15 +119,15 @@ PROJECT_CONTENT_OVERRIDES = {
 }
 
 CATEGORY_MAP = {
-    "network": ("🌐 Network Engineering", "Tools for network design, simulation, and analysis.", "/network-automation"),
-    "sdr": ("📡 Radio Systems", "Radio signal analysis and spectrum monitoring.", "/signal-processing"),
-    "health": ("🏥 Health & Biometrics", "Real-time biometric signal processing.", "/agentic-systems"),
-    "astrophotography": ("🔭 Astrophotography", "Autonomous imaging and celestial monitoring.", None),
-    "photography": ("📷 Photography", "Automated camera control and monitoring.", None),
-    "agents": ("🤖 Autonomous Systems", "Secure systems for agents and infrastructure automation.", "/agentic-systems"),
-    "data": ("📊 Data & Utilities", "Geospatial analytics and time-series discovery.", "/data-analytics"),
-    "wellness": ("🧘 Wellness & Sound", "Sound analysis and wellness monitoring.", None),
-    "experimental": ("🧪 Experimental", "Exploratory projects and technical experiments.", None),
+    "network": ("Network Engineering", "Tools for network design, simulation, and analysis.", "/network-automation"),
+    "sdr": ("Radio Systems", "Radio signal analysis and spectrum monitoring.", "/signal-processing"),
+    "health": ("Health & Biometrics", "Real-time biometric signal processing.", "/agentic-systems"),
+    "astrophotography": ("Astrophotography", "Autonomous imaging and celestial monitoring.", None),
+    "photography": ("Photography", "Automated camera control and monitoring.", None),
+    "agents": ("Autonomous Systems", "Secure systems for agents and infrastructure automation.", "/agentic-systems"),
+    "data": ("Data & Utilities", "Geospatial analytics and time-series discovery.", "/data-analytics"),
+    "wellness": ("Wellness & Sound", "Sound analysis and wellness monitoring.", None),
+    "experimental": ("Experimental", "Exploratory projects and technical experiments.", None),
 }
 
 DETAILED_SECTIONS = [
@@ -189,10 +189,16 @@ def clean_text(text: str) -> str:
     text = re.sub(r"^\s*·\s*\*\*.*?\*\*\s*$", "", text, flags=re.MULTILINE)
     return text.strip()
 
+TOC_SECTIONS = {
+    "Concept", "Simulation Output", "Interactive Playground (WASM Mock Demo)",
+    "Technical Reports", "Code Samples", "Visuals", "Usage",
+    "Architecture", "Features", "Current Status", "Roadmap",
+}
+
 def generate_toc(content: str) -> str:
     headers = re.findall(r"^##\s+([^#\n]+)\s*$", content, re.MULTILINE)
-    headers = [h.strip() for h in headers if h.strip() not in ["Contents", "Quick Facts"]]
-    if len(headers) < 4: return ""
+    headers = [h.strip() for h in headers if h.strip() in TOC_SECTIONS]
+    if len(headers) < 3: return ""
     links = [f"- [{h}](#{re.sub(r'-+', '-', re.sub(r'[^a-z0-9-]', '', h.lower().replace(' ', '-')))})" for h in headers]
     return "## Contents\n\n" + "\n".join(links) + "\n\n"
 
@@ -213,6 +219,7 @@ def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
     content = project_md.read_text()
     name_match = re.search(r"^#\s+(.+)$", content, re.MULTILINE)
     project_name = name_match.group(1).strip() if name_match else project_path.name
+    project_name = re.sub(r"^(?:PROJECT:\s*|Project:\s*)", "", project_name)
     slug = project_path.name.lower().replace("_", "-").replace(" ", "-")
     slug_mappings = {"multi-agent-assistant": "multi-agent", "passive": "rf-signal-analysis", "wifi-radar": "wifi-signal-analysis", "ank_pydantic": "ank-pydantic", "ank_nte": "ank-nte", "ank_workbench": "ank-workbench", "network-simulator": "netsim", "ank_netcfg": "ank-netcfg"}
     slug = slug_mappings.get(slug, slug)
@@ -230,8 +237,8 @@ def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
     elif any(x in s for x in ["spectra", "rtltcp", "wifi-signal-analysis", "signals", "rf-signal-analysis"]): cat = "sdr"
     elif any(x in s for x in ["astro", "aurora", "eclipse", "satellites"]): cat = "astrophotography"
     elif any(x in s for x in ["agent", "multi-agent", "cycle"]): cat = "agents"
-    elif any(x in s for x in ["netflow", "polars", "tileserver", "matrix-time-series", "weather", "omnifocus-db", "cliscrape", "nascleanup", "devmon"]): cat = "data"
-    elif any(x in s for x in ["netvis", "ank", "topogen", "netsim", "autonetkit", "network", "configparsing", "nte", "orchestrator", "automationarch", "netflowsim"]): cat = "network"
+    elif any(x in s for x in ["netvis", "ank", "topogen", "netsim", "autonetkit", "network", "configparsing", "nte", "orchestrator", "automationarch", "netflowsim", "netassure", "cliscrape", "deviceinteraction"]): cat = "network"
+    elif any(x in s for x in ["polars", "tileserver", "matrix-time-series", "weather", "omnifocus-db", "nascleanup", "devmon"]): cat = "data"
     
     stack = []
     if (project_path / "Cargo.toml").exists(): stack.append("Rust")
@@ -244,7 +251,7 @@ def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
     docs_dir = project_path / "docs"
     if docs_dir.exists():
         for pdf in docs_dir.rglob("*.pdf"):
-            if any(x in pdf.name for x in ["paper.pdf", "techreport.pdf"]): docs.append(pdf)
+            if "techreport.pdf" in pdf.name: docs.append(pdf)
     for ext in ["*.png", "*.svg", "*.gif"]:
         for img in project_path.rglob(ext):
             if any(x in str(img) for x in ["node_modules", ".venv", ".pytest_cache", "target"]): continue
@@ -265,7 +272,7 @@ def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
     for search_dir in search_dirs:
         if search_dir.exists():
             for f in sorted(search_dir.rglob("*")):
-                if f.is_file() and f.suffix in [".yaml", ".py", ".rs", ".md"] and f.stat().st_size < 15000:
+                if f.is_file() and f.suffix in [".yaml", ".py", ".md"] and f.stat().st_size < 15000:
                     lang = f.suffix[1:] if f.suffix != ".md" else "markdown"
                     if lang == "rs": lang = "rust"
                     if lang == "py": lang = "python"
@@ -371,19 +378,20 @@ def generate_detailed_page(project: ProjectInfo) -> str:
 def generate_projects_index(projects: list[ProjectInfo]) -> str:
     lines = ["---", "layout: default", "---", "", "# Projects", "", "Focused on network engineering, autonomous systems, and signal processing.", "", "---", ""]
     lines.append('<div class="search-container"><input type="text" id="projectSearch" placeholder="Search projects, stack, or descriptions..." onkeyup="filterProjects()"></div>\n')
-    valid_dates = [p for p in projects if p.last_activity_date]
-    recent = sorted(valid_dates, key=lambda x: x.last_activity_date, reverse=True)[:5]
+    valid_dates = [p for p in projects if p.last_activity_date is not None]
+    recent = sorted(valid_dates, key=lambda x: x.last_activity_date or datetime.min, reverse=True)[:5]
     if recent:
         lines.append("## Recent Activity\n")
         lines.append('<ul class="recent-activity-list">')
         for p in recent:
             status_text = clean_text(p.current_status).split("—")[-1].strip()
-            lines.append(f'<li><strong>{p.last_activity_date.strftime("%Y-%m-%d")}</strong>: <a href="projects/{p.slug}">{p.name}</a> — <em>{status_text}</em></li>')
+            date_str = p.last_activity_date.strftime("%Y-%m-%d") if p.last_activity_date else ""
+            lines.append(f'<li><strong>{date_str}</strong>: <a href="projects/{p.slug}">{p.name}</a> — <em>{status_text}</em></li>')
         lines.append('</ul>\n\n---\n')
     sorted_projs = sorted(projects, key=lambda p: (list(CATEGORY_MAP.keys()).index(p.category), p.name))
     categorized = {k: [] for k in CATEGORY_MAP.keys()}
     for p in sorted_projs: categorized[p.category].append(p)
-    for cat_key, (title, desc, link) in CATEGORY_MAP.items():
+    for cat_key, (title, _desc, _link) in CATEGORY_MAP.items():
         projs = categorized[cat_key]
         if not projs: continue
         lines.append(f"## {title}\n")
@@ -396,27 +404,14 @@ def generate_projects_index(projects: list[ProjectInfo]) -> str:
                     if summary: break
             stack_html = "".join([f'<span class="stack-badge">{s}</span>' for s in p.stack])
             lines.append(f'<div class="project-card" data-search="{p.name.lower()} {summary.lower()} {" ".join(p.stack).lower()} {p.slug.lower()}">')
-            lines.append(f'  <h3 style="margin-top:0; margin-bottom: 0.5rem;"><a href="projects/{p.slug}">{p.name}</a></h3>')
-            lines.append(f'  <div class="badges-row" style="margin-bottom: 0.8rem;"><span class="status-badge status-active">{p.status_detail}</span> {stack_html}</div>')
+            lines.append(f'  <h3 class="card-title"><a href="projects/{p.slug}">{p.name}</a></h3>')
+            lines.append(f'  <div class="badges-row card-badges"><span class="status-badge status-active">{p.status_detail}</span> {stack_html}</div>')
             if p.hero_asset: lines.append(f'  <img src="../images/{p.hero_asset.name}" class="project-thumbnail" alt="{p.name} diagram" />')
-            lines.append(f'  <p style="font-size: 0.9em; margin-top: 0;">{summary}</p>')
+            lines.append(f'  <p class="card-description">{summary}</p>')
             lines.append('</div>\n')
         lines.append('</div>\n')
     lines.append("""
-<style>
-.project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
-.project-card { border: 1px solid #dee2e6; border-radius: 8px; padding: 1.2rem; background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.02); display: flex; flex-direction: column;}
-.project-thumbnail { width: 100%; height: 120px; object-fit: cover; border-radius: 4px; margin-bottom: 1rem; border: 1px solid #f1f3f5;}
-.badges-row { display: flex; gap: 0.4rem; flex-wrap: wrap; align-items: center; }
-.status-badge { padding: 0.2em 0.6em; border-radius: 4px; font-size: 0.75em; font-weight: 600; background-color: #e3f2fd; color: #495057; border: 1px solid #dee2e6; }
-.stack-badge { padding: 0.2em 0.6em; border-radius: 4px; font-size: 0.75em; font-weight: 500; background-color: #f8f9fa; color: #6c757d; border: 1px solid #e9ecef;}
-.search-container { margin-bottom: 2rem; }
-#projectSearch { width: 100%; padding: 0.8rem 1rem; border-radius: 6px; border: 1px solid #ced4da; font-size: 1rem; box-sizing: border-box; outline: none; }
-#projectSearch:focus { border-color: #80bdff; box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25); }
-.recent-activity-list { line-height: 1.6; font-size: 0.95em; }
-.recent-activity-list li { margin-bottom: 0.5rem; }
-section { margin-bottom: 2em; }
-</style>
+<!-- Styles in assets/css/main.css -->
 <script>
 function filterProjects() {
     var input, filter, cards, card, i, txtValue;

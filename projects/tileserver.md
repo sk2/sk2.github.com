@@ -3,7 +3,7 @@ layout: default
 section: projects
 ---
 
-# PROJECT: Tileserver Polars (Rust Optimized)
+# Tileserver Polars
 
 <div class="badges-row">
   <span class="status-badge status-active">Active</span>
@@ -18,7 +18,7 @@ section: projects
 
 ## Contents
 
-- [Core Value](#core-value)
+- [Concept](#concept)
 - [Vision](#vision)
 - [Constraints](#constraints)
 - [Key Decisions](#key-decisions)
@@ -31,9 +31,9 @@ section: projects
 
 ---
 
-## Core Value
+## Concept
 
-Serve dynamic vector tiles (MVT) from massive geospatial datasets (millions of points) with sub-second latency, enabling interactive visualization in Kepler.gl without pre-rendering static tilesets.
+Serves dynamic vector tiles (MVT) from massive geospatial datasets (millions of points) with sub-second latency, enabling interactive visualization in Kepler.gl without pre-rendering static tilesets.
 
 ---
 

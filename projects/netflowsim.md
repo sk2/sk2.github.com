@@ -18,8 +18,7 @@ section: network-automation
 
 ## Contents
 
-- [Code Samples](#code-samples)
-- [Core Value](#core-value)
+- [Concept](#concept)
 - [Primary Objectives](#primary-objectives)
 - [Milestones](#milestones)
 - [Current Milestone: v2.1 Performance Optimization](#current-milestone-v21-performance-optimization)
@@ -30,108 +29,6 @@ section: network-automation
 - [Key Decisions](#key-decisions)
 - [Current Status](#current-status)
 
-## Code Samples
-
-### scale_validation.rs
-
-```rust
-//! Full-scale validation runner for  empirical testing.
-//!
-//! Runs ScaleValidator at 25k, 50k, 75k, 100k node scales to validate:
-//! - Runtime < 10 minutes at 100k scale
-//! - Peak memory < 4GB at 100k scale
-//! - Throughput measurements at all scales
-//!
-//! Usage: cargo run --release --example scale_validation
-
-use netflowsim::profiling::{ScaleValidator, ScaleTestConfig};
-
-fn main() {
-    eprintln!("===  Full-Scale Validation ===");
-    eprintln!();
-    eprintln!("Running validation at 25k, 50k, 75k, 100k node scales...");
-    eprintln!("This may take 10-20 minutes depending on hardware.");
-    eprintln!();
-
-    let config = ScaleTestConfig::default(); // Uses [25k, 50k, 75k, 100k]
-
-    eprintln!("Configuration:");
-    eprintln!("  Scales: {:?}", config.scales);
-    eprintln!("  Average degree: {}", config.avg_degree);
-    eprintln!("  Iterations: {}", config.iterations);
-    eprintln!("  Flow count: {}", config.flow_count);
-    eprintln!();
-
-    match ScaleValidator::run(config) {
-        Ok(results) => {
-            eprintln!();
-            eprintln!("=== Validation Results ===");
-            eprintln!();
-            eprintln!("{:<10} {:<10} {:<15} {:<12} {:<15} {:<10}",
-                "Nodes", "Edges", "Peak Mem (MB)", "Time (s)", "Flows/sec", "Status");
-            eprintln!("{}", "-".repeat(82));
-
-            for result in &results {
-                let status = if result.passed_targets { "PASS" } else { "FAIL" };
-                eprintln!("{:<10} {:<10} {:<15.2} {:<12.2} {:<15.2e} {:<10}",
-                    result.node_count,
-                    result.edge_count,
-                    result.peak_memory_bytes as f64 / 1_000_000.0,
-                    result.wall_time_secs,
-                    result.flows_per_sec,
-                    status
-                );
-            }
-
-            eprintln!();
-            eprintln!("=== Target Analysis ===");
-            eprintln!();
-
-            // Analyze 100k results specifically
-            if let Some(result_100k) = results.iter().find(|r| r.node_count == 100_000) {
-                let runtime_pass = result_100k.wall_time_secs < 600.0;
-                let memory_pass = result_100k.peak_memory_bytes < 4_000_000_000;
-                let throughput_pass = result_100k.flows_per_sec > 1_000_000.0;
-
-                eprintln!("100k Node Results:");
-                eprintln!("  Runtime:    {:.2}s / 600s target - {}",
-                    result_100k.wall_time_secs,
-                    if runtime_pass { "✓ PASS" } else { "✗ FAIL" }
-                );
-                eprintln!("  Memory:     {:.2}GB / 4.00GB target - {}",
-                    result_100k.peak_memory_bytes as f64 / 1_000_000_000.0,
-                    if memory_pass { "✓ PASS" } else { "✗ FAIL" }
-                );
-                eprintln!("  Throughput: {:.2e} flows/sec / 1.00e6 target - {}",
-                    result_100k.flows_per_sec,
-                    if throughput_pass { "✓ PASS" } else { "✗ FAIL" }
-                );
-
-                eprintln!();
-                if runtime_pass && memory_pass {
-                    eprintln!("✓ SCALE-01 and SCALE-02 requirements SATISFIED");
-                } else {
-                    eprintln!("✗ SCALE-01 and/or SCALE-02 requirements FAILED");
-                }
-
-                if !throughput_pass {
-                    eprintln!("⚠ SCALE-03 throughput target not met (expected, requires algorithm optimization)");
-                }
-            }
-
-            std::process::exit(0);
-        }
-        Err(e) => {
-            eprintln!("ERROR: Validation failed: {}", e);
-            std::process::exit(1);
-        }
-    }
-}
-
-```
-
----
-
 ## Quick Facts
 
 | | |
@@ -140,7 +37,7 @@ fn main() {
 
 ---
 
-## Core Value
+## Concept
 
 `netflowsim` provides rapid, massive-scale network performance analysis by using analytic queuing models and Monte Carlo simulations instead of packet-level discrete event simulation. It enables network engineers to validate topologies and routing strategies against billions of flow iterations in seconds, identify bottlenecks probabilistically, test network resilience under failure scenarios, and project capacity headroom for carrier-scale networks (100k+ nodes).
 

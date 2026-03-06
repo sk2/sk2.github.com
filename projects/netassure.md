@@ -16,8 +16,7 @@ section: network-automation
 
 ## Contents
 
-- [What This Is](#what-this-is)
-- [Core Value](#core-value)
+- [Concept](#concept)
 - [Requirements](#requirements)
 - [Context](#context)
 - [Constraints](#constraints)
@@ -32,13 +31,9 @@ section: network-automation
 
 ---
 
-## What This Is
+## Concept
 
 A Graph Neural Network (GNN) based network analytics module that extends NetAssure's existing topology analysis capabilities with real-time learning and prediction. Integrates with the NTE (Network Topology Engine) to provide anomaly detection, traffic prediction, and topology learning through multiple consumption interfaces.
-
----
-
-## Core Value
 
 Enable exploration and practical application of GNN techniques on real network topology data, producing actionable insights that improve network reliability and security.
 

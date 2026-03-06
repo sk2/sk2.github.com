@@ -20,7 +20,7 @@ section: signal-processing
 
 - [Technical Reports](#technical-reports)
 - [Visuals](#visuals)
-- [Core Value](#core-value)
+- [Concept](#concept)
 - [Current Milestone: v2.0 — Central Server Integration](#current-milestone-v20-central-server-integration)
 - [Stakeholders](#stakeholders)
 - [Constraints & Assumptions](#constraints-assumptions)
@@ -61,7 +61,7 @@ section: signal-processing
 
 ---
 
-## Core Value
+## Concept
 
 Transform raw radio spectrum data into an actionable "Signal Census" through automated detection, ML classification, and distributed acquisition.
 

@@ -3,7 +3,7 @@ layout: default
 section: projects
 ---
 
-# Project: Weather (BOM ACCESS Pipeline)
+# Weather (BOM ACCESS Pipeline)
 
 <div class="badges-row">
   <span class="status-badge status-active">Last Active: 2026-02-14</span>
@@ -19,8 +19,6 @@ section: projects
 ## Contents
 
 - [Concept](#concept)
-- [Overview](#overview)
-- [Core Value](#core-value)
 - [Objectives](#objectives)
 - [Context](#context)
 - [Requirements](#requirements)
@@ -29,7 +27,7 @@ section: projects
 
 ## Concept
 
-A data engineering pipeline to fetch, process, and serve high-resolution weather model data from the Australian Bureau of Meteorology (BOM). Specifically targeting the ACCESS (Australian Community Climate and Earth-System Simulator) model outputs.
+A data engineering pipeline to fetch, process, and serve high-resolution weather model data from the Australian Bureau of Meteorology (BOM), targeting ACCESS (Australian Community Climate and Earth-System Simulator) model outputs. Bypasses BOM's FTP delivery and binary formats (GRIB2/NetCDF) to provide a clean, queryable interface (API/DuckDB) for localized weather insights, starting with South Australia.
 
 ---
 
@@ -38,18 +36,6 @@ A data engineering pipeline to fetch, process, and serve high-resolution weather
 | | |
 |---|---|
 | **Status** | Last Active: 2026-02-14 |
-
----
-
-## Overview
-
-A data engineering pipeline to fetch, process, and serve high-resolution weather model data from the Australian Bureau of Meteorology (BOM). Specifically targeting the ACCESS (Australian Community Climate and Earth-System Simulator) model outputs.
-
----
-
-## Core Value
-
-The primary goal is to bypass the complexity of BOM's FTP delivery and binary formats (GRIB2/NetCDF) to provide a clean, queryable interface (API/DuckDB) for localized weather insights, starting with South Australia.
 
 ---
 

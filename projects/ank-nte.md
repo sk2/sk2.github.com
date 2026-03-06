@@ -22,8 +22,7 @@ section: network-automation
 - [Code Samples](#code-samples)
 - [Visuals](#visuals)
 - [Architecture](#architecture)
-- [What This Is](#what-this-is)
-- [Core Value](#core-value)
+- [Concept](#concept)
 - [Tech Stack](#tech-stack)
 - [Roadmap Direction](#roadmap-direction)
 - [Requirements](#requirements)
@@ -36,7 +35,6 @@ section: network-automation
 
 ## Technical Reports
 
-- [Download Technical Report: nte-paper.pdf](/assets/docs/ank-nte-nte-paper.pdf)
 - [Download Technical Report: nte-techreport.pdf](/assets/docs/ank-nte-nte-techreport.pdf)
 
 ---
@@ -305,36 +303,6 @@ if __name__ == "__main__":
         print(f"  {title}")
         print(f"{'=' * 60}\n")
         fn()
-
-```
-
-### validate_topology.rs
-
-```rust
-use std::path::PathBuf;
-
-use anyhow::Result;
-use nte_topology::topology::Topology;
-use polars::prelude::*;
-
-fn main() -> Result<()> {
-    let archive_path = PathBuf::from("examples/topology.zip");
-
-    let mut topo = Topology::new();
-    topo.add_nodes_with_metadata(&[1], &["Router".to_string()], &["base".to_string()])?;
-
-    // The CLI adapter reads JSON properties from a `data_json` column.
-    let router_df = df! {
-        "id" => [1u32],
-        "data_json" => [r#"{\"vendor\": \"Cisco\", \"model\": \"ISR4451\"}"#]
-    }?;
-    topo.set_dataframe("Router".to_string(), router_df);
-
-    topo.save_to_archive(&archive_path)?;
-    println!("Wrote {}", archive_path.display());
-
-    Ok(())
-}
 
 ```
 
@@ -1121,15 +1089,9 @@ The key implementation constraint is that topology operations are "dual write": 
 
 ---
 
-## What This Is
+## Concept
 
-NTE (Network Topology Engine) is a Rust-based graph topology engine with Python bindings via PyO3, used as the backend for [ank_pydantic](../ank_pydantic). It provides a 14-crate Cargo workspace built on petgraph StableDiGraph with pluggable datastores (Polars, DuckDB, Lite). This project covers two milestones: first hardening the existing engine for production reliability, then evaluating LadybugDB as a potential backend replacement.
-
----
-
-## Core Value
-
-The engine must be correct and observable — mutations never silently corrupt state, errors always surface meaningful information, and operations are traceable through logging.
+NTE (Network Topology Engine) is a Rust-based graph topology engine with Python bindings via PyO3, used as the backend for [ank_pydantic](../ank_pydantic). A 14-crate Cargo workspace built on petgraph StableDiGraph with pluggable datastores (Polars, DuckDB, Lite). Mutations never silently corrupt state, errors always surface meaningful information, and operations are traceable through logging. This project covers two milestones: hardening the existing engine for production reliability, then evaluating LadybugDB as a potential backend replacement.
 
 ---
 

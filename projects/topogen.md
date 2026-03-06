@@ -27,8 +27,7 @@ section: network-automation
 - [Topology type mapping](#topology-type-mapping)
 - [Validation policy](#validation-policy)
 - [Usage](#usage)
-- [What This Is](#what-this-is)
-- [Core Value](#core-value)
+- [Concept](#concept)
 - [Current Milestone: v1.5 - Intent-Based Overlays & Schematic Enrichment](#current-milestone-v15-intent-based-overlays-schematic-enrichment)
 - [Latest Release: v1.4 Interactive Editing & Incremental Validation (shipped 2026-03-02)](#latest-release-v14-interactive-editing-incremental-validation-shipped-2026-03-02)
 - [Next Milestone Goals](#next-milestone-goals)
@@ -207,7 +206,6 @@ This interactive widget demonstrates the core generation algorithms, running loc
 ## Technical Reports
 
 - [Download Technical Report: topogen-techreport.pdf](/assets/docs/topogen-topogen-techreport.pdf)
-- [Download Technical Report: topogen-paper.pdf](/assets/docs/topogen-topogen-paper.pdf)
 
 ---
 
@@ -620,13 +618,9 @@ layers:
 
 ---
 
-## What This Is
+## Concept
 
 A Rust-based network topology generator with Python bindings that consolidates scattered topology generation logic from AutoNetKit, simulation tools, and visualization tools. Generates realistic data center, WAN, and random graph topologies with proper structure, design patterns, and realistic parameters. Outputs custom YAML format for use across the network engineering tool ecosystem.
-
----
-
-## Core Value
 
 Network engineers can quickly generate realistic, validated network topologies without implementing complex algorithms from scratch.
 

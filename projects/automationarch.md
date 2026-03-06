@@ -3,7 +3,7 @@ layout: default
 section: network-automation
 ---
 
-# PROJECT: Network Automation Ecosystem - Overall Architecture Definition
+# Network Automation Ecosystem Architecture
 
 <div class="badges-row">
   <span class="status-badge status-active">Recently Updated</span>
@@ -34,7 +34,7 @@ section: network-automation
 - [Overlay scenarios covered](#overlay-scenarios-covered)
 - [Fold rules used for overlay.view.json](#fold-rules-used-for-overlayviewjson)
 - [Review / verification](#review-verification)
-- [What This Is](#what-this-is)
+- [Concept](#concept)
 - [Why We're Doing This](#why-were-doing-this)
 - [Success Metrics](#success-metrics)
 - [Key Decisions](#key-decisions)
@@ -696,11 +696,11 @@ links:
 
 ---
 
-## What This Is
+## Concept
 
-This project aims to comprehensively define the **overall architecture of the Network Automation Ecosystem**. This involves understanding how the existing and planned tools (such as `[topogen](../topogen)`, `[autonetkit](../autonetkit)`, `[netsim](../netsim)`, `[netflowsim](../netflowsim)`, `[netvis](../netvis)`, and the `Workbench`), along with strategic initiatives like the "Intelligence Layer," integrate to form a cohesive, unified, and differentiated product.
+Defines the **overall architecture of the Network Automation Ecosystem**: how existing and planned tools ([topogen](../topogen), [autonetkit](../autonetkit), [netsim](../netsim), [netflowsim](../netflowsim), [netvis](../netvis), and the Workbench) and strategic initiatives like the Intelligence Layer integrate into a cohesive toolchain.
 
-The output of this project will be a clearer, more formalized architectural understanding, enabling the identification and discussion of future sub-projects that contribute to the ecosystem's evolution.
+The output is a formalized architectural map that identifies future sub-projects and guides the ecosystem's evolution.
 
 ---
 

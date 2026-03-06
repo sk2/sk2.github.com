@@ -16,8 +16,7 @@ section: projects
 
 ## Contents
 
-- [What This Is](#what-this-is)
-- [Core Value](#core-value)
+- [Concept](#concept)
 - [Architecture Boundary (Core SDK vs Node Runtime)](#architecture-boundary-core-sdk-vs-node-runtime)
 - [Current State](#current-state)
 - [Milestones](#milestones)
@@ -32,14 +31,10 @@ section: projects
 
 ---
 
-## What This Is
+## Concept
 
 OpenAstro Core ("Core SDK") is a high-performance Rust library providing shared astronomical logic, hardware drivers, and protocol implementations for the OpenAstro ecosystem.
 It exists to keep coordinate math, imaging intelligence, and device/protocol behavior consistent across downstream OpenAstro apps.
-
----
-
-## Core Value
 
 Downstream apps can rely on correct, consistent coordinate math, imaging intelligence, and device/protocol primitives.
 

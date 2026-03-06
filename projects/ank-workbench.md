@@ -20,8 +20,7 @@ section: network-automation
 
 - [Technical Reports](#technical-reports)
 - [Current Status](#current-status)
-- [What This Is](#what-this-is)
-- [Core Value](#core-value)
+- [Concept](#concept)
 - [Screenshots](#screenshots)
 - [Current Milestone: Ecosystem Maintenance & Operations](#current-milestone-ecosystem-maintenance-operations)
 - [What We've Built](#what-weve-built)
@@ -34,7 +33,6 @@ section: network-automation
 
 ## Technical Reports
 
-- [Download Technical Report: paper.pdf](/assets/docs/ank-workbench-paper.pdf)
 - [Download Technical Report: techreport.pdf](/assets/docs/ank-workbench-techreport.pdf)
 
 ---
@@ -54,13 +52,10 @@ section: network-automation
 
 ---
 
-## What This Is
+## Concept
 
-**An orchestration platform** that integrates the ANK ecosystem tools (TopoGen, [ank_pydantic](../ank_pydantic), Network Simulator, NetVis) into one seamless workflow.
+Orchestration platform that integrates the ANK ecosystem tools (TopoGen, [ank_pydantic](../ank_pydantic), Network Simulator, NetVis) into a unified workflow. Engineers generate topologies, model networks declaratively, run simulations, and visualize results from a single web interface.
 
-ANK Workbench is the **glue layer** that coordinates the entire network automation pipeline. Engineers can generate topologies, model networks declaratively, run lightweight simulations, and visualize results—all from a unified web interface. No more context switching between separate tools or manually stitching components together.
-
-**The Integration Vision:**
 ```
 ┌──────────────────────────────────────────────────────────────────┐
 │                        ANK Workbench                             │
@@ -70,14 +65,7 @@ ANK Workbench is the **glue layer** that coordinates the entire network automati
 └───┴──────────────┴──────────────┴──────────────┴──────────────┴─┘
 ```
 
-**Workflow:** Generate/model topology → Run simulation → Visualize results → Export configs
-**Value:** Complete pipeline in one interface, no tool-switching or manual integration
-
----
-
-## Core Value
-
-Network engineers can design, validate, and visualize network changes in one complete workflow without switching between separate tools or manually gluing components together.
+**Workflow:** Generate/model topology, run simulation, visualize results, export configs.
 
 ---
 
@@ -163,7 +151,7 @@ Integrated dynamic performance analysis and multi-host scaling capabilities, all
 **Delivered:** March 4, 2026 | **Phases:** 4 (77-80)
 
 Pivoted towards the `[automationarch](../automationarch)` ecosystem architecture by introducing standard YAML manifests, external provider imports, and actionable dissonance remediation:
-- **NetAuto Manifest Persistence:** Seamlessly save/open project state via `netauto.project` YAML files instead of pure SQLite.
+- **NetAuto Manifest Persistence:** Save/open project state via `netauto.project` YAML files instead of pure SQLite.
 - **External Provider Import:** Bootstrap topologies directly from external Git or NetBox sources.
 - **Dissonance Remediation Generation:** Generated atomic CLI configuration snippets for Reality vs. Model mismatches.
 - **Automated Remediation Application:** Implemented "Push Fix" functionality directly in the Dissonance and LiveConfig panels.

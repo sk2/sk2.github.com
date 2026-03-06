@@ -16,9 +16,8 @@ section: projects
 
 ## Contents
 
-- [What This Is](#what-this-is)
+- [Concept](#concept)
 - [Why We're Building It](#why-were-building-it)
-- [Core Value](#core-value)
 - [Current Milestone: v2.0 - Advanced Forecasting System](#current-milestone-v20-advanced-forecasting-system)
 - [Key Decisions](#key-decisions)
 - [Requirements](#requirements)
@@ -32,21 +31,17 @@ section: projects
 
 ---
 
-## What This Is
+## Concept
 
 A specialized tool for Australian aurora observers that solves the "should I drive 60 minutes?" problem. It combines real-time solar wind data (NOAA), substorm trigger logic (Bz/HP trends), and local weather (ACCESS-G model) to provide actionable advice.
+
+Providing a single, definitive "Go/No-Go" score that accounts for both space weather potential and local terrestrial conditions (travel time, clouds, moon).
 
 ---
 
 ## Why We're Building It
 
 Existing tools like the Glendale app are powerful but difficult to use, and many sources lack the localized Australian context and travel-time "trade-off" logic required for confident planning. This tool aims to maximize observation success by providing a clear, advice-driven indicator of when to leave for a site.
-
----
-
-## Core Value
-
-Providing a single, definitive "Go/No-Go" score that accounts for both space weather potential and local terrestrial conditions (travel time, clouds, moon).
 
 ---
 

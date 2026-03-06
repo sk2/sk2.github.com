@@ -3,7 +3,7 @@ layout: default
 section: projects
 ---
 
-# Project: NAS Cleanup & Intelligence
+# NAS Cleanup & Intelligence
 
 <div class="badges-row">
   <span class="status-badge status-active">Recently Updated</span>
@@ -42,9 +42,9 @@ section: projects
 
 ---
 
-## Goal
+## Concept
 
-Develop a high-performance Rust application to manage large-scale Synology NAS file systems, focusing on duplicate detection, astrophotography optimization, conventional RAW photography management, and intelligent organization.
+Rust CLI for managing large-scale Synology NAS file systems: duplicate detection, astrophotography optimization, conventional RAW photography management, and intelligent organization.
 
 ---
 

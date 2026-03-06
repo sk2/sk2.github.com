@@ -16,8 +16,7 @@ section: projects
 
 ## Contents
 
-- [What This Is](#what-this-is)
-- [Core Value](#core-value)
+- [Concept](#concept)
 - [Stakeholders](#stakeholders)
 - [Context](#context)
 - [Requirements](#requirements)
@@ -31,13 +30,9 @@ section: projects
 
 ---
 
-## What This Is
+## Concept
 
 An exploration-focused audio processing system using Raspberry Pi and microphone arrays. It focuses on spatial audio (ToA, beamforming) and classification (vehicles, wildlife) using an "analyst" agent approach.
-
----
-
-## Core Value
 
 The ability to capture, localize, and classify complex soundscapes on edge devices or via remote streaming, providing structured insights to an agent framework.
 

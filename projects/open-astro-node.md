@@ -35,7 +35,7 @@ A headless, autonomous astrophotography controller designed for low-power Linux 
 
 ---
 
-## Overview
+## Concept
 
 A headless, autonomous astrophotography controller designed for low-power Linux devices (RPi/Jetson). It manages hardware, executes imaging sequences, and ensures rig safety.
 

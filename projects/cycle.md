@@ -3,7 +3,7 @@ layout: default
 section: agentic-systems
 ---
 
-# Project: Cycle Agent
+# Cycle Agent
 
 <div class="badges-row">
   <span class="status-badge status-active">Recently Updated</span>
@@ -18,7 +18,7 @@ section: agentic-systems
 
 ## Contents
 
-- [Core Value](#core-value)
+- [Concept](#concept)
 - [Target Audience](#target-audience)
 - [Success Criteria](#success-criteria)
 - [Constraints](#constraints)
@@ -32,9 +32,9 @@ section: agentic-systems
 
 ---
 
-## Core Value
+## Concept
 
-A native SwiftUI training application for iPad and Apple TV that bridges professional cycling hardware (KICKR Core) with dynamic AI-driven workout logic via NATS, visualized in a high-performance SceneKit environment.
+A native SwiftUI training application for iPad and Apple TV that bridges professional cycling hardware (KICKR Core) with dynamic AI-driven workout logic via NATS, visualized in a SceneKit environment.
 
 ---
 

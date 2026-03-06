@@ -18,7 +18,7 @@ section: agentic-systems
 
 ## Contents
 
-- [Core Value](#core-value)
+- [Concept](#concept)
 - [Vision](#vision)
 - [Constraints](#constraints)
 - [Target Outcomes](#target-outcomes)
@@ -33,7 +33,7 @@ section: agentic-systems
 
 ---
 
-## Core Value
+## Concept
 
 A modular, agent-aware health monitoring ecosystem that translates raw biometric data from HealthyPi hardware (6 and Move) into actionable insights and automated interventions.
 
@@ -63,7 +63,7 @@ To bridge the gap between high-fidelity biometric hardware and daily health mana
 - Standardized data models for multi-modal biometrics.
 - A "Virtual Patient" for hardware-free development.
 - Agentic tools for real-time health coaching.
-- Seamless visualization across desktop and mobile.
+- Unified visualization across desktop and mobile.
 
 ---
 

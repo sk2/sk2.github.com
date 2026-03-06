@@ -21,10 +21,9 @@ section: network-automation
 - [Technical Reports](#technical-reports)
 - [Code Samples](#code-samples)
 - [Usage](#usage)
-- [What This Is](#what-this-is)
+- [Concept](#concept)
 - [Current Milestone: v2.1 Protocol Library & Security Policy DSL](#current-milestone-v21-protocol-library-security-policy-dsl)
 - [Current State (v1.2 Front & Back Ends — shipped)](#current-state-v12-front-back-ends-shipped)
-- [Core Value](#core-value)
 - [Requirements](#requirements)
 - [Key Decisions](#key-decisions)
 - [Constraints](#constraints)
@@ -32,7 +31,6 @@ section: network-automation
 ## Technical Reports
 
 - [Download Technical Report: netcfg-techreport.pdf](/assets/docs/ank-netcfg-netcfg-techreport.pdf)
-- [Download Technical Report: netcfg-paper.pdf](/assets/docs/ank-netcfg-netcfg-paper.pdf)
 
 ---
 
@@ -215,52 +213,6 @@ rules:
               - prefix: "10.255.0.0/24"
                 action: "permit"
                 le: 32
-
-```
-
-### generate_fabric_topo.rs
-
-```rust
-use nte_topology::Topology;
-use serde_json::json;
-use std::path::Path;
-
-fn main() {
-    let mut topo = Topology::new();
-    
-    // 2 Spines (1, 2), 2 Leaves (3, 4)
-    let ids = vec![1u32, 2u32, 3u32, 4u32];
-    let types = vec!["Router".to_string(); 4];
-    let layers = vec!["input".to_string(); 4];
-    
-    topo.add_nodes_with_metadata(&ids, &types, &layers).expect("Add nodes");
-    
-    use polars::prelude::{Column, DataFrame, NamedFrom, Series};
-    // Include 'layer' column in the type-specific DataFrame as well, 
-    // as some versions of the engine may expect it to be present here to reconstruct global state.
-    let df = DataFrame::new(vec![
-        Column::from(Series::new("id".into(), ids)),
-        Column::from(Series::new("layer".into(), layers)),
-        Column::from(Series::new(
-            "data_json".into(),
-            vec![
-                json!({"hostname":"spine1", "device_os": "nxos", "role": "spine"}).to_string(),
-                json!({"hostname":"spine2", "device_os": "nxos", "role": "spine"}).to_string(),
-                json!({"hostname":"leaf1", "device_os": "eos", "role": "leaf"}).to_string(),
-                json!({"hostname":"leaf2", "device_os": "eos", "role": "leaf"}).to_string(),
-            ],
-        )),
-    ])
-    .unwrap();
-    topo.set_dataframe("Router".to_string(), df);
-
-    // spine1 -> leaf1, leaf2
-    // spine2 -> leaf1, leaf2
-    topo.add_edges(&[1, 1, 2, 2], &[3, 4, 3, 4]).expect("Add edges");
-
-    topo.save_to_archive(Path::new("fabric_topo.nte")).expect("Save");
-    println!("fabric_topo.nte created successfully.");
-}
 
 ```
 
@@ -480,210 +432,6 @@ assertions:
 
 ```
 
-### advanced_primitive_tests.rs
-
-```rust
-use nte_topology::Topology;
-use netcfg_core::dsl::schema::{
-    Primitive, BuildPrefixListSpec, BuildCommunityListSpec
-};
-use netcfg_core::primitives::vxlan::{BuildVxlanSpec, BuildEvpnSpec};
-use netcfg_core::models::stanza::{PrefixListEntry, CommunityListEntry};
-use netcfg_core::primitives::{PrimitiveContext, PrimitiveRunner};
-use ipnet::IpNet;
-use std::str::FromStr;
-
-fn setup_topo() -> Topology {
-    let mut topo = Topology::new();
-    topo.add_nodes_with_metadata(
-        &[1],
-        &["Router".to_string()],
-        &["input".to_string()],
-    )
-    .unwrap();
-    topo
-}
-
-#[test]
-fn test_build_prefix_list() {
-    let mut topo = setup_topo();
-    let mut ctx = PrimitiveContext::new(&mut topo, "input");
-
-    let spec = Primitive::BuildPrefixList(BuildPrefixListSpec {
-        selector: "nodes[true]".to_string(),
-        name: "PL-TEST".to_string(),
-        entries: vec![
-            PrefixListEntry {
-                prefix: IpNet::from_str("10.0.0.0/8").unwrap(),
-                action: "permit".to_string(),
-                le: Some(32),
-                ge: None,
-            }
-        ],
-    });
-
-    spec.execute(&mut ctx).expect("executed");
-    
-    let dev_ctx = ctx.get_device_context("Router", 1).unwrap();
-    assert_eq!(dev_ctx.stanzas.len(), 1);
-    assert_eq!(dev_ctx.stanzas[0].kind, "prefix_list");
-    assert_eq!(dev_ctx.stanzas[0].key, Some("PL-TEST".to_string()));
-}
-
-#[test]
-fn test_build_community_list() {
-    let mut topo = setup_topo();
-    let mut ctx = PrimitiveContext::new(&mut topo, "input");
-
-    let spec = Primitive::BuildCommunityList(BuildCommunityListSpec {
-        selector: "nodes[true]".to_string(),
-        name: "CL-TEST".to_string(),
-        entries: vec![
-            CommunityListEntry {
-                community: "65000:100".to_string(),
-                action: "permit".to_string(),
-            }
-        ],
-    });
-
-    spec.execute(&mut ctx).expect("executed");
-    
-    let dev_ctx = ctx.get_device_context("Router", 1).unwrap();
-    assert_eq!(dev_ctx.stanzas.len(), 1);
-    assert_eq!(dev_ctx.stanzas[0].kind, "community_list");
-}
-
-#[test]
-fn test_build_vxlan() {
-    let mut topo = setup_topo();
-    let mut ctx = PrimitiveContext::new(&mut topo, "input");
-
-    let spec = Primitive::BuildVxlan(BuildVxlanSpec {
-        selector: "nodes[true]".to_string(),
-        vni_base: 10000,
-        mcast_group_base: Some("239.1.1.1".to_string()),
-    });
-
-    spec.execute(&mut ctx).expect("executed");
-    
-    let dev_ctx = ctx.get_device_context("Router", 1).unwrap();
-    let vxlan_stanza = dev_ctx.stanzas.iter().find(|s| s.kind == "vxlan_vtep").unwrap();
-    assert_eq!(vxlan_stanza.fields.get("vni").unwrap().as_u64().unwrap(), 10000);
-}
-
-#[test]
-fn test_build_evpn() {
-    let mut topo = setup_topo();
-    let mut ctx = PrimitiveContext::new(&mut topo, "input");
-
-    let spec = Primitive::BuildEvpn(BuildEvpnSpec {
-        selector: "nodes[true]".to_string(),
-        route_distinguisher_base: "65000:1".to_string(),
-        route_target_base: "65000:1".to_string(),
-    });
-
-    spec.execute(&mut ctx).expect("executed");
-    
-    let dev_ctx = ctx.get_device_context("Router", 1).unwrap();
-    let evpn_stanza = dev_ctx.stanzas.iter().find(|s| s.kind == "evpn_instance").unwrap();
-    assert_eq!(evpn_stanza.fields.get("rd").unwrap().as_str().unwrap(), "65000:1");
-}
-
-```
-
-### diff_tests.rs
-
-```rust
-use nte_topology::Topology;
-
-use netcfg_core::diff::{Change, DiffEngine, PlanRenderer};
-
-#[test]
-fn test_diff_engine_add_remove_update() {
-    let mut current = Topology::new();
-    // Add 1 node in current
-    current
-        .add_nodes_with_metadata(&[1], &["Router".to_string()], &["physical".to_string()])
-        .unwrap();
-
-    let mut desired = Topology::new();
-    // Add node 2 in desired
-    desired
-        .add_nodes_with_metadata(&[2], &["Router".to_string()], &["physical".to_string()])
-        .unwrap();
-
-    // Compute diff
-    let plan = DiffEngine::compute_plan(&current, &desired).expect("diff failed");
-
-    // We expect:
-    // - Add node 2
-    // - Remove node 1
-    let stats = plan.statistics();
-    assert_eq!(stats.nodes_added, 1);
-    assert_eq!(stats.nodes_updated, 0);
-    assert_eq!(stats.nodes_removed, 1);
-
-    // Check specific changes
-    let mut found_add = false;
-    let mut found_remove = false;
-
-    for change in &plan.changes {
-        match change {
-            Change::AddNode { id, node_type, .. } => {
-                assert_eq!(*id, 2);
-                assert_eq!(node_type, "Router");
-                found_add = true;
-            }
-            Change::RemoveNode { id, .. } => {
-                assert_eq!(*id, 1);
-                found_remove = true;
-            }
-            _ => {}
-        }
-    }
-
-    assert!(found_add, "Add node 2 not found");
-    assert!(found_remove, "Remove node 1 not found");
-
-    // Test reverse direction (should flip add/remove)
-    let rev_plan = DiffEngine::compute_plan(&desired, &current).expect("reverse diff failed");
-    let rev_stats = rev_plan.statistics();
-    assert_eq!(rev_stats.nodes_added, 1);
-    assert_eq!(rev_stats.nodes_removed, 1);
-    assert_eq!(rev_stats.nodes_updated, 0);
-
-    // Test renderer output
-    let text = PlanRenderer::render_verbose(&plan);
-    assert!(text.contains("Nodes: +1 -1 ~0"));
-    assert!(text.contains("+ Node 2 [Router]"));
-    assert!(text.contains("- Node 1 [Router]"));
-}
-
-#[test]
-fn test_diff_engine_stable_output() {
-    let mut current = Topology::new();
-    let mut desired = Topology::new();
-
-    current
-        .add_nodes_with_metadata(&[1], &["Router".to_string()], &["physical".to_string()])
-        .unwrap();
-    desired
-        .add_nodes_with_metadata(&[1], &["Router".to_string()], &["physical".to_string()])
-        .unwrap();
-
-    let plan1 = DiffEngine::compute_plan(&current, &desired).unwrap();
-    let plan2 = DiffEngine::compute_plan(&current, &desired).unwrap();
-
-    assert_eq!(plan1, plan2);
-    assert_eq!(plan1.statistics().additions(), 0);
-    assert_eq!(plan1.statistics().changes(), 0);
-    assert_eq!(plan1.statistics().removals(), 0);
-
-    let text = PlanRenderer::render_text(&plan1);
-    assert!(text.contains("No changes detected"));
-}
-
-```
 
 ---
 
@@ -691,21 +439,17 @@ fn test_diff_engine_stable_output() {
 
 ### DSL Transformation Example
 
-```rust
-// Define a transformation rule in the netcfg DSL
-let nxos_transform = TransformationSpec {
-    name: "nxos_lowering".to_string(),
-    when: Some("device_os == 'nxos'".to_string()),
-    rules: vec![
-        RewriteRule {
-            match_expr: "kind == 'interface' && name.startsWith('Ethernet')".to_string(),
-            apply: HashMap::from([
-                ("name".to_string(), "name + '/1'".to_string()),
-                ("mtu".to_string(), "9216".to_string()), // Force Jumbo frames
-            ]),
-        }
-    ],
-};
+```yaml
+# DSL Transformation Rule
+# Applied when device_os matches 'nxos'
+transformations:
+  - name: nxos_lowering
+    when: "device_os == 'nxos'"
+    rules:
+      - match: "kind == 'interface' && name.startsWith('Ethernet')"
+        apply:
+          name: "name + '/1'"
+          mtu: 9216  # Force jumbo frames
 ```
 
 ---
@@ -718,9 +462,9 @@ let nxos_transform = TransformationSpec {
 
 ---
 
-## What This Is
+## Concept
 
-Deterministic, auditable, CI/CD-friendly Rust CLI for compiling declarative YAML network blueprints into vendor-neutral configuration artifacts. The `netcfg` binary orchestrates: blueprint parsing → topology transformation → DeviceIR generation → template rendering → traceable config file emission.
+Deterministic, auditable, CI/CD-friendly Rust CLI that compiles declarative YAML network blueprints into vendor-neutral configuration artifacts. The `netcfg` binary orchestrates: blueprint parsing, topology transformation, DeviceIR generation, template rendering, and traceable config file emission.
 
 ---
 
@@ -750,12 +494,6 @@ The front and back ends of the compiler are fully functional end-to-end:
 - Path dependency on `[ank_nte](../ank_nte)` prevents standalone crate publication
 - Benchmarks for large topologies (10,000+ nodes) are missing
 - `edge_properties` in `mesh_nodes` remains deferred
-
----
-
-## Core Value
-
-Single-binary network compiler: design, transform, and generate configs from YAML blueprints without Python.
 
 ---
 

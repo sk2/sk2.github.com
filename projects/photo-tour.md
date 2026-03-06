@@ -16,8 +16,7 @@ section: projects
 
 ## Contents
 
-- [What This Is](#what-this-is)
-- [Core Value](#core-value)
+- [Concept](#concept)
 - [Current Milestone: v0.1 Interactive Foundation](#current-milestone-v01-interactive-foundation)
 - [Requirements](#requirements)
 - [Context](#context)
@@ -32,14 +31,10 @@ section: projects
 
 ---
 
-## What This Is
+## Concept
 
 Photo Tour is a smart, interactive photography assistant designed for field use.
 It helps you compose shots, automate repeatable workflows, and progressively adds intelligent triggering and transition logic.
-
----
-
-## Core Value
 
 In the field, you can see what the camera sees and get actionable guidance/control fast enough to improve the shot.
 

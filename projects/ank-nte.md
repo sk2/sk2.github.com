@@ -21,7 +21,6 @@ section: network-automation
 - [Concept](#concept)
 - [Technical Reports](#technical-reports)
 - [Code Samples](#code-samples)
-- [Visuals](#visuals)
 - [Usage](#usage)
 - [Architecture](#architecture)
 - [Current Status](#current-status)
@@ -1184,22 +1183,6 @@ def test_extreme_id_fragmentation():
         pass
 
 ```
-
----
-
-## Visuals
-
-![5_10](/images/5_10.png)
-
-![5_8](/images/5_8.png)
-
-![5_9](/images/5_9.png)
-
-![5_10](/images/5_10.png)
-
-![5_8](/images/5_8.png)
-
-![5_9](/images/5_9.png)
 
 ---
 

@@ -254,7 +254,8 @@ def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
             if "techreport.pdf" in pdf.name: docs.append(pdf)
     for ext in ["*.png", "*.svg", "*.gif"]:
         for img in project_path.rglob(ext):
-            if any(x in str(img) for x in ["node_modules", ".venv", ".pytest_cache", "target"]): continue
+            if any(x in str(img) for x in ["node_modules", ".venv", ".pytest_cache", "target", "implementations"]): continue
+            if re.match(r"^\d+[_\d]*\.", img.name): continue  # Skip numbered thesis figures
             if img.parent.name in ["figures", "images", "visuals"] or any(x in img.name for x in ["diagram", "example", "hero", "demo"]): 
                 assets.append(img)
                 if not hero_asset and ("hero" in img.name or "architecture" in img.name):

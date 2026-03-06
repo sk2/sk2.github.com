@@ -10,9 +10,9 @@ section: data-analytics
   <span class="stack-badge">Python</span> <span class="stack-badge">TypeScript</span>
 </div>
 
-[← Back to Data Analytics](../data-analytics)
+[← Back to Data Analytics](/data-analytics)
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)
 
 ---
 
@@ -115,6 +115,6 @@ A Python-based CLI that bypasses slow AppleScript/TypeScript layers to read dire
 
 ---
 
-[← Back to Data Analytics](../data-analytics)
+[← Back to Data Analytics](/data-analytics)
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)

@@ -10,9 +10,9 @@ section: agentic-systems
   <span class="stack-badge">Python</span>
 </div>
 
-[← Back to Autonomous Systems](../agentic-systems)
+[← Back to Autonomous Systems](/agentic-systems)
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)
 
 ---
 
@@ -111,6 +111,6 @@ To bridge the gap between high-fidelity biometric hardware and daily health mana
 
 ---
 
-[← Back to Autonomous Systems](../agentic-systems)
+[← Back to Autonomous Systems](/agentic-systems)
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)

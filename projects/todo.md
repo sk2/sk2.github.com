@@ -10,7 +10,7 @@ section: projects
   <span class="stack-badge">Rust</span>
 </div>
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)
 
 ---
 
@@ -135,4 +135,4 @@ Process an inbox full of captures into correctly-organized next actions (project
 
 ---
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)

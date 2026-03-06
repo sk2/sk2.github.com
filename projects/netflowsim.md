@@ -10,9 +10,9 @@ section: network-automation
   <span class="stack-badge">Rust</span>
 </div>
 
-[← Back to Network Automation](../network-automation)
+[← Back to Network Automation](/network-automation)
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)
 
 ---
 
@@ -318,6 +318,6 @@ This project is part of a seven-tool network automation ecosystem. netflowsim pr
 
 ---
 
-[← Back to Network Automation](../network-automation)
+[← Back to Network Automation](/network-automation)
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)

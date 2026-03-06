@@ -10,9 +10,9 @@ section: network-automation
   <span class="stack-badge">Python</span> <span class="stack-badge">TypeScript</span>
 </div>
 
-[← Back to Network Automation](../network-automation)
+[← Back to Network Automation](/network-automation)
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)
 
 ---
 
@@ -39,12 +39,6 @@ Orchestration platform that integrates the ANK ecosystem tools — [Topology Gen
 ```
 
 The workflow follows a linear pipeline: generate or model a topology, run a simulation against it, visualize the results, and export device configurations. Each stage delegates to a specialized tool; the workbench coordinates the handoffs and presents a unified project context across all stages.
-
----
-
-## Technical Reports
-
-- [Download Technical Report: techreport.pdf](/assets/docs/ank-workbench-techreport.pdf)
 
 ---
 
@@ -514,8 +508,14 @@ This project is part of a seven-tool network automation ecosystem. The workbench
 
 2026-03-04 — Completed v4.2 UX Polish & Accessibility milestone.
 
+
+## Technical Reports
+
+- [Download Technical Report: techreport.pdf](/assets/docs/ank-workbench-techreport.pdf)
+
+
 ---
 
-[← Back to Network Automation](../network-automation)
+[← Back to Network Automation](/network-automation)
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)

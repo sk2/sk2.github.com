@@ -10,9 +10,9 @@ section: signal-processing
   <span class="stack-badge">Python</span>
 </div>
 
-[← Back to Signal Processing](../signal-processing)
+[← Back to Signal Processing](/signal-processing)
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)
 
 ---
 
@@ -83,6 +83,6 @@ Edge Pi (SDR) → SpyServer/rtl_tcp → Mac mini Core
 
 ---
 
-[← Back to Signal Processing](../signal-processing)
+[← Back to Signal Processing](/signal-processing)
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)

@@ -10,7 +10,7 @@ section: photography
 
 </div>
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)
 
 ---
 
@@ -99,4 +99,4 @@ Provides precise, automated control over exposure and focus specifically optimiz
 
 ---
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)

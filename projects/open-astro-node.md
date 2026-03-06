@@ -10,7 +10,7 @@ section: photography
   <span class="stack-badge">Rust</span> <span class="stack-badge">TypeScript</span>
 </div>
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)
 
 ---
 
@@ -62,4 +62,4 @@ A headless, autonomous astrophotography controller designed for low-power Linux 
 
 ---
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)

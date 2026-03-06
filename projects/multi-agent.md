@@ -10,9 +10,9 @@ section: agentic-systems
   <span class="stack-badge">Python</span>
 </div>
 
-[← Back to Autonomous Systems](../agentic-systems)
+[← Back to Autonomous Systems](/agentic-systems)
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)
 
 ---
 
@@ -167,6 +167,6 @@ These establish proven patterns for air-gapped agents, defense-in-depth isolatio
 
 ---
 
-[← Back to Autonomous Systems](../agentic-systems)
+[← Back to Autonomous Systems](/agentic-systems)
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)

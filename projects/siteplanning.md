@@ -9,7 +9,7 @@ layout: default
   <span class="stack-badge">TypeScript</span> <span class="stack-badge">React</span>
 </div>
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)
 
 ---
 
@@ -41,4 +41,4 @@ Key modules:
 
 ---
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)

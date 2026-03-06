@@ -10,9 +10,9 @@ section: data-analytics
   <span class="stack-badge">Python</span> <span class="stack-badge">Polars</span>
 </div>
 
-[← Back to Data Analytics](../data-analytics)
+[← Back to Data Analytics](/data-analytics)
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)
 
 ---
 
@@ -121,6 +121,6 @@ The primary goal is to bypass the complexity of BOM's FTP delivery and binary fo
 
 ---
 
-[← Back to Data Analytics](../data-analytics)
+[← Back to Data Analytics](/data-analytics)
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)

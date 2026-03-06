@@ -10,9 +10,9 @@ section: data-analytics
   <span class="stack-badge">Rust</span> <span class="stack-badge">Polars</span>
 </div>
 
-[← Back to Data Analytics](../data-analytics)
+[← Back to Data Analytics](/data-analytics)
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)
 
 ---
 
@@ -325,6 +325,6 @@ None yet — v1.0 is initial release. Expecting feedback on:
 
 ---
 
-[← Back to Data Analytics](../data-analytics)
+[← Back to Data Analytics](/data-analytics)
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)

@@ -10,9 +10,9 @@ section: network-automation
   <span class="stack-badge">Rust</span>
 </div>
 
-[← Back to Network Automation](../network-automation)
+[← Back to Network Automation](/network-automation)
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)
 
 ---
 
@@ -66,6 +66,6 @@ The engine is built on a custom regex-based state machine implemented in Rust. I
 
 ---
 
-[← Back to Network Automation](../network-automation)
+[← Back to Network Automation](/network-automation)
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)

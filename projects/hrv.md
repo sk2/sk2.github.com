@@ -10,9 +10,9 @@ section: agentic-systems
   <span class="stack-badge">Rust</span>
 </div>
 
-[← Back to Autonomous Systems](../agentic-systems)
+[← Back to Autonomous Systems](/agentic-systems)
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)
 
 ---
 
@@ -32,6 +32,6 @@ Rust TUI application for real-time heart rate variability monitoring. Connects t
 
 ---
 
-[← Back to Autonomous Systems](../agentic-systems)
+[← Back to Autonomous Systems](/agentic-systems)
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)

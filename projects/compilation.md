@@ -7,9 +7,9 @@ section: network-automation
 
 <span class="status-badge status-active">Active</span>
 
-[← Back to Network Automation](../network-automation)
+[← Back to Network Automation](/network-automation)
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)
 
 ---
 
@@ -28,6 +28,6 @@ A Rust-based configuration compiler that treats network design as source code. I
 
 ---
 
-[← Back to Network Automation](../network-automation)
+[← Back to Network Automation](/network-automation)
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)

@@ -10,9 +10,9 @@ section: network-automation
 
 </div>
 
-[← Back to Network Automation](../network-automation)
+[← Back to Network Automation](/network-automation)
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)
 
 ---
 
@@ -28,12 +28,6 @@ section: network-automation
 This project defines the architecture of the Network Automation Ecosystem: how its tools connect, what data flows between them, and where the system is headed.
 
 The ecosystem comprises nine repositories that form a composable toolchain. Each tool handles one concern -- topology generation, simulation, configuration parsing, visualization, analysis -- and communicates through pinned contract schemas (RFC-01, RFC-02). The architecture document formalizes these relationships and identifies future sub-projects.
-
----
-
-## Technical Reports
-
-- [Download Technical Report: ecosystem-techreport.pdf](/assets/docs/automationarch-ecosystem-techreport.pdf)
 
 ---
 
@@ -850,8 +844,14 @@ This project directly supports the strategic vision outlined in `STRATEGY.md` an
 
 2026-03-01 — v3.0 roadmap created with phases 18-22
 
+
+## Technical Reports
+
+- [Download Technical Report: ecosystem-techreport.pdf](/assets/docs/automationarch-ecosystem-techreport.pdf)
+
+
 ---
 
-[← Back to Network Automation](../network-automation)
+[← Back to Network Automation](/network-automation)
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)

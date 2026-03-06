@@ -10,9 +10,9 @@ section: signal-processing
   <span class="stack-badge">Rust</span>
 </div>
 
-[← Back to Signal Processing](../signal-processing)
+[← Back to Signal Processing](/signal-processing)
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)
 
 ---
 
@@ -130,6 +130,6 @@ The ability to reliably and efficiently stream high-fidelity IQ data from multip
 
 ---
 
-[← Back to Signal Processing](../signal-processing)
+[← Back to Signal Processing](/signal-processing)
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)

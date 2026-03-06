@@ -10,9 +10,9 @@ section: data-analytics
   <span class="stack-badge">Rust</span>
 </div>
 
-[← Back to Data Analytics](../data-analytics)
+[← Back to Data Analytics](/data-analytics)
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)
 
 ---
 
@@ -76,6 +76,6 @@ Develop a high-performance Rust application to manage large-scale Synology NAS f
 
 ---
 
-[← Back to Data Analytics](../data-analytics)
+[← Back to Data Analytics](/data-analytics)
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)

@@ -10,9 +10,9 @@ section: network-automation
   <span class="stack-badge">Rust</span> <span class="stack-badge">Python</span>
 </div>
 
-[← Back to Network Automation](../network-automation)
+[← Back to Network Automation](/network-automation)
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)
 
 ---
 
@@ -30,12 +30,6 @@ Rust-based network topology generator with Python bindings. Takes a declarative 
 Consolidates topology generation logic that was previously scattered across AutoNetKit, the Network Simulator, and the Visualization Engine into a single library. Network engineers can generate data center fabrics, WAN backbones, enterprise hierarchies, and random graph models without implementing the algorithms from scratch.
 
 Three interfaces with parity guarantees: CLI for quick generation, Python API for workflow integration, config files for repeatable setups.
-
----
-
-## Technical Reports
-
-- [Download Technical Report: topogen-techreport.pdf](/assets/docs/topogen-topogen-techreport.pdf)
 
 ---
 
@@ -619,8 +613,14 @@ This project is part of a seven-tool network automation ecosystem. topogen provi
 
 *Last updated: 2026-02-21 after v1.1 milestone start*
 
+
+## Technical Reports
+
+- [Download Technical Report: topogen-techreport.pdf](/assets/docs/topogen-topogen-techreport.pdf)
+
+
 ---
 
-[← Back to Network Automation](../network-automation)
+[← Back to Network Automation](/network-automation)
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)

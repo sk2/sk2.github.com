@@ -10,9 +10,9 @@ section: data-analytics
   <span class="stack-badge">Python</span>
 </div>
 
-[← Back to Data Analytics](../data-analytics)
+[← Back to Data Analytics](/data-analytics)
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)
 
 ---
 
@@ -32,6 +32,6 @@ TUI dashboard that scans multiple development directories for projects with `.pl
 
 ---
 
-[← Back to Data Analytics](../data-analytics)
+[← Back to Data Analytics](/data-analytics)
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)

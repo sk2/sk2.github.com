@@ -10,9 +10,9 @@ section: network-automation
   <span class="stack-badge">Python</span>
 </div>
 
-[← Back to Network Automation](../network-automation)
+[← Back to Network Automation](/network-automation)
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)
 
 ---
 
@@ -31,6 +31,6 @@ Ingestion pipeline for vendor documentation and configuration files. Extracts st
 
 ---
 
-[← Back to Network Automation](../network-automation)
+[← Back to Network Automation](/network-automation)
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)

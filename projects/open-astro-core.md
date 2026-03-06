@@ -10,7 +10,7 @@ section: photography
   <span class="stack-badge">Rust</span>
 </div>
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)
 
 ---
 
@@ -104,4 +104,4 @@ Plate solving consumption, co-axial calibration, mosaic planning, planetary imag
 
 ---
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)

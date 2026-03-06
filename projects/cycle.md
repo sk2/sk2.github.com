@@ -10,9 +10,9 @@ section: agentic-systems
 
 </div>
 
-[← Back to Autonomous Systems](../agentic-systems)
+[← Back to Autonomous Systems](/agentic-systems)
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)
 
 ---
 
@@ -86,6 +86,6 @@ A native SwiftUI training application for iPad and Apple TV that bridges profess
 
 ---
 
-[← Back to Autonomous Systems](../agentic-systems)
+[← Back to Autonomous Systems](/agentic-systems)
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)

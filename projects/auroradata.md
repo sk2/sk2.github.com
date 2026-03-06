@@ -10,7 +10,7 @@ section: photography
   <span class="stack-badge">TypeScript</span>
 </div>
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)
 
 ---
 
@@ -130,4 +130,4 @@ Providing a single, definitive "Go/No-Go" score that accounts for both space wea
 
 ---
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)

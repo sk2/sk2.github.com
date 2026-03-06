@@ -10,7 +10,7 @@ section: photography
   <span class="stack-badge">Rust</span>
 </div>
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)
 
 ---
 
@@ -103,4 +103,4 @@ Enable high-fidelity HDR solar composites by providing sub-pixel alignment of ec
 
 ---
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)

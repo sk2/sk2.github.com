@@ -10,9 +10,9 @@ section: network-automation
   <span class="stack-badge">Rust</span>
 </div>
 
-[← Back to Network Automation](../network-automation)
+[← Back to Network Automation](/network-automation)
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)
 
 ---
 
@@ -33,12 +33,6 @@ section: network-automation
 Deterministic tick-based network protocol simulator validating configurations before production deployment. It provides protocol-level fidelity with same-topology-same-results guarantees, allowing engineers to verify control-plane behavior without the overhead of full VM emulation.
 
 Unlike packet-level simulators that focus on bit-level accuracy, this engine focuses on **protocol convergence and state validation**. It mirrors the behavior of real router operating systems, including the separation of RIB and FIB, allowing for the empirical testing of complex routing policies and failure scenarios.
-
----
-
-## Technical Reports
-
-- [Download Technical Report: techreport.pdf](/assets/docs/netsim-techreport.pdf)
 
 ---
 
@@ -1325,8 +1319,14 @@ This project is part of a seven-tool network automation ecosystem. netsim provid
 - **v2.4 Chaos Engineering & Performance** (Proposed) — Phases 80-82
 - **v2.5 Intelligent Simulation & Scale** (Proposed) — Phases 83-85
 
+
+## Technical Reports
+
+- [Download Technical Report: techreport.pdf](/assets/docs/netsim-techreport.pdf)
+
+
 ---
 
-[← Back to Network Automation](../network-automation)
+[← Back to Network Automation](/network-automation)
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)

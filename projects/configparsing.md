@@ -10,9 +10,9 @@ section: network-automation
   <span class="stack-badge">Python</span>
 </div>
 
-[← Back to Network Automation](../network-automation)
+[← Back to Network Automation](/network-automation)
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)
 
 ---
 
@@ -160,6 +160,6 @@ Extract network-level topology relationships (protocol adjacencies, link roles, 
 
 ---
 
-[← Back to Network Automation](../network-automation)
+[← Back to Network Automation](/network-automation)
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)

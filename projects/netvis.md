@@ -10,9 +10,9 @@ section: network-automation
   <span class="stack-badge">Rust</span> <span class="stack-badge">Python</span> <span class="stack-badge">TypeScript</span>
 </div>
 
-[← Back to Network Automation](../network-automation)
+[← Back to Network Automation](/network-automation)
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)
 
 ---
 
@@ -35,12 +35,6 @@ section: network-automation
 Rust-based network topology layout and visualization engine. Takes multi-layer network topologies (via petgraph) and renders them using layout algorithms that minimize edge crossings, bundle related connections, and respect hierarchical or geographic structure. Outputs SVG, PDF, and PNG with interactive browser embedding via WASM.
 
 Design follows Tufte's principles: maximize information density, minimize chartjunk. An automated WCAG 3:1 contrast system ensures accessibility without manual tuning.
-
----
-
-## Technical Reports
-
-- [Download Technical Report: techreport.pdf](/assets/docs/netvis-techreport.pdf)
 
 ---
 
@@ -959,8 +953,14 @@ This project is part of a seven-tool network automation ecosystem. netvis provid
 
 2026-03-02 —  complete, smart edge routing implemented.
 
+
+## Technical Reports
+
+- [Download Technical Report: techreport.pdf](/assets/docs/netvis-techreport.pdf)
+
+
 ---
 
-[← Back to Network Automation](../network-automation)
+[← Back to Network Automation](/network-automation)
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)

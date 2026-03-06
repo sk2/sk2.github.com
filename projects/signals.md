@@ -10,9 +10,9 @@ section: signal-processing
   <span class="stack-badge">Python</span>
 </div>
 
-[← Back to Signal Processing](../signal-processing)
+[← Back to Signal Processing](/signal-processing)
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)
 
 ---
 
@@ -32,12 +32,6 @@ section: signal-processing
 ## Concept
 
 Automated signal census system that transforms raw radio spectrum data into classified, searchable signal inventories. Combines SDR acquisition, ML classification, and vector search to detect, identify, and catalog signals across monitored bands.
-
----
-
-## Technical Reports
-
-- [Download Technical Report: spectra-techreport.pdf](/assets/docs/signals-spectra-techreport.pdf)
 
 ---
 
@@ -133,8 +127,14 @@ Transform raw radio spectrum data into an actionable "Signal Census" through aut
 
 ** 2026-03-04 — Completed  Audio Content Intelligence
 
+
+## Technical Reports
+
+- [Download Technical Report: spectra-techreport.pdf](/assets/docs/signals-spectra-techreport.pdf)
+
+
 ---
 
-[← Back to Signal Processing](../signal-processing)
+[← Back to Signal Processing](/signal-processing)
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)

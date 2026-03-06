@@ -10,7 +10,7 @@ section: photography
 
 </div>
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)
 
 ---
 
@@ -147,4 +147,4 @@ Eliminates manual file sorting after imaging sessions - scan hundreds of frames,
 
 ---
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)

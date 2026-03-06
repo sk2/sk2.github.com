@@ -10,7 +10,7 @@ section: projects
 
 </div>
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)
 
 ---
 
@@ -239,4 +239,4 @@ From v1.1 milestone audit:
 
 ---
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)

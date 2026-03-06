@@ -10,7 +10,7 @@ section: projects
   <span class="stack-badge">Rust</span>
 </div>
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)
 
 ---
 
@@ -168,4 +168,4 @@ Energy-driven generative music that sounds professional and lets users quickly e
 
 ---
 
-[← Back to Projects](../projects)
+[← Back to Projects](/projects)

@@ -47,8 +47,6 @@ Enable exploration and practical application of GNN techniques on real network t
 
 ## Requirements
 
-
-
 ---
 
 ## # Validated

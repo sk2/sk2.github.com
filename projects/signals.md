@@ -27,7 +27,6 @@ section: signal-processing
 
 ![Hero Image](/images/search_topk_example.png)
 
-
 ---
 
 ## Concept
@@ -114,7 +113,7 @@ Transform raw radio spectrum data into an actionable "Signal Census" through aut
 ## Constraints & Assumptions
 
 - **Edge Hardware:** Raspberry Pi 4/5.
-- **SDRs:** 
+- **SDRs:**
   - Airspy R2 (Primary Scanner)
   - Airspy HF Discovery (HF/LF)
   - KrakenSDR (5-channel phase-coherent for DoA)

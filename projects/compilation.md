@@ -29,3 +29,5 @@ A Rust-based configuration compiler that treats network design as source code. I
 ---
 
 [← Back to Network Automation](../network-automation)
+
+[← Back to Projects](../projects)

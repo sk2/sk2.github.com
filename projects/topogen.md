@@ -476,8 +476,6 @@ Network engineers can quickly generate realistic, validated network topologies w
 
 ## Latest Release: v1.4 Interactive Editing & Incremental Validation (shipped 2026-03-02)
 
-
-
 ---
 
 ## Next Milestone Goals
@@ -488,8 +486,6 @@ Network engineers can quickly generate realistic, validated network topologies w
 ---
 
 ## Requirements
-
-
 
 ---
 

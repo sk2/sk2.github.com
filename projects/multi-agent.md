@@ -65,8 +65,6 @@ Complete isolation between agents such that compromise of one agent cannot casca
 
 ## Requirements
 
-
-
 ---
 
 ## # Validated

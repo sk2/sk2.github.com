@@ -7,7 +7,7 @@ section: network-automation
 
 <div class="badges-row">
   <span class="status-badge status-active">Recently Updated</span>
-  
+
 </div>
 
 [← Back to Network Automation](../network-automation)
@@ -804,8 +804,6 @@ This project directly supports the strategic vision outlined in `STRATEGY.md` an
 ---
 
 ## Requirements
-
-
 
 ---
 

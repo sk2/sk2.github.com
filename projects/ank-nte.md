@@ -84,7 +84,6 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from [ank_nte](../ank_nte) import Topology
 from src.query import Expr, QueryNamespace
 
-
 def build_topology() -> Topology:
     """Create a small network topology for demonstration."""
     t = Topology()
@@ -104,7 +103,6 @@ def build_topology() -> Topology:
         ],
     )
     return t
-
 
 # ── 1. Basic filtering ──────────────────────────────────────────────
 
@@ -133,7 +131,6 @@ def example_basic_filtering():
     # Multiple types
     print("Routers or Switches:", q.nodes().of_type("Router", "Switch").ids())
 
-
 # ── 2. Terminal methods ──────────────────────────────────────────────
 
 def example_terminal_methods():
@@ -159,7 +156,6 @@ def example_terminal_methods():
     # Exactly one result (raises ValueError otherwise)
     edge_router = q.nodes().of_type("Router").in_layer("edge")
     print("Edge router count:", edge_router.count())
-
 
 # ── 3. Expression filters ───────────────────────────────────────────
 
@@ -195,7 +191,6 @@ def example_expr_filters():
     )
     print("Switches + Endpoints:", some_types.ids())
 
-
 # ── 4. Composable & reusable queries ────────────────────────────────
 
 def example_composable_queries():
@@ -219,7 +214,6 @@ def example_composable_queries():
     # Chain further
     subset = core_routers.with_ids([1, 2])
     print("Core routers 1&2:", subset.ids())
-
 
 # ── 5. Expression DSL showcase ──────────────────────────────────────
 
@@ -262,7 +256,6 @@ def example_expr_dsl():
     rust_expr = complex_expr._to_rust_expr()
     print("Compiled to Rust:", type(rust_expr).__name__)
 
-
 # ── 6. Link queries ─────────────────────────────────────────────────
 
 def example_link_queries():
@@ -286,7 +279,6 @@ def example_link_queries():
     # For specific nodes
     node_links = q.links().for_nodes(1, 2, 3)
     print("Links for nodes 1-3:", node_links.ids())
-
 
 # ── Run all examples ────────────────────────────────────────────────
 
@@ -330,20 +322,20 @@ def test_type_coercion_polars_boundary():
     """
     topo = [ank_nte](../ank_nte).Topology()
     topo.add_nodes_with_metadata([1, 2, 3], ["Device"]*3, ["layer"]*3)
-    
+
     # Node 1 gets an integer
     topo.update_node_properties(1, {"capacity": 10})
     # Node 2 gets a float (Forces upcast of the 'capacity' column to Float64)
     topo.update_node_properties(2, {"capacity": 10.5})
     # Node 3 gets a string (Forces upcast of the 'capacity' column to String/Utf8)
     topo.update_node_properties(3, {"capacity": "10G"})
-    
+
     # Now query numerically. Does the engine crash because '10G' isn't an int,
     # or does it gracefully filter it out?
     try:
         res = topo.query("MATCH (n:Device) WHERE n.capacity > 5 RETURN n")
         # Should ideally just return Node 1 and Node 2, ignoring the string
-        assert len(res.matches) >= 0 
+        assert len(res.matches) >= 0
     except Exception:
         pass
 
@@ -354,16 +346,16 @@ def test_temporal_timezone_stripping():
     """
     topo = [ank_nte](../ank_nte).Topology()
     topo.add_nodes_with_metadata([1, 2], ["Event"]*2, ["audit"]*2)
-    
+
     # Timezone Aware
     tz_aware = datetime(2026, 3, 1, 12, 0, tzinfo=timezone.utc)
     # Timezone Naive
     tz_naive = datetime(2026, 3, 1, 12, 0)
-    
+
     try:
         topo.update_node_properties(1, {"timestamp": tz_aware})
         topo.update_node_properties(2, {"timestamp": tz_naive})
-        
+
         # Test if the engine can query across the boundary safely
         topo.query("MATCH (n:Event) RETURN n")
     except Exception:
@@ -377,17 +369,17 @@ def test_duckdb_sql_injection_on_fallback():
     """
     topo = [ank_nte](../ank_nte).Topology()
     topo.add_nodes_with_metadata([1], ["Router"], ["core"])
-    
+
     # Inject standard SQLi payloads into a node property
     evil_payloads = [
         "1; DROP TABLE nodes; --",
         "' OR '1'='1",
         "admin'--",
     ]
-    
+
     for payload in evil_payloads:
         topo.update_node_properties(1, {"name": payload})
-        
+
     # Attempt to query it back using a wildcard or specific match
     try:
         query = f"MATCH (n:Router) WHERE n.name = '{evil_payloads[1]}' RETURN n"
@@ -404,16 +396,16 @@ def test_extreme_json_nesting_in_return():
     """
     topo = [ank_nte](../ank_nte).Topology()
     topo.add_nodes_with_metadata([1], ["Router"], ["core"])
-    
+
     # Build a 500-level deep dictionary
     deep_dict = "bottom"
     for _ in range(500):
         deep_dict = {"layer": deep_dict}
-        
+
     try:
         topo.update_node_properties(1, {"config": deep_dict})
-        
-        # Querying the node means the engine has to serialize this 500-deep 
+
+        # Querying the node means the engine has to serialize this 500-deep
         # Rust struct back into a Python dictionary.
         res = topo.query("MATCH (n:Router) RETURN n")
         assert len(res.matches) == 1
@@ -423,11 +415,11 @@ def test_extreme_json_nesting_in_return():
 
 def test_query_timeout_circuit_breaker():
     """
-    Test if the engine respects execution timeout bounds when handed a query 
+    Test if the engine respects execution timeout bounds when handed a query
     that mathematically requires exponential time (e.g. searching all paths in a mesh).
     """
     topo = [ank_nte](../ank_nte).Topology()
-    
+
     # 20 node full mesh (every node connects to every node)
     nodes = list(range(20))
     topo.add_nodes_with_metadata(nodes, ["Router"]*20, ["core"]*20)
@@ -438,12 +430,12 @@ def test_query_timeout_circuit_breaker():
                     topo.add_edge(src, dst)
                 except Exception:
                     pass
-                    
-    # "Find EVERY POSSIBLE PATH between A and B". In a 20 node mesh, 
+
+    # "Find EVERY POSSIBLE PATH between A and B". In a 20 node mesh,
     # the number of paths is O(N!). This query will never finish in our lifetime.
     query = "MATCH p = (a {id: 0})-[*]->(b {id: 19}) RETURN p"
-    
-    # We execute it on a background thread and assert it yields or crashes safely 
+
+    # We execute it on a background thread and assert it yields or crashes safely
     # instead of locking the OS.
     # Note: In a real test, you'd use pytest-timeout or pass a timeout arg.
     try:
@@ -472,14 +464,14 @@ def test_adversarial_compression_bomb():
     """
     topo = [ank_nte](../ank_nte).Topology()
     topo.add_nodes_with_metadata([1], ["Router"], ["core"])
-    
+
     # Generate 1GB of highly compressible zeros
     raw_data = b"0" * (1024 * 1024 * 1024)
     compressed_bomb = zlib.compress(raw_data)
-    
-    # In a real engine, if this is ingested via an API that auto-inflates, 
-    # it must hit a hard buffer limit. Here we inject the compressed bytes 
-    # to ensure the storage layer safely stores it as opaque bytes or string 
+
+    # In a real engine, if this is ingested via an API that auto-inflates,
+    # it must hit a hard buffer limit. Here we inject the compressed bytes
+    # to ensure the storage layer safely stores it as opaque bytes or string
     # without automatically expanding it and causing an OOM.
     try:
         topo.update_node_properties(1, {"payload": compressed_bomb})
@@ -492,27 +484,27 @@ def test_adversarial_compression_bomb():
 def test_adversarial_hash_collision_dos():
     """
     Test against a HashDoS attack.
-    An attacker crafts thousands of specific dictionary keys that mathematically 
+    An attacker crafts thousands of specific dictionary keys that mathematically
     hash to the exact same bucket in the Rust HashMap (SipHash/AHash).
     This forces O(1) lookups to degrade to O(N), locking the CPU at .
     """
     topo = [ank_nte](../ank_nte).Topology()
     topo.add_nodes_with_metadata([1], ["Router"], ["core"])
-    
+
     # Note: Modern Rust uses randomized SipHash/AHash to prevent deterministic HashDoS.
     # However, we simulate the attack by generating 100,000 weird keys.
     # If the hash algorithm is weak, this update will take minutes instead of milliseconds.
     start_time = time.time()
-    
+
     evil_payload = {f"k_{i}_{hash(str(i))}": i for i in range(100000)}
-    
+
     try:
         topo.update_node_properties(1, evil_payload)
     except Exception:
         pass
-        
+
     duration = time.time() - start_time
-    
+
     # If the hash table degraded to O(N) collisions, this would take exponentially longer.
     # We assert it completes in under 2 seconds.
     assert duration < 2.0, f"HashDoS Vulnerability: Update took {duration} seconds!"
@@ -524,18 +516,18 @@ def test_adversarial_polyglot_injection():
     """
     topo = [ank_nte](../ank_nte).Topology()
     topo.add_nodes_with_metadata([1], ["Router"], ["core"])
-    
+
     # The ultimate polyglot string
     polyglot = "1; DROP TABLE nodes; /* <script>alert(1)</script> */ $(rm -rf /) MATCH (n) DETACH DELETE n //"
-    
+
     try:
         # Inject it
         topo.update_node_properties(1, {"name": polyglot})
-        
-        # Query it. If the engine uses unsafe string concatenation anywhere (in logs, 
+
+        # Query it. If the engine uses unsafe string concatenation anywhere (in logs,
         # in the planner, or in a SQL fallback), this will trigger it.
         res = topo.query(f"MATCH (n) WHERE n.name = '{polyglot}' RETURN n")
-        
+
         assert len(res.matches) == 1
     except Exception:
         # A syntax error from refusing to parse the unescaped garbage is perfectly safe
@@ -550,7 +542,7 @@ def test_adversarial_toctou_race_condition():
     topo = [ank_nte](../ank_nte).Topology()
     topo.add_nodes_with_metadata([1], ["Vault"], ["secure"])
     topo.update_node_properties(1, {"access": "DENIED"})
-    
+
     # We simulate an engine query that takes a long time
     def slow_query():
         try:
@@ -559,34 +551,34 @@ def test_adversarial_toctou_race_condition():
             topo.query("MATCH (n:Vault) WHERE n.access = 'DENIED' RETURN n")
         except Exception:
             pass
-            
+
     t1 = threading.Thread(target=slow_query)
     t1.start()
-    
+
     # The attacker thread instantly tries to mutate the property during the read
     try:
         topo.update_node_properties(1, {"access": "GRANTED"})
     except Exception:
         pass
-        
+
     t1.join()
-    # The Rust RwLock must ensure that the read transaction sees a perfectly 
-    # isolated snapshot, and the write transaction is completely blocked until 
+    # The Rust RwLock must ensure that the read transaction sees a perfectly
+    # isolated snapshot, and the write transaction is completely blocked until
     # the read finishes (or vice versa), guaranteeing absolute ACID isolation.
     assert True
 
 def test_adversarial_type_juggling_authentication():
     """
     Test Type Juggling (common in PHP/Node architectures).
-    If a policy engine checks `if n.auth_level == 1`, an attacker might pass 
+    If a policy engine checks `if n.auth_level == 1`, an attacker might pass
     `true`, `"1"`, or `[1]` to bypass the strict equality check.
     """
     topo = [ank_nte](../ank_nte).Topology()
     topo.add_nodes_with_metadata([1], ["User"], ["identity"])
-    
+
     # The system expects an integer 1 for admin
-    topo.update_node_properties(1, {"auth_level": 0}) 
-    
+    topo.update_node_properties(1, {"auth_level": 0})
+
     # Attacker tries to bypass by finding the node using coerced types
     # Engine MUST enforce strict type equality for security properties.
     queries = [
@@ -594,7 +586,7 @@ def test_adversarial_type_juggling_authentication():
         "MATCH (n:User) WHERE n.auth_level = false RETURN n",
         "MATCH (n:User) WHERE n.auth_level = [] RETURN n",
     ]
-    
+
     for q in queries:
         try:
             res = topo.query(q)
@@ -617,12 +609,12 @@ import math
 
 def test_floating_point_anomalies():
     """
-    Test how the engine handles mathematically anomalous floating-point values 
+    Test how the engine handles mathematically anomalous floating-point values
     like NaN (Not a Number) and Infinity when injected into properties.
     """
     topo = [ank_nte](../ank_nte).Topology()
     topo.add_nodes_with_metadata([1, 2, 3], ["Node"]*3, ["layer"]*3)
-    
+
     # Inject NaN and Infinity
     try:
         topo.update_node_properties(1, {"score": math.nan})
@@ -631,7 +623,7 @@ def test_floating_point_anomalies():
     except Exception:
         # If the boundary aggressively rejects non-finite floats, that is safe.
         pass
-        
+
     # The engine must still be queryable without panicking during filter execution
     try:
         # If the engine accepts NaN, filtering against it must follow SQL semantics (usually false)
@@ -641,20 +633,20 @@ def test_floating_point_anomalies():
 
 def test_extreme_schema_evolution():
     """
-    Test the DataFrame storage layer's ability to handle massive horizontal 
+    Test the DataFrame storage layer's ability to handle massive horizontal
     schema evolution (the 'Wide Table' problem).
     """
     topo = [ank_nte](../ank_nte).Topology()
     topo.add_nodes_with_metadata([1], ["Router"], ["core"])
-    
+
     # Generate 5,000 distinct property keys
     wide_payload = {f"custom_metric_{i}": i for i in range(5000)}
-    
+
     try:
         # This forces Polars to dynamically expand the DataFrame schema by 5,000 columns.
         # This tests if the engine has a max-column circuit breaker.
         topo.update_node_properties(1, wide_payload)
-        
+
         # Ensure the engine can still execute a basic scan without choking on the schema
         res = topo.query("MATCH (n:Router) RETURN n")
         assert len(res.matches) == 1
@@ -665,7 +657,7 @@ def test_extreme_schema_evolution():
 def test_concurrent_transaction_contention():
     """
     Test how the engine handles two threads attempting to open a write transaction
-    simultaneously. It should safely block or raise a lock contention error, 
+    simultaneously. It should safely block or raise a lock contention error,
     but never allow dirty writes or deadlocks.
     """
     # Need a mock for this test to compile against the stub
@@ -673,10 +665,10 @@ def test_concurrent_transaction_contention():
         def __enter__(self): return self
         def __exit__(self, *args): pass
         def add_nodes_with_metadata(self, *args): pass
-        
+
     topo = [ank_nte](../ank_nte).Topology()
     topo.transaction = lambda: MockTransaction()
-    
+
     errors = []
     def worker_a():
         try:
@@ -685,7 +677,7 @@ def test_concurrent_transaction_contention():
                 time.sleep(0.05) # Hold the lock
         except Exception as e:
             errors.append(e)
-            
+
     def worker_b():
         try:
             with topo.transaction() as tx:
@@ -693,16 +685,16 @@ def test_concurrent_transaction_contention():
                 time.sleep(0.05)
         except Exception as e:
             errors.append(e)
-            
+
     t1 = threading.Thread(target=worker_a)
     t2 = threading.Thread(target=worker_b)
-    
+
     t1.start()
     t2.start()
-    
+
     t1.join(timeout=2)
     t2.join(timeout=2)
-    
+
     # Threads must resolve
     assert not t1.is_alive()
     assert not t2.is_alive()
@@ -714,17 +706,17 @@ def test_deep_hierarchical_deletion():
     This tests the recursive stack depth of the cascading delete algorithm.
     """
     topo = [ank_nte](../ank_nte).Topology()
-    
+
     # Create a single linear chain 1000 nodes deep: 1 -> 2 -> 3 -> ... -> 1000
     nodes = list(range(1, 1001))
     topo.add_nodes_with_metadata(nodes, ["Chain"]*1000, ["layer"]*1000)
-    
+
     for i in range(1, 1000):
         try:
             topo.add_edge(i, i+1)
         except AttributeError:
             pass # Ignore missing mock logic
-            
+
     try:
         # Delete the root. The cascade algorithm must recursively delete 999 children.
         # If it uses standard recursion, it might blow the Rust C-stack.
@@ -735,7 +727,7 @@ def test_deep_hierarchical_deletion():
             topo.remove_nodes([1])
     except Exception:
         pass
-        
+
     assert True
 
 ```
@@ -758,18 +750,18 @@ def test_cache_poisoning_vulnerability():
     topo = [ank_nte](../ank_nte).Topology()
     topo.add_nodes_with_metadata([1], ["A"], ["layer"])
     topo.add_nodes_with_metadata([2], ["B"], ["layer"])
-    
+
     # Let's assume the cache key is naively built from the string.
     # An attacker crafts a query string with an identical length/hash but different semantics
     # If the cache doesn't verify the full AST, it might return the wrong results.
     q1 = "MATCH (n:A) RETURN n"
     q2 = "MATCH (n:B) RETURN n"
-    
+
     # Run them sequentially.
     try:
         res1 = topo.query(q1)
         res2 = topo.query(q2)
-        
+
         # If the cache was poisoned, res2 would incorrectly return the matches for A
         if len(res1.matches) > 0 and len(res2.matches) > 0:
             assert res1.matches != res2.matches
@@ -784,18 +776,18 @@ def test_symbolic_link_directory_escape():
     sensitive files when the engine writes or reads.
     """
     topo = [ank_nte](../ank_nte).Topology()
-    
+
     with tempfile.TemporaryDirectory() as tmpdir:
         # Create a malicious symlink pointing to root or an arbitrary sensitive location
         symlink_path = os.path.join(tmpdir, "evil_link")
         try:
             os.symlink("/", symlink_path)
-            
+
             # The engine must validate that configured paths do not follow symlinks
             # escaping the intended sandboxed directory.
             if hasattr([ank_nte](../ank_nte), 'configure_storage'):
                 [ank_nte](../ank_nte).configure_storage(symlink_path)
-                
+
             # Attempt to write
             topo.add_nodes_with_metadata([1], ["T"], ["L"])
         except OSError:
@@ -804,30 +796,30 @@ def test_symbolic_link_directory_escape():
         except Exception:
             # The engine rejecting the symlink or raising a security error is correct
             pass
-            
+
     assert True
 
 def test_out_of_bounds_pointer_dereference():
     """
     Test against memory unsafety (Out-Of-Bounds Read/Write).
     Rust is generally memory safe, but if the Graph uses `unsafe` blocks
-    for speed, passing a maliciously crafted internal node index could 
+    for speed, passing a maliciously crafted internal node index could
     trick the engine into reading adjacent memory from the C-heap.
     """
     topo = [ank_nte](../ank_nte).Topology()
     topo.add_nodes_with_metadata([1], ["T"], ["L"])
-    
+
     try:
         # Instead of using the Python `add_edge` which takes external IDs,
         # what if an internal macro or API bypasses the ID lookup?
-        # We simulate this by passing the maximum possible usize to see if it 
+        # We simulate this by passing the maximum possible usize to see if it
         # hits a hard bounds check or causes a segfault.
         if hasattr(topo, '_internal_add_edge_unchecked'):
             topo._internal_add_edge_unchecked(18446744073709551615, 18446744073709551615)
     except Exception:
         # A panic or out of bounds exception is correct. A segfault kills the test runner.
         pass
-        
+
     assert True
 
 def test_floating_point_precision_loss():
@@ -838,17 +830,17 @@ def test_floating_point_precision_loss():
     """
     topo = [ank_nte](../ank_nte).Topology()
     topo.add_nodes_with_metadata([1], ["Bank"], ["core"])
-    
+
     # Two massive numbers that only differ at the very end.
     # In standard 64-bit floats, these might round to the exact same value in memory.
     val1 = 9007199254740992.0
     val2 = 9007199254740993.0
-    
+
     try:
         topo.update_node_properties(1, {"balance": val1})
         # If the engine uses exact equality on floats, this query will test if precision was lost
         res = topo.query(f"MATCH (n) WHERE n.balance = {val2} RETURN n")
-        
+
         # If it lost precision, it would incorrectly return the node (val1 == val2).
         assert len(res.matches) == 0
     except Exception:
@@ -857,24 +849,24 @@ def test_floating_point_precision_loss():
 def test_query_plan_combinatorial_explosion():
     """
     Test the Query Planner against Combinatorial Explosion (Join Ordering).
-    If a user submits a query with 20 disjoint subpatterns, a naive 
+    If a user submits a query with 20 disjoint subpatterns, a naive
     query planner might try to calculate all possible join order permutations
     (20! = 2.4 quintillion), freezing the server for years before even executing.
     """
     # Create an absurdly disjoint query
-    # MATCH (a), (b), (c) ... 
+    # MATCH (a), (b), (c) ...
     query = "MATCH " + ", ".join([f"(n{i}:Type)" for i in range(20)]) + " RETURN n0"
-    
+
     topo = [ank_nte](../ank_nte).Topology()
     start_time = time.time()
-    
+
     try:
         topo.query(query)
     except Exception:
         # It should reject the query quickly or plan it instantly using heuristics,
         # but the planning phase must NOT take exponential time.
         pass
-        
+
     duration = time.time() - start_time
     # Planning (or rejection) must complete in under 1 second
     assert duration < 1.0, f"Query Planner took exponential time: {duration}s"
@@ -917,7 +909,7 @@ def test_fuzz_garbage_collection_cycles():
         del topo
         # Force a full GC sweep
         gc.collect()
-        
+
     # If Rust panicked on a double-free, this test would abort the process
     assert True
 
@@ -929,17 +921,17 @@ def test_fuzz_randomized_topology_mutation():
     """
     topo = [ank_nte](../ank_nte).Topology()
     active_nodes = set()
-    
+
     # 500 chaotic operations
     for _ in range(500):
         op = random.choice(["add_node", "remove_node", "add_edge", "update_prop"])
-        
+
         if op == "add_node":
             node_id = random.randint(1, 1000)
             if node_id not in active_nodes:
                 topo.add_nodes_with_metadata([node_id], ["Chaos"], ["fuzz"])
                 active_nodes.add(node_id)
-                
+
         elif op == "remove_node":
             if active_nodes:
                 node_id = random.choice(list(active_nodes))
@@ -951,7 +943,7 @@ def test_fuzz_randomized_topology_mutation():
                 except Exception:
                     pass
                 active_nodes.remove(node_id)
-                
+
         elif op == "add_edge":
             if len(active_nodes) >= 2:
                 src, dst = random.sample(list(active_nodes), 2)
@@ -959,7 +951,7 @@ def test_fuzz_randomized_topology_mutation():
                     topo.add_edge(src, dst)
                 except Exception:
                     pass
-                    
+
         elif op == "update_prop":
             if active_nodes:
                 node_id = random.choice(list(active_nodes))
@@ -969,7 +961,7 @@ def test_fuzz_randomized_topology_mutation():
                     topo.update_node_properties(node_id, {random_key: random_val})
                 except Exception:
                     pass
-                    
+
     # The process must still be alive and queryable at the end
     assert isinstance(topo, [ank_nte](../ank_nte).Topology)
 
@@ -980,7 +972,7 @@ def test_fuzz_unicode_and_emoji_property_injection():
     """
     topo = [ank_nte](../ank_nte).Topology()
     topo.add_nodes_with_metadata([1], ["Router"], ["core"])
-    
+
     adversarial_strings = [
         "こんにちは", # Japanese
         "مرحبا", # Chinese/Arabic mixed
@@ -990,7 +982,7 @@ def test_fuzz_unicode_and_emoji_property_injection():
         "\uD800", # Unpaired surrogates (often crash JSON parsers)
         "a" * 10000 + "🔥", # Massive string ending in multi-byte
     ]
-    
+
     for payload in adversarial_strings:
         try:
             # We wrap in try/except because PyO3 might raise a ValueError on invalid unicode,
@@ -1001,22 +993,22 @@ def test_fuzz_unicode_and_emoji_property_injection():
 
 def test_fuzz_deep_query_nesting():
     """
-    Build structurally valid but absurdly complex query shapes 
+    Build structurally valid but absurdly complex query shapes
     to exhaust the query planner's permutations logic.
     """
     query = "MATCH "
-    
+
     # Generate a chain of 50 node segments
     # (a)-[e1]->(b)-[e2]->(c)...
     nodes = [f"(n{i}:T)" for i in range(50)]
     edges = [f"-[e{i}:E]->" for i in range(49)]
-    
+
     chain = nodes[0]
     for i in range(49):
         chain += edges[i] + nodes[i+1]
-        
+
     query += chain + " RETURN n0"
-    
+
     topo = [ank_nte](../ank_nte).Topology()
     try:
         # If the engine uses recursive AST walking, this might blow the C stack.
@@ -1031,7 +1023,7 @@ def test_fuzz_memory_exhaustion_circuit_breakers():
     by passing max integer sizes to the reservation algorithms.
     """
     topo = [ank_nte](../ank_nte).Topology()
-    
+
     # Try to add 100 million nodes in one batch
     # This should be caught by an internal circuit breaker (e.g. PyErr or MemoryError),
     # rather than triggering a low-level OS OOM kill on the entire Python process.
@@ -1044,7 +1036,7 @@ def test_fuzz_memory_exhaustion_circuit_breakers():
     except Exception:
         # Rejection via MemoryError or ValueError is correct
         pass
-        
+
     # Process must still be alive
     assert True
 
@@ -1061,16 +1053,16 @@ import stat
 
 def test_enospc_disk_full_simulation(monkeypatch):
     """
-    Simulate an ENOSPC (Error No Space Left on Device) occurring 
+    Simulate an ENOSPC (Error No Space Left on Device) occurring
     exactly during a dataframe persistence or caching operation.
     """
     topo = [ank_nte](../ank_nte).Topology()
     topo.add_nodes_with_metadata([1], ["Router"], ["core"])
-    
+
     # We monkeypatch the OS write call (or the internal persistence mechanism if exposed)
     # to throw an IOError halfway through saving.
     # In a true E2E, this would point a temp directory to a 1MB ramdisk and overflow it.
-    
+
     # Since we can't easily mount a ramdisk in a cross-platform test, we assert that
     # IF the engine exposes a save/archive method, it catches generic IOErrors.
     try:
@@ -1081,7 +1073,7 @@ def test_enospc_disk_full_simulation(monkeypatch):
         pass
     except Exception:
         pass
-        
+
     # Crucially, the in-memory graph must still be valid and uncorrupted after a failed write
     res = topo.query("MATCH (n:Router) RETURN n")
     assert len(res.matches) == 1
@@ -1092,16 +1084,16 @@ def test_eacces_permission_denied_recovery():
     cache or transaction log directories.
     """
     topo = [ank_nte](../ank_nte).Topology()
-    
+
     with tempfile.TemporaryDirectory() as tmpdir:
         # Remove write permissions from the directory
         os.chmod(tmpdir, stat.S_IRUSR | stat.S_IXUSR)
-        
+
         try:
             # If the engine supports configuring its storage path
             if hasattr([ank_nte](../ank_nte), 'configure_storage'):
                 [ank_nte](../ank_nte).configure_storage(tmpdir)
-                
+
             # Attempt to mutate. The engine should cleanly throw a PermissionError
             # rather than panicking in Rust.
             topo.add_nodes_with_metadata([99], ["Switch"], ["edge"])
@@ -1115,12 +1107,12 @@ def test_eacces_permission_denied_recovery():
 
 def test_sigbus_mmap_truncation_simulation():
     """
-    If the engine uses memory-mapped (mmap) files (e.g. via Polars or Arrow IPC), 
-    a common fatal error is SIGBUS, which occurs if the underlying file is truncated 
+    If the engine uses memory-mapped (mmap) files (e.g. via Polars or Arrow IPC),
+    a common fatal error is SIGBUS, which occurs if the underlying file is truncated
     by an external process while mapped in memory.
     """
     topo = [ank_nte](../ank_nte).Topology()
-    
+
     # We simulate this by passing a completely corrupted, truncated Parquet/Arrow file
     # to any 'load' or 'import' methods. The Rust engine must validate file bounds
     # BEFORE mapping, or handle the SIGBUS safely.
@@ -1128,17 +1120,17 @@ def test_sigbus_mmap_truncation_simulation():
         # Write 10 bytes of garbage, pretending to be a 1GB parquet file
         tmp.write(b"PAR1GARBAG")
         tmp_name = tmp.name
-        
+
     try:
         if hasattr(topo, 'load_from_disk'):
             topo.load_from_disk(tmp_name)
     except Exception:
-        # A clean 'Invalid Format' or 'Unexpected EOF' is required. 
+        # A clean 'Invalid Format' or 'Unexpected EOF' is required.
         # A hard process crash (SIGBUS/SIGSEGV) fails the test suite.
         pass
     finally:
         os.unlink(tmp_name)
-        
+
 def test_unicode_collation_and_case_folding():
     """
     Test advanced SQL-style string matching edge cases.
@@ -1147,16 +1139,16 @@ def test_unicode_collation_and_case_folding():
     """
     topo = [ank_nte](../ank_nte).Topology()
     topo.add_nodes_with_metadata([1, 2], ["Device"]*2, ["layer"]*2)
-    
+
     topo.update_node_properties(1, {"city": "Gießen"})
     topo.update_node_properties(2, {"city": "Giessen"})
-    
+
     # In some SQL collations, 'ß' equals 'ss'. In strict UTF-8 equality, they do not.
     # We just want to ensure the engine doesn't panic on the byte comparison.
     try:
         res1 = topo.query("MATCH (n) WHERE n.city = 'Gießen' RETURN n")
         res2 = topo.query("MATCH (n) WHERE n.city = 'Giessen' RETURN n")
-        
+
         # They should evaluate independently without crashing
         assert len(res1.matches) >= 0
         assert len(res2.matches) >= 0
@@ -1171,11 +1163,11 @@ def test_extreme_id_fragmentation():
     this will instantly allocate gigabytes of empty memory and OOM.
     """
     topo = [ank_nte](../ank_nte).Topology()
-    
+
     try:
         # Add exactly two nodes, but with wildly distant IDs
         topo.add_nodes_with_metadata([1, 100000000], ["T"]*2, ["L"]*2)
-        
+
         # Querying should be instant and use minimal RAM
         res = topo.query("MATCH (n) RETURN n")
         assert len(res.matches) == 2
@@ -1280,8 +1272,6 @@ The engine must be correct and observable — mutations never silently corrupt s
 ---
 
 ## Requirements
-
-
 
 ---
 

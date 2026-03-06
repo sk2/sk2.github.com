@@ -63,8 +63,6 @@ Reliability and autonomy for a "one-shot" astronomical event. The system handles
 
 ## Requirements
 
-
-
 ---
 
 ## # Validated

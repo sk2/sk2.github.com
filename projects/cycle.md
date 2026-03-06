@@ -7,7 +7,7 @@ section: agentic-systems
 
 <div class="badges-row">
   <span class="status-badge status-active">Recently Updated</span>
-  
+
 </div>
 
 [← Back to Autonomous Systems](../agentic-systems)

@@ -7,7 +7,7 @@ section: projects
 
 <div class="badges-row">
   <span class="status-badge status-active">Active</span>
-  
+
 </div>
 
 [← Back to Projects](../projects)
@@ -65,8 +65,6 @@ In the field, you can see what the camera sees and get actionable guidance/contr
 ---
 
 ## Requirements
-
-
 
 ---
 

@@ -7,7 +7,7 @@ section: projects
 
 <div class="badges-row">
   <span class="status-badge status-active">Last Active: 2026-02-11</span>
-  
+
 </div>
 
 [← Back to Projects](../projects)
@@ -59,8 +59,6 @@ Eliminates manual file sorting after imaging sessions - scan hundreds of frames,
 ---
 
 ## Requirements
-
-
 
 ---
 

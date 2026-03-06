@@ -85,8 +85,6 @@ The ability to reliably and efficiently stream high-fidelity IQ data from multip
 
 ## Requirements
 
-
-
 ---
 
 ## # Validated

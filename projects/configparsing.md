@@ -79,8 +79,6 @@ Extract network-level topology relationships (protocol adjacencies, link roles, 
 
 ## Requirements
 
-
-
 ---
 
 ## # Validated

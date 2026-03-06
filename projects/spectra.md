@@ -84,3 +84,5 @@ Edge Pi (SDR) → SpyServer/rtl_tcp → Mac mini Core
 ---
 
 [← Back to Signal Processing](../signal-processing)
+
+[← Back to Projects](../projects)

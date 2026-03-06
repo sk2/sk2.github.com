@@ -1298,17 +1298,14 @@ layers:
       - type: mesh_nodes
         selector: "nodes[site='a']"
         mesh_type: full
-        
 
       - type: mesh_nodes
         selector: "nodes[site='b']"
         mesh_type: full
-        
 
       - type: mesh_nodes
         selector: "nodes[site='c']"
         mesh_type: full
-        
 
   # Stage 2: Assign /30 P2P addresses from per-site pools.
   # ProvisionIps runs AFTER MeshNodes — edges must exist before IPs can be assigned.
@@ -1443,8 +1440,6 @@ Single-binary network compiler: design, transform, and generate configs from YAM
 ---
 
 ## Requirements
-
-
 
 ---
 

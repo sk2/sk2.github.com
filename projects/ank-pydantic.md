@@ -160,7 +160,6 @@ if TYPE_CHECKING:
 
 logger = logging.getLogger(__name__)
 
-
 from [ank_pydantic](../ank_pydantic).core.models import (
     BaseInternodeEdge,
     BaseTopologyEndpoint,
@@ -195,7 +194,6 @@ class Interface(BaseTopologyEndpoint[InterfaceData]):
 
 class Link(BaseInternodeEdge[FlexibleData]):
     type: str = RelationshipType.CONNECTS
-
 
 def build_dc_fabric_example() -> "Topology":
     """Build a data center fabric topology with EVPN overlay.
@@ -341,7 +339,6 @@ def build_dc_fabric_example() -> "Topology":
     logger.info("DC fabric example complete!")
     return topo
 
-
 def validate_fabric(topo: Topology) -> None:
     """Validate the DC fabric for path diversity and reachability.
 
@@ -357,7 +354,7 @@ def validate_fabric(topo: Topology) -> None:
     # 1. Verify Spine-to-Leaf link count with .between()
     spine_set = topo.query.nodes().of_type(Router).where(role="spine")
     leaf_set = topo.query.nodes().of_type(Router).where(role="leaf")
-    
+
     links = topo.query.links().in_layer("physical").between(spine_set, leaf_set)
     logger.info(f"Verified {links.count()} spine-leaf links using .between()")
     assert links.count() == 8, f"Expected 8 links, found {links.count()}"
@@ -384,7 +381,7 @@ def validate_fabric(topo: Topology) -> None:
 
         # 3.2 Get Physical Leaf -> Physical Interfaces
         leaf_interface_ids = set(topo.query.nodes().filter(q.field("id") == phys_leaf_id).endpoints.ids())
-        
+
         # 3.3 Find remote interfaces via physical edges
         remote_interface_ids = set()
         for edge in topo.query.edges().models():
@@ -394,7 +391,7 @@ def validate_fabric(topo: Topology) -> None:
                 remote_interface_ids.add(edge.dst_id)
             elif edge.dst_id in leaf_interface_ids:
                 remote_interface_ids.add(edge.src_id)
-        
+
         # 3.4 Remote Interfaces -> Parent Nodes (Physical Spines)
         peer_spine_ids = set()
         for if_id in remote_interface_ids:
@@ -404,18 +401,17 @@ def validate_fabric(topo: Topology) -> None:
                 owner = topo.nodes.get(owner_id)
                 if getattr(owner.data, "role", None) == "spine":
                     peer_spine_ids.add(owner_id)
-        
+
         logger.info(f"Leaf {leaf.label} connected to {len(peer_spine_ids)} physical spines")
         assert len(peer_spine_ids) == 2, f"Leaf {leaf.label} has only {len(peer_spine_ids)} spine connections"
 
     logger.info("Fabric validation successful!")
 
-
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
     topo = build_dc_fabric_example()
     validate_fabric(topo)
-    
+
     print(f"\nTopology Summary:")
     print(f"  Total nodes: {topo.query.nodes().count()}")
     print(f"  Total edges: {topo.query.edges().count()}")
@@ -448,7 +444,6 @@ if TYPE_CHECKING:
     from [ank_pydantic](../ank_pydantic).core.topology.topology import Topology
 
 logger = logging.getLogger(__name__)
-
 
 def build_isp_core_example() -> "Topology":
     """Build an ISP core network topology with ISIS + MPLS.
@@ -713,7 +708,6 @@ def build_isp_core_example() -> "Topology":
     logger.info("ISP core example complete!")
     return topo
 
-
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
     topo = build_isp_core_example()
@@ -805,14 +799,14 @@ def build_ixp_topology() -> Topology:
     topo = Topology()
     topo.nodes.register_models([PeeringSwitch, RouteServer, MemberRouter, PeeringInterface])
     topo.edges.register_models([PeeringLink])
-    
+
     # 1. Create Peering Fabric (L2 LAN)
     fabric = PeeringSwitch(
         layer="physical",
         data=IXPNodeData(label="IXP-PEERING-LAN", role="fabric")
     )
     topo.nodes.add([fabric])
-    
+
     # 2. Create Route Servers
     rs_nodes = []
     for i in range(1, 3):
@@ -822,20 +816,20 @@ def build_ixp_topology() -> Topology:
         )
         topo.nodes.add([rs])
         rs_nodes.append(rs)
-        
+
         # Add interface and connect to fabric
         rs_if = PeeringInterface(
-            layer="physical", 
+            layer="physical",
             data=PeeringInterfaceData(label=f"rs{i}:eth0", ipv4_address=f"192.0.2.{i}/24")
         )
         topo.nodes.add([rs_if])
         topo.nodes.add_topology_endpoints([rs_if], [rs])
-        
+
         # Connect to fabric switch
         fab_if = PeeringInterface(layer="physical", data=PeeringInterfaceData(label=f"fab:rs{i}"))
         topo.nodes.add([fab_if])
         topo.nodes.add_topology_endpoints([fab_if], [fabric])
-        
+
         topo.links.add(
             PeeringLink(layer="physical"),
             endpoint1_id=rs_if.id,
@@ -853,7 +847,7 @@ def build_ixp_topology() -> Topology:
         )
         topo.nodes.add([member])
         members.append(member)
-        
+
         # Add interface and connect to fabric
         mem_if = PeeringInterface(
             layer="physical",
@@ -861,12 +855,12 @@ def build_ixp_topology() -> Topology:
         )
         topo.nodes.add([mem_if])
         topo.nodes.add_topology_endpoints([mem_if], [member])
-        
+
         # Connect to fabric switch
         fab_if = PeeringInterface(layer="physical", data=PeeringInterfaceData(label=f"fab:member{i}"))
         topo.nodes.add([fab_if])
         topo.nodes.add_topology_endpoints([fab_if], [fabric])
-        
+
         topo.links.add(
             PeeringLink(layer="physical"),
             endpoint1_id=mem_if.id,
@@ -876,17 +870,17 @@ def build_ixp_topology() -> Topology:
 
     # 4. Automate Route Server Sessions
     logger.info("Automating RS sessions...")
-    
+
     # Query all members and all route servers
     all_members = topo.query.nodes().of_type(MemberRouter).models()
     all_rs = topo.query.nodes().of_type(RouteServer).models()
-    
+
     for member in all_members:
         for rs in all_rs:
             # Get peering interfaces
             mem_ep = topo.query.nodes().filter(q.field("id") == member.id).endpoints.models()[0]
             rs_ep = topo.query.nodes().filter(q.field("id") == rs.id).endpoints.models()[0]
-            
+
             # Create RS BGP Session
             session = BGPSession(
                 layer="bgp_rs",
@@ -902,26 +896,26 @@ def build_ixp_topology() -> Topology:
                 endpoint2_id=rs_ep.id,
                 layer="bgp_rs"
             )
-            
+
     return topo
 
 def analyze_peering(topo: Topology) -> None:
     """Analyze the IXP peering state using the Query API."""
     logger.info("Analyzing IXP peering...")
-    
+
     # 1. Verify RS session count
     # Use count() on all links first to see if they are there
     total_links = topo.query.links().count()
     logger.info(f"Total links in topology: {total_links}")
-    
+
     # Check layers
     layers = topo._nte.layers()
     logger.info(f"Layers in NTE: {layers}")
-    
+
     rs_sessions = topo.query.links().in_layer("bgp_rs").count()
     logger.info(f"Total RS BGP sessions: {rs_sessions}")
     assert rs_sessions == 8, f"Expected 8 sessions, got {rs_sessions}"
-    
+
     # 2. Find Potential Peers (connected to same fabric but not peered directly)
     members = topo.query.nodes().of_type(MemberRouter).models()
     for member in members:
@@ -933,7 +927,7 @@ def analyze_peering(topo: Topology) -> None:
             .filter(q.field("id") != member.id)
             .models()
         )
-        
+
         logger.info(f"Member {member.label} has {len(other_members)} potential direct peers")
 
 if __name__ == "__main__":
@@ -967,9 +961,7 @@ from __future__ import annotations
 import logging
 from dataclasses import dataclass
 
-
 logger = logging.getLogger(__name__)
-
 
 @dataclass(frozen=True)
 class BuiltLinks:
@@ -978,7 +970,6 @@ class BuiltLinks:
     fiber_name_by_id: dict[int, str]
     lambda_name_by_id: dict[int, str]
     ip_name_by_id: dict[int, str]
-
 
 def build_multi_layer_example():
     """Build an IP-over-optical topology and return it."""
@@ -1181,7 +1172,6 @@ def build_multi_layer_example():
         ip_name_by_id=ip_name_by_id,
     )
 
-
 def srlg_query(*, topo, built: BuiltLinks) -> dict[str, list[str]]:
     """Return SRLG groups: fiber name -> list of IP link names."""
 
@@ -1204,7 +1194,6 @@ def srlg_query(*, topo, built: BuiltLinks) -> dict[str, list[str]]:
         result[fiber_name] = ip_names
 
     return result
-
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
@@ -1267,7 +1256,6 @@ from [ank_pydantic](../ank_pydantic).blueprints.rules import (
 )
 from [ank_pydantic](../ank_pydantic).helpers.hierarchy import HierarchicalAllocator
 
-
 # ---------------------------------------------------------------------------
 # 1. Define model
 # ---------------------------------------------------------------------------
@@ -1283,7 +1271,6 @@ class NetDevice(BaseTopologyNode):
         network: str | None = None
 
     data: DataModel
-
 
 # ---------------------------------------------------------------------------
 # 2. Build topology: 3 sites, 3 tiers
@@ -1306,7 +1293,6 @@ SITE_DEVICES = {
         "access": {"count": 4, "asn": 65002},
     },
 }
-
 
 def build_topology() -> Topology:
     topology = Topology()
@@ -1347,11 +1333,9 @@ def build_topology() -> Topology:
 
     return topology
 
-
 def phy(topology):
     """Fresh physical-layer NetDevice query."""
     return topology.query.nodes().of_type(NetDevice).in_layer("physical")
-
 
 # ---------------------------------------------------------------------------
 # 3. Wire topology
@@ -1392,7 +1376,6 @@ def wire_topology(topology):
                     q.field("label").is_in([d_label, a_label])
                 )
                 pair.connect_as(patterns.full_mesh, auto_create_endpoints=True)
-
 
 # ---------------------------------------------------------------------------
 # Main
@@ -1518,7 +1501,6 @@ def main():
     print(f"  Errors: {report.error_count}")
     print(f"  Warnings: {report.warning_count}")
     print(f"  Info: {report.info_count}")
-
 
 if __name__ == "__main__":
     main()
@@ -1689,8 +1671,6 @@ See the notebook for a complete walkthrough.
 
 ## Usage
 
-
-
 ---
 
 ## Architecture
@@ -1802,8 +1782,6 @@ A clean, consistent API where there's one obvious way to perform each topology o
 ---
 
 ## Requirements
-
-
 
 ---
 

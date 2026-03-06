@@ -179,12 +179,12 @@ assertions:
 name: bfd-fast-failover
 description: |
   BFD fast failover example demonstrating OSPF and BGP reaction to link failures.
-  
+
   Topology:
   - Triangle of routers (r1, r2, r3)
   - r1 and r2 have a primary link with BFD enabled.
   - OSPF and BGP run over the links.
-  
+
   Scenario:
   - Simulation converges.
   - Event at tick 1000: r1-r2 interface goes down.
@@ -282,12 +282,12 @@ script:
 name: bgp-community-policy
 description: |
   BGP propagation example across multiple ASes.
-  
+
   Topology:
   - AS 65001 (r1): Originator.
   - AS 65002 (r2): Intermediate Transit.
   - AS 65003 (r3): External Peer.
-  
+
   Scenario:
   - r1 originates a network.
   - Observation: r2 and r3 receive the route.
@@ -776,13 +776,9 @@ cascade_rules:
 
 ## Usage
 
-
-
 ---
 
 ## Architecture
-
-
 
 ---
 
@@ -915,8 +911,6 @@ Links are first-class simulation participants, enabling future latency/loss mode
 ---
 
 ## Protocols Implemented
-
-
 
 ---
 
@@ -1165,24 +1159,24 @@ Active development with regular protocol additions and improvements.
 - [x] E2E test suite expansion (cross-protocol failure, ECMP, L3VPN, determinism validation)
 
 **v1.8 Data Center Fabric & EVPN (shipped 2026-02-28):**
-- [x] L2 bridge domains with per-BD FDB, MAC learning, aging, BUM flooding 
-- [x] VXLAN data plane — RFC 7348 encap/decap, VTEP endpoints, head-end replication 
-- [x] BGP EVPN control plane — Type-2 (MAC/IP), Type-3 (IMET), ARP suppression 
-- [x] EVPN Type-5 (IP prefix) + IRB with anycast gateway for inter-subnet routing 
-- [x] LACP/LAG with hash-based load distribution, LACP PDU negotiation 
-- [x] LLDP neighbor discovery with TTL aging, `show lldp neighbors` 
-- [x] EVPN multi-homing — ESI, DF election (service-carving), Type-1/4 routes 
+- [x] L2 bridge domains with per-BD FDB, MAC learning, aging, BUM flooding
+- [x] VXLAN data plane — RFC 7348 encap/decap, VTEP endpoints, head-end replication
+- [x] BGP EVPN control plane — Type-2 (MAC/IP), Type-3 (IMET), ARP suppression
+- [x] EVPN Type-5 (IP prefix) + IRB with anycast gateway for inter-subnet routing
+- [x] LACP/LAG with hash-based load distribution, LACP PDU negotiation
+- [x] LLDP neighbor discovery with TTL aging, `show lldp neighbors`
+- [x] EVPN multi-homing — ESI, DF election (service-carving), Type-1/4 routes
 
 **v1.9 Advanced Impairments & Topology Patterns (shipped 2026-02-28):**
-- [x] Uniform and Gaussian jitter models for wire-level latency variation 
-- [x] Pattern-based link impairments — declarative profiles, selectors, distance-based latency 
-- [x] Gravity-model traffic matrix generation with node importance weighting 
-- [x] Declarative failure injection — time-based, correlated, cascading failures with dry-run 
+- [x] Uniform and Gaussian jitter models for wire-level latency variation
+- [x] Pattern-based link impairments — declarative profiles, selectors, distance-based latency
+- [x] Gravity-model traffic matrix generation with node importance weighting
+- [x] Declarative failure injection — time-based, correlated, cascading failures with dry-run
 
 **v2.0 IPv6 Foundation (shipped 2026-03-01):**
-- [x] IPv6 forwarding with NDP , ICMPv6 
-- [x] OSPFv3 for IPv6 routing 
-- [x] MP-BGP IPv6 Unicast (AFI 2, SAFI 1) 
+- [x] IPv6 forwarding with NDP , ICMPv6
+- [x] OSPFv3 for IPv6 routing
+- [x] MP-BGP IPv6 Unicast (AFI 2, SAFI 1)
 - [x] Dual-stack integration and performance benchmarking
 
 ---

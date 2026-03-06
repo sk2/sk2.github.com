@@ -71,8 +71,6 @@ A Python-based CLI that bypasses slow AppleScript/TypeScript layers to read dire
 
 ## Requirements
 
-
-
 ---
 
 ## # Validated

@@ -173,8 +173,6 @@ Enable rapid, type-safe validation of network device state through streamlined d
 
 ## Requirements
 
-
-
 ---
 
 ## # Validated

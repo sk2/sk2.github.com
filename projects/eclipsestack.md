@@ -64,8 +64,6 @@ Enable high-fidelity HDR solar composites by providing sub-pixel alignment of ec
 
 ## Requirements
 
-
-
 ---
 
 ## # Validated

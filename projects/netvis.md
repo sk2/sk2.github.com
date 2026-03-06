@@ -28,7 +28,6 @@ section: network-automation
 
 ![Hero Image](/images/hero-diagram.svg)
 
-
 ---
 
 ## Concept
@@ -538,7 +537,6 @@ cargo test verification::rendering_quality::generate_visual_reference -- --ignor
 
 - Generated (unix seconds): 1770157724
 
-
 ```
 
 ### basic_topology.py
@@ -555,7 +553,6 @@ This example demonstrates:
 """
 
 import netvis
-
 
 def main():
     # Create a simple spine-leaf datacenter topology
@@ -664,7 +661,6 @@ def main():
     topo.render_to_file("spine-leaf.png", layout="hierarchical", scale=2.0)
 
     print("Done! Check output files.")
-
 
 if __name__ == "__main__":
     main()
@@ -779,19 +775,17 @@ All 4 phases complete (76–79), 10/10 requirements satisfied.
 - `src/annotation/` — text notes + circle/box/arrow callouts anchored to nodes; named layers with `--hide-layers`/`--show-layers`; SVG injection post-processing
 
 **Previous Milestones:**
-- v1.8 - Temporal & Interaction 
-- v1.7 - Interactive Browser Editor 
-- v1.4 - Production Scale & Real-World Integration 
-- v1.3 - Embed Readiness & API Stability 
-- v1.2 - Visual Polish & Production Hardening 
-- v1.1 - Network Analysis & Operations 
+- v1.8 - Temporal & Interaction
+- v1.7 - Interactive Browser Editor
+- v1.4 - Production Scale & Real-World Integration
+- v1.3 - Embed Readiness & API Stability
+- v1.2 - Visual Polish & Production Hardening
+- v1.1 - Network Analysis & Operations
 - v1.0.0 - Release Preparation
 
 ---
 
 ## Requirements
-
-
 
 ---
 

@@ -65,8 +65,6 @@ Process an inbox full of captures into correctly-organized next actions (project
 
 ## Requirements
 
-
-
 ---
 
 ## # Validated

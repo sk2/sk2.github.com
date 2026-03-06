@@ -72,8 +72,6 @@ Real-time satellite positions rendered on a terminal world map with pass predict
 
 ## Requirements
 
-
-
 ---
 
 ## # Validated

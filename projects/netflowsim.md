@@ -160,61 +160,59 @@ See `.planning/MILESTONES.md` for full milestone history.
 
 ## Requirements
 
-
-
 ---
 
 ## # Validated (v1.0)
 
-- ✓ Simulate 1M+ flows through 10k+ nodes in under 1 second — v1.0 
-- ✓ Support standard graph formats (GraphML/JSON) — v1.0 
-- ✓ Accurate analytic modeling (M/M/1, M/D/1) validated against theoretical benchmarks — v1.0 
-- ✓ Real-time visualization of congestion hotspots — v1.0 
-- ✓ FIB ingestion and routing matrix generation — v1.0 
-- ✓ Path tracing with ECMP support and loop detection — v1.0 
-- ✓ Integration with topogener and packet simulators — v1.0 
-- ✓ Statistical analysis with percentiles (p50/p90/p95/p99) — v1.0 
-- ✓ CDF plot generation for latency, throughput, queueing delay, link utilization — v1.0 
-- ✓ Automated bottleneck detection with Top-K ranking — v1.0 
-- ✓ Dynamic simulation with link/node failure events — v1.0 
-- ✓ Convergence tracking and success rate monitoring — v1.0 
+- ✓ Simulate 1M+ flows through 10k+ nodes in under 1 second — v1.0
+- ✓ Support standard graph formats (GraphML/JSON) — v1.0
+- ✓ Accurate analytic modeling (M/M/1, M/D/1) validated against theoretical benchmarks — v1.0
+- ✓ Real-time visualization of congestion hotspots — v1.0
+- ✓ FIB ingestion and routing matrix generation — v1.0
+- ✓ Path tracing with ECMP support and loop detection — v1.0
+- ✓ Integration with topogener and packet simulators — v1.0
+- ✓ Statistical analysis with percentiles (p50/p90/p95/p99) — v1.0
+- ✓ CDF plot generation for latency, throughput, queueing delay, link utilization — v1.0
+- ✓ Automated bottleneck detection with Top-K ranking — v1.0
+- ✓ Dynamic simulation with link/node failure events — v1.0
+- ✓ Convergence tracking and success rate monitoring — v1.0
 - ✓ N-1 failure analysis for critical component identification — v1.0
 
 ---
 
 ## # Validated (v1.1)
 
-- ✓ M/G/1 queuing model with Pollaczek-Khinchine formula — v1.1 
-- ✓ Heavy-tailed distributions (Pareto, LogNormal, Weibull) — v1.1 
-- ✓ Custom distribution framework with automatic CV² calculation — v1.1 
-- ✓ Queuing model validation suite (Little's Law, K-S tests, regression benchmarks) — v1.1 
-- ✓ Performance comparison across queuing models (parallel execution) — v1.1 
-- ✓ Schema evolution with backward compatibility (v1.0 → v1.1) — v1.1 
+- ✓ M/G/1 queuing model with Pollaczek-Khinchine formula — v1.1
+- ✓ Heavy-tailed distributions (Pareto, LogNormal, Weibull) — v1.1
+- ✓ Custom distribution framework with automatic CV² calculation — v1.1
+- ✓ Queuing model validation suite (Little's Law, K-S tests, regression benchmarks) — v1.1
+- ✓ Performance comparison across queuing models (parallel execution) — v1.1
+- ✓ Schema evolution with backward compatibility (v1.0 → v1.1) — v1.1
 - ✓ CLI config-driven execution with reproducible results — v1.1
 
 ---
 
 ## # Validated (v2.0)
 
-- ✓ 100k+ nodes analyzed in <10min — v2.0 
-- ✓ Multi-scale profiling infrastructure (25k-125k nodes) — v2.0 
-- ✓ Incremental routing cache for topology changes — v2.0 
-- ✓ Post-execution checkpointing with deterministic resume — v2.0 
-- ✓ Time-series behavior tracking over simulation duration — v2.0 
-- ✓ Bounded memory streaming with adaptive sampling — v2.0 
-- ✓ Rolling window metrics (mean/max/count) — v2.0 
-- ✓ Trend plot generation (utilization, bottlenecks, latency percentiles) — v2.0 
-- ✓ Bottleneck detection with  utilization threshold — v2.0 
-- ✓ Correlation analysis with time-lagged causality detection — v2.0 
-- ✓ Capacity planning projections with saturation timeline — v2.0 
-- ✓ Cascading failure detection with BFS depth/breadth metrics — v2.0 
-- ✓ Geographic zone definitions (region_id, availability_zone) — v2.0 
-- ✓ Inter-region latency zones (WAN link classification) — v2.0 
-- ✓ Region-aware traffic generation with locality bias — v2.0 
-- ✓ Region-filtered statistics and bottlenecks — v2.0 
-- ✓ GeoJSON export with region metadata — v2.0 
-- ✓ Feature matrix validation (30/30 scenarios passed) — v2.0 
-- ✓ Queuing theory correctness (16/16 Little's Law tests) — v2.0 
+- ✓ 100k+ nodes analyzed in <10min — v2.0
+- ✓ Multi-scale profiling infrastructure (25k-125k nodes) — v2.0
+- ✓ Incremental routing cache for topology changes — v2.0
+- ✓ Post-execution checkpointing with deterministic resume — v2.0
+- ✓ Time-series behavior tracking over simulation duration — v2.0
+- ✓ Bounded memory streaming with adaptive sampling — v2.0
+- ✓ Rolling window metrics (mean/max/count) — v2.0
+- ✓ Trend plot generation (utilization, bottlenecks, latency percentiles) — v2.0
+- ✓ Bottleneck detection with  utilization threshold — v2.0
+- ✓ Correlation analysis with time-lagged causality detection — v2.0
+- ✓ Capacity planning projections with saturation timeline — v2.0
+- ✓ Cascading failure detection with BFS depth/breadth metrics — v2.0
+- ✓ Geographic zone definitions (region_id, availability_zone) — v2.0
+- ✓ Inter-region latency zones (WAN link classification) — v2.0
+- ✓ Region-aware traffic generation with locality bias — v2.0
+- ✓ Region-filtered statistics and bottlenecks — v2.0
+- ✓ GeoJSON export with region metadata — v2.0
+- ✓ Feature matrix validation (30/30 scenarios passed) — v2.0
+- ✓ Queuing theory correctness (16/16 Little's Law tests) — v2.0
 - ✓ Backward compatibility (v1.0/v1.1 → v2.0 schema migration) — v2.0
 
 ---
@@ -309,7 +307,6 @@ This project is part of a seven-tool network automation ecosystem. netflowsim pr
 | **[v2.0] HashMap::with_capacity() for known sizes** | Eliminates reallocation overhead at scale | Reduced allocation churn | ✓ Good |
 | **[v2.0] Iteration-specific seed derivation (base_seed + index)** | Deterministic parallel execution without rayon hooks | Reproducible parallel Monte Carlo | ✓ Good |
 | **[v2.0] Restart-with-seed resume semantics** | Simpler than incremental, avoids rayon hooks | Post-execution checkpoints complete | — Pending (mid-execution deferred) |
-
 
 *Last updated: 2026-03-01 after v2.1 milestone start*
 

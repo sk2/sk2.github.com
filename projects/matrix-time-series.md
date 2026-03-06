@@ -34,8 +34,6 @@ Matrix Profile algorithms (STOMP, SCRIMP++, SCAMP) in native Rust for motif disc
 
 ## Architecture
 
-
-
 ---
 
 ## Features
@@ -120,8 +118,6 @@ matrix-profile-rs provides production-quality implementations with:
 ---
 
 ## Requirements
-
-
 
 ---
 
@@ -208,15 +204,13 @@ Polars DataFrame (via to_dataframe()) or Rust types
 
 ## Context
 
-
-
 ---
 
 ## # Codebase State
 
 **Shipped v1.0 (2026-02-22):** 8,705 LOC Rust across 7 phases, 26 plans
 - **matrix-profile-rs**: Primary crate with STOMP, SCAMP, SCRIMP++, SIMD, tiling, Polars integration
-- **stump-rs**: Reference implementation used during porting 
+- **stump-rs**: Reference implementation used during porting
 
 **Tech Stack:**
 - Rust 1.85+ (2024 edition)
@@ -320,7 +314,6 @@ None yet — v1.0 is initial release. Expecting feedback on:
 - Multi-core: Linear scaling with available cores
 - Memory: O(N) base + configurable tiling for N>10^6
 - Tiling: N=10^6 validated under 64MB budget
-
 
 *Last updated: 2026-02-22 after v1.0 milestone, v1.1 milestone started*
 

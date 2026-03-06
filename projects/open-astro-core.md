@@ -54,15 +54,13 @@ Downstream apps can rely on correct, consistent coordinate math, imaging intelli
 ## Current State
 
 **Shipped:** v0.2 Imaging Intelligence (2026-03-02)
-**Next milestone:** v0.3 Advanced Astro 
+**Next milestone:** v0.3 Advanced Astro
 
 8,030 lines of Rust across 7 crates. 163+ unit tests. Pure Rust stack (no C toolchain required).
 
 ---
 
 ## Milestones
-
-
 
 ---
 

@@ -7,7 +7,7 @@ section: projects
 
 <div class="badges-row">
   <span class="status-badge status-active">Active</span>
-  
+
 </div>
 
 [← Back to Projects](../projects)
@@ -51,8 +51,6 @@ The ability to capture, localize, and classify complex soundscapes on edge devic
 
 ## Context
 
-
-
 ---
 
 ## # Background
@@ -72,8 +70,6 @@ The ability to capture, localize, and classify complex soundscapes on edge devic
 ---
 
 ## Requirements
-
-
 
 ---
 

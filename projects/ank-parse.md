@@ -32,3 +32,5 @@ Ingestion pipeline for vendor documentation and configuration files. Extracts st
 ---
 
 [← Back to Network Automation](../network-automation)
+
+[← Back to Projects](../projects)

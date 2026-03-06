@@ -33,3 +33,5 @@ TUI dashboard that scans multiple development directories for projects with `.pl
 ---
 
 [← Back to Data Analytics](../data-analytics)
+
+[← Back to Projects](../projects)

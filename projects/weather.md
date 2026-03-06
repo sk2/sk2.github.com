@@ -78,8 +78,6 @@ The primary goal is to bypass the complexity of BOM's FTP delivery and binary fo
 
 ## Requirements
 
-
-
 ---
 
 ## # Validated

@@ -33,3 +33,5 @@ Rust TUI application for real-time heart rate variability monitoring. Connects t
 ---
 
 [← Back to Autonomous Systems](../agentic-systems)
+
+[← Back to Projects](../projects)

@@ -74,8 +74,6 @@ Energy-driven generative music that sounds professional and lets users quickly e
 
 ## Requirements
 
-
-
 ---
 
 ## # Validated

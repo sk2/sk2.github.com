@@ -7,7 +7,7 @@ section: projects
 
 <div class="badges-row">
   <span class="status-badge status-active">Active</span>
-  
+
 </div>
 
 [← Back to Projects](../projects)
@@ -60,8 +60,6 @@ Provides precise, automated control over exposure and focus specifically optimiz
 ---
 
 ## Requirements
-
-
 
 ---
 

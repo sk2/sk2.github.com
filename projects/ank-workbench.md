@@ -139,15 +139,13 @@ Network engineers can design, validate, and visualize network changes in one com
 
 **Goal:** The ANK Workbench is now functionally complete, type-safe, and covered by end-to-end testing. The project enters a maintenance phase, waiting for future strategic shifts like an AI-driven Model Context Protocol (MCP) server or real-time collaborative editing.
 
-**Target features:** 
+**Target features:**
 - All 93 phases across the 5 major milestones have been completed.
 - The project is now in a maintenance and operational state.
 
 ---
 
 ## What We've Built
-
-
 
 ---
 
@@ -343,18 +341,16 @@ Foundation infrastructure for dual-fidelity network validation:
 **Status:** Paused (phases 15-17 complete, phase 18 at 6/7 plans, phase 19 not started)
 
 Large-topology visualization performance:
-- Performance benchmarks and regression gates 
-- Worker-first compute with IndexedDB caching 
-- GPU-first renderer with LOD policies 
-- Scale navigation with search, selection, focus modes 
+- Performance benchmarks and regression gates
+- Worker-first compute with IndexedDB caching
+- GPU-first renderer with LOD policies
+- Scale navigation with search, selection, focus modes
 
 **Note:** Paused to pursue v1.3. Can be resumed or integrated into future milestones.
 
 ---
 
 ## Requirements
-
-
 
 ---
 

@@ -78,8 +78,6 @@ Run the same device workflow reliably across lab/real targets, with deterministi
 
 ## Requirements
 
-
-
 ---
 
 ## # Validated

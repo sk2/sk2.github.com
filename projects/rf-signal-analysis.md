@@ -115,8 +115,6 @@ Clean, understandable, stable codebase that reliably tracks aircraft in real-tim
 
 ## Requirements
 
-
-
 ---
 
 ## # Validated

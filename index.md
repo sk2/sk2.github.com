@@ -4,27 +4,43 @@ layout: default
 
 # Simon Knight
 
-I am a telecommunications engineer and software researcher based in Adelaide, South Australia. My work centers on the modeling, simulation, and coordination of complex systems—bridging the gap between high-level architectural intent and technical execution.
+Telecommunications engineer and software researcher based in Adelaide, South Australia. I build tools for modeling, simulating, and coordinating complex systems — turning architectural intent into working infrastructure.
 
-With a background spanning engineering and economics, I focus on building tools that provide structural clarity to large-scale infrastructure. Whether I'm developing deterministic protocol simulators, high-performance graph engines, or secure multi-agent architectures, my goal is to create systems that are as understandable as they are capable.
+My focus is structural clarity at scale: deterministic protocol simulators, graph topology engines, and multi-agent coordination systems. Each project starts from research (my PhD work on automated network configuration) and ships as working software.
 
-I believe that the most effective engineering solutions come from a combination of formal research and practical implementation. Grounded in my PhD work on automated network configuration, I continue to explore how better abstractions can simplify the management of increasingly complex digital and physical networks.
-
-**[🔍 Read the Insights: The Architecture of a Modern Network Automation Ecosystem](ecosystem)**
+**[Explore the Network Automation Toolchain](network-automation)**
 
 ## Featured Work
 
-- **[Network Simulator:](/projects/netsim)** A deterministic, tick-based simulator for validating large-scale network designs. It enables pre-deployment verification of routing protocols (OSPF, IS-IS, BGP), catching convergence and failover errors by modeling protocol-level behavior before production deployment.
-- **[Automatic Configuration Generation:](/projects/autonetkit)** A compiler-based framework for automated network provisioning. It transforms high-level architectural intent into validated device configurations, ensuring consistency across complex, multi-vendor infrastructures through formal graph transformations.
-- **[Network Visualization:](/projects/netvis)** A layout engine designed to transform dense, multi-layer topologies into clear, structured diagrams. It employs advanced algorithms to handle complex graph data, making the structure of large networks intuitive and actionable.
-- **[Network Modeling Engine:](/projects/ank-pydantic)** A modern Python library for defining and querying network topologies, backed by a high-performance Rust core (NTE). It provides a type-safe API for managing network intent and generating configurations at scale.
-- **[Brownfield Ingestion & Analysis:](/projects/configparsing)** A framework for extracting structured intent from legacy network state. It bridges the gap between manual CLI configurations and modern automation by identifying protocol relationships and topology from unstructured data.
+<div class="project-grid">
+<div class="project-card">
+  <h3 class="card-title"><a href="/projects/netsim">Network Simulator</a></h3>
+  <div class="badges-row card-badges"><span class="stack-badge">Rust</span></div>
+  <p class="card-description">Deterministic, tick-based protocol simulator that validates routing configurations (OSPF, IS-IS, BGP) before deployment. Models control-plane convergence at protocol level.</p>
+</div>
+
+<div class="project-card">
+  <h3 class="card-title"><a href="/projects/ank-pydantic">Network Modeling Library</a></h3>
+  <div class="badges-row card-badges"><span class="stack-badge">Python</span><span class="stack-badge">Rust</span></div>
+  <p class="card-description">Type-safe Python API for defining network topologies, backed by a Rust graph engine (NTE). Composable query system with domain models for IS-IS, MPLS, EVPN.</p>
+</div>
+
+<div class="project-card">
+  <h3 class="card-title"><a href="/projects/netvis">Visualization Engine</a></h3>
+  <div class="badges-row card-badges"><span class="stack-badge">Rust</span><span class="stack-badge">TypeScript</span></div>
+  <p class="card-description">Layout engine for dense, multi-layer network topologies. Edge bundling, hierarchical stacking, and geographic positioning across thousands of nodes.</p>
+</div>
+
+<div class="project-card">
+  <h3 class="card-title"><a href="/projects/configparsing">Brownfield Ingestion</a></h3>
+  <div class="badges-row card-badges"><span class="stack-badge">Python</span></div>
+  <p class="card-description">Extracts structured intent from legacy network configurations using LLM-powered RAG, identifying protocol relationships and topology from unstructured CLI output.</p>
+</div>
+</div>
 
 ## Background
 
-My work is grounded in a background in telecommunications engineering and economics. I completed a Bachelor of Engineering in Telecommunications with First Class Honours and a Bachelor of Economics at the University of Adelaide.
-
-I later pursued research at the University of South Australia, where I earned a PhD in Computer Science (2017). My research focused on the abstractions and transformations required for automated network configuration, leading to the development of the AutoNetkit modeling framework.
+Bachelor of Engineering (Telecommunications, First Class Honours) and Bachelor of Economics from the University of Adelaide. PhD in Computer Science (2017) from the University of South Australia, where I developed the AutoNetKit modeling framework for automated network configuration.
 
 - [Read my PhD thesis](thesis)
 - [View CV](cv)

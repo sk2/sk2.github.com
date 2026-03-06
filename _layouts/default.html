@@ -13,8 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
     <!-- Syntax highlighting -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" media="(prefers-color-scheme: dark)">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css" media="(prefers-color-scheme: light)">
+    <link id="hljs-theme" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
 
     <!-- Privacy-friendly analytics by Plausible -->
     <script async src="https://plausible.io/js/pa-yCne4NWB89I_kfbSuPYEI.js"></script>
@@ -28,20 +27,20 @@
       <header class="site-header">
         <div class="header-content">
           <a href="{{ '/' | relative_url }}" class="site-title">Simon Knight</a>
+          <button class="hamburger-btn" aria-label="Toggle navigation" aria-expanded="false" onclick="this.nextElementSibling.classList.toggle('nav-open'); this.setAttribute('aria-expanded', this.nextElementSibling.classList.contains('nav-open'))">&#9776;</button>
           <nav class="site-nav">
             <a href="{{ '/' | relative_url }}" {% if page.url == '/' or page.url == '/index.html' %}class="active"{% endif %}>About</a>
-            <a href="{{ '/ecosystem' | relative_url }}" {% if page.url == '/ecosystem' or page.url == '/ecosystem.html' %}class="active"{% endif %}>Architecture</a>
             <div class="nav-dropdown">
-              <a href="{{ '/projects' | relative_url }}" class="nav-dropdown-trigger{% if page.url == '/projects.html' or page.url == '/projects/' or page.section == 'projects' or page.url contains 'data-analytics' or page.section == 'data-analytics' or page.url contains 'agentic-systems' or page.section == 'agentic-systems' or page.url contains 'photography' or page.section == 'photography' or page.url contains 'signal-processing' or page.section == 'signal-processing' %}  active{% endif %}">Projects <span class="nav-caret">&#9662;</span></a>
+              <a href="{{ '/projects' | relative_url }}" class="nav-dropdown-trigger{% if page.url == '/projects.html' or page.url == '/projects/' or page.section == 'projects' or page.url contains 'network-automation' or page.section == 'network-automation' or page.url contains 'signal-processing' or page.section == 'signal-processing' or page.url contains 'photography' or page.section == 'photography' or page.url contains 'data-analytics' or page.section == 'data-analytics' or page.url contains 'agentic-systems' or page.section == 'agentic-systems' %}  active{% endif %}">Projects <span class="nav-caret">&#9662;</span></a>
               <div class="nav-dropdown-menu">
                 <a href="{{ '/projects' | relative_url }}">All Projects</a>
-                <a href="{{ '/data-analytics' | relative_url }}" {% if page.url contains 'data-analytics' or page.section == 'data-analytics' %}class="active"{% endif %}>Data Analytics</a>
-                <a href="{{ '/agentic-systems' | relative_url }}" {% if page.url contains 'agentic-systems' or page.section == 'agentic-systems' %}class="active"{% endif %}>Agentic Systems</a>
-                <a href="{{ '/photography' | relative_url }}" {% if page.url contains 'photography' or page.section == 'photography' %}class="active"{% endif %}>Photography</a>
+                <a href="{{ '/network-automation' | relative_url }}" {% if page.url contains 'network-automation' or page.section == 'network-automation' %}class="active"{% endif %}>Network Automation</a>
                 <a href="{{ '/signal-processing' | relative_url }}" {% if page.url contains 'signal-processing' or page.section == 'signal-processing' %}class="active"{% endif %}>Signal Processing</a>
+                <a href="{{ '/photography' | relative_url }}" {% if page.url contains 'photography' or page.section == 'photography' %}class="active"{% endif %}>Photography</a>
+                <a href="{{ '/data-analytics' | relative_url }}" {% if page.url contains 'data-analytics' or page.section == 'data-analytics' %}class="active"{% endif %}>Data & Analytics</a>
+                <a href="{{ '/agentic-systems' | relative_url }}" {% if page.url contains 'agentic-systems' or page.section == 'agentic-systems' %}class="active"{% endif %}>Autonomous Systems</a>
               </div>
             </div>
-            <a href="{{ '/network-automation' | relative_url }}" {% if page.url contains 'network-automation' or page.section == 'network-automation' %}class="active"{% endif %}>Network Automation</a>
           </nav>
         </div>
       </header>
@@ -100,7 +99,7 @@
       }
       .lightbox.active { display: flex; }
       .lightbox-card {
-        background: #fff;
+        background: var(--lightbox-card-bg, var(--bg-primary));
         border-radius: 8px;
         padding: 1.5rem;
         max-width: 70vw;
@@ -119,11 +118,11 @@
         background: none;
         border: none;
         font-size: 1.4rem;
-        color: #999;
+        color: var(--lightbox-close-color, #999);
         cursor: pointer;
         line-height: 1;
       }
-      .lightbox-close:hover { color: #333; }
+      .lightbox-close:hover { color: var(--lightbox-close-hover, var(--text-primary)); }
       .lightbox-img {
         max-width: 100%;
         max-height: 70vh;
@@ -132,7 +131,7 @@
       }
       .lightbox-caption {
         margin-top: 0.75rem;
-        color: #666;
+        color: var(--lightbox-caption-color, var(--text-tertiary));
         font-size: 0.85em;
         text-align: center;
       }
@@ -162,8 +161,8 @@
         right: 0;
         width: 100%;
         padding: 12px;
-        background: linear-gradient(transparent, rgba(20, 20, 20, 0.95) 40%);
-        color: #aaa;
+        background: linear-gradient(transparent, var(--code-expand-gradient, rgba(20, 20, 20, 0.95)) 40%);
+        color: var(--code-expand-color, #aaa);
         border: none;
         cursor: pointer;
         font-size: 0.8rem;
@@ -174,19 +173,30 @@
         transition: color 0.2s ease;
       }
       .code-expand-btn:hover {
-        color: #fff;
+        color: var(--code-expand-hover, #fff);
       }
       .code-content.expanded + .code-expand-btn {
         position: static;
-        background: #1a1a1a;
+        background: var(--code-expand-bg, #1a1a1a);
         margin-bottom: 1.5rem;
-        border-top: 1px solid #333;
+        border-top: 1px solid var(--code-expand-border, #333);
       }
     </style>
 
     <script>
       // Set dark mode by default
       document.documentElement.setAttribute('data-theme', 'dark');
+
+      function syncHljsTheme() {
+        var theme = document.documentElement.getAttribute('data-theme');
+        var link = document.getElementById('hljs-theme');
+        if (link) {
+          link.href = theme === 'dark'
+            ? 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css'
+            : 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css';
+        }
+      }
+      syncHljsTheme();
 
       // Syntax highlighting
       document.addEventListener('DOMContentLoaded', function() {
@@ -265,6 +275,27 @@
         document.addEventListener('keydown', function(e) {
           if (e.key === 'Escape') closeLightbox();
         });
+
+        // Click/touch support for dropdown
+        var dropdownTrigger = document.querySelector('.nav-dropdown-trigger');
+        if (dropdownTrigger) {
+          dropdownTrigger.addEventListener('click', function(e) {
+            var menu = this.parentElement.querySelector('.nav-dropdown-menu');
+            if (menu) {
+              var isVisible = menu.style.display === 'block';
+              menu.style.display = isVisible ? '' : 'block';
+              if (!isVisible) {
+                e.preventDefault();
+              }
+            }
+          });
+          document.addEventListener('click', function(e) {
+            if (!e.target.closest('.nav-dropdown')) {
+              var menu = document.querySelector('.nav-dropdown-menu');
+              if (menu) menu.style.display = '';
+            }
+          });
+        }
       });
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>

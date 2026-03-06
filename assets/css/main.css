@@ -15,6 +15,28 @@
   --border: #e2e8f0;
   --code-bg: #f7fafc;
   --shadow: rgba(0, 0, 0, 0.1);
+  --card-bg: #ffffff;
+  --card-border: #dee2e6;
+  --card-shadow: rgba(0, 0, 0, 0.02);
+  --badge-status-bg: #e3f2fd;
+  --badge-status-color: #495057;
+  --badge-status-border: #dee2e6;
+  --badge-stack-bg: #f8f9fa;
+  --badge-stack-color: #6c757d;
+  --badge-stack-border: #e9ecef;
+  --search-border: #ced4da;
+  --search-focus-border: #80bdff;
+  --search-focus-shadow: rgba(0, 123, 255, 0.25);
+  --lightbox-bg: rgba(0, 0, 0, 0.5);
+  --lightbox-card-bg: var(--bg-primary);
+  --lightbox-close-color: #999;
+  --lightbox-close-hover: var(--text-primary);
+  --lightbox-caption-color: var(--text-tertiary);
+  --code-expand-gradient: rgba(247, 250, 252, 0.95);
+  --code-expand-bg: var(--code-bg);
+  --code-expand-border: var(--border);
+  --code-expand-color: var(--text-tertiary);
+  --code-expand-hover: var(--text-primary);
 
   /* Typography */
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
@@ -50,6 +72,28 @@
   --border: #334155;
   --code-bg: #1e293b;
   --shadow: rgba(0, 0, 0, 0.3);
+  --card-bg: #1e293b;
+  --card-border: #334155;
+  --card-shadow: rgba(0, 0, 0, 0.15);
+  --badge-status-bg: #1e3a5f;
+  --badge-status-color: #93c5fd;
+  --badge-status-border: #2563eb40;
+  --badge-stack-bg: #1e293b;
+  --badge-stack-color: #94a3b8;
+  --badge-stack-border: #334155;
+  --search-border: #334155;
+  --search-focus-border: #3b82f6;
+  --search-focus-shadow: rgba(59, 130, 246, 0.25);
+  --lightbox-bg: rgba(0, 0, 0, 0.7);
+  --lightbox-card-bg: #1e293b;
+  --lightbox-close-color: #94a3b8;
+  --lightbox-close-hover: #f1f5f9;
+  --lightbox-caption-color: #94a3b8;
+  --code-expand-gradient: rgba(30, 41, 59, 0.95);
+  --code-expand-bg: #1e293b;
+  --code-expand-border: #334155;
+  --code-expand-color: #94a3b8;
+  --code-expand-hover: #f1f5f9;
 }
 
 /* ============================================
@@ -328,6 +372,8 @@ h1 {
 h2 {
   font-size: 1.875rem;
   margin-top: var(--space-2xl);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--border);
   letter-spacing: -0.01em;
 }
 
@@ -508,12 +554,22 @@ img {
    Project Cards (for projects page)
    ============================================ */
 
+/* Project grid (from projects.md) */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
 .project-card {
-  background-color: var(--bg-secondary);
-  border: 1px solid var(--border);
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
   border-radius: var(--border-radius);
-  padding: var(--space-lg);
-  margin-bottom: var(--space-xl);
+  padding: 1.2rem;
+  box-shadow: 0 2px 4px var(--card-shadow);
+  display: flex;
+  flex-direction: column;
   transition: all var(--transition-normal);
 }
 
@@ -521,6 +577,89 @@ img {
   border-color: var(--accent);
   box-shadow: 0 4px 12px var(--shadow);
   transform: translateY(-2px);
+}
+
+.project-thumbnail {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  border: 1px solid var(--border);
+}
+
+/* Badge theme overrides */
+.badges-row {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.status-badge {
+  padding: 0.2em 0.6em;
+  border-radius: 4px;
+  font-size: 0.75em;
+  font-weight: 600;
+  background-color: var(--badge-status-bg);
+  color: var(--badge-status-color);
+  border: 1px solid var(--badge-status-border);
+}
+
+.stack-badge {
+  padding: 0.2em 0.6em;
+  border-radius: 4px;
+  font-size: 0.75em;
+  font-weight: 500;
+  background-color: var(--badge-stack-bg);
+  color: var(--badge-stack-color);
+  border: 1px solid var(--badge-stack-border);
+}
+
+/* Search */
+.search-container {
+  margin-bottom: 2rem;
+}
+
+#projectSearch {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border-radius: 6px;
+  border: 1px solid var(--search-border);
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  font-size: 1rem;
+  box-sizing: border-box;
+  outline: none;
+}
+
+#projectSearch:focus {
+  border-color: var(--search-focus-border);
+  box-shadow: 0 0 0 0.2rem var(--search-focus-shadow);
+}
+
+.recent-activity-list {
+  line-height: 1.6;
+  font-size: 0.95em;
+}
+
+.recent-activity-list li {
+  margin-bottom: 0.5rem;
+}
+
+/* Card element styles */
+.card-title {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.card-badges {
+  margin-bottom: 0.8rem;
+}
+
+.card-description {
+  font-size: 0.9em;
+  margin-top: 0;
 }
 
 .project-card h2 {
@@ -545,18 +684,8 @@ img {
 }
 
 /* ============================================
-   Status badges
+   Status badges (color variants)
    ============================================ */
-
-.status-badge {
-  display: inline-block;
-  padding: 0.25rem 0.75rem;
-  border-radius: 12px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
 
 .status-active {
   background-color: #10b98120;
@@ -571,6 +700,62 @@ img {
 .status-complete {
   background-color: #8b5cf620;
   color: #7c3aed;
+}
+
+/* ============================================
+   Table of contents panel
+   ============================================ */
+
+.site-content > ul:first-of-type,
+.contents-list {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--border-radius);
+  padding: var(--space-md) var(--space-lg);
+  margin-bottom: var(--space-xl);
+  list-style: none;
+}
+
+.site-content > ul:first-of-type li,
+.contents-list li {
+  margin-bottom: 0.3rem;
+}
+
+/* ============================================
+   Hamburger menu button
+   ============================================ */
+
+.hamburger-btn {
+  display: none;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.4rem 0.6rem;
+  cursor: pointer;
+  color: var(--text-secondary);
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.hamburger-btn:hover {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+/* ============================================
+   Focus indicators
+   ============================================ */
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.nav-dropdown-trigger:focus-visible + .nav-dropdown-menu {
+  display: block;
 }
 
 /* ============================================
@@ -594,14 +779,24 @@ img {
     font-size: 1.25rem;
   }
 
+  .hamburger-btn {
+    display: block;
+  }
+
   .header-content {
     flex-direction: column;
     align-items: flex-start;
   }
 
   .site-nav {
+    display: none;
     width: 100%;
-    gap: var(--space-md);
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .site-nav.nav-open {
+    display: flex;
   }
 
   .nav-dropdown-menu {

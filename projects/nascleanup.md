@@ -1,12 +1,12 @@
 ---
 layout: default
-section: data-analytics
+section: projects
 ---
 
 # NAS Cleanup & Intelligence
 
 <div class="badges-row">
-  <span class="status-badge status-active">Active</span>
+  <span class="status-badge status-active">Recently Updated</span>
   <span class="stack-badge">Rust</span>
 </div>
 
@@ -15,6 +15,12 @@ section: data-analytics
 [← Back to Projects](../projects)
 
 ---
+
+## Contents
+
+- [Concept](#concept)
+- [Architecture](#architecture)
+- [Current Status](#current-status)
 
 ## Concept
 
@@ -32,4 +38,44 @@ Rust CLI for managing large-scale Synology NAS file systems. Performs duplicate 
 
 ---
 
+## Quick Facts
+
+| | |
+|---|---|
+| **Status** | Recently Updated |
+| **Stack** | Rust |
+
+---
+
+## Goal
+
+Develop a high-performance Rust application to manage large-scale Synology NAS file systems, focusing on duplicate detection, astrophotography optimization, conventional RAW photography management, and intelligent organization.
+
+---
+
+## Key Components
+
+- **Scanner:** Parallel directory walker utilizing `jwalk` or `rayon`.
+- **Hasher:** `blake3` based content hashing.
+- **Deduplicator:** Logic to identify bit-for-bit and fuzzy duplicates.
+- **Cleaner:** Workflow-specific cleanup rules (e.g., ASIair/Astrophotography and Conventional RAW/Sidecar management).
+- **TUI:** Terminal interface for reviewing and acting on findings.
+
+---
+
+## Tech Stack
+
+- **Rust:** `tokio`, `rayon`, `blake3`, `jwalk`, `ignore`, `clap` (CLI), `ratatui` (TUI).
+- **DSM Integration:** `syno-api` (if available/needed), BTRFS ioctls.
+
+---
+
+## Current Status
+
+2026-03-03 - Completed 10-01-PLAN.md (Doctor Diagnostics)
+
+---
+
 [← Back to Data Analytics](../data-analytics)
+
+[← Back to Projects](../projects)

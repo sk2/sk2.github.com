@@ -43,8 +43,9 @@ None currently — all active projects have pages.
 
 ## Technical
 
-- Jekyll site using the minimal theme with custom layout in `_layouts/default.html`
+- Eleventy (11ty) static site with Liquid templates and custom layout in `_layouts/default.html`
 - CSS in `assets/css/main.css` with CSS custom properties for light/dark themes
 - Navigation uses a dropdown for project categories under "Projects"
-- Build: `./script/bootstrap && ./script/cibuild`
+- Site data in `_data/site.json` (title, description)
+- Build: `npm install && npx @11ty/eleventy` (or `./script/bootstrap && ./script/cibuild`)
 - Deploy: push to `master` branch (GitHub Pages)

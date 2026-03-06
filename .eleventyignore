@@ -1,0 +1,11 @@
+README.md
+CLAUDE.md
+WRITING_STYLE.md
+WEBSITE_TODO.md
+docs/
+Gemfile
+Gemfile.lock
+*.gemspec
+node_modules/
+vendor/
+update_projects.py

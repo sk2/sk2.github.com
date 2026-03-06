@@ -38,6 +38,14 @@
   --code-expand-color: var(--text-tertiary);
   --code-expand-hover: var(--text-primary);
 
+  /* Status badge variants */
+  --status-active-bg: #10b98120;
+  --status-active-color: #059669;
+  --status-planning-bg: #3b82f620;
+  --status-planning-color: #2563eb;
+  --status-complete-bg: #8b5cf620;
+  --status-complete-color: #7c3aed;
+
   /* Typography */
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
@@ -94,6 +102,14 @@
   --code-expand-border: #334155;
   --code-expand-color: #94a3b8;
   --code-expand-hover: #f1f5f9;
+
+  /* Status badge variants */
+  --status-active-bg: #10b98130;
+  --status-active-color: #34d399;
+  --status-planning-bg: #3b82f630;
+  --status-planning-color: #60a5fa;
+  --status-complete-bg: #8b5cf630;
+  --status-complete-color: #a78bfa;
 }
 
 /* ============================================
@@ -688,18 +704,18 @@ img {
    ============================================ */
 
 .status-active {
-  background-color: #10b98120;
-  color: #059669;
+  background-color: var(--status-active-bg);
+  color: var(--status-active-color);
 }
 
 .status-planning {
-  background-color: #3b82f620;
-  color: #2563eb;
+  background-color: var(--status-planning-bg);
+  color: var(--status-planning-color);
 }
 
 .status-complete {
-  background-color: #8b5cf620;
-  color: #7c3aed;
+  background-color: var(--status-complete-bg);
+  color: var(--status-complete-color);
 }
 
 /* ============================================
@@ -784,8 +800,11 @@ select:focus-visible {
   }
 
   .header-content {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .site-title {
+    flex: 1;
   }
 
   .site-nav {
@@ -793,6 +812,7 @@ select:focus-visible {
     width: 100%;
     flex-direction: column;
     gap: var(--space-sm);
+    order: 10;
   }
 
   .site-nav.nav-open {

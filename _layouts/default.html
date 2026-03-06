@@ -7,10 +7,19 @@
 
     <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title | default: "Simon Knight" }}</title>
 
-    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+    <link rel="stylesheet" href="/assets/css/main.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Prevent flash of wrong theme -->
+    <script>
+      (function() {
+        var saved = localStorage.getItem('theme');
+        var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
 
     <!-- Syntax highlighting -->
     <link id="hljs-theme" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
@@ -26,22 +35,26 @@
     <div class="container">
       <header class="site-header">
         <div class="header-content">
-          <a href="{{ '/' | relative_url }}" class="site-title">Simon Knight</a>
+          <a href="/" class="site-title">Simon Knight</a>
           <button class="hamburger-btn" aria-label="Toggle navigation" aria-expanded="false" onclick="this.nextElementSibling.classList.toggle('nav-open'); this.setAttribute('aria-expanded', this.nextElementSibling.classList.contains('nav-open'))">&#9776;</button>
           <nav class="site-nav">
-            <a href="{{ '/' | relative_url }}" {% if page.url == '/' or page.url == '/index.html' %}class="active"{% endif %}>About</a>
+            <a href="/" {% if page.url == '/' or page.url == '/index.html' %}class="active"{% endif %}>About</a>
             <div class="nav-dropdown">
-              <a href="{{ '/projects' | relative_url }}" class="nav-dropdown-trigger{% if page.url == '/projects.html' or page.url == '/projects/' or page.section == 'projects' or page.url contains 'network-automation' or page.section == 'network-automation' or page.url contains 'signal-processing' or page.section == 'signal-processing' or page.url contains 'photography' or page.section == 'photography' or page.url contains 'data-analytics' or page.section == 'data-analytics' or page.url contains 'agentic-systems' or page.section == 'agentic-systems' %}  active{% endif %}">Projects <span class="nav-caret">&#9662;</span></a>
+              <a href="/projects" class="nav-dropdown-trigger{% if page.url == '/projects.html' or page.url == '/projects/' or page.section == 'projects' or page.url contains 'network-automation' or page.section == 'network-automation' or page.url contains 'signal-processing' or page.section == 'signal-processing' or page.url contains 'photography' or page.section == 'photography' or page.url contains 'data-analytics' or page.section == 'data-analytics' or page.url contains 'agentic-systems' or page.section == 'agentic-systems' %}  active{% endif %}">Projects <span class="nav-caret">&#9662;</span></a>
               <div class="nav-dropdown-menu">
-                <a href="{{ '/projects' | relative_url }}">All Projects</a>
-                <a href="{{ '/network-automation' | relative_url }}" {% if page.url contains 'network-automation' or page.section == 'network-automation' %}class="active"{% endif %}>Network Automation</a>
-                <a href="{{ '/signal-processing' | relative_url }}" {% if page.url contains 'signal-processing' or page.section == 'signal-processing' %}class="active"{% endif %}>Signal Processing</a>
-                <a href="{{ '/photography' | relative_url }}" {% if page.url contains 'photography' or page.section == 'photography' %}class="active"{% endif %}>Photography</a>
-                <a href="{{ '/data-analytics' | relative_url }}" {% if page.url contains 'data-analytics' or page.section == 'data-analytics' %}class="active"{% endif %}>Data & Analytics</a>
-                <a href="{{ '/agentic-systems' | relative_url }}" {% if page.url contains 'agentic-systems' or page.section == 'agentic-systems' %}class="active"{% endif %}>Autonomous Systems</a>
+                <a href="/projects">All Projects</a>
+                <a href="/network-automation" {% if page.url contains 'network-automation' or page.section == 'network-automation' %}class="active"{% endif %}>Network Automation</a>
+                <a href="/signal-processing" {% if page.url contains 'signal-processing' or page.section == 'signal-processing' %}class="active"{% endif %}>Signal Processing</a>
+                <a href="/photography" {% if page.url contains 'photography' or page.section == 'photography' %}class="active"{% endif %}>Photography</a>
+                <a href="/data-analytics" {% if page.url contains 'data-analytics' or page.section == 'data-analytics' %}class="active"{% endif %}>Data & Analytics</a>
+                <a href="/agentic-systems" {% if page.url contains 'agentic-systems' or page.section == 'agentic-systems' %}class="active"{% endif %}>Autonomous Systems</a>
               </div>
             </div>
           </nav>
+          <button class="theme-toggle" aria-label="Toggle theme" onclick="(function(btn){var html=document.documentElement;var next=html.getAttribute('data-theme')==='dark'?'light':'dark';html.setAttribute('data-theme',next);localStorage.setItem('theme',next);syncHljsTheme();})(this)">
+            <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+            <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          </button>
         </div>
       </header>
 
@@ -50,15 +63,15 @@
         <nav class="breadcrumb" aria-label="Breadcrumb">
           {% case page.section %}
           {% when 'network-automation' %}
-            <a href="{{ '/network-automation' | relative_url }}">← Back to Network Automation</a>
+            <a href="/network-automation">← Back to Network Automation</a>
           {% when 'signal-processing' %}
-            <a href="{{ '/signal-processing' | relative_url }}">← Back to Signal Processing</a>
+            <a href="/signal-processing">← Back to Signal Processing</a>
           {% when 'data-analytics' %}
-            <a href="{{ '/data-analytics' | relative_url }}">← Back to Data Analytics</a>
+            <a href="/data-analytics">← Back to Data Analytics</a>
           {% when 'agentic-systems' %}
-            <a href="{{ '/agentic-systems' | relative_url }}">← Back to Autonomous Systems</a>
+            <a href="/agentic-systems">← Back to Autonomous Systems</a>
           {% when 'photography' %}
-            <a href="{{ '/photography' | relative_url }}">← Back to Photography</a>
+            <a href="/photography">← Back to Photography</a>
           {% endcase %}
         </nav>
         {% endif %}
@@ -67,7 +80,7 @@
 
       <footer class="site-footer">
         <div class="footer-content">
-          <p>&copy; {{ 'now' | date: "%Y" }} Simon Knight. Built with Jekyll.</p>
+          <p>&copy; {{ 'now' | date: "%Y" }} Simon Knight. Built with Eleventy.</p>
           <div class="social-links">
             <a href="https://github.com/sk2" target="_blank" rel="noopener noreferrer">GitHub</a>
             <a href="https://scholar.google.com.au/citations?user=BJ1Efr8AAAAJ" target="_blank" rel="noopener noreferrer">Scholar</a>
@@ -104,7 +117,7 @@
         padding: 1.5rem;
         max-width: 70vw;
         max-height: 85vh;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.24);
+        box-shadow: 0 8px 32px var(--shadow);
         cursor: default;
         position: relative;
         display: flex;
@@ -184,9 +197,6 @@
     </style>
 
     <script>
-      // Set dark mode by default
-      document.documentElement.setAttribute('data-theme', 'dark');
-
       function syncHljsTheme() {
         var theme = document.documentElement.getAttribute('data-theme');
         var link = document.getElementById('hljs-theme');

@@ -36,7 +36,7 @@ Focused on network engineering, autonomous systems, and signal processing.
 ```
 
 the workflow follows a linear pipeline: generate or model a topology, run a simulation against it, visualize the results, and export device configurations. python typescript ank-workbench">
-  <h3 class="card-title"><a href="projects/ank-workbench">Automation Workbench</a></h3>
+  <h3 class="card-title"><a href="projects/ank-workbench">Network Automation Workbench</a></h3>
   <div class="badges-row card-badges"><span class="status-badge status-active">Recently Updated</span> <span class="stack-badge">Python</span><span class="stack-badge">TypeScript</span></div>
   <p class="card-description">Orchestration platform that integrates the ANK ecosystem tools — [Topology Generator](../topogen), [Network Modeling & Configuration Library](../ank_pydantic), [Network Simulator](../netsim), [Network Visualization Engine](../netvis) — into a single web interface. Engineers define topologies, generate configurations, run simulations, and inspect results without switching between CLI tools. ```
 ┌──────────────────────────────────────────────────────────────────┐
@@ -112,7 +112,7 @@ The workflow follows a linear pipeline: generate or model a topology, run a simu
 </div>
 
 <div class="project-card" data-search="topology engine core rust-based graph topology engine with python bindings via pyo3. takes network topologies — nodes, edges, layers, metadata — and stores them in a dual-write architecture: structural graph (petgraph stabledigraph) plus columnar attribute store (polars dataframes). mutations update both atomically; if either write fails, the transaction rolls back. rust python typescript polars ank-nte">
-  <h3 class="card-title"><a href="projects/ank-nte">Topology Engine Core</a></h3>
+  <h3 class="card-title"><a href="projects/ank-nte">Network Topology Engine</a></h3>
   <div class="badges-row card-badges"><span class="status-badge status-active">Recently Updated</span> <span class="stack-badge">Rust</span><span class="stack-badge">Python</span><span class="stack-badge">TypeScript</span><span class="stack-badge">Polars</span></div>
   <p class="card-description">Rust-based graph topology engine with Python bindings via PyO3. Takes network topologies — nodes, edges, layers, metadata — and stores them in a dual-write architecture: structural graph (petgraph StableDiGraph) plus columnar attribute store (Polars DataFrames). Mutations update both atomically; if either write fails, the transaction rolls back.</p>
 </div>
@@ -124,7 +124,7 @@ The workflow follows a linear pipeline: generate or model a topology, run a simu
 </div>
 
 <div class="project-card" data-search="visualization engine rust-based network topology layout and visualization engine. takes multi-layer network topologies (via petgraph) and renders them using layout algorithms that minimize edge crossings, bundle related connections, and respect hierarchical or geographic structure. outputs svg, pdf, and png with interactive browser embedding via wasm. rust python typescript netvis">
-  <h3 class="card-title"><a href="projects/netvis">Visualization Engine</a></h3>
+  <h3 class="card-title"><a href="projects/netvis">Network Visualization Engine</a></h3>
   <div class="badges-row card-badges"><span class="status-badge status-active">Recently Updated</span> <span class="stack-badge">Rust</span><span class="stack-badge">Python</span><span class="stack-badge">TypeScript</span></div>
   <img src="../images/hero-diagram.svg" class="project-thumbnail" alt="Visualization Engine diagram" />
   <p class="card-description">Rust-based network topology layout and visualization engine. Takes multi-layer network topologies (via petgraph) and renders them using layout algorithms that minimize edge crossings, bundle related connections, and respect hierarchical or geographic structure. Outputs SVG, PDF, and PNG with interactive browser embedding via WASM.</p>

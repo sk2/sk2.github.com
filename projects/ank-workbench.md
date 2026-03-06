@@ -3,7 +3,7 @@ layout: default
 section: network-automation
 ---
 
-# Automation Workbench
+# Network Automation Workbench
 
 <div class="badges-row">
   <span class="status-badge status-active">Recently Updated</span>
@@ -94,14 +94,14 @@ Export GitOps bundles with generated GitHub Actions and GitLab CI validation pip
 
 ## What This Is
 
-**An orchestration platform** that integrates the ANK ecosystem tools (TopoGen, [ank_pydantic](../ank_pydantic), Network Simulator, NetVis) into one seamless workflow.
+**An orchestration platform** that integrates the ecosystem tools ([Topology Generator](../topogen), [Network Modeling & Configuration Library](../ank-pydantic), [Network Simulator](../netsim), [Network Visualization Engine](../netvis)) into one seamless workflow.
 
-ANK Workbench is the **glue layer** that coordinates the entire network automation pipeline. Engineers can generate topologies, model networks declaratively, run lightweight simulations, and visualize results—all from a unified web interface. No more context switching between separate tools or manually stitching components together.
+Network Automation Workbench is the **glue layer** that coordinates the entire network automation pipeline. Engineers can generate topologies, model networks declaratively, run lightweight simulations, and visualize results—all from a unified web interface. No more context switching between separate tools or manually stitching components together.
 
 **The Integration Vision:**
 ```
 ┌──────────────────────────────────────────────────────────────────┐
-│                        ANK Workbench                             │
+│                        Network Automation Workbench                             │
 │         (Orchestration · Web UI · Workflow Management)           │
 │   ┌──────────────┬──────────────┬──────────────┬──────────────┐ │
 │   │   TopoGen    │ [ank_pydantic](../ank_pydantic) │   Simulator  │    NetVis    │ │
@@ -137,7 +137,7 @@ Network engineers can design, validate, and visualize network changes in one com
 
 ## Current Milestone: Ecosystem Maintenance & Operations
 
-**Goal:** The ANK Workbench is now functionally complete, type-safe, and covered by end-to-end testing. The project enters a maintenance phase, waiting for future strategic shifts like an AI-driven Model Context Protocol (MCP) server or real-time collaborative editing.
+**Goal:** The Network Automation Workbench is now functionally complete, type-safe, and covered by end-to-end testing. The project enters a maintenance phase, waiting for future strategic shifts like an AI-driven Model Context Protocol (MCP) server or real-time collaborative editing.
 
 **Target features:**
 - All 93 phases across the 5 major milestones have been completed.
@@ -165,7 +165,7 @@ Transformed the Workbench from a powerful engineering tool into a polished, prof
 
 **Delivered:** March 4, 2026 | **Phases:** 3 (87-89)
 
-Solidified the foundation of the ANK Workbench after rapid feature development, ensuring long-term maintainability, type safety, and bug-free operation:
+Solidified the foundation of the Network Automation Workbench after rapid feature development, ensuring long-term maintainability, type safety, and bug-free operation:
 - **Strict Static Type Checking:** Conducted a deep `mypy` pass across the backend orchestrator, eliminating over 200 type warnings, circular dependencies, and runtime attribute errors.
 - **Code Deduplication:** Purged unused legacy components and endpoints, reducing the frontend bundle size and eliminating zombie UI code.
 - **End-to-End Testing:** Initialized Playwright and implemented automated browser testing covering the critical paths.
@@ -407,11 +407,11 @@ Large-topology visualization performance:
 ## Context
 
 **ANK Ecosystem:**
-ANK Workbench is the orchestration layer for a family of specialized tools:
-- **TopoGen** — Generate realistic network topologies (data center, WAN, random graphs)
-- **[ank_pydantic](../ank_pydantic)** — Model and query network topologies with type-safe Python API (Rust-backed graph operations)
-- **Network Simulator ([netsim](../netsim))** — Deterministic protocol simulation (OSPF, IS-IS, BGP) for validation
-- **NetVis** — Advanced layout and visualization engine (SVG, PDF export)
+Network Automation Workbench is the orchestration layer for a family of specialized tools:
+- **[Topology Generator](../topogen)** — Generate realistic network topologies (data center, WAN, random graphs)
+- **[Network Modeling & Configuration Library](../ank-pydantic)** — Model and query network topologies with type-safe Python API (Rust-backed graph operations)
+- **[Network Simulator](../netsim)** — Deterministic protocol simulation (OSPF, IS-IS, BGP) for validation
+- **[Network Visualization Engine](../netvis)** — Advanced layout and visualization engine (SVG, PDF export)
 - **Traffic Simulator** — Flow-based performance analysis with Monte Carlo simulations
 
 **Workbench Role:**

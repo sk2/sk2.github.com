@@ -1,6 +1,6 @@
 ---
 layout: default
-section: projects
+section: signal-processing
 ---
 
 # Sound Array

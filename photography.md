@@ -263,23 +263,4 @@ Capture is only half the workflow. These tools integrate with industry-standard 
 
 ---
 
-[← Back to Projects](projects) | [View CV](cv) | [Network Automation](network-automation) | [Signal Processing](signal-processing) | [Data Analytics](data-analytics) | [Agentic Systems](agentic-systems)
-
-<style>
-.status-badge {
-  display: inline-block;
-  padding: 0.3em 0.8em;
-  margin: 0.5em 0;
-  border-radius: 4px;
-  font-size: 0.85em;
-  font-weight: 600;
-}
-.status-active {
-  background-color: #007bff;
-  color: white;
-}
-.status-planning {
-  background-color: #ffc107;
-  color: #343a40;
-}
-</style>
+[← Back to Projects](projects) | [Network Automation](network-automation) | [Signal Processing](signal-processing) | [Data & Analytics](data-analytics) | [Autonomous Systems](agentic-systems)

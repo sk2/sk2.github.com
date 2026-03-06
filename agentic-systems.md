@@ -39,4 +39,4 @@ Our systems use specialized agents for different domains:
 
 ---
 
-[← Back to Projects](projects)
+[← Back to Projects](projects) | [Network Automation](network-automation) | [Signal Processing](signal-processing) | [Photography](photography) | [Data & Analytics](data-analytics)

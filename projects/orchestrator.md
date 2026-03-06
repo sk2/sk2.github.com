@@ -1,6 +1,6 @@
 ---
 layout: default
-section: projects
+section: network-automation
 ---
 
 # Orchestrator (Device Interaction Runner)

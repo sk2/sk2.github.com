@@ -3,7 +3,7 @@ layout: default
 section: network-automation
 ---
 
-# Visualization Engine
+# Network Visualization Engine
 
 <div class="badges-row">
   <span class="status-badge status-active">Recently Updated</span>

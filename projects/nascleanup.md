@@ -1,12 +1,12 @@
 ---
 layout: default
-section: projects
+section: data-analytics
 ---
 
 # NAS Cleanup & Intelligence
 
 <div class="badges-row">
-  <span class="status-badge status-active">Recently Updated</span>
+  <span class="status-badge status-active">Active</span>
   <span class="stack-badge">Rust</span>
 </div>
 
@@ -16,61 +16,20 @@ section: projects
 
 ---
 
-## Contents
+## Concept
 
-- [Architecture](#architecture)
-- [Goal](#goal)
-- [Key Components](#key-components)
-- [Tech Stack](#tech-stack)
-- [Current Status](#current-status)
+Rust CLI for managing large-scale Synology NAS file systems. Performs duplicate detection (bit-for-bit and fuzzy), astrophotography file optimization (ASIair workflow cleanup), conventional RAW/sidecar management, and intelligent organization. Designed for Docker or native execution on DSM to minimize network latency during scanning.
+
+---
 
 ## Architecture
 
-- **Language:** Rust (for performance and safety).
-- **Core Engine:** A CLI tool capable of rapid traversal and content-based hashing.
-- **Execution:** Optimized for Docker/Native execution on DSM to minimize network latency.
-- **Data Model:** Indexing layer to store file hashes and metadata for fast comparison.
-- **Intelligence:** Future integration of ML for content-based classification.
-
----
-
-## Quick Facts
-
-| | |
-|---|---|
-| **Status** | Recently Updated |
-
----
-
-## Concept
-
-Rust CLI for managing large-scale Synology NAS file systems: duplicate detection, astrophotography optimization, conventional RAW photography management, and intelligent organization.
-
----
-
-## Key Components
-
-- **Scanner:** Parallel directory walker utilizing `jwalk` or `rayon`.
-- **Hasher:** `blake3` based content hashing.
-- **Deduplicator:** Logic to identify bit-for-bit and fuzzy duplicates.
-- **Cleaner:** Workflow-specific cleanup rules (e.g., ASIair/Astrophotography and Conventional RAW/Sidecar management).
-- **TUI:** Terminal interface for reviewing and acting on findings.
-
----
-
-## Tech Stack
-
-- **Rust:** `tokio`, `rayon`, `blake3`, `jwalk`, `ignore`, `clap` (CLI), `ratatui` (TUI).
-- **DSM Integration:** `syno-api` (if available/needed), BTRFS ioctls.
-
----
-
-## Current Status
-
-2026-03-03 - Completed 10-01-PLAN.md (Doctor Diagnostics)
+- **Scanner**: parallel directory traversal using `jwalk` with `rayon` thread pool
+- **Hasher**: BLAKE3 content hashing for fast duplicate identification
+- **Deduplicator**: identifies exact and fuzzy duplicates across large file trees
+- **Cleaner**: workflow-specific rules for astrophotography (ASIair) and photography (RAW/sidecar pairing)
+- **TUI**: `ratatui` terminal interface for reviewing and acting on findings
 
 ---
 
 [← Back to Data Analytics](../data-analytics)
-
-[← Back to Projects](../projects)

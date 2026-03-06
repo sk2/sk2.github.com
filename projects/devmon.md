@@ -1,11 +1,16 @@
 ---
 layout: default
-section: projects
+section: data-analytics
 ---
 
 # GSD Project Monitor
 
-<span class="status-badge status-active">Active</span>
+<div class="badges-row">
+  <span class="status-badge status-active">Active</span>
+  <span class="stack-badge">Python</span>
+</div>
+
+[← Back to Data Analytics](../data-analytics)
 
 [← Back to Projects](../projects)
 
@@ -13,55 +18,18 @@ section: projects
 
 ## Concept
 
-Developing...
+TUI dashboard that scans multiple development directories for projects with `.planning` structures, tracking health and progress across workspaces. Detects recent activity from state files, git commits, and source changes, then visualizes each project's pipeline stage (discuss, research, planning, ready, active, done). Highlights at-risk projects — those marked active with no ready plans in the queue.
 
 ---
 
-## Architecture
+## Features
 
-**Language**: Python 3.10+
-**UI Framework**: `ratatui` / `textual` for the TUI dashboard
-**Scanning**: Integrated `ripgrep` support for high-performance file discovery
-**Configuration**: TOML-based project and workspace configuration
-
----
-
-## Quick Facts
-
-| | |
-|---|---|
-| **Status** | Active |
+- Multi-workspace scanning with automatic project discovery
+- Activity detection from state files, git history, and file modification times
+- Pipeline stage visualization with phase progression tracking
+- At-risk alerting for active projects with empty plan queues
+- TOML-based configuration for workspace paths and settings
 
 ---
 
-## # Multi-Workspace Scanning
-
-Scans multiple development directories for GSD projects, identifying those with a `.planning` structure. It tracks project health across different environments without requiring manual registration.
-
----
-
-## # Smart Activity Detection
-
-Intelligently detects recent activity by checking `STATE.md` updates, git commits, and scanning source directories for recent changes. This ensures the "Last Activity" status is accurate even before code is committed.
-
----
-
-## # Phase Pipeline Tracking
-
-Visualizes the progress of projects through the GSD pipeline:
-- **Discuss**: Needs initial context.
-- **Research**: Needs domain investigation.
-- **Planning**: Needs task breakdown.
-- **Ready**: Planned and ready to execute.
-- **Active**: Currently in progress.
-- **Done**: Completed.
-
----
-
-## # At-Risk Alerting
-
-Automatically highlights projects that are "Active" but have zero "Ready" plans. This serves as a leading indicator that a project's pipeline is running dry and requires planning attention.
-
----
-
-[← Back to Projects](../projects)
+[← Back to Data Analytics](../data-analytics)

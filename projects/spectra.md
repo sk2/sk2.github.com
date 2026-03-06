@@ -5,178 +5,82 @@ section: signal-processing
 
 # Project Spectra
 
-<span class="status-badge status-active">Active</span>
+<div class="badges-row">
+  <span class="status-badge status-active">Active</span>
+  <span class="stack-badge">Python</span>
+</div>
 
 [← Back to Signal Processing](../signal-processing)
 
 [← Back to Projects](../projects)
 
 ---
+
+## Contents
+
+- [Concept](#concept)
+- [Architecture](#architecture)
+- [Capabilities](#capabilities)
+- [Status](#status)
 
 ## Concept
 
-Developing...
+Distributed spectrum monitoring system built on Raspberry Pi edge nodes and a Mac mini core. Multiple SDR receivers (Airspy, RTL-SDR, KrakenSDR) stream IQ data to a central orchestrator that runs ML classification, signal census tracking, and real-time waterfall visualization. The system autonomously sweeps bands, identifies signal modulations, and maintains a historical database of spectrum activity.
 
 ---
 
-## Quick Facts
+## Architecture
 
-| | |
-|---|---|
-| **Status** | Active |
+```
+Edge Pi (SDR) → SpyServer/rtl_tcp → Mac mini Core
+                                         ↓
+                             Orchestrator → ML Pipeline
+                                         ↓
+                             Signal Census Database
+                                         ↓
+                         Desktop/Web Visualizers
+```
 
----
+**Edge nodes** run on Raspberry Pi units, each with a specialized SDR:
+- Airspy R2 (24 MHz–1.8 GHz, 10 MSPS) — primary scanner
+- Airspy HF Discovery (9 kHz–31 MHz) — HF/amateur bands
+- KrakenSDR — coherent multi-channel array for direction-of-arrival
+- RTL-SDR — ADS-B (1090 MHz) and utility scanning
 
-## # Phase 1 Complete: Foundation ✅
+**Core** runs on a Mac mini with Neural Engine:
+- FastAPI orchestrator managing edge connections and spectrum acquisition
+- CNN modulation classifier using CoreML inference
+- DuckDB-backed Signal Census with SigIDWiki integration
+- FM/AM/SSB audio demodulation pipeline
 
-**SDR Protocol Support:**
-- SpyServer client (NumPy-based IQ streaming)
-- rtl_tcp client (RTL-SDR network protocol)
-- readsb (ADS-B Beast/SBS protocols)
-- Kraken HTTP control API
-
-**Orchestrator:**
-- Asyncio TCP clients for streaming
-- Per-device in-memory IQ buffers
-- Bandwidth-friendly spectrum frames (uint8)
-- Background task management
-
-**Visualizations:**
-- PyQtGraph real-time waterfall (desktop)
-- WebSocket + WebGL browser waterfall
-- Scroll speed control and throttling
-- Per-bin max aggregation for smooth display
-
-**Infrastructure:**
-- Raspberry Pi bootstrap script (SDR drivers)
-- systemd service configuration
-- Network bandwidth optimization
-- Mock servers for deterministic testing
+**Visualization** via PyQtGraph (desktop) and WebGL (browser) waterfall displays with per-bin max aggregation.
 
 ---
 
-## # Phase 2 Complete: Intelligence ✅
+## Capabilities
 
-**ML Classification:**
-- CNN modulation classifier with CoreML inference on Mac Neural Engine
-- Two-stage classification pipeline with confidence scoring
-- Constellation diagram analysis for automatic mode identification
-
-**Signal Census Database:**
-- DuckDB-backed Signal Census for durable historical tracking
-- SigIDWiki integration for known signal identification
-- Frequency, bandwidth, modulation, and temporal indexing
-
-**Audio Demodulation:**
-- FM/AM/SSB demodulation pipeline
-- Audio output for monitored signals
-
----
-
-## # Phase 3 Complete: Autonomy ✅
-
-**Automated Collection:**
-- Priority-based band sweeping and scheduled collection windows
-- Satellite pass scheduling with TLE orbital prediction
+- SDR protocol support: SpyServer, rtl_tcp, readsb (ADS-B), Kraken HTTP
+- Two-stage ML classification pipeline with constellation diagram analysis
+- Priority-based band sweeping with scheduled collection windows
+- Satellite pass scheduling using TLE orbital prediction
 - Direction of arrival (DoA) mapping with coherent arrays
-
-**Persistent Monitoring:**
-- Baseline and anomaly detection for new or unusual signals
-- Signal Census maintenance with automated updates
-
----
-
-## # Phase 5 Complete: Spectrum Autopilot ✅
-
-**Mission-Driven Scanning:**
-- Automated scanning behavior driven by mission parameters
-- Automated briefing generation
+- Baseline anomaly detection for new or unusual signals
+- Automated briefing generation from scan results
+- Health instrumentation with auto-reconnect and failure isolation
 
 ---
 
-## # Phase 6 Complete: Verification & Operational Readiness ✅
+## Status
 
-**Infrastructure Verification:**
-- End-to-end verification harness with mock testing
-- Health instrumentation (`/api/health/deep`)
-- Auto-reconnect with exponential backoff (1s→30s) and per-device failure isolation
-- Real hardware validation ready but deferred
+**Current**: Advanced ML/DSP — de-noising, blind signal separation, emitter identification, vector search, and beamforming.
 
----
-
-## # Roadmap
-
--  — Advanced ML/DSP including de-noising, blind signal separation, emitter identification, vector search, and beamforming
--  — GPU acceleration, waterfall ring buffer optimization, memory profiling, batch updates
-
----
-
-## # Edge Nodes: Raspberry Pi
-
-Multiple Pi units with specialized SDRs:
-
-**Airspy R2 (Primary Scanner):**
-- 24 MHz - 1800 MHz coverage
-- 10 MSPS bandwidth
-- SpyServer protocol streaming
-
-**Airspy HF Discovery:**
-- 9 kHz - 31 MHz (HF/LF)
-- Amateur radio bands
-- Maritime, shortwave broadcast
-
-**Coherent SDR Arrays:**
-- Multi-channel phase-coherent capability
-- Direction of arrival (DoA) analysis
-- 24 MHz - 1766 MHz coverage
-
-**RTL-SDR:**
-- 1090 MHz ADS-B (aircraft)
-- Utility scanning
-- Low-cost backup
-
----
-
-## # Core: Mac mini M-Series
-
-Central processing and ML inference:
-
-**FastAPI Orchestrator:**
-- Manages edge SDR connections
-- Coordinates spectrum acquisition
-- WebSocket streaming to clients
-
-**ML Classification:**
-- Leverages Neural Engine
-- Signal modulation identification
-- Automatic mode detection
-
-**Signal Census:**
-- Polars DataFrame tracking
-- Historical activity database
-- Frequency/modulation/time indexing
-
-**Visualization:**
-- PyQtGraph waterfall (desktop)
-- WebGL waterfall (browser)
-- Real-time spectrum display
-
----
-
-## # Network Architecture
-
-```
-Edge Pi → SpyServer/rtl_tcp → Mac mini Core
-                                    ↓
-                        Orchestrator → ML Pipeline
-                                    ↓
-                        Signal Census Database
-                                    ↓
-                Desktop/Web Visualizers
-```
+**Completed:**
+- Foundation — SDR protocol clients, asyncio orchestrator, waterfall visualization
+- Intelligence — CNN classifier (CoreML), Signal Census (DuckDB), audio demodulation
+- Autonomy — automated collection, satellite scheduling, DoA mapping
+- Spectrum Autopilot — mission-driven scanning and automated briefings
+- Verification — end-to-end test harness, health instrumentation, auto-reconnect
 
 ---
 
 [← Back to Signal Processing](../signal-processing)
-
-[← Back to Projects](../projects)

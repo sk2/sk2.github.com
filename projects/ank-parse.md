@@ -1,11 +1,16 @@
 ---
 layout: default
-section: projects
+section: network-automation
 ---
 
 # Network Configuration Parser
 
-<span class="status-badge status-active">Active</span>
+<div class="badges-row">
+  <span class="status-badge status-active">Active</span>
+  <span class="stack-badge">Python</span>
+</div>
+
+[← Back to Network Automation](../network-automation)
 
 [← Back to Projects](../projects)
 
@@ -13,25 +18,17 @@ section: projects
 
 ## Concept
 
-Developing...
+Ingestion pipeline for vendor documentation and configuration files. Extracts structured, searchable knowledge from PDFs and CLI output, making vendor-specific configuration details accessible to downstream automation tools.
 
 ---
 
 ## Features
 
-- **Layout-Aware Ingestion**: Uses `pymupdf4llm` and `MinerU` to preserve tables, hierarchies, and code blocks from vendor PDFs.
-- **Semantic Search**: Vector store integration (ChromaDB) enables "Search by Intent"—find how to configure a feature by describing its function, not just its command.
-- **Unified Model Target**: Designed to output standardized YANG/OpenConfig models, enabling downstream tools like the Network Modeling & Configuration Library to consume legacy state.
-- **API-First**: FastAPI backend provides endpoints for ingestion pipelines and search queries.
+- Layout-aware PDF ingestion (pymupdf4llm + MinerU) preserving tables, hierarchies, and code blocks
+- Semantic search via ChromaDB vector store — find configuration guidance by describing intent, not memorizing commands
+- Standardized output targeting YANG/OpenConfig models for consumption by the Network Modeling & Configuration Library
+- FastAPI backend with endpoints for ingestion pipelines and search queries
 
 ---
 
-## Quick Facts
-
-| | |
-|---|---|
-| **Status** | Active |
-
----
-
-[← Back to Projects](../projects)
+[← Back to Network Automation](../network-automation)

@@ -5,7 +5,10 @@ section: agentic-systems
 
 # HRV Monitor
 
-<span class="status-badge status-active">Active</span>
+<div class="badges-row">
+  <span class="status-badge status-active">Active</span>
+  <span class="stack-badge">Rust</span>
+</div>
 
 [← Back to Autonomous Systems](../agentic-systems)
 
@@ -15,56 +18,18 @@ section: agentic-systems
 
 ## Concept
 
-Developing...
+Rust TUI application for real-time heart rate variability monitoring. Connects to BLE heart rate sensors via `btleplug`, computes time-domain HRV metrics (RMSSD, SDNN, pNN50) using `cardio-rs`, and stores session data in Apache Arrow/Parquet format for longitudinal analysis.
 
 ---
 
 ## Architecture
 
-**BLE Stack**: `btleplug` for cross-platform Bluetooth Low Energy communication
-**HRV Analysis**: `cardio-rs` for time-domain metric computation
-**Storage**: Apache Arrow + Parquet for columnar session files
-**TUI**: `ratatui` + `crossterm` for terminal UI
-**Platform**: macOS (Linux/Raspberry Pi planned)
-
----
-
-## Tech Stack
-
-| Component | Technology |
-|-----------|-----------|
-| Language | Rust |
-| BLE | `btleplug` |
-| TUI | `ratatui`, `crossterm` |
-| HRV Analysis | `cardio-rs` |
-| Storage | Apache Arrow, Parquet |
-| Platform | macOS (Linux planned) |
-
-<style>
-.status-badge {
-  display: inline-block;
-  padding: 0.3em 0.8em;
-  margin: 0.5em 0;
-  border-radius: 4px;
-  font-size: 0.85em;
-  font-weight: 600;
-}
-.status-active {
-  background-color: #007bff;
-  color: white;
-}
-</style>
-
----
-
-## Quick Facts
-
-| | |
-|---|---|
-| **Status** | Active |
+- **BLE**: `btleplug` for cross-platform Bluetooth Low Energy communication
+- **HRV analysis**: `cardio-rs` for time-domain metric computation
+- **Storage**: Apache Arrow + Parquet for columnar session files
+- **TUI**: `ratatui` + `crossterm` for terminal interface
+- **Platform**: macOS (Linux/Raspberry Pi planned)
 
 ---
 
 [← Back to Autonomous Systems](../agentic-systems)
-
-[← Back to Projects](../projects)

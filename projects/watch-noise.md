@@ -6,9 +6,11 @@ section: projects
 # Wave (StillState & FlowState)
 
 <div class="badges-row">
-  <span class="status-badge status-active">Recently Updated</span>
-
+  <span class="status-badge status-active">Last Active: 2026-02-21</span>
+  
 </div>
+
+[← Back to Projects](../projects)
 
 ---
 
@@ -95,6 +97,8 @@ Ambient audio ecosystem spanning Apple Watch and Mac, designed for sleep and dee
 
 ## Requirements
 
+
+
 ---
 
 ## # Validated
@@ -137,7 +141,7 @@ Ambient audio ecosystem spanning Apple Watch and Mac, designed for sleep and dee
 **UI & UX:**
 - ✓ **UI-06, UI-07, UI-09, UI-10**: All delivered UI requirements fully satisfied — v1.1
 
-**Total v1.1:** 35 requirements fully satisfied, 2 partial, 10 skipped
+**Total v1.1:** 35 requirements fully satisfied, 2 partial, 10 skipped 
 
 </details>
 
@@ -227,6 +231,7 @@ From v1.1 milestone audit:
    - Calibration <, Heartbeat <, Adaptive ~ (research-based)
    - Fix: Validate during extended usage sessions
 
+
 *Last updated: 2026-02-09 after v1.2 milestone planning*
 
 ---
@@ -237,4 +242,4 @@ From v1.1 milestone audit:
 
 ---
 
-[← Back to Projects](/projects)
+[← Back to Projects](../projects)

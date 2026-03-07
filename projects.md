@@ -13,11 +13,11 @@ Focused on network engineering, autonomous systems, and signal processing.
 ## Recent Activity
 
 <ul class="recent-activity-list">
-<li><strong>2026-03-06</strong>: <a href="projects/netassure">Network Analysis Engine</a> — <em>Completed 05-04-PLAN.md (CLI Multimodal Integration)</em></li>
+<li><strong>2026-03-07</strong>: <a href="projects/netassure">Network Analysis Engine</a> — <em>Completed 01-04-PLAN.md (CLI ingest subcommand)</em></li>
+<li><strong>2026-03-07</strong>: <a href="projects/netvis">Network Visualization Engine</a> — <em>Plan 89-01 complete, Z-axis isometric projection verified.</em></li>
+<li><strong>2026-03-07</strong>: <a href="projects/netsim">Network Simulator</a> — <em>Completed 125-05 SRv6 traceroute command</em></li>
 <li><strong>2026-03-06</strong>: <a href="projects/netflowsim">Performance Simulator</a> — <em></em></li>
-<li><strong>2026-03-06</strong>: <a href="projects/netsim">Network Simulator</a> — <em>Milestone v2.2 started</em></li>
-<li><strong>2026-03-05</strong>: <a href="projects/configparsing">Brownfield Ingestion & Analysis</a> — <em>Completed 07-01-PLAN.md</em></li>
-<li><strong>2026-03-05</strong>: <a href="projects/orchestrator">Orchestrator (Device Interaction Runner)</a> — <em>2026-03-05 - Completed 02-05-PLAN.md</em></li>
+<li><strong>2026-03-05</strong>: <a href="projects/configparsing">Brownfield Ingestion</a> — <em>Completed 07-01-PLAN.md</em></li>
 </ul>
 
 ---
@@ -25,34 +25,8 @@ Focused on network engineering, autonomous systems, and signal processing.
 ## Network Engineering
 
 <div class="project-grid">
-<div class="project-card" data-search="automation workbench orchestration platform that integrates the ank ecosystem tools — [topology generator](../topogen), [network modeling & configuration library](../ank_pydantic), [network simulator](../netsim), [network visualization engine](../netvis) — into a single web interface. engineers define topologies, generate configurations, run simulations, and inspect results without switching between cli tools. ```
-┌──────────────────────────────────────────────────────────────────┐
-│                  network automation workbench                    │
-│         (orchestration · web ui · workflow management)           │
-│   ┌──────────────┬──────────────┬──────────────┬──────────────┐ │
-│   │   topogen    │ ank_pydantic │   simulator  │    netvis    │ │
-│   └──────────────┴──────────────┴──────────────┴──────────────┘ │
-└──────────────────────────────────────────────────────────────────┘
-```
-
-the workflow follows a linear pipeline: generate or model a topology, run a simulation against it, visualize the results, and export device configurations. python typescript ank-workbench">
-  <h3 class="card-title"><a href="projects/ank-workbench">Network Automation Workbench</a></h3>
-  <div class="badges-row card-badges"><span class="status-badge status-active">Recently Updated</span> <span class="stack-badge">Python</span><span class="stack-badge">TypeScript</span></div>
-  <p class="card-description">Orchestration platform that integrates the ANK ecosystem tools — [Topology Generator](../topogen), [Network Modeling & Configuration Library](../ank_pydantic), [Network Simulator](../netsim), [Network Visualization Engine](../netvis) — into a single web interface. Engineers define topologies, generate configurations, run simulations, and inspect results without switching between CLI tools. ```
-┌──────────────────────────────────────────────────────────────────┐
-│                  Network Automation Workbench                    │
-│         (Orchestration · Web UI · Workflow Management)           │
-│   ┌──────────────┬──────────────┬──────────────┬──────────────┐ │
-│   │   TopoGen    │ ank_pydantic │   Simulator  │    NetVis    │ │
-│   └──────────────┴──────────────┴──────────────┴──────────────┘ │
-└──────────────────────────────────────────────────────────────────┘
-```
-
-The workflow follows a linear pipeline: generate or model a topology, run a simulation against it, visualize the results, and export device configurations.</p>
-</div>
-
-<div class="project-card" data-search="brownfield ingestion & analysis vendor translation layer that decouples network configuration from vendor-specific syntax. uses llm-powered rag to extract network-level intent and topology relationships from vendor documentation and cli configurations, normalizing them into a vendor-neutral topology graph model. the intermediate representation is topology-centric (protocol adjacencies, link roles, vlan membership) rather than device-centric like yang, enabling genuine vendor abstraction. python configparsing">
-  <h3 class="card-title"><a href="projects/configparsing">Brownfield Ingestion & Analysis</a></h3>
+<div class="project-card" data-search="brownfield ingestion vendor translation layer that decouples network configuration from vendor-specific syntax. uses llm-powered rag to extract network-level intent and topology relationships from vendor documentation and cli configurations, normalizing them into a vendor-neutral topology graph model. the intermediate representation is topology-centric (protocol adjacencies, link roles, vlan membership) rather than device-centric like yang, enabling genuine vendor abstraction. python configparsing">
+  <h3 class="card-title"><a href="projects/configparsing">Brownfield Ingestion</a></h3>
   <div class="badges-row card-badges"><span class="status-badge status-active">Recently Updated</span> <span class="stack-badge">Python</span></div>
   <p class="card-description">Vendor translation layer that decouples network configuration from vendor-specific syntax. Uses LLM-powered RAG to extract network-level intent and topology relationships from vendor documentation and CLI configurations, normalizing them into a vendor-neutral topology graph model. The intermediate representation is topology-centric (protocol adjacencies, link roles, VLAN membership) rather than device-centric like YANG, enabling genuine vendor abstraction.</p>
 </div>
@@ -81,22 +55,61 @@ The workflow follows a linear pipeline: generate or model a topology, run a simu
   <p class="card-description">This project defines the architecture of the Network Automation Ecosystem: how its tools connect, what data flows between them, and where the system is headed. The ecosystem comprises nine repositories that form a composable toolchain. Each tool handles one concern -- topology generation, simulation, configuration parsing, visualization, analysis -- and communicates through pinned contract schemas (RFC-01, RFC-02).</p>
 </div>
 
+<div class="project-card" data-search="network automation workbench orchestration platform that integrates the ank ecosystem tools — [topology generator](/projects/topogen), [network modeling & configuration library](/projects/ank-pydantic), [network simulator](/projects/netsim), [network visualization engine](/projects/netvis) — into a single web interface. engineers define topologies, generate configurations, run simulations, and inspect results without switching between cli tools. ```
+┌──────────────────────────────────────────────────────────────────┐
+│                  network automation workbench                    │
+│         (orchestration · web ui · workflow management)           │
+│   ┌──────────────┬──────────────┬──────────────┬──────────────┐ │
+│   │   topogen    │  [ank-pydantic](../ank-pydantic)│   simulator  │    netvis    │ │
+│   └──────────────┴──────────────┴──────────────┴──────────────┘ │
+└──────────────────────────────────────────────────────────────────┘
+```
+
+the workflow follows a linear pipeline: generate or model a topology, run a simulation against it, visualize the results, and export device configurations. python typescript ank-workbench">
+  <h3 class="card-title"><a href="projects/ank-workbench">Network Automation Workbench</a></h3>
+  <div class="badges-row card-badges"><span class="status-badge status-active">Recently Updated</span> <span class="stack-badge">Python</span><span class="stack-badge">TypeScript</span></div>
+  <p class="card-description">Orchestration platform that integrates the ANK ecosystem tools — [Topology Generator](/projects/topogen), [Network Modeling & Configuration Library](/projects/ank-pydantic), [Network Simulator](/projects/netsim), [Network Visualization Engine](/projects/netvis) — into a single web interface. Engineers define topologies, generate configurations, run simulations, and inspect results without switching between CLI tools. ```
+┌──────────────────────────────────────────────────────────────────┐
+│                  Network Automation Workbench                    │
+│         (Orchestration · Web UI · Workflow Management)           │
+│   ┌──────────────┬──────────────┬──────────────┬──────────────┐ │
+│   │   TopoGen    │  [ank-pydantic](../ank-pydantic)│   Simulator  │    NetVis    │ │
+│   └──────────────┴──────────────┴──────────────┴──────────────┘ │
+└──────────────────────────────────────────────────────────────────┘
+```
+
+The workflow follows a linear pipeline: generate or model a topology, run a simulation against it, visualize the results, and export device configurations.</p>
+</div>
+
 <div class="project-card" data-search="network configuration framework network configuration framework is a rust cli that compiles declarative yaml blueprints into vendor-neutral configuration artifacts. a single binary orchestrates the full pipeline: blueprint parsing, topology transformation, deviceir generation, template rendering, and traceable config file emission. the core problem is determinism. rust ank-netcfg">
   <h3 class="card-title"><a href="projects/ank-netcfg">Network Configuration Framework</a></h3>
   <div class="badges-row card-badges"><span class="status-badge status-active">Active</span> <span class="stack-badge">Rust</span></div>
   <p class="card-description">Network Configuration Framework is a Rust CLI that compiles declarative YAML blueprints into vendor-neutral configuration artifacts. A single binary orchestrates the full pipeline: blueprint parsing, topology transformation, DeviceIR generation, template rendering, and traceable config file emission. The core problem is determinism.</p>
 </div>
 
-<div class="project-card" data-search="network modeling & configuration library the network modeling & configuration library represents network topologies as typed python objects backed by a rust graph engine. you define nodes, edges, and layers using pydantic models. the library stores them in a rust-native topology engine (`ank_nte`) and exposes a composable query api that builds lazy evaluation plans in python and executes them in rust. python polars ank-pydantic">
+<div class="project-card" data-search="network modeling & configuration library the network modeling & configuration library represents network topologies as typed python objects backed by a rust graph engine. you define nodes, edges, and layers using pydantic models. the library stores them in the [network topology engine](/projects/ank-nte) and exposes a composable query api that builds lazy evaluation plans in python and executes them in rust. python polars ank-pydantic">
   <h3 class="card-title"><a href="projects/ank-pydantic">Network Modeling & Configuration Library</a></h3>
   <div class="badges-row card-badges"><span class="status-badge status-active">Recently Updated</span> <span class="stack-badge">Python</span><span class="stack-badge">Polars</span></div>
-  <p class="card-description">The Network Modeling & Configuration Library represents network topologies as typed Python objects backed by a Rust graph engine. You define nodes, edges, and layers using Pydantic models. The library stores them in a Rust-native topology engine (`ank_nte`) and exposes a composable query API that builds lazy evaluation plans in Python and executes them in Rust.</p>
+  <p class="card-description">The Network Modeling & Configuration Library represents network topologies as typed Python objects backed by a Rust graph engine. You define nodes, edges, and layers using Pydantic models. The library stores them in the [Network Topology Engine](/projects/ank-nte) and exposes a composable query API that builds lazy evaluation plans in Python and executes them in Rust.</p>
 </div>
 
 <div class="project-card" data-search="network simulator deterministic tick-based network protocol simulator validating configurations before production deployment. it provides protocol-level fidelity with same-topology-same-results guarantees, allowing engineers to verify control-plane behavior without the overhead of full vm emulation. unlike packet-level simulators that focus on bit-level accuracy, this engine focuses on **protocol convergence and state validation**. rust netsim">
   <h3 class="card-title"><a href="projects/netsim">Network Simulator</a></h3>
   <div class="badges-row card-badges"><span class="status-badge status-active">Recently Updated</span> <span class="stack-badge">Rust</span></div>
   <p class="card-description">Deterministic tick-based network protocol simulator validating configurations before production deployment. It provides protocol-level fidelity with same-topology-same-results guarantees, allowing engineers to verify control-plane behavior without the overhead of full VM emulation. Unlike packet-level simulators that focus on bit-level accuracy, this engine focuses on **protocol convergence and state validation**.</p>
+</div>
+
+<div class="project-card" data-search="network topology engine rust-based graph topology engine with python bindings via pyo3. takes network topologies — nodes, edges, layers, metadata — and stores them in a dual-write architecture: structural graph (petgraph stabledigraph) plus columnar attribute store (polars dataframes). mutations update both atomically; if either write fails, the transaction rolls back. rust python typescript polars ank-nte">
+  <h3 class="card-title"><a href="projects/ank-nte">Network Topology Engine</a></h3>
+  <div class="badges-row card-badges"><span class="status-badge status-active">Recently Updated</span> <span class="stack-badge">Rust</span><span class="stack-badge">Python</span><span class="stack-badge">TypeScript</span><span class="stack-badge">Polars</span></div>
+  <p class="card-description">Rust-based graph topology engine with Python bindings via PyO3. Takes network topologies — nodes, edges, layers, metadata — and stores them in a dual-write architecture: structural graph (petgraph StableDiGraph) plus columnar attribute store (Polars DataFrames). Mutations update both atomically; if either write fails, the transaction rolls back.</p>
+</div>
+
+<div class="project-card" data-search="network visualization engine rust-based network topology layout and visualization engine. takes multi-layer network topologies (via petgraph) and renders them using layout algorithms that minimize edge crossings, bundle related connections, and respect hierarchical or geographic structure. outputs svg, pdf, and png with interactive browser embedding via wasm. rust python typescript netvis">
+  <h3 class="card-title"><a href="projects/netvis">Network Visualization Engine</a></h3>
+  <div class="badges-row card-badges"><span class="status-badge status-active">Recently Updated</span> <span class="stack-badge">Rust</span><span class="stack-badge">Python</span><span class="stack-badge">TypeScript</span></div>
+  <img src="../images/hero-diagram.svg" class="project-thumbnail" alt="Network Visualization Engine diagram" />
+  <p class="card-description">Rust-based network topology layout and visualization engine. Takes multi-layer network topologies (via petgraph) and renders them using layout algorithms that minimize edge crossings, bundle related connections, and respect hierarchical or geographic structure. Outputs SVG, PDF, and PNG with interactive browser embedding via WASM.</p>
 </div>
 
 <div class="project-card" data-search="orchestrator (device interaction runner) orchestration engine for coordinating device interactions across real and testbed networks. executes runs with retries, timeouts, bounded concurrency, and durable artifacts (logs, results, snapshots). uses [device interaction framework](../deviceinteraction) as a library for transports, parsing, and test primitives — the orchestrator owns run coordination, persistence, and event streaming. python orchestrator">
@@ -111,23 +124,10 @@ The workflow follows a linear pipeline: generate or model a topology, run a simu
   <p class="card-description">Network Flow Simulator uses analytic queuing models and Monte Carlo simulation to evaluate network performance without packet-level discrete event simulation. Given a topology and traffic demands, it pushes billions of flow iterations through queuing models in seconds, identifying congestion bottlenecks probabilistically and projecting capacity headroom across carrier-scale networks (100k+ nodes). The core tradeoff: sacrifice per-packet fidelity for orders-of-magnitude speed improvement.</p>
 </div>
 
-<div class="project-card" data-search="topology engine core rust-based graph topology engine with python bindings via pyo3. takes network topologies — nodes, edges, layers, metadata — and stores them in a dual-write architecture: structural graph (petgraph stabledigraph) plus columnar attribute store (polars dataframes). mutations update both atomically; if either write fails, the transaction rolls back. rust python typescript polars ank-nte">
-  <h3 class="card-title"><a href="projects/ank-nte">Network Topology Engine</a></h3>
-  <div class="badges-row card-badges"><span class="status-badge status-active">Recently Updated</span> <span class="stack-badge">Rust</span><span class="stack-badge">Python</span><span class="stack-badge">TypeScript</span><span class="stack-badge">Polars</span></div>
-  <p class="card-description">Rust-based graph topology engine with Python bindings via PyO3. Takes network topologies — nodes, edges, layers, metadata — and stores them in a dual-write architecture: structural graph (petgraph StableDiGraph) plus columnar attribute store (Polars DataFrames). Mutations update both atomically; if either write fails, the transaction rolls back.</p>
-</div>
-
-<div class="project-card" data-search="topology generator rust-based network topology generator with python bindings. takes a declarative yaml config describing the desired topology type, scale, and parameters, and produces a validated network graph with realistic structure — proper tier hierarchies, vendor-specific interface naming, geographic placement, and bandwidth profiles. consolidates topology generation logic that was previously scattered across autonetkit, the network simulator, and the visualization engine into a single library. rust python topogen">
+<div class="project-card" data-search="topology generator rust-based network topology generator with python bindings. takes a declarative yaml config describing the desired topology type, scale, and parameters, and produces a validated network graph with realistic structure — proper tier hierarchies, vendor-specific interface naming, geographic placement, and bandwidth profiles. consolidates topology generation logic that was previously scattered across autonetkit, the [network simulator](/projects/netsim), and the [network visualization engine](/projects/netvis) into a single library. rust python topogen">
   <h3 class="card-title"><a href="projects/topogen">Topology Generator</a></h3>
   <div class="badges-row card-badges"><span class="status-badge status-active">Active</span> <span class="stack-badge">Rust</span><span class="stack-badge">Python</span></div>
-  <p class="card-description">Rust-based network topology generator with Python bindings. Takes a declarative YAML config describing the desired topology type, scale, and parameters, and produces a validated network graph with realistic structure — proper tier hierarchies, vendor-specific interface naming, geographic placement, and bandwidth profiles. Consolidates topology generation logic that was previously scattered across AutoNetKit, the Network Simulator, and the Visualization Engine into a single library.</p>
-</div>
-
-<div class="project-card" data-search="visualization engine rust-based network topology layout and visualization engine. takes multi-layer network topologies (via petgraph) and renders them using layout algorithms that minimize edge crossings, bundle related connections, and respect hierarchical or geographic structure. outputs svg, pdf, and png with interactive browser embedding via wasm. rust python typescript netvis">
-  <h3 class="card-title"><a href="projects/netvis">Network Visualization Engine</a></h3>
-  <div class="badges-row card-badges"><span class="status-badge status-active">Recently Updated</span> <span class="stack-badge">Rust</span><span class="stack-badge">Python</span><span class="stack-badge">TypeScript</span></div>
-  <img src="../images/hero-diagram.svg" class="project-thumbnail" alt="Visualization Engine diagram" />
-  <p class="card-description">Rust-based network topology layout and visualization engine. Takes multi-layer network topologies (via petgraph) and renders them using layout algorithms that minimize edge crossings, bundle related connections, and respect hierarchical or geographic structure. Outputs SVG, PDF, and PNG with interactive browser embedding via WASM.</p>
+  <p class="card-description">Rust-based network topology generator with Python bindings. Takes a declarative YAML config describing the desired topology type, scale, and parameters, and produces a validated network graph with realistic structure — proper tier hierarchies, vendor-specific interface naming, geographic placement, and bandwidth profiles. Consolidates topology generation logic that was previously scattered across AutoNetKit, the [Network Simulator](/projects/netsim), and the [Network Visualization Engine](/projects/netvis) into a single library.</p>
 </div>
 
 </div>
@@ -154,10 +154,10 @@ The workflow follows a linear pipeline: generate or model a topology, run a simu
   <p class="card-description">Automated signal census system that transforms raw radio spectrum data into classified, searchable signal inventories. Combines SDR acquisition, ML classification, and vector search to detect, identify, and catalog signals across monitored bands.</p>
 </div>
 
-<div class="project-card" data-search="wi-fi signal reflection (krakensdr) through-wall human detection and localization using existing wi-fi signals as illumination sources. built on the krakensdr five-channel coherent receiver, processing heimdall daq iq streams to detect movement through obstacles in indoor environments. bridges theoretical signal reflection research with a portable, real-time hardware implementation. rust python wifi-signal-analysis">
+<div class="project-card" data-search="wi-fi signal reflection (krakensdr) through-wall human detection and localization using existing wi-fi [signals](../signals) as illumination sources. built on the krakensdr five-channel coherent receiver, processing heimdall daq iq streams to detect movement through obstacles in indoor environments. bridges theoretical signal reflection research with a portable, real-time hardware implementation. rust python wifi-signal-analysis">
   <h3 class="card-title"><a href="projects/wifi-signal-analysis">Wi-Fi Signal Reflection (KrakenSDR)</a></h3>
   <div class="badges-row card-badges"><span class="status-badge status-active">Active</span> <span class="stack-badge">Rust</span><span class="stack-badge">Python</span></div>
-  <p class="card-description">Through-wall human detection and localization using existing Wi-Fi signals as illumination sources. Built on the KrakenSDR five-channel coherent receiver, processing Heimdall DAQ IQ streams to detect movement through obstacles in indoor environments. Bridges theoretical signal reflection research with a portable, real-time hardware implementation.</p>
+  <p class="card-description">Through-wall human detection and localization using existing Wi-Fi [signals](../signals) as illumination sources. Built on the KrakenSDR five-channel coherent receiver, processing Heimdall DAQ IQ streams to detect movement through obstacles in indoor environments. Bridges theoretical signal reflection research with a portable, real-time hardware implementation.</p>
 </div>
 
 </div>
@@ -165,10 +165,10 @@ The workflow follows a linear pipeline: generate or model a topology, run a simu
 ## Health & Biometrics
 
 <div class="project-grid">
-<div class="project-card" data-search="healthypi ecosystem modular health monitoring ecosystem that translates raw biometric data from healthypi hardware (pi hat and wearable) into structured metrics for agent-driven analysis. swift collectors on apple devices capture healthkit data, publish to a nats broker, and python agents in containers run analysis pipelines — all coordinated by the multi-agent orchestrator. python healthypi">
+<div class="project-card" data-search="healthypi ecosystem modular health monitoring ecosystem that translates raw biometric data from healthypi hardware (pi hat and wearable) into structured metrics for agent-driven analysis. swift collectors on apple devices capture healthkit data, publish to a nats broker, and python agents in containers run analysis pipelines — all coordinated by the [multi-agent](../multi-agent) orchestrator. python healthypi">
   <h3 class="card-title"><a href="projects/healthypi">HealthyPi Ecosystem</a></h3>
   <div class="badges-row card-badges"><span class="status-badge status-active">Last Active: 2026-02-20</span> <span class="stack-badge">Python</span></div>
-  <p class="card-description">Modular health monitoring ecosystem that translates raw biometric data from HealthyPi hardware (Pi HAT and wearable) into structured metrics for agent-driven analysis. Swift collectors on Apple devices capture HealthKit data, publish to a NATS broker, and Python agents in containers run analysis pipelines — all coordinated by the multi-agent orchestrator.</p>
+  <p class="card-description">Modular health monitoring ecosystem that translates raw biometric data from HealthyPi hardware (Pi HAT and wearable) into structured metrics for agent-driven analysis. Swift collectors on Apple devices capture HealthKit data, publish to a NATS broker, and Python agents in containers run analysis pipelines — all coordinated by the [multi-agent](../multi-agent) orchestrator.</p>
 </div>
 
 </div>
@@ -236,13 +236,13 @@ The workflow follows a linear pipeline: generate or model a topology, run a simu
 <div class="project-grid">
 <div class="project-card" data-search="cycle agent native swiftui training application for ipad and apple tv that bridges a wahoo kickr core smart trainer with ai-driven workout logic. the app communicates with the trainer over bluetooth (ftms protocol) for real-time resistance control and telemetry, while a nats message bridge connects to an external agent for dynamic workout decisions. a scenekit-rendered infinite terrain visualization runs at 60fps on apple tv, with heart rate relay from apple watch completing the sensor loop.  cycle">
   <h3 class="card-title"><a href="projects/cycle">Cycle Agent</a></h3>
-  <div class="badges-row card-badges"><span class="status-badge status-active">Recently Updated</span> </div>
+  <div class="badges-row card-badges"><span class="status-badge status-active">Last Active: 2026-02-21</span> </div>
   <p class="card-description">Native SwiftUI training application for iPad and Apple TV that bridges a Wahoo KICKR Core smart trainer with AI-driven workout logic. The app communicates with the trainer over Bluetooth (FTMS protocol) for real-time resistance control and telemetry, while a NATS message bridge connects to an external agent for dynamic workout decisions. A SceneKit-rendered infinite terrain visualization runs at 60fps on Apple TV, with heart rate relay from Apple Watch completing the sensor loop.</p>
 </div>
 
 <div class="project-card" data-search="secure multi-agent personal assistant a security-first multi-agent system that coordinates specialized containerized agents through a nats message broker. each agent runs in isolation with minimal privileges — separate containers, scoped credentials, no direct agent-to-agent communication. the orchestrator uses cloud llm reasoning (gpt-4/claude) while agents remain lightweight and deterministic. python multi-agent">
   <h3 class="card-title"><a href="projects/multi-agent">Secure Multi-Agent Personal Assistant</a></h3>
-  <div class="badges-row card-badges"><span class="status-badge status-active">Recently Updated</span> <span class="stack-badge">Python</span></div>
+  <div class="badges-row card-badges"><span class="status-badge status-active">Last Active: 2026-02-21</span> <span class="stack-badge">Python</span></div>
   <p class="card-description">A security-first multi-agent system that coordinates specialized containerized agents through a NATS message broker. Each agent runs in isolation with minimal privileges — separate containers, scoped credentials, no direct agent-to-agent communication. The orchestrator uses cloud LLM reasoning (GPT-4/Claude) while agents remain lightweight and deterministic.</p>
 </div>
 
@@ -294,7 +294,7 @@ The workflow follows a linear pipeline: generate or model a topology, run a simu
 
 <div class="project-card" data-search="wave (stillstate & flowstate) ambient audio ecosystem spanning apple watch and mac, designed for sleep and deep work. **stillstate** (watchos) is an adaptive sleep sounds app that generates procedural noise (white, brown, blended) with binaural beats, personalized frequency calibration, and heartbeat synchronization. microphone monitoring detects environmental noise for adaptive masking.  watch-noise">
   <h3 class="card-title"><a href="projects/watch-noise">Wave (StillState & FlowState)</a></h3>
-  <div class="badges-row card-badges"><span class="status-badge status-active">Recently Updated</span> </div>
+  <div class="badges-row card-badges"><span class="status-badge status-active">Last Active: 2026-02-21</span> </div>
   <p class="card-description">Ambient audio ecosystem spanning Apple Watch and Mac, designed for sleep and deep work. **StillState** (watchOS) is an adaptive sleep sounds app that generates procedural noise (white, brown, blended) with binaural beats, personalized frequency calibration, and heartbeat synchronization. Microphone monitoring detects environmental noise for adaptive masking.</p>
 </div>
 

@@ -1,6 +1,6 @@
 ---
 layout: default
-section: network-automation
+section: projects
 ---
 
 # Orchestrator (Device Interaction Runner)
@@ -9,6 +9,10 @@ section: network-automation
   <span class="status-badge status-active">Recently Updated</span>
   <span class="stack-badge">Python</span>
 </div>
+
+[← Back to Network Automation](../network-automation)
+
+[← Back to Projects](../projects)
 
 ---
 
@@ -73,6 +77,8 @@ Run the same device workflow reliably across lab/real targets, with deterministi
 ---
 
 ## Requirements
+
+
 
 ---
 
@@ -142,6 +148,6 @@ Run the same device workflow reliably across lab/real targets, with deterministi
 
 ---
 
-[← Back to Network Automation](/network-automation)
+[← Back to Network Automation](../network-automation)
 
-[← Back to Projects](/projects)
+[← Back to Projects](../projects)

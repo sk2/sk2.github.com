@@ -10,6 +10,10 @@ section: signal-processing
   <span class="stack-badge">Rust</span> <span class="stack-badge">Python</span>
 </div>
 
+[← Back to Signal Processing](../signal-processing)
+
+[← Back to Projects](../projects)
+
 ---
 
 ## Contents
@@ -23,6 +27,12 @@ section: signal-processing
 ## Concept
 
 Distributed multi-beam signal reflection analysis system built on KrakenSDR hardware. A Raspberry Pi handles data acquisition and streams IQ data over UDP; a Mac or Linux workstation runs compute-intensive DSP. All four surveillance channels process in parallel with independent Range-Doppler visualization, per-beam configuration, and real-time performance monitoring.
+
+---
+
+## Technical Reports
+
+- [Download Technical Report: passive-radar-techreport.pdf](/assets/docs/rf-signal-analysis-passive-radar-techreport.pdf)
 
 ---
 
@@ -104,6 +114,8 @@ Clean, understandable, stable codebase that reliably tracks aircraft in real-tim
 ---
 
 ## Requirements
+
+
 
 ---
 
@@ -214,14 +226,8 @@ Clean, understandable, stable codebase that reliably tracks aircraft in real-tim
 
 2026-03-05 — Completed 36-02-PLAN.md
 
-
-## Technical Reports
-
-- [Download Technical Report: passive-radar-techreport.pdf](/assets/docs/rf-signal-analysis-passive-radar-techreport.pdf)
-
-
 ---
 
-[← Back to Signal Processing](/signal-processing)
+[← Back to Signal Processing](../signal-processing)
 
-[← Back to Projects](/projects)
+[← Back to Projects](../projects)

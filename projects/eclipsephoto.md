@@ -1,6 +1,6 @@
 ---
 layout: default
-section: photography
+section: projects
 ---
 
 # EclipsePhoto
@@ -9,6 +9,8 @@ section: photography
   <span class="status-badge status-active">Active</span>
   <span class="stack-badge">Python</span>
 </div>
+
+[← Back to Projects](../projects)
 
 ---
 
@@ -61,6 +63,8 @@ Reliability and autonomy for a "one-shot" astronomical event. The system handles
 
 ## Requirements
 
+
+
 ---
 
 ## # Validated
@@ -103,4 +107,4 @@ Reliability and autonomy for a "one-shot" astronomical event. The system handles
 
 ---
 
-[← Back to Projects](/projects)
+[← Back to Projects](../projects)

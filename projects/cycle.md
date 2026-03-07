@@ -6,9 +6,13 @@ section: agentic-systems
 # Cycle Agent
 
 <div class="badges-row">
-  <span class="status-badge status-active">Recently Updated</span>
-
+  <span class="status-badge status-active">Last Active: 2026-02-21</span>
+  
 </div>
+
+[← Back to Autonomous Systems](../agentic-systems)
+
+[← Back to Projects](../projects)
 
 ---
 
@@ -82,6 +86,6 @@ A native SwiftUI training application for iPad and Apple TV that bridges profess
 
 ---
 
-[← Back to Autonomous Systems](/agentic-systems)
+[← Back to Autonomous Systems](../agentic-systems)
 
-[← Back to Projects](/projects)
+[← Back to Projects](../projects)

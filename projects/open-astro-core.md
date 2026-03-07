@@ -1,6 +1,6 @@
 ---
 layout: default
-section: photography
+section: projects
 ---
 
 # OpenAstro Core
@@ -9,6 +9,8 @@ section: photography
   <span class="status-badge status-active">Active</span>
   <span class="stack-badge">Rust</span>
 </div>
+
+[← Back to Projects](../projects)
 
 ---
 
@@ -52,13 +54,15 @@ Downstream apps can rely on correct, consistent coordinate math, imaging intelli
 ## Current State
 
 **Shipped:** v0.2 Imaging Intelligence (2026-03-02)
-**Next milestone:** v0.3 Advanced Astro
+**Next milestone:** v0.3 Advanced Astro 
 
 8,030 lines of Rust across 7 crates. 163+ unit tests. Pure Rust stack (no C toolchain required).
 
 ---
 
 ## Milestones
+
+
 
 ---
 
@@ -102,4 +106,4 @@ Plate solving consumption, co-axial calibration, mosaic planning, planetary imag
 
 ---
 
-[← Back to Projects](/projects)
+[← Back to Projects](../projects)

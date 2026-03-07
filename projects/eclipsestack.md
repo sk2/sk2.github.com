@@ -1,6 +1,6 @@
 ---
 layout: default
-section: photography
+section: projects
 ---
 
 # EclipseStack
@@ -9,6 +9,8 @@ section: photography
   <span class="status-badge status-active">Active</span>
   <span class="stack-badge">Rust</span>
 </div>
+
+[← Back to Projects](../projects)
 
 ---
 
@@ -62,6 +64,8 @@ Enable high-fidelity HDR solar composites by providing sub-pixel alignment of ec
 
 ## Requirements
 
+
+
 ---
 
 ## # Validated
@@ -101,4 +105,4 @@ Enable high-fidelity HDR solar composites by providing sub-pixel alignment of ec
 
 ---
 
-[← Back to Projects](/projects)
+[← Back to Projects](../projects)

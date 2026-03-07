@@ -10,6 +10,10 @@ section: network-automation
   <span class="stack-badge">Rust</span> <span class="stack-badge">Polars</span>
 </div>
 
+[← Back to Network Automation](../network-automation)
+
+[← Back to Projects](../projects)
+
 ---
 
 ## Concept
@@ -42,6 +46,8 @@ Enable exploration and practical application of GNN techniques on real network t
 ---
 
 ## Requirements
+
+
 
 ---
 
@@ -129,10 +135,10 @@ Dual purpose - explore GNN techniques while building production-usable network m
 
 ## Current Status
 
-2026-03-06 — Completed 05-04-PLAN.md (CLI Multimodal Integration)
+2026-03-07 — Completed 01-04-PLAN.md (CLI ingest subcommand)
 
 ---
 
-[← Back to Network Automation](/network-automation)
+[← Back to Network Automation](../network-automation)
 
-[← Back to Projects](/projects)
+[← Back to Projects](../projects)

@@ -6,9 +6,13 @@ section: agentic-systems
 # Secure Multi-Agent Personal Assistant
 
 <div class="badges-row">
-  <span class="status-badge status-active">Recently Updated</span>
+  <span class="status-badge status-active">Last Active: 2026-02-21</span>
   <span class="stack-badge">Python</span>
 </div>
+
+[← Back to Autonomous Systems](../agentic-systems)
+
+[← Back to Projects](../projects)
 
 ---
 
@@ -60,6 +64,8 @@ Complete isolation between agents such that compromise of one agent cannot casca
 ---
 
 ## Requirements
+
+
 
 ---
 
@@ -163,6 +169,6 @@ These establish proven patterns for air-gapped agents, defense-in-depth isolatio
 
 ---
 
-[← Back to Autonomous Systems](/agentic-systems)
+[← Back to Autonomous Systems](../agentic-systems)
 
-[← Back to Projects](/projects)
+[← Back to Projects](../projects)

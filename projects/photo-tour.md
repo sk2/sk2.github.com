@@ -1,14 +1,16 @@
 ---
 layout: default
-section: photography
+section: projects
 ---
 
 # Photo Tour
 
 <div class="badges-row">
   <span class="status-badge status-active">Active</span>
-
+  
 </div>
+
+[← Back to Projects](../projects)
 
 ---
 
@@ -64,6 +66,8 @@ In the field, you can see what the camera sees and get actionable guidance/contr
 
 ## Requirements
 
+
+
 ---
 
 ## # Validated
@@ -113,4 +117,4 @@ In the field, you can see what the camera sees and get actionable guidance/contr
 
 ---
 
-[← Back to Projects](/projects)
+[← Back to Projects](../projects)

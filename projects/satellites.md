@@ -1,6 +1,6 @@
 ---
 layout: default
-section: photography
+section: projects
 ---
 
 # Satellites
@@ -9,6 +9,8 @@ section: photography
   <span class="status-badge status-active">Recently Updated</span>
   <span class="stack-badge">Rust</span>
 </div>
+
+[← Back to Projects](../projects)
 
 ---
 
@@ -69,6 +71,8 @@ Real-time satellite positions rendered on a terminal world map with pass predict
 ---
 
 ## Requirements
+
+
 
 ---
 
@@ -169,4 +173,4 @@ Real-time satellite positions rendered on a terminal world map with pass predict
 
 ---
 
-[← Back to Projects](/projects)
+[← Back to Projects](../projects)

@@ -1,14 +1,16 @@
 ---
 layout: default
-section: signal-processing
+section: projects
 ---
 
 # Sound Array
 
 <div class="badges-row">
   <span class="status-badge status-active">Active</span>
-
+  
 </div>
+
+[← Back to Projects](../projects)
 
 ---
 
@@ -49,6 +51,8 @@ The ability to capture, localize, and classify complex soundscapes on edge devic
 
 ## Context
 
+
+
 ---
 
 ## # Background
@@ -68,6 +72,8 @@ The ability to capture, localize, and classify complex soundscapes on edge devic
 ---
 
 ## Requirements
+
+
 
 ---
 
@@ -108,4 +114,4 @@ The ability to capture, localize, and classify complex soundscapes on edge devic
 
 ---
 
-[← Back to Projects](/projects)
+[← Back to Projects](../projects)

@@ -1,6 +1,6 @@
 ---
 layout: default
-section: data-analytics
+section: projects
 ---
 
 # OmniFocus DB CLI (omnifocus-db)
@@ -9,6 +9,10 @@ section: data-analytics
   <span class="status-badge status-active">Last Active: 2026-02-16</span>
   <span class="stack-badge">Python</span> <span class="stack-badge">TypeScript</span>
 </div>
+
+[← Back to Data Analytics](../data-analytics)
+
+[← Back to Projects](../projects)
 
 ---
 
@@ -67,6 +71,8 @@ A Python-based CLI that bypasses slow AppleScript/TypeScript layers to read dire
 
 ## Requirements
 
+
+
 ---
 
 ## # Validated
@@ -111,6 +117,6 @@ A Python-based CLI that bypasses slow AppleScript/TypeScript layers to read dire
 
 ---
 
-[← Back to Data Analytics](/data-analytics)
+[← Back to Data Analytics](../data-analytics)
 
-[← Back to Projects](/projects)
+[← Back to Projects](../projects)

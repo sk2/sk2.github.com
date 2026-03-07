@@ -1,14 +1,16 @@
 ---
 layout: default
-section: photography
+section: projects
 ---
 
 # AuroraPhoto
 
 <div class="badges-row">
   <span class="status-badge status-active">Active</span>
-
+  
 </div>
+
+[← Back to Projects](../projects)
 
 ---
 
@@ -59,6 +61,8 @@ Provides precise, automated control over exposure and focus specifically optimiz
 
 ## Requirements
 
+
+
 ---
 
 ## # Validated
@@ -97,4 +101,4 @@ Provides precise, automated control over exposure and focus specifically optimiz
 
 ---
 
-[← Back to Projects](/projects)
+[← Back to Projects](../projects)

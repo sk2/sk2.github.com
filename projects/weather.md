@@ -1,6 +1,6 @@
 ---
 layout: default
-section: data-analytics
+section: projects
 ---
 
 # Weather (BOM ACCESS Pipeline)
@@ -9,6 +9,10 @@ section: data-analytics
   <span class="status-badge status-active">Last Active: 2026-02-14</span>
   <span class="stack-badge">Python</span> <span class="stack-badge">Polars</span>
 </div>
+
+[← Back to Data Analytics](../data-analytics)
+
+[← Back to Projects](../projects)
 
 ---
 
@@ -74,6 +78,8 @@ The primary goal is to bypass the complexity of BOM's FTP delivery and binary fo
 
 ## Requirements
 
+
+
 ---
 
 ## # Validated
@@ -117,6 +123,6 @@ The primary goal is to bypass the complexity of BOM's FTP delivery and binary fo
 
 ---
 
-[← Back to Data Analytics](/data-analytics)
+[← Back to Data Analytics](../data-analytics)
 
-[← Back to Projects](/projects)
+[← Back to Projects](../projects)

@@ -251,7 +251,7 @@ def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
     docs_dir = project_path / "docs"
     if docs_dir.exists():
         for pdf in docs_dir.rglob("*.pdf"):
-            if "techreport.pdf" in pdf.name: docs.append(pdf)
+            if any(x in pdf.name for x in ["techreport.pdf", "paper.pdf", "usermanual.pdf"]): docs.append(pdf)
     for ext in ["*.png", "*.svg", "*.gif"]:
         for img in project_path.rglob(ext):
             if any(x in str(img) for x in ["node_modules", ".venv", ".pytest_cache", "target", "implementations"]): continue
@@ -346,7 +346,12 @@ def generate_detailed_page(project: ProjectInfo) -> str:
             dest_name = f"{project.slug}-{doc.name}"
             try: shutil.copy2(doc, doc_dir / dest_name)
             except: pass
-            doc_lines.append(f"- [Download Technical Report: {doc.name}](/assets/docs/{dest_name})")
+            
+            label = "Technical Report"
+            if "paper.pdf" in doc.name: label = "Research Paper"
+            elif "usermanual.pdf" in doc.name: label = "User Manual"
+            
+            doc_lines.append(f"- [Download {label}: {doc.name}](/assets/docs/{dest_name})")
         project.sections["Technical Reports"] = "\n".join(doc_lines)
     
     dest_path = Path("projects") / f"{project.slug}.md"

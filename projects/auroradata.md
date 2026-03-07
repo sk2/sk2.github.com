@@ -1,6 +1,6 @@
 ---
 layout: default
-section: photography
+section: projects
 ---
 
 # Aurora Advisor
@@ -9,6 +9,8 @@ section: photography
   <span class="status-badge status-active">Active</span>
   <span class="stack-badge">TypeScript</span>
 </div>
+
+[← Back to Projects](../projects)
 
 ---
 
@@ -90,6 +92,8 @@ Providing a single, definitive "Go/No-Go" score that accounts for both space wea
 
 ## Requirements
 
+
+
 ---
 
 ## # Validated (v1.0 shipped)
@@ -98,7 +102,7 @@ Providing a single, definitive "Go/No-Go" score that accounts for both space wea
 - ✓ Multi-criteria site scoring (activity, weather, travel time, moon) — Phase 2
 - ✓ Telegram bot with automated alerts — Phase 3
 - ✓ Historical playback engine with tuning infrastructure — Phase 4
-- ✓ Hybrid Rust/TypeScript architecture —
+- ✓ Hybrid Rust/TypeScript architecture — 
 - ✓ Fast offline analysis (Rust CLI, 10k configs in <1s) — Phase 6
 
 ---
@@ -124,8 +128,8 @@ Providing a single, definitive "Go/No-Go" score that accounts for both space wea
 
 ## Roadmap
 
-- **Scope (not prioritized):**
+- **Scope (not prioritized):** 
 
 ---
 
-[← Back to Projects](/projects)
+[← Back to Projects](../projects)

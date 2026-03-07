@@ -1,6 +1,6 @@
 ---
 layout: default
-section: data-analytics
+section: projects
 ---
 
 # Tileserver Polars (Rust Optimized)
@@ -9,6 +9,10 @@ section: data-analytics
   <span class="status-badge status-active">Active</span>
   <span class="stack-badge">Rust</span> <span class="stack-badge">Python</span> <span class="stack-badge">Polars</span>
 </div>
+
+[← Back to Data Analytics](../data-analytics)
+
+[← Back to Projects](../projects)
 
 ---
 
@@ -71,6 +75,6 @@ A high-performance tile server that combines the speed of columnar data processi
 
 ---
 
-[← Back to Data Analytics](/data-analytics)
+[← Back to Data Analytics](../data-analytics)
 
-[← Back to Projects](/projects)
+[← Back to Projects](../projects)

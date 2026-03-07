@@ -138,7 +138,7 @@ DETAILED_SECTIONS = [
 ALWAYS_UPDATE_SECTIONS = {"Technical Reports", "Code Samples", "Visuals", "Current Status", "Roadmap"}
 STABLE_SECTIONS = {"Concept", "Interactive Playground (WASM Mock Demo)", "Architecture", "Features", "Quick Facts", "Usage"}
 
-FM_SECTIONS = {"network": "network-automation", "sdr": "signal-processing", "agents": "agentic-systems", "health": "agentic-systems", "data": "data-analytics"}
+FM_SECTIONS = {"network": "network-automation", "sdr": "signal-processing", "agents": "agentic-systems", "health": "agentic-systems", "data": "data-analytics", "astrophotography": "photography", "photography": "photography"}
 
 # Generate global slug list for cross-linking
 ALL_SLUGS = set(list(CANONICAL_SLUG.values()) + list(CANONICAL_SLUG.keys()) + list(ECOSYSTEM_MAP.keys()))
@@ -201,15 +201,6 @@ def generate_toc(content: str) -> str:
     if len(headers) < 3: return ""
     links = [f"- [{h}](#{re.sub(r'-+', '-', re.sub(r'[^a-z0-9-]', '', h.lower().replace(' ', '-')))})" for h in headers]
     return "## Contents\n\n" + "\n".join(links) + "\n\n"
-
-def get_back_links(category: str) -> str:
-    links = []
-    if category in FM_SECTIONS:
-        slug = FM_SECTIONS[category]
-        title = slug.replace("-", " ").title().replace("Agentic Systems", "Autonomous Systems")
-        links.append(f"[← Back to {title}](../{slug})")
-    links.append("[← Back to Projects](../projects)")
-    return "\n\n".join(links)
 
 def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
     planning_dir = project_path / ".planning"
@@ -314,10 +305,11 @@ def generate_detailed_page(project: ProjectInfo) -> str:
         if project.stack: facts.append(f"| **Stack** | {', '.join(project.stack)} |")
         project.sections["Quick Facts"] = "| | |\n|---|---|\n" + "\n".join(facts)
         
-    eco_slug = ECOSYSTEM_MAP.get(project.slug, "projects")
-    fm = f"---\nlayout: default\nsection: {eco_slug}\n---\n\n"
+    section = FM_SECTIONS.get(project.category)
+    fm_section = f"\nsection: {section}" if section else ""
+    fm = f"---\nlayout: default{fm_section}\n---\n\n"
     stack_html = " ".join([f'<span class="stack-badge">{s}</span>' for s in project.stack])
-    header = f"# {project.name}\n\n<div class=\"badges-row\">\n  <span class=\"status-badge status-active\">{project.status_detail}</span>\n  {stack_html}\n</div>\n\n{get_back_links(project.category)}\n\n---\n\n"
+    header = f"# {project.name}\n\n<div class=\"badges-row\">\n  <span class=\"status-badge status-active\">{project.status_detail}</span>\n  {stack_html}\n</div>\n\n---\n\n"
     
     if project.assets:
         img_lines = []
@@ -384,7 +376,7 @@ def generate_detailed_page(project: ProjectInfo) -> str:
     if project.roadmap_summary: body_list.append("## Roadmap\n\n" + "\n".join([f"- {item}" for item in project.roadmap_summary]))
     
     final_body = "\n\n---\n\n".join(body_list)
-    return fm + header + generate_toc(final_body) + final_body + f"\n\n---\n\n{get_back_links(project.category)}\n"
+    return fm + header + generate_toc(final_body) + final_body + "\n"
 
 def generate_projects_index(projects: list[ProjectInfo]) -> str:
     lines = ["---", "layout: default", "---", "", "# Projects", "", "Focused on network engineering, autonomous systems, and signal processing.", "", "---", ""]

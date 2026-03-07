@@ -35,6 +35,7 @@
     </script>
 
     <!-- Syntax highlighting -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <link id="hljs-theme" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
 
     <!-- Privacy-friendly analytics by Plausible -->
@@ -117,103 +118,6 @@
         <p class="lightbox-caption"></p>
       </div>
     </div>
-
-    <style>
-      .lightbox {
-        display: none;
-        position: fixed;
-        inset: 0;
-        z-index: 9999;
-        background: rgba(0, 0, 0, 0.5);
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-      }
-      .lightbox.active { display: flex; }
-      .lightbox-card {
-        background: var(--lightbox-card-bg, var(--bg-primary));
-        border-radius: 8px;
-        padding: 1.5rem;
-        max-width: 70vw;
-        max-height: 85vh;
-        box-shadow: 0 8px 32px var(--shadow);
-        cursor: default;
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-      .lightbox-close {
-        position: absolute;
-        top: 0.5rem;
-        right: 0.75rem;
-        background: none;
-        border: none;
-        font-size: 1.4rem;
-        color: var(--lightbox-close-color, #999);
-        cursor: pointer;
-        line-height: 1;
-      }
-      .lightbox-close:hover { color: var(--lightbox-close-hover, var(--text-primary)); }
-      .lightbox-img {
-        max-width: 100%;
-        max-height: 70vh;
-        object-fit: contain;
-        border-radius: 4px;
-      }
-      .lightbox-caption {
-        margin-top: 0.75rem;
-        color: var(--lightbox-caption-color, var(--text-tertiary));
-        font-size: 0.85em;
-        text-align: center;
-      }
-      .site-content img {
-        cursor: zoom-in;
-      }
-
-      /* Expandable code blocks */
-      .code-wrapper {
-        position: relative;
-        margin-bottom: 1.5rem;
-        border-radius: 6px;
-        overflow: hidden;
-      }
-      .code-content {
-        max-height: 300px;
-        overflow: hidden;
-        transition: max-height 0.3s ease;
-      }
-      .code-content.expanded {
-        max-height: none;
-      }
-      .code-expand-btn {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        width: 100%;
-        padding: 12px;
-        background: linear-gradient(transparent, var(--code-expand-gradient, rgba(20, 20, 20, 0.95)) 40%);
-        color: var(--code-expand-color, #aaa);
-        border: none;
-        cursor: pointer;
-        font-size: 0.8rem;
-        font-weight: 500;
-        text-align: center;
-        display: none;
-        z-index: 10;
-        transition: color 0.2s ease;
-      }
-      .code-expand-btn:hover {
-        color: var(--code-expand-hover, #fff);
-      }
-      .code-content.expanded + .code-expand-btn {
-        position: static;
-        background: var(--code-expand-bg, #1a1a1a);
-        margin-bottom: 1.5rem;
-        border-top: 1px solid var(--code-expand-border, #333);
-      }
-    </style>
 
     <script>
       function syncHljsTheme() {
@@ -335,7 +239,6 @@
         }
       });
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 
     <!-- Mermaid.js for diagrams -->
     <script type="module">

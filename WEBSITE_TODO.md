@@ -46,7 +46,7 @@ Tracked improvements for flow, readability, navigation, and polish.
 
 ### Update Script
 
-- [ ] Update `update_projects.py` to set `section:` front matter based on category
-- [ ] Remove inline back-link generation from script (back-links no longer exist)
-- [ ] Ensure category taxonomy matches 5-category structure
+- [x] Set `section:` front matter based on `FM_SECTIONS` category mapping
+- [x] Remove `get_back_links()` function and all back-link generation
+- [x] Add photography/astrophotography to `FM_SECTIONS` mapping
 - [ ] Prevent script from re-bloating trimmed pages (preserve stable sections)

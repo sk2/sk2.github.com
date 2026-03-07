@@ -26,7 +26,7 @@ Tracked improvements for flow, readability, navigation, and polish.
 
 ### UX
 
-- [ ] **Back to top button**: Floating button on long project pages (CSS + minimal JS in default.html), appears after scrolling past first screen
+- [x] **Back to top button**: Floating button appears after scrolling past first viewport height
 
 ### Visual Content
 

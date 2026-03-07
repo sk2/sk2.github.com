@@ -854,7 +854,8 @@ select:focus-visible {
   .site-header,
   .site-footer,
   .theme-toggle,
-  .breadcrumb {
+  .breadcrumb,
+  .back-to-top {
     display: none;
   }
 
@@ -956,4 +957,36 @@ details.code-collapse[open] summary {
   background: var(--bg-tertiary);
   border-color: var(--accent);
   color: var(--accent) !important;
+}
+
+/* Back to top button */
+.back-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg-primary);
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-normal), visibility var(--transition-normal),
+              background-color var(--transition-fast), color var(--transition-fast);
+  z-index: 50;
+  box-shadow: 0 2px 8px var(--shadow);
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.back-to-top:hover {
+  background: var(--bg-secondary);
+  color: var(--accent);
+  border-color: var(--accent);
 }

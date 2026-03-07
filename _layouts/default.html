@@ -106,6 +106,9 @@
       </footer>
     </div>
 
+    <!-- Back to top -->
+    <button class="back-to-top" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
     <!-- Image lightbox -->
     <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
       <div class="lightbox-card">
@@ -301,6 +304,14 @@
         document.addEventListener('keydown', function(e) {
           if (e.key === 'Escape') closeLightbox();
         });
+
+        // Back to top visibility
+        var backToTop = document.querySelector('.back-to-top');
+        if (backToTop) {
+          window.addEventListener('scroll', function() {
+            backToTop.classList.toggle('visible', window.scrollY > window.innerHeight);
+          }, { passive: true });
+        }
 
         // Click/touch support for dropdown
         var dropdownTrigger = document.querySelector('.nav-dropdown-trigger');

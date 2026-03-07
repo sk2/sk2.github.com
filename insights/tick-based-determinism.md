@@ -78,6 +78,17 @@ By simulating the *protocols* rather than emulating the *hardware*, we gained se
 2. **Absolute Reproducibility:** Because the system is driven by a discrete, single-threaded "tick", the same configuration applied to the same topology will always produce the exact same routing tables, down to the exact tick of convergence.
 3. **Time Travel & Chaos:** We can deterministically script chaos. "At tick 500, drop the link between Spine-1 and Leaf-2. Assert that traffic reroutes within 30 ticks."
 
+### Comparison
+
+| | Tick-Based Simulation | Full Emulation (Containerlab) |
+|---|---|---|
+| **Startup** | Milliseconds | Minutes |
+| **50-node test** | < 100ms | Minutes + GB of RAM |
+| **Determinism** | Identical results every run | Timing varies with CPU load |
+| **Debuggability** | Pause at any tick, inspect state | Opaque VM internals |
+| **Vendor fidelity** | Protocol-level | Full CLI syntax |
+| **Best for** | Design iteration, CI/CD | Final vendor syntax validation |
+
 ### When to use which?
 
 We didn't kill Containerlab; we shifted left. 

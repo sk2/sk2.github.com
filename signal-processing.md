@@ -15,25 +15,14 @@ Tools for radio spectrum monitoring, spatial audio analysis, and biometric signa
 
 ## How They Work Together
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                  SDR Hardware Layer                          │
-│   (RTL-SDR · AirSpy HF+ · KrakenSDR · Microphone Arrays)  │
-└──────────┬────────────────────┬─────────────────────────────┘
-           │                    │
-  ┌────────▼─────────┐  ┌──────▼───────────┐
-  │  Streaming Server│  │  Signal Reflection│
-  │  (rtltcp-rust)   │  │  (KrakenSDR)     │
-  └────────┬─────────┘  └──────┬───────────┘
-           │                    │
-           └────────┬───────────┘
-                    ▼
-       ┌────────────────────────┐
-       │  Spectrum Analysis     │
-       │  (ML Classification   │
-       │   + Vector Search)    │
-       └────────────────────────┘
-```
+<div class="mermaid">
+flowchart TD
+    HW["SDR Hardware Layer<br/><small>RTL-SDR · AirSpy HF+ · KrakenSDR · Microphone Arrays</small>"]
+    HW --> SS["Streaming Server<br/><small>Multi-SDR Streaming Server</small>"]
+    HW --> SR["Signal Reflection<br/><small>KrakenSDR</small>"]
+    SS --> SA["Spectrum Analysis<br/><small>ML Classification + Vector Search</small>"]
+    SR --> SA
+</div>
 
 **Typical workflow:** SDR hardware captures raw IQ samples → the streaming server distributes data over the network → spectrum analysis classifies and catalogs detected signals into a searchable inventory.
 

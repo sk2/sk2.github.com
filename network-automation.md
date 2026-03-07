@@ -19,38 +19,19 @@ A modular toolchain that takes a network design from whiteboard sketch to valida
 
 ## Pipeline
 
-```
-  Brownfield CLI ──┐          ┌── Greenfield Design
-                   ▼          ▼
-            ┌─────────────────────────┐
-            │   Topology Generation   │   topogen / configparsing
-            └────────────┬────────────┘
-                         ▼
-            ┌─────────────────────────┐
-            │   Modeling & Queries    │   ank_pydantic + NTE (Rust)
-            └────────────┬────────────┘
-                         │
-              ┌──────────┴──────────┐
-              ▼                     ▼
-   ┌────────────────────┐ ┌────────────────────┐
-   │  Config Generation │ │  Protocol Sim      │
-   │  netcfg (Rust)     │ │  netsim (Rust)     │
-   └─────────┬──────────┘ └─────────┬──────────┘
-             │                      │
-             ▼                      ▼
-   ┌────────────────────┐ ┌────────────────────┐
-   │  Device Deploy     │ │  Performance Sim   │
-   │  + Test            │ │  netflowsim (Rust) │
-   └─────────┬──────────┘ └─────────┬──────────┘
-             └──────────┬───────────┘
-                        ▼
-            ┌─────────────────────────┐
-            │   Visualization &       │   netvis + Workbench UI
-            │   Analysis              │   netassure (GNN/Z3)
-            └─────────────────────────┘
-```
-
-Code names in the diagram map to the full project names in the sections below.
+<div class="mermaid">
+flowchart TD
+    BF["Brownfield CLI"] --> TG
+    GF["Greenfield Design"] --> TG
+    TG["Topology Generation<br/><small>TopoGen · Config Parsing</small>"]
+    TG --> MOD["Modeling & Queries<br/><small>Modeling Library + NTE</small>"]
+    MOD --> CFG["Config Generation<br/><small>Config Framework</small>"]
+    MOD --> SIM["Protocol Simulation<br/><small>Simulator</small>"]
+    CFG --> DEP["Device Deploy & Test"]
+    SIM --> PERF["Performance Simulation"]
+    DEP --> VIS["Visualization & Analysis<br/><small>Visualization Engine · Workbench · Analysis Engine</small>"]
+    PERF --> VIS
+</div>
 
 ---
 

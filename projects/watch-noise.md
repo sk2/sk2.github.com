@@ -10,8 +10,6 @@ section: projects
 
 </div>
 
-[← Back to Projects](/projects)
-
 ---
 
 ## Contents

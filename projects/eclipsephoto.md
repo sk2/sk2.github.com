@@ -10,8 +10,6 @@ section: photography
   <span class="stack-badge">Python</span>
 </div>
 
-[← Back to Projects](/projects)
-
 ---
 
 ## Concept

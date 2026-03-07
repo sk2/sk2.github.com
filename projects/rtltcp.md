@@ -10,10 +10,6 @@ section: signal-processing
   <span class="stack-badge">Rust</span>
 </div>
 
-[← Back to Signal Processing](/signal-processing)
-
-[← Back to Projects](/projects)
-
 ---
 
 ## Contents

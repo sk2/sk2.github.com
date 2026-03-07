@@ -1,5 +1,6 @@
 ---
 layout: default
+title: Curriculum Vitae
 ---
 
 # Curriculum Vitae

@@ -10,10 +10,6 @@ section: data-analytics
   <span class="stack-badge">Rust</span> <span class="stack-badge">Python</span> <span class="stack-badge">Polars</span>
 </div>
 
-[← Back to Data Analytics](/data-analytics)
-
-[← Back to Projects](/projects)
-
 ---
 
 ## Concept

@@ -10,10 +10,6 @@ section: network-automation
   <span class="stack-badge">Python</span>
 </div>
 
-[← Back to Network Automation](/network-automation)
-
-[← Back to Projects](/projects)
-
 ---
 
 ## Concept

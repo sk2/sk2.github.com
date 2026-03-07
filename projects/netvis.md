@@ -10,10 +10,6 @@ section: network-automation
   <span class="stack-badge">Rust</span> <span class="stack-badge">Python</span> <span class="stack-badge">TypeScript</span>
 </div>
 
-[← Back to Network Automation](/network-automation)
-
-[← Back to Projects](/projects)
-
 ---
 
 ## Contents

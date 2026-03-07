@@ -10,10 +10,6 @@ section: agentic-systems
   <span class="stack-badge">Python</span>
 </div>
 
-[← Back to Autonomous Systems](/agentic-systems)
-
-[← Back to Projects](/projects)
-
 ---
 
 ## Contents

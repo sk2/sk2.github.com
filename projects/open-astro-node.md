@@ -10,8 +10,6 @@ section: photography
   <span class="stack-badge">Rust</span> <span class="stack-badge">TypeScript</span>
 </div>
 
-[← Back to Projects](/projects)
-
 ---
 
 ## Concept

@@ -3,9 +3,22 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="{{ site.description | default: page.description | default: 'Simon Knight - Software Engineer' }}">
+    {% assign desc = description | default: site.description | default: 'Simon Knight - Software Engineer' %}
+    {% assign page_title = title | default: site.title %}
+    <meta name="description" content="{{ desc }}">
+    <meta name="author" content="Simon Knight">
 
-    <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title | default: "Simon Knight" }}</title>
+    <title>{% if title %}{{ title }} - {% endif %}{{ site.title | default: "Simon Knight" }}</title>
+
+    <link rel="icon" type="image/png" href="/images/favicon.png">
+    <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="{{ page_title }}">
+    <meta property="og:description" content="{{ desc }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+    <meta name="twitter:card" content="summary">
 
     <link rel="stylesheet" href="/assets/css/main.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -40,14 +53,14 @@
           <nav class="site-nav">
             <a href="/" {% if page.url == '/' or page.url == '/index.html' %}class="active"{% endif %}>About</a>
             <div class="nav-dropdown">
-              <a href="/projects" class="nav-dropdown-trigger{% if page.url == '/projects.html' or page.url == '/projects/' or page.section == 'projects' or page.url contains 'network-automation' or page.section == 'network-automation' or page.url contains 'signal-processing' or page.section == 'signal-processing' or page.url contains 'photography' or page.section == 'photography' or page.url contains 'data-analytics' or page.section == 'data-analytics' or page.url contains 'agentic-systems' or page.section == 'agentic-systems' %}  active{% endif %}">Projects <span class="nav-caret">&#9662;</span></a>
+              <a href="/projects" class="nav-dropdown-trigger{% if page.url == '/projects.html' or page.url == '/projects/' or section == 'projects' or page.url contains 'network-automation' or section == 'network-automation' or page.url contains 'signal-processing' or section == 'signal-processing' or page.url contains 'photography' or section == 'photography' or page.url contains 'data-analytics' or section == 'data-analytics' or page.url contains 'agentic-systems' or section == 'agentic-systems' %}  active{% endif %}">Projects <span class="nav-caret">&#9662;</span></a>
               <div class="nav-dropdown-menu">
                 <a href="/projects">All Projects</a>
-                <a href="/network-automation" {% if page.url contains 'network-automation' or page.section == 'network-automation' %}class="active"{% endif %}>Network Automation</a>
-                <a href="/signal-processing" {% if page.url contains 'signal-processing' or page.section == 'signal-processing' %}class="active"{% endif %}>Signal Processing</a>
-                <a href="/photography" {% if page.url contains 'photography' or page.section == 'photography' %}class="active"{% endif %}>Photography</a>
-                <a href="/data-analytics" {% if page.url contains 'data-analytics' or page.section == 'data-analytics' %}class="active"{% endif %}>Data & Analytics</a>
-                <a href="/agentic-systems" {% if page.url contains 'agentic-systems' or page.section == 'agentic-systems' %}class="active"{% endif %}>Autonomous Systems</a>
+                <a href="/network-automation" {% if page.url contains 'network-automation' or section == 'network-automation' %}class="active"{% endif %}>Network Automation</a>
+                <a href="/signal-processing" {% if page.url contains 'signal-processing' or section == 'signal-processing' %}class="active"{% endif %}>Signal Processing</a>
+                <a href="/photography" {% if page.url contains 'photography' or section == 'photography' %}class="active"{% endif %}>Photography</a>
+                <a href="/data-analytics" {% if page.url contains 'data-analytics' or section == 'data-analytics' %}class="active"{% endif %}>Data & Analytics</a>
+                <a href="/agentic-systems" {% if page.url contains 'agentic-systems' or section == 'agentic-systems' %}class="active"{% endif %}>Autonomous Systems</a>
               </div>
             </div>
           </nav>
@@ -59,9 +72,9 @@
       </header>
 
       <main class="site-content">
-        {% if page.section %}
+        {% if section %}
         <nav class="breadcrumb" aria-label="Breadcrumb">
-          {% case page.section %}
+          {% case section %}
           {% when 'network-automation' %}
             <a href="/network-automation">← Back to Network Automation</a>
           {% when 'signal-processing' %}
@@ -72,6 +85,8 @@
             <a href="/agentic-systems">← Back to Autonomous Systems</a>
           {% when 'photography' %}
             <a href="/photography">← Back to Photography</a>
+          {% when 'insights' %}
+            <a href="/network-automation">← Back to Network Automation</a>
           {% endcase %}
         </nav>
         {% endif %}

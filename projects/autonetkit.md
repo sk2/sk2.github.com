@@ -7,10 +7,6 @@ section: network-automation
 
 <span class="status-badge status-active">Active</span>
 
-[← Back to Network Automation](/network-automation)
-
-[← Back to Projects](/projects)
-
 ---
 
 ## Concept

@@ -46,7 +46,3 @@ Bachelor of Engineering (Telecommunications, First Class Honours) and Bachelor o
 - [View CV](cv)
 
 [View all projects](projects)
-
----
-
-[GitHub](https://github.com/sk2) | [LinkedIn](https://www.linkedin.com/in/simoncknight/)

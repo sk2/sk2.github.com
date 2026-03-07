@@ -10,8 +10,6 @@ section: signal-processing
 
 </div>
 
-[← Back to Projects](/projects)
-
 ---
 
 ## Concept

@@ -33,24 +33,14 @@ Modern data analysis fragments across disconnected tools: extract data with one 
 
 ## How They Work Together
 
-```
-┌────────────────────────────────────────────────────────────┐
-│              Raw Data Sources                              │
-│   (Geospatial · Time Series · Large CSVs · Streams)       │
-└────────────┬───────────────────────────┬───────────────────┘
-             │                           │
-    ┌────────▼─────────┐        ┌────────▼─────────┐
-    │ Tileserver Polars│        │ matrix-profile-rs│
-    │  (Geospatial)    │        │  (Time Series)   │
-    └────────┬─────────┘        └────────┬─────────┘
-             │                           │
-             └──────────┬────────────────┘
-                        │
-          ┌─────────────▼──────────────┐
-          │   Interactive Frontends    │
-          │  (Kepler.gl · Dashboards)  │
-          └────────────────────────────┘
-```
+<div class="mermaid">
+flowchart TD
+    DS["Raw Data Sources<br/><small>Geospatial · Time Series · Large CSVs · Streams</small>"]
+    DS --> TS["Tileserver Polars<br/><small>Geospatial analytics</small>"]
+    DS --> MP["matrix-profile-rs<br/><small>Time series patterns</small>"]
+    TS --> FE["Interactive Frontends<br/><small>Kepler.gl · Dashboards</small>"]
+    MP --> FE
+</div>
 
 **Typical Workflow:**
 1. **Ingest**: Load massive datasets (geospatial points, time series) into Polars DataFrames

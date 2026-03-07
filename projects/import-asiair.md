@@ -10,8 +10,6 @@ section: photography
 
 </div>
 
-[← Back to Projects](/projects)
-
 ---
 
 ## Contents

@@ -91,7 +91,7 @@ Photography—whether capturing aurora bursts in sub-zero conditions or composin
 
 <span class="status-badge status-planning">Planning</span> · [Full Details →](projects/auroraphoto)
 
-**What It Is:**
+
 Automated aurora photography system using Raspberry Pi nodes controlling Sony a7R V/a7 IV cameras via USB, with iPhone companion app for composition and multi-node management.
 
 **Key Features:**
@@ -110,7 +110,7 @@ Automated aurora photography system using Raspberry Pi nodes controlling Sony a7
 
 <span class="status-badge status-active">Active Development</span> · [Full Details →](projects/open-astro-node)
 
-**What It Is:**
+
 A headless, autonomous astrophotography controller designed for low-power Linux devices (RPi/Jetson). Manages hardware, executes imaging sequences, and ensures rig safety.
 
 **Key Features:**
@@ -129,7 +129,7 @@ A headless, autonomous astrophotography controller designed for low-power Linux 
 
 <span class="status-badge status-active">v0.1 Celestial Math</span> · [Full Details →](projects/open-astro-core)
 
-**What It Is:**
+
 Rust library providing shared astronomical logic, hardware drivers, and protocol implementations for the OpenAstro ecosystem.
 
 **Components:**
@@ -151,7 +151,7 @@ Rust library providing shared astronomical logic, hardware drivers, and protocol
 
 <span class="status-badge status-active">Phase 1 — Hardware & Data Foundation</span> · [Full Details →](projects/eclipsephoto)
 
-**What It Is:**
+
 A "fire and forget" Raspberry Pi-based controller for autonomous solar eclipse photography. Coordinates a camera (via gphoto2) and a high-end mount (ZWO AM5 / Benro Polaris via INDI) to capture a complete eclipse sequence from C1 to C4 without manual intervention.
 
 **Key Features:**
@@ -170,7 +170,7 @@ A "fire and forget" Raspberry Pi-based controller for autonomous solar eclipse p
 
 <span class="status-badge status-planning">Planning</span> · [Full Details →](projects/eclipsestack)
 
-**What It Is:**
+
 High-precision alignment tool for solar eclipse photography that handles tracker drift to enable HDR stacking.
 
 **The Challenge:**
@@ -192,7 +192,7 @@ Solar eclipse photography during totality captures hundreds of frames, but subtl
 
 <span class="status-badge status-active">Phase 1/1</span> · [Full Details →](projects/import-asiair)
 
-**What It Is:**
+
 Python script that automates post-imaging-session file organization for astrophotography.
 
 **Key Features:**
@@ -213,7 +213,7 @@ Python script that automates post-imaging-session file organization for astropho
 
 <span class="status-badge status-active">Active Development</span> · [Full Details →](projects/photo-tour)
 
-**What It Is:**
+
 Smart, interactive photography assistant designed for field use. Helps compose shots, automate repeatable workflows, and progressively adds intelligent triggering and transition logic.
 
 **Key Features:**

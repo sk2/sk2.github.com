@@ -10,10 +10,6 @@ section: data-analytics
   <span class="stack-badge">Python</span>
 </div>
 
-[← Back to Data Analytics](/data-analytics)
-
-[← Back to Projects](/projects)
-
 ---
 
 ## Concept

@@ -10,10 +10,6 @@ section: agentic-systems
 
 </div>
 
-[← Back to Autonomous Systems](/agentic-systems)
-
-[← Back to Projects](/projects)
-
 ---
 
 ## Contents

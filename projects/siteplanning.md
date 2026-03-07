@@ -1,5 +1,6 @@
 ---
 layout: default
+section: photography
 ---
 
 # Astrophotography Site Planner
@@ -8,8 +9,6 @@ layout: default
   <span class="status-badge status-active">Active</span>
   <span class="stack-badge">TypeScript</span> <span class="stack-badge">React</span>
 </div>
-
-[← Back to Projects](/projects)
 
 ---
 

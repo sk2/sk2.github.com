@@ -853,7 +853,8 @@ select:focus-visible {
 @media print {
   .site-header,
   .site-footer,
-  .theme-toggle {
+  .theme-toggle,
+  .breadcrumb {
     display: none;
   }
 

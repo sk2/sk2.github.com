@@ -10,8 +10,6 @@ section: photography
   <span class="stack-badge">Rust</span>
 </div>
 
-[← Back to Projects](/projects)
-
 ---
 
 ## Contents

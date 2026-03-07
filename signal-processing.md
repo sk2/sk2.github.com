@@ -4,47 +4,93 @@ layout: default
 
 # Signal Processing & Radio
 
-Projects exploring radio spectrum monitoring and signal analysis.
+Tools for radio spectrum monitoring, spatial audio analysis, and biometric signal processing — from SDR acquisition through ML classification to real-time visualization.
+
+## Contents
+- [How They Work Together](#how-they-work-together)
+- [Radio Systems](#radio-systems)
+- [Audio & Biometrics](#audio--biometrics)
+
+---
+
+## How They Work Together
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                  SDR Hardware Layer                          │
+│   (RTL-SDR · AirSpy HF+ · KrakenSDR · Microphone Arrays)  │
+└──────────┬────────────────────┬─────────────────────────────┘
+           │                    │
+  ┌────────▼─────────┐  ┌──────▼───────────┐
+  │  Streaming Server│  │  Signal Reflection│
+  │  (rtltcp-rust)   │  │  (KrakenSDR)     │
+  └────────┬─────────┘  └──────┬───────────┘
+           │                    │
+           └────────┬───────────┘
+                    ▼
+       ┌────────────────────────┐
+       │  Spectrum Analysis     │
+       │  (ML Classification   │
+       │   + Vector Search)    │
+       └────────────────────────┘
+```
+
+**Typical workflow:** SDR hardware captures raw IQ samples → the streaming server distributes data over the network → spectrum analysis classifies and catalogs detected signals into a searchable inventory.
 
 ---
 
 ## Radio Systems
 
-### Spectrum Monitoring
-[Full Details →](projects/signals)
-An autonomous system for monitoring the radio spectrum. It identifies signals and maintains a record of activity over time.
+### Spectrum Analysis
+
+<span class="status-badge status-active">Recently Updated</span> · <span class="stack-badge">Python</span> · [Full Details →](projects/signals)
+
+Automated signal census system that transforms raw radio spectrum data into classified, searchable signal inventories. Combines SDR acquisition, ML classification, and vector search to detect, identify, and catalog signals across monitored bands.
+
+![Spectrum waterfall](/images/spectra-waterfall.png)
+*Real-time waterfall visualization of monitored spectrum.*
 
 ---
 
-### SDR Streaming Server
-[Full Details →](projects/rtltcp)
-A server that manages multiple radio devices and streams data over a network for remote analysis.
+### Multi-SDR Streaming Server
+
+<span class="status-badge status-active">Recently Updated</span> · <span class="stack-badge">Rust</span> · [Full Details →](projects/rtltcp)
+
+Cross-platform server that manages multiple SDR devices (RTL-SDR, AirSpy HF+) and streams raw IQ samples over the network using the `rtl_tcp` protocol. A single Rust binary replaces multiple C-based streaming tools, adding a TUI for live device management and safe concurrency across all connected radios.
 
 ---
 
 ### Signal Reflection Analysis
-[Full Details →](projects/rf-signal-analysis)
-Experiments in analyzing radio signal reflections to track movement and presence using multi-channel hardware.
+
+<span class="status-badge status-active">Recently Updated</span> · <span class="stack-badge">Rust</span> <span class="stack-badge">Python</span> · [Full Details →](projects/rf-signal-analysis)
+
+Distributed multi-beam signal reflection analysis system built on KrakenSDR hardware. A Raspberry Pi handles data acquisition and streams IQ data over UDP; a workstation runs compute-intensive DSP. All four channels process in parallel with independent Range-Doppler visualization and real-time performance monitoring.
 
 ---
 
 ## Audio & Biometrics
 
 ### Spatial Audio
-[Full Details →](projects/soundarray)
-Research into processing sound from microphone arrays to locate and classify sound sources.
+
+<span class="status-badge status-active">Active</span> · [Full Details →](projects/soundarray)
+
+Audio processing system using Raspberry Pi and microphone arrays for spatial sound analysis. Computes Time of Arrival (ToA) for sound localization and applies beamforming for directional isolation. Classifies sources — vehicles, aircraft, wildlife — and streams processed data for remote analysis.
 
 ---
 
 ### Heart Rate Analysis
-[Full Details →](projects/hrv)
-A tool for monitoring heart rate variability in real-time, providing insights into stress and recovery.
+
+<span class="status-badge status-active">Active</span> · <span class="stack-badge">Rust</span> · [Full Details →](projects/hrv)
+
+Rust TUI application for real-time heart rate variability monitoring. Connects to BLE heart rate sensors via `btleplug`, computes time-domain HRV metrics (RMSSD, SDNN, pNN50), and stores session data in Apache Arrow/Parquet format for longitudinal analysis.
 
 ---
 
 ### Biometric Systems
-[Full Details →](projects/healthypi)
-An ecosystem for processing biometric signals from experimental hardware to provide health insights.
+
+<span class="status-badge status-active">Active</span> · <span class="stack-badge">Python</span> · [Full Details →](projects/healthypi)
+
+Modular health monitoring ecosystem that translates raw biometric data from HealthyPi hardware into structured metrics. Swift collectors on Apple devices capture HealthKit data, publish to a NATS broker, and Python agents run analysis pipelines — coordinated by the [multi-agent orchestrator](/projects/multi-agent).
 
 ---
 

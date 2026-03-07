@@ -82,15 +82,14 @@ Load data:
 import polars as pl
 from tileserver_polars import TileServer
 
-# Load massive point dataset
 df = pl.read_csv("earthquakes_10M.csv")
-
-# Start tile server
 server = TileServer(df, lon_col="longitude", lat_col="latitude")
 server.start(port=8080)
 ```
 
-Configure Kepler.gl:
+<details class="code-collapse">
+<summary>Configure Kepler.gl + dynamic filtering</summary>
+
 ```javascript
 // Add custom tile layer
 {
@@ -100,12 +99,13 @@ Configure Kepler.gl:
 }
 ```
 
-Query dynamically:
 ```python
 # Filter by magnitude on the fly
 server.set_filter(pl.col("magnitude") > 5.0)
 # Tiles regenerate automatically with filtered data
 ```
+
+</details>
 
 **Performance:**
 - **10M points**: 800ms full-extent render
@@ -154,53 +154,11 @@ Matrix Profiles provide a universal representation:
 - **Polars integration** (Phase 5): `df.select(pl.col("ts").mp.stomp(m=20))`
 - **Native performance**: 100x faster than Python equivalents
 
-**Example: Predictive Maintenance**
-
-Input time series (vibration sensor):
-```rust
-use matrix_profile::{MatrixProfile, stomp};
-
-// Load sensor data
-let vibration_data: Vec<f64> = load_sensor_readings();
-
-// Compute matrix profile (window size: 100 samples)
-let mp = stomp(&vibration_data, 100)?;
-
-// Find top 3 repeating patterns
-let motifs = mp.motifs(3)?;
-for (rank, motif) in motifs.iter().enumerate() {
-    println!("Motif {}: occurs at indices {:?}",
-             rank + 1, motif.occurrences);
-    println!("  Distance: {:.4}", motif.distance);
-}
-
-// Find top 3 anomalies
-let discords = mp.discords(3)?;
-for (rank, discord) in discords.iter().enumerate() {
-    println!("Anomaly {}: at index {}",
-             rank + 1, discord.index);
-    println!("  Severity: {:.4}", discord.distance);
-}
-```
-
-Output:
-```
-Motif 1: occurs at indices [1234, 2456, 3678, 4890, ...]
-  Distance: 0.0234
-Motif 2: occurs at indices [890, 1890, 2890]
-  Distance: 0.0456
-
-Anomaly 1: at index 5432
-  Severity: 12.3456
-Anomaly 2: at index 7890
-  Severity: 11.2345
-```
-
-Interpretation:
-- **Motif 1**: Degradation pattern that appears multiple times (pre-failure signature)
-- **Anomaly 1**: Unusual vibration spike (investigate further)
-
 **Polars Integration (Planned):**
+
+<details class="code-collapse">
+<summary>Matrix profile as DataFrame operations</summary>
+
 ```python
 import polars as pl
 
@@ -214,10 +172,9 @@ result = df.with_columns([
 ])
 ```
 
-**Performance Targets:**
-- **N=10⁴ samples**: < 100ms
-- **N=10⁵ samples**: < 5s
-- **N=10⁶ samples**: < 2 minutes (with parallelization)
+</details>
+
+See the [full project page →](projects/matrix-time-series) for Rust API examples and performance benchmarks.
 
 **Use Cases:**
 - **Predictive maintenance**: Find degradation patterns in sensor data

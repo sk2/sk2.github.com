@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="{{ site.description | default: page.description | default: 'Simon Knight - Software Engineer and Researcher' }}">
+    <meta name="description" content="{{ site.description | default: page.description | default: 'Simon Knight - Software Engineer' }}">
 
     <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title | default: "Simon Knight" }}</title>
 
@@ -309,5 +309,33 @@
       });
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+    <!-- Mermaid.js for diagrams -->
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+      const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default';
+      mermaid.initialize({ startOnLoad: true, theme: theme });
+
+      // Re-render on theme toggle
+      const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(m) {
+          if (m.attributeName === 'data-theme') {
+            const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default';
+            mermaid.initialize({ startOnLoad: false, theme: newTheme });
+            document.querySelectorAll('.mermaid[data-processed]').forEach(function(el) {
+              el.removeAttribute('data-processed');
+              el.innerHTML = el.getAttribute('data-original');
+            });
+            mermaid.run();
+          }
+        });
+      });
+      observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+      // Store original content for re-rendering
+      document.querySelectorAll('.mermaid').forEach(function(el) {
+        el.setAttribute('data-original', el.textContent);
+      });
+    </script>
   </body>
 </html>

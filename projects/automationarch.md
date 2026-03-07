@@ -29,6 +29,37 @@ This project defines the architecture of the Network Automation Ecosystem: how i
 
 The ecosystem comprises nine repositories that form a composable toolchain. Each tool handles one concern -- topology generation, simulation, configuration parsing, visualization, analysis -- and communicates through pinned contract schemas (RFC-01, RFC-02). The architecture document formalizes these relationships and identifies future sub-projects.
 
+### Pipeline Flow
+
+<div class="mermaid">
+flowchart LR
+    TG[Topology<br/>Generator] --> MOD[Modeling<br/>Library]
+    MOD --> CFG[Config<br/>Compiler]
+    CFG --> SIM[Simulator]
+    SIM --> VIS[Visualization<br/>Engine]
+    VIS --> ANA[Analysis<br/>Engine]
+    SIM --> ANA
+</div>
+
+### Contract Relationships
+
+<div class="mermaid">
+flowchart TD
+    RFC01["RFC-01<br/>Operational Topology"]
+    RFC02["RFC-02<br/>Live Overlay Stream"]
+    RFC03["RFC-03<br/>Interface Representation"]
+
+    TG[TopoGen] -->|produces| RFC01
+    MOD[Modeling Library] -->|consumes/produces| RFC01
+    CFG[Config Compiler] -->|consumes| RFC01
+    SIM[Simulator] -->|consumes| RFC01
+    SIM -->|produces| RFC02
+    VIS[NetVis] -->|consumes| RFC01
+    VIS -->|consumes| RFC02
+    ANA[Analysis Engine] -->|consumes| RFC02
+    RFC03 -.->|referenced by| RFC01
+</div>
+
 ---
 
 ## Code Samples

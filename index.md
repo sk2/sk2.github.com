@@ -4,7 +4,7 @@ layout: default
 
 # Simon Knight
 
-Telecommunications engineer and software researcher based in Adelaide, South Australia. I build tools for modeling, simulating, and coordinating complex systems — turning architectural intent into working infrastructure.
+Telecommunications and software engineer based in Adelaide, South Australia. I build tools for modeling, simulating, and coordinating complex systems — turning architectural intent into working infrastructure.
 
 My focus is structural clarity at scale: deterministic protocol simulators, graph topology engines, and multi-agent coordination systems. Each project starts from research (my PhD work on automated network configuration) and ships as working software.
 
@@ -14,27 +14,27 @@ My focus is structural clarity at scale: deterministic protocol simulators, grap
 
 <div class="project-grid">
 <div class="project-card">
-  <h3 class="card-title"><a href="/projects/netsim">Network Simulator</a></h3>
+  <h3 class="card-title"><a href="/projects/ank-nte">Network Topology Engine</a></h3>
   <div class="badges-row card-badges"><span class="stack-badge">Rust</span></div>
-  <p class="card-description">Deterministic, tick-based protocol simulator that validates routing configurations (OSPF, IS-IS, BGP) before deployment. Models control-plane convergence at protocol level.</p>
+  <p class="card-description">Graph engine (14-crate workspace, petgraph StableDiGraph) ensuring every topological mutation is structurally sound. Pluggable datastores: Polars, DuckDB, Lite.</p>
 </div>
 
 <div class="project-card">
-  <h3 class="card-title"><a href="/projects/ank-pydantic">Network Modeling Library</a></h3>
-  <div class="badges-row card-badges"><span class="stack-badge">Python</span><span class="stack-badge">Rust</span></div>
-  <p class="card-description">Type-safe Python API for defining network topologies, backed by a Rust graph engine (NTE). Composable query system with domain models for IS-IS, MPLS, EVPN.</p>
+  <h3 class="card-title"><a href="/projects/netsim">Network Simulator</a></h3>
+  <div class="badges-row card-badges"><span class="stack-badge">Rust</span></div>
+  <p class="card-description">Deterministic, tick-based protocol simulator that validates routing configurations (OSPF, IS-IS, BGP) before deployment. Same topology, same results — every time.</p>
+</div>
+
+<div class="project-card">
+  <h3 class="card-title"><a href="/projects/ank-netcfg">Network Configuration Framework</a></h3>
+  <div class="badges-row card-badges"><span class="stack-badge">Rust</span></div>
+  <p class="card-description">Compiles vendor-neutral graph models into device-specific configurations (Arista EOS, Cisco IOS-XR) through a deterministic blueprint-to-template pipeline.</p>
 </div>
 
 <div class="project-card">
   <h3 class="card-title"><a href="/projects/netvis">Visualization Engine</a></h3>
   <div class="badges-row card-badges"><span class="stack-badge">Rust</span><span class="stack-badge">TypeScript</span></div>
-  <p class="card-description">Layout engine for dense, multi-layer network topologies. Edge bundling, hierarchical stacking, and geographic positioning across thousands of nodes.</p>
-</div>
-
-<div class="project-card">
-  <h3 class="card-title"><a href="/projects/configparsing">Brownfield Ingestion</a></h3>
-  <div class="badges-row card-badges"><span class="stack-badge">Python</span></div>
-  <p class="card-description">Extracts structured intent from legacy network configurations using LLM-powered RAG, identifying protocol relationships and topology from unstructured CLI output.</p>
+  <p class="card-description">Layout engine for dense, multi-layer network topologies. Edge bundling, hierarchical stacking, and SVG/PDF/PNG output with browser embedding via WASM.</p>
 </div>
 </div>
 

@@ -29,31 +29,46 @@ To achieve CI/CD-style rigor for physical networks, we needed tests that run in 
 
 We abandoned full OS emulation and instead built a custom, deterministic protocol engine in Rust.
 
+<div class="mermaid">
+stateDiagram-v2
+    [*] --> DeliverPackets: tick = 0
+    DeliverPackets --> ProcessRouters: Links flush in-flight packets
+    ProcessRouters --> CheckConvergence: Each router steps its state machine
+    CheckConvergence --> IncrementClock: Not converged
+    CheckConvergence --> [*]: All routers quiescent
+    IncrementClock --> DeliverPackets: tick += 1
+</div>
+
+<details class="code-collapse">
+<summary>View simplified tick loop (Rust)</summary>
+
 ```rust
 // A simplified view of the Simulator tick loop
 pub fn run_until_converged(&mut self) -> SimulationResult {
     let mut tick = 0;
-    
+
     loop {
         // 1. All links deliver in-flight packets that have reached their delay threshold
         self.fabric.deliver_packets(tick);
-        
+
         // 2. All routers process received packets and update their protocol state machines (OSPF/BGP)
         let mut converged = true;
         for router in &mut self.routers {
             let active = router.step(tick);
             if active { converged = false; }
         }
-        
+
         // 3. Increment universal clock
         tick += 1;
-        
+
         if converged { break; }
     }
-    
+
     SimulationResult::Converged(tick)
 }
 ```
+
+</details>
 
 ### The Benefits of Simulation
 

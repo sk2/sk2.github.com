@@ -889,3 +889,43 @@ select:focus-visible {
 .mb-md { margin-bottom: var(--space-md); }
 .mt-lg { margin-top: var(--space-lg); }
 .mb-lg { margin-bottom: var(--space-lg); }
+
+/* Mermaid diagram blocks */
+.mermaid {
+  text-align: center;
+  max-width: 100%;
+  margin: 1.5rem auto;
+  overflow-x: auto;
+}
+
+/* Details/summary for collapsible code */
+details.code-collapse {
+  margin: 1rem 0 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+details.code-collapse summary {
+  padding: 0.6rem 1rem;
+  background: var(--bg-secondary);
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  user-select: none;
+}
+
+details.code-collapse summary:hover {
+  color: var(--text-primary);
+  background: var(--bg-tertiary);
+}
+
+details.code-collapse pre {
+  margin: 0;
+  border-radius: 0;
+}
+
+details.code-collapse[open] summary {
+  border-bottom: 1px solid var(--border);
+}

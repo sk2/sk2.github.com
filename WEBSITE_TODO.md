@@ -7,51 +7,45 @@ Tracked improvements for flow, readability, navigation, and polish. Items marked
 ## Navigation & Structure
 
 ### 1. Nav/category alignment [DONE]
-Nav dropdown now has 5 categories (Network Automation, Signal Processing, Photography, Data & Analytics, Autonomous Systems) matching the sections in projects.md. Removed the separate "Architecture" nav item.
+Nav dropdown now has 5 categories matching sections in projects.md.
 
-### 2. Category landing page consistency
-Category landing pages vary in depth:
-- `network-automation.md`: thorough (pipeline diagram, categorized tools) [DONE - rewritten]
-- `data-analytics.md`: thorough (pipeline diagram, code examples) — still has hardcoded `<style>` and Rust code
-- `photography.md`: thorough (pipeline diagram, per-tool descriptions) — still has hardcoded `<style>`
-- `signal-processing.md`: thin (one-line descriptions, no pipeline or code)
-- `agentic-systems.md`: thin (three short paragraphs, two links)
-
-**Action:** Flesh out thin pages or fold into projects page. Remove hardcoded `<style>` blocks from data-analytics.md and photography.md.
+### 2. Category landing page consistency [DONE]
+All 5 category pages now have consistent structure: pipeline diagrams, per-tool descriptions with badges, and cross-category footer links.
+- `network-automation.md`: Core Platform cards + Supporting Tools list
+- `data-analytics.md`: Pipeline diagram + tool descriptions with code examples
+- `photography.md`: Pipeline diagram + per-tool descriptions
+- `signal-processing.md`: Pipeline diagram + per-tool descriptions with badges
+- `agentic-systems.md`: Architecture diagram + system descriptions
 
 ### 3. ecosystem.md vs. network-automation.md redundancy [DONE]
-Redirected ecosystem.md to network-automation.md. Updated homepage link. Removed "Architecture" nav item.
+Redirected ecosystem.md to network-automation.md.
 
 ---
 
 ## Content & Readability
 
 ### 4. Homepage "Featured Work" visual hierarchy [DONE]
-Replaced bullet list with project cards using the card grid system.
+Project cards showing the four core Rust engines (NTE, Netsim, netcfg, NetVis) with descriptions matching network-automation.md.
 
 ### 5. Empty project cards [DONE]
 Populated all blank card descriptions in projects.md.
 
-### 6. Category landing pages: Rust code and hardcoded styles
-Remaining work:
-- `data-analytics.md`: Rust code block (matrix-profile-rs example) and hardcoded `<style>` with `#007bff`, `#28a745`, `#ffc107`
-- `photography.md`: hardcoded `<style>` with non-theme-aware badge colors
+### 6. Category landing pages: Rust code and hardcoded styles [DONE]
+Removed hardcoded `<style>` blocks from data-analytics.md and photography.md. Replaced Rust code block in data-analytics.md with Python example and link to project page.
 
-**Action:** Replace Rust code with YAML/CLI examples or project page links. Replace `<style>` blocks with theme-aware CSS classes.
+### 9. Project page bloat [DONE]
+All project pages trimmed to ~100-250 lines. Removed concatenated internal docs (README dumps, decision tables, constraint lists, phase checklists, full YAML topology dumps, Requirements/Constraints/Key Decisions sections, duplicate "What This Is"/"Core Value" sections).
 
-### 9. Project page bloat [DONE for netsim, netvis]
-Several project pages were 800-1800 lines of concatenated internal docs (decision tables, constraint lists, phase checklists, full YAML topology dumps). Rewrote:
-- `netsim.md`: 1849 lines → ~200 lines. Clean TOC (8 items), 11 GIF demos, protocol list, simulation output, concise status.
-- `netvis.md`: 803 lines → ~160 lines. Gallery with 9 visualization PNGs/SVGs, layout algorithm list, feature summary.
-
-**Remaining project pages to audit for similar bloat:**
-- [ ] `ank-pydantic.md`
-- [ ] `ank-workbench.md`
-- [ ] `ank-nte.md`
-- [ ] `ank-netcfg.md`
-- [ ] `topogen.md`
-- [ ] `deviceinteraction.md`
-- [ ] `configparsing.md`
+Pages trimmed:
+- `netsim.md`: 1332 → ~250 lines
+- `ank-pydantic.md`: 2044 → ~150 lines
+- `ank-nte.md`: 1404 → ~130 lines
+- `ank-netcfg.md`: 1509 → ~140 lines
+- `topogen.md`: 626 → ~110 lines
+- `ank-workbench.md`: 521 → ~120 lines (wired up 4 screenshots)
+- `deviceinteraction.md`: 297 → ~120 lines
+- `configparsing.md`: 165 → ~65 lines
+- `netvis.md`: 803 → ~160 lines (done earlier)
 
 ---
 
@@ -61,7 +55,7 @@ Several project pages were 800-1800 lines of concatenated internal docs (decisio
 **Action:** Add a floating "back to top" button (CSS + minimal JS in default.html) that appears after scrolling past the first screen.
 
 ### 8. Breadcrumb navigation duplication
-Project pages have hardcoded `[← Back to ...]` links AND the layout-based breadcrumb system. Some pages use both (double navigation), others use neither.
+Project pages have hardcoded `[← Back to ...]` links AND the layout-based breadcrumb system.
 
 **Action:** Standardize on the layout breadcrumb. Set `section:` in each project page's front matter, then remove inline `← Back to` links from content.
 
@@ -70,13 +64,13 @@ Project pages have hardcoded `[← Back to ...]` links AND the layout-based brea
 ## Visual Content
 
 ### Network Engineering
-- [x] Network Simulator: 11 GIF demos (basic, daemon, TUI, enterprise, chaos, self-healing, L3VPN, SR, trace, scale, assertion)
-- [x] Visualization Engine: 9 PNG/SVG gallery images (enterprise, datacenter, ISP, geographic, isometric, radial, theme, NOC, traffic)
-- [ ] Network Automation Workbench: web UI screenshots (workbench-projects.png, workbench-editor.png etc. exist but not referenced)
+- [x] Network Simulator: 11 GIF demos
+- [x] Visualization Engine: 9 PNG/SVG gallery images
+- [x] Network Automation Workbench: 4 web UI screenshots (projects, editor, workflow, visualize)
 - [ ] Topology Generator: CLI usage examples, generated topology visualizations
 
 ### Signal Processing
-- [ ] Spectrum Analysis: waterfall visualization (spectra-waterfall.png exists but not referenced in signals.md)
+- [x] Spectrum Analysis: waterfall visualization (spectra-waterfall.png referenced in signal-processing.md)
 - [ ] HealthyPi: signal plots (ECG, PPG), HRV analysis output
 
 ### Astrophotography
@@ -94,3 +88,4 @@ Project pages have hardcoded `[← Back to ...]` links AND the layout-based brea
 - [ ] Update `update_projects.py` to set `section:` front matter based on category
 - [ ] Remove inline back-link generation from script (breadcrumbs handled by layout)
 - [ ] Ensure `update_projects.py` category taxonomy matches new 5-category structure
+- [ ] Prevent script from re-bloating trimmed pages (preserve stable sections)

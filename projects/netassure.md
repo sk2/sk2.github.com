@@ -10,10 +10,6 @@ section: network-automation
   <span class="stack-badge">Rust</span> <span class="stack-badge">Polars</span>
 </div>
 
-[← Back to Network Automation](../network-automation)
-
-[← Back to Projects](../projects)
-
 ---
 
 ## Concept
@@ -138,7 +134,3 @@ Dual purpose - explore GNN techniques while building production-usable network m
 2026-03-07 — Completed 01-04-PLAN.md (CLI ingest subcommand)
 
 ---
-
-[← Back to Network Automation](../network-automation)
-
-[← Back to Projects](../projects)

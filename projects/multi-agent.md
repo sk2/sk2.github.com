@@ -10,10 +10,6 @@ section: agentic-systems
   <span class="stack-badge">Python</span>
 </div>
 
-[← Back to Autonomous Systems](../agentic-systems)
-
-[← Back to Projects](../projects)
-
 ---
 
 ## Contents
@@ -168,7 +164,3 @@ These establish proven patterns for air-gapped agents, defense-in-depth isolatio
 2026-02-21 — Completed  (Dashboard milestone achievements included in snapshot payload)
 
 ---
-
-[← Back to Autonomous Systems](../agentic-systems)
-
-[← Back to Projects](../projects)

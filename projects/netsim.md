@@ -10,10 +10,6 @@ section: network-automation
   <span class="stack-badge">Rust</span>
 </div>
 
-[← Back to Network Automation](../network-automation)
-
-[← Back to Projects](../projects)
-
 ---
 
 ## Contents
@@ -1372,7 +1368,3 @@ This project is part of a seven-tool network automation ecosystem. netsim provid
 - **v2.6 Ecosystem & Digital Twin** (Proposed)
 
 ---
-
-[← Back to Network Automation](../network-automation)
-
-[← Back to Projects](../projects)

@@ -10,8 +10,6 @@ section: projects
   
 </div>
 
-[← Back to Projects](../projects)
-
 ---
 
 ## Concept
@@ -100,5 +98,3 @@ Provides precise, automated control over exposure and focus specifically optimiz
 *Last updated: 2026-02-13 after initialization*
 
 ---
-
-[← Back to Projects](../projects)

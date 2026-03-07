@@ -27,7 +27,3 @@ TUI dashboard that scans multiple development directories for projects with `.pl
 - TOML-based configuration for workspace paths and settings
 
 ---
-
-[← Back to Data Analytics](/data-analytics)
-
-[← Back to Projects](/projects)

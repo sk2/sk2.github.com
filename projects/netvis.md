@@ -10,10 +10,6 @@ section: network-automation
   <span class="stack-badge">Rust</span> <span class="stack-badge">Python</span> <span class="stack-badge">TypeScript</span>
 </div>
 
-[← Back to Network Automation](../network-automation)
-
-[← Back to Projects](../projects)
-
 ---
 
 ## Contents
@@ -988,7 +984,3 @@ This project is part of a seven-tool network automation ecosystem. netvis provid
 2026-03-07 — Plan 89-01 complete, Z-axis isometric projection verified.
 
 ---
-
-[← Back to Network Automation](../network-automation)
-
-[← Back to Projects](../projects)

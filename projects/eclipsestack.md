@@ -10,8 +10,6 @@ section: projects
   <span class="stack-badge">Rust</span>
 </div>
 
-[← Back to Projects](../projects)
-
 ---
 
 ## Concept
@@ -104,5 +102,3 @@ Enable high-fidelity HDR solar composites by providing sub-pixel alignment of ec
 *Last updated: Friday 13 February 2026 after initialization*
 
 ---
-
-[← Back to Projects](../projects)

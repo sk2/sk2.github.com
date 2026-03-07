@@ -10,8 +10,6 @@ section: projects
   
 </div>
 
-[← Back to Projects](../projects)
-
 ---
 
 ## Concept
@@ -113,5 +111,3 @@ The ability to capture, localize, and classify complex soundscapes on edge devic
 *Last updated: 2026-02-13 after initialization*
 
 ---
-
-[← Back to Projects](../projects)

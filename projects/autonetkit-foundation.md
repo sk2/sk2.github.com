@@ -23,7 +23,3 @@ The original research that established the principles of automated network confi
 - **Industry adoption**: earlier iterations were integrated into industry tooling for automated lab provisioning
 
 ---
-
-[← Back to Network Automation](/network-automation)
-
-[← Back to Projects](/projects)

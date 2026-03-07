@@ -10,10 +10,6 @@ section: projects
   <span class="stack-badge">Rust</span>
 </div>
 
-[← Back to Data Analytics](../data-analytics)
-
-[← Back to Projects](../projects)
-
 ---
 
 ## Contents
@@ -75,7 +71,3 @@ Develop a high-performance Rust application to manage large-scale Synology NAS f
 2026-03-03 - Completed 10-01-PLAN.md (Doctor Diagnostics)
 
 ---
-
-[← Back to Data Analytics](../data-analytics)
-
-[← Back to Projects](../projects)

@@ -10,10 +10,6 @@ section: agentic-systems
   <span class="stack-badge">Python</span>
 </div>
 
-[← Back to Autonomous Systems](../agentic-systems)
-
-[← Back to Projects](../projects)
-
 ---
 
 ## Contents
@@ -110,7 +106,3 @@ To bridge the gap between high-fidelity biometric hardware and daily health mana
 ** 2026-02-20 - v1.1 roadmap created
 
 ---
-
-[← Back to Autonomous Systems](../agentic-systems)
-
-[← Back to Projects](../projects)

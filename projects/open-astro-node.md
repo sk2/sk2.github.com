@@ -10,8 +10,6 @@ section: projects
   <span class="stack-badge">Rust</span> <span class="stack-badge">TypeScript</span>
 </div>
 
-[← Back to Projects](../projects)
-
 ---
 
 ## Concept
@@ -61,5 +59,3 @@ A headless, autonomous astrophotography controller designed for low-power Linux 
 - **Terminal UI (TUI)**: Local power-user control over SSH.
 
 ---
-
-[← Back to Projects](../projects)

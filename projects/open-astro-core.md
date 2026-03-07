@@ -10,8 +10,6 @@ section: projects
   <span class="stack-badge">Rust</span>
 </div>
 
-[← Back to Projects](../projects)
-
 ---
 
 ## Concept
@@ -105,5 +103,3 @@ Plate solving consumption, co-axial calibration, mosaic planning, planetary imag
 *Last updated: 2026-03-02 after v0.2 milestone*
 
 ---
-
-[← Back to Projects](../projects)

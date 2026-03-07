@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sk2.id.au/sitemap.xml

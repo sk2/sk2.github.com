@@ -10,10 +10,6 @@ section: signal-processing
   <span class="stack-badge">Rust</span>
 </div>
 
-[← Back to Signal Processing](../signal-processing)
-
-[← Back to Projects](../projects)
-
 ---
 
 ## Contents
@@ -131,7 +127,3 @@ The ability to reliably and efficiently stream high-fidelity IQ data from multip
 2026-02-22 - Completed 05-04-PLAN.md
 
 ---
-
-[← Back to Signal Processing](../signal-processing)
-
-[← Back to Projects](../projects)

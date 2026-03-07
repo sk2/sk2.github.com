@@ -10,10 +10,6 @@ section: signal-processing
   <span class="stack-badge">Python</span>
 </div>
 
-[← Back to Signal Processing](../signal-processing)
-
-[← Back to Projects](../projects)
-
 ---
 
 ## Contents
@@ -135,7 +131,3 @@ Transform raw radio spectrum data into an actionable "Signal Census" through aut
 ** 2026-03-04 — Completed  Audio Content Intelligence
 
 ---
-
-[← Back to Signal Processing](../signal-processing)
-
-[← Back to Projects](../projects)

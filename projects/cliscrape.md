@@ -10,10 +10,6 @@ section: network-automation
   <span class="stack-badge">Rust</span>
 </div>
 
-[← Back to Network Automation](../network-automation)
-
-[← Back to Projects](../projects)
-
 ---
 
 ## Concept
@@ -65,7 +61,3 @@ The engine is built on a custom regex-based state machine implemented in Rust. I
 - **Validation**: Strict schema enforcement ensuring that parsed output always matches the expected data structure.
 
 ---
-
-[← Back to Network Automation](../network-automation)
-
-[← Back to Projects](../projects)

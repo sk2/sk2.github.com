@@ -39,5 +39,3 @@ Key modules:
 - Offline-capable PWA for field use without mobile signal
 
 ---
-
-[← Back to Projects](/projects)

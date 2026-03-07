@@ -10,8 +10,6 @@ section: projects
   <span class="stack-badge">Rust</span>
 </div>
 
-[← Back to Projects](../projects)
-
 ---
 
 ## Contents
@@ -172,5 +170,3 @@ Real-time satellite positions rendered on a terminal world map with pass predict
 ** 2026-03-01 --  complete
 
 ---
-
-[← Back to Projects](../projects)

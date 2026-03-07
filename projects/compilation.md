@@ -23,7 +23,3 @@ A Rust-based configuration compiler that treats network design as source code. I
 - **Sub-second compilation**: native Rust pipeline handles 10,000+ node graphs
 
 ---
-
-[← Back to Network Automation](/network-automation)
-
-[← Back to Projects](/projects)

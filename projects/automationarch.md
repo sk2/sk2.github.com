@@ -10,10 +10,6 @@ section: network-automation
   
 </div>
 
-[← Back to Network Automation](../network-automation)
-
-[← Back to Projects](../projects)
-
 ---
 
 ## Contents
@@ -853,7 +849,3 @@ This project directly supports the strategic vision outlined in `STRATEGY.md` an
 2026-03-01 — v3.0 roadmap created with phases 18-22
 
 ---
-
-[← Back to Network Automation](../network-automation)
-
-[← Back to Projects](../projects)

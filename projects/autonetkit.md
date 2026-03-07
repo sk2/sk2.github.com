@@ -43,7 +43,3 @@ AutoNetkit employs a multi-stage transformation pipeline:
 Earlier iterations of AutoNetkit were integrated into industry tooling for automated lab provisioning. That integration reflects the lineage of the approach, not the current in-progress implementation.
 
 ---
-
-[← Back to Network Automation](/network-automation)
-
-[← Back to Projects](/projects)

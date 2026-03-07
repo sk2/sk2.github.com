@@ -10,8 +10,6 @@ section: projects
   
 </div>
 
-[← Back to Projects](../projects)
-
 ---
 
 ## Concept
@@ -116,5 +114,3 @@ In the field, you can see what the camera sees and get actionable guidance/contr
 *Last updated: 2026-02-10 after milestone v0.1 kickoff*
 
 ---
-
-[← Back to Projects](../projects)

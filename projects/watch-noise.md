@@ -10,8 +10,6 @@ section: projects
   
 </div>
 
-[← Back to Projects](../projects)
-
 ---
 
 ## Contents
@@ -241,5 +239,3 @@ From v1.1 milestone audit:
 2026-02-21 — Completed 26-01 FlowState Hotkeys + Quick Actions
 
 ---
-
-[← Back to Projects](../projects)

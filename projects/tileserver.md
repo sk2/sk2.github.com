@@ -10,10 +10,6 @@ section: projects
   <span class="stack-badge">Rust</span> <span class="stack-badge">Python</span> <span class="stack-badge">Polars</span>
 </div>
 
-[← Back to Data Analytics](../data-analytics)
-
-[← Back to Projects](../projects)
-
 ---
 
 ## Concept
@@ -74,7 +70,3 @@ A high-performance tile server that combines the speed of columnar data processi
 | **MVT Protocol** | Standard format supported by Kepler.gl and MapLibre, more efficient than JSON. | Planned  |
 
 ---
-
-[← Back to Data Analytics](../data-analytics)
-
-[← Back to Projects](../projects)

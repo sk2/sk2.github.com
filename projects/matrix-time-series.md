@@ -10,10 +10,6 @@ section: projects
   <span class="stack-badge">Rust</span> <span class="stack-badge">Polars</span>
 </div>
 
-[← Back to Data Analytics](../data-analytics)
-
-[← Back to Projects](../projects)
-
 ---
 
 ## Contents
@@ -331,7 +327,3 @@ None yet — v1.0 is initial release. Expecting feedback on:
 2026-03-01 — Completed 14-01-PLAN.md: tokio::Stream wrapper + async callbacks
 
 ---
-
-[← Back to Data Analytics](../data-analytics)
-
-[← Back to Projects](../projects)

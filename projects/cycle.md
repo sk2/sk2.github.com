@@ -10,10 +10,6 @@ section: agentic-systems
   
 </div>
 
-[← Back to Autonomous Systems](../agentic-systems)
-
-[← Back to Projects](../projects)
-
 ---
 
 ## Contents
@@ -85,7 +81,3 @@ A native SwiftUI training application for iPad and Apple TV that bridges profess
 2026-02-21 - Completed 04-01-PLAN.md
 
 ---
-
-[← Back to Autonomous Systems](../agentic-systems)
-
-[← Back to Projects](../projects)

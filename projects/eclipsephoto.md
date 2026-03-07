@@ -10,8 +10,6 @@ section: projects
   <span class="stack-badge">Python</span>
 </div>
 
-[← Back to Projects](../projects)
-
 ---
 
 ## Concept
@@ -106,5 +104,3 @@ Reliability and autonomy for a "one-shot" astronomical event. The system handles
 *Last updated: 2026-02-13 after initialization*
 
 ---
-
-[← Back to Projects](../projects)

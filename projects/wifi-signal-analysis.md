@@ -10,10 +10,6 @@ section: signal-processing
   <span class="stack-badge">Rust</span> <span class="stack-badge">Python</span>
 </div>
 
-[← Back to Signal Processing](../signal-processing)
-
-[← Back to Projects](../projects)
-
 ---
 
 ## Concept
@@ -51,7 +47,3 @@ To bridge the gap between theoretical signal reflection research and a portable,
 - Environment: Indoor/Through-wall (high clutter).
 
 ---
-
-[← Back to Signal Processing](../signal-processing)
-
-[← Back to Projects](../projects)

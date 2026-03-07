@@ -10,10 +10,6 @@ section: signal-processing
   <span class="stack-badge">Rust</span> <span class="stack-badge">Python</span>
 </div>
 
-[← Back to Signal Processing](../signal-processing)
-
-[← Back to Projects](../projects)
-
 ---
 
 ## Contents
@@ -227,7 +223,3 @@ Clean, understandable, stable codebase that reliably tracks aircraft in real-tim
 2026-03-05 — Completed 36-02-PLAN.md
 
 ---
-
-[← Back to Signal Processing](../signal-processing)
-
-[← Back to Projects](../projects)

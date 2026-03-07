@@ -10,10 +10,6 @@ section: projects
   <span class="stack-badge">Python</span> <span class="stack-badge">TypeScript</span>
 </div>
 
-[← Back to Data Analytics](../data-analytics)
-
-[← Back to Projects](../projects)
-
 ---
 
 ## Contents
@@ -116,7 +112,3 @@ A Python-based CLI that bypasses slow AppleScript/TypeScript layers to read dire
 ** 2026-02-16 - Closed out phase 7 (summaries, state update)
 
 ---
-
-[← Back to Data Analytics](../data-analytics)
-
-[← Back to Projects](../projects)

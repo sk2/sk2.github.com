@@ -10,10 +10,6 @@ section: network-automation
   <span class="stack-badge">Python</span> <span class="stack-badge">Polars</span>
 </div>
 
-[← Back to Network Automation](../network-automation)
-
-[← Back to Projects](../projects)
-
 ---
 
 ## Contents
@@ -2087,7 +2083,3 @@ This project is part of a seven-tool network automation ecosystem. ank-pydantic 
 2026-03-01 —  executed (batteries_included module: datacenter, WAN, campus, ISP topologies)
 
 ---
-
-[← Back to Network Automation](../network-automation)
-
-[← Back to Projects](../projects)

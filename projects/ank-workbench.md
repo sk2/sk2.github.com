@@ -10,10 +10,6 @@ section: network-automation
   <span class="stack-badge">Python</span> <span class="stack-badge">TypeScript</span>
 </div>
 
-[← Back to Network Automation](../network-automation)
-
-[← Back to Projects](../projects)
-
 ---
 
 ## Contents
@@ -510,7 +506,3 @@ This project is part of a seven-tool network automation ecosystem. The workbench
 2026-03-04 — Completed v4.2 UX Polish & Accessibility milestone.
 
 ---
-
-[← Back to Network Automation](../network-automation)
-
-[← Back to Projects](../projects)

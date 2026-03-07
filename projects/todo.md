@@ -10,8 +10,6 @@ section: projects
   <span class="stack-badge">Rust</span>
 </div>
 
-[← Back to Projects](../projects)
-
 ---
 
 ## Contents
@@ -136,5 +134,3 @@ Process an inbox full of captures into correctly-organized next actions (project
 2026-02-25 - Completed 13-01-PLAN.md
 
 ---
-
-[← Back to Projects](../projects)

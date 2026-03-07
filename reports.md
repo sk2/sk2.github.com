@@ -117,32 +117,6 @@ Detailed technical documentation for selected projects. Each report covers archi
   </div>
 </div>
 
-<style>
-.doc-links {
-  margin-top: 1rem;
-  display: flex;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-}
-.doc-link {
-  display: inline-block;
-  padding: 0.25rem 0.6rem;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  font-size: 0.8rem;
-  font-weight: 500;
-  text-decoration: none !important;
-  color: var(--text-secondary) !important;
-  transition: all 0.2s ease;
-}
-.doc-link:hover {
-  background: var(--bg-tertiary);
-  border-color: var(--link);
-  color: var(--link) !important;
-}
-</style>
-
 ---
 
 [← Back to Projects](projects)

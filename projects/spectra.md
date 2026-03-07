@@ -78,7 +78,3 @@ Edge Pi (SDR) → SpyServer/rtl_tcp → Mac mini Core
 - Verification — end-to-end test harness, health instrumentation, auto-reconnect
 
 ---
-
-[← Back to Signal Processing](/signal-processing)
-
-[← Back to Projects](/projects)

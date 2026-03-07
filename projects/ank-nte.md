@@ -10,10 +10,6 @@ section: network-automation
   <span class="stack-badge">Rust</span> <span class="stack-badge">Python</span> <span class="stack-badge">TypeScript</span> <span class="stack-badge">Polars</span>
 </div>
 
-[← Back to Network Automation](../network-automation)
-
-[← Back to Projects](../projects)
-
 ---
 
 ## Contents
@@ -1427,7 +1423,3 @@ This project is part of a seven-tool network automation ecosystem. NTE provides 
 2026-03-04 — Completed  (Zero-copy Mmap CSR Serialization and Traversal).
 
 ---
-
-[← Back to Network Automation](../network-automation)
-
-[← Back to Projects](../projects)

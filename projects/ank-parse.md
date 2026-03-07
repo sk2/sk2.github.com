@@ -26,7 +26,3 @@ Ingestion pipeline for vendor documentation and configuration files. Extracts st
 - FastAPI backend with endpoints for ingestion pipelines and search queries
 
 ---
-
-[← Back to Network Automation](/network-automation)
-
-[← Back to Projects](/projects)

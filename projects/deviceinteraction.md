@@ -10,10 +10,6 @@ section: network-automation
   <span class="stack-badge">Rust</span>
 </div>
 
-[← Back to Network Automation](../network-automation)
-
-[← Back to Projects](../projects)
-
 ---
 
 ## Contents
@@ -304,7 +300,3 @@ PyATS/Genie provides excellent network automation capabilities but is heavyweigh
 *Last updated: 2026-02-22 after v1.1 milestone start*
 
 ---
-
-[← Back to Network Automation](../network-automation)
-
-[← Back to Projects](../projects)

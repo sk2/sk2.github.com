@@ -10,10 +10,6 @@ section: network-automation
   <span class="stack-badge">Rust</span>
 </div>
 
-[← Back to Network Automation](../network-automation)
-
-[← Back to Projects](../projects)
-
 ---
 
 ## Contents
@@ -1311,7 +1307,3 @@ Single-binary network compiler: design, transform, and generate configs from YAM
 *Last updated: 2026-03-06 — Milestone v2.1 started*
 
 ---
-
-[← Back to Network Automation](../network-automation)
-
-[← Back to Projects](../projects)

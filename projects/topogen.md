@@ -10,10 +10,6 @@ section: network-automation
   <span class="stack-badge">Rust</span> <span class="stack-badge">Python</span>
 </div>
 
-[← Back to Network Automation](../network-automation)
-
-[← Back to Projects](../projects)
-
 ---
 
 ## Contents
@@ -625,7 +621,3 @@ This project is part of a seven-tool network automation ecosystem. topogen provi
 *Last updated: 2026-02-21 after v1.1 milestone start*
 
 ---
-
-[← Back to Network Automation](../network-automation)
-
-[← Back to Projects](../projects)

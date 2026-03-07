@@ -10,8 +10,6 @@ section: projects
   <span class="stack-badge">TypeScript</span>
 </div>
 
-[← Back to Projects](../projects)
-
 ---
 
 ## Contents
@@ -131,5 +129,3 @@ Providing a single, definitive "Go/No-Go" score that accounts for both space wea
 - **Scope (not prioritized):** 
 
 ---
-
-[← Back to Projects](../projects)

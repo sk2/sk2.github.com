@@ -10,8 +10,6 @@ section: projects
   <span class="stack-badge">Rust</span>
 </div>
 
-[← Back to Projects](../projects)
-
 ---
 
 ## Contents
@@ -169,5 +167,3 @@ Energy-driven generative music that sounds professional and lets users quickly e
 2026-03-05 — Completed Sessions, Presets, Live Control, Wavetables, FX, Modulation Matrix.
 
 ---
-
-[← Back to Projects](../projects)

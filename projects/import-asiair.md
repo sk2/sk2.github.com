@@ -10,8 +10,6 @@ section: projects
   
 </div>
 
-[← Back to Projects](../projects)
-
 ---
 
 ## Contents
@@ -148,5 +146,3 @@ Eliminates manual file sorting after imaging sessions - scan hundreds of frames,
 2026-02-11 —  plans across 4 waves
 
 ---
-
-[← Back to Projects](../projects)

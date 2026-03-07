@@ -10,10 +10,6 @@ section: projects
   <span class="stack-badge">Python</span>
 </div>
 
-[← Back to Network Automation](../network-automation)
-
-[← Back to Projects](../projects)
-
 ---
 
 ## Contents
@@ -147,7 +143,3 @@ Run the same device workflow reliably across lab/real targets, with deterministi
 2026-03-05 - Completed 02-05-PLAN.md
 
 ---
-
-[← Back to Network Automation](../network-automation)
-
-[← Back to Projects](../projects)

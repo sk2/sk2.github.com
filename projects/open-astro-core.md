@@ -1,6 +1,6 @@
 ---
 layout: default
-section: projects
+section: photography
 ---
 
 # OpenAstro Core
@@ -101,5 +101,3 @@ Plate solving consumption, co-axial calibration, mosaic planning, planetary imag
 3. **Safety**: Robust error handling for hardware communication.
 
 *Last updated: 2026-03-02 after v0.2 milestone*
-
----

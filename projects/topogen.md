@@ -31,8 +31,7 @@ Three interfaces with parity guarantees: CLI for quick generation, Python API fo
 
 ## Technical Reports
 
-- [Download Technical Report: topogen-techreport.pdf](/assets/docs/topogen-topogen-techreport.pdf)
-- [Download Research Paper: topogen-paper.pdf](/assets/docs/topogen-topogen-paper.pdf)
+- [Download User Manual: topogen-usermanual.pdf](/assets/docs/topogen-topogen-usermanual.pdf)
 
 ---
 
@@ -619,5 +618,3 @@ This project is part of a seven-tool network automation ecosystem. topogen provi
 - [Cross-Project Data Contracts](ARCHITECTURE.md) — ownership boundaries and format specifications
 
 *Last updated: 2026-02-21 after v1.1 milestone start*
-
----

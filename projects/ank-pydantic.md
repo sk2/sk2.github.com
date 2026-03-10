@@ -35,6 +35,7 @@ The library ships with domain models for common protocol stacks in its `blueprin
 
 ## Technical Reports
 
+- [Download User Manual: ank-usermanual.pdf](/assets/docs/ank-pydantic-ank-usermanual.pdf)
 - [Download Technical Report: ank-techreport.pdf](/assets/docs/ank-pydantic-ank-techreport.pdf)
 
 ---
@@ -2081,5 +2082,3 @@ This project is part of a seven-tool network automation ecosystem. ank-pydantic 
 ## Current Status
 
 2026-03-01 —  executed (batteries_included module: datacenter, WAN, campus, ISP topologies)
-
----

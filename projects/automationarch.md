@@ -30,6 +30,7 @@ The ecosystem comprises nine repositories that form a composable toolchain. Each
 ## Technical Reports
 
 - [Download Technical Report: ecosystem-techreport.pdf](/assets/docs/automationarch-ecosystem-techreport.pdf)
+- [Download User Manual: ecosystem-usermanual.pdf](/assets/docs/automationarch-ecosystem-usermanual.pdf)
 
 ---
 
@@ -847,5 +848,3 @@ This project directly supports the strategic vision outlined in `STRATEGY.md` an
 ## Current Status
 
 2026-03-01 — v3.0 roadmap created with phases 18-22
-
----

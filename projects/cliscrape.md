@@ -59,5 +59,3 @@ The engine is built on a custom regex-based state machine implemented in Rust. I
 - **Stack**: Rust, `regex` crate for optimized matching, `ratatui` for the TUI debugger.
 - **Parallelism**: Thread-safe design allowing for concurrent parsing of multiple device outputs across all available CPU cores.
 - **Validation**: Strict schema enforcement ensuring that parsed output always matches the expected data structure.
-
----

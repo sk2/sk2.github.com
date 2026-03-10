@@ -41,6 +41,7 @@ Detailed technical documentation for selected projects. Each report covers archi
     <div class="doc-links">
       <a href="/assets/docs/netsim-techreport.pdf" class="doc-link">Tech Report</a>
       <a href="/assets/docs/netsim-paper.pdf" class="doc-link">Paper</a>
+      <a href="/assets/docs/netsim-netsim-usermanual.pdf" class="doc-link">Manual</a>
     </div>
   </div>
 
@@ -51,6 +52,7 @@ Detailed technical documentation for selected projects. Each report covers archi
     <div class="doc-links">
       <a href="/assets/docs/netvis-techreport.pdf" class="doc-link">Tech Report</a>
       <a href="/assets/docs/netvis-paper.pdf" class="doc-link">Paper</a>
+      <a href="/assets/docs/netvis-netvis-usermanual.pdf" class="doc-link">Manual</a>
     </div>
   </div>
 
@@ -60,6 +62,7 @@ Detailed technical documentation for selected projects. Each report covers archi
     <p class="card-description">Pydantic models for declarative network topology and configuration generation.</p>
     <div class="doc-links">
       <a href="/assets/docs/ank-pydantic-ank-techreport.pdf" class="doc-link">Tech Report</a>
+      <a href="/assets/docs/ank-pydantic-ank-usermanual.pdf" class="doc-link">Manual</a>
     </div>
   </div>
 
@@ -69,6 +72,7 @@ Detailed technical documentation for selected projects. Each report covers archi
     <p class="card-description">A multi-layered ecosystem for automated network infrastructure management.</p>
     <div class="doc-links">
       <a href="/assets/docs/automationarch-ecosystem-techreport.pdf" class="doc-link">Tech Report</a>
+      <a href="/assets/docs/automationarch-ecosystem-usermanual.pdf" class="doc-link">Manual</a>
     </div>
   </div>
 
@@ -79,6 +83,7 @@ Detailed technical documentation for selected projects. Each report covers archi
     <div class="doc-links">
       <a href="/assets/docs/ank-workbench-techreport.pdf" class="doc-link">Tech Report</a>
       <a href="/assets/docs/ank-workbench-paper.pdf" class="doc-link">Paper</a>
+      <a href="/assets/docs/ank-workbench-workbench-usermanual.pdf" class="doc-link">Manual</a>
     </div>
   </div>
 
@@ -89,6 +94,7 @@ Detailed technical documentation for selected projects. Each report covers archi
     <div class="doc-links">
       <a href="/assets/docs/topogen-topogen-techreport.pdf" class="doc-link">Tech Report</a>
       <a href="/assets/docs/topogen-topogen-paper.pdf" class="doc-link">Paper</a>
+      <a href="/assets/docs/topogen-topogen-usermanual.pdf" class="doc-link">Manual</a>
     </div>
   </div>
 </div>
@@ -101,9 +107,10 @@ Detailed technical documentation for selected projects. Each report covers archi
   <div class="project-card">
     <h3 class="card-title"><a href="/projects/rf-signal-analysis">Signal Reflection Analysis</a></h3>
     <div class="badges-row card-badges"><span class="stack-badge">Python</span></div>
-    <p class="card-description">Passive radar systems using commercial signal reflection for position tracking.</p>
+    <p class="card-description">Signal reflection systems using commercial illumination for position tracking.</p>
     <div class="doc-links">
       <a href="/assets/docs/rf-signal-analysis-passive-radar-techreport.pdf" class="doc-link">Tech Report</a>
+      <a href="/assets/docs/rf-signal-analysis-passive-radar-usermanual.pdf" class="doc-link">Manual</a>
     </div>
   </div>
 
@@ -113,6 +120,22 @@ Detailed technical documentation for selected projects. Each report covers archi
     <p class="card-description">SDR-based signal monitoring and waterfall analysis with vector indexing.</p>
     <div class="doc-links">
       <a href="/assets/docs/signals-spectra-techreport.pdf" class="doc-link">Tech Report</a>
+      <a href="/assets/docs/signals-spectra-usermanual.pdf" class="doc-link">Manual</a>
+    </div>
+  </div>
+</div>
+
+---
+
+## Sound & Music
+
+<div class="project-grid">
+  <div class="project-card">
+    <h3 class="card-title"><a href="/projects/psytrance">Algorithmic Music Engine</a></h3>
+    <div class="badges-row card-badges"><span class="stack-badge">Python</span></div>
+    <p class="card-description">Procedural generation of psychedelic trance music using algorithmic composition.</p>
+    <div class="doc-links">
+      <a href="/assets/docs/psytrance-techreport.pdf" class="doc-link">Tech Report</a>
     </div>
   </div>
 </div>

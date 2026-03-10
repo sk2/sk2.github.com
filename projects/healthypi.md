@@ -104,5 +104,3 @@ To bridge the gap between high-fidelity biometric hardware and daily health mana
 ## Current Status
 
 ** 2026-02-20 - v1.1 roadmap created
-
----

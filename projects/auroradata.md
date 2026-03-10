@@ -1,6 +1,6 @@
 ---
 layout: default
-section: projects
+section: photography
 ---
 
 # Aurora Advisor
@@ -127,5 +127,3 @@ Providing a single, definitive "Go/No-Go" score that accounts for both space wea
 ## Roadmap
 
 - **Scope (not prioritized):** 
-
----

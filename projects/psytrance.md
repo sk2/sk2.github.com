@@ -1,6 +1,5 @@
 ---
 layout: default
-section: projects
 ---
 
 # Psytrance Generator
@@ -15,6 +14,7 @@ section: projects
 ## Contents
 
 - [Concept](#concept)
+- [Technical Reports](#technical-reports)
 - [Architecture](#architecture)
 - [Features](#features)
 - [Current Status](#current-status)
@@ -22,6 +22,12 @@ section: projects
 ## Concept
 
 Generative psytrance synthesis engine with real-time TUI controls. Creates complete tracks driven by a multi-level energy model (macro, meso, micro), with live playback, step editing, and WAV export. Procedural synthesis generates kick, bass, hihat, and clap patterns; an effects chain (sidechain compression, delay, reverb, HPF, limiter) and humanization (velocity jitter, micro-timing) produce output that sounds like a produced track rather than a sequencer demo.
+
+---
+
+## Technical Reports
+
+- [Download Technical Report: techreport.pdf](/assets/docs/psytrance-techreport.pdf)
 
 ---
 
@@ -164,6 +170,4 @@ Energy-driven generative music that sounds professional and lets users quickly e
 
 ## Current Status
 
-2026-03-05 — Completed Sessions, Presets, Live Control, Wavetables, FX, Modulation Matrix.
-
----
+2026-03-09 — Skipped human verification for -03 (DSP Engine Block-Based Rendering Optimization). Created  research doc.

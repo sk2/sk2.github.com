@@ -306,6 +306,120 @@ if __name__ == "__main__":
 
 ```
 
+### sota_benchmark.py
+
+```python
+import time
+import timeit
+import polars as pl
+from textwrap import dedent
+from [ank_nte](../ank_nte) import Topology, QuerySpec, ExprNode
+
+def generate_topology(num_nodes=100_000) -> Topology:
+    print(f"Generating synthetic topology with {num_nodes:,} nodes...")
+    t = Topology()
+    
+    # Generate large batch of nodes with varied properties
+    batch_size = 10_000
+    for i in range(0, num_nodes, batch_size):
+        ids = list(range(i, i + batch_size))
+        types = ["Router"] * batch_size
+        layers = ["physical"] * batch_size
+        
+        # Simulate some sparsity and specific target properties
+        data = []
+        for j in ids:
+            pop = "SYD" if j % 10 == 0 else ("MEL" if j % 10 == 1 else "BNE")
+            asn = 64512 if j % 5 == 0 else 65000
+            speed = 100 if j % 2 == 0 else 40
+            data.append({
+                "hostname": f"r-{pop.lower()}-{j}",
+                "pop": pop,
+                "as_number": asn,
+                "speed_gbps": speed
+            })
+            
+        t.add_nodes(ids=ids, node_types=types, layer="physical", data=data)
+        
+    print("Topology generated.\n")
+    return t
+
+def benchmark_simd_filter_first(t: Topology):
+    """
+    Simulates the NTE 'Filter-First' approach using SIMD-accelerated Polars 
+    predicates via the QuerySpec API.
+    """
+    expr = ExprNode.and_(
+        ExprNode.eq_(ExprNode.field("pop"), ExprNode.string("SYD")),
+        ExprNode.eq_(ExprNode.field("as_number"), ExprNode.int_(64512))
+    )
+    spec = QuerySpec(
+        type_filter=["Router"],
+        expr_filters=[expr]
+    )
+    
+    # Execute query, pulling just the filtered IDs
+    result_ids = t.execute_query(spec)
+    return len(result_ids)
+
+def benchmark_naive_row_based(t: Topology):
+    """
+    Simulates a traditional 'Pointer-Chasing' row-based graph database approach 
+    by forcing property deserialization and row-by-row iteration in Python space.
+    """
+    # Simulate fetching all nodes (as dictionaries) and filtering row-by-row
+    all_nodes_spec = QuerySpec(type_filter=["Router"])
+    all_structs = t.query_nodes_as_structs(all_nodes_spec)
+    
+    match_count = 0
+    for node in all_structs:
+        # Row-by-row property check (simulating cache misses and pointer chasing)
+        if node.data.get("pop") == "SYD" and node.data.get("as_number") == 64512:
+            match_count += 1
+            
+    return match_count
+
+def print_results(simd_time, naive_time):
+    improvement = naive_time / simd_time
+    
+    print(dedent(f"""\
+    ===================================================================
+    NTE Architecture Benchmark: SIMD-First vs Row-Based Pointer Chasing
+    ===================================================================
+    
+    Query: "Find all Routers where pop='SYD' AND as_number=64512"
+    
+    [1] NTE Dual-Write (Filter-First SIMD):
+        Time: {simd_time*1000:.2f} ms
+        Complexity: O(V/K + E_sub)
+        
+    [2] Simulated Row-Based Database (Pointer Chasing):
+        Time: {naive_time*1000:.2f} ms
+        Complexity: O(V + E)
+        
+    -------------------------------------------------------------------
+    RESULT: NTE's architecture is {improvement:.1f}x faster for property-heavy queries.
+    ===================================================================
+    """))
+
+if __name__ == "__main__":
+    t = generate_topology(num_nodes=50_000)
+    
+    # Warm up caches
+    benchmark_simd_filter_first(t)
+    benchmark_naive_row_based(t)
+    
+    # Run benchmarks
+    print("Running SIMD-First benchmark...")
+    simd_time = timeit.timeit(lambda: benchmark_simd_filter_first(t), number=10) / 10
+    
+    print("Running Naive Row-Based benchmark...")
+    naive_time = timeit.timeit(lambda: benchmark_naive_row_based(t), number=10) / 10
+    
+    print_results(simd_time, naive_time)
+
+```
+
 ### __init__.py
 
 ```python
@@ -1048,140 +1162,6 @@ def test_fuzz_memory_exhaustion_circuit_breakers():
 
 ```
 
-### test_hardware_and_io_faults.py
-
-```python
-import pytest
-import [ank_nte](../ank_nte)
-import os
-import tempfile
-import stat
-
-def test_enospc_disk_full_simulation(monkeypatch):
-    """
-    Simulate an ENOSPC (Error No Space Left on Device) occurring 
-    exactly during a dataframe persistence or caching operation.
-    """
-    topo = [ank_nte](../ank_nte).Topology()
-    topo.add_nodes_with_metadata([1], ["Router"], ["core"])
-    
-    # We monkeypatch the OS write call (or the internal persistence mechanism if exposed)
-    # to throw an IOError halfway through saving.
-    # In a true E2E, this would point a temp directory to a 1MB ramdisk and overflow it.
-    
-    # Since we can't easily mount a ramdisk in a cross-platform test, we assert that
-    # IF the engine exposes a save/archive method, it catches generic IOErrors.
-    try:
-        if hasattr(topo, 'save_to_disk'):
-            # Provide an invalid/read-only path to simulate failure
-            topo.save_to_disk("/dev/full")
-    except IOError:
-        pass
-    except Exception:
-        pass
-        
-    # Crucially, the in-memory graph must still be valid and uncorrupted after a failed write
-    res = topo.query("MATCH (n:Router) RETURN n")
-    assert len(res.matches) == 1
-
-def test_eacces_permission_denied_recovery():
-    """
-    Test how the engine handles lacking permissions to write to its designated
-    cache or transaction log directories.
-    """
-    topo = [ank_nte](../ank_nte).Topology()
-    
-    with tempfile.TemporaryDirectory() as tmpdir:
-        # Remove write permissions from the directory
-        os.chmod(tmpdir, stat.S_IRUSR | stat.S_IXUSR)
-        
-        try:
-            # If the engine supports configuring its storage path
-            if hasattr([ank_nte](../ank_nte), 'configure_storage'):
-                [ank_nte](../ank_nte).configure_storage(tmpdir)
-                
-            # Attempt to mutate. The engine should cleanly throw a PermissionError
-            # rather than panicking in Rust.
-            topo.add_nodes_with_metadata([99], ["Switch"], ["edge"])
-        except PermissionError:
-            pass
-        except Exception:
-            pass
-        finally:
-            # Restore permissions so the tempdir can be cleaned up
-            os.chmod(tmpdir, stat.S_IRWXU)
-
-def test_sigbus_mmap_truncation_simulation():
-    """
-    If the engine uses memory-mapped (mmap) files (e.g. via Polars or Arrow IPC), 
-    a common fatal error is SIGBUS, which occurs if the underlying file is truncated 
-    by an external process while mapped in memory.
-    """
-    topo = [ank_nte](../ank_nte).Topology()
-    
-    # We simulate this by passing a completely corrupted, truncated Parquet/Arrow file
-    # to any 'load' or 'import' methods. The Rust engine must validate file bounds
-    # BEFORE mapping, or handle the SIGBUS safely.
-    with tempfile.NamedTemporaryFile(delete=False) as tmp:
-        # Write 10 bytes of garbage, pretending to be a 1GB parquet file
-        tmp.write(b"PAR1GARBAG")
-        tmp_name = tmp.name
-        
-    try:
-        if hasattr(topo, 'load_from_disk'):
-            topo.load_from_disk(tmp_name)
-    except Exception:
-        # A clean 'Invalid Format' or 'Unexpected EOF' is required. 
-        # A hard process crash (SIGBUS/SIGSEGV) fails the test suite.
-        pass
-    finally:
-        os.unlink(tmp_name)
-        
-def test_unicode_collation_and_case_folding():
-    """
-    Test advanced SQL-style string matching edge cases.
-    Verifies that the Polars/Rust string engine correctly handles complex
-    Unicode case folding (e.g., German 'ß' vs 'ss', or Turkish dotless 'ı').
-    """
-    topo = [ank_nte](../ank_nte).Topology()
-    topo.add_nodes_with_metadata([1, 2], ["Device"]*2, ["layer"]*2)
-    
-    topo.update_node_properties(1, {"city": "Gießen"})
-    topo.update_node_properties(2, {"city": "Giessen"})
-    
-    # In some SQL collations, 'ß' equals 'ss'. In strict UTF-8 equality, they do not.
-    # We just want to ensure the engine doesn't panic on the byte comparison.
-    try:
-        res1 = topo.query("MATCH (n) WHERE n.city = 'Gießen' RETURN n")
-        res2 = topo.query("MATCH (n) WHERE n.city = 'Giessen' RETURN n")
-        
-        # They should evaluate independently without crashing
-        assert len(res1.matches) >= 0
-        assert len(res2.matches) >= 0
-    except Exception:
-        pass
-
-def test_extreme_id_fragmentation():
-    """
-    Test how the internal graph handles extreme fragmentation of Node IDs.
-    Instead of adding nodes 1, 2, 3... we add node 1, then node 1,000,000.
-    If the engine naively uses the ID as a direct array index instead of a HashMap,
-    this will instantly allocate gigabytes of empty memory and OOM.
-    """
-    topo = [ank_nte](../ank_nte).Topology()
-    
-    try:
-        # Add exactly two nodes, but with wildly distant IDs
-        topo.add_nodes_with_metadata([1, 100000000], ["T"]*2, ["L"]*2)
-        
-        # Querying should be instant and use minimal RAM
-        res = topo.query("MATCH (n) RETURN n")
-        assert len(res.matches) == 2
-    except Exception:
-        pass
-
-```
-
 ---
 
 ## Usage
@@ -1420,6 +1400,4 @@ This project is part of a seven-tool network automation ecosystem. NTE provides 
 
 ## Current Status
 
-2026-03-04 — Completed  (Zero-copy Mmap CSR Serialization and Traversal).
-
----
+2026-03-08 — Committed starlark_engine refactor, fixed workspace warnings, wired nte-policy into nte-server, synced ROADMAP.md.

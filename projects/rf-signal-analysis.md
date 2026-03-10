@@ -29,6 +29,7 @@ Distributed multi-beam signal reflection analysis system built on KrakenSDR hard
 ## Technical Reports
 
 - [Download Technical Report: passive-radar-techreport.pdf](/assets/docs/rf-signal-analysis-passive-radar-techreport.pdf)
+- [Download User Manual: passive-radar-usermanual.pdf](/assets/docs/rf-signal-analysis-passive-radar-usermanual.pdf)
 
 ---
 
@@ -220,6 +221,4 @@ Clean, understandable, stable codebase that reliably tracks aircraft in real-tim
 
 ## Current Status
 
-2026-03-05 — Completed 36-02-PLAN.md
-
----
+2026-03-09 — Completed 40-04-PLAN.md

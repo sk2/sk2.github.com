@@ -1,6 +1,6 @@
 ---
 layout: default
-section: projects
+section: photography
 ---
 
 # AuroraPhoto
@@ -96,5 +96,3 @@ Provides precise, automated control over exposure and focus specifically optimiz
 | HFR Focus Check | Industry standard for measuring star sharpness in astrophotography. | Pending |
 
 *Last updated: 2026-02-13 after initialization*
-
----

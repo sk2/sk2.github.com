@@ -1,6 +1,6 @@
 ---
 layout: default
-section: projects
+section: data-analytics
 ---
 
 # Tileserver Polars (Rust Optimized)
@@ -68,5 +68,3 @@ A high-performance tile server that combines the speed of columnar data processi
 | **Rust for Math** | Python overhead is too high for per-point coordinate projection in tight loops. | Confirmed  |
 | **Dynamic Tiling** | Pre-generating tiles for large datasets is storage-intensive and inflexible. | Core Architecture |
 | **MVT Protocol** | Standard format supported by Kepler.gl and MapLibre, more efficient than JSON. | Planned  |
-
----

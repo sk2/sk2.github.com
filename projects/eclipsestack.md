@@ -1,6 +1,6 @@
 ---
 layout: default
-section: projects
+section: photography
 ---
 
 # EclipseStack
@@ -100,5 +100,3 @@ Enable high-fidelity HDR solar composites by providing sub-pixel alignment of ec
 | EXIF-Based Extrapolation | Leverages the constant drift rate to fill gaps between confident frames. | — Pending |
 
 *Last updated: Friday 13 February 2026 after initialization*
-
----

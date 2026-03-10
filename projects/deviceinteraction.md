@@ -298,5 +298,3 @@ PyATS/Genie provides excellent network automation capabilities but is heavyweigh
 | ConnectionPool per-device caching | Reuse SSH sessions to avoid reconnection overhead | ✓ Good — Pool unit tests prove session reuse, single-flight execution prevents race conditions |
 
 *Last updated: 2026-02-22 after v1.1 milestone start*
-
----

@@ -1,6 +1,6 @@
 ---
 layout: default
-section: projects
+section: data-analytics
 ---
 
 # Weather (BOM ACCESS Pipeline)
@@ -116,5 +116,3 @@ The primary goal is to bypass the complexity of BOM's FTP delivery and binary fo
 ## Current Status
 
 ** 2026-02-14 - Completed 02-04-PLAN.md
-
----

@@ -1,6 +1,6 @@
 ---
 layout: default
-section: projects
+section: data-analytics
 ---
 
 # matrix-profile-rs
@@ -324,6 +324,4 @@ None yet — v1.0 is initial release. Expecting feedback on:
 
 ## Current Status
 
-2026-03-01 — Completed 14-01-PLAN.md: tokio::Stream wrapper + async callbacks
-
----
+2026-03-09 — Completed 15-01-PLAN.md: MultiStreamingState core + Join distance kernels + Batch Join STOMP

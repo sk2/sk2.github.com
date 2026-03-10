@@ -1,6 +1,5 @@
 ---
 layout: default
-section: projects
 ---
 
 # Sound Array
@@ -109,5 +108,3 @@ The ability to capture, localize, and classify complex soundscapes on edge devic
 | Agnostic/USB Priority | USB arrays offer easier initial setup and portability. | — Pending |
 
 *Last updated: 2026-02-13 after initialization*
-
----

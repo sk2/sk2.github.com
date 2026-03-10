@@ -1,6 +1,6 @@
 ---
 layout: default
-section: projects
+section: data-analytics
 ---
 
 # OmniFocus DB CLI (omnifocus-db)
@@ -110,5 +110,3 @@ A Python-based CLI that bypasses slow AppleScript/TypeScript layers to read dire
 ## Current Status
 
 ** 2026-02-16 - Closed out phase 7 (summaries, state update)
-
----

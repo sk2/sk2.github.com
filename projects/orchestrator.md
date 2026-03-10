@@ -1,6 +1,6 @@
 ---
 layout: default
-section: projects
+section: network-automation
 ---
 
 # Orchestrator (Device Interaction Runner)
@@ -141,5 +141,3 @@ Run the same device workflow reliably across lab/real targets, with deterministi
 ## Current Status
 
 2026-03-05 - Completed 02-05-PLAN.md
-
----

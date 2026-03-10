@@ -1,6 +1,6 @@
 ---
 layout: default
-section: projects
+section: photography
 ---
 
 # OpenAstro Node
@@ -57,5 +57,3 @@ A headless, autonomous astrophotography controller designed for low-power Linux 
 
 - **Web UI**: Responsive React interface for remote control.
 - **Terminal UI (TUI)**: Local power-user control over SSH.
-
----

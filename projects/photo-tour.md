@@ -1,6 +1,6 @@
 ---
 layout: default
-section: projects
+section: photography
 ---
 
 # Photo Tour
@@ -112,5 +112,3 @@ In the field, you can see what the camera sees and get actionable guidance/contr
 | Start with Interactive Foundation (v0.1) | Enables all later modules to plug into a real live/control loop | — Pending |
 
 *Last updated: 2026-02-10 after milestone v0.1 kickoff*
-
----

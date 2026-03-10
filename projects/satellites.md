@@ -1,6 +1,6 @@
 ---
 layout: default
-section: projects
+section: photography
 ---
 
 # Satellites
@@ -167,6 +167,4 @@ Real-time satellite positions rendered on a terminal world map with pass predict
 
 ## Current Status
 
-** 2026-03-01 --  complete
-
----
+** 2026-03-09 --  (Link Budget) complete

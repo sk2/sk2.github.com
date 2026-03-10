@@ -155,5 +155,3 @@ Extract network-level topology relationships (protocol adjacencies, link roles, 
 ## Current Status
 
 2026-03-05 — Completed 07-01-PLAN.md
-
----

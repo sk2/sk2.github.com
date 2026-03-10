@@ -13,11 +13,11 @@ Focused on network engineering, autonomous systems, and signal processing.
 ## Recent Activity
 
 <ul class="recent-activity-list">
-<li><strong>2026-03-07</strong>: <a href="projects/netassure">Network Analysis Engine</a> — <em>Completed 01-04-PLAN.md (CLI ingest subcommand)</em></li>
-<li><strong>2026-03-07</strong>: <a href="projects/netvis">Network Visualization Engine</a> — <em>Plan 89-01 complete, Z-axis isometric projection verified.</em></li>
-<li><strong>2026-03-07</strong>: <a href="projects/netsim">Network Simulator</a> — <em>Completed 125-05 SRv6 traceroute command</em></li>
-<li><strong>2026-03-06</strong>: <a href="projects/netflowsim">Performance Simulator</a> — <em></em></li>
-<li><strong>2026-03-05</strong>: <a href="projects/configparsing">Brownfield Ingestion</a> — <em>Completed 07-01-PLAN.md</em></li>
+<li><strong>2026-03-10</strong>: <a href="projects/ank-workbench">Network Automation Workbench</a> — <em>Revalidated  network impairments (running-state validation + tests).</em></li>
+<li><strong>2026-03-10</strong>: <a href="projects/signals">Spectrum Analysis</a> — <em>Completed  (Multi-Node IQ Sync).</em></li>
+<li><strong>2026-03-09</strong>: <a href="projects/matrix-time-series">matrix-profile-rs</a> — <em>Completed 15-01-PLAN.md: MultiStreamingState core + Join distance kernels + Batch Join STOMP</em></li>
+<li><strong>2026-03-09</strong>: <a href="projects/netassure">Network Analysis Engine</a> — <em>executed: GET /analyze/trends endpoint (1 task, 1 file)</em></li>
+<li><strong>2026-03-09</strong>: <a href="projects/rf-signal-analysis">Signal Reflection - KrakenSDR Multi-Beam System</a> — <em>Completed 40-04-PLAN.md</em></li>
 </ul>
 
 ---
@@ -43,9 +43,9 @@ Focused on network engineering, autonomous systems, and signal processing.
   <p class="card-description">A Rust library and CLI for network device interaction and automated testing. Provides the essential PyATS capabilities — testbed management, CLI output parsing, and state verification — without the complexity. Connects to devices (real, simulated, or mocked), executes commands, parses structured output, and verifies correctness with the type safety of compiled Rust.</p>
 </div>
 
-<div class="project-card" data-search="network analysis engine graph neural network (gnn) based network analytics module that extends topology analysis with real-time learning and prediction. subscribes to the network topology engine's websocket stream for live topology updates, runs gnn models on graph data, and exposes analytics through multiple interfaces (websocket streaming, rest api, rust library, event queue). built on an existing rust+python analysis toolkit that includes formal verification (z3 smt solver), graph algorithms (centrality, community detection, cascade modeling), and python bindings via pyo3. rust polars netassure">
+<div class="project-card" data-search="network analysis engine graph neural network (gnn) based network analytics module that extends topology analysis with real-time learning and prediction. subscribes to the network topology engine's websocket stream for live topology updates, runs gnn models on graph data, and exposes analytics through multiple interfaces (websocket streaming, rest api, rust library, event queue). built on an existing rust+python analysis toolkit that includes formal verification (z3 smt solver), graph algorithms (centrality, community detection, cascade modeling), and python bindings via pyo3. rust netassure">
   <h3 class="card-title"><a href="projects/netassure">Network Analysis Engine</a></h3>
-  <div class="badges-row card-badges"><span class="status-badge status-active">Recently Updated</span> <span class="stack-badge">Rust</span><span class="stack-badge">Polars</span></div>
+  <div class="badges-row card-badges"><span class="status-badge status-active">Recently Updated</span> <span class="stack-badge">Rust</span></div>
   <p class="card-description">Graph Neural Network (GNN) based network analytics module that extends topology analysis with real-time learning and prediction. Subscribes to the Network Topology Engine's WebSocket stream for live topology updates, runs GNN models on graph data, and exposes analytics through multiple interfaces (WebSocket streaming, REST API, Rust library, event queue). Built on an existing Rust+Python analysis toolkit that includes formal verification (Z3 SMT solver), graph algorithms (centrality, community detection, cascade modeling), and Python bindings via PyO3.</p>
 </div>
 
@@ -107,7 +107,7 @@ The workflow follows a linear pipeline: generate or model a topology, run a simu
 
 <div class="project-card" data-search="network visualization engine rust-based network topology layout and visualization engine. takes multi-layer network topologies (via petgraph) and renders them using layout algorithms that minimize edge crossings, bundle related connections, and respect hierarchical or geographic structure. outputs svg, pdf, and png with interactive browser embedding via wasm. rust python typescript netvis">
   <h3 class="card-title"><a href="projects/netvis">Network Visualization Engine</a></h3>
-  <div class="badges-row card-badges"><span class="status-badge status-active">Recently Updated</span> <span class="stack-badge">Rust</span><span class="stack-badge">Python</span><span class="stack-badge">TypeScript</span></div>
+  <div class="badges-row card-badges"><span class="status-badge status-active">Last Active: 2026-02-24</span> <span class="stack-badge">Rust</span><span class="stack-badge">Python</span><span class="stack-badge">TypeScript</span></div>
   <img src="../images/hero-diagram.svg" class="project-thumbnail" alt="Network Visualization Engine diagram" />
   <p class="card-description">Rust-based network topology layout and visualization engine. Takes multi-layer network topologies (via petgraph) and renders them using layout algorithms that minimize edge crossings, bundle related connections, and respect hierarchical or geographic structure. Outputs SVG, PDF, and PNG with interactive browser embedding via WASM.</p>
 </div>
@@ -137,7 +137,7 @@ The workflow follows a linear pipeline: generate or model a topology, run a simu
 <div class="project-grid">
 <div class="project-card" data-search="radio streaming server cross-platform server (targeting raspberry pi) that manages multiple sdr devices (rtl-sdr, airspy hf+) and streams raw iq samples over the network using the `rtl_tcp` protocol. a single binary replaces multiple c-based streaming tools, adding a tui for live device management, toml configuration, and safe concurrency across all connected radios. existing c implementations (`rtl_tcp`, `hfp_tcp`) are single-threaded and require separate processes per device. rust rtltcp">
   <h3 class="card-title"><a href="projects/rtltcp">Radio Streaming Server</a></h3>
-  <div class="badges-row card-badges"><span class="status-badge status-active">Recently Updated</span> <span class="stack-badge">Rust</span></div>
+  <div class="badges-row card-badges"><span class="status-badge status-active">Last Active: 2026-02-22</span> <span class="stack-badge">Rust</span></div>
   <p class="card-description">Cross-platform server (targeting Raspberry Pi) that manages multiple SDR devices (RTL-SDR, AirSpy HF+) and streams raw IQ samples over the network using the `rtl_tcp` protocol. A single binary replaces multiple C-based streaming tools, adding a TUI for live device management, TOML configuration, and safe concurrency across all connected radios. Existing C implementations (`rtl_tcp`, `hfp_tcp`) are single-threaded and require separate processes per device.</p>
 </div>
 

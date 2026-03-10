@@ -45,5 +45,3 @@ To bridge the gap between theoretical signal reflection research and a portable,
 - Software: Python-based processing pipeline.
 - Input: Heimdall DAQ IQ data streams.
 - Environment: Indoor/Through-wall (high clutter).
-
----

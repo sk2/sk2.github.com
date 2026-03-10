@@ -34,7 +34,6 @@ Blueprints are composed from importable fragments. A site blueprint imports prot
 
 - [Download Technical Report: netcfg-techreport.pdf](/assets/docs/ank-netcfg-netcfg-techreport.pdf)
 - [Download Research Paper: netcfg-paper.pdf](/assets/docs/ank-netcfg-netcfg-paper.pdf)
-- [Download User Manual: netcfg-usermanual.pdf](/assets/docs/ank-netcfg-netcfg-usermanual.pdf)
 
 ---
 
@@ -779,354 +778,1726 @@ hardware_library:
 
 ```
 
-### evpn-vxlan-fabric.yaml
+### 05_sp_mpls_core.yaml
 
 ```yaml
+# Case Study 05 — Service Provider MPLS Core
+#
+# Models a Tier-2 ISP backbone running IS-IS as the IGP with Segment
+# Routing (SR-MPLS) replacing LDP for label distribution.  BFD provides
+# sub-second failure detection on all core links.
+#
+# Topology:
+#   3 Provider Edge (PE) routers — customer-facing, originate L3VPN services
+#   2 Provider (P) routers — transit core, no customer interfaces
+#   PE1–PE3 connect to P1 and P2 in a partial mesh (hub-and-spoke to core)
+#   P1–P2 are fully meshed between themselves
+#
+# Design choices:
+#   - IS-IS Level-2 only (flat backbone, no area hierarchy)
+#   - SR-MPLS with SRGB 16000–23999; each PE gets a unique Node SID
+#   - BFD with 100 ms timers for fast convergence
+#   - TACACS+ for device administration with local fallback
+#   - syslog + NTP for operational baseline
+#   - IOS-XR transforms for GigabitEthernet naming
+#
+# Address plan:
+#   P2P links:    10.0.0.0/16  (/31 subnets)
+#   Router IDs:   192.0.2.0/24
+#   Node SIDs:    16001–16200
+
 version: 1
-imports:
-- '../docs/library/datacenter-rules.yaml'
-- '../docs/library/hardware-lowering.yaml'
+imports: []
 layers:
-- name: resources
+- name: pools
   requires: []
   primitives:
-  - type: map_hardware_inventory
-    selector: $leaves
-    chassis_model: dcs-7508
-    slots:
-      1: linecard-48port-10g
-  - type: allocate_resources
-    selector: $all_nodes
-    resource_type: bgp_as
-    pool: '65001-65001'
-    strategy: dense
-    pool_size: null
-  - type: allocate_resources
-    selector: $all_nodes
+  - type: global_resource_pool
+    name: router-id-pool
     resource_type: router_id
-    pool: '10.255.0.1-10.255.0.255'
-    strategy: dense
-    pool_size: null
-- name: underlay
-  requires: []
+    pool: '192.0.2.1-192.0.2.254'
+  - type: global_resource_pool
+    name: node-sid-pool
+    resource_type: segment_id
+    pool: '16001-16200'
+
+- name: topology
+  requires:
+  - pools
+  primitives:
+  # Full mesh between P routers (P1–P2)
+  - type: mesh_nodes
+    selector: $p_routers
+    mesh_type: full
+    naming_strategy: cisco_ge
+  # PE routers connect to every P router (hub-and-spoke)
+  - type: mesh_nodes
+    selector: $pe_and_p
+    mesh_type: hub_and_spoke
+    hub_selector: $p_routers
+    spoke_selector: $pe_routers
+    naming_strategy: cisco_ge
+
+- name: addressing
+  requires:
+  - topology
   primitives:
   - type: provision_ips
-    selector: edges[true]
-    pool: '10.0.0.0/24'
+    selector: $core_links
+    pool: '10.0.0.0/16'
     subnet_size: 31
-    ipv6_pool: null
-    ipv6_subnet_size: null
     strategy: dense
-    pool_size: null
-    vrf: null
+  - type: allocate_resources
+    selector: $all_routers
+    resource_type: router_id
+    pool: router-id-pool
+    strategy: dense
+  - type: allocate_resources
+    selector: $all_routers
+    resource_type: segment_id
+    pool: node-sid-pool
+    strategy: dense
+
+- name: underlay
+  requires:
+  - addressing
+  primitives:
+  - type: build_protocol_layer
+    selector: $all_routers
+    layer: isis
+    config:
+      level: level_2
+      metric_style: wide
+      protocol_type: isis
+    clone_underlying: true
+  - type: build_protocol_layer
+    selector: $all_routers
+    layer: sr_mpls
+    config:
+      srgb_start: 16000
+      srgb_end: 23999
+      prefer_sr: true
+      ti_lfa: true
+  - type: build_protocol_layer
+    selector: $all_routers
+    layer: bfd
+    config:
+      min_tx_ms: 100
+      min_rx_ms: 100
+      detect_mult: 3
+
+- name: services
+  requires:
+  - underlay
+  primitives:
+  - type: build_protocol_layer
+    selector: $pe_routers
+    layer: bgp
+    config:
+      asn_base: '65100'
+      protocol_type: bgp
+      peer_type: ibgp
+    clone_underlying: true
+  - type: build_protocol_layer
+    selector: $all_routers
+    layer: tacacs
+    config:
+      servers: ["10.99.0.1", "10.99.0.2"]
+      fallback_local: true
+  - type: build_protocol_layer
+    selector: $all_routers
+    layer: ntp
+    config:
+      servers: ["10.99.0.10", "10.99.0.11"]
+      source_interface: loopback0
+  - type: build_protocol_layer
+    selector: $all_routers
+    layer: syslog
+    config:
+      servers: ["10.99.0.20"]
+      facility: local7
+      severity: informational
+
+- name: secrets
+  requires:
+  - services
+  primitives:
+  - type: inject_secrets
+    selector: $all_routers
+    secrets:
+      tacacs_key: ${TACACS_KEY}
+      isis_auth_key: ${ISIS_AUTH_KEY}
+
+assertions:
+- name: pe-reaches-every-p
+  severity: error
+  select: $pe_routers
+  check:
+    type: reachability
+    target_selector: $p_routers
+  help: A PE router cannot reach a P router — check IS-IS adjacencies.
+
+- name: core-is-connected
+  severity: error
+  select: $all_routers
+  check:
+    type: is_connected
+  help: Core network is partitioned — a router is isolated.
+
+- name: every-router-has-sid
+  severity: error
+  select: $all_routers
+  check:
+    type: field_exists
+    field: segment_id
+  help: Router is missing its SR Node SID — check allocate_resources.
+
+- name: every-router-has-rid
+  severity: error
+  select: $all_routers
+  check:
+    type: field_exists
+    field: router_id
+  help: Router is missing its router-id — check allocate_resources.
+
+- name: ntp-compliance
+  severity: error
+  select: $all_routers
+  check:
+    type: use_rule
+    name: ntp-configured
+  help: Router is missing NTP configuration.
+
+rules:
+  ntp-configured: has(node.ntp_servers) and size(node.ntp_servers) >= 2
+
+groups:
+  pe_routers: nodes[role=='pe']
+  p_routers: nodes[role=='p']
+  pe_and_p: $pe_routers | $p_routers
+  all_routers: $pe_routers | $p_routers
+  core_links: edges[true]
+
+blast_radius:
+- name: core-change-limit
+  select: null
+  check:
+    type: max_modifications
+    count: 5
+
+transforms:
+- name: iosxr-interface-naming
+  when: device_os == 'iosxr'
+  rules:
+  - match_expr: stanza.kind == 'interface'
+    apply:
+      name: "'GigabitEthernet0/0/0/' + string(stanza.fields.abstract_index)"
+- name: iosxr-isis-sr
+  when: device_os == 'iosxr'
+  rules:
+  - match_expr: stanza.kind == 'isis_neighbor'
+    apply:
+      sr_enabled: 'true'
+      metric: '10'
+
+hardware_library:
+  chassis: []
+  linecards: []
+
+```
+
+### 06_campus_nac.yaml
+
+```yaml
+# Case Study 06 — Campus Network with 802.1X NAC
+#
+# Models a university campus network with three-tier architecture
+# (core → distribution → access), 802.1X port-based access control,
+# DHCP relay, VRRP gateway redundancy, and full compliance auditing.
+#
+# Topology:
+#   2 Core routers          — OSPF area 0 backbone, VRRP gateway pair
+#   2 Distribution switches — aggregate access layer, DHCP relay
+#   4 Access switches       — host-facing, 802.1X + MAB enforcement
+#
+# Design choices:
+#   - OSPF area 0 flat backbone (single area for simplicity)
+#   - VRRP on core for default gateway redundancy
+#   - RSTP with BPDU guard on access ports
+#   - 802.1X with MAB fallback and guest VLAN 999
+#   - RADIUS for 802.1X backend, TACACS+ for admin access
+#   - DHCP relay on access switches → central DHCP server
+#   - LLDP for neighbour discovery and topology verification
+#   - NTP + syslog compliance assertions
+#
+# Address plan:
+#   Core links:          10.0.0.0/24  (/30 subnets)
+#   Distribution links:  10.0.1.0/24  (/30 subnets)
+#   Access links:        10.0.2.0/24  (/30 subnets)
+
+version: 1
+imports: []
+layers:
+- name: topology
+  requires: []
+  primitives:
+  # Core pair — full mesh (single link between core1 and core2)
+  - type: mesh_nodes
+    selector: $core
+    mesh_type: full
+  # Distribution connects to both core switches
+  - type: mesh_nodes
+    selector: $core_and_dist
+    mesh_type: hub_and_spoke
+    hub_selector: $core
+    spoke_selector: $distribution
+  # Access connects to distribution (dual-homed)
+  - type: mesh_nodes
+    selector: $dist_and_access
+    mesh_type: hub_and_spoke
+    hub_selector: $distribution
+    spoke_selector: $access
+
+- name: addressing
+  requires:
+  - topology
+  primitives:
+  - type: provision_ips
+    selector: $core_links
+    pool: '10.0.0.0/24'
+    subnet_size: 30
+    strategy: dense
+  - type: provision_ips
+    selector: $dist_links
+    pool: '10.0.1.0/24'
+    subnet_size: 30
+    strategy: dense
+  - type: provision_ips
+    selector: $access_links
+    pool: '10.0.2.0/24'
+    subnet_size: 30
+    strategy: dense
+
+- name: routing
+  requires:
+  - addressing
+  primitives:
+  - type: build_protocol_layer
+    selector: $all_switches
+    layer: ospf
+    config:
+      area: '0.0.0.0'
+      network_type: point_to_point
+    clone_underlying: true
+  - type: build_protocol_layer
+    selector: $core
+    layer: vrrp
+    config:
+      version: 3
+      vrid: 10
+      priority: 110
+      preempt: true
+      advertisement_interval_ms: 1000
+  - type: build_protocol_layer
+    selector: $all_switches
+    layer: bfd
+    config:
+      min_tx_ms: 300
+      min_rx_ms: 300
+      detect_mult: 3
+
+- name: switching
+  requires:
+  - routing
+  primitives:
+  - type: build_protocol_layer
+    selector: $all_switches
+    layer: stp
+    config:
+      mode: rstp
+      bpdu_guard: true
+  - type: build_protocol_layer
+    selector: $all_switches
+    layer: lldp
+    config:
+      tx_interval_s: 30
+      hold_multiplier: 4
+  - type: build_protocol_layer
+    selector: $access
+    layer: lacp
+    config:
+      mode: active
+      min_links: 1
+      lacp_rate: fast
+
+- name: security
+  requires:
+  - switching
+  primitives:
+  # 802.1X on access layer with guest VLAN and MAB fallback
+  - type: build_protocol_layer
+    selector: $access
+    layer: dot1x
+    config:
+      mode: multi-auth
+      reauth_period_s: 3600
+      guest_vlan: 999
+      auth_fail_vlan: 998
+      critical_vlan: 997
+      mac_bypass: true
+  # RADIUS for 802.1X backend
+  - type: build_protocol_layer
+    selector: $access
+    layer: radius
+    config:
+      servers: ["10.99.0.50", "10.99.0.51"]
+      auth_port: 1812
+      acct_port: 1813
+      use_accounting: true
+  # TACACS+ for admin access on all devices
+  - type: build_protocol_layer
+    selector: $all_switches
+    layer: tacacs
+    config:
+      servers: ["10.99.0.1", "10.99.0.2"]
+      fallback_local: true
+      authorization: true
+      accounting: true
+  # Management ACL restricting SSH/HTTPS access
+  - type: build_access_policy
+    selector: $all_switches
+    policy_name: MGMT-ACCESS
+    rules:
+    - name: allow-noc-ssh
+      action: permit
+      source_prefix: '10.99.0.0/24'
+      destination_prefix: null
+      protocol: tcp
+      source_port: null
+      destination_port: 22
+    - name: allow-noc-https
+      action: permit
+      source_prefix: '10.99.0.0/24'
+      destination_prefix: null
+      protocol: tcp
+      source_port: null
+      destination_port: 443
+    - name: deny-all-mgmt
+      action: deny
+      source_prefix: null
+      destination_prefix: null
+      protocol: null
+      source_port: null
+      destination_port: null
+
+- name: services
+  requires:
+  - security
+  primitives:
+  # DHCP relay on access switches pointing to central DHCP server
+  - type: build_protocol_layer
+    selector: $access
+    layer: dhcp_relay
+    config:
+      servers: ["10.99.0.100"]
+      option_82: true
+      source_interface: loopback0
+  # NTP on all devices
+  - type: build_protocol_layer
+    selector: $all_switches
+    layer: ntp
+    config:
+      servers: ["10.99.0.10", "10.99.0.11"]
+      source_interface: loopback0
+  # Syslog on all devices
+  - type: build_protocol_layer
+    selector: $all_switches
+    layer: syslog
+    config:
+      servers: ["10.99.0.20"]
+      facility: local7
+      severity: informational
+
+- name: secrets
+  requires:
+  - services
+  primitives:
+  - type: inject_secrets
+    selector: $all_switches
+    secrets:
+      tacacs_key: ${TACACS_KEY}
+      radius_secret: ${RADIUS_SECRET}
+
+assertions:
+- name: access-dual-homed
+  severity: error
+  select: $access
+  check:
+    type: min_edges
+    count: 2
+  help: Access switch has fewer than 2 uplinks — single point of failure.
+
+- name: core-connected
+  severity: error
+  select: $all_switches
+  check:
+    type: is_connected
+  help: Campus network is partitioned — a switch is isolated.
+
+- name: ntp-compliance
+  severity: error
+  select: $all_switches
+  check:
+    type: use_rule
+    name: ntp-configured
+  help: Switch is missing NTP configuration — at least 2 NTP servers required.
+
+- name: syslog-compliance
+  severity: error
+  select: $all_switches
+  check:
+    type: use_rule
+    name: syslog-configured
+  help: Switch has no syslog server configured.
+
+- name: hostnames-unique
+  severity: error
+  select: $all_switches
+  check:
+    type: field_exists
+    field: hostname
+  help: A switch is missing its hostname field.
+
+- name: access-bipartite
+  severity: error
+  select: $dist_and_access
+  check:
+    type: is_bipartite
+  help: Access-to-distribution graph is not bipartite — unexpected link between same-tier nodes.
+
+rules:
+  ntp-configured: has(node.ntp_servers) and size(node.ntp_servers) >= 2
+  syslog-configured: has(node.syslog_server) and node.syslog_server != ''
+
+groups:
+  core: nodes[role=='core']
+  distribution: nodes[role=='distribution']
+  access: nodes[role=='access']
+  core_and_dist: $core | $distribution
+  dist_and_access: $distribution | $access
+  all_switches: $core | $distribution | $access
+  core_links: edges[tier=='core']
+  dist_links: edges[tier=='distribution']
+  access_links: edges[tier=='access']
+
+blast_radius:
+- name: campus-change-cap
+  select: null
+  check:
+    type: max_percentage_changed
+    value: 15.0
+
+transforms: []
+hardware_library:
+  chassis: []
+  linecards: []
+
+```
+
+### 07_sdwan_ipsec.yaml
+
+```yaml
+# Case Study 07 — Multi-Site SD-WAN with IPsec Overlay
+#
+# Models a hub-and-spoke SD-WAN connecting branch offices to dual DC
+# hubs via IPsec tunnels, with OSPF running over the encrypted overlay
+# for dynamic routing and BFD for fast failover.
+#
+# Topology:
+#   2 DC hub routers   — terminate all branch tunnels, fully meshed
+#   4 Branch routers   — each connects to both hubs (dual-homed)
+#
+# Design choices:
+#   - IKEv2 with AES-256-GCM and DH group 20 (ECDH-384)
+#   - OSPF over IPsec tunnels (point-to-point network type)
+#   - BFD with relaxed timers (300 ms) for WAN tolerance
+#   - PSK injected via inject_secrets (never hardcoded)
+#   - NTP + syslog + SNMP for operational baseline
+#   - WireGuard alternative shown as conditional (for VyOS branches)
+#   - Blast radius limits: max 2 deletions to prevent mass decommission
+#
+# Address plan:
+#   Hub-to-hub:    172.16.0.0/24  (/31 subnets)
+#   Hub-to-branch: 172.16.1.0/24  (/30 subnets)
+
+version: 1
+imports: []
+layers:
+- name: topology
+  requires: []
+  primitives:
+  # Full mesh between DC hub routers
+  - type: mesh_nodes
+    selector: $hubs
+    mesh_type: full
+  # Each branch connects to both hubs
+  - type: mesh_nodes
+    selector: $hubs_and_branches
+    mesh_type: hub_and_spoke
+    hub_selector: $hubs
+    spoke_selector: $branches
+
+- name: addressing
+  requires:
+  - topology
+  primitives:
+  - type: provision_ips
+    selector: $hub_links
+    pool: '172.16.0.0/24'
+    subnet_size: 31
+    strategy: dense
+  - type: provision_ips
+    selector: $branch_links
+    pool: '172.16.1.0/24'
+    subnet_size: 30
+    strategy: dense
+
+- name: encryption
+  requires:
+  - addressing
+  primitives:
+  # IPsec IKEv2 overlay on all routers
+  - type: build_protocol_layer
+    selector: $all_routers
+    layer: ipsec
+    config:
+      ike_version: 2
+      encryption: aes256gcm
+      dh_group: 20
+      ike_lifetime_s: 86400
+      ipsec_lifetime_s: 3600
+      dpd_interval_s: 30
+      dpd_retries: 5
+      tunnel_mode: tunnel
+    clone_underlying: true
+  # Conditional: use WireGuard instead of IPsec for VyOS branches
+  - type: conditional
+    condition: topology.node_count < 0
+    then_primitives:
+    - type: build_protocol_layer
+      selector: nodes[device_os=='vyos']
+      layer: wireguard
+      config:
+        listen_port: 51820
+        mtu: 1420
+        persistent_keepalive_s: 25
+    else_primitives: null
+
+- name: routing
+  requires:
+  - encryption
+  primitives:
+  - type: build_protocol_layer
+    selector: $all_routers
+    layer: ospf
+    config:
+      area: '0.0.0.0'
+      network_type: point_to_point
+    clone_underlying: true
+  - type: build_protocol_layer
+    selector: $all_routers
+    layer: bfd
+    config:
+      min_tx_ms: 300
+      min_rx_ms: 300
+      detect_mult: 3
+
+- name: management
+  requires:
+  - routing
+  primitives:
+  - type: build_protocol_layer
+    selector: $all_routers
+    layer: ntp
+    config:
+      servers: ["10.99.0.10", "10.99.0.11"]
+      source_interface: loopback0
+  - type: build_protocol_layer
+    selector: $all_routers
+    layer: syslog
+    config:
+      servers: ["10.99.0.20"]
+      facility: local7
+  - type: build_protocol_layer
+    selector: $all_routers
+    layer: snmp
+    config:
+      version: "3"
+      v3_auth_protocol: sha
+      v3_priv_protocol: aes128
+      v3_security_level: authPriv
+      trap_targets: ["10.99.0.30"]
+
+- name: secrets
+  requires:
+  - management
+  primitives:
+  - type: inject_secrets
+    selector: $all_routers
+    secrets:
+      ipsec_psk: ${IPSEC_PSK}
+      snmp_auth_pass: ${SNMP_AUTH_PASS}
+      snmp_priv_pass: ${SNMP_PRIV_PASS}
+
+assertions:
+- name: branch-dual-homed
+  severity: error
+  select: $branches
+  check:
+    type: min_edges
+    count: 2
+  help: Branch router has fewer than 2 hub connections — no failover path.
+
+- name: hubs-connected
+  severity: error
+  select: $hubs
+  check:
+    type: is_connected
+  help: DC hub routers are not directly connected.
+
+- name: branch-reaches-hub
+  severity: error
+  select: $branches
+  check:
+    type: reachability
+    target_selector: $hubs
+  help: A branch router cannot reach any DC hub — check IPsec tunnel.
+
+- name: ntp-compliance
+  severity: error
+  select: $all_routers
+  check:
+    type: use_rule
+    name: ntp-configured
+  help: Router is missing NTP configuration.
+
+- name: all-have-ipsec-psk
+  severity: error
+  select: $all_routers
+  check:
+    type: field_exists
+    field: ipsec_psk
+  help: Router is missing IPsec pre-shared key — check inject_secrets.
+
+rules:
+  ntp-configured: has(node.ntp_servers) and size(node.ntp_servers) >= 2
+
+groups:
+  hubs: nodes[role=='hub']
+  branches: nodes[role=='branch']
+  hubs_and_branches: $hubs | $branches
+  all_routers: $hubs | $branches
+  hub_links: edges[tier=='hub']
+  branch_links: edges[tier=='branch']
+
+blast_radius:
+- name: prevent-mass-decommission
+  select: null
+  check:
+    type: max_deletions
+    count: 2
+
+transforms: []
+hardware_library:
+  chassis: []
+  linecards: []
+
+```
+
+### 08_multicast_video.yaml
+
+```yaml
+# Case Study 08 — Multicast Video Distribution Network
+#
+# Models an IPTV / video distribution network using PIM Sparse Mode
+# with a dedicated Rendezvous Point, IGMP on access-facing interfaces,
+# and OSPF as the unicast underlay for RPF lookups.
+#
+# Topology:
+#   1 Rendezvous Point (RP) — PIM-SM RP, BSR candidate
+#   2 Core routers           — PIM transit, OSPF backbone
+#   2 Distribution routers   — aggregate multicast streams
+#   3 Access routers         — IGMP snooping, last-hop PIM
+#
+# Design choices:
+#   - PIM-SM with static RP (RP address set on rp1's loopback)
+#   - IGMPv3 on access layer for source-specific multicast (SSM) readiness
+#   - OSPF area 0 as unicast underlay for RPF validation
+#   - MLAG on distribution pairs for resilient multicast forwarding
+#   - LLDP for topology discovery
+#   - NetFlow/IPFIX on core for multicast traffic accounting
+#   - BFD for fast PIM neighbour failure detection
+#
+# Address plan:
+#   Core links:  10.10.0.0/24 (/31)
+#   Dist links:  10.10.1.0/24 (/30)
+#   Access links: 10.10.2.0/24 (/30)
+#   Multicast:   239.1.0.0/16 (admin-scoped)
+
+version: 1
+imports: []
+layers:
+- name: pools
+  requires: []
+  primitives:
+  - type: global_resource_pool
+    name: router-id-pool
+    resource_type: router_id
+    pool: '10.255.0.1-10.255.0.50'
+
+- name: topology
+  requires:
+  - pools
+  primitives:
+  # RP connects to both core routers
+  - type: mesh_nodes
+    selector: $rp_and_core
+    mesh_type: hub_and_spoke
+    hub_selector: $core
+    spoke_selector: $rp
+  # Core full mesh
+  - type: mesh_nodes
+    selector: $core
+    mesh_type: full
+  # Distribution connects to core
+  - type: mesh_nodes
+    selector: $core_and_dist
+    mesh_type: hub_and_spoke
+    hub_selector: $core
+    spoke_selector: $distribution
+  # Access connects to distribution
+  - type: mesh_nodes
+    selector: $dist_and_access
+    mesh_type: hub_and_spoke
+    hub_selector: $distribution
+    spoke_selector: $access
+
+- name: addressing
+  requires:
+  - topology
+  primitives:
+  - type: provision_ips
+    selector: $core_links
+    pool: '10.10.0.0/24'
+    subnet_size: 31
+    strategy: dense
+  - type: provision_ips
+    selector: $dist_links
+    pool: '10.10.1.0/24'
+    subnet_size: 30
+    strategy: dense
+  - type: provision_ips
+    selector: $access_links
+    pool: '10.10.2.0/24'
+    subnet_size: 30
+    strategy: dense
+  - type: allocate_resources
+    selector: $all_routers
+    resource_type: router_id
+    pool: router-id-pool
+    strategy: dense
+
+- name: underlay
+  requires:
+  - addressing
+  primitives:
+  - type: build_protocol_layer
+    selector: $all_routers
+    layer: ospf
+    config:
+      area: '0.0.0.0'
+      network_type: point_to_point
+    clone_underlying: true
+  - type: build_protocol_layer
+    selector: $all_routers
+    layer: bfd
+    config:
+      min_tx_ms: 200
+      min_rx_ms: 200
+      detect_mult: 3
+
+- name: multicast
+  requires:
+  - underlay
+  primitives:
+  # PIM-SM on all routers — RP address is rp1's loopback
+  - type: build_protocol_layer
+    selector: $all_routers
+    layer: pim_sm
+    config:
+      mode: sparse
+      rp_address: "10.255.0.1"
+      hello_interval_s: 30
+      join_prune_interval_s: 60
+      spt_threshold_kbps: 0
+  # BSR candidacy on RP node
+  - type: build_protocol_layer
+    selector: $rp
+    layer: pim_sm
+    config:
+      use_bsr: true
+      bsr_candidate: true
+      bsr_priority: 200
+      rp_candidate: true
+  # IGMP on access layer for host-facing interfaces
+  - type: build_protocol_layer
+    selector: $access
+    layer: igmp
+    config:
+      version: 3
+      snooping: true
+      querier: true
+      query_interval_s: 125
+      fast_leave: false
+  # IGMP snooping only on distribution (no querier)
+  - type: build_protocol_layer
+    selector: $distribution
+    layer: igmp
+    config:
+      version: 3
+      snooping: true
+      querier: false
+
+- name: resilience
+  requires:
+  - multicast
+  primitives:
+  # MLAG on distribution pairs for dual-homed access switches
+  - type: build_protocol_layer
+    selector: $distribution
+    layer: mlag
+    config:
+      domain_id: 1
+      dual_primary_detection: true
+      peer_gateway: true
+      reload_delay_s: 300
+  - type: build_protocol_layer
+    selector: $all_routers
+    layer: lldp
+    config:
+      tx_interval_s: 30
+      hold_multiplier: 4
+
+- name: telemetry
+  requires:
+  - resilience
+  primitives:
+  # NetFlow/IPFIX on core for multicast traffic accounting
+  - type: build_protocol_layer
+    selector: $core
+    layer: netflow
+    config:
+      format: ipfix
+      collectors: ["10.99.0.30"]
+      collector_port: 4739
+      sampling_rate: 1000
+      active_timeout_s: 60
+
+assertions:
+- name: rp-reachable-from-access
+  severity: error
+  select: $access
+  check:
+    type: reachability
+    target_selector: $rp
+  help: Access router cannot reach RP — multicast joins will fail.
+
+- name: network-connected
+  severity: error
+  select: $all_routers
+  check:
+    type: is_connected
+  help: Network is partitioned — a router is isolated.
+
+- name: access-dual-homed
+  severity: error
+  select: $access
+  check:
+    type: min_edges
+    count: 2
+  help: Access router has fewer than 2 uplinks — no multicast redundancy.
+
+- name: every-router-has-rid
+  severity: error
+  select: $all_routers
+  check:
+    type: field_exists
+    field: router_id
+  help: Router is missing its router-id.
+
+- name: dist-to-access-bipartite
+  severity: error
+  select: $dist_and_access
+  check:
+    type: is_bipartite
+  help: Distribution-to-access graph is not bipartite.
+
+rules: {}
+
+groups:
+  rp: nodes[role=='rp']
+  core: nodes[role=='core']
+  distribution: nodes[role=='distribution']
+  access: nodes[role=='access']
+  rp_and_core: $rp | $core
+  core_and_dist: $core | $distribution
+  dist_and_access: $distribution | $access
+  all_routers: $rp | $core | $distribution | $access
+  core_links: edges[tier=='core']
+  dist_links: edges[tier=='distribution']
+  access_links: edges[tier=='access']
+
+blast_radius:
+- name: multicast-change-cap
+  select: null
+  check:
+    type: max_percentage_changed
+    value: 20.0
+
+transforms: []
+hardware_library:
+  chassis: []
+  linecards: []
+
+```
+
+### 09_zerotrust_dc.yaml
+
+```yaml
+# Case Study 09 — Zero-Trust DC Microsegmentation
+#
+# Models a security-first datacentre design with zone-based firewall
+# policies enforcing strict east-west traffic control between application
+# tiers, NAT for external access, and MACsec on all inter-switch links.
+#
+# Topology:
+#   2 Firewall nodes  — central policy enforcement point
+#   2 Web servers     — DMZ tier, internet-facing
+#   2 App servers     — application tier, internal APIs
+#   2 DB servers      — data tier, strictly isolated
+#
+# Design choices:
+#   - Zone-based firewall: web→app (TCP 8080), app→db (TCP 5432), mgmt→all (SSH)
+#   - Default deny between all zones (explicit permit only)
+#   - DNAT for inbound HTTPS to web tier
+#   - SNAT for outbound internet access from app tier
+#   - MACsec on all links for Layer 2 encryption
+#   - SNMP + syslog + NTP for monitoring baseline
+#   - NetFlow on firewalls for traffic visibility
+#   - Strict blast radius: max 1 deletion, max  change
+#
+# Address plan:
+#   Web tier:    10.10.1.0/24
+#   App tier:    10.10.2.0/24
+#   DB tier:     10.10.3.0/24
+#   Management:  10.99.0.0/24
+#   External:    203.0.113.0/24
+
+version: 1
+imports: []
+layers:
+- name: topology
+  requires: []
+  primitives:
+  # Each tier connects through the firewall pair
+  - type: mesh_nodes
+    selector: $fw_and_web
+    mesh_type: hub_and_spoke
+    hub_selector: $firewalls
+    spoke_selector: $web
+  - type: mesh_nodes
+    selector: $fw_and_app
+    mesh_type: hub_and_spoke
+    hub_selector: $firewalls
+    spoke_selector: $app
+  - type: mesh_nodes
+    selector: $fw_and_db
+    mesh_type: hub_and_spoke
+    hub_selector: $firewalls
+    spoke_selector: $db
+  # Firewall pair interconnect
+  - type: mesh_nodes
+    selector: $firewalls
+    mesh_type: full
+
+- name: addressing
+  requires:
+  - topology
+  primitives:
+  - type: provision_ips
+    selector: $web_links
+    pool: '10.10.1.0/24'
+    subnet_size: 30
+    strategy: dense
+  - type: provision_ips
+    selector: $app_links
+    pool: '10.10.2.0/24'
+    subnet_size: 30
+    strategy: dense
+  - type: provision_ips
+    selector: $db_links
+    pool: '10.10.3.0/24'
+    subnet_size: 30
+    strategy: dense
+
+- name: encryption
+  requires:
+  - addressing
+  primitives:
+  # MACsec on all inter-switch links
   - type: build_protocol_layer
     selector: $all_nodes
+    layer: macsec
+    config:
+      cipher: gcm_aes_256
+      confidentiality: must-encrypt
+      include_sci: true
+      replay_protection: true
+
+- name: zone_policy
+  requires:
+  - encryption
+  primitives:
+  # Web → App: only HTTP API traffic
+  - build_zone_policy:
+      name: "web-to-app"
+      select:
+        role: firewall
+      from_zone: web
+      to_zone: app
+      default_action: deny
+      rules:
+        - name: allow-api
+          action: permit
+          protocol: tcp
+          destination_port: 8080
+          source_prefixes: ["10.10.1.0/24"]
+          destination_prefixes: ["10.10.2.0/24"]
+          stateful: true
+          log: true
+        - name: allow-health-check
+          action: permit
+          protocol: tcp
+          destination_port: 8081
+          source_prefixes: ["10.10.1.0/24"]
+          destination_prefixes: ["10.10.2.0/24"]
+          stateful: true
+          log: false
+
+  # App → DB: only database traffic
+  - build_zone_policy:
+      name: "app-to-db"
+      select:
+        role: firewall
+      from_zone: app
+      to_zone: db
+      default_action: deny
+      rules:
+        - name: allow-postgres
+          action: permit
+          protocol: tcp
+          destination_port: 5432
+          source_prefixes: ["10.10.2.0/24"]
+          destination_prefixes: ["10.10.3.0/24"]
+          stateful: true
+          log: true
+        - name: allow-redis
+          action: permit
+          protocol: tcp
+          destination_port: 6379
+          source_prefixes: ["10.10.2.0/24"]
+          destination_prefixes: ["10.10.3.0/24"]
+          stateful: true
+          log: false
+
+  # Management → All: SSH from NOC
+  - build_zone_policy:
+      name: "mgmt-to-all"
+      select:
+        role: firewall
+      from_zone: management
+      to_zone: web
+      default_action: deny
+      rules:
+        - name: allow-ssh
+          action: permit
+          protocol: tcp
+          destination_port: 22
+          source_prefixes: ["10.99.0.0/24"]
+          destination_prefixes: ["0.0.0.0/0"]
+          stateful: true
+          log: true
+        - name: allow-icmp
+          action: permit
+          protocol: icmp
+          stateful: false
+          log: false
+
+  # DB → anything: deny all (data tier never initiates)
+  - build_zone_policy:
+      name: "db-to-any"
+      select:
+        role: firewall
+      from_zone: db
+      to_zone: app
+      default_action: deny
+      rules: []
+
+- name: nat
+  requires:
+  - zone_policy
+  primitives:
+  # DNAT: external HTTPS → web tier
+  - build_nat_policy:
+      name: "inbound-nat"
+      select:
+        role: firewall
+      rules:
+        - name: https-to-web
+          nat_type: dnat
+          external_address: "203.0.113.10"
+          external_port: 443
+          internal_address: "10.10.1.10"
+          internal_port: 8443
+          log: true
+
+  # SNAT: app tier → internet via interface masquerade
+  - build_nat_policy:
+      name: "outbound-nat"
+      select:
+        role: firewall
+      rules:
+        - name: app-internet-snat
+          nat_type: snat
+          mode: interface
+          source_prefixes: ["10.10.2.0/24"]
+          from_zone: app
+          to_zone: untrust
+          log: false
+
+- name: monitoring
+  requires:
+  - nat
+  primitives:
+  - type: build_protocol_layer
+    selector: $all_nodes
+    layer: syslog
+    config:
+      servers: ["10.99.0.20"]
+      facility: local7
+      severity: informational
+  - type: build_protocol_layer
+    selector: $all_nodes
+    layer: ntp
+    config:
+      servers: ["10.99.0.10", "10.99.0.11"]
+  - type: build_protocol_layer
+    selector: $all_nodes
+    layer: snmp
+    config:
+      version: "3"
+      v3_security_level: authPriv
+      trap_targets: ["10.99.0.30"]
+  # NetFlow on firewalls for traffic analysis
+  - type: build_protocol_layer
+    selector: $firewalls
+    layer: netflow
+    config:
+      format: ipfix
+      collectors: ["10.99.0.40"]
+      sampling_rate: 100
+
+- name: secrets
+  requires:
+  - monitoring
+  primitives:
+  - type: inject_secrets
+    selector: $all_nodes
+    secrets:
+      macsec_cak: ${MACSEC_CAK}
+      macsec_ckn: ${MACSEC_CKN}
+      snmp_auth_pass: ${SNMP_AUTH_PASS}
+      snmp_priv_pass: ${SNMP_PRIV_PASS}
+
+assertions:
+- name: zone-policy-web-to-app
+  severity: error
+  select: $firewalls
+  check:
+    type: zone_policy_exists
+    from_zone: web
+    to_zone: app
+  help: Missing zone policy from web to app — east-west traffic is uncontrolled.
+
+- name: zone-policy-app-to-db
+  severity: error
+  select: $firewalls
+  check:
+    type: zone_policy_exists
+    from_zone: app
+    to_zone: db
+  help: Missing zone policy from app to db — database access is uncontrolled.
+
+- name: web-reachable-from-fw
+  severity: error
+  select: $web
+  check:
+    type: reachability
+    target_selector: $firewalls
+  help: Web server cannot reach firewall — check topology wiring.
+
+- name: db-isolated-from-web
+  severity: warning
+  select: $db
+  check:
+    type: use_rule
+    name: no-direct-web-link
+  help: DB server has a direct link to web tier — violates zero-trust model.
+
+- name: all-links-encrypted
+  severity: error
+  select: $all_nodes
+  check:
+    type: use_rule
+    name: macsec-enabled
+  help: A node is missing MACsec — all links must be encrypted in zero-trust.
+
+rules:
+  no-direct-web-link: "!has(node.direct_web_link) or node.direct_web_link == false"
+  macsec-enabled: has(node.macsec_config) and node.macsec_config != ''
+
+groups:
+  firewalls: nodes[role=='firewall']
+  web: nodes[role=='web']
+  app: nodes[role=='app']
+  db: nodes[role=='db']
+  fw_and_web: $firewalls | $web
+  fw_and_app: $firewalls | $app
+  fw_and_db: $firewalls | $db
+  all_nodes: $firewalls | $web | $app | $db
+  web_links: edges[zone=='web']
+  app_links: edges[zone=='app']
+  db_links: edges[zone=='db']
+
+blast_radius:
+- name: strict-deletion-limit
+  select: null
+  check:
+    type: max_deletions
+    count: 1
+- name: strict-change-cap
+  select: null
+  check:
+    type: max_percentage_changed
+    value: 10.0
+
+transforms: []
+hardware_library:
+  chassis: []
+  linecards: []
+
+```
+
+### 10_financial_compliance.yaml
+
+```yaml
+# Case Study 10 — Compliance-Hardened Financial Network
+#
+# Models a PCI-DSS / SOX-compliant financial trading network with strict
+# access controls, encrypted management plane, comprehensive auditing,
+# and MACsec on all inter-switch links.
+#
+# Topology:
+#   2 Core routers     — OSPF backbone, route reflectors
+#   1 DMZ router       — internet-facing, heavily filtered
+#   2 Trading switches — low-latency trading floor, MACsec encrypted
+#   1 Management node  — out-of-band management, TACACS+ / RADIUS
+#
+# Design choices:
+#   - OSPF backbone with BGP safety filters on DMZ (bogon + RFC1918 block)
+#   - MACsec (AES-256-GCM) on trading links for wire-speed encryption
+#   - TACACS+ for all admin access with command authorisation + accounting
+#   - RADIUS for 802.1X on trading floor ports
+#   - NTP with authentication (compliance requirement)
+#   - Syslog over TLS to centralised SIEM
+#   - SNMP v3 with authPriv (no v2c permitted)
+#   - NetFlow/IPFIX for PCI-DSS audit trail
+#   - Strict schema assertions: hostname, serial, firmware, site required
+#   - Zone policy: DMZ → trading denied; management → all permitted (SSH only)
+#   - Blast radius: max 1 deletion, max  change (change-averse environment)
+#
+# Address plan:
+#   Core:        10.1.0.0/24
+#   DMZ:         10.2.0.0/24
+#   Trading:     10.3.0.0/24
+#   Management:  10.99.0.0/24
+#   External:    203.0.113.0/28
+
+version: 1
+imports: []
+layers:
+- name: topology
+  requires: []
+  primitives:
+  # Core full mesh
+  - type: mesh_nodes
+    selector: $core
+    mesh_type: full
+  # DMZ connects to core
+  - type: mesh_nodes
+    selector: $core_and_dmz
+    mesh_type: hub_and_spoke
+    hub_selector: $core
+    spoke_selector: $dmz
+  # Trading connects to core
+  - type: mesh_nodes
+    selector: $core_and_trading
+    mesh_type: hub_and_spoke
+    hub_selector: $core
+    spoke_selector: $trading
+  # Management connects to core (out-of-band path)
+  - type: mesh_nodes
+    selector: $core_and_mgmt
+    mesh_type: hub_and_spoke
+    hub_selector: $core
+    spoke_selector: $management
+
+- name: addressing
+  requires:
+  - topology
+  primitives:
+  - type: provision_ips
+    selector: $core_links
+    pool: '10.1.0.0/24'
+    subnet_size: 30
+    strategy: dense
+  - type: provision_ips
+    selector: $dmz_links
+    pool: '10.2.0.0/24'
+    subnet_size: 30
+    strategy: dense
+  - type: provision_ips
+    selector: $trading_links
+    pool: '10.3.0.0/24'
+    subnet_size: 30
+    strategy: dense
+
+- name: routing
+  requires:
+  - addressing
+  primitives:
+  - type: build_protocol_layer
+    selector: $all_routers
     layer: ospf
     config:
       area: '0.0.0.0'
     clone_underlying: true
-- name: control_plane
-  requires: []
-  primitives:
   - type: build_protocol_layer
-    selector: $all_nodes
-    layer: bgp
+    selector: $all_routers
+    layer: bfd
     config:
-      peer_type: ibgp
-      protocol_type: bgp
-    clone_underlying: false
-  - type: mesh_nodes
-    selector: $bgp_nodes
-    mesh_type: full
-    hub_selector: null
-    spoke_selector: null
-    naming_strategy: null
-- name: policies
-  requires: []
+      min_tx_ms: 100
+      min_rx_ms: 100
+      detect_mult: 3
+
+- name: bgp_safety
+  requires:
+  - routing
   primitives:
-  - type: build_prefix_list
-    selector: $all_nodes
-    prefix_list_name: PL-LOOPBACKS
-    entries:
-    - prefix: '10.255.0.0/24'
-      action: permit
-      le: 32
-      ge: null
-  - type: build_community_list
-    selector: $all_nodes
-    community_list_name: CL-EVPN
-    entries:
-    - community: '65001:1000'
-      action: permit
-  - type: build_routing_policy
-    selector: $all_nodes
-    policy_name: RP-UNDERLAY-EXPORT
-    statements:
-    - name: PERMIT-LOOPBACKS
-      action: permit
-      match_prefix_list: PL-LOOPBACKS
-      match_community_list: null
-      match_as_path: null
-      set_local_preference: null
-      set_metric: null
-      set_as_path_prepend: null
-      set_community: null
-      next_hop: null
-- name: overlays
-  requires: []
+  # BGP safety filters on DMZ router — block bogons and RFC1918
+  - type: generate_safe_bgp_filters
+    selector: $dmz
+    prefix_list_name: BOGON-FILTER-V4
+    policy_name: DMZ-INBOUND
+    block_rfc1918: true
+    permit_default: false
+
+- name: encryption
+  requires:
+  - bgp_safety
   primitives:
-  - type: build_vxlan
-    selector: $leaves
-    vni_base: 10000
-    mcast_group_base: '239.1.1.1'
-  - type: build_evpn
-    selector: $leaves
-    route_distinguisher_base: auto
-    route_target_base: '65001:10000'
+  # MACsec on trading links — wire-speed L2 encryption
+  - type: build_protocol_layer
+    selector: $trading
+    layer: macsec
+    config:
+      cipher: gcm_aes_256
+      confidentiality: must-encrypt
+      include_sci: true
+      replay_protection: true
+      replay_window: 64
+
+- name: zone_security
+  requires:
+  - encryption
+  primitives:
+  # DMZ → Trading: deny all (PCI-DSS requirement)
+  - build_zone_policy:
+      name: "dmz-to-trading"
+      select:
+        role: core
+      from_zone: dmz
+      to_zone: trading
+      default_action: deny
+      rules: []
+
+  # Management → All: SSH only
+  - build_zone_policy:
+      name: "mgmt-to-all"
+      select:
+        role: core
+      from_zone: management
+      to_zone: trading
+      default_action: deny
+      rules:
+        - name: allow-ssh
+          action: permit
+          protocol: tcp
+          destination_port: 22
+          source_prefixes: ["10.99.0.0/24"]
+          destination_prefixes: ["0.0.0.0/0"]
+          stateful: true
+          log: true
+        - name: allow-icmp-diag
+          action: permit
+          protocol: icmp
+          log: true
+
+- name: aaa
+  requires:
+  - zone_security
+  primitives:
+  # TACACS+ for device admin — command auth + accounting
+  - type: build_protocol_layer
+    selector: $all_routers
+    layer: tacacs
+    config:
+      servers: ["10.99.0.1", "10.99.0.2"]
+      fallback_local: true
+      authorization: true
+      accounting: true
+      single_connection: true
+  # RADIUS for 802.1X on trading floor
+  - type: build_protocol_layer
+    selector: $trading
+    layer: radius
+    config:
+      servers: ["10.99.0.50", "10.99.0.51"]
+      use_accounting: true
+  # 802.1X on trading floor ports
+  - type: build_protocol_layer
+    selector: $trading
+    layer: dot1x
+    config:
+      mode: single
+      reauth_period_s: 1800
+      mac_bypass: false
+      guest_vlan: null
+
+- name: compliance_services
+  requires:
+  - aaa
+  primitives:
+  # NTP with authentication (PCI-DSS 10.4)
+  - type: build_protocol_layer
+    selector: $all_routers
+    layer: ntp
+    config:
+      servers: ["10.99.0.10", "10.99.0.11"]
+      authentication: true
+      source_interface: loopback0
+  # Syslog over TLS to SIEM (PCI-DSS 10.5)
+  - type: build_protocol_layer
+    selector: $all_routers
+    layer: syslog
+    config:
+      servers: ["10.99.0.20"]
+      facility: local7
+      severity: informational
+      transport: tcp
+      use_tls: true
+  # SNMP v3 only — no v2c permitted
+  - type: build_protocol_layer
+    selector: $all_routers
+    layer: snmp
+    config:
+      version: "3"
+      v3_auth_protocol: sha
+      v3_priv_protocol: aes256
+      v3_security_level: authPriv
+      trap_targets: ["10.99.0.30"]
+      source_interface: loopback0
+  # NetFlow/IPFIX for audit trail (PCI-DSS 10.2)
+  - type: build_protocol_layer
+    selector: $core
+    layer: netflow
+    config:
+      format: ipfix
+      collectors: ["10.99.0.40"]
+      collector_port: 4739
+      sampling_rate: 1
+      active_timeout_s: 60
+
+- name: secrets
+  requires:
+  - compliance_services
+  primitives:
+  - type: inject_secrets
+    selector: $all_routers
+    secrets:
+      tacacs_key: ${TACACS_KEY}
+      radius_secret: ${RADIUS_SECRET}
+      macsec_cak: ${MACSEC_CAK}
+      macsec_ckn: ${MACSEC_CKN}
+      ntp_auth_key: ${NTP_AUTH_KEY}
+      snmp_auth_pass: ${SNMP_AUTH_PASS}
+      snmp_priv_pass: ${SNMP_PRIV_PASS}
+
 assertions:
-- name: loopback-prefix-check
+# --- Topology assertions ---
+- name: core-connected
   severity: error
-  select: $all_nodes
+  select: $all_routers
   check:
-    type: field_in_cidr
-    field: router_id
-    cidr: '10.255.0.0/24'
-  help: null
-rules: {}
+    type: is_connected
+  help: Network is partitioned — a router is isolated.
+
+- name: dmz-reaches-core
+  severity: error
+  select: $dmz
+  check:
+    type: reachability
+    target_selector: $core
+  help: DMZ cannot reach core routers.
+
+- name: trading-reaches-core
+  severity: error
+  select: $trading
+  check:
+    type: reachability
+    target_selector: $core
+  help: Trading switches cannot reach core routers.
+
+# --- Security assertions ---
+- name: zone-policy-dmz-trading
+  severity: error
+  select: $core
+  check:
+    type: zone_policy_exists
+    from_zone: dmz
+    to_zone: trading
+  help: Missing zone policy blocking DMZ→trading — PCI-DSS violation.
+
+# --- Compliance assertions ---
+- name: ntp-compliance
+  severity: error
+  select: $all_routers
+  check:
+    type: use_rule
+    name: ntp-configured
+  help: Router is missing NTP — PCI-DSS 10.4 requires synchronised clocks.
+
+- name: syslog-compliance
+  severity: error
+  select: $all_routers
+  check:
+    type: use_rule
+    name: syslog-configured
+  help: Router is missing syslog — PCI-DSS 10.5 requires centralised logging.
+
+- name: all-have-hostname
+  severity: error
+  select: $all_routers
+  check:
+    type: field_exists
+    field: hostname
+  help: A router is missing its hostname field.
+
+- name: inventory-schema
+  severity: error
+  select: $all_routers
+  check:
+    type: match_schema
+    schema:
+      type: object
+      required:
+      - hostname
+      - serial_number
+      - firmware_version
+      - site
+      properties:
+        hostname:
+          type: string
+          minLength: 1
+        serial_number:
+          type: string
+          pattern: "^[A-Z0-9]{9,14}$"
+        firmware_version:
+          type: string
+        site:
+          type: string
+          enum: [london-primary, london-dr, new-york]
+  help: Router is missing required inventory fields — SOX audit trail requirement.
+
+- name: hostnames-unique-per-site
+  severity: error
+  select: $all_routers
+  check:
+    type: unique_per_group
+    field: hostname
+    group_by: site
+  help: Duplicate hostname within the same site.
+
+rules:
+  ntp-configured: has(node.ntp_servers) and size(node.ntp_servers) >= 2
+  syslog-configured: has(node.syslog_server) and node.syslog_server != ''
+
 groups:
-  spines: nodes[role=='spine']
-  leaves: nodes[role=='leaf']
-  all_nodes: nodes[true]
-  bgp_nodes: nodes[layer=='bgp']
-blast_radius: []
-transforms: []
+  core: nodes[role=='core']
+  dmz: nodes[role=='dmz']
+  trading: nodes[role=='trading']
+  management: nodes[role=='management']
+  core_and_dmz: $core | $dmz
+  core_and_trading: $core | $trading
+  core_and_mgmt: $core | $management
+  all_routers: $core | $dmz | $trading | $management
+  core_links: edges[tier=='core']
+  dmz_links: edges[tier=='dmz']
+  trading_links: edges[tier=='trading']
+
+blast_radius:
+- name: strict-deletion-limit
+  select: null
+  check:
+    type: max_deletions
+    count: 1
+- name: strict-change-cap
+  select: null
+  check:
+    type: max_percentage_changed
+    value: 5.0
+
+transforms:
+- name: junos-interface-rewrite
+  when: device_os == 'junos'
+  rules:
+  - match_expr: stanza.kind == 'interface'
+    apply:
+      name: "'xe-0/0/' + string(stanza.fields.abstract_index)"
+
 hardware_library:
   chassis: []
   linecards: []
-
-```
-
-### evpn-vxlan-mapping.yaml
-
-```yaml
-# examples/evpn-vxlan-mapping.yaml
-#
-# Multi-vendor DeviceIR mapping for the EVPN-VXLAN fabric.
-# Demonstrates how the same topology data generates vendor-specific CLI stanzas.
-
-rules:
-  # 1. Leaf Configuration
-  - selector: "nodes[role=='leaf']"
-    rules:
-      - stanza:
-          kind: "interface"
-          fields:
-            name: "Loopback0" # Template handles vendor-specific mapping if needed
-            address: "{{ router_id }}/32"
-            description: "Router-ID / VTEP source"
-
-      - stanza:
-          kind: "bgp_neighbor"
-          fields:
-            local_as: "{{ bgp_as }}"
-            peer_ip: "{{ peer_ip }}"
-            remote_as: "{{ remote_as }}"
-            description: "iBGP EVPN Peer"
-            export_policy: "RP-UNDERLAY-EXPORT"
-
-  # 2. Spine Configuration
-  - selector: "nodes[role=='spine']"
-    rules:
-      - stanza:
-          kind: "interface"
-          fields:
-            name: "Loopback0"
-            address: "{{ router_id }}/32"
-            description: "Router-ID"
-
-      - stanza:
-          kind: "ospf_neighbor"
-          fields:
-            interface: "{{ interface }}"
-            area: "0.0.0.0"
-            network_type: "point-to-point"
-
-  # 3. Global Policy Application (Prefix-Lists)
-  - selector: "nodes[true]"
-    rules:
-      - stanza:
-          kind: "prefix_list"
-          key: "PL-LOOPBACKS"
-          fields:
-            entries:
-              - prefix: "10.255.0.0/24"
-                action: "permit"
-                le: 32
-
-```
-
-### multi-protocol-site.yaml
-
-```yaml
-version: 1
-imports:
-- '../protocols/ospfv3.yaml'
-- '../protocols/bfd.yaml'
-- '../protocols/vrrp.yaml'
-layers:
-- name: physical
-  requires: []
-  primitives:
-  - type: mesh_nodes
-    selector: $all_nodes
-    mesh_type: full
-    hub_selector: null
-    spoke_selector: null
-    naming_strategy: null
-  - type: provision_ips
-    selector: $all_links
-    pool: '10.0.0.0/24'
-    subnet_size: 30
-    ipv6_pool: null
-    ipv6_subnet_size: null
-    strategy: dense
-    pool_size: null
-    vrf: null
-assertions: []
-rules: {}
-groups:
-  spines: nodes[role=='spine']
-  all_links: edges[src>=0]
-  all_nodes: nodes[true]
-blast_radius: []
-transforms: []
-hardware_library:
-  chassis: []
-  linecards: []
-
-```
-
-### three-site-mesh-mapping.yaml
-
-```yaml
-# examples/three-site-mesh-mapping.yaml
-#
-# Companion mapping for three-site-mesh.yaml.
-# Produces a BGP config file for site-a-r1 demonstrating end-to-end pipeline output.
-#
-# The mapping targets all_nodes and emits a bgp stanza grouped under "site-a-r1".
-# Using kind: "bgp" ensures the rendered output contains BGP keywords.
-#
-# The default fallback template renders: kind={{ kind }} key={{ key }}
-# So each matched node produces a line: "kind=bgp key="
-#
-# Note: the `node` field is used by generate_configs to group output by device.
-# It is not passed to the stanza template renderer.
-
-rules:
-  - selector: "all_nodes"
-    stanza:
-      kind: "bgp"
-      fields:
-        node: "site-a-r1"
-        local_asn: "65001"
-        description: "site-a full-mesh BGP session"
-
-```
-
-### three-site-mesh.yaml
-
-```yaml
-# examples/three-site-mesh.yaml
-#
-# Three-site BGP mesh — canonical reference blueprint for [ank_pydantic](../ank_pydantic) consumers.
-#
-# This blueprint demonstrates the complete netcfg primitive pipeline:
-#
-#   Stage 1 — MeshNodes: creates full-mesh point-to-point links within each site.
-#              Each site's routers are fully meshed independently (intra-site only).
-#              A full mesh of N nodes produces N*(N-1)/2 edges.
-#
-#   Stage 2 — ProvisionIps: assigns /30 subnets to each P2P link.
-#              Each site has its own /24 address pool — IPs are scoped per-site.
-#              ProvisionIps MUST run after MeshNodes (edges must exist first).
-#              Writes src_ip, dst_ip, subnet to each endpoint node's data.
-#
-#   Stage 3 — BuildProtocolLayer: clones each physical node into a BGP overlay layer.
-#              The BGP node inherits its parent's IP data (src_ip, dst_ip).
-#              BuildProtocolLayer MUST run after ProvisionIps to inherit IP addresses.
-#
-# Address plan:
-#   Site A: 10.1.0.0/24 — routers site-a-r1..r4
-#   Site B: 10.2.0.0/24 — routers site-b-r1..r4
-#   Site C: 10.3.0.0/24 — routers site-c-r1..r4
-#
-# Each /24 provides 64 /30 subnets — more than enough for 6 links per site.
-
-version: 1
-layers:
-  # Stage 1: Create full mesh of P2P links within each site.
-  # Selector "nodes[site=...]" matches nodes whose data_json contains {"site": "..."}.
-  # 4 nodes per site → 4*(4-1)/2 = 6 edges per site → 18 edges total.
-  - name: input
-    primitives:
-      - type: mesh_nodes
-        selector: "nodes[site='a']"
-        mesh_type: full
-        
-
-      - type: mesh_nodes
-        selector: "nodes[site='b']"
-        mesh_type: full
-        
-
-      - type: mesh_nodes
-        selector: "nodes[site='c']"
-        mesh_type: full
-        
-
-  # Stage 2: Assign /30 P2P addresses from per-site pools.
-  # ProvisionIps runs AFTER MeshNodes — edges must exist before IPs can be assigned.
-  # Each /30 uses .1 (src_ip) and .2 (dst_ip) host addresses.
-  # "edges[src>=0]" selects all edges in the physical layer.
-  - name: input
-    primitives:
-      - type: provision_ips
-        selector: "edges[src>=0]"
-        pool: "10.1.0.0/24"
-        subnet_size: 30
-        strategy: dense
-
-  # Stage 3: Build BGP overlay — one BGP node per physical node.
-  # BuildProtocolLayer MUST run after ProvisionIps to inherit src_ip/dst_ip.
-  # The BGP node's data_json is deep-merged from its physical parent, so
-  # the BGP node carries the same IP data that ProvisionIps wrote.
-  - name: input
-    primitives:
-      - type: build_protocol_layer
-        selector: "nodes[true]"
-        layer: bgp
-        config:
-          protocol_type: bgp
-          asn_base: "65000"
-
-```
-
-### validate-test-blueprint.yaml
-
-```yaml
-version: 1
-layers:
-  - name: physical
-    primitives:
-      - type: mesh_nodes
-        selector: "nodes[hostname != '']"
-        mesh_type: "full"
-        edge_properties: {}
-      - type: provision_ips
-        selector: "edges[true]"
-        pool: "10.0.0.0/16"
-        strategy: "dense"
 
 ```
 
@@ -1206,32 +2577,31 @@ Deterministic, auditable, CI/CD-friendly Rust CLI for compiling declarative YAML
 
 ---
 
-## Current Milestone: v2.1 Protocol Library & Security Policy DSL
+## Current Milestone: v3.0 Policy Verification, QoS & IPv6
 
-**Goal:** Deliver a standard library of importable protocol fragments covering the full simulator protocol set, LaTeX DSL formatting for technical reports, and a first-class security policy DSL with named groups, security zones, zone-based policy, NAT, and assertions.
+**Goal:** Complete the security policy verification engine, add interface-level zone membership, introduce a full QoS policy DSL (classification, marking, queuing, policing, shaping), and add IPv6 support (NAT64, NPTv6, IPv6 IPAM pool provisioning).
 
 **Target features:**
-- Protocol Library — importable YAML fragments for all simulator protocols (OSPF, BGP, IS-IS, LACP, LLDP, ARP, STP, GRE, VXLAN, BGP-EVPN + existing BFD/VRRPv3/RIP/LDP/RSVP-TE)
-- LaTeX DSL Formatter — `listings`-based syntax highlighting for blueprint YAML in the tech report
-- Named Groups — `groups:` section in Blueprint, `$group_name` selectors, `tag_nodes` primitive
-- Security Zones — `kind: security_zone` group type, zone membership from group resolution
-- Zone Policy DSL — `build_zone_policy` primitive with address/service objects, permit/deny rules
-- NAT Policy — `build_nat_policy` primitive for source/destination NAT
-- Policy Assertions — verifiable security invariants on zone membership and zone policy
+- `SecurityModel` IR as the stable contract between DSL and renderers
+- Interface-level zone membership (zones assigned per-interface, not per-device)
+- Policy verification assertions: `no_shadowed_rules`, `zone_pairs_covered`, `zone_policy_denies/permits`
+- Full QoS policy DSL: `build_qos_policy` with traffic classes, DSCP/CoS marking, queuing/scheduling, policing, and shaping
+- QoS vendor templates across all 7 vendors
+- IPv6 IPAM pool provisioning (`provision_ips` with IPv6 prefixes)
+- NAT64 (stateful IPv6-to-IPv4 translation) in `build_nat_policy`
+- NPTv6 (Network Prefix Translation for IPv6) in `build_nat_policy`
 
 ---
 
-## Current State (v1.2 Front & Back Ends — shipped)
+## Previous State (v2.2 shipped 2026-03-09)
 
-The front and back ends of the compiler are fully functional end-to-end:
-- **** (The Rendering Engine): Vendor-specific config synthesis via MiniJinja template loading and `data_json` injection.
-- **** (The CLI Application): Core `netcfg plan` and `netcfg generate` commands orchestrating the full pipeline and writing `.cfg` artifacts.
-- **** (Rich Terminal Diagnostics): `miette`-powered source-snippet error reporting for blueprint validation and IP pool exhaustion.
-
-**Known tech debt (v1.3):**
-- Path dependency on `[ank_nte](../ank_nte)` prevents standalone crate publication
-- Benchmarks for large topologies (10,000+ nodes) are missing
-- `edge_properties` in `mesh_nodes` remains deferred
+The compiler delivers a complete security policy DSL with full vendor rendering:
+- **Protocol Library:** 16 importable YAML fragments with all 7 vendor templates rendering new stanza kinds
+- **Named Groups & Security Zones:** `groups:` section with `$group_name` expansion, `tag_nodes`, typed group variants (`kind: security_zone`), zone auto-tagging across all executor paths
+- **Zone Policy DSL:** `objects:` section for reusable address/service objects, `build_zone_policy` with permit/deny rules, implicit deny-all, stateful inspection; rendered across all 7 vendors
+- **NAT Policy:** `build_nat_policy` with SNAT (interface/pool) and DNAT (port-forward), rendered across all 7 vendors
+- **Policy Assertions:** `ZoneMembership` and `ZonePolicyExists` check types
+- **~22,000 LOC Rust** across netcfg-core and netcfg crates
 
 ---
 
@@ -1247,29 +2617,35 @@ Single-binary network compiler: design, transform, and generate configs from YAM
 
 ---
 
-## # Active (v2.1)
+## # Active (v3.0)
 
-- [ ] Remaining protocol fragments: OSPF, BGP, IS-IS, LACP, LLDP, ARP, STP, GRE, VXLAN, BGP-EVPN (PROTO-01–10)
-- [ ] LaTeX DSL formatter for tech report (DOC-01)
-- [ ] Named groups `groups:` section + `$name` selectors (GROUP-01–02)
-- [ ] `tag_nodes` primitive for group membership tagging (GROUP-03)
-- [ ] Nested groups with parent inheritance (GROUP-04)
-- [ ] Security zone group type `kind: security_zone` (ZONE-01–02)
-- [ ] `build_zone_policy` primitive with address/service objects (POLICY-01–04)
-- [ ] `build_nat_policy` primitive for source/destination NAT (NAT-01–02)
-- [ ] Policy assertions for security invariants (ASSERT-01–02)
+- `SecurityModel` IR as stable renderer contract
+- Interface-level zone membership
+- Policy verification assertions (`no_shadowed_rules`, `zone_pairs_covered`, `zone_policy_denies/permits`)
+- Full QoS policy DSL (`build_qos_policy`) with vendor templates for all 7 vendors
+- IPv6 IPAM pool provisioning (`provision_ips` with IPv6 prefixes)
+- NAT64 and NPTv6 in `build_nat_policy`
 
 ---
 
-## # Deferred (v2.0+)
+## # Validated (v2.2)
 
-- IPv6 pool support (IPAM-V2-03)
+- ✓ Vendor template rendering for `zone_policy_rule` and `nat_rule` stanzas — v2.2
+- ✓ `apply_zone_tags()` in all CLI direct-shadow paths — v2.2
+- ✓ Stateful inspection for zone policy — v2.2
+
+---
+
+## # Deferred
+
 - Interface name derivation in `mesh_nodes` (MESH-V2-02)
 - LSP server (`nte-lsp`) integration (LSP-01)
+- GUI/web editor for group and zone declarations
+- Formal zone policy verification via Batfish integration
 
 ---
 
-## # Validated (v1.0 - v1.2)
+## # Validated (v1.0 - v2.1)
 
 - ✓ Mapping DSL to populate stanza-based `DeviceIR` models
 - ✓ Native template rendering via MiniJinja
@@ -1283,6 +2659,14 @@ Single-binary network compiler: design, transform, and generate configs from YAM
 - ✓ `mesh_nodes` implemented
 - ✓ CLI `plan` and `generate`
 - ✓ `miette` terminal diagnostics
+- ✓ Protocol fragment library (16 protocols) — v2.1
+- ✓ NetcfgDSL LaTeX syntax highlighting — v2.1
+- ✓ Named groups with `$group_name` expansion — v2.1
+- ✓ `tag_nodes` primitive — v2.1
+- ✓ Security zones (`kind: security_zone`) — v2.1
+- ✓ `build_zone_policy` with objects and permit/deny — v2.1
+- ✓ `build_nat_policy` with SNAT/DNAT — v2.1
+- ✓ Zone membership and policy existence assertions — v2.1
 
 ---
 
@@ -1295,6 +2679,12 @@ Single-binary network compiler: design, transform, and generate configs from YAM
 | Clap 4 `Args` wrapper struct (`ConfigCommand`) containing `Subcommand` enum | Matches Clap 4 nested subcommand pattern, consistent with `BlueprintCommand` | ✓ Good |
 | `RenderEngine::render_node` per-node API | Clean separation between transformation and configuration generation | ✓ Good |
 | `miette` for diagnostic reporting | Provides out-of-the-box snippet and span highlighting for YAML errors | ✓ Good |
+| Groups as first-class Blueprint section | Zone declarations are group variants — no separate primitive required | ✓ Good |
+| GroupSpec untagged enum | Selector(String) shorthand + Full{} for backward compat | ✓ Good |
+| Zone auto-tagging before primitives | Metadata stamped in runner before primitive loop — primitives query via selectors | ✓ Good |
+| NAT separate from zone policy | Distinct stanza kinds mirror vendor evaluation order (NAT → security policy) | ✓ Good |
+| Objects section for reuse | Named address/service objects resolved to concrete values before stanza emission | ✓ Good |
+| Protocol library YAML-only | No Rust changes needed — `build_protocol_layer` is already protocol-agnostic | ✓ Good |
 
 ---
 
@@ -1304,6 +2694,4 @@ Single-binary network compiler: design, transform, and generate configs from YAM
 - British English in all documentation
 - GSD workflow for phase-based planning
 
-*Last updated: 2026-03-06 — Milestone v2.1 started*
-
----
+*Last updated: 2026-03-09 — v3.0 milestone started*

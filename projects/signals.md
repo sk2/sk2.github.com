@@ -34,6 +34,7 @@ Automated signal census system that transforms raw radio spectrum data into clas
 
 ## Technical Reports
 
+- [Download User Manual: spectra-usermanual.pdf](/assets/docs/signals-spectra-usermanual.pdf)
 - [Download Technical Report: spectra-techreport.pdf](/assets/docs/signals-spectra-techreport.pdf)
 
 ---
@@ -128,6 +129,4 @@ Transform raw radio spectrum data into an actionable "Signal Census" through aut
 
 ## Current Status
 
-** 2026-03-04 — Completed  Audio Content Intelligence
-
----
+** 2026-03-10 — Completed  (Multi-Node IQ Sync).

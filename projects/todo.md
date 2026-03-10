@@ -1,6 +1,5 @@
 ---
 layout: default
-section: projects
 ---
 
 # Rust TUI GTD Todo (OmniFocus-inspired)
@@ -132,5 +131,3 @@ Process an inbox full of captures into correctly-organized next actions (project
 ## Current Status
 
 2026-02-25 - Completed 13-01-PLAN.md
-
----

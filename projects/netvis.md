@@ -6,7 +6,7 @@ section: network-automation
 # Network Visualization Engine
 
 <div class="badges-row">
-  <span class="status-badge status-active">Recently Updated</span>
+  <span class="status-badge status-active">Last Active: 2026-02-24</span>
   <span class="stack-badge">Rust</span> <span class="stack-badge">Python</span> <span class="stack-badge">TypeScript</span>
 </div>
 
@@ -58,8 +58,7 @@ block-beta
 
 ## Technical Reports
 
-- [Download Research Paper: paper.pdf](/assets/docs/netvis-paper.pdf)
-- [Download Technical Report: techreport.pdf](/assets/docs/netvis-techreport.pdf)
+- [Download User Manual: netvis-usermanual.pdf](/assets/docs/netvis-netvis-usermanual.pdf)
 
 ---
 
@@ -336,26 +335,6 @@ render:
 #    - width: 800 (smaller for email clients)
 #    - compression: high
 #    - background: white
-
-```
-
-### production-view.yaml
-
-```yaml
-name: "Production Infrastructure"
-show:
-  tags: [production]
-hide:
-  types: [hub]
-  tags: [decommissioned]
-
-```
-
-### routers-only.yaml
-
-```yaml
-show:
-  types: [router, firewall]
 
 ```
 
@@ -689,6 +668,678 @@ if __name__ == "__main__":
 
 ```
 
+### netbox_integration.py
+
+```python
+#!/usr/bin/env python3
+"""Example: Structuring NetBox-style data for NetVis visualization.
+
+This example demonstrates the PATTERN for using NetVis with data from
+Network Management Systems (NMS) like NetBox, Infrahub, or Nautobot.
+
+NOTE: Direct API integration is intentionally not included in NetVis.
+You should:
+1. Query your NMS using its Python client (pynetbox, infrahub-sdk, etc.)
+2. Transform the data into the format shown below
+3. Pass it to NetVis for visualization
+
+This separation of concerns keeps NetVis focused and avoids dependencies
+on specific NMS versions, authentication schemes, and API changes.
+
+Example workflow in your script:
+    # 1. Query your NMS yourself
+    # (e.g., get devices and connections for a site)
+    devices = query_devices_from_nms(...)
+    links = query_links_from_nms(...)
+
+    # 2. Transform to NetVis format (as shown in mock_topology below)
+    topo = transform_nms_to_netvis(devices, links)
+
+    # 3. Render
+    topo.render_to_file('topology.svg')
+"""
+
+import netvis
+
+
+def mock_topology() -> netvis.Topology:
+    """Create a mock topology demonstrating NMS data patterns.
+
+    This simulates data you would get from an NMS query, showing:
+    - How to preserve NMS metadata in attrs
+    - Common device attributes (status, serial, platform, rack, IP)
+    - Cable/connection attributes (type, status, length)
+
+    In your real script, replace this with data from your NMS query.
+    """
+    return netvis.Topology.from_dict(
+        {
+            "nodes": [
+                {
+                    "id": "dc1-spine-01",
+                    "type": "switch",
+                    "label": "DC1 Spine 01",
+                    # Preserve NMS metadata in attrs for downstream use
+                    # (e.g., click handlers, tooltips, reports)
+                    "attrs": {
+                        "netbox_id": 101,
+                        "status": "active",
+                        "serial": "ABC123",
+                        "platform": "arista-eos",
+                        "rack": "R01",
+                        "primary_ip": "10.0.0.1/32",
+                    },
+                },
+                {
+                    "id": "dc1-spine-02",
+                    "type": "switch",
+                    "label": "DC1 Spine 02",
+                    "attrs": {
+                        "netbox_id": 102,
+                        "status": "active",
+                        "serial": "ABC124",
+                        "platform": "arista-eos",
+                        "rack": "R01",
+                        "primary_ip": "10.0.0.2/32",
+                    },
+                },
+                {
+                    "id": "dc1-leaf-01",
+                    "type": "switch",
+                    "label": "DC1 Leaf 01",
+                    "attrs": {
+                        "netbox_id": 201,
+                        "status": "active",
+                        "serial": "DEF456",
+                        "platform": "arista-eos",
+                        "rack": "R02",
+                    },
+                },
+                {
+                    "id": "dc1-leaf-02",
+                    "type": "switch",
+                    "label": "DC1 Leaf 02",
+                    "attrs": {
+                        "netbox_id": 202,
+                        "status": "active",
+                        "serial": "DEF457",
+                        "platform": "arista-eos",
+                        "rack": "R02",
+                    },
+                },
+                {
+                    "id": "dc1-srv-01",
+                    "type": "server",
+                    "label": "Web Server 01",
+                    "attrs": {
+                        "netbox_id": 301,
+                        "status": "active",
+                        "tenant": "web-team",
+                        "platform": "linux",
+                    },
+                },
+                {
+                    "id": "dc1-srv-02",
+                    "type": "server",
+                    "label": "Web Server 02",
+                    "attrs": {
+                        "netbox_id": 302,
+                        "status": "active",
+                        "tenant": "web-team",
+                        "platform": "linux",
+                    },
+                },
+                {
+                    "id": "dc1-fw-01",
+                    "type": "firewall",
+                    "label": "Firewall",
+                    "attrs": {
+                        "netbox_id": 401,
+                        "status": "active",
+                        "platform": "panos",
+                    },
+                },
+            ],
+            "edges": [
+                {
+                    "source": "dc1-leaf-01",
+                    "target": "dc1-spine-01",
+                    "from_interface": "Eth1/49",
+                    "to_interface": "Eth1/1",
+                    # Preserve cable metadata from NetBox
+                    "attrs": {
+                        "netbox_cable_id": 1001,
+                        "cable_type": "smf",
+                        "cable_status": "connected",
+                        "cable_length": 10,
+                        "cable_length_unit": "m",
+                    },
+                },
+                {
+                    "source": "dc1-leaf-01",
+                    "target": "dc1-spine-02",
+                    "from_interface": "Eth1/50",
+                    "to_interface": "Eth1/1",
+                    "attrs": {
+                        "netbox_cable_id": 1002,
+                        "cable_type": "smf",
+                        "cable_status": "connected",
+                    },
+                },
+                {
+                    "source": "dc1-leaf-02",
+                    "target": "dc1-spine-01",
+                    "from_interface": "Eth1/49",
+                    "to_interface": "Eth1/2",
+                    "attrs": {
+                        "netbox_cable_id": 1003,
+                        "cable_type": "smf",
+                        "cable_status": "connected",
+                    },
+                },
+                {
+                    "source": "dc1-leaf-02",
+                    "target": "dc1-spine-02",
+                    "from_interface": "Eth1/50",
+                    "to_interface": "Eth1/2",
+                    "attrs": {
+                        "netbox_cable_id": 1004,
+                        "cable_type": "smf",
+                        "cable_status": "connected",
+                    },
+                },
+                {
+                    "source": "dc1-srv-01",
+                    "target": "dc1-leaf-01",
+                    "from_interface": "eno1",
+                    "to_interface": "Eth1/1",
+                    "attrs": {
+                        "netbox_cable_id": 2001,
+                        "cable_type": "cat6a",
+                        "cable_status": "connected",
+                    },
+                },
+                {
+                    "source": "dc1-srv-02",
+                    "target": "dc1-leaf-02",
+                    "from_interface": "eno1",
+                    "to_interface": "Eth1/1",
+                    "attrs": {
+                        "netbox_cable_id": 2002,
+                        "cable_type": "cat6a",
+                        "cable_status": "connected",
+                    },
+                },
+                {
+                    "source": "dc1-fw-01",
+                    "target": "dc1-spine-01",
+                    "from_interface": "eth0",
+                    "to_interface": "Eth1/48",
+                    "attrs": {
+                        "netbox_cable_id": 3001,
+                        "cable_type": "smf",
+                        "cable_status": "connected",
+                    },
+                },
+            ],
+        }
+    )
+
+
+def main():
+    """Demonstrate the pattern for NMS integration."""
+    print("NetVis + NMS Integration Pattern")
+    print("=" * 40)
+    print()
+    print("This example shows how to structure data from NetBox/Infrahub/Nautobot")
+    print("for visualization with NetVis.")
+    print()
+    print("In your script, you would:")
+    print("  1. Query your NMS using its Python client")
+    print("  2. Transform results to the format shown in mock_topology()")
+    print("  3. Pass to NetVis for rendering")
+    print()
+
+    # Create topology from mock data (simulating NMS query results)
+    topo = mock_topology()
+
+    print(f"Topology: {topo.node_count()} nodes, {topo.edge_count()} edges")
+
+    # Render with hierarchical layout (good for datacenter topologies)
+    topo.render_to_file(
+        "netbox-topology.svg", layout="hierarchical", width=1400, height=900
+    )
+    print("Saved: netbox-topology.svg")
+
+    # Also render as PNG for documentation
+    topo.render_to_file("netbox-topology.png", layout="hierarchical", scale=2.0)
+    print("Saved: netbox-topology.png")
+
+
+if __name__ == "__main__":
+    main()
+
+```
+
+### README.md
+
+```markdown
+# Sample Topologies
+
+This directory contains copy/paste-friendly topology examples in both JSON and YAML formats, plus the `netvis` CLI binary that renders them to SVG.
+
+## Getting Started
+
+**New to NetVis?** Start with the progressive JSON tutorial series:
+
+1. **[01-minimal.json](01-minimal.json)** - Absolute minimal 3-node example
+2. **[02-basic-features.json](02-basic-features.json)** - Node types, edge labels, and attributes
+3. **[03-aws-vpc.json](03-aws-vpc.json)** - Production AWS VPC architecture
+4. **[04-kubernetes-cluster.json](04-kubernetes-cluster.json)** - K8s cluster with control plane
+5. **[05-microservices.json](05-microservices.json)** - E-commerce microservices architecture
+
+**Real-world scenario examples:**
+
+- **[06-cdn-topology.json](06-cdn-topology.json)** - Global CDN with edge locations and cache hierarchy
+- **[07-office-network.json](07-office-network.json)** - Corporate office with WiFi, VoIP, and IoT segments
+- **[08-hybrid-cloud.json](08-hybrid-cloud.json)** - Hybrid cloud with on-premises and AWS integration
+
+**Legacy examples:**
+
+- **[tiny-network.json](tiny-network.json)** - Simple 5-node star topology
+- **[medium-network.json](medium-network.json)** - ~50-node campus network
+- **[datacenter-spine-leaf.json](datacenter-spine-leaf.json)** - Spine-leaf datacenter topology
+
+## 🎯 Feature Showcases (YAML)
+
+**Production-scale examples demonstrating specific NetVis capabilities:**
+
+### Multi-Layer Clustering
+**[showcase-multilayer-clustering.yaml](showcase-multilayer-clustering.yaml)** - 50+ node datacenter with 4 hierarchical layers
+
+- Core spine switches (tier 1)
+- Distribution aggregation switches (tier 2)
+- Access top-of-rack switches (tier 3)
+- Server/storage/database workloads (tier 4)
+- 3 distinct pods with natural clustering patterns
+- Cross-pod traffic demonstrating inter-cluster communication
+
+```bash
+# Render with Louvain clustering algorithm
+cargo run --bin netvis -- \
+  --input examples/topologies/showcase-multilayer-clustering.yaml \
+  --output target/showcase-multilayer-clustering.svg \
+  --width 2000 --height 1600 \
+  --cluster --algorithm louvain --granularity medium \
+  --verbose
+```
+
+### Edge Bundling
+**[showcase-edge-bundling.yaml](showcase-edge-bundling.yaml)** - 40+ node global service mesh with dense connectivity
+
+- Hierarchical hub-and-spoke topology
+- 5 regional hubs, 15 edge locations, 12 service endpoints
+- Many-to-many connections creating visual complexity
+- Perfect demonstration of edge bundling reducing clutter
+- Cross-region replication and data flows
+
+```bash
+# Render with hierarchical edge bundling
+cargo run --bin netvis -- \
+  --input examples/topologies/showcase-edge-bundling.yaml \
+  --output target/showcase-edge-bundling.svg \
+  --width 2200 --height 1600 \
+  --verbose
+```
+
+### Geographic Layout
+**[showcase-geographic.yaml](showcase-geographic.yaml)** - 21-city global WAN with real-world coordinates
+
+- Major cities across 6 continents
+- Position hints matching real geographic locations
+- Undersea fiber optic cables (trans-Atlantic, trans-Pacific)
+- Regional terrestrial networks
+- Actual cable names and latency measurements
+
+```bash
+# Render with geographic positioning
+cargo run --bin netvis -- \
+  --input examples/topologies/showcase-geographic.yaml \
+  --output target/showcase-geographic.svg \
+  --width 2400 --height 1200 \
+  --verbose
+```
+
+### Radial Layout
+**[showcase-radial-layout.yaml](showcase-radial-layout.yaml)** - 85-node radial topology with 5 concentric rings
+
+- Perfect radial symmetry from central controller
+- 4 regional coordinators (cardinal directions)
+- 8 zone controllers, 24 edge nodes, 48 services
+- Demonstrates natural hub-and-spoke patterns
+- Ideal for service distribution architectures
+
+```bash
+# Render with radial layout
+cargo run --bin netvis -- \
+  --input examples/topologies/showcase-radial-layout.yaml \
+  --output target/showcase-radial-layout.svg \
+  --width 2000 --height 2000 \
+  --verbose
+```
+
+### Hierarchical Layout
+**[showcase-hierarchical-layout.yaml](showcase-hierarchical-layout.yaml)** - 80-node enterprise org chart
+
+- 5-level strict hierarchy (CEO → VP → Director → Manager → Team)
+- Enterprise organizational structure
+- Engineering, Operations, and Sales divisions
+- Cross-functional collaboration edges
+- Perfect tree structure demonstration
+
+```bash
+# Render with hierarchical layout
+cargo run --bin netvis -- \
+  --input examples/topologies/showcase-hierarchical-layout.yaml \
+  --output target/showcase-hierarchical-layout.svg \
+  --width 2200 --height 1800 \
+  --verbose
+```
+
+### Constraints System
+**[showcase-constraints.yaml](showcase-constraints.yaml)** - Constraint system demonstration
+
+- **Region constraints** - Security zones (DMZ, internal, database, management)
+- **Alignment constraints** - Horizontally aligned load balancers, vertically aligned cache tiers
+- **Proximity constraints** - Latency-sensitive services grouped together
+- **Keep-apart constraints** - HA DNS servers with minimum separation
+
+```bash
+# Render with constraints applied
+cargo run --bin netvis -- \
+  --input examples/topologies/showcase-constraints.yaml \
+  --output target/showcase-constraints.svg \
+  --width 2000 --height 1400 \
+  --verbose
+```
+
+### Mixed-Algorithm Layouts
+**[mixed-layout-wan-dc.yaml](mixed-layout-wan-dc.yaml)** - WAN backbone + datacenter with composite layout
+
+- WAN backbone using force-directed layout for organic positioning
+- Datacenter groups using hierarchical layout for spine-leaf structure
+- Demonstrates per-group algorithm assignment via `layout:` field
+- 20 nodes across 3 groups showing composition benefits
+
+**[mixed-layout-campus.yaml](mixed-layout-campus.yaml)** - Campus network with nested hierarchy
+
+- Building root using radial layout (building-centric view)
+- Floor groups using hierarchical layout (closet distribution)
+- Shows nested group structure with mixed algorithms
+- 17 nodes demonstrating hierarchical composition
+
+```bash
+# Note: Full CLI integration for composite layout is in progress
+# These examples demonstrate the YAML schema and topology structure
+# for mixed-algorithm layouts. Rendering requires CompositeLayout
+# implementation to be wired into the binary crate.
+
+# Planned usage (once CLI integration complete):
+# cargo run --bin netvis -- \
+#   --input examples/topologies/mixed-layout-wan-dc.yaml \
+#   --output target/mixed-layout-wan-dc.svg \
+#   --layout composite \
+#   --width 2000 --height 1400
+```
+
+## 🌍 Regional Geographic Networks
+
+Detailed regional topologies with real Internet Exchanges and connectivity:
+
+### European Network
+**[regional-europe.yaml](regional-europe.yaml)** - 20 European IXPs and major fiber rings
+
+- Tier 1: DE-CIX Frankfurt, LINX London, AMS-IX Amsterdam
+- Regional hubs across 15+ countries
+- Nordic ring, Western Europe ring, Eastern Europe connections
+- Real IX traffic statistics and peering data
+
+```bash
+cargo run --bin netvis -- \
+  --input examples/topologies/regional-europe.yaml \
+  --output target/regional-europe.svg \
+  --width 1400 --height 1000
+```
+
+### Asian Network
+**[regional-asia.yaml](regional-asia.yaml)** - 22 Asian cities with undersea cable systems
+
+- Major hubs: Tokyo, Singapore, Hong Kong, Sydney, Mumbai
+- Southeast Asia ring, Indian subcontinent, Australia/Oceania
+- Real undersea cables (APG, SEA-ME-WE-5, Southern Cross, i2i)
+- Cable capacities and latency measurements
+
+```bash
+cargo run --bin netvis -- \
+  --input examples/topologies/regional-asia.yaml \
+  --output target/regional-asia.svg \
+  --width 1600 --height 1000
+```
+
+### North American Network
+**[regional-north-america.yaml](regional-north-america.yaml)** - US, Canada, Mexico interconnection
+
+- Tier 1 US hubs with Equinix IXPs
+- Canadian transcontinental network
+- US-Canada and US-Mexico border crossings
+- East coast, central, and west coast backbone routes
+
+```bash
+cargo run --bin netvis -- \
+  --input examples/topologies/regional-north-america.yaml \
+  --output target/regional-north-america.svg \
+  --width 1200 --height 800
+```
+
+## Schema Reference
+
+See [docs/topology-format.md](../../docs/topology-format.md) for the complete topology file format reference, including:
+
+- Full YAML/JSON schema with all fields documented
+- Annotated examples you can copy and modify
+- Node types reference table
+- Tips and best practices
+
+## Quick Start - Render JSON Examples
+
+All commands write an SVG file and print the output path. NetVis accepts both JSON and YAML formats.
+
+**Minimal example (3 nodes):**
+
+```bash
+cargo run --bin netvis -- \
+  --input examples/topologies/01-minimal.json \
+  --output target/01-minimal.svg
+```
+
+**AWS VPC architecture:**
+
+```bash
+cargo run --bin netvis -- \
+  --input examples/topologies/03-aws-vpc.json \
+  --output target/aws-vpc.svg \
+  --width 1400 --height 1000
+```
+
+**Kubernetes cluster:**
+
+```bash
+cargo run --bin netvis -- \
+  --input examples/topologies/04-kubernetes-cluster.json \
+  --output target/k8s-cluster.svg \
+  --width 1600 --height 1200
+```
+
+**Microservices architecture:**
+
+```bash
+cargo run --bin netvis -- \
+  --input examples/topologies/05-microservices.json \
+  --output target/microservices.svg \
+  --width 1600 --height 1400
+```
+
+**Office network with VoIP and IoT:**
+
+```bash
+cargo run --bin netvis -- \
+  --input examples/topologies/07-office-network.json \
+  --output target/office-network.svg \
+  --width 1800 --height 1200
+```
+
+**Hybrid cloud architecture:**
+
+```bash
+cargo run --bin netvis -- \
+  --input examples/topologies/08-hybrid-cloud.json \
+  --output target/hybrid-cloud.svg \
+  --width 2000 --height 1400
+```
+
+**Render all JSON examples at once:**
+
+```bash
+cargo run --bin netvis -- \
+  --input "examples/topologies/*.json" \
+  --output target/json-examples/
+```
+
+Help / supported flags:
+
+```bash
+cargo run --bin netvis -- --help
+```
+
+## YAML Examples
+
+Basic:
+
+```bash
+cargo run --bin netvis -- \
+  --input examples/topologies/basic.yaml \
+  --output target/basic.svg
+```
+
+Multi-layer (using a wide-area layout preset):
+
+```bash
+cargo run --bin netvis -- \
+  --input examples/topologies/multi-layer.yaml \
+  --output target/multi-layer.svg \
+  --preset wan
+```
+
+Datacenter (preset + explicit size):
+
+```bash
+cargo run --bin netvis -- \
+  --input examples/topologies/datacenter.yaml \
+  --output target/datacenter.svg \
+  --preset datacenter \
+  --width 1400 \
+  --height 900
+```
+
+### Feature Showcase YAML Examples
+
+These examples demonstrate specific NetVis features and layout algorithms:
+
+**Layout algorithms:**
+```bash
+cargo run --bin netvis -- --input examples/topologies/hierarchical-showcase.yaml --output target/hierarchical.svg
+cargo run --bin netvis -- --input examples/topologies/force-directed-showcase.yaml --output target/force-directed.svg
+cargo run --bin netvis -- --input examples/topologies/radial-layout-showcase.yaml --output target/radial.svg
+```
+
+**Edge bundling:**
+```bash
+cargo run --bin netvis -- --input examples/topologies/edge-bundling-showcase.yaml --output target/edge-bundling.svg
+cargo run --bin netvis -- --input examples/topologies/hierarchical-bundling-showcase.yaml --output target/hierarchical-bundling.svg
+```
+
+**Clustering and community detection:**
+```bash
+cargo run --bin netvis -- --input examples/topologies/clustering-showcase.yaml --output target/clustering.svg \
+  --cluster --algorithm louvain --granularity medium --verbose
+```
+
+**Visual effects:**
+```bash
+cargo run --bin netvis -- --input examples/topologies/effects-showcase.yaml --output target/effects.svg
+cargo run --bin netvis -- --input examples/topologies/theme-showcase.yaml --output target/themes.svg
+```
+
+**Constraints and positioning:**
+```bash
+cargo run --bin netvis -- --input examples/topologies/constraint-showcase.yaml --output target/constraints.svg
+cargo run --bin netvis -- --input examples/topologies/geographic-wan-showcase.yaml --output target/geographic-wan.svg
+```
+
+**Metrics and attributes:**
+```bash
+cargo run --bin netvis -- --input examples/topologies/metrics-showcase.yaml --output target/metrics.svg
+cargo run --bin netvis -- --input examples/topologies/interface-showcase.yaml --output target/interfaces.svg
+```
+
+### Real-World YAML Examples
+
+Production-scale network topologies:
+
+```bash
+cargo run --bin netvis -- --input examples/topologies/datacenter-large.yaml --output target/datacenter-large.svg
+cargo run --bin netvis -- --input examples/topologies/enterprise-campus.yaml --output target/enterprise-campus.svg
+cargo run --bin netvis -- --input examples/topologies/isp-backbone.yaml --output target/isp-backbone.svg
+cargo run --bin netvis -- --input examples/topologies/wan-multi-site-large.yaml --output target/wan-multi-site.svg
+```
+
+### Gallery Examples
+
+Polished examples for screenshots and documentation:
+
+```bash
+# Render all gallery examples
+cargo run --bin netvis -- --input "examples/topologies/gallery-*.yaml" --output target/gallery/
+```
+
+### Render Everything
+
+```bash
+# Render all YAML examples
+cargo run --bin netvis -- --input "examples/topologies/*.yaml" --output target/yaml-examples/
+
+# Render all JSON and YAML examples
+cargo run --bin netvis -- --input "examples/topologies/*.{json,yaml}" --output target/all-examples/
+```
+
+## Convert SVG To PNG/PDF (Optional)
+
+These conversions are external to `netvis`.
+
+PNG via librsvg (`rsvg-convert`):
+
+```bash
+rsvg-convert -w 2000 -o target/datacenter.png target/datacenter.svg
+```
+
+PDF via Inkscape:
+
+```bash
+inkscape target/datacenter.svg --export-type=pdf --export-filename=target/datacenter.pdf
+```
+
+```
+
 ---
 
 ## Visuals
@@ -773,31 +1424,25 @@ Transform network topologies into clear, information-dense visualizations using 
 
 ---
 
-## Current Milestone: v1.9 Scale & Export
+## Current Milestone: v1.8 - Temporal & Interaction
 
-**Goal:** Push NetVis to enterprise scale (10K-node topologies in <10s) and add single-file interactive HTML export for offline sharing — while closing v1.8 tech debt.
+**Goal:** Transform NetVis into a complete network visualization toolkit by adding temporal analysis, interactive filtering, live monitoring, and diagram annotation capabilities.
 
 **Target features:**
-- Barnes-Hut O(n log n) force repulsion + Rayon parallelization for 10K-node layouts
-- Single-file interactive HTML export (embedded WASM + topology, no external deps)
-- Timeline + filter composition gap closure (`netvis timeline --filter-*`)
-- `TrafficDirection::Bidirectional` rendering
+- **Time-series topology evolution** - Scrub timeline to visualize network changes over time, highlight diffs between snapshots, export evolution animations, query "when did X appear"
+- **Interactive query/filtering** - Show/hide by device type, protocol layer, tag/group; path/connectivity queries without re-layout
+- **Live traffic flow animation** - CSS-animated pulses for NOC displays, presentations, simulation playback, and performance/utilization visualization
+- **Annotation & markup** - Text notes, visual callouts (circles/arrows/boxes), persistent storage, layered annotations with show/hide
 
----
+**Strategic vision:** v1.8 establishes the **interaction foundation** (temporal + filtering + annotation) that v1.9 will build upon with 3D visualization, tiled exports, and collaboration features.
 
-## Previous: v1.8 Temporal & Interaction (Shipped 2026-03-01)
-
-All 4 phases complete (76–79), 10/10 requirements satisfied.
-
-**What shipped:**
-- `netvis timeline` — multi-snapshot SVG export with frozen layout + incremental diff SVGs
-- `netvis query` — temporal entity history (when did X appear/change/disappear)
-- `--filter-type/tag/group/layer` — show/hide topology subsets without re-layout; BFS path highlighting; reusable YAML filter rules
-- `src/traffic/` — CSS dot-particle animation from YAML utilization data; NOC color mapping (green/amber/red); play/pause/speed controls in standalone SVG
-- `src/annotation/` — text notes + circle/box/arrow callouts anchored to nodes; named layers with `--hide-layers`/`--show-layers`; SVG injection post-processing
+**Out of scope:**
+- Real-time data source integration (no live SNMP/NetFlow collection) - users provide traffic data
+- Multi-user collaborative editing - single-user annotation only (multi-user deferred to v1.9)
+- Web-based topology editor - visualization-focused, topology authoring stays CLI/code-based
+- Advanced 3D rendering - current isometric projection only (full 3D rotation/perspective deferred to v1.9)
 
 **Previous Milestones:**
-- v1.8 - Temporal & Interaction 
 - v1.7 - Interactive Browser Editor 
 - v1.4 - Production Scale & Real-World Integration 
 - v1.3 - Embed Readiness & API Stability 
@@ -847,25 +1492,20 @@ v1.3 Embed Readiness & API Stability (shipped 2026-02-16):
 - ✓ CI governance: overlap gate, API drift detection, SemVer checks, versioned JSON Schemas — v1.3
 - ✓ Rust SVG quality analyzer with label distance metrics (zero Python dependency) — v1.3
 
-v1.8 Temporal & Interaction (shipped 2026-03-01):
-- ✓ `netvis timeline` CLI — snapshot discovery, frozen-layout rendering, incremental diff SVGs — v1.8
-- ✓ `netvis query` CLI — temporal entity history (appear/change/disappear) with JSON/table output — v1.8
-- ✓ Topology filter pipeline — show/hide by type/tag/group/layer; BFS path highlighting; reusable YAML filter files — v1.8
-- ✓ CSS traffic animation — dot particles from YAML utilization data; NOC color mapping; play/pause/speed overlay; standalone SVG — v1.8
-- ✓ Annotation markup — text notes + circle/box/arrow callouts; named layers with show/hide; anchor-relative positions survive re-layout — v1.8
-
 ---
 
 ## # Active
 
-v1.9 Scale & Export:
-- [ ] Barnes-Hut spatial indexing for O(n log n) force repulsion (replaces O(n²) all-pairs)
-- [ ] Rayon-based parallelization of force simulation inner loop
-- [ ] 10K-node layout completes in <10 seconds (validated by benchmark)
-- [ ] `netvis export-html` — single-file interactive HTML with embedded WASM + topology data
-- [ ] HTML export supports pan/zoom, search, hover tooltips with no external dependencies
-- [ ] `netvis timeline` accepts `--filter-type/tag/group/layer` flags
-- [ ] `TrafficDirection::Bidirectional` renders dot particles in both directions
+v1.0.0 Release preparation:
+- [ ] CLI user guide documentation
+- [ ] Topology file format reference (JSON/YAML schema)
+- [ ] Configuration file reference (NetVisConfig schema)
+- [ ] Basic rustdoc on public APIs (module-level + core types)
+- [ ] GitHub Actions CI pipeline (test, clippy, fmt, docs)
+- [ ] Criterion benchmarks for layouts and rendering
+- [ ] Package metadata for crates.io
+- [ ] CHANGELOG.md for v1.0.0
+- [ ] Security audit and preparation
 
 ---
 
@@ -950,11 +1590,6 @@ Will eventually integrate with a "Topology Visualisation and Querying" tool (Rea
 | WCAG 3:1 automated enforcement (v1.2) | Accessibility compliance without manual tuning | ✓ Good (auto-adjust + numeric warnings) |
 | Text-anchor alignment for labels (v1.2) | Break geometric constraint (close + side + no truncation) | ✓ Good (10px spacing vs 150-233px) |
 | Perpendicular-FIRST offset strategy (v1.2) | Keep edge labels visually connected while avoiding strokes | ✓ Good (zero overlap warnings) |
-| SVG post-processing for traffic/annotation overlays (v1.8) | Inject traffic animation and annotation layers as final SVG transforms — no Scene contamination | ✓ Good (clean pipeline: render → traffic → annotations → write) |
-| `TopologyYaml.annotations: Option<Vec<Annotation>>` flat list (v1.8) | Avoid double-nesting (`annotations.annotations:`) in YAML; wrap to `AnnotationConfig` at call site | ✓ Good (natural YAML authoring) |
-| WASM-gated file I/O for timeline module (v1.8) | `#![cfg(not(target_arch = "wasm32"))]` on timeline/query — keeps file-system ops off WASM target | ✓ Good (consistent with adapters pattern) |
-| Byte-level ISO 8601 date scanning (v1.8) | Avoids regex dependency for snapshot discovery; ISO dates are lexicographically sortable | ✓ Good (zero new deps for timeline) |
-| Timeline dispatch before run() (v1.8) | `netvis timeline` dispatches from main() before filter pipeline — consequence: timeline cannot accept  filter flags | ⚠ Revisit (tech debt: timeline+filter composition gap) |
 
 ---
 
@@ -975,12 +1610,10 @@ This project is part of a seven-tool network automation ecosystem. netvis provid
 - [Ecosystem Architecture Overview](../../automationarch/README.md) — full ecosystem design, data flow, workflows
 - [Ecosystem Critical Review](../../automationarch/REVIEW.md) — maturity assessment, integration gaps, strategic priorities
 
-*Last updated: 2026-03-01 after v1.9 milestone start*
+*Last updated: 2026-02-22 after v1.7 milestone initialization*
 
 ---
 
 ## Current Status
 
-2026-03-07 — Plan 89-01 complete, Z-axis isometric projection verified.
-
----
+2026-02-24 — Completed 73-03-PLAN.md (Share URL encode/decode WASM API + tests)

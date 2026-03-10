@@ -1,6 +1,6 @@
 ---
 layout: default
-section: projects
+section: photography
 ---
 
 # EclipsePhoto
@@ -102,5 +102,3 @@ Reliability and autonomy for a "one-shot" astronomical event. The system handles
 | Auto-Resume | Critical for power failure recovery during a timed event. | — Pending |
 
 *Last updated: 2026-02-13 after initialization*
-
----

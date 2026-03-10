@@ -1,6 +1,5 @@
 ---
 layout: default
-section: projects
 ---
 
 # Wave (StillState & FlowState)
@@ -237,5 +236,3 @@ From v1.1 milestone audit:
 ## Current Status
 
 2026-02-21 — Completed 26-01 FlowState Hotkeys + Quick Actions
-
----

@@ -6,7 +6,7 @@ section: signal-processing
 # Radio Streaming Server
 
 <div class="badges-row">
-  <span class="status-badge status-active">Recently Updated</span>
+  <span class="status-badge status-active">Last Active: 2026-02-22</span>
   <span class="stack-badge">Rust</span>
 </div>
 
@@ -125,5 +125,3 @@ The ability to reliably and efficiently stream high-fidelity IQ data from multip
 ## Current Status
 
 2026-02-22 - Completed 05-04-PLAN.md
-
----

@@ -67,16 +67,6 @@ Detailed technical documentation for selected projects. Each report covers archi
   </div>
 
   <div class="project-card">
-    <h3 class="card-title"><a href="/projects/automationarch">Network Automation Ecosystem</a></h3>
-    <div class="badges-row card-badges"><span class="stack-badge">Python</span><span class="stack-badge">Rust</span></div>
-    <p class="card-description">A multi-layered ecosystem for automated network infrastructure management.</p>
-    <div class="doc-links">
-      <a href="/assets/docs/automationarch-ecosystem-techreport.pdf" class="doc-link">Tech Report</a>
-      <a href="/assets/docs/automationarch-ecosystem-usermanual.pdf" class="doc-link">Manual</a>
-    </div>
-  </div>
-
-  <div class="project-card">
     <h3 class="card-title"><a href="/projects/ank-workbench">Network Automation Workbench</a></h3>
     <div class="badges-row card-badges"><span class="stack-badge">Rust</span></div>
     <p class="card-description">Interactive TUI for visualizing and planning network transformations.</p>

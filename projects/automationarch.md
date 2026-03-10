@@ -15,7 +15,6 @@ section: network-automation
 ## Contents
 
 - [Concept](#concept)
-- [Technical Reports](#technical-reports)
 - [Code Samples](#code-samples)
 - [Current Status](#current-status)
 
@@ -24,13 +23,6 @@ section: network-automation
 This project defines the architecture of the Network Automation Ecosystem: how its tools connect, what data flows between them, and where the system is headed.
 
 The ecosystem comprises nine repositories that form a composable toolchain. Each tool handles one concern -- topology generation, simulation, configuration parsing, visualization, analysis -- and communicates through pinned contract schemas (RFC-01, RFC-02). The architecture document formalizes these relationships and identifies future sub-projects.
-
----
-
-## Technical Reports
-
-- [Download Technical Report: ecosystem-techreport.pdf](/assets/docs/automationarch-ecosystem-techreport.pdf)
-- [Download User Manual: ecosystem-usermanual.pdf](/assets/docs/automationarch-ecosystem-usermanual.pdf)
 
 ---
 

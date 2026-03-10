@@ -6,6 +6,9 @@
     "build": "eleventy",
     "serve": "eleventy --serve"
   },
+  "overrides": {
+    "liquidjs": ">=10.25.0"
+  },
   "devDependencies": {
     "@11ty/eleventy": "^3.0.0"
   }

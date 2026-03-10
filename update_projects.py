@@ -336,7 +336,10 @@ def generate_detailed_page(project: ProjectInfo) -> str:
             if img_lines: project.sections["Visuals"] = "\n\n".join(img_lines[:8])
             elif "Visuals" in project.sections: del project.sections["Visuals"]
     
-    if project.docs:
+    # Projects with commercially sensitive documentation
+    SKIP_DOCS = {"automationarch"}
+
+    if project.docs and project.slug not in SKIP_DOCS:
         doc_lines = []
         doc_dir = Path("assets/docs")
         doc_dir.mkdir(parents=True, exist_ok=True)

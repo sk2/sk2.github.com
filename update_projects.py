@@ -347,29 +347,37 @@ def generate_detailed_page(project: ProjectInfo) -> str:
         project.sections["Technical Reports"] = "\n".join(doc_lines)
     
     dest_path = Path("projects") / f"{project.slug}.md"
+    existing_sections: Dict[str, str] = {}
     if dest_path.exists():
         existing_sections = extract_sections(dest_path.read_text())
         for sec in STABLE_SECTIONS:
             if sec in existing_sections and sec not in ALWAYS_UPDATE_SECTIONS and sec not in PROJECT_CONTENT_OVERRIDES.get(project.slug, {}):
                 project.sections[sec] = existing_sections[sec]
 
+    # When a page already exists, only allow known sections or sections already
+    # present on the page.  This prevents PROJECT.md extras from re-bloating
+    # pages that were manually trimmed.
+    allowed_sections = set(DETAILED_SECTIONS) | {"Current Status", "Roadmap", "Contents"}
+    if existing_sections:
+        allowed_sections |= set(existing_sections.keys())
+
     body_list, processed_sections = [], set()
     if project.hero_asset:
         body_list.append(f"![Hero Image](/images/{project.hero_asset.name})\n")
-        
+
     for s in ["Concept", "The Insight", "Overview"]:
         if s in project.sections:
             body_list.append(f"## Concept\n\n{linkify_text(clean_text(project.sections[s]), project.slug)}")
             processed_sections.add(s)
             break
-            
+
     for s in DETAILED_SECTIONS:
         if s in project.sections and s not in processed_sections:
             body_list.append(f"## {s}\n\n{linkify_text(clean_text(project.sections[s]), project.slug)}")
             processed_sections.add(s)
-            
+
     for s, content in project.sections.items():
-        if s not in processed_sections and s not in ["Current Status", "Roadmap", "Contents"]:
+        if s not in processed_sections and s not in ["Current Status", "Roadmap", "Contents"] and s in allowed_sections:
             body_list.append(f"## {s}\n\n{linkify_text(clean_text(content), project.slug)}")
             
     if project.current_status: body_list.append(f"## Current Status\n\n{clean_text(project.current_status)}")

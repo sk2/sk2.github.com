@@ -129,4 +129,4 @@ Transform raw radio spectrum data into an actionable "Signal Census" through aut
 
 ## Current Status
 
-** 2026-03-10 — Completed  (Multi-Node IQ Sync).
+** 2026-03-10 — Completed  (Distributed BSS).

@@ -14,7 +14,7 @@ Focused on network engineering, autonomous systems, and signal processing.
 
 <ul class="recent-activity-list">
 <li><strong>2026-03-10</strong>: <a href="projects/ank-workbench">Network Automation Workbench</a> — <em>Revalidated  network impairments (running-state validation + tests).</em></li>
-<li><strong>2026-03-10</strong>: <a href="projects/signals">Spectrum Analysis</a> — <em>Completed  (Multi-Node IQ Sync).</em></li>
+<li><strong>2026-03-10</strong>: <a href="projects/signals">Spectrum Analysis</a> — <em>Completed  (Distributed BSS).</em></li>
 <li><strong>2026-03-09</strong>: <a href="projects/matrix-time-series">matrix-profile-rs</a> — <em>Completed 15-01-PLAN.md: MultiStreamingState core + Join distance kernels + Batch Join STOMP</em></li>
 <li><strong>2026-03-09</strong>: <a href="projects/netassure">Network Analysis Engine</a> — <em>executed: GET /analyze/trends endpoint (1 task, 1 file)</em></li>
 <li><strong>2026-03-09</strong>: <a href="projects/rf-signal-analysis">Signal Reflection - KrakenSDR Multi-Beam System</a> — <em>Completed 40-04-PLAN.md</em></li>

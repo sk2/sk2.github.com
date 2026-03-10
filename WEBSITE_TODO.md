@@ -49,4 +49,4 @@ Tracked improvements for flow, readability, navigation, and polish.
 - [x] Set `section:` front matter based on `FM_SECTIONS` category mapping
 - [x] Remove `get_back_links()` function and all back-link generation
 - [x] Add photography/astrophotography to `FM_SECTIONS` mapping
-- [ ] Prevent script from re-bloating trimmed pages (preserve stable sections)
+- [x] Prevent script from re-bloating trimmed pages (preserve stable sections)

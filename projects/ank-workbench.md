@@ -18,7 +18,6 @@ section: network-automation
 - [Technical Reports](#technical-reports)
 - [Features](#features)
 - [Current Status](#current-status)
-- [Current Status](#current-status)
 
 ## Concept
 

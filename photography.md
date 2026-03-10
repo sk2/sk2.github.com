@@ -1,5 +1,6 @@
 ---
 layout: default
+title: Photography & Astrophotography
 ---
 
 # Photography & Astrophotography Ecosystem

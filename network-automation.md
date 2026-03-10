@@ -1,5 +1,6 @@
 ---
 layout: default
+title: Network Automation
 ---
 
 # Network Automation

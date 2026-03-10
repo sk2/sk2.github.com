@@ -1,5 +1,6 @@
 ---
 layout: default
+title: Development Philosophy
 ---
 
 # Development Philosophy

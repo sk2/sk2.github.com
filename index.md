@@ -1,5 +1,6 @@
 ---
 layout: default
+title: Simon Knight — Engineer
 ---
 
 # Simon Knight

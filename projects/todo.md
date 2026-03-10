@@ -1,5 +1,6 @@
 ---
 layout: default
+section: data-analytics
 ---
 
 # Rust TUI GTD Todo (OmniFocus-inspired)

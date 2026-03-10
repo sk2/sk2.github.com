@@ -22,7 +22,6 @@ section: network-automation
 - [Architecture](#architecture)
 - [Roadmap](#roadmap)
 - [Current Status](#current-status)
-- [Roadmap](#roadmap)
 
 ## Concept
 

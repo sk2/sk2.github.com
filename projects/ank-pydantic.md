@@ -19,7 +19,6 @@ section: network-automation
 - [Code Samples](#code-samples)
 - [Usage](#usage)
 - [Visuals](#visuals)
-- [Usage](#usage)
 - [Architecture](#architecture)
 - [Current Status](#current-status)
 

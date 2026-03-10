@@ -138,7 +138,7 @@ DETAILED_SECTIONS = [
 ALWAYS_UPDATE_SECTIONS = {"Technical Reports", "Code Samples", "Visuals", "Current Status", "Roadmap"}
 STABLE_SECTIONS = {"Concept", "Interactive Playground (WASM Mock Demo)", "Architecture", "Features", "Quick Facts", "Usage"}
 
-FM_SECTIONS = {"network": "network-automation", "sdr": "signal-processing", "agents": "agentic-systems", "health": "agentic-systems", "data": "data-analytics", "astrophotography": "photography", "photography": "photography"}
+FM_SECTIONS = {"network": "network-automation", "sdr": "signal-processing", "agents": "agentic-systems", "health": "agentic-systems", "data": "data-analytics", "astrophotography": "photography", "photography": "photography", "wellness": "signal-processing", "experimental": "data-analytics"}
 
 # Generate global slug list for cross-linking
 ALL_SLUGS = set(list(CANONICAL_SLUG.values()) + list(CANONICAL_SLUG.keys()) + list(ECOSYSTEM_MAP.keys()))
@@ -197,7 +197,13 @@ TOC_SECTIONS = {
 
 def generate_toc(content: str) -> str:
     headers = re.findall(r"^##\s+([^#\n]+)\s*$", content, re.MULTILINE)
-    headers = [h.strip() for h in headers if h.strip() in TOC_SECTIONS]
+    seen, unique = set(), []
+    for h in headers:
+        h = h.strip()
+        if h in TOC_SECTIONS and h not in seen:
+            unique.append(h)
+            seen.add(h)
+    headers = unique
     if len(headers) < 3: return ""
     links = [f"- [{h}](#{re.sub(r'-+', '-', re.sub(r'[^a-z0-9-]', '', h.lower().replace(' ', '-')))})" for h in headers]
     return "## Contents\n\n" + "\n".join(links) + "\n\n"
@@ -222,10 +228,10 @@ def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
             for sec, body in PROJECT_CONTENT_OVERRIDES[s_key].items(): sections[sec] = body
     cat = "experimental"
     s = slug.lower()
-    if "photo-tour" in s: cat = "photography"
+    if any(x in s for x in ["photo-tour", "import-asiair"]): cat = "photography"
     elif any(x in s for x in ["watchnoise", "watch-noise", "psytrance"]): cat = "wellness"
     elif any(x in s for x in ["healthypi", "hrv"]): cat = "health"
-    elif any(x in s for x in ["spectra", "rtltcp", "wifi-signal-analysis", "signals", "rf-signal-analysis"]): cat = "sdr"
+    elif any(x in s for x in ["spectra", "rtltcp", "wifi-signal-analysis", "signals", "rf-signal-analysis", "soundarray"]): cat = "sdr"
     elif any(x in s for x in ["astro", "aurora", "eclipse", "satellites"]): cat = "astrophotography"
     elif any(x in s for x in ["agent", "multi-agent", "cycle"]): cat = "agents"
     elif any(x in s for x in ["netvis", "ank", "topogen", "netsim", "autonetkit", "network", "configparsing", "nte", "orchestrator", "automationarch", "netflowsim", "netassure", "cliscrape", "deviceinteraction"]): cat = "network"
@@ -387,7 +393,7 @@ def generate_detailed_page(project: ProjectInfo) -> str:
     return fm + header + generate_toc(final_body) + final_body + "\n"
 
 def generate_projects_index(projects: list[ProjectInfo]) -> str:
-    lines = ["---", "layout: default", "---", "", "# Projects", "", "Focused on network engineering, autonomous systems, and signal processing.", "", "---", ""]
+    lines = ["---", "layout: default", "title: Projects", "---", "", "# Projects", "", "Focused on network engineering, autonomous systems, and signal processing.", "", "---", ""]
     lines.append('<div class="search-container"><input type="text" id="projectSearch" placeholder="Search projects, stack, or descriptions..." onkeyup="filterProjects()"></div>\n')
     valid_dates = [p for p in projects if p.last_activity_date is not None]
     recent = sorted(valid_dates, key=lambda x: x.last_activity_date or datetime.min, reverse=True)[:5]

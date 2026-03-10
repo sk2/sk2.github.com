@@ -1,5 +1,6 @@
 ---
 layout: default
+title: Projects
 ---
 
 # Projects
@@ -14,7 +15,7 @@ Focused on network engineering, autonomous systems, and signal processing.
 
 <ul class="recent-activity-list">
 <li><strong>2026-03-10</strong>: <a href="projects/ank-workbench">Network Automation Workbench</a> — <em>Revalidated  network impairments (running-state validation + tests).</em></li>
-<li><strong>2026-03-10</strong>: <a href="projects/signals">Spectrum Analysis</a> — <em>Drafted v9.0 roadmap; Starting .</em></li>
+<li><strong>2026-03-10</strong>: <a href="projects/signals">Spectrum Analysis</a> — <em>Completed  (Unsupervised Protocol Discovery).</em></li>
 <li><strong>2026-03-09</strong>: <a href="projects/matrix-time-series">matrix-profile-rs</a> — <em>Completed 15-01-PLAN.md: MultiStreamingState core + Join distance kernels + Batch Join STOMP</em></li>
 <li><strong>2026-03-09</strong>: <a href="projects/netassure">Network Analysis Engine</a> — <em>executed: GET /analyze/trends endpoint (1 task, 1 file)</em></li>
 <li><strong>2026-03-09</strong>: <a href="projects/rf-signal-analysis">Signal Reflection - KrakenSDR Multi-Beam System</a> — <em>Completed 40-04-PLAN.md</em></li>
@@ -147,6 +148,12 @@ The workflow follows a linear pipeline: generate or model a topology, run a simu
   <p class="card-description">Distributed multi-beam signal reflection analysis system built on KrakenSDR hardware. A Raspberry Pi handles data acquisition and streams IQ data over UDP; a Mac or Linux workstation runs compute-intensive DSP. All four surveillance channels process in parallel with independent Range-Doppler visualization, per-beam configuration, and real-time performance monitoring.</p>
 </div>
 
+<div class="project-card" data-search="sound array audio processing system using raspberry pi and microphone arrays for spatial sound analysis. captures multi-channel audio from usb/hat arrays (respeaker, matrix), computes time of arrival (toa) for sound localization, and applies beamforming for directional isolation. classifies sources — vehicles (engine sounds), aircraft, wildlife (birds) — and streams processed audio or metadata to a remote desktop for analysis.  soundarray">
+  <h3 class="card-title"><a href="projects/soundarray">Sound Array</a></h3>
+  <div class="badges-row card-badges"><span class="status-badge status-active">Active</span> </div>
+  <p class="card-description">Audio processing system using Raspberry Pi and microphone arrays for spatial sound analysis. Captures multi-channel audio from USB/HAT arrays (ReSpeaker, Matrix), computes Time of Arrival (ToA) for sound localization, and applies beamforming for directional isolation. Classifies sources — vehicles (engine sounds), aircraft, wildlife (birds) — and streams processed audio or metadata to a remote desktop for analysis.</p>
+</div>
+
 <div class="project-card" data-search="spectrum analysis automated signal census system that transforms raw radio spectrum data into classified, searchable signal inventories. combines sdr acquisition, ml classification, and vector search to detect, identify, and catalog signals across monitored bands. python signals">
   <h3 class="card-title"><a href="projects/signals">Spectrum Analysis</a></h3>
   <div class="badges-row card-badges"><span class="status-badge status-active">Recently Updated</span> <span class="stack-badge">Python</span></div>
@@ -223,6 +230,12 @@ The workflow follows a linear pipeline: generate or model a topology, run a simu
 ## Photography
 
 <div class="project-grid">
+<div class="project-card" data-search="asiair import tool python script that automates post-imaging file organization for astrophotography. scans asiair backup locations (udisk/emmc across autorun, preview, plan, and live folders), reads fits headers to extract metadata, and organizes hundreds of frames by target and observation night into a directory structure ready for pixinsight's weighted batch preprocessing (wbpp) workflow.  import-asiair">
+  <h3 class="card-title"><a href="projects/import-asiair">ASIAIR Import Tool</a></h3>
+  <div class="badges-row card-badges"><span class="status-badge status-active">Last Active: 2026-02-11</span> </div>
+  <p class="card-description">Python script that automates post-imaging file organization for astrophotography. Scans ASIAIR backup locations (Udisk/EMMC across Autorun, Preview, Plan, and Live folders), reads FITS headers to extract metadata, and organizes hundreds of frames by target and observation night into a directory structure ready for PixInsight's Weighted Batch Preprocessing (WBPP) workflow.</p>
+</div>
+
 <div class="project-card" data-search="photo tour interactive photography assistant for field use on ios and ipados. provides live camera preview, manual motor control for landscape rigs, and a plugin architecture for composition overlays, exposure ramping, and intelligent triggering. built with swiftui and designed around a real-time control loop — see what the camera sees and act on it fast enough to improve the shot.  photo-tour">
   <h3 class="card-title"><a href="projects/photo-tour">Photo Tour</a></h3>
   <div class="badges-row card-badges"><span class="status-badge status-active">Active</span> </div>
@@ -303,22 +316,10 @@ The workflow follows a linear pipeline: generate or model a topology, run a simu
 ## Experimental
 
 <div class="project-grid">
-<div class="project-card" data-search="asiair import tool python script that automates post-imaging file organization for astrophotography. scans asiair backup locations (udisk/emmc across autorun, preview, plan, and live folders), reads fits headers to extract metadata, and organizes hundreds of frames by target and observation night into a directory structure ready for pixinsight's weighted batch preprocessing (wbpp) workflow.  import-asiair">
-  <h3 class="card-title"><a href="projects/import-asiair">ASIAIR Import Tool</a></h3>
-  <div class="badges-row card-badges"><span class="status-badge status-active">Last Active: 2026-02-11</span> </div>
-  <p class="card-description">Python script that automates post-imaging file organization for astrophotography. Scans ASIAIR backup locations (Udisk/EMMC across Autorun, Preview, Plan, and Live folders), reads FITS headers to extract metadata, and organizes hundreds of frames by target and observation night into a directory structure ready for PixInsight's Weighted Batch Preprocessing (WBPP) workflow.</p>
-</div>
-
 <div class="project-card" data-search="rust tui gtd todo (omnifocus-inspired) keyboard-driven rust tui task manager built around a gtd workflow. stores tasks in a local sqlite database with support for projects, hierarchical tags, and availability-based next-action computation. optimized for rapid inbox processing — single-key field mode for triage, project/tag assignment, and batch operations with sub-second interactions at 10,000+ actions. rust todo">
   <h3 class="card-title"><a href="projects/todo">Rust TUI GTD Todo (OmniFocus-inspired)</a></h3>
   <div class="badges-row card-badges"><span class="status-badge status-active">Recently Updated</span> <span class="stack-badge">Rust</span></div>
   <p class="card-description">Keyboard-driven Rust TUI task manager built around a GTD workflow. Stores tasks in a local SQLite database with support for projects, hierarchical tags, and availability-based next-action computation. Optimized for rapid inbox processing — single-key field mode for triage, project/tag assignment, and batch operations with sub-second interactions at 10,000+ actions.</p>
-</div>
-
-<div class="project-card" data-search="sound array audio processing system using raspberry pi and microphone arrays for spatial sound analysis. captures multi-channel audio from usb/hat arrays (respeaker, matrix), computes time of arrival (toa) for sound localization, and applies beamforming for directional isolation. classifies sources — vehicles (engine sounds), aircraft, wildlife (birds) — and streams processed audio or metadata to a remote desktop for analysis.  soundarray">
-  <h3 class="card-title"><a href="projects/soundarray">Sound Array</a></h3>
-  <div class="badges-row card-badges"><span class="status-badge status-active">Active</span> </div>
-  <p class="card-description">Audio processing system using Raspberry Pi and microphone arrays for spatial sound analysis. Captures multi-channel audio from USB/HAT arrays (ReSpeaker, Matrix), computes Time of Arrival (ToA) for sound localization, and applies beamforming for directional isolation. Classifies sources — vehicles (engine sounds), aircraft, wildlife (birds) — and streams processed audio or metadata to a remote desktop for analysis.</p>
 </div>
 
 </div>

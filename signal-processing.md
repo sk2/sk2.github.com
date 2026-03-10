@@ -1,5 +1,6 @@
 ---
 layout: default
+title: Signal Processing & Radio
 ---
 
 # Signal Processing & Radio

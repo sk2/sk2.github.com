@@ -18,7 +18,6 @@ section: data-analytics
 - [Architecture](#architecture)
 - [Features](#features)
 - [Current Status](#current-status)
-- [Current Status](#current-status)
 
 ## Concept
 

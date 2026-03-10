@@ -129,4 +129,4 @@ Transform raw radio spectrum data into an actionable "Signal Census" through aut
 
 ## Current Status
 
-** 2026-03-10 — Drafted v9.0 roadmap; Starting .
+** 2026-03-10 — Completed  (Unsupervised Protocol Discovery).

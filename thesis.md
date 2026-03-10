@@ -1,5 +1,6 @@
 ---
 layout: default
+title: PhD Thesis
 ---
 
 # PhD Thesis

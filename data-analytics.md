@@ -1,5 +1,6 @@
 ---
 layout: default
+title: Data Analytics & Visualization
 ---
 
 # Data Analytics & Visualization Ecosystem

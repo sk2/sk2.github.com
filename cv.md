@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Curriculum Vitae
+description: Software developer building tools for network automation, intelligent systems, and signal processing. PhD in automated network configuration.
 ---
 
 # Curriculum Vitae

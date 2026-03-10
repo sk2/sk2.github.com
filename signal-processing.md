@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Signal Processing & Radio
+description: SDR spectrum monitoring, spatial audio analysis, and biometric signal processing tools — from RF acquisition through ML classification to real-time visualization.
 ---
 
 # Signal Processing & Radio

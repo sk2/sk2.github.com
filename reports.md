@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Technical Reports
+description: Downloadable technical reports, research papers, and user manuals for network automation, signal processing, and music generation projects.
 ---
 
 # Technical Reports

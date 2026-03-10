@@ -1,6 +1,7 @@
 ---
 layout: default
 title: PhD Thesis
+description: PhD research on automated network configuration — capturing high-level intent and compiling it to device-specific configurations via NETCONF.
 ---
 
 # PhD Thesis

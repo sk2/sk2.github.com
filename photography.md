@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Photography & Astrophotography
+description: Integrated tools for field photography, astrophotography automation, aurora capture, and image processing workflows.
 ---
 
 # Photography & Astrophotography Ecosystem

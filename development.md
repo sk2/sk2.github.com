@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Development Philosophy
+description: Planning-first development approach with structured project directories, type-safe Rust and Python tooling, and deterministic testing.
 ---
 
 # Development Philosophy

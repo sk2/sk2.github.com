@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Data Analytics & Visualization
+description: Tools for geospatial analytics, time-series pattern discovery, and information-dense visualization of large datasets.
 ---
 
 # Data Analytics & Visualization Ecosystem

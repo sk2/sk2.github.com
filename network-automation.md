@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Network Automation
+description: Modular toolchain from whiteboard sketch to validated network configuration. Topology engine, protocol simulator, configuration compiler, and visualization.
 ---
 
 # Network Automation

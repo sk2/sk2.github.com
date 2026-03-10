@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Simon Knight — Engineer
+description: Telecommunications and software engineer building tools for network simulation, graph topology engines, and multi-agent coordination systems.
 ---
 
 # Simon Knight

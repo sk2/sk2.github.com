@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Autonomous Systems
+description: Multi-agent coordination and real-time adaptive control systems with strict isolation boundaries and NATS-based messaging.
 ---
 
 # Autonomous Systems

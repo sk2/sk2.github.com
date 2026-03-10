@@ -1,6 +1,7 @@
 ---
 layout: default
 section: photography
+description: "Autonomous solar eclipse photography controller for Raspberry Pi."
 ---
 
 # EclipsePhoto

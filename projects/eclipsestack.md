@@ -1,6 +1,7 @@
 ---
 layout: default
 section: photography
+description: "Alignment tool for solar eclipse HDR composites. Takes hundreds of RAW frames captured during totality and produces sub-pixel-aligned output ready for HDR…"
 ---
 
 # EclipseStack

@@ -1,6 +1,7 @@
 ---
 layout: default
 section: photography
+description: "Python script that automates post-imaging file organization for astrophotography."
 ---
 
 # ASIAIR Import Tool

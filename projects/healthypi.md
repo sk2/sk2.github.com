@@ -1,6 +1,7 @@
 ---
 layout: default
 section: agentic-systems
+description: "Modular health monitoring ecosystem that translates raw biometric data from HealthyPi hardware (Pi HAT and wearable) into structured metrics for agent-driven…"
 ---
 
 # HealthyPi Ecosystem

@@ -1,6 +1,7 @@
 ---
 layout: default
 section: network-automation
+description: "A Rust library and CLI for network device interaction and automated testing."
 ---
 
 # Device Interaction Framework

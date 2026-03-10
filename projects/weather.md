@@ -1,6 +1,7 @@
 ---
 layout: default
 section: data-analytics
+description: "Data engineering pipeline that fetches, processes, and serves weather model data from the Australian Bureau of Meteorology."
 ---
 
 # Weather (BOM ACCESS Pipeline)

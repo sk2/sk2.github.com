@@ -1,6 +1,7 @@
 ---
 layout: default
 section: signal-processing
+description: "Distributed multi-beam signal reflection analysis system built on KrakenSDR hardware."
 ---
 
 # Signal Reflection - KrakenSDR Multi-Beam System

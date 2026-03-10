@@ -1,6 +1,7 @@
 ---
 layout: default
 section: signal-processing
+description: "Automated signal census system that transforms raw radio spectrum data into classified, searchable signal inventories."
 ---
 
 # Spectrum Analysis
@@ -129,4 +130,4 @@ Transform raw radio spectrum data into an actionable "Signal Census" through aut
 
 ## Current Status
 
-** 2026-03-10 — Completed  (Anomalous Propagation Detection).
+** 2026-03-10 — Completed  (3D Propagation Bounce Visualization).

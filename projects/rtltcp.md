@@ -1,6 +1,7 @@
 ---
 layout: default
 section: signal-processing
+description: "Cross-platform server (targeting Raspberry Pi) that manages multiple SDR devices (RTL-SDR, AirSpy HF+) and streams raw IQ samples over the network using the…"
 ---
 
 # Radio Streaming Server
@@ -15,6 +16,7 @@ section: signal-processing
 ## Contents
 
 - [Concept](#concept)
+- [Technical Reports](#technical-reports)
 - [Features](#features)
 - [Current Status](#current-status)
 
@@ -23,6 +25,12 @@ section: signal-processing
 Cross-platform server (targeting Raspberry Pi) that manages multiple SDR devices (RTL-SDR, AirSpy HF+) and streams raw IQ samples over the network using the `rtl_tcp` protocol. A single binary replaces multiple C-based streaming tools, adding a TUI for live device management, TOML configuration, and safe concurrency across all connected radios.
 
 Existing C implementations (`rtl_tcp`, `hfp_tcp`) are single-threaded and require separate processes per device. This server manages all SDRs through one binary with real-time frequency and gain adjustment from the terminal.
+
+---
+
+## Technical Reports
+
+- [Download Technical Report: rtltcp-techreport.pdf](/assets/docs/rtltcp-rtltcp-techreport.pdf)
 
 ---
 

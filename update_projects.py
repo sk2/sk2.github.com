@@ -189,6 +189,27 @@ def clean_text(text: str) -> str:
     text = re.sub(r"^\s*·\s*\*\*.*?\*\*\s*$", "", text, flags=re.MULTILINE)
     return text.strip()
 
+def extract_description(sections: Dict[str, str], max_len: int = 160) -> str:
+    """Extract a short meta description from the Concept/Overview section."""
+    for key in ["Concept", "The Insight", "Overview"]:
+        if key in sections:
+            text = clean_text(sections[key])
+            text = re.sub(r"!\[.*?\]\(.*?\)", "", text)  # strip images
+            text = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", text)  # links to text
+            text = re.sub(r"\*\*([^*]+)\*\*", r"\1", text)  # bold to plain
+            text = re.sub(r"\*([^*]+)\*", r"\1", text)  # italic to plain
+            text = re.sub(r"\s+", " ", text).strip()
+            sentences = re.split(r"(?<=[.!?])\s+", text)
+            desc = sentences[0] if sentences else ""
+            if len(desc) < 60 and len(sentences) > 1:
+                desc = " ".join(sentences[:2])
+            if len(desc) > max_len:
+                desc = desc[:max_len - 1].rsplit(" ", 1)[0] + "\u2026"
+            # Escape characters that break YAML
+            desc = desc.replace('"', "'")
+            return desc
+    return ""
+
 TOC_SECTIONS = {
     "Concept", "Simulation Output", "Interactive Playground (WASM Mock Demo)",
     "Technical Reports", "Code Samples", "Visuals", "Usage",
@@ -313,7 +334,6 @@ def generate_detailed_page(project: ProjectInfo) -> str:
         
     section = FM_SECTIONS.get(project.category)
     fm_section = f"\nsection: {section}" if section else ""
-    fm = f"---\nlayout: default{fm_section}\n---\n\n"
     stack_html = " ".join([f'<span class="stack-badge">{s}</span>' for s in project.stack])
     header = f"# {project.name}\n\n<div class=\"badges-row\">\n  <span class=\"status-badge status-active\">{project.status_detail}</span>\n  {stack_html}\n</div>\n\n---\n\n"
     
@@ -362,6 +382,12 @@ def generate_detailed_page(project: ProjectInfo) -> str:
         for sec in STABLE_SECTIONS:
             if sec in existing_sections and sec not in ALWAYS_UPDATE_SECTIONS and sec not in PROJECT_CONTENT_OVERRIDES.get(project.slug, {}):
                 project.sections[sec] = existing_sections[sec]
+
+    # Generate frontmatter after stable sections are merged so description
+    # can draw from the preserved Concept text.
+    desc = extract_description(project.sections)
+    fm_desc = f"\ndescription: \"{desc}\"" if desc else ""
+    fm = f"---\nlayout: default{fm_section}{fm_desc}\n---\n\n"
 
     # When a page already exists, only allow known sections or sections already
     # present on the page.  This prevents PROJECT.md extras from re-bloating
@@ -448,6 +474,70 @@ function filterProjects() {
     """)
     return "\n".join(lines)
 
+REPORTS_CATEGORY_MAP = {
+    "network": "Network Engineering",
+    "sdr": "Radio Systems",
+    "wellness": "Sound & Music",
+}
+
+def generate_reports_page(projects: list[ProjectInfo]) -> str:
+    """Generate reports.md from projects that have docs (excluding SKIP_DOCS)."""
+    lines = [
+        "---", "layout: default", "title: Technical Reports",
+        'description: Downloadable technical reports, research papers, and user manuals for network automation, signal processing, and music generation projects.',
+        "---", "",
+        "# Technical Reports", "",
+        "Detailed technical documentation for selected projects. Each report covers architecture, design decisions, and implementation details.",
+        "", "---",
+    ]
+
+    SKIP_DOCS = {"automationarch"}
+    categorized: Dict[str, list] = {}
+    for p in projects:
+        if p.slug in SKIP_DOCS or not p.docs:
+            continue
+        cat_label = REPORTS_CATEGORY_MAP.get(p.category)
+        if not cat_label:
+            continue
+        categorized.setdefault(cat_label, []).append(p)
+
+    # Scan assets/docs/ for all existing PDFs per project slug
+    doc_dir = Path("assets/docs")
+    for section_order in ["Network Engineering", "Radio Systems", "Sound & Music"]:
+        projs = categorized.get(section_order, [])
+        if not projs:
+            continue
+        lines.append(f"\n## {section_order}\n")
+        lines.append('<div class="project-grid">')
+        for p in sorted(projs, key=lambda x: x.name):
+            stack_html = "".join(f'<span class="stack-badge">{s}</span>' for s in p.stack)
+            desc = extract_description(p.sections, 120)
+            # Find all PDFs for this project in assets/docs/
+            doc_links = []
+            if doc_dir.exists():
+                for pdf in sorted(doc_dir.glob(f"{p.slug}*")):
+                    if "techreport" in pdf.name:
+                        doc_links.append(f'      <a href="/assets/docs/{pdf.name}" class="doc-link">Tech Report</a>')
+                    elif "paper" in pdf.name:
+                        doc_links.append(f'      <a href="/assets/docs/{pdf.name}" class="doc-link">Paper</a>')
+                    elif "usermanual" in pdf.name:
+                        doc_links.append(f'      <a href="/assets/docs/{pdf.name}" class="doc-link">Manual</a>')
+            if not doc_links:
+                continue
+            lines.append(f'  <div class="project-card">')
+            lines.append(f'    <h3 class="card-title"><a href="/projects/{p.slug}">{p.name}</a></h3>')
+            lines.append(f'    <div class="badges-row card-badges">{stack_html}</div>')
+            lines.append(f'    <p class="card-description">{desc}</p>')
+            lines.append(f'    <div class="doc-links">')
+            lines.extend(doc_links)
+            lines.append(f'    </div>')
+            lines.append(f'  </div>\n')
+        lines.append('</div>\n')
+        lines.append('---')
+
+    lines.append("\n[← Back to Projects](projects)")
+    return "\n".join(lines)
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--scan-dirs", nargs="+", default=["~/dev"])
@@ -465,6 +555,7 @@ def main():
     projects_dir.mkdir(exist_ok=True)
     for p in projects: (projects_dir / f"{p.slug}.md").write_text(generate_detailed_page(p))
     Path("projects.md").write_text(generate_projects_index(projects))
+    Path("reports.md").write_text(generate_reports_page(projects))
     print("Sync complete.")
 
 if __name__ == "__main__": main()

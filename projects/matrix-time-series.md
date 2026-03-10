@@ -1,6 +1,7 @@
 ---
 layout: default
 section: data-analytics
+description: "Matrix Profile algorithms (STOMP, SCRIMP++, SCAMP) in native Rust for motif discovery and anomaly detection in time series data."
 ---
 
 # matrix-profile-rs

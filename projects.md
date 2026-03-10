@@ -15,7 +15,7 @@ Focused on network engineering, autonomous systems, and signal processing.
 
 <ul class="recent-activity-list">
 <li><strong>2026-03-10</strong>: <a href="projects/ank-workbench">Network Automation Workbench</a> — <em>Revalidated  network impairments (running-state validation + tests).</em></li>
-<li><strong>2026-03-10</strong>: <a href="projects/signals">Spectrum Analysis</a> — <em>Completed  (Anomalous Propagation Detection).</em></li>
+<li><strong>2026-03-10</strong>: <a href="projects/signals">Spectrum Analysis</a> — <em>Completed  (3D Propagation Bounce Visualization).</em></li>
 <li><strong>2026-03-09</strong>: <a href="projects/matrix-time-series">matrix-profile-rs</a> — <em>Completed 15-01-PLAN.md: MultiStreamingState core + Join distance kernels + Batch Join STOMP</em></li>
 <li><strong>2026-03-09</strong>: <a href="projects/netassure">Network Analysis Engine</a> — <em>executed: GET /analyze/trends endpoint (1 task, 1 file)</em></li>
 <li><strong>2026-03-09</strong>: <a href="projects/rf-signal-analysis">Signal Reflection - KrakenSDR Multi-Beam System</a> — <em>Completed 40-04-PLAN.md</em></li>
@@ -299,8 +299,8 @@ The workflow follows a linear pipeline: generate or model a topology, run a simu
 ## Wellness & Sound
 
 <div class="project-grid">
-<div class="project-card" data-search="psytrance generator generative psytrance synthesis engine with real-time tui controls. creates complete tracks driven by a multi-level energy model (macro, meso, micro), with live playback, step editing, and wav export. procedural synthesis generates kick, bass, hihat, and clap patterns; an effects chain (sidechain compression, delay, reverb, hpf, limiter) and humanization (velocity jitter, micro-timing) produce output that sounds like a produced track rather than a sequencer demo. rust psytrance">
-  <h3 class="card-title"><a href="projects/psytrance">Psytrance Generator</a></h3>
+<div class="project-card" data-search="overtone generative psytrance synthesis engine with real-time tui controls. creates complete tracks driven by a multi-level energy model (macro, meso, micro), with live playback, step editing, and wav export. procedural synthesis generates kick, bass, hihat, and clap patterns; an effects chain (sidechain compression, delay, reverb, hpf, limiter) and humanization (velocity jitter, micro-timing) produce output that sounds like a produced track rather than a sequencer demo. rust psytrance">
+  <h3 class="card-title"><a href="projects/psytrance">Overtone</a></h3>
   <div class="badges-row card-badges"><span class="status-badge status-active">Recently Updated</span> <span class="stack-badge">Rust</span></div>
   <p class="card-description">Generative psytrance synthesis engine with real-time TUI controls. Creates complete tracks driven by a multi-level energy model (macro, meso, micro), with live playback, step editing, and WAV export. Procedural synthesis generates kick, bass, hihat, and clap patterns; an effects chain (sidechain compression, delay, reverb, HPF, limiter) and humanization (velocity jitter, micro-timing) produce output that sounds like a produced track rather than a sequencer demo.</p>
 </div>

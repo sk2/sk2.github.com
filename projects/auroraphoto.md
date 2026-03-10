@@ -1,6 +1,7 @@
 ---
 layout: default
 section: photography
+description: "Automated astrophotography system for capturing aurora and night sky imagery."
 ---
 
 # AuroraPhoto

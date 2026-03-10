@@ -1,6 +1,7 @@
 ---
 layout: default
 section: network-automation
+description: "Vendor translation layer that decouples network configuration from vendor-specific syntax."
 ---
 
 # Brownfield Ingestion

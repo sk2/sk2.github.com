@@ -1,9 +1,10 @@
 ---
 layout: default
 section: signal-processing
+description: "Generative psytrance synthesis engine with real-time TUI controls."
 ---
 
-# Psytrance Generator
+# Overtone
 
 <div class="badges-row">
   <span class="status-badge status-active">Recently Updated</span>
@@ -67,7 +68,7 @@ Generative psytrance synthesis engine with real-time TUI controls. Creates compl
 
 ## What This Is
 
-A generative psytrance synthesis engine with real-time TUI controls. Creates complete tracks driven by a multi-level energy model, with live playback, step editing, and WAV export. Currently produces high-quality procedural psytrance but lacks workflow features for capturing ideas and iterating efficiently.
+A generative cross-cultural music engine with real-time TUI controls. Creates complete tracks driven by a multi-level energy model, with live playback, step editing, and WAV export. Spans psytrance, Indian classical, ambient, and beyond — with intelligent tradition blending and 197 planned expansion phases.
 
 ---
 

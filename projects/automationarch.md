@@ -1,6 +1,7 @@
 ---
 layout: default
 section: network-automation
+description: "This project defines the architecture of the Network Automation Ecosystem: how its tools connect, what data flows between them, and where the system is headed."
 ---
 
 # Network Automation Ecosystem - Overall Architecture Definition

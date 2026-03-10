@@ -1,6 +1,7 @@
 ---
 layout: default
 section: signal-processing
+description: "Ambient audio ecosystem spanning Apple Watch and Mac, designed for sleep and deep work."
 ---
 
 # Wave (StillState & FlowState)

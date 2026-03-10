@@ -1,6 +1,7 @@
 ---
 layout: default
 section: network-automation
+description: "Parsing engine for network device CLI output. Transforms semi-structured text (show commands, routing tables, BGP summaries) into structured data (JSON/YAML)…"
 ---
 
 # CLI Parser

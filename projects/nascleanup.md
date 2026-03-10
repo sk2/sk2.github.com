@@ -1,6 +1,7 @@
 ---
 layout: default
 section: data-analytics
+description: "Rust CLI for managing large-scale Synology NAS file systems."
 ---
 
 # NAS Cleanup & Intelligence

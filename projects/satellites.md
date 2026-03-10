@@ -1,6 +1,7 @@
 ---
 layout: default
 section: photography
+description: "Terminal-based satellite tracker that displays real-time positions on a world map, predicts passes over the user's location, and shows transmission frequencies."
 ---
 
 # Satellites

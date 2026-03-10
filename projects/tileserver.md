@@ -1,6 +1,7 @@
 ---
 layout: default
 section: data-analytics
+description: "Dynamic vector tile server for massive geospatial datasets. Serves Mapbox Vector Tiles (MVT) from millions of points with sub-second latency, enabling…"
 ---
 
 # Tileserver Polars (Rust Optimized)

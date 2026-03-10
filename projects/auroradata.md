@@ -1,6 +1,7 @@
 ---
 layout: default
 section: photography
+description: "Decision tool for Australian aurora observers that answers 'should I drive 60 minutes to a dark site tonight?' Combines real-time solar wind data (NOAA SWPC),…"
 ---
 
 # Aurora Advisor

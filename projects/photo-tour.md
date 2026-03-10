@@ -1,6 +1,7 @@
 ---
 layout: default
 section: photography
+description: "Interactive photography assistant for field use on iOS and iPadOS."
 ---
 
 # Photo Tour

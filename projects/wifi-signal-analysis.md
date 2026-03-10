@@ -1,6 +1,7 @@
 ---
 layout: default
 section: signal-processing
+description: "Through-wall human detection and localization using existing Wi-Fi signals as illumination sources."
 ---
 
 # Wi-Fi Signal Reflection (KrakenSDR)

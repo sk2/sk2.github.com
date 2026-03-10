@@ -1,6 +1,7 @@
 ---
 layout: default
 section: data-analytics
+description: "Python CLI that reads directly from the OmniFocus 4 SQLite database on macOS, bypassing AppleScript and Omni Automation layers."
 ---
 
 # OmniFocus DB CLI (omnifocus-db)

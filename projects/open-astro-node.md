@@ -1,6 +1,7 @@
 ---
 layout: default
 section: photography
+description: "Headless, autonomous astrophotography controller for low-power Linux devices (Raspberry Pi, Jetson)."
 ---
 
 # OpenAstro Node

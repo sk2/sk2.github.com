@@ -1,6 +1,7 @@
 ---
 layout: default
 section: network-automation
+description: "Rust-based graph topology engine with Python bindings via PyO3."
 ---
 
 # Network Topology Engine

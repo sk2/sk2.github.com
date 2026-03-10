@@ -1,6 +1,7 @@
 ---
 layout: default
 section: network-automation
+description: "Graph Neural Network (GNN) based network analytics module that extends topology analysis with real-time learning and prediction."
 ---
 
 # Network Analysis Engine

@@ -1,6 +1,7 @@
 ---
 layout: default
 section: photography
+description: "Rust library providing shared astronomical logic, hardware drivers, and protocol implementations for the OpenAstro ecosystem."
 ---
 
 # OpenAstro Core

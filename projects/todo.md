@@ -1,6 +1,7 @@
 ---
 layout: default
 section: data-analytics
+description: "Keyboard-driven Rust TUI task manager built around a GTD workflow."
 ---
 
 # Rust TUI GTD Todo (OmniFocus-inspired)

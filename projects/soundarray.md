@@ -1,6 +1,7 @@
 ---
 layout: default
 section: signal-processing
+description: "Audio processing system using Raspberry Pi and microphone arrays for spatial sound analysis."
 ---
 
 # Sound Array

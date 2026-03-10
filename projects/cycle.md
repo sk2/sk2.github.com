@@ -1,6 +1,7 @@
 ---
 layout: default
 section: agentic-systems
+description: "Native SwiftUI training application for iPad and Apple TV that bridges a Wahoo KICKR Core smart trainer with AI-driven workout logic."
 ---
 
 # Cycle Agent

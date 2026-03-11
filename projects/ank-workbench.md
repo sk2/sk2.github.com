@@ -7,7 +7,7 @@ description: "Orchestration platform that integrates the ANK ecosystem tools —
 # Network Automation Workbench
 
 <div class="badges-row">
-  <span class="status-badge status-active">Recently Updated</span>
+  <span class="status-badge status-active">Active</span>
   <span class="stack-badge">Python</span> <span class="stack-badge">TypeScript</span>
 </div>
 
@@ -499,9 +499,3 @@ This project is part of a seven-tool network automation ecosystem. The workbench
 - [Cross-Project Data Contracts](../../topogen/.planning/ARCHITECTURE.md) — ownership boundaries and format specifications
 
 *Last updated: 2026-02-22 after starting v1.7 milestone*
-
----
-
-## Current Status
-
-2026-03-10 — Revalidated  network impairments (running-state validation + tests).

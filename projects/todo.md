@@ -7,7 +7,7 @@ description: "Keyboard-driven Rust TUI task manager built around a GTD workflow.
 # Rust TUI GTD Todo (OmniFocus-inspired)
 
 <div class="badges-row">
-  <span class="status-badge status-active">Recently Updated</span>
+  <span class="status-badge status-active">Last Active: 2026-02-25</span>
   <span class="stack-badge">Rust</span>
 </div>
 

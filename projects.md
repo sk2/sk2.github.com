@@ -14,10 +14,10 @@ Focused on network engineering, autonomous systems, and signal processing.
 ## Recent Activity
 
 <ul class="recent-activity-list">
-<li><strong>2026-03-10</strong>: <a href="projects/ank-workbench">Network Automation Workbench</a> — <em>Revalidated  network impairments (running-state validation + tests).</em></li>
+<li><strong>2026-03-11</strong>: <a href="projects/netassure">Network Analysis Engine</a> — <em>plan, 2 files)</em></li>
+<li><strong>2026-03-11</strong>: <a href="projects/psytrance">Overtone</a> — <em>Completed  (Ableton MIDI Export Upgrades).</em></li>
 <li><strong>2026-03-10</strong>: <a href="projects/signals">Spectrum Analysis</a> — <em>Completed  (3D Propagation Bounce Visualization).</em></li>
 <li><strong>2026-03-09</strong>: <a href="projects/matrix-time-series">matrix-profile-rs</a> — <em>Completed 15-01-PLAN.md: MultiStreamingState core + Join distance kernels + Batch Join STOMP</em></li>
-<li><strong>2026-03-09</strong>: <a href="projects/netassure">Network Analysis Engine</a> — <em>executed: GET /analyze/trends endpoint (1 task, 1 file)</em></li>
 <li><strong>2026-03-09</strong>: <a href="projects/rf-signal-analysis">Signal Reflection - KrakenSDR Multi-Beam System</a> — <em>Completed 40-04-PLAN.md</em></li>
 </ul>
 
@@ -36,6 +36,12 @@ Focused on network engineering, autonomous systems, and signal processing.
   <h3 class="card-title"><a href="projects/cliscrape">CLI Parser</a></h3>
   <div class="badges-row card-badges"><span class="status-badge status-active">Active</span> <span class="stack-badge">Rust</span></div>
   <p class="card-description">Parsing engine for network device CLI output. Transforms semi-structured text (show commands, routing tables, BGP summaries) into structured data (JSON/YAML) using an optimized Rust state machine. Provides full compatibility with the industry-standard ntc-templates library while offering 10–50x faster execution than Python-based alternatives like TextFSM.</p>
+</div>
+
+<div class="project-card" data-search="configuration generation (autonetkit) a compiler-based framework for automated network provisioning. autonetkit transforms high-level network designs into validated device configurations across heterogeneous hardware and protocol environments. traditional network configuration is manual and vendor-specific. python polars autonetkit">
+  <h3 class="card-title"><a href="projects/autonetkit">Configuration Generation (AutoNetkit)</a></h3>
+  <div class="badges-row card-badges"><span class="status-badge status-active">Recently Updated</span> <span class="stack-badge">Python</span><span class="stack-badge">Polars</span></div>
+  <p class="card-description">A compiler-based framework for automated network provisioning. AutoNetkit transforms high-level network designs into validated device configurations across heterogeneous hardware and protocol environments. Traditional network configuration is manual and vendor-specific.</p>
 </div>
 
 <div class="project-card" data-search="device interaction framework a rust library and cli for network device interaction and automated testing. provides the essential pyats capabilities — testbed management, cli output parsing, and state verification — without the complexity. connects to devices (real, simulated, or mocked), executes commands, parses structured output, and verifies correctness with the type safety of compiled rust. rust deviceinteraction">
@@ -68,7 +74,7 @@ Focused on network engineering, autonomous systems, and signal processing.
 
 the workflow follows a linear pipeline: generate or model a topology, run a simulation against it, visualize the results, and export device configurations. python typescript ank-workbench">
   <h3 class="card-title"><a href="projects/ank-workbench">Network Automation Workbench</a></h3>
-  <div class="badges-row card-badges"><span class="status-badge status-active">Recently Updated</span> <span class="stack-badge">Python</span><span class="stack-badge">TypeScript</span></div>
+  <div class="badges-row card-badges"><span class="status-badge status-active">Active</span> <span class="stack-badge">Python</span><span class="stack-badge">TypeScript</span></div>
   <p class="card-description">Orchestration platform that integrates the ANK ecosystem tools — [Topology Generator](/projects/topogen), [Network Modeling & Configuration Library](/projects/ank-pydantic), [Network Simulator](/projects/netsim), [Network Visualization Engine](/projects/netvis) — into a single web interface. Engineers define topologies, generate configurations, run simulations, and inspect results without switching between CLI tools. ```
 ┌──────────────────────────────────────────────────────────────────┐
 │                  Network Automation Workbench                    │
@@ -318,7 +324,7 @@ The workflow follows a linear pipeline: generate or model a topology, run a simu
 <div class="project-grid">
 <div class="project-card" data-search="rust tui gtd todo (omnifocus-inspired) keyboard-driven rust tui task manager built around a gtd workflow. stores tasks in a local sqlite database with support for projects, hierarchical tags, and availability-based next-action computation. optimized for rapid inbox processing — single-key field mode for triage, project/tag assignment, and batch operations with sub-second interactions at 10,000+ actions. rust todo">
   <h3 class="card-title"><a href="projects/todo">Rust TUI GTD Todo (OmniFocus-inspired)</a></h3>
-  <div class="badges-row card-badges"><span class="status-badge status-active">Recently Updated</span> <span class="stack-badge">Rust</span></div>
+  <div class="badges-row card-badges"><span class="status-badge status-active">Last Active: 2026-02-25</span> <span class="stack-badge">Rust</span></div>
   <p class="card-description">Keyboard-driven Rust TUI task manager built around a GTD workflow. Stores tasks in a local SQLite database with support for projects, hierarchical tags, and availability-based next-action computation. Optimized for rapid inbox processing — single-key field mode for triage, project/tag assignment, and batch operations with sub-second interactions at 10,000+ actions.</p>
 </div>
 

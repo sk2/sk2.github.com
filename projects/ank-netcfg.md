@@ -78,13 +78,11 @@ layers:
     mesh_type: hub_and_spoke
     hub_selector: $borders
     spoke_selector: $transits
-    naming_strategy: cisco_ge
   - type: mesh_nodes
     selector: $border_and_ce
     mesh_type: hub_and_spoke
     hub_selector: $borders
     spoke_selector: $customer_edges
-    naming_strategy: cisco_ge
 - name: addressing
   requires:
   - peering
@@ -576,7 +574,6 @@ layers:
     mesh_type: hub_and_spoke
     hub_selector: $spines
     spoke_selector: $leaves
-    naming_strategy: cisco_ge
 - name: addressing
   requires:
   - fabric
@@ -830,14 +827,12 @@ layers:
   - type: mesh_nodes
     selector: $p_routers
     mesh_type: full
-    naming_strategy: cisco_ge
   # PE routers connect to every P router (hub-and-spoke)
   - type: mesh_nodes
     selector: $pe_and_p
     mesh_type: hub_and_spoke
     hub_selector: $p_routers
     spoke_selector: $pe_routers
-    naming_strategy: cisco_ge
 
 - name: addressing
   requires:
@@ -2574,7 +2569,9 @@ Error reporting uses `miette` for source-snippet diagnostics: blueprint validati
 
 ## What This Is
 
-Deterministic, auditable, CI/CD-friendly Rust CLI for compiling declarative YAML network blueprints into vendor-neutral configuration artifacts. The `netcfg` binary orchestrates: blueprint parsing → topology transformation → DeviceIR generation → template rendering → traceable config file emission.
+An implementation of the **Multi-Abstraction Layer Topology (MALT)**, built as an enterprise Rust compiler for deterministic network configuration generation. `NetCfg` treats configuration as a [compilation](../compilation) problem rather than a string templating exercise, translating high-level **Whiteboard-to-Plan (W2P)** architectural intent into target-specific configurations via AST lowering.
+
+The `netcfg` binary orchestrates: blueprint parsing → topology transformation → DeviceIR generation → AST lowering (TSDM) → template rendering → traceable config file emission.
 
 ---
 

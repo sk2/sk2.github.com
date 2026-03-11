@@ -16,7 +16,6 @@ description: "Rust-based network topology layout and visualization engine."
 ## Contents
 
 - [Concept](#concept)
-- [Technical Reports](#technical-reports)
 - [Code Samples](#code-samples)
 - [Visuals](#visuals)
 - [Usage](#usage)
@@ -54,12 +53,6 @@ block-beta
     L2["Layer 2"]
     Physical["Physical"]
 </div>
-
----
-
-## Technical Reports
-
-- [Download User Manual: netvis-usermanual.pdf](/assets/docs/netvis-netvis-usermanual.pdf)
 
 ---
 

@@ -35,7 +35,6 @@ Unlike packet-level simulators that focus on bit-level accuracy, this engine foc
 ## Technical Reports
 
 - [Download Research Paper: paper.pdf](/assets/docs/netsim-paper.pdf)
-- [Download User Manual: netsim-usermanual.pdf](/assets/docs/netsim-netsim-usermanual.pdf)
 - [Download Technical Report: techreport.pdf](/assets/docs/netsim-techreport.pdf)
 
 ---
@@ -615,102 +614,6 @@ script:
 
 ```
 
-### case-study-facebook-2021.yaml
-
-```yaml
-# Facebook October 2021 Outage Simulation
-# 
-# Scenario: A routine maintenance command accidentally severs backbone router 
-# connections, causing BGP to withdraw the DNS prefix globally.
-#
-# This demonstrates netsim's ability to model control-plane convergence
-# and catch catastrophic reachability losses deterministically.
-
-name: facebook-2021-outage
-description: Simulation of a backbone isolation event leading to global DNS withdrawal
-
-topologies:
-  - name: global-internet
-    nodes:
-      # --- Facebook AS 32934 ---
-      - name: fb-dns
-        type: router
-        asn: 32934
-        loopback: 185.89.218.12/32
-        bgp:
-          router_id: 185.89.218.12
-          networks:
-            - 185.89.218.0/24 # Authoritative DNS prefix
-      
-      - name: fb-backbone-1
-        type: router
-        asn: 32934
-        loopback: 10.0.0.1/32
-        bgp:
-          router_id: 10.0.0.1
-          
-      - name: fb-edge-1
-        type: router
-        asn: 32934
-        loopback: 10.0.0.2/32
-        bgp:
-          router_id: 10.0.0.2
-
-      # --- External Transit AS 3356 (Level 3) ---
-      - name: transit-level3
-        type: router
-        asn: 3356
-        loopback: 4.2.2.2/32
-        bgp:
-          router_id: 4.2.2.2
-
-    links:
-      # Facebook Internal (iBGP)
-      - endpoints: ["fb-dns", "fb-backbone-1"]
-        type: point-to-point
-      - endpoints: ["fb-backbone-1", "fb-edge-1"]
-        type: point-to-point
-        
-      # External Peering (eBGP)
-      - endpoints: ["fb-edge-1", "transit-level3"]
-        type: point-to-point
-
-    bgp_sessions:
-      # Internal Peering
-      - peers: ["fb-dns", "fb-backbone-1"]
-        type: ibgp
-      - peers: ["fb-backbone-1", "fb-edge-1"]
-        type: ibgp
-        
-      # External Peering
-      - peers: ["fb-edge-1", "transit-level3"]
-        type: ebgp
-
-# The failure event: A maintenance command takes down the backbone-to-edge links.
-events:
-  - at: converged + 100
-    type: link_down
-    endpoints: ["fb-backbone-1", "fb-edge-1"]
-    description: "Maintenance command severs backbone from edge"
-
-assertions:
-  - at: converged
-    type: reachability
-    source: transit-level3
-    destination: 185.89.218.12
-    expected: success
-    description: "DNS is globally reachable before maintenance"
-    
-  # This assertion should fail after the event, proving the outage
-  - at: end
-    type: reachability
-    source: transit-level3
-    destination: 185.89.218.12
-    expected: unroutable
-    description: "DNS is globally withdrawn after backbone isolation"
-
-```
-
 ### chaos-impairments.yaml
 
 ```yaml
@@ -758,6 +661,88 @@ script:
   - at: converged
     device: h1
     command: ping 10.0.2.10
+
+```
+
+### chaos-simple.yaml
+
+```yaml
+# Chaos Engineering Example - Simple Failure Injection
+#
+# Demonstrates basic failure patterns and cascade rules for chaos testing.
+# This topology models a simple network where probabilistic link failures
+# test resilience and demonstrate cascade behavior.
+
+name: chaos-simple
+description: Basic chaos monkey pattern with probabilistic failures and cascades
+
+devices:
+  - name: router-1
+    type: router
+    router_id: 1.1.1.1
+    interfaces:
+      - name: eth0
+        ip: 10.0.1.1/24
+      - name: eth1
+        ip: 10.0.2.1/24
+
+  - name: router-2
+    type: router
+    router_id: 2.2.2.2
+    interfaces:
+      - name: eth0
+        ip: 10.0.1.2/24
+      - name: eth1
+        ip: 10.0.3.1/24
+
+  - name: host-1
+    type: host
+    interfaces:
+      - name: eth0
+        ip: 10.0.2.10/24
+        gateway: 10.0.2.1
+
+  - name: host-2
+    type: host
+    interfaces:
+      - name: eth0
+        ip: 10.0.3.10/24
+        gateway: 10.0.3.1
+
+links:
+  - endpoints: [router-1:eth0, router-2:eth0]
+    latency_ms: 1
+
+  - endpoints: [router-1:eth1, host-1:eth0]
+    latency_ms: 1
+
+  - endpoints: [router-2:eth1, host-2:eth0]
+    latency_ms: 1
+
+# Failure pattern: Chaos monkey - random link failures
+failure_patterns:
+  - name: chaos-monkey
+    trigger: !probabilistic
+      check_interval: 100  # Check every 100 ticks
+      probability: 0.1     #  chance of failure at each check
+    selector:
+      all: true  # Target all links
+    action: fail_random_link
+    recovery: !after_ticks
+      ticks: 50  # Recover after 50 ticks (50ms)
+
+# Cascade rule: When router fails, downstream host fails
+cascade_rules:
+  - name: router-failure-cascade
+    trigger: !dependency_based
+      primary_selector:
+        link_name_pattern: "router-*"
+      cascade_selector:
+        link_name_pattern: "host-*"
+      relationship: downstream
+    action: fail_devices
+    recovery: !permanent
+    delay: 10  # 10 tick delay before cascade fires
 
 ```
 

@@ -41,8 +41,8 @@ The workflow follows a linear pipeline: generate or model a topology, run a simu
 ## Technical Reports
 
 - [Download Research Paper: paper.pdf](/assets/docs/ank-workbench-paper.pdf)
-- [Download User Manual: workbench-usermanual.pdf](/assets/docs/ank-workbench-workbench-usermanual.pdf)
-- [Download Technical Report: techreport.pdf](/assets/docs/ank-workbench-techreport.pdf)
+- [Download Research Paper: workbench-usermanual.pdf](/assets/docs/ank-workbench-workbench-usermanual.pdf)
+- [Download Research Paper: techreport.pdf](/assets/docs/ank-workbench-techreport.pdf)
 
 ---
 

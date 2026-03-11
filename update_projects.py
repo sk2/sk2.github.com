@@ -269,7 +269,7 @@ def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
     docs_dir = project_path / "docs"
     if docs_dir.exists():
         for pdf in docs_dir.rglob("*.pdf"):
-            if any(x in pdf.name for x in ["techreport.pdf", "paper.pdf", "usermanual.pdf"]): docs.append(pdf)
+            if any(x in pdf.name for x in ["techreport.pdf", "paper.pdf", "usermanual.pdf"]) or pdf.parent.name in ["techreport", "paper", "usermanual"]: docs.append(pdf)
     for ext in ["*.png", "*.svg", "*.gif"]:
         for img in project_path.rglob(ext):
             if any(x in str(img) for x in ["node_modules", ".venv", ".pytest_cache", "target", "implementations"]): continue
@@ -369,8 +369,9 @@ def generate_detailed_page(project: ProjectInfo) -> str:
             except: pass
             
             label = "Technical Report"
-            if "paper.pdf" in doc.name: label = "Research Paper"
-            elif "usermanual.pdf" in doc.name: label = "User Manual"
+            if "paper.pdf" in doc.name or doc.parent.name == "paper": label = "Research Paper"
+            elif "usermanual.pdf" in doc.name or doc.parent.name == "usermanual": label = "User Manual"
+            elif "techreport" in doc.name or doc.parent.name == "techreport": label = "Technical Report"
             
             doc_lines.append(f"- [Download {label}: {doc.name}](/assets/docs/{dest_name})")
         project.sections["Technical Reports"] = "\n".join(doc_lines)
@@ -478,6 +479,7 @@ REPORTS_CATEGORY_MAP = {
     "network": "Network Engineering",
     "sdr": "Radio Systems",
     "wellness": "Sound & Music",
+    "astrophotography": "Astrophotography",
 }
 
 def generate_reports_page(projects: list[ProjectInfo]) -> str:
@@ -503,7 +505,7 @@ def generate_reports_page(projects: list[ProjectInfo]) -> str:
 
     # Scan assets/docs/ for all existing PDFs per project slug
     doc_dir = Path("assets/docs")
-    for section_order in ["Network Engineering", "Radio Systems", "Sound & Music"]:
+    for section_order in ["Network Engineering", "Radio Systems", "Sound & Music", "Astrophotography"]:
         projs = categorized.get(section_order, [])
         if not projs:
             continue
@@ -522,6 +524,8 @@ def generate_reports_page(projects: list[ProjectInfo]) -> str:
                         doc_links.append(f'      <a href="/assets/docs/{pdf.name}" class="doc-link">Paper</a>')
                     elif "usermanual" in pdf.name:
                         doc_links.append(f'      <a href="/assets/docs/{pdf.name}" class="doc-link">Manual</a>')
+                    elif pdf.suffix == ".pdf":
+                        doc_links.append(f'      <a href="/assets/docs/{pdf.name}" class="doc-link">Tech Report</a>')
             if not doc_links:
                 continue
             lines.append(f'  <div class="project-card">')

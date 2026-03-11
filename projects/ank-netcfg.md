@@ -33,7 +33,7 @@ Blueprints are composed from importable fragments. A site blueprint imports prot
 
 ## Technical Reports
 
-- [Download Technical Report: netcfg-techreport.pdf](/assets/docs/ank-netcfg-netcfg-techreport.pdf)
+- [Download Research Paper: netcfg-techreport.pdf](/assets/docs/ank-netcfg-netcfg-techreport.pdf)
 - [Download Research Paper: netcfg-paper.pdf](/assets/docs/ank-netcfg-netcfg-paper.pdf)
 
 ---

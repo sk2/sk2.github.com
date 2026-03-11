@@ -34,7 +34,7 @@ Traditional network configuration is manual and vendor-specific. AutoNetkit intr
 
 ## Technical Reports
 
-- [Download Technical Report: ank-techreport.pdf](/assets/docs/autonetkit-ank-techreport.pdf)
+- [Download Research Paper: ank-techreport.pdf](/assets/docs/autonetkit-ank-techreport.pdf)
 
 ---
 

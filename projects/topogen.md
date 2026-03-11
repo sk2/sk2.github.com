@@ -32,7 +32,7 @@ Three interfaces with parity guarantees: CLI for quick generation, Python API fo
 
 ## Technical Reports
 
-- [Download User Manual: topogen-usermanual.pdf](/assets/docs/topogen-topogen-usermanual.pdf)
+- [Download Research Paper: topogen-usermanual.pdf](/assets/docs/topogen-topogen-usermanual.pdf)
 
 ---
 

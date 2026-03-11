@@ -77,6 +77,17 @@ Detailed technical documentation for selected projects. Each report covers archi
   </div>
 
   <div class="project-card">
+    <h3 class="card-title"><a href="/projects/netvis">Network Visualization Engine</a></h3>
+    <div class="badges-row card-badges"><span class="stack-badge">Rust</span><span class="stack-badge">Python</span><span class="stack-badge">TypeScript</span></div>
+    <p class="card-description">Rust-based network topology layout and visualization engine.</p>
+    <div class="doc-links">
+      <a href="/assets/docs/netvis-netvis-usermanual.pdf" class="doc-link">Manual</a>
+      <a href="/assets/docs/netvis-paper.pdf" class="doc-link">Paper</a>
+      <a href="/assets/docs/netvis-techreport.pdf" class="doc-link">Tech Report</a>
+    </div>
+  </div>
+
+  <div class="project-card">
     <h3 class="card-title"><a href="/projects/topogen">Topology Generator</a></h3>
     <div class="badges-row card-badges"><span class="stack-badge">Rust</span><span class="stack-badge">Python</span></div>
     <p class="card-description">Rust-based network topology generator with Python bindings. Takes a declarative YAML config describing the desired…</p>
@@ -136,6 +147,22 @@ Detailed technical documentation for selected projects. Each report covers archi
     <p class="card-description">Generative psytrance synthesis engine with real-time TUI controls.</p>
     <div class="doc-links">
       <a href="/assets/docs/psytrance-techreport.pdf" class="doc-link">Tech Report</a>
+    </div>
+  </div>
+
+</div>
+
+---
+
+## Astrophotography
+
+<div class="project-grid">
+  <div class="project-card">
+    <h3 class="card-title"><a href="/projects/open-astro-core">OpenAstro Core</a></h3>
+    <div class="badges-row card-badges"><span class="stack-badge">Rust</span></div>
+    <p class="card-description">Rust library providing shared astronomical logic, hardware drivers, and protocol implementations for the OpenAstro…</p>
+    <div class="doc-links">
+      <a href="/assets/docs/open-astro-core-open-astro-core.pdf" class="doc-link">Tech Report</a>
     </div>
   </div>
 

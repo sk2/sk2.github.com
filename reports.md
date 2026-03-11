@@ -40,6 +40,7 @@ Detailed technical documentation for selected projects. Each report covers archi
 | [NAS Cleanup](/projects/nascleanup) | [PDF](/assets/docs/nascleanup-nascleanup-techreport.pdf) | 2026-03-11 |
 | [Configuration Generation (AutoNetkit)](/projects/autonetkit) | [PDF](/assets/docs/autonetkit-ank-techreport.pdf) | 2026-03-11 |
 | [Network Automation Workbench](/projects/ank-workbench) | [PDF](/assets/docs/ank-workbench-techreport.pdf) | 2026-03-11 |
+| [Sound Array](/projects/soundarray) | [PDF](/assets/docs/soundarray-techreport.pdf) | 2026-03-11 |
 | [Eclipse Stack](/projects/eclipsestack) | [PDF](/assets/docs/eclipsestack-techreport.pdf) | 2026-03-11 |
 
 ---

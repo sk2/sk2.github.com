@@ -14,8 +14,8 @@ Focused on network engineering, autonomous systems, and signal processing.
 ## Recent Activity
 
 <ul class="recent-activity-list">
-<li><strong>2026-03-11</strong>: <a href="projects/netassure">Network Analysis Engine</a> — <em>plans, 5 files)</em></li>
-<li><strong>2026-03-11</strong>: <a href="projects/psytrance">Overtone</a> — <em>Completed  (Workflow Integrations).</em></li>
+<li><strong>2026-03-11</strong>: <a href="projects/netassure">Network Analysis Engine</a> — <em>plans, 4 files)</em></li>
+<li><strong>2026-03-11</strong>: <a href="projects/psytrance">Overtone</a> — <em>Completed  (Module-Level Rustdocs).</em></li>
 <li><strong>2026-03-10</strong>: <a href="projects/signals">Spectrum Analysis</a> — <em>Completed  (3D Propagation Bounce Visualization).</em></li>
 <li><strong>2026-03-09</strong>: <a href="projects/matrix-time-series">matrix-profile-rs</a> — <em>Completed 15-01-PLAN.md: MultiStreamingState core + Join distance kernels + Batch Join STOMP</em></li>
 <li><strong>2026-03-09</strong>: <a href="projects/rf-signal-analysis">Signal Reflection - KrakenSDR Multi-Beam System</a> — <em>Completed 40-04-PLAN.md</em></li>

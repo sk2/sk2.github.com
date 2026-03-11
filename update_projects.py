@@ -229,6 +229,32 @@ def generate_toc(content: str) -> str:
     links = [f"- [{h}](#{re.sub(r'-+', '-', re.sub(r'[^a-z0-9-]', '', h.lower().replace(' ', '-')))})" for h in headers]
     return "## Contents\n\n" + "\n".join(links) + "\n\n"
 
+_papers_manifest_cache: Optional[Dict[str, str]] = None
+
+def _get_papers_manifest_ids(papers_dir: Path) -> Dict[str, str]:
+    """Return {manifest_id: resolved_project_path} from papers manifest."""
+    global _papers_manifest_cache
+    if _papers_manifest_cache is not None:
+        return _papers_manifest_cache
+    _papers_manifest_cache = {}
+    manifest = papers_dir / "scripts" / "papers_manifest.yaml"
+    if not manifest.exists():
+        return _papers_manifest_cache
+    import yaml
+    with open(manifest) as f:
+        data = yaml.safe_load(f)
+    for proj in data.get("projects", []):
+        mid = proj["id"]
+        # Resolve the path relative to papers_dir
+        doc_path = (papers_dir / proj["path"]).resolve()
+        # Walk up to find the project root (first dir under ~/dev)
+        project_root = doc_path
+        while project_root.parent != papers_dir.parent and project_root.parent != project_root:
+            project_root = project_root.parent
+        _papers_manifest_cache[mid] = str(project_root)
+    return _papers_manifest_cache
+
+
 def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
     planning_dir = project_path / ".planning"
     if not planning_dir.exists(): return None
@@ -270,6 +296,18 @@ def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
     if docs_dir.exists():
         for pdf in docs_dir.rglob("*.pdf"):
             if any(x in pdf.name for x in ["techreport.pdf", "paper.pdf", "usermanual.pdf"]) or pdf.parent.name in ["techreport", "paper", "usermanual"]: docs.append(pdf)
+    # Also check centralised papers/out/ directory for pre-built PDFs.
+    # Only pick up files whose name exactly matches "{manifest_id}-{doctype}.pdf".
+    papers_out = project_path.parent / "papers" / "out"
+    if papers_out.exists() and not docs:
+        manifest_ids = _get_papers_manifest_ids(papers_out.parent)
+        project_ids = {mid for mid, mpath in manifest_ids.items()
+                       if Path(mpath).resolve().is_relative_to(project_path.resolve())}
+        for mid in project_ids:
+            for pdf in papers_out.glob(f"{mid}-*.pdf"):
+                if "-docs-" in pdf.name or "-doc-" in pdf.name: continue
+                if pdf not in docs:
+                    docs.append(pdf)
     for ext in ["*.png", "*.svg", "*.gif"]:
         for img in project_path.rglob(ext):
             if any(x in str(img) for x in ["node_modules", ".venv", ".pytest_cache", "target", "implementations"]): continue
@@ -364,7 +402,11 @@ def generate_detailed_page(project: ProjectInfo) -> str:
         doc_dir = Path("assets/docs")
         doc_dir.mkdir(parents=True, exist_ok=True)
         for doc in project.docs:
-            dest_name = f"{project.slug}-{doc.name}"
+            # Don't double-prefix if filename already starts with the canonical slug
+            if doc.name.startswith(f"{project.slug}-"):
+                dest_name = doc.name
+            else:
+                dest_name = f"{project.slug}-{doc.name}"
             try: shutil.copy2(doc, doc_dir / dest_name)
             except: pass
             
@@ -480,6 +522,7 @@ REPORTS_CATEGORY_MAP = {
     "sdr": "Radio Systems",
     "wellness": "Sound & Music",
     "astrophotography": "Astrophotography",
+    "data": "Data & Utilities",
 }
 
 def generate_reports_page(projects: list[ProjectInfo]) -> str:
@@ -505,7 +548,7 @@ def generate_reports_page(projects: list[ProjectInfo]) -> str:
 
     # Scan assets/docs/ for all existing PDFs per project slug
     doc_dir = Path("assets/docs")
-    for section_order in ["Network Engineering", "Radio Systems", "Sound & Music", "Astrophotography"]:
+    for section_order in ["Network Engineering", "Radio Systems", "Sound & Music", "Astrophotography", "Data & Utilities"]:
         projs = categorized.get(section_order, [])
         if not projs:
             continue
@@ -538,6 +581,29 @@ def generate_reports_page(projects: list[ProjectInfo]) -> str:
             lines.append(f'  </div>\n')
         lines.append('</div>\n')
         lines.append('---')
+
+    # Master index: flat list of all reports with direct download links
+    all_reports: list[tuple[str, str, str]] = []  # (project_name, label, pdf_path)
+    for cat_label in ["Network Engineering", "Radio Systems", "Sound & Music", "Astrophotography", "Data & Utilities"]:
+        for p in sorted(categorized.get(cat_label, []), key=lambda x: x.name):
+            if doc_dir.exists():
+                for pdf in sorted(doc_dir.glob(f"{p.slug}*")):
+                    if "techreport" in pdf.name:
+                        all_reports.append((p.name, "Tech Report", pdf.name))
+                    elif "paper" in pdf.name:
+                        all_reports.append((p.name, "Paper", pdf.name))
+                    elif "usermanual" in pdf.name:
+                        all_reports.append((p.name, "Manual", pdf.name))
+                    elif pdf.suffix == ".pdf":
+                        all_reports.append((p.name, "Tech Report", pdf.name))
+
+    if all_reports:
+        lines.append("\n## All Reports\n")
+        lines.append("| Project | Document | Download |")
+        lines.append("|---------|----------|----------|")
+        for name, label, pdf_name in all_reports:
+            lines.append(f"| {name} | {label} | [PDF](/assets/docs/{pdf_name}) |")
+        lines.append("")
 
     lines.append("\n[← Back to Projects](projects)")
     return "\n".join(lines)

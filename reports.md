@@ -94,7 +94,7 @@ Detailed technical documentation for selected projects. Each report covers archi
     <div class="doc-links">
       <a href="/assets/docs/topogen-topogen-paper.pdf" class="doc-link">Paper</a>
       <a href="/assets/docs/topogen-topogen-techreport.pdf" class="doc-link">Tech Report</a>
-      <a href="/assets/docs/topogen-topogen-usermanual.pdf" class="doc-link">Manual</a>
+      <a href="/assets/docs/topogen-usermanual.pdf" class="doc-link">Manual</a>
     </div>
   </div>
 
@@ -110,7 +110,7 @@ Detailed technical documentation for selected projects. Each report covers archi
     <div class="badges-row card-badges"><span class="stack-badge">Rust</span></div>
     <p class="card-description">Cross-platform server (targeting Raspberry Pi) that manages multiple SDR devices (RTL-SDR, AirSpy HF+) and streams raw…</p>
     <div class="doc-links">
-      <a href="/assets/docs/rtltcp-rtltcp-techreport.pdf" class="doc-link">Tech Report</a>
+      <a href="/assets/docs/rtltcp-techreport.pdf" class="doc-link">Tech Report</a>
     </div>
   </div>
 
@@ -166,8 +166,69 @@ Detailed technical documentation for selected projects. Each report covers archi
     </div>
   </div>
 
+  <div class="project-card">
+    <h3 class="card-title"><a href="/projects/satellites">Satellites</a></h3>
+    <div class="badges-row card-badges"><span class="stack-badge">Rust</span></div>
+    <p class="card-description">Terminal-based satellite tracker that displays real-time positions on a world map, predicts passes over the user's…</p>
+    <div class="doc-links">
+      <a href="/assets/docs/satellites-techreport.pdf" class="doc-link">Tech Report</a>
+    </div>
+  </div>
+
 </div>
 
 ---
+
+## Data & Utilities
+
+<div class="project-grid">
+  <div class="project-card">
+    <h3 class="card-title"><a href="/projects/matrix-time-series">matrix-profile-rs</a></h3>
+    <div class="badges-row card-badges"><span class="stack-badge">Rust</span><span class="stack-badge">Polars</span></div>
+    <p class="card-description">Matrix Profile algorithms (STOMP, SCRIMP++, SCAMP) in native Rust for motif discovery and anomaly detection in time…</p>
+    <div class="doc-links">
+      <a href="/assets/docs/matrix-time-series-matrix-profile-rs.pdf" class="doc-link">Tech Report</a>
+    </div>
+  </div>
+
+</div>
+
+---
+
+## All Reports
+
+| Project | Document | Download |
+|---------|----------|----------|
+| Configuration Generation (AutoNetkit) | Tech Report | [PDF](/assets/docs/autonetkit-ank-techreport.pdf) |
+| Network Automation Workbench | Paper | [PDF](/assets/docs/ank-workbench-paper.pdf) |
+| Network Automation Workbench | Tech Report | [PDF](/assets/docs/ank-workbench-techreport.pdf) |
+| Network Automation Workbench | Manual | [PDF](/assets/docs/ank-workbench-workbench-usermanual.pdf) |
+| Network Configuration Framework | Paper | [PDF](/assets/docs/ank-netcfg-netcfg-paper.pdf) |
+| Network Configuration Framework | Tech Report | [PDF](/assets/docs/ank-netcfg-netcfg-techreport.pdf) |
+| Network Configuration Framework | Manual | [PDF](/assets/docs/ank-netcfg-netcfg-usermanual.pdf) |
+| Network Modeling & Configuration Library | Tech Report | [PDF](/assets/docs/ank-pydantic-ank-techreport.pdf) |
+| Network Modeling & Configuration Library | Manual | [PDF](/assets/docs/ank-pydantic-ank-usermanual.pdf) |
+| Network Simulator | Manual | [PDF](/assets/docs/netsim-netsim-usermanual.pdf) |
+| Network Simulator | Paper | [PDF](/assets/docs/netsim-paper.pdf) |
+| Network Simulator | Tech Report | [PDF](/assets/docs/netsim-techreport.pdf) |
+| Network Topology Engine | Paper | [PDF](/assets/docs/ank-nte-nte-paper.pdf) |
+| Network Topology Engine | Tech Report | [PDF](/assets/docs/ank-nte-nte-techreport.pdf) |
+| Network Topology Engine | Manual | [PDF](/assets/docs/ank-nte-nte-usermanual.pdf) |
+| Network Visualization Engine | Manual | [PDF](/assets/docs/netvis-netvis-usermanual.pdf) |
+| Network Visualization Engine | Paper | [PDF](/assets/docs/netvis-paper.pdf) |
+| Network Visualization Engine | Tech Report | [PDF](/assets/docs/netvis-techreport.pdf) |
+| Topology Generator | Paper | [PDF](/assets/docs/topogen-topogen-paper.pdf) |
+| Topology Generator | Tech Report | [PDF](/assets/docs/topogen-topogen-techreport.pdf) |
+| Topology Generator | Manual | [PDF](/assets/docs/topogen-usermanual.pdf) |
+| Radio Streaming Server | Tech Report | [PDF](/assets/docs/rtltcp-techreport.pdf) |
+| Signal Reflection - KrakenSDR Multi-Beam System | Tech Report | [PDF](/assets/docs/rf-signal-analysis-passive-radar-techreport.pdf) |
+| Signal Reflection - KrakenSDR Multi-Beam System | Manual | [PDF](/assets/docs/rf-signal-analysis-passive-radar-usermanual.pdf) |
+| Spectrum Analysis | Tech Report | [PDF](/assets/docs/signals-spectra-techreport.pdf) |
+| Spectrum Analysis | Manual | [PDF](/assets/docs/signals-spectra-usermanual.pdf) |
+| Overtone | Tech Report | [PDF](/assets/docs/psytrance-techreport.pdf) |
+| OpenAstro Core | Tech Report | [PDF](/assets/docs/open-astro-core-open-astro-core.pdf) |
+| Satellites | Tech Report | [PDF](/assets/docs/satellites-techreport.pdf) |
+| matrix-profile-rs | Tech Report | [PDF](/assets/docs/matrix-time-series-matrix-profile-rs.pdf) |
+
 
 [← Back to Projects](projects)

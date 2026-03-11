@@ -16,6 +16,7 @@ description: "Matrix Profile algorithms (STOMP, SCRIMP++, SCAMP) in native Rust 
 ## Contents
 
 - [Concept](#concept)
+- [Technical Reports](#technical-reports)
 - [Architecture](#architecture)
 - [Features](#features)
 - [Current Status](#current-status)
@@ -25,6 +26,12 @@ description: "Matrix Profile algorithms (STOMP, SCRIMP++, SCAMP) in native Rust 
 Matrix Profile algorithms (STOMP, SCRIMP++, SCAMP) in native Rust for motif discovery and anomaly detection in time series data. Achieves 2.5x speedup via SIMD (AVX2/NEON), handles datasets exceeding RAM through memory-budgeted tiling, and integrates with Polars as a native DataFrame operation.
 
 8,700 lines of Rust. 58 tests.
+
+---
+
+## Technical Reports
+
+- [Download Technical Report: matrix-time-series-matrix-profile-rs.pdf](/assets/docs/matrix-time-series-matrix-profile-rs.pdf)
 
 ---
 

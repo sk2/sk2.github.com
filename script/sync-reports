@@ -1,0 +1,182 @@
+#!/usr/bin/env bash
+#
+# Sync technical reports from ~/dev/papers/out to assets/docs/
+#
+# Usage:
+#   script/sync-reports          # copy PDFs and report new/missing entries
+#   script/sync-reports --dry    # show what would be copied without doing it
+#
+set -eo pipefail
+
+PAPERS_DIR="${PAPERS_DIR:-$HOME/dev/papers/out}"
+SCRIPT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+DOCS_DIR="$SCRIPT_DIR/assets/docs"
+REPORTS_MD="$SCRIPT_DIR/reports.md"
+DRY_RUN=false
+
+if [[ "${1:-}" == "--dry" ]]; then
+  DRY_RUN=true
+fi
+
+if [[ ! -d "$PAPERS_DIR" ]]; then
+  echo "Error: papers directory not found: $PAPERS_DIR"
+  echo "Set PAPERS_DIR to override."
+  exit 1
+fi
+
+# ── Counters ────────────────────────────────────────────────────────
+copied=0
+updated=0
+skipped=0
+
+copy_file() {
+  local src="$PAPERS_DIR/$1"
+  local dest="$DOCS_DIR/$2"
+
+  if [[ ! -f "$src" ]]; then
+    echo "  MISSING: $1"
+    return
+  fi
+
+  local action="new"
+  if [[ -f "$dest" ]]; then
+    if cmp -s "$src" "$dest"; then
+      skipped=$((skipped + 1))
+      return
+    fi
+    action="updated"
+  fi
+
+  if $DRY_RUN; then
+    echo "  [DRY RUN] $action: $2"
+  else
+    cp "$src" "$dest"
+    echo "  $action: $2"
+  fi
+
+  if [[ "$action" == "new" ]]; then
+    copied=$((copied + 1))
+  else
+    updated=$((updated + 1))
+  fi
+}
+
+echo "Syncing from: $PAPERS_DIR"
+echo "          to: $DOCS_DIR"
+echo
+
+# ── Canonical files (source name = destination name) ────────────────
+CANONICAL=(
+  ank-netcfg-netcfg-paper.pdf
+  ank-netcfg-netcfg-techreport.pdf
+  ank-netcfg-netcfg-usermanual.pdf
+  ank-nte-nte-paper.pdf
+  ank-nte-nte-techreport.pdf
+  ank-nte-nte-usermanual.pdf
+  ank-pydantic-ank-techreport.pdf
+  ank-pydantic-ank-usermanual.pdf
+  ank-workbench-paper.pdf
+  ank-workbench-techreport.pdf
+  ank-workbench-workbench-usermanual.pdf
+  automationarch-ecosystem-techreport.pdf
+  automationarch-ecosystem-usermanual.pdf
+  autonetkit-ank-techreport.pdf
+  cliscrape-cliscrape-techreport.pdf
+  configparsing-configparsing-techreport.pdf
+  deviceinteraction-deviceinteraction-techreport.pdf
+  healthypi-healthypi-techreport.pdf
+  matrix-time-series-matrix-profile-rs.pdf
+  multi-agent-assistant-multi-agent-techreport.pdf
+  nascleanup-nascleanup-techreport.pdf
+  netassure-netassure-techreport.pdf
+  netflowsim-netflowsim-techreport.pdf
+  netvis-netvis-usermanual.pdf
+  netvis-paper.pdf
+  netvis-techreport.pdf
+  open-astro-core-open-astro-core.pdf
+  psytrance-techreport.pdf
+  rtltcp-rtltcp-techreport.pdf
+  satellites-techreport.pdf
+  signals-spectra-techreport.pdf
+  signals-spectra-usermanual.pdf
+  topogen-topogen-paper.pdf
+  topogen-topogen-techreport.pdf
+  topogen-usermanual.pdf
+  watch-noise-watch-noise-techreport.pdf
+)
+
+for f in "${CANONICAL[@]}"; do
+  copy_file "$f" "$f"
+done
+
+# ── Renamed files (source -> destination) ───────────────────────────
+# netsim: papers/out uses "network-simulator-" prefix
+copy_file "network-simulator-netsim-usermanual.pdf" "netsim-netsim-usermanual.pdf"
+copy_file "network-simulator-paper.pdf"             "netsim-paper.pdf"
+copy_file "network-simulator-techreport.pdf"        "netsim-techreport.pdf"
+
+# rf-signal-analysis: papers/out uses "passive-radar-" prefix
+copy_file "passive-radar-passive-radar-techreport.pdf" "rf-signal-analysis-passive-radar-techreport.pdf"
+copy_file "passive-radar-passive-radar-usermanual.pdf" "rf-signal-analysis-passive-radar-usermanual.pdf"
+
+echo
+echo "Done: $copied new, $updated updated, $skipped unchanged"
+
+# ── Check for PDFs not in reports.md ────────────────────────────────
+echo
+echo "Checking for PDFs in assets/docs not listed in reports.md..."
+missing=0
+for f in "$DOCS_DIR"/*.pdf; do
+  base=$(basename "$f")
+  if ! grep -q "$base" "$REPORTS_MD" 2>/dev/null; then
+    echo "  NOT IN reports.md: $base"
+    missing=$((missing + 1))
+  fi
+done
+
+if [[ $missing -eq 0 ]]; then
+  echo "  All PDFs are listed in reports.md"
+fi
+
+# ── Check for new PDFs in papers/out not yet tracked ────────────────
+echo
+echo "Checking for new PDFs in papers/out not yet in sync list..."
+
+# Build lookup of all tracked source filenames
+TRACKED=" ${CANONICAL[*]} "
+TRACKED="$TRACKED network-simulator-netsim-usermanual.pdf "
+TRACKED="$TRACKED network-simulator-paper.pdf "
+TRACKED="$TRACKED network-simulator-techreport.pdf "
+TRACKED="$TRACKED passive-radar-passive-radar-techreport.pdf "
+TRACKED="$TRACKED passive-radar-passive-radar-usermanual.pdf "
+
+new_found=0
+for f in "$PAPERS_DIR"/*.pdf; do
+  base=$(basename "$f")
+
+  # Skip build artifacts, generic names, business reports
+  case "$base" in
+    *-docs-paper-*|*-docs-techreport-*|*-docs-report-*|*-doc-*) continue ;;
+    paper.pdf|techreport.pdf) continue ;;
+    *businessreport*) continue ;;
+    # Skip short generic duplicates of files we already track
+    open-astro-core.pdf|matrix-profile-rs.pdf) continue ;;
+    netsim-usermanual.pdf|netvis-usermanual.pdf) continue ;;
+    topogen-paper.pdf|topogen-techreport.pdf|topogen-usermanual.pdf) continue ;;
+    topogen-topogen-usermanual.pdf) continue ;; # duplicate of topogen-usermanual.pdf
+    psytrance-docs-techreport.pdf) continue ;;
+  esac
+
+  if [[ "$TRACKED" != *" $base "* ]]; then
+    echo "  NEW: $base"
+    new_found=$((new_found + 1))
+  fi
+done
+
+if [[ $new_found -eq 0 ]]; then
+  echo "  All papers/out PDFs are tracked"
+else
+  echo
+  echo "  To add: update CANONICAL array in this script,"
+  echo "  then add entries to reports.md."
+fi

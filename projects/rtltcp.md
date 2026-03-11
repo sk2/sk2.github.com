@@ -30,7 +30,7 @@ Existing C implementations (`rtl_tcp`, `hfp_tcp`) are single-threaded and requir
 
 ## Technical Reports
 
-- [Download Technical Report: rtltcp-techreport.pdf](/assets/docs/rtltcp-techreport.pdf)
+- [Download Technical Report: rtltcp-rtltcp-techreport.pdf](/assets/docs/rtltcp-rtltcp-techreport.pdf)
 
 ---
 

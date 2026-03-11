@@ -26,8 +26,8 @@ Detailed technical documentation for selected projects. Each report covers archi
 | [Signal Reflection - KrakenSDR Multi-Beam System](/projects/rf-signal-analysis) | [PDF](/assets/docs/rf-signal-analysis-passive-radar-techreport.pdf) | 2026-03-11 |
 | [matrix-profile-rs](/projects/matrix-time-series) | [PDF](/assets/docs/matrix-time-series-matrix-profile-rs.pdf) | 2026-03-11 |
 | [Network Analysis Engine](/projects/netassure) | [PDF](/assets/docs/netassure-netassure-techreport.pdf) | 2026-03-11 |
-| [Network Flow Simulator](/projects/netflowsim) | [PDF](/assets/docs/netflowsim-netflowsim-techreport.pdf) | 2026-03-11 |
 | [Network Simulator](/projects/netsim) | [PDF](/assets/docs/netsim-techreport.pdf) | 2026-03-11 |
+| [Network Flow Simulator](/projects/netflowsim) | [PDF](/assets/docs/netflowsim-netflowsim-techreport.pdf) | 2026-03-11 |
 | [Topology Generator](/projects/topogen) | [PDF](/assets/docs/topogen-topogen-techreport.pdf) | 2026-03-11 |
 | [Configuration Parser](/projects/configparsing) | [PDF](/assets/docs/configparsing-configparsing-techreport.pdf) | 2026-03-11 |
 | [Watch Noise](/projects/watch-noise) | [PDF](/assets/docs/watch-noise-watch-noise-techreport.pdf) | 2026-03-11 |
@@ -36,10 +36,10 @@ Detailed technical documentation for selected projects. Each report covers archi
 | [HealthyPi](/projects/healthypi) | [PDF](/assets/docs/healthypi-healthypi-techreport.pdf) | 2026-03-11 |
 | [Device Interaction](/projects/deviceinteraction) | [PDF](/assets/docs/deviceinteraction-deviceinteraction-techreport.pdf) | 2026-03-11 |
 | [Satellites](/projects/satellites) | [PDF](/assets/docs/satellites-techreport.pdf) | 2026-03-11 |
+| [Site Planning](/projects/siteplanning) | [PDF](/assets/docs/siteplanning-techreport.pdf) | 2026-03-11 |
 | [NAS Cleanup](/projects/nascleanup) | [PDF](/assets/docs/nascleanup-nascleanup-techreport.pdf) | 2026-03-11 |
 | [Configuration Generation (AutoNetkit)](/projects/autonetkit) | [PDF](/assets/docs/autonetkit-ank-techreport.pdf) | 2026-03-11 |
 | [Network Automation Workbench](/projects/ank-workbench) | [PDF](/assets/docs/ank-workbench-techreport.pdf) | 2026-03-11 |
-| [Site Planning](/projects/siteplanning) | [PDF](/assets/docs/siteplanning-techreport.pdf) | 2026-03-11 |
 | [Eclipse Stack](/projects/eclipsestack) | [PDF](/assets/docs/eclipsestack-techreport.pdf) | 2026-03-11 |
 
 ---

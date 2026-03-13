@@ -40,6 +40,7 @@ Detailed technical documentation for selected projects. Each report covers archi
 | [Orchestrator](/projects/orchestrator) | [PDF](/assets/docs/orchestrator-techreport.pdf) | 2026-03-13 |
 | [HealthyPi](/projects/healthypi) | [PDF](/assets/docs/healthypi-healthypi-techreport.pdf) | 2026-03-13 |
 | [Device Interaction](/projects/deviceinteraction) | [PDF](/assets/docs/deviceinteraction-deviceinteraction-techreport.pdf) | 2026-03-13 |
+| [Eclipse Photo](/projects/eclipsephoto) | [PDF](/assets/docs/eclipsephoto-techreport.pdf) | 2026-03-13 |
 | [Todo](/projects/todo) | [PDF](/assets/docs/todo-techreport.pdf) | 2026-03-12 |
 | [Satellites](/projects/satellites) | [PDF](/assets/docs/satellites-techreport.pdf) | 2026-03-13 |
 | [Tile Server](/projects/tileserver) | [PDF](/assets/docs/tileserver-techreport.pdf) | 2026-03-13 |

@@ -16,10 +16,10 @@ Detailed technical documentation for selected projects. Each report covers archi
 |---------|----------|---------|
 | [Network Visualization Engine](/projects/netvis) | [PDF](/assets/docs/netvis-techreport.pdf) | 2026-03-13 |
 | [Overtone](/projects/psytrance) | [PDF](/assets/docs/psytrance-techreport.pdf) | 2026-03-13 |
-| [Network Topology Engine](/projects/ank-nte) | [PDF](/assets/docs/ank-nte-nte-techreport.pdf) | 2026-03-13 |
 | [OpenAstro Core](/projects/open-astro-core) | [PDF](/assets/docs/open-astro-core-open-astro-core.pdf) | 2026-03-13 |
-| [Network Configuration Framework](/projects/ank-netcfg) | [PDF](/assets/docs/ank-netcfg-netcfg-techreport.pdf) | 2026-03-13 |
+| [Eclipse Photo](/projects/eclipsephoto) | [PDF](/assets/docs/eclipsephoto-techreport.pdf) | 2026-03-13 |
 | [Network Analysis Engine](/projects/netassure) | [PDF](/assets/docs/netassure-netassure-techreport.pdf) | 2026-03-13 |
+| [Network Configuration Framework](/projects/ank-netcfg) | [PDF](/assets/docs/ank-netcfg-netcfg-techreport.pdf) | 2026-03-13 |
 | [Radio Streaming Server](/projects/rtltcp) | [PDF](/assets/docs/rtltcp-rtltcp-techreport.pdf) | 2026-03-13 |
 | [Spectrum Analysis](/projects/signals) | [PDF](/assets/docs/signals-spectra-techreport.pdf) | 2026-03-13 |
 | [Topology Generator](/projects/topogen) | [PDF](/assets/docs/topogen-topogen-techreport.pdf) | 2026-03-13 |
@@ -30,7 +30,6 @@ Detailed technical documentation for selected projects. Each report covers archi
 | [Signal Reflection - KrakenSDR Multi-Beam System](/projects/rf-signal-analysis) | [PDF](/assets/docs/rf-signal-analysis-passive-radar-techreport.pdf) | 2026-03-13 |
 | [Watch Noise](/projects/watch-noise) | [PDF](/assets/docs/watch-noise-watch-noise-techreport.pdf) | 2026-03-13 |
 | [Multi-Agent Assistant](/projects/multi-agent) | [PDF](/assets/docs/multi-agent-assistant-multi-agent-techreport.pdf) | 2026-03-13 |
-| [Eclipse Photo](/projects/eclipsephoto) | [PDF](/assets/docs/eclipsephoto-techreport.pdf) | 2026-03-13 |
 | [Network Automation Workbench](/projects/ank-workbench) | [PDF](/assets/docs/ank-workbench-techreport.pdf) | 2026-03-13 |
 | [NAS Cleanup](/projects/nascleanup) | [PDF](/assets/docs/nascleanup-nascleanup-techreport.pdf) | 2026-03-13 |
 | [Aurora Photo](/projects/auroraphoto) | [PDF](/assets/docs/auroraphoto-techreport.pdf) | 2026-03-13 |
@@ -46,6 +45,7 @@ Detailed technical documentation for selected projects. Each report covers archi
 | [Tile Server](/projects/tileserver) | [PDF](/assets/docs/tileserver-techreport.pdf) | 2026-03-13 |
 | [Sound Array](/projects/soundarray) | [PDF](/assets/docs/soundarray-techreport.pdf) | 2026-03-11 |
 | [Configuration Generation (AutoNetkit)](/projects/autonetkit) | [PDF](/assets/docs/autonetkit-ank-techreport.pdf) | 2026-03-13 |
+| [Network Topology Engine](/projects/ank-nte) | [PDF](/assets/docs/ank-nte-nte-techreport.pdf) | 2026-03-13 |
 | [Eclipse Stack](/projects/eclipsestack) | [PDF](/assets/docs/eclipsestack-techreport.pdf) | 2026-03-11 |
 
 ---

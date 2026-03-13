@@ -16,6 +16,7 @@ Detailed technical documentation for selected projects. Each report covers archi
 |---------|----------|---------|
 | [Network Visualization Engine](/projects/netvis) | [PDF](/assets/docs/netvis-techreport.pdf) | 2026-03-13 |
 | [Overtone](/projects/psytrance) | [PDF](/assets/docs/psytrance-techreport.pdf) | 2026-03-13 |
+| [Network Topology Engine](/projects/ank-nte) | [PDF](/assets/docs/ank-nte-nte-techreport.pdf) | 2026-03-13 |
 | [OpenAstro Core](/projects/open-astro-core) | [PDF](/assets/docs/open-astro-core-open-astro-core.pdf) | 2026-03-13 |
 | [Network Analysis Engine](/projects/netassure) | [PDF](/assets/docs/netassure-netassure-techreport.pdf) | 2026-03-13 |
 | [Network Configuration Framework](/projects/ank-netcfg) | [PDF](/assets/docs/ank-netcfg-netcfg-techreport.pdf) | 2026-03-13 |
@@ -26,6 +27,7 @@ Detailed technical documentation for selected projects. Each report covers archi
 | [Network Flow Simulator](/projects/netflowsim) | [PDF](/assets/docs/netflowsim-netflowsim-techreport.pdf) | 2026-03-13 |
 | [Network Modeling & Configuration Library](/projects/ank-pydantic) | [PDF](/assets/docs/ank-pydantic-ank-techreport.pdf) | 2026-03-13 |
 | [matrix-profile-rs](/projects/matrix-time-series) | [PDF](/assets/docs/matrix-time-series-matrix-profile-rs.pdf) | 2026-03-13 |
+| [Aurora Photo](/projects/auroraphoto) | [PDF](/assets/docs/auroraphoto-techreport.pdf) | 2026-03-13 |
 | [Signal Reflection - KrakenSDR Multi-Beam System](/projects/rf-signal-analysis) | [PDF](/assets/docs/rf-signal-analysis-passive-radar-techreport.pdf) | 2026-03-13 |
 | [Watch Noise](/projects/watch-noise) | [PDF](/assets/docs/watch-noise-watch-noise-techreport.pdf) | 2026-03-13 |
 | [Multi-Agent Assistant](/projects/multi-agent) | [PDF](/assets/docs/multi-agent-assistant-multi-agent-techreport.pdf) | 2026-03-13 |
@@ -42,9 +44,7 @@ Detailed technical documentation for selected projects. Each report covers archi
 | [Satellites](/projects/satellites) | [PDF](/assets/docs/satellites-techreport.pdf) | 2026-03-13 |
 | [Tile Server](/projects/tileserver) | [PDF](/assets/docs/tileserver-techreport.pdf) | 2026-03-13 |
 | [Sound Array](/projects/soundarray) | [PDF](/assets/docs/soundarray-techreport.pdf) | 2026-03-11 |
-| [Aurora Photo](/projects/auroraphoto) | [PDF](/assets/docs/auroraphoto-techreport.pdf) | 2026-03-13 |
 | [Configuration Generation (AutoNetkit)](/projects/autonetkit) | [PDF](/assets/docs/autonetkit-ank-techreport.pdf) | 2026-03-13 |
-| [Network Topology Engine](/projects/ank-nte) | [PDF](/assets/docs/ank-nte-nte-techreport.pdf) | 2026-03-13 |
 | [Eclipse Stack](/projects/eclipsestack) | [PDF](/assets/docs/eclipsestack-techreport.pdf) | 2026-03-11 |
 
 ---

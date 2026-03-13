@@ -21,13 +21,13 @@ Detailed technical documentation for selected projects. Each report covers archi
 | [Network Analysis Engine](/projects/netassure) | [PDF](/assets/docs/netassure-netassure-techreport.pdf) | 2026-03-13 |
 | [Network Configuration Framework](/projects/ank-netcfg) | [PDF](/assets/docs/ank-netcfg-netcfg-techreport.pdf) | 2026-03-13 |
 | [Radio Streaming Server](/projects/rtltcp) | [PDF](/assets/docs/rtltcp-rtltcp-techreport.pdf) | 2026-03-13 |
+| [Aurora Photo](/projects/auroraphoto) | [PDF](/assets/docs/auroraphoto-techreport.pdf) | 2026-03-13 |
 | [Spectrum Analysis](/projects/signals) | [PDF](/assets/docs/signals-spectra-techreport.pdf) | 2026-03-13 |
 | [Topology Generator](/projects/topogen) | [PDF](/assets/docs/topogen-topogen-techreport.pdf) | 2026-03-13 |
 | [Automation Architecture](/projects/automationarch) | [PDF](/assets/docs/automationarch-ecosystem-techreport.pdf) | 2026-03-13 |
 | [Network Flow Simulator](/projects/netflowsim) | [PDF](/assets/docs/netflowsim-netflowsim-techreport.pdf) | 2026-03-13 |
 | [Network Modeling & Configuration Library](/projects/ank-pydantic) | [PDF](/assets/docs/ank-pydantic-ank-techreport.pdf) | 2026-03-13 |
 | [matrix-profile-rs](/projects/matrix-time-series) | [PDF](/assets/docs/matrix-time-series-matrix-profile-rs.pdf) | 2026-03-13 |
-| [Aurora Photo](/projects/auroraphoto) | [PDF](/assets/docs/auroraphoto-techreport.pdf) | 2026-03-13 |
 | [Signal Reflection - KrakenSDR Multi-Beam System](/projects/rf-signal-analysis) | [PDF](/assets/docs/rf-signal-analysis-passive-radar-techreport.pdf) | 2026-03-13 |
 | [Watch Noise](/projects/watch-noise) | [PDF](/assets/docs/watch-noise-watch-noise-techreport.pdf) | 2026-03-13 |
 | [Multi-Agent Assistant](/projects/multi-agent) | [PDF](/assets/docs/multi-agent-assistant-multi-agent-techreport.pdf) | 2026-03-13 |

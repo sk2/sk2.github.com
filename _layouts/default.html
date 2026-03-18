@@ -56,7 +56,6 @@
           <button class="hamburger-btn" aria-label="Toggle navigation" aria-expanded="false" onclick="this.nextElementSibling.classList.toggle('nav-open'); this.setAttribute('aria-expanded', this.nextElementSibling.classList.contains('nav-open'))">&#9776;</button>
           <nav class="site-nav">
             <a href="/" {% if page.url == '/' or page.url == '/index.html' %}class="active"{% endif %}>About</a>
-            <a href="/reports" {% if page.url == '/reports' or page.url == '/reports.html' %}class="active"{% endif %}>Reports</a>
             <div class="nav-dropdown">
               <a href="/projects" class="nav-dropdown-trigger{% if page.url == '/projects.html' or page.url == '/projects/' or section == 'projects' or page.url contains 'network-automation' or section == 'network-automation' or page.url contains 'signal-processing' or section == 'signal-processing' or page.url contains 'photography' or section == 'photography' or page.url contains 'data-analytics' or section == 'data-analytics' or page.url contains 'agentic-systems' or section == 'agentic-systems' %}  active{% endif %}">Projects <span class="nav-caret">&#9662;</span></a>
               <div class="nav-dropdown-menu">

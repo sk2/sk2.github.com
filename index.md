@@ -10,8 +10,8 @@ Telecommunications and software engineer in Adelaide, South Australia. I build t
 
 PhD in computer science (University of South Australia, 2017) on the automated configuration of large networks. The same compiler-and-graph approach shows up across most of the projects here.
 
-[![Every recorded species occurrence in the GBIF release — 3.62 billion observations — rendered by DataRaster as a single density surface](/images/home-hero-gbif.png)](/projects/datavis)
-*Every recorded species occurrence on the planet — **3.62 billion observations** from the GBIF open-data release — drawn as one smooth density surface. About **four minutes** of compute on a single workstation. [DataRaster →](/projects/datavis)*
+[![Global flight network rendered as a ridge structure by DataRaster](/images/home-hero-flights.png)](/projects/datavis)
+*The global airline network — **67,000 great-circle routes** — processed into a corridor ridge structure. Major hubs and the transoceanic corridors between them surface as bright spines instead of overlapping lines. One pass through DataRaster over the raw OpenFlights point cloud. [DataRaster →](/projects/datavis)*
 
 **[Browse all projects](projects)**
 

@@ -119,8 +119,14 @@ PROJECT_CONTENT_OVERRIDES = {
     "datavis": {
         "Visuals": "![GBIF global biodiversity density rendered by DataRaster](/images/datavis-gbif-3b.png)\n*The full GBIF release — 3.62 billion species-occurrence records — rendered as a single density layer with an equalized-histogram transfer and the inferno colormap. The Parquet release is read directly from S3, with no intermediate aggregation step.*\n\n![Global earthquake density rendered by DataRaster](/images/datavis-earthquakes.png)\n*Every recorded earthquake epicentre as a density map. Plate boundaries emerge from the raw point cloud with no point-by-point drawing.*\n\n![Flight-path density rendered by DataRaster](/images/datavis-flights.jpg)\n*Line rendering: hundreds of thousands of great-circle flight paths aggregated into a single density layer.*\n\n![Urban trip density rendered by DataRaster](/images/datavis-citibike.png)\n*Point density at city scale — bike-share trip endpoints across a metro area.*\n"
     },
+    "rtltcp": {
+        "Visuals": "![Multi-SDR streaming server TUI](/images/rtltcp-server-tui.png)\n*Server-side TUI: per-tuner client counts, sample rates, and bandwidth utilisation across a fleet of RTL-SDR dongles. Each device is published as an independent rtl_tcp stream that downstream tools subscribe to without coordinating on a single radio.*\n"
+    },
+    "spectra": {
+        "Visuals": "![Spectra waterfall display](/images/spectra-waterfall-screenshot.png)\n*Real-time waterfall view: frequency on the horizontal axis, time scrolling vertically, magnitude on a perceptual colormap. The TUI runs over a remote rtl_tcp stream so the visualiser does not need to be co-located with the SDR.*\n"
+    },
     "matrix-time-series": {
-        "Visuals": "![Electricity-demand signal with matrix-profile annotations](/images/matrix-annotated-profile.png)\n*Top: an electricity-demand signal with the discovered discord and matching motifs boxed. Bottom: the matrix profile — its lowest point locates the strongest motif, its highest point the clearest anomaly.*\n\n![Steam-generator signal with motif arcs](/images/matrix-motif-arc-fanout.png)\n*Motif arc fan-out: arcs connect each occurrence of a recurring shape across a steam-generator sensor trace, with the matrix profile below.*\n"
+        "Visuals": "![Electricity-demand signal with matrix-profile annotations](/images/matrix-annotated-profile.png)\n*Top: an electricity-demand signal with the discovered discord and matching motifs boxed. Bottom: the matrix profile — its lowest point locates the strongest motif, its highest point the clearest anomaly.*\n\n![Steam-generator signal with motif arcs](/images/matrix-motif-arc-fanout.png)\n*Motif arc fan-out: arcs connect each occurrence of a recurring shape across a steam-generator sensor trace, with the matrix profile below.*\n\n![Multi-stream join across two electricity feeds](/images/matrix-electricity-join.png)\n*Multi-stream join (v2.0.0): the profile annotates one electricity signal with the shape distance to its nearest match in a second signal, surfacing shared structure across two independently sampled feeds.*\n\n![Household sensor stream with online matrix-profile events](/images/matrix-household-streaming.png)\n*Online streaming mode: a household sensor trace is consumed incrementally; motif and discord events are emitted as the profile updates, without re-running the full computation each tick.*\n"
     },
 }
 
@@ -405,11 +411,14 @@ def generate_detailed_page(project: ProjectInfo) -> str:
     existing_extra_fm = ""
     if dest_path.exists():
         existing_text = dest_path.read_text()
+        # Pages flagged hand_written: true are owned by the human; never regenerate.
+        fm_match = re.match(r"^---\n(.*?)\n---", existing_text, re.DOTALL)
+        if fm_match and re.search(r"^hand_written:\s*true\s*$", fm_match.group(1), re.MULTILINE):
+            return existing_text
         existing_sections = extract_sections(existing_text)
         for sec in STABLE_SECTIONS:
             if sec in existing_sections and sec not in ALWAYS_UPDATE_SECTIONS and sec not in PROJECT_CONTENT_OVERRIDES.get(project.slug, {}):
                 project.sections[sec] = existing_sections[sec]
-        fm_match = re.match(r"^---\n(.*?)\n---", existing_text, re.DOTALL)
         if fm_match:
             for line in fm_match.group(1).splitlines():
                 if line.startswith(("sitemap:", "permalink:")):

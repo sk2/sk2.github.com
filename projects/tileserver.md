@@ -1,71 +1,63 @@
 ---
 layout: default
 section: data-analytics
-description: "Dynamic vector tile server for massive geospatial datasets. Serves Mapbox Vector Tiles (MVT) from millions of points with sub-second latency, enabling…"
+description: "A dynamic Mapbox Vector Tile server for massive geospatial datasets — Polars in-memory, Rust over PyO3 for per-point math, FastAPI on top."
 ---
 
-# Tileserver Polars (Rust Optimized)
+# Tileserver Polars
 
 <div class="badges-row">
-  <span class="status-badge status-active">Active</span>
+  <span class="status-badge status-complete">Superseded</span>
   <span class="stack-badge">Rust</span> <span class="stack-badge">Python</span> <span class="stack-badge">Polars</span>
+</div>
+
+<div class="callout">
+<p><strong>Superseded by <a href="/projects/datavis">DataRaster</a>.</strong>
+DataRaster covers the same dense-spatial-rendering problem with a broader
+surface — a tile server, Python and WASM front ends, and a Polars plugin — in
+one ten-crate Rust workspace. This page is kept for context on the original
+approach.</p>
 </div>
 
 ---
 
 ## Concept
 
-Dynamic vector tile server for massive geospatial datasets. Serves Mapbox Vector Tiles (MVT) from millions of points with sub-second latency, enabling interactive visualization in Kepler.gl without pre-rendering static tilesets. Python (FastAPI) handles the API layer; Rust (via PyO3) handles coordinate transformation and MVT encoding; Polars provides in-memory filtering and aggregation.
+A dynamic vector tile server for massive geospatial datasets. It serves Mapbox
+Vector Tiles (MVT) from millions of points with sub-second latency, enabling
+interactive visualisation in Kepler.gl and MapLibre without pre-rendering a
+static tile set. Python (FastAPI) handles the HTTP layer; Rust (via PyO3) does
+coordinate projection and Protobuf encoding; Polars holds the data and runs the
+spatial filters.
+
+The argument was that pre-generating tiles for a large dataset is both
+storage-intensive and inflexible: every change of filter or zoom strategy means
+re-generating the pyramid. Dynamic tiling backed by columnar in-memory filtering
+trades a small per-request cost for the ability to change the query at any
+moment.
 
 ---
 
 ## Architecture
 
-- **API**: FastAPI serving MVT/PBF tile requests
-- **Computation**: Rust extension via PyO3 for per-point coordinate projection and Protobuf encoding
-- **Data engine**: Polars for vectorized spatial filtering and aggregation
-- **Output**: Mapbox Vector Tiles consumed by Kepler.gl and MapLibre
-
-Dynamic tiling avoids the storage cost and inflexibility of pre-generated tile pyramids. Polars vectorized filtering handles the spatial queries; Rust handles the per-point math where Python overhead is prohibitive.
-
----
-
-## Quick Facts
-
-| | |
-|---|---|
-| **Status** | Active |
-| **Stack** | Rust, Python, Polars |
+- **API layer** — FastAPI serving MVT/PBF tile requests over HTTP.
+- **Compute layer** — A Rust extension via PyO3 for per-point coordinate projection
+  and Protobuf MVT encoding, where Python overhead would dominate.
+- **Data engine** — Polars for vectorised spatial filtering and aggregation
+  against the in-memory dataset.
+- **Consumers** — Mapbox Vector Tiles, consumed by Kepler.gl or MapLibre.
 
 ---
 
-## Core Value
+## Why It Was Superseded
 
-Serve dynamic vector tiles (MVT) from massive geospatial datasets (millions of points) with sub-second latency, enabling interactive visualization in Kepler.gl without pre-rendering static tilesets.
-
----
-
-## Vision
-
-A high-performance tile server that combines the speed of columnar data processing (Polars) with the efficiency of systems programming (Rust) to deliver a "Datashader-like" experience for vector data. It bridges the gap between data science workflows (Python) and high-performance web mapping.
-
----
-
-## Constraints
-
-- **Language**: Python (FastAPI) for the API layer.
-- **Computation**: Rust (via PyO3) for coordinate transformation and MVT encoding.
-- **Data Engine**: Polars for in-memory filtering and aggregation.
-- **Output Format**: Mapbox Vector Tiles (MVT/PBF) consumed by Kepler.gl.
-- **Latency**: Sub-second response times for tile requests.
+The split-language design — FastAPI on top of a PyO3 extension on top of Polars —
+was load-bearing for the tile-serving use case, but rebuilding around the same
+architecture every time DataRaster needed a different output (static PNG, raster
+tile, WASM render, density layer) was not. DataRaster generalises the engine:
+one Rust core, one render plan, multiple front ends (CLI, server, Python, WASM)
+over the same compute path. The tile-server use case is one mode within it.
 
 ---
 
-## Key Decisions
-
-| Decision | Rationale | Outcome |
-|----------|-----------|---------|
-| **Polars over Pandas** | Significantly faster filtering and lower memory overhead for large datasets. | Confirmed  |
-| **Rust for Math** | Python overhead is too high for per-point coordinate projection in tight loops. | Confirmed  |
-| **Dynamic Tiling** | Pre-generating tiles for large datasets is storage-intensive and inflexible. | Core Architecture |
-| **MVT Protocol** | Standard format supported by Kepler.gl and MapLibre, more efficient than JSON. | Planned  |
+[← Back to Data Analytics](../data-analytics)

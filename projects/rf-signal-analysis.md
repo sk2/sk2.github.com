@@ -29,7 +29,6 @@ Distributed multi-beam signal reflection analysis system built on KrakenSDR hard
 
 ## Technical Reports
 
-- [Download Research Paper: passive-radar-techreport.pdf](/assets/docs/rf-signal-analysis-passive-radar-techreport.pdf)
 - [Download Research Paper: passive-radar-usermanual.pdf](/assets/docs/rf-signal-analysis-passive-radar-usermanual.pdf)
 
 ---

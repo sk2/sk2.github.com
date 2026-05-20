@@ -1,267 +1,121 @@
 ---
 layout: default
 title: Photography & Astrophotography
-description: Integrated tools for field photography, astrophotography automation, aurora capture, and image processing workflows.
+description: Tools for field photography, astrophotography automation, aurora and eclipse capture, and image-processing workflows — capture handled by software, judgment left to the photographer.
 ---
 
-# Photography & Astrophotography Ecosystem
+# Photography & Astrophotography
 
-Integrated tools for field photography, astrophotography automation, and image processing workflows.
+Tools for field photography, astrophotography, and the processing that follows.
+The dividing line is consistent: software handles the technical work — focus,
+exposure sequencing, hardware control — and the photographer keeps the creative
+decisions of composition, timing, and subject.
 
 ## Contents
-- [The Vision](#the-vision)
 - [How They Work Together](#how-they-work-together)
 - [Astrophotography](#astrophotography)
-  - [AuroraPhoto — Automated Aurora Capture](#auroraphoto--automated-aurora-capture)
-  - [OpenAstro Node — Autonomous Observatory](#openastro-node--autonomous-observatory)
-  - [OpenAstro Core — Shared Astronomical Logic](#openastro-core--shared-astronomical-logic)
-  - [EclipsePhoto — Autonomous Eclipse Capture](#eclipsephoto--autonomous-eclipse-capture)
-  - [EclipseStack — High-Precision Alignment](#eclipsestack--high-precision-alignment)
-  - [ASIAIR Import Tool — Workflow Automation](#asiair-import-tool--workflow-automation)
 - [Field Photography](#field-photography)
-  - [Photo Tour — Interactive Assistant](#photo-tour--interactive-assistant)
-- [Philosophy](#philosophy-why-this-approach)
 
 ---
-
-## The Vision
-
-Photography—whether capturing aurora bursts in sub-zero conditions or composing landscape shots in the field—demands tools that handle technical complexity while staying out of the creative flow. This ecosystem provides automation where it matters (focus, exposure, sequencing) and intelligent assistance where judgment is needed (composition, timing).
-
-**Core Philosophy:**
-- **Autonomous where possible**: Automated focus, exposure sequencing, hardware management
-- **Assistive where valuable**: Composition guidance, timing suggestions, workflow optimization
-- **Field-ready**: Designed for real-world conditions (dark, remote, no internet)
-- **Workflow integration**: From capture through processing with minimal manual steps
 
 ## How They Work Together
 
-```
-┌────────────────────────────────────────────────────────────┐
-│                    Field Capture Layer                      │
-│   ┌─────────────────┬──────────────────┬─────────────────┐ │
-│   │  AuroraPhoto    │   Photo Tour     │  OpenAstro Node │ │
-│   │  (Aurora)       │   (General)      │  (Deep Sky)     │ │
-│   └────────┬────────┴────────┬─────────┴────────┬─────────┘ │
-└────────────┼─────────────────┼──────────────────┼───────────┘
-             │                 │                  │
-             └────────┬────────┴──────────────────┘
-                      │
-        ┌─────────────▼──────────────┐
-        │   OpenAstro Core Library   │
-        │  (Shared Astronomical      │
-        │   Logic & Drivers)         │
-        └─────────────┬──────────────┘
-                      │
-        ┌─────────────▼──────────────┐
-        │    Processing Layer         │
-        │  ┌────────────────────────┐ │
-        │  │  EclipseStack          │ │
-        │  │  ASIAIR Import Tool    │ │
-        │  │  PixInsight Workflows  │ │
-        │  └────────────────────────┘ │
-        └────────────────────────────┘
-```
+<div class="mermaid">
+flowchart TD
+    AP["AuroraPhoto"] --> CORE
+    OAN["OpenAstro Node"] --> CORE
+    PT["Photo Tour"] --> CORE
+    EP["EclipsePhoto"] --> CORE
+    CORE["OpenAstro Core<br/><small>shared coordinate math &amp; device drivers</small>"] --> PROC["Processing<br/><small>EclipseStack · ASIAIR Import → PixInsight</small>"]
+</div>
 
-**Typical Workflows:**
-
-**Aurora Photography:**
-1. AuroraPhoto receives aurora alert
-2. Multi-node array automatically adjusts focus (HFR monitoring)
-3. Executes optimized capture sequence
-4. iPhone app provides composition assistance
-5. Files organized for processing
-
-**Deep Sky Imaging:**
-1. OpenAstro Node plans imaging session from target list
-2. Automated goto, focus, and exposure sequencing
-3. Hardware safety monitoring (weather, mount limits)
-4. ASIAIR Import Tool organizes captured frames
-5. Ready for PixInsight WBPP processing
-
-**Field Photography:**
-1. Photo Tour displays live camera preview on iPhone
-2. Composition overlay with horizon/thirds guides
-3. Smart triggering suggestions based on scene analysis
-4. Automated bracketing and focus stacking workflows
+The capture tools each target a different subject — aurora, deep sky, eclipse,
+landscape — but draw on one shared Rust library for coordinate math and device
+drivers, and hand their output to a common processing stage.
 
 ---
 
 ## Astrophotography
 
-### AuroraPhoto — Automated Aurora Capture
+### AuroraPhoto
 
-<span class="status-badge status-planning">Planning</span> · [Full Details →](projects/auroraphoto)
+<span class="status-badge status-planning">Planning</span> · <span class="stack-badge">Python</span> <span class="stack-badge">Swift</span> · [Full Details →](projects/auroraphoto)
 
-
-Automated aurora photography system using Raspberry Pi nodes controlling Sony a7R V/a7 IV cameras via USB, with iPhone companion app for composition and multi-node management.
-
-**Key Features:**
-- **Star Sharpness Monitoring**: Automated HFR (Half-Flux Radius) tracking for pin-sharp focus
-- **Burst Response**: Intelligent capture sequencing optimized for unpredictable aurora activity
-- **Multi-Node Control**: Manage 4+ camera arrays from single iPhone interface
-- **Field-Ready**: Wi-Fi hotspot connectivity for remote locations
-
-**Use Case:** Capture high-quality aurora imagery during unpredictable "bursts" while maintaining perfect star focus in remote field conditions.
-
-**Tech Stack:** Raspberry Pi, iOS (SwiftUI), Python/Rust camera control
+Automated aurora capture across a multi-node camera array. Raspberry Pi nodes
+drive Sony a7R V and a7 IV cameras over USB; an iPhone app handles composition
+and manages the array from one interface. Half-flux-radius tracking holds star
+focus through the unpredictable bursts of an aurora display, where there is no
+time to refocus by hand.
 
 ---
 
-### OpenAstro Node — Autonomous Observatory
+### OpenAstro Node
 
-<span class="status-badge status-active">Active Development</span> · [Full Details →](projects/open-astro-node)
+<span class="status-badge status-active">Active</span> · <span class="stack-badge">Rust</span> · [Full Details →](projects/open-astro-node)
 
-
-A headless, autonomous astrophotography controller designed for low-power Linux devices (RPi/Jetson). Manages hardware, executes imaging sequences, and ensures rig safety.
-
-**Key Features:**
-- **Hardware Management**: INDI/ASCOM Alpaca device control (mount, camera, focuser, filter wheel)
-- **Autonomous Sequencing**: Execute multi-target imaging plans without intervention
-- **Safety Monitoring**: Weather checks, mount limit detection, power management
-- **Remote Access**: SSH-based control and monitoring
-
-**Use Case:** Deploy a fully automated deep-sky imaging rig that runs unattended overnight sessions.
-
-**Tech Stack:** Rust, INDI protocol, ASCOM Alpaca
+A headless astrophotography controller for low-power Linux devices (Raspberry Pi,
+Jetson). It manages the mount, camera, focuser, and filter wheel over INDI and
+ASCOM Alpaca, executes multi-target imaging plans unattended, and monitors
+weather and mount limits so an overnight session runs without supervision.
 
 ---
 
-### OpenAstro Core — Shared Astronomical Logic
+### OpenAstro Core
 
-<span class="status-badge status-active">v0.1 Celestial Math</span> · [Full Details →](projects/open-astro-core)
+<span class="status-badge status-active">v0.1 — Celestial Math</span> · <span class="stack-badge">Rust</span> · [Full Details →](projects/open-astro-core)
 
-
-Rust library providing shared astronomical logic, hardware drivers, and protocol implementations for the OpenAstro ecosystem.
-
-**Components:**
-- **astro-core**: Coordinate math (RA, Dec, transforms), time calculations (Julian date, sidereal time)
-- **astro-indi**: INDI protocol client and device abstraction
-- **astro-alpaca**: ASCOM Alpaca REST client for modern hardware
-- **sony-sdk-rs** (Planned): Sony Camera Remote SDK bindings
-- **polaris-proto** (Planned): Benro Polaris protocol implementation
-
-**Core Value:** Ensure both OpenAstro Node and Photo Tour use identical, correct coordinate math and driver logic.
-
-**Current Milestone:** v0.1 Celestial Math (angle primitives, coordinate transforms, time helpers)
-
-**Tech Stack:** Rust
+The Rust library beneath the OpenAstro tools: coordinate math (RA/Dec transforms,
+Julian date, sidereal time), an INDI protocol client, and an ASCOM Alpaca REST
+client. OpenAstro Node and Photo Tour share one correct implementation of the
+astronomy primitives rather than each reimplementing them.
 
 ---
 
-### EclipsePhoto — Autonomous Eclipse Capture
+### EclipsePhoto
 
-<span class="status-badge status-active">Phase 1 — Hardware & Data Foundation</span> · [Full Details →](projects/eclipsephoto)
+<span class="status-badge status-active">Phase 1 — Hardware Foundation</span> · <span class="stack-badge">Python</span> · [Full Details →](projects/eclipsephoto)
 
-
-A "fire and forget" Raspberry Pi-based controller for autonomous solar eclipse photography. Coordinates a camera (via gphoto2) and a high-end mount (ZWO AM5 / Benro Polaris via INDI) to capture a complete eclipse sequence from C1 to C4 without manual intervention.
-
-**Key Features:**
-- **Full Autonomy**: Handles guiding, exposure ramping (Holy Grail), and error recovery so the photographer can experience the eclipse
-- **Mount Control**: INDI-based integration with ZWO AM5 and Benro Polaris
-- **Watchdog Recovery**: Automatic recovery from hardware faults during the one-shot event
-- **Sequence Planning**: Pre-programmed exposure sequences for each contact phase (C1-C4)
-
-**Use Case:** Secure high-quality eclipse imagery from a completely autonomous system, eliminating the need to choose between operating the camera and experiencing the event.
-
-**Tech Stack:** Python, gphoto2, INDI protocol, Raspberry Pi
+A fire-and-forget Raspberry Pi controller for solar eclipse photography. It
+coordinates a camera over gphoto2 and a mount (ZWO AM5, Benro Polaris) over INDI
+to capture the full sequence from first to last contact. Guiding, exposure
+ramping, and fault recovery run automatically, so the photographer can watch the
+eclipse instead of the camera.
 
 ---
 
-### EclipseStack — High-Precision Alignment
+### EclipseStack
 
-<span class="status-badge status-planning">Planning</span> · [Full Details →](projects/eclipsestack)
+<span class="status-badge status-planning">Planning</span> · <span class="stack-badge">Rust</span> · [Full Details →](projects/eclipsestack)
 
-
-High-precision alignment tool for solar eclipse photography that handles tracker drift to enable HDR stacking.
-
-**The Challenge:**
-Solar eclipse photography during totality captures hundreds of frames, but subtle tracker drift prevents perfect alignment. No background stars available for traditional astrophotography alignment methods.
-
-**The Solution:**
-- **Solar Disk Detection**: Automatically locate center of solar disk/moon silhouette
-- **Temporal Drift Modeling**: Use EXIF timestamps to model tracker drift rate
-- **Feature-Based Alignment**: Use solar flares as secondary anchors for sub-pixel precision
-- **Interactive Review**: Web-based UI to visualize drift path and verify alignment
-
-**Workflow:** Import .ARW files → Detect disk + flares → Model drift → Align frames → Export TIFF/FITS for PixInsight HDR stacking
-
-**Tech Stack:** Rust (core processing), Web UI (Tauri or web stack)
+Alignment for eclipse-totality image stacks. Totality yields hundreds of frames
+but no background stars to align against, and tracker drift defeats a naive
+overlay. EclipseStack detects the solar disk, models the drift rate from EXIF
+timestamps, and uses solar flares as sub-pixel anchors — exporting aligned frames
+ready for HDR stacking in PixInsight.
 
 ---
 
-### ASIAIR Import Tool — Workflow Automation
+### ASIAIR Import Tool
 
-<span class="status-badge status-active">Phase 1/1</span> · [Full Details →](projects/import-asiair)
+<span class="status-badge status-active">Complete</span> · <span class="stack-badge">Python</span> · [Full Details →](projects/import-asiair)
 
-
-Python script that automates post-imaging-session file organization for astrophotography.
-
-**Key Features:**
-- **Batch Import**: Scan ASIAIR backup locations for FITS files
-- **Smart Organization**: Group by target, observation night, filter
-- **Calibration Matching**: Copy matching darks, flats, bias frames
-- **WBPP Ready**: Prepare directory structure for PixInsight's Weighted Batch Preprocessing
-
-**Use Case:** Eliminate manual file sorting after imaging sessions—scan hundreds of frames, organize by target/filter/date, validate calibration availability, go straight to processing.
-
-**Tech Stack:** Python
+Post-session file organization for astrophotography. It scans ASIAIR backups,
+groups frames by target, night, and filter, matches the corresponding darks,
+flats, and bias frames, and lays out a directory ready for PixInsight's Weighted
+Batch Preprocessing.
 
 ---
 
 ## Field Photography
 
-### Photo Tour — Interactive Assistant
+### Photo Tour
 
-<span class="status-badge status-active">Active Development</span> · [Full Details →](projects/photo-tour)
+<span class="status-badge status-active">Active</span> · <span class="stack-badge">Swift</span> · [Full Details →](projects/photo-tour)
 
-
-Smart, interactive photography assistant designed for field use. Helps compose shots, automate repeatable workflows, and progressively adds intelligent triggering and transition logic.
-
-**Key Features:**
-- **Live Preview**: See what the camera sees on iPhone display
-- **Composition Assistance**: Overlay guides (horizon level, rule of thirds, compass)
-- **Workflow Automation**: Bracketing, focus stacking, time-lapse sequencing
-- **Smart Triggering** (Planned): ML-assisted scene analysis for optimal capture timing
-
-**Use Case:** In the field, get actionable guidance and camera control fast enough to improve the shot.
-
-**Tech Stack:** iOS (SwiftUI), Sony SDK integration
-
----
-
-## Philosophy: Why This Approach?
-
-### Automation Frees Creativity
-
-Technical perfection (focus, exposure, tracking) should be automated. Creative decisions (composition, timing, subject) should remain human. The tools handle pixel-peeping so you can focus on the frame.
-
-### Field-Ready Design
-
-These tools are designed for real-world conditions:
-- **Aurora shoots**: Remote locations, no internet, unpredictable timing
-- **Deep sky imaging**: Overnight unattended operation, safety monitoring
-- **Landscape work**: Quick setup, minimal fumbling with settings
-
-### Shared Core, Specialized UX
-
-OpenAstro Core provides the mathematical foundation (coordinate transforms, device drivers) so higher-level apps (Node, Photo Tour, AuroraPhoto) can focus on their specific workflows without reimplementing astronomy primitives.
-
-### Processing Integration
-
-Capture is only half the workflow. These tools integrate with industry-standard processing pipelines (PixInsight WBPP, HDR stacking) through standardized file organization and metadata.
-
----
-
-## Open Source & Contributions
-
-- **AuroraPhoto**: [github.com/sk2/auroraphoto](https://github.com/sk2/auroraphoto)
-- **OpenAstro Node**: [github.com/sk2/open-astro-node](https://github.com/sk2/open-astro-node)
-- **OpenAstro Core**: [github.com/sk2/open-astro-core](https://github.com/sk2/open-astro-core)
-- **EclipsePhoto**: [github.com/sk2/eclipsephoto](https://github.com/sk2/eclipsephoto)
-- **EclipseStack**: [github.com/sk2/eclipsestack](https://github.com/sk2/eclipsestack)
-- **ASIAIR Import Tool**: [github.com/sk2/import-asiair](https://github.com/sk2/import-asiair)
-- **Photo Tour**: [github.com/sk2/photo-tour](https://github.com/sk2/photo-tour)
+A field photography assistant for iPhone. It shows a live camera preview with
+composition overlays — horizon level, rule of thirds, compass — and automates
+repeatable workflows such as bracketing and focus stacking. Planned scene
+analysis will suggest capture timing.
 
 ---
 

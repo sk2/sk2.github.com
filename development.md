@@ -1,132 +1,74 @@
 ---
 layout: default
 title: Development Philosophy
-description: Planning-first development approach with structured project directories, type-safe Rust and Python tooling, and deterministic testing.
+description: A planning-first approach to building tools — structured project directories, type-safe Rust and Python, deterministic testing, and verification at every phase.
 ---
 
 # Development Philosophy
 
-## Motivation
+I build tools to solve specific problems in network automation, data
+visualization, signal processing, and intelligent systems. Each project starts
+from a concrete need — type-safe topology modeling, rendering datasets too dense
+to draw, an open alternative to closed astrophotography hardware — not from a
+hypothetical use case. What follows is how that work is structured.
 
-I build tools to solve real problems in network automation and intelligent systems. Projects address specific needs: type-safe topology modeling, open astrophotography alternatives, robust biometric signal processing.
+## Planning Before Code
 
-## Planning-First Approach
+Every project carries a `.planning/` directory:
 
-Projects use `.planning/` directories with structured planning:
-- **PROJECT.md**: Core value, requirements, constraints, decisions.
-- **ROADMAP.md**: Phase breakdown, goals, success criteria.
-- **STATE.md**: Current position, progress, decision log, blockers.
-- **Phase plans**: Detailed execution, verified before implementation.
+- **PROJECT.md** — core value, requirements, constraints, decisions.
+- **ROADMAP.md** — phase breakdown with goals and success criteria.
+- **STATE.md** — current position, progress, decision log, blockers.
+- **Phase plans** — execution detail, verified before any code is written.
 
-This systematic approach prevents rework and maintains clear goals.
+Writing the plan first surfaces the hard decisions while they are still cheap to
+change, and keeps the goal explicit once implementation begins.
 
 ## Verification Loops
 
-Formal verification concludes each phase:
-- Goal-backward analysis confirms codebase delivery.
-- Must-have coverage ensures all requirements are met.
-- Verification documents create a permanent record of completion.
-
-If verification fails, I fix gaps before advancing.
+Each phase closes with a verification step. Goal-backward analysis checks that
+the codebase delivers what the phase promised; must-have coverage confirms every
+requirement is met; a verification document records the result. When
+verification fails, the gap is fixed before the next phase starts — a phase is
+not "done" because its code compiles.
 
 ## Technology Choices
 
-**Core Languages:**
-- **Rust**: For performance-critical code (Network Visualization Engine, Network Simulator, Topology Generator, astro). Ensures type safety, zero-cost abstractions, robust error handling.
-- **Python**: For rapid development and scientific computing (Network Modeling & Configuration Library, HealthyPi). Leverages a rich ecosystem for signal processing and network automation.
-- **Swift**: For native Apple ecosystem integration (multi-agent collectors, cycle agent). Provides first-class support for iOS/tvOS/macOS.
+- **Rust** for performance-critical and long-lived code — the rendering and
+  simulation engines, the graph and astronomy libraries. The type system and
+  ownership model rule out whole classes of error at compile time.
+- **Python** for scientific computing and rapid iteration, where the ecosystem
+  (signal processing, data analysis) earns its place. Compiled extensions cross
+  into Rust through PyO3 where Python overhead would dominate.
+- **Swift** for native Apple integration — the iPhone and Apple TV apps, the
+  HealthKit collectors.
 
-**Key Tools:**
-- **NATS**: Universal message bus for agent coordination. Features TLS 1.3, per-subject ACLs, JetStream for durability.
-- **Pydantic**: Type-safe Python models with validation at definition time.
-- **PyO3**: Rust-Python FFI for compiled Python extensions.
-- **petgraph**: Production-ready graph data structures in Rust.
-- **FastAPI**: Modern async Python web framework.
-
-**Testing:**
-- Comprehensive test suites (286 tests in HealthyPi, 582 in Network Visualization Engine).
-- Unit tests validate algorithms and logic.
-- Integration tests verify component interaction.
-- Parity tests ensure interface consistency across CLI/API/config.
+Recurring tools: **NATS** as a message bus (TLS 1.3, per-subject ACLs, JetStream
+for durability), **Pydantic** for type-safe Python models, **Polars** for
+columnar data, and **petgraph** for Rust graph structures.
 
 ## Architecture Patterns
 
-**Message Bus Coordination:**
-Projects use NATS as a universal communication layer. Agents, simulators, and services communicate via typed messages, not direct calls. This enables:
-- Independent agent development and deployment.
-- Security boundaries with per-subject ACLs.
-- Observable message flows for debugging.
-- Clean separation of concerns.
+**Message-bus coordination.** Agents, simulators, and services communicate
+through typed NATS messages rather than direct calls. This allows independent
+deployment, enforces security boundaries with per-subject ACLs, and leaves the
+message flow observable for debugging.
 
-**Multi-Layer Abstraction:**
-Network tools separate physical, logical, and protocol layers. This mirrors network engineering thought processes and enables independent reasoning.
+**Layered abstraction.** Network tools separate physical, logical, and protocol
+layers; astrophotography tools separate coordinate math from device drivers from
+capture logic. Each layer can be reasoned about, and tested, on its own.
 
-**Type Safety:**
-Rust's type system and Pydantic validation catch errors at compile/definition time, preventing invalid runtime states.
-
-**Modular Design:**
-Components expose clean interfaces and minimize coupling. Libraries separate core logic from rendering/export, enabling reuse and independent evolution.
-
-## Documentation Practice
-
-**Code-Level:**
-- Clear, intent-explaining function/type names.
-- Comments for non-obvious decisions.
-- Doc-tests serving as examples.
-
-**Architecture-Level:**
-- PROJECT.md captures design decisions and rationale.
-- STATE.md logs decision history and blockers.
-- README.md provides quick-start guides and overviews.
-
-**Research-Level:**
-- RESEARCH.md documents exploration before planning.
-- Links to relevant papers, tools, and prior art.
-- Captures findings.
-
-## Workflow
-
-**Development Cycle:**
-1. Research and planning (understand problem).
-2. Phase design (break work into verifiable chunks).
-3. Implementation (write code with tests).
-4. Verification (confirm goals met).
-5. Documentation (capture decisions).
-
-**Commit Practice:**
-- Atomic commits: one logical change per commit.
-- Clear messages: state what and why.
-- Co-authored commits credit Claude Sonnet.
-
-**Tools:**
-- Git for version control.
-- pytest for Python testing.
-- cargo test for Rust testing.
-- GitHub Actions for CI.
-- Docker for containerized agents.
-- uv for Python dependency management.
+**Determinism and type safety.** Simulators are tick-based and reproducible —
+same input, same result. Rust's type system and Pydantic validation catch
+invalid states before they reach runtime. Test suites are substantial and run in
+CI; the Network Simulator alone carries 2,192 tests.
 
 ## Constraints
 
-**Resource Limits:**
-Projects run on commodity hardware (Mac mini M4 Pro, Raspberry Pi). This drives efficient design.
-
-**Security First:**
-Multi-agent systems assume agents are potentially compromised. Defense-in-depth includes containers, network policies, capability tokens, and audit trails.
-
-**Open Source:**
-Code is open where possible. Tools are inspectable, modifiable, and improvable by users.
-
-## Principles
-
-1. **Solve real problems**: Tools address specific needs, not hypothetical use cases.
-2. **Type safety**: Catch errors early through strong typing.
-3. **Test thoroughly**: Comprehensive tests validate correctness.
-4. **Document decisions**: Capture rationale for future reference.
-5. **Plan systematically**: Phase-based execution with verification.
-6. **Keep it simple**: Avoid over-engineering and unnecessary abstraction.
-7. **Make it fast**: Performance matters for large-scale network topologies.
-8. **Build modularly**: Clean interfaces enable reuse and evolution.
+Projects run on commodity hardware — a Mac mini M4 Pro and Raspberry Pi nodes —
+which keeps the design honest about efficiency. Multi-agent systems assume an
+agent may be compromised, so defense is layered: containers, network policies,
+scoped credentials, audit trails. Code is open source where possible.
 
 ---
 

@@ -16,7 +16,6 @@ description: "Terminal-based satellite tracker that displays real-time positions
 ## Contents
 
 - [Concept](#concept)
-- [Technical Reports](#technical-reports)
 - [Architecture](#architecture)
 - [Features](#features)
 - [Current Status](#current-status)
@@ -24,12 +23,6 @@ description: "Terminal-based satellite tracker that displays real-time positions
 ## Concept
 
 Terminal-based satellite tracker that displays real-time positions on a world map, predicts passes over the user's location, and shows transmission frequencies. Built with Rust and ratatui, using the SGP4 orbital propagation algorithm to compute positions from Two-Line Element (TLE) data. A single binary with no GUI dependencies — aimed at amateur radio operators and space enthusiasts.
-
----
-
-## Technical Reports
-
-- [Download Technical Report: satellites-techreport.pdf](/assets/docs/satellites-techreport.pdf)
 
 ---
 

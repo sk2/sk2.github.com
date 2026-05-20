@@ -116,6 +116,12 @@ PROJECT_CONTENT_OVERRIDES = {
     "signals": {
         "Visuals": "### Waterfall & TUI Interface\n\n![Spectra Waterfall](/images/spectra-waterfall-screenshot.png)\n\n### RF Fingerprinting Results\n\n![RF Fingerprinting](/images/rf_fingerprinting_results.png)\n\n### Vector Search (Top-K Matches)\n\n![Vector Search](/images/search_topk_example.png)\n"
     },
+    "datavis": {
+        "Visuals": "![Global earthquake density rendered by DataRaster](/images/datavis-earthquakes.png)\n*Every recorded earthquake epicentre as a density map. Plate boundaries emerge from the raw point cloud with no point-by-point drawing.*\n\n![Flight-path density rendered by DataRaster](/images/datavis-flights.jpg)\n*Line rendering: hundreds of thousands of great-circle flight paths aggregated into a single density layer.*\n\n![Urban trip density rendered by DataRaster](/images/datavis-citibike.png)\n*Point density at city scale — bike-share trip endpoints across a metro area.*\n"
+    },
+    "matrix-time-series": {
+        "Visuals": "![Electricity-demand signal with matrix-profile annotations](/images/matrix-annotated-profile.png)\n*Top: an electricity-demand signal with the discovered discord and matching motifs boxed. Bottom: the matrix profile — its lowest point locates the strongest motif, its highest point the clearest anomaly.*\n\n![Steam-generator signal with motif arcs](/images/matrix-motif-arc-fanout.png)\n*Motif arc fan-out: arcs connect each occurrence of a recurring shape across a steam-generator sensor trace, with the matrix profile below.*\n"
+    },
 }
 
 CATEGORY_MAP = {
@@ -125,7 +131,7 @@ CATEGORY_MAP = {
     "astrophotography": ("Astrophotography", "Autonomous imaging and celestial monitoring.", None),
     "photography": ("Photography", "Automated camera control and monitoring.", None),
     "agents": ("Autonomous Systems", "Secure systems for agents and infrastructure automation.", "/agentic-systems"),
-    "data": ("Data & Utilities", "Geospatial analytics and time-series discovery.", "/data-analytics"),
+    "data": ("Data & Utilities", "Dense spatial rendering and time-series pattern discovery.", "/data-analytics"),
     "wellness": ("Wellness & Sound", "Sound analysis and wellness monitoring.", None),
     "experimental": ("Experimental", "Exploratory projects and technical experiments.", None),
 }
@@ -282,7 +288,7 @@ def parse_project_metadata(project_path: Path) -> Optional[ProjectInfo]:
     elif any(x in s for x in ["astro", "aurora", "eclipse", "satellites"]): cat = "astrophotography"
     elif any(x in s for x in ["agent", "multi-agent", "cycle"]): cat = "agents"
     elif any(x in s for x in ["netvis", "ank", "topogen", "netsim", "autonetkit", "network", "configparsing", "nte", "orchestrator", "automationarch", "netflowsim", "netassure", "cliscrape", "deviceinteraction"]): cat = "network"
-    elif any(x in s for x in ["polars", "tileserver", "matrix-time-series", "weather", "omnifocus-db", "nascleanup", "devmon"]): cat = "data"
+    elif any(x in s for x in ["polars", "tileserver", "matrix-time-series", "datavis", "data-raster", "weather", "omnifocus-db", "nascleanup", "devmon"]): cat = "data"
     
     stack = []
     if (project_path / "Cargo.toml").exists(): stack.append("Rust")

@@ -35,7 +35,6 @@ Unlike packet-level simulators that focus on bit-level accuracy, this engine foc
 ## Technical Reports
 
 - [Download Research Paper: paper.pdf](/assets/docs/netsim-paper.pdf)
-- [Download Research Paper: techreport.pdf](/assets/docs/netsim-techreport.pdf)
 
 ---
 

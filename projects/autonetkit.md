@@ -16,7 +16,6 @@ description: "A compiler-based framework for automated network provisioning."
 ## Contents
 
 - [Concept](#concept)
-- [Technical Reports](#technical-reports)
 - [Code Samples](#code-samples)
 - [Usage](#usage)
 - [Visuals](#visuals)
@@ -29,12 +28,6 @@ description: "A compiler-based framework for automated network provisioning."
 A compiler-based framework for automated network provisioning. AutoNetkit transforms high-level network designs into validated device configurations across heterogeneous hardware and protocol environments.
 
 Traditional network configuration is manual and vendor-specific. AutoNetkit introduces a declarative approach where engineers define the network design, and the engine handles the transformations required to generate protocol parameters and CLI commands.
-
----
-
-## Technical Reports
-
-- [Download Research Paper: ank-techreport.pdf](/assets/docs/autonetkit-ank-techreport.pdf)
 
 ---
 

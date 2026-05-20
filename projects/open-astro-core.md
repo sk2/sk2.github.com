@@ -21,12 +21,6 @@ Rust library providing shared astronomical logic, hardware drivers, and protocol
 
 ---
 
-## Technical Reports
-
-- [Download Technical Report: open-astro-core.pdf](/assets/docs/open-astro-core-open-astro-core.pdf)
-
----
-
 ## Quick Facts
 
 | | |

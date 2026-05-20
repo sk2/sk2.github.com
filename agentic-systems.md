@@ -18,7 +18,7 @@ Multi-agent coordination and real-time adaptive control — secure systems where
 ## Principles
 
 - **Security by Design**: Every agent runs in its own container with minimal privileges. No direct agent-to-agent communication — all coordination flows through the NATS broker.
-- **Clear Coordination**: The orchestrator uses cloud LLM reasoning (Claude/GPT-4) for task planning while agents remain lightweight and deterministic.
+- **Clear Coordination**: The orchestrator uses cloud LLM reasoning for task planning while agents stay lightweight and deterministic.
 - **User Control**: Sensitive actions require explicit approval. The system explains its reasoning and provides a clear audit trail.
 - **Composable Architecture**: New capabilities are added by deploying new agent containers, not by modifying the orchestrator.
 
@@ -26,20 +26,16 @@ Multi-agent coordination and real-time adaptive control — secure systems where
 
 ## How They Work Together
 
-```
-┌────────────────────────────────────────────────────────┐
-│                    Orchestrator                         │
-│            (LLM Reasoning + Task Planning)             │
-└──────────┬────────────────────────────────┬────────────┘
-           │         NATS Broker            │
-     ┌─────▼──────┐  ┌──────────┐  ┌───────▼────────┐
-     │  Health     │  │  Home    │  │  Monitoring    │
-     │  Agent      │  │  Agent   │  │  Agent         │
-     │ (Biometrics)│  │ (HomeKit)│  │ (Backups/Infra)│
-     └─────────────┘  └──────────┘  └────────────────┘
-```
+<div class="mermaid">
+flowchart TD
+    ORCH["Orchestrator<br/><small>LLM reasoning · task planning</small>"]
+    ORCH <--> NATS["NATS Broker"]
+    NATS <--> HA["Health Agent<br/><small>biometrics</small>"]
+    NATS <--> HOME["Home Agent<br/><small>HomeKit</small>"]
+    NATS <--> MON["Monitoring Agent<br/><small>backups · infrastructure</small>"]
+</div>
 
-Each agent subscribes to NATS topics matching its domain. The orchestrator breaks complex requests into domain-specific tasks, publishes them, and aggregates results. Agents can trigger other agents through the broker but never communicate directly.
+Each agent subscribes to the NATS topics matching its domain. The orchestrator breaks a complex request into domain-specific tasks, publishes them, and aggregates the results. Agents can trigger other agents through the broker but never communicate directly.
 
 ---
 

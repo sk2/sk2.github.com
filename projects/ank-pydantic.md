@@ -36,7 +36,6 @@ The library ships with domain models for common protocol stacks in its `blueprin
 ## Technical Reports
 
 - [Download Research Paper: ank-usermanual.pdf](/assets/docs/ank-pydantic-ank-usermanual.pdf)
-- [Download Research Paper: ank-techreport.pdf](/assets/docs/ank-pydantic-ank-techreport.pdf)
 
 ---
 

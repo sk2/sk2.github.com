@@ -36,7 +36,6 @@ A 14-crate Cargo workspace with pluggable datastore backends (Polars, DuckDB, Li
 
 - [Download Research Paper: nte-paper.pdf](/assets/docs/ank-nte-nte-paper.pdf)
 - [Download Research Paper: nte-usermanual.pdf](/assets/docs/ank-nte-nte-usermanual.pdf)
-- [Download Research Paper: nte-techreport.pdf](/assets/docs/ank-nte-nte-techreport.pdf)
 
 ---
 

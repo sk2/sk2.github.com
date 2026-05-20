@@ -489,6 +489,25 @@ blockquote {
   font-style: italic;
 }
 
+/* Callout — boxed notice for important page-level messages */
+.callout {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+  padding: var(--space-md);
+  margin: var(--space-lg) 0;
+}
+
+.callout p {
+  margin: 0;
+  color: var(--text-secondary);
+}
+
+.callout strong {
+  color: var(--text-primary);
+}
+
 /* ============================================
    Horizontal Rules
    ============================================ */

@@ -33,7 +33,6 @@ Blueprints are composed from importable fragments. A site blueprint imports prot
 
 ## Technical Reports
 
-- [Download Research Paper: netcfg-techreport.pdf](/assets/docs/ank-netcfg-netcfg-techreport.pdf)
 - [Download Research Paper: netcfg-paper.pdf](/assets/docs/ank-netcfg-netcfg-paper.pdf)
 
 ---
@@ -2569,7 +2568,7 @@ Error reporting uses `miette` for source-snippet diagnostics: blueprint validati
 
 ## What This Is
 
-An implementation of the **Multi-Abstraction Layer Topology (MALT)**, built as an enterprise Rust compiler for deterministic network configuration generation. `NetCfg` treats configuration as a [compilation](../compilation) problem rather than a string templating exercise, translating high-level **Whiteboard-to-Plan (W2P)** architectural intent into target-specific configurations via AST lowering.
+An implementation of the **Multi-Abstraction Layer Topology (MALT)**, built as an enterprise Rust compiler for deterministic network configuration generation. `NetCfg` treats configuration as a [compilation](../compilation) problem rather than a string templating exercise, translating high-level **Intent-to-Blueprint** architectural intent into target-specific configurations via AST lowering.
 
 The `netcfg` binary orchestrates: blueprint parsing → topology transformation → DeviceIR generation → AST lowering (TSDM) → template rendering → traceable config file emission.
 

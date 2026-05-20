@@ -16,7 +16,6 @@ description: "Generative psytrance synthesis engine with real-time TUI controls.
 ## Contents
 
 - [Concept](#concept)
-- [Technical Reports](#technical-reports)
 - [Architecture](#architecture)
 - [Features](#features)
 - [Current Status](#current-status)
@@ -24,12 +23,6 @@ description: "Generative psytrance synthesis engine with real-time TUI controls.
 ## Concept
 
 Generative psytrance synthesis engine with real-time TUI controls. Creates complete tracks driven by a multi-level energy model (macro, meso, micro), with live playback, step editing, and WAV export. Procedural synthesis generates kick, bass, hihat, and clap patterns; an effects chain (sidechain compression, delay, reverb, HPF, limiter) and humanization (velocity jitter, micro-timing) produce output that sounds like a produced track rather than a sequencer demo.
-
----
-
-## Technical Reports
-
-- [Download Technical Report: techreport.pdf](/assets/docs/psytrance-techreport.pdf)
 
 ---
 

@@ -36,7 +36,6 @@ Automated signal census system that transforms raw radio spectrum data into clas
 ## Technical Reports
 
 - [Download Research Paper: spectra-usermanual.pdf](/assets/docs/signals-spectra-usermanual.pdf)
-- [Download Research Paper: spectra-techreport.pdf](/assets/docs/signals-spectra-techreport.pdf)
 
 ---
 

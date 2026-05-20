@@ -120,4 +120,4 @@ steam-generator sensor trace, with the matrix profile below.*
 
 ---
 
-[← Back to Projects](projects) | [Network Automation](network-automation) | [Signal Processing](signal-processing) | [Photography](photography) | [Autonomous Systems](agentic-systems)
+[← Back to Projects](projects) | [Signal Processing](signal-processing) | [Photography](photography) | [Autonomous Systems](agentic-systems)

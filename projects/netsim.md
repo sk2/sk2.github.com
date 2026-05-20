@@ -2,6 +2,8 @@
 layout: default
 section: network-automation
 description: "Deterministic tick-based network protocol simulator validating configurations before production deployment."
+sitemap: false
+hand_written: true
 ---
 
 # Network Simulator

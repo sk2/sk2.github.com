@@ -2,6 +2,8 @@
 layout: default
 section: network-automation
 description: "The Network Modeling & Configuration Library represents network topologies as typed Python objects backed by a Rust graph engine."
+sitemap: false
+hand_written: true
 ---
 
 # Network Modeling & Configuration Library

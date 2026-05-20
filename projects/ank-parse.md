@@ -1,6 +1,8 @@
 ---
 layout: default
 section: network-automation
+sitemap: false
+hand_written: true
 ---
 
 # Network Configuration Parser

@@ -2,6 +2,8 @@
 layout: default
 title: "Tick-Based Determinism vs. Full Emulation"
 section: insights
+sitemap: false
+hand_written: true
 ---
 
 # Tick-Based Determinism vs. Full Emulation

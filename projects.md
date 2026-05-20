@@ -11,133 +11,6 @@ Focused on network engineering, autonomous systems, and signal processing.
 
 <div class="search-container"><input type="text" id="projectSearch" placeholder="Search projects, stack, or descriptions..." onkeyup="filterProjects()"></div>
 
-## Recent Activity
-
-<ul class="recent-activity-list">
-<li><strong>2026-05-05</strong>: <a href="projects/configparsing">Brownfield Ingestion</a> — <em>2026-05-05 - Verified vks/45w/do2/yhp closure against code; resynced docs with bead state.</em></li>
-<li><strong>2026-05-02</strong>: <a href="projects/cliscrape">CLI Parser</a> — <em>closed Universal Ledger epic. 189 tests across 18 binaries enforce the schema contract end-to-end.</em></li>
-<li><strong>2026-04-30</strong>: <a href="projects/matrix-time-series">matrix-profile-rs</a> — <em>Published v2.0.0 release (commits and tags pushed to main)</em></li>
-<li><strong>2026-04-12</strong>: <a href="projects/netsequence">netsequence</a> — <em>2026-04-12 - Reality-check docs, report status, and `br` gap epic updated</em></li>
-<li><strong>2026-04-11</strong>: <a href="projects/automationarch">Network Automation Ecosystem - Overall Architecture Definition</a> — <em>Agentic Translation Layer shipped; UUID Registry and Pessimistic Locking live.</em></li>
-</ul>
-
----
-
-## Network Engineering
-
-<div class="project-grid">
-<div class="project-card" data-search="brownfield ingestion vendor translation layer that decouples network configuration from vendor-specific syntax. uses llm-powered rag to extract network-level intent and topology relationships from vendor documentation and cli configurations, normalizing them into a vendor-neutral topology graph model. the intermediate representation is topology-centric (protocol adjacencies, link roles, vlan membership) rather than device-centric like yang, enabling genuine vendor abstraction. python configparsing">
-  <h3 class="card-title"><a href="projects/configparsing">Brownfield Ingestion</a></h3>
-  <div class="badges-row card-badges"><span class="status-badge status-active">Last Active: 2026-05-05</span> <span class="stack-badge">Python</span></div>
-  <p class="card-description">Vendor translation layer that decouples network configuration from vendor-specific syntax. Uses LLM-powered RAG to extract network-level intent and topology relationships from vendor documentation and CLI configurations, normalizing them into a vendor-neutral topology graph model. The intermediate representation is topology-centric (protocol adjacencies, link roles, VLAN membership) rather than device-centric like YANG, enabling genuine vendor abstraction.</p>
-</div>
-
-<div class="project-card" data-search="cli parser parsing engine for network device cli output. transforms semi-structured text (show commands, routing tables, bgp summaries) into structured data (json/yaml) using an optimized rust state machine. provides full compatibility with the industry-standard ntc-templates library while offering 10–50x faster execution than python-based alternatives like textfsm. rust cliscrape">
-  <h3 class="card-title"><a href="projects/cliscrape">CLI Parser</a></h3>
-  <div class="badges-row card-badges"><span class="status-badge status-active">Last Active: 2026-05-02</span> <span class="stack-badge">Rust</span></div>
-  <p class="card-description">Parsing engine for network device CLI output. Transforms semi-structured text (show commands, routing tables, BGP summaries) into structured data (JSON/YAML) using an optimized Rust state machine. Provides full compatibility with the industry-standard ntc-templates library while offering 10–50x faster execution than Python-based alternatives like TextFSM.</p>
-</div>
-
-<div class="project-card" data-search="configuration generation (autonetkit) a compiler-based framework for automated network provisioning. autonetkit transforms high-level network designs into validated device configurations across heterogeneous hardware and protocol environments. traditional network configuration is manual and vendor-specific. python polars autonetkit">
-  <h3 class="card-title"><a href="projects/autonetkit">Configuration Generation (AutoNetkit)</a></h3>
-  <div class="badges-row card-badges"><span class="status-badge status-active">Last Active: 2026-03-01</span> <span class="stack-badge">Python</span><span class="stack-badge">Polars</span></div>
-  <p class="card-description">A compiler-based framework for automated network provisioning. AutoNetkit transforms high-level network designs into validated device configurations across heterogeneous hardware and protocol environments. Traditional network configuration is manual and vendor-specific.</p>
-</div>
-
-<div class="project-card" data-search="device interaction framework a rust library and cli for network device interaction and automated testing. provides the essential pyats capabilities — testbed management, cli output parsing, and state verification — without the complexity. connects to devices (real, simulated, or mocked), executes commands, parses structured output, and verifies correctness with the type safety of compiled rust. rust deviceinteraction">
-  <h3 class="card-title"><a href="projects/deviceinteraction">Device Interaction Framework</a></h3>
-  <div class="badges-row card-badges"><span class="status-badge status-active">Active</span> <span class="stack-badge">Rust</span></div>
-  <p class="card-description">A Rust library and CLI for network device interaction and automated testing. Provides the essential PyATS capabilities — testbed management, CLI output parsing, and state verification — without the complexity. Connects to devices (real, simulated, or mocked), executes commands, parses structured output, and verifies correctness with the type safety of compiled Rust.</p>
-</div>
-
-<div class="project-card" data-search="network analysis engine graph neural network (gnn) based network analytics module that extends topology analysis with real-time learning and prediction. subscribes to the network topology engine's websocket stream for live topology updates, runs gnn models on graph data, and exposes analytics through multiple interfaces (websocket streaming, rest api, rust library, event queue). built on an existing rust+python analysis toolkit that includes formal verification (z3 smt solver), graph algorithms (centrality, community detection, cascade modeling), and python bindings via pyo3. rust typescript netassure">
-  <h3 class="card-title"><a href="projects/netassure">Network Analysis Engine</a></h3>
-  <div class="badges-row card-badges"><span class="status-badge status-active">Active</span> <span class="stack-badge">Rust</span><span class="stack-badge">TypeScript</span></div>
-  <p class="card-description">Graph Neural Network (GNN) based network analytics module that extends topology analysis with real-time learning and prediction. Subscribes to the Network Topology Engine's WebSocket stream for live topology updates, runs GNN models on graph data, and exposes analytics through multiple interfaces (WebSocket streaming, REST API, Rust library, event queue). Built on an existing Rust+Python analysis toolkit that includes formal verification (Z3 SMT solver), graph algorithms (centrality, community detection, cascade modeling), and Python bindings via PyO3.</p>
-</div>
-
-<div class="project-card" data-search="network automation ecosystem - overall architecture definition this project defines the architecture of the network automation ecosystem: how its tools connect, what data flows between them, and where the system is headed. the ecosystem comprises nine repositories that form a composable toolchain. each tool handles one concern -- topology generation, simulation, configuration parsing, visualization, analysis -- and communicates through pinned contract schemas (rfc-01, rfc-02). python typescript automationarch">
-  <h3 class="card-title"><a href="projects/automationarch">Network Automation Ecosystem - Overall Architecture Definition</a></h3>
-  <div class="badges-row card-badges"><span class="status-badge status-active">Last Active: 2026-04-11</span> <span class="stack-badge">Python</span><span class="stack-badge">TypeScript</span></div>
-  <p class="card-description">This project defines the architecture of the Network Automation Ecosystem: how its tools connect, what data flows between them, and where the system is headed. The ecosystem comprises nine repositories that form a composable toolchain. Each tool handles one concern -- topology generation, simulation, configuration parsing, visualization, analysis -- and communicates through pinned contract schemas (RFC-01, RFC-02).</p>
-</div>
-
-<div class="project-card" data-search="network automation workbench orchestration platform that integrates the ank ecosystem tools — [topology generator](/projects/topogen), [network modeling & configuration library](/projects/ank-pydantic), [network simulator](/projects/netsim), [network visualization engine](/projects/netvis) — into a single web interface. engineers define topologies, generate configurations, run simulations, and inspect results without switching between cli tools. ```
-┌──────────────────────────────────────────────────────────────────┐
-│                  network automation workbench                    │
-│         (orchestration · web ui · workflow management)           │
-│   ┌──────────────┬──────────────┬──────────────┬──────────────┐ │
-│   │   topogen    │  [ank-pydantic](../ank-pydantic)│   simulator  │    netvis    │ │
-│   └──────────────┴──────────────┴──────────────┴──────────────┘ │
-└──────────────────────────────────────────────────────────────────┘
-```
-
-the workflow follows a linear pipeline: generate or model a topology, run a simulation against it, visualize the results, and export device configurations. python ank-workbench">
-  <h3 class="card-title"><a href="projects/ank-workbench">Network Automation Workbench</a></h3>
-  <div class="badges-row card-badges"><span class="status-badge status-active">Last Active: 2026-04-06</span> <span class="stack-badge">Python</span></div>
-  <p class="card-description">Orchestration platform that integrates the ANK ecosystem tools — [Topology Generator](/projects/topogen), [Network Modeling & Configuration Library](/projects/ank-pydantic), [Network Simulator](/projects/netsim), [Network Visualization Engine](/projects/netvis) — into a single web interface. Engineers define topologies, generate configurations, run simulations, and inspect results without switching between CLI tools. ```
-┌──────────────────────────────────────────────────────────────────┐
-│                  Network Automation Workbench                    │
-│         (Orchestration · Web UI · Workflow Management)           │
-│   ┌──────────────┬──────────────┬──────────────┬──────────────┐ │
-│   │   TopoGen    │  [ank-pydantic](../ank-pydantic)│   Simulator  │    NetVis    │ │
-│   └──────────────┴──────────────┴──────────────┴──────────────┘ │
-└──────────────────────────────────────────────────────────────────┘
-```
-
-The workflow follows a linear pipeline: generate or model a topology, run a simulation against it, visualize the results, and export device configurations.</p>
-</div>
-
-<div class="project-card" data-search="network configuration framework network configuration framework is a rust cli that compiles declarative yaml blueprints into vendor-neutral configuration artifacts. a single binary orchestrates the full pipeline: blueprint parsing, topology transformation, deviceir generation, template rendering, and traceable config file emission. the core problem is determinism. rust polars ank-netcfg">
-  <h3 class="card-title"><a href="projects/ank-netcfg">Network Configuration Framework</a></h3>
-  <div class="badges-row card-badges"><span class="status-badge status-active">Last Active: 2026-03-24</span> <span class="stack-badge">Rust</span><span class="stack-badge">Polars</span></div>
-  <p class="card-description">Network Configuration Framework is a Rust CLI that compiles declarative YAML blueprints into vendor-neutral configuration artifacts. A single binary orchestrates the full pipeline: blueprint parsing, topology transformation, DeviceIR generation, template rendering, and traceable config file emission. The core problem is determinism.</p>
-</div>
-
-<div class="project-card" data-search="network modeling & configuration library the network modeling & configuration library represents network topologies as typed python objects backed by a rust graph engine. you define nodes, edges, and layers using pydantic models. the library stores them in the [network topology engine](/projects/ank-nte) and exposes a composable query api that builds lazy evaluation plans in python and executes them in rust. python polars ank-pydantic">
-  <h3 class="card-title"><a href="projects/ank-pydantic">Network Modeling & Configuration Library</a></h3>
-  <div class="badges-row card-badges"><span class="status-badge status-active">Last Active: 2026-03-01</span> <span class="stack-badge">Python</span><span class="stack-badge">Polars</span></div>
-  <p class="card-description">The Network Modeling & Configuration Library represents network topologies as typed Python objects backed by a Rust graph engine. You define nodes, edges, and layers using Pydantic models. The library stores them in the [Network Topology Engine](/projects/ank-nte) and exposes a composable query API that builds lazy evaluation plans in Python and executes them in Rust.</p>
-</div>
-
-<div class="project-card" data-search="network simulator deterministic tick-based network protocol simulator validating configurations before production deployment. it provides protocol-level fidelity with same-topology-same-results guarantees, allowing engineers to verify control-plane behavior without the overhead of full vm emulation. unlike packet-level simulators that focus on bit-level accuracy, this engine focuses on **protocol convergence and state validation**. rust netsim">
-  <h3 class="card-title"><a href="projects/netsim">Network Simulator</a></h3>
-  <div class="badges-row card-badges"><span class="status-badge status-active">Last Active: 2026-03-26</span> <span class="stack-badge">Rust</span></div>
-  <p class="card-description">Deterministic tick-based network protocol simulator validating configurations before production deployment. It provides protocol-level fidelity with same-topology-same-results guarantees, allowing engineers to verify control-plane behavior without the overhead of full VM emulation. Unlike packet-level simulators that focus on bit-level accuracy, this engine focuses on **protocol convergence and state validation**.</p>
-</div>
-
-<div class="project-card" data-search="network topology engine rust-based graph topology engine with python bindings via pyo3. takes network topologies — nodes, edges, layers, metadata — and stores them in a dual-write architecture: structural graph (petgraph stabledigraph) plus columnar attribute store (polars dataframes). mutations update both atomically; if either write fails, the transaction rolls back. rust python polars ank-nte">
-  <h3 class="card-title"><a href="projects/ank-nte">Network Topology Engine</a></h3>
-  <div class="badges-row card-badges"><span class="status-badge status-active">Active</span> <span class="stack-badge">Rust</span><span class="stack-badge">Python</span><span class="stack-badge">Polars</span></div>
-  <p class="card-description">Rust-based graph topology engine with Python bindings via PyO3. Takes network topologies — nodes, edges, layers, metadata — and stores them in a dual-write architecture: structural graph (petgraph StableDiGraph) plus columnar attribute store (Polars DataFrames). Mutations update both atomically; if either write fails, the transaction rolls back.</p>
-</div>
-
-<div class="project-card" data-search="network visualization engine rust-based network topology layout and visualization engine. takes multi-layer network topologies (via petgraph) and renders them using layout algorithms that minimize edge crossings, bundle related connections, and respect hierarchical or geographic structure. outputs svg, pdf, and png with interactive browser embedding via wasm. rust python typescript netvis">
-  <h3 class="card-title"><a href="projects/netvis">Network Visualization Engine</a></h3>
-  <div class="badges-row card-badges"><span class="status-badge status-active">Last Active: 2026-03-30</span> <span class="stack-badge">Rust</span><span class="stack-badge">Python</span><span class="stack-badge">TypeScript</span></div>
-  <img src="../images/hero-diagram.svg" class="project-thumbnail" alt="Network Visualization Engine diagram" />
-  <p class="card-description">Rust-based network topology layout and visualization engine. Takes multi-layer network topologies (via petgraph) and renders them using layout algorithms that minimize edge crossings, bundle related connections, and respect hierarchical or geographic structure. Outputs SVG, PDF, and PNG with interactive browser embedding via WASM.</p>
-</div>
-
-<div class="project-card" data-search="performance simulator network flow simulator uses analytic queuing models and monte carlo simulation to evaluate network performance without packet-level discrete event simulation. given a topology and traffic demands, it pushes billions of flow iterations through queuing models in seconds, identifying congestion bottlenecks probabilistically and projecting capacity headroom across carrier-scale networks (100k+ nodes). the core tradeoff: sacrifice per-packet fidelity for orders-of-magnitude speed improvement. rust netflowsim">
-  <h3 class="card-title"><a href="projects/netflowsim">Performance Simulator</a></h3>
-  <div class="badges-row card-badges"><span class="status-badge status-active">Active</span> <span class="stack-badge">Rust</span></div>
-  <p class="card-description">Network Flow Simulator uses analytic queuing models and Monte Carlo simulation to evaluate network performance without packet-level discrete event simulation. Given a topology and traffic demands, it pushes billions of flow iterations through queuing models in seconds, identifying congestion bottlenecks probabilistically and projecting capacity headroom across carrier-scale networks (100k+ nodes). The core tradeoff: sacrifice per-packet fidelity for orders-of-magnitude speed improvement.</p>
-</div>
-
-<div class="project-card" data-search="project reference orchestration engine for coordinating device interactions across real and testbed networks. executes runs with retries, timeouts, bounded concurrency, and durable artifacts (logs, results, snapshots). uses [device interaction framework](../deviceinteraction) as a library for transports, parsing, and test primitives — the orchestrator owns run coordination, persistence, and event streaming. python orchestrator">
-  <h3 class="card-title"><a href="projects/orchestrator">Project Reference</a></h3>
-  <div class="badges-row card-badges"><span class="status-badge status-active">Active</span> <span class="stack-badge">Python</span></div>
-  <p class="card-description">Orchestration engine for coordinating device interactions across real and testbed networks. Executes runs with retries, timeouts, bounded concurrency, and durable artifacts (logs, results, snapshots). Uses [Device Interaction Framework](../deviceinteraction) as a library for transports, parsing, and test primitives — the orchestrator owns run coordination, persistence, and event streaming.</p>
-</div>
-
-<div class="project-card" data-search="topology generator rust-based network topology generator with python bindings. takes a declarative yaml config describing the desired topology type, scale, and parameters, and produces a validated network graph with realistic structure — proper tier hierarchies, vendor-specific interface naming, geographic placement, and bandwidth profiles. consolidates topology generation logic that was previously scattered across autonetkit, the [network simulator](/projects/netsim), and the [network visualization engine](/projects/netvis) into a single library. rust python topogen">
-  <h3 class="card-title"><a href="projects/topogen">Topology Generator</a></h3>
-  <div class="badges-row card-badges"><span class="status-badge status-active">Active</span> <span class="stack-badge">Rust</span><span class="stack-badge">Python</span></div>
-  <p class="card-description">Rust-based network topology generator with Python bindings. Takes a declarative YAML config describing the desired topology type, scale, and parameters, and produces a validated network graph with realistic structure — proper tier hierarchies, vendor-specific interface naming, geographic placement, and bandwidth profiles. Consolidates topology generation logic that was previously scattered across AutoNetKit, the [Network Simulator](/projects/netsim), and the [Network Visualization Engine](/projects/netvis) into a single library.</p>
-</div>
-
-</div>
 
 ## Radio Systems
 
@@ -178,10 +51,10 @@ The workflow follows a linear pipeline: generate or model a topology, run a simu
 ## Health & Biometrics
 
 <div class="project-grid">
-<div class="project-card" data-search="healthypi ecosystem modular health monitoring ecosystem that translates raw biometric data from healthypi hardware (pi hat and wearable) into structured metrics for agent-driven analysis. swift collectors on apple devices capture healthkit data, publish to a nats broker, and python agents in containers run analysis pipelines — all coordinated by the [multi-agent](../multi-agent) orchestrator. python healthypi">
+<div class="project-card" data-search="healthypi ecosystem modular health monitoring ecosystem that translates raw biometric data from healthypi hardware (pi hat and wearable) into structured metrics for agent-driven analysis. swift collectors on apple devices capture healthkit data, publish to a nats broker, and python agents in containers run analysis pipelines over the resulting stream. python healthypi">
   <h3 class="card-title"><a href="projects/healthypi">HealthyPi Ecosystem</a></h3>
   <div class="badges-row card-badges"><span class="status-badge status-active">Last Active: 2026-02-20</span> <span class="stack-badge">Python</span></div>
-  <p class="card-description">Modular health monitoring ecosystem that translates raw biometric data from HealthyPi hardware (Pi HAT and wearable) into structured metrics for agent-driven analysis. Swift collectors on Apple devices capture HealthKit data, publish to a NATS broker, and Python agents in containers run analysis pipelines — all coordinated by the [multi-agent](../multi-agent) orchestrator.</p>
+  <p class="card-description">Modular health monitoring ecosystem that translates raw biometric data from HealthyPi hardware (Pi HAT and wearable) into structured metrics for agent-driven analysis. Swift collectors on Apple devices capture HealthKit data, publish to a NATS broker, and Python agents in containers run analysis pipelines over the resulting stream.</p>
 </div>
 
 </div>
@@ -258,20 +131,10 @@ The workflow follows a linear pipeline: generate or model a topology, run a simu
 ## Data & Utilities
 
 <div class="project-grid">
-<div class="project-card" data-search="dataraster (data-raster) dataraster turns massive spatial datasets into density maps, raster tiles, and
-analysis outputs. it is built for the point where browser-side svg, notebook
-scripts, and hand-rolled python pipelines stop scaling — a compiled backend for
-dense point, line, and polygon rendering. the shortest framing, for anyone who knows datashader: dataraster is a
-deployment-friendly backend for the same class of dense spatial rendering, with
-a tile server, python bindings, and diagnostics built around it. rust polars datavis">
+<div class="project-card" data-search="dataraster (data-raster) a rust-native server-side rasterization library and toolset for rendering datasets of millions to billions of points into density-aware raster images and map tiles. inspired by datashader's pioneering concepts but rebuilt from scratch on a modern polars/arrow/rayon stack, eliminating jit warmup latency, the numba/dask dependency chain, and python-only deployment constraints. shipped as v1.0: a rust library crate, cli tool, http tile server, and python package. rust polars datavis">
   <h3 class="card-title"><a href="projects/datavis">DataRaster (data-raster)</a></h3>
   <div class="badges-row card-badges"><span class="status-badge status-active">Last Active: 2026-03-22</span> <span class="stack-badge">Rust</span><span class="stack-badge">Polars</span></div>
-  <p class="card-description">DataRaster turns massive spatial datasets into density maps, raster tiles, and
-analysis outputs. It is built for the point where browser-side SVG, notebook
-scripts, and hand-rolled Python pipelines stop scaling — a compiled backend for
-dense point, line, and polygon rendering. The shortest framing, for anyone who knows Datashader: DataRaster is a
-deployment-friendly backend for the same class of dense spatial rendering, with
-a tile server, Python bindings, and diagnostics built around it.</p>
+  <p class="card-description">A Rust-native server-side rasterization library and toolset for rendering datasets of millions to billions of points into density-aware raster images and map tiles. Inspired by Datashader's pioneering concepts but rebuilt from scratch on a modern Polars/Arrow/Rayon stack, eliminating JIT warmup latency, the Numba/Dask dependency chain, and Python-only deployment constraints. Shipped as v1.0: a Rust library crate, CLI tool, HTTP tile server, and Python package.</p>
 </div>
 
 <div class="project-card" data-search="nas cleanup & intelligence rust cli for managing large-scale synology nas file systems. performs duplicate detection (bit-for-bit and fuzzy), astrophotography file optimization (asiair workflow cleanup), conventional raw/sidecar management, and intelligent organization. designed for docker or native execution on dsm to minimize network latency during scanning. rust nascleanup">

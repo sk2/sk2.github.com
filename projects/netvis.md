@@ -2,6 +2,8 @@
 layout: default
 section: network-automation
 description: "Rust-based network topology layout and visualization engine."
+sitemap: false
+hand_written: true
 ---
 
 # Network Visualization Engine

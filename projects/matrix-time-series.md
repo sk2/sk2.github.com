@@ -44,6 +44,12 @@ than RAM within a fixed footprint.
 ![Steam-generator signal with motif arcs](/images/matrix-motif-arc-fanout.png)
 *Motif arc fan-out: arcs connect each occurrence of a recurring shape across a steam-generator sensor trace, with the matrix profile below.*
 
+![Multi-stream join across two electricity feeds](/images/matrix-electricity-join.png)
+*Multi-stream join (v2.0.0): the profile annotates one electricity signal with the shape distance to its nearest match in a second signal, surfacing shared structure across two independently sampled feeds.*
+
+![Household sensor stream with online matrix-profile events](/images/matrix-household-streaming.png)
+*Online streaming mode: a household sensor trace is consumed incrementally; motif and discord events are emitted as the profile updates, without re-running the full computation each tick.*
+
 ---
 
 ## Architecture

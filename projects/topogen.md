@@ -2,6 +2,8 @@
 layout: default
 section: network-automation
 description: "Rust-based network topology generator with Python bindings. Takes a declarative YAML config describing the desired topology type, scale, and parameters, and…"
+sitemap: false
+hand_written: true
 ---
 
 # Topology Generator

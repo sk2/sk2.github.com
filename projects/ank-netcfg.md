@@ -2,6 +2,8 @@
 layout: default
 section: network-automation
 description: "Network Configuration Framework is a Rust CLI that compiles declarative YAML blueprints into vendor-neutral configuration artifacts."
+sitemap: false
+hand_written: true
 ---
 
 # Network Configuration Framework

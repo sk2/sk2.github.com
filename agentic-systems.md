@@ -55,4 +55,4 @@ Native SwiftUI training application for iPad and Apple TV that bridges a Wahoo K
 
 ---
 
-[← Back to Projects](projects) | [Network Automation](network-automation) | [Signal Processing](signal-processing) | [Photography](photography) | [Data & Analytics](data-analytics)
+[← Back to Projects](projects) | [Signal Processing](signal-processing) | [Photography](photography) | [Data & Analytics](data-analytics)

@@ -22,12 +22,6 @@ PhD in computer science (University of South Australia, 2017) on the automated c
 </div>
 
 <div class="project-card">
-  <h3 class="card-title"><a href="/projects/netsim">Network Simulator</a></h3>
-  <div class="badges-row card-badges"><span class="stack-badge">Rust</span></div>
-  <p class="card-description">Deterministic, tick-based protocol simulator that validates routing configurations (OSPF, IS-IS, BGP) before deployment. 247,000 lines of Rust, 2,192 tests. Same topology, same results — every time.</p>
-</div>
-
-<div class="project-card">
   <h3 class="card-title"><a href="/projects/matrix-time-series">matrix-profile-rs</a></h3>
   <div class="badges-row card-badges"><span class="stack-badge">Rust</span><span class="stack-badge">Polars</span></div>
   <p class="card-description">Matrix Profile algorithms (STOMP, SCAMP, SCRIMP++) in native Rust. Parameter-free motif and anomaly discovery in time series, with SIMD kernels and a Polars dataframe plugin.</p>

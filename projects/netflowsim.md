@@ -2,6 +2,8 @@
 layout: default
 section: network-automation
 description: "Network Flow Simulator uses analytic queuing models and Monte Carlo simulation to evaluate network performance without packet-level discrete event simulation."
+sitemap: false
+hand_written: true
 ---
 
 # Performance Simulator

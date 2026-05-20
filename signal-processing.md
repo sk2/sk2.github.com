@@ -85,4 +85,4 @@ Modular health monitoring ecosystem that translates raw biometric data from Heal
 
 ---
 
-[← Back to Projects](projects) | [Network Automation](network-automation) | [Photography](photography) | [Data & Analytics](data-analytics) | [Autonomous Systems](agentic-systems)
+[← Back to Projects](projects) | [Photography](photography) | [Data & Analytics](data-analytics) | [Autonomous Systems](agentic-systems)

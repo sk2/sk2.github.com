@@ -2,6 +2,8 @@
 layout: default
 section: network-automation
 description: "A compiler-based framework for automated network provisioning."
+sitemap: false
+hand_written: true
 ---
 
 # Configuration Generation (AutoNetkit)

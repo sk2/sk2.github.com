@@ -2,6 +2,8 @@
 layout: default
 section: network-automation
 description: "Orchestration engine for coordinating device interactions across real and testbed networks."
+sitemap: false
+hand_written: true
 ---
 
 # Project Reference

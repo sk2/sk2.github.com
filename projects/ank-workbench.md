@@ -2,6 +2,8 @@
 layout: default
 section: network-automation
 description: "Orchestration platform that integrates the ANK ecosystem tools — Topology Generator, Network Modeling & Configuration Library, Network Simulator, Network…"
+sitemap: false
+hand_written: true
 ---
 
 # Network Automation Workbench

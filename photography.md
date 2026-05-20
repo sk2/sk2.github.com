@@ -119,4 +119,4 @@ analysis will suggest capture timing.
 
 ---
 
-[← Back to Projects](projects) | [Network Automation](network-automation) | [Signal Processing](signal-processing) | [Data & Analytics](data-analytics) | [Autonomous Systems](agentic-systems)
+[← Back to Projects](projects) | [Signal Processing](signal-processing) | [Data & Analytics](data-analytics) | [Autonomous Systems](agentic-systems)

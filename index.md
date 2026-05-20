@@ -30,6 +30,18 @@ PhD in computer science (University of South Australia, 2017) on the automated c
   <p class="card-description">Matrix Profile algorithms (STOMP, SCAMP, SCRIMP++) in native Rust. Parameter-free motif and anomaly discovery in time series, with SIMD kernels and a Polars dataframe plugin.</p>
 </div>
 
+<div class="project-card">
+  <h3 class="card-title"><a href="/projects/signals">Spectra</a></h3>
+  <div class="badges-row card-badges"><span class="stack-badge">Python</span></div>
+  <p class="card-description">SDR-based spectrum monitoring that classifies and indexes everything it sees. Multi-radio capture feeds an ML pipeline that identifies modulations and writes a searchable signal census, with a TUI waterfall for live inspection.</p>
+</div>
+
+<div class="project-card">
+  <h3 class="card-title"><a href="/projects/psytrance">Overtone</a></h3>
+  <div class="badges-row card-badges"><span class="stack-badge">Rust</span></div>
+  <p class="card-description">Generative psytrance synthesis from first principles. A multi-scale energy model drives procedural pattern generation; an effects chain and humanisation layer turn the result into a produced-sounding track. Tala-style additive rhythm biases the underlying grid.</p>
+</div>
+
 </div>
 
 ## Background

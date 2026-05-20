@@ -1254,6 +1254,9 @@ tile template as a raster source.
 
 ## Visuals
 
+![GBIF global biodiversity density rendered by DataRaster](/images/datavis-gbif-3b.png)
+*The full GBIF release — 3.62 billion species-occurrence records — rendered as a single density layer with an equalized-histogram transfer and the inferno colormap. The Parquet release is read directly from S3, with no intermediate aggregation step.*
+
 ![Global earthquake density rendered by DataRaster](/images/datavis-earthquakes.png)
 *Every recorded earthquake epicentre as a density map. Plate boundaries emerge from the raw point cloud with no point-by-point drawing.*
 

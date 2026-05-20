@@ -7,8 +7,8 @@ description: "Rust-based graph topology engine with Python bindings via PyO3."
 # Network Topology Engine
 
 <div class="badges-row">
-  <span class="status-badge status-active">Recently Updated</span>
-  <span class="stack-badge">Rust</span> <span class="stack-badge">Python</span> <span class="stack-badge">TypeScript</span> <span class="stack-badge">Polars</span>
+  <span class="status-badge status-active">Active</span>
+  <span class="stack-badge">Rust</span> <span class="stack-badge">Python</span> <span class="stack-badge">Polars</span>
 </div>
 
 ---
@@ -16,11 +16,9 @@ description: "Rust-based graph topology engine with Python bindings via PyO3."
 ## Contents
 
 - [Concept](#concept)
-- [Technical Reports](#technical-reports)
 - [Code Samples](#code-samples)
 - [Usage](#usage)
 - [Architecture](#architecture)
-- [Current Status](#current-status)
 
 ## Concept
 
@@ -32,14 +30,124 @@ A 14-crate Cargo workspace with pluggable datastore backends (Polars, DuckDB, Li
 
 ---
 
-## Technical Reports
-
-- [Download Research Paper: nte-paper.pdf](/assets/docs/ank-nte-nte-paper.pdf)
-- [Download Research Paper: nte-usermanual.pdf](/assets/docs/ank-nte-nte-usermanual.pdf)
-
----
-
 ## Code Samples
+
+### inventory_preflight_validation.py
+
+```python
+"""CSV inventory onboarding plus pre-flight validation demo.
+
+Run from the repo root:
+
+    uv run --python 3.13 python examples/inventory_preflight_validation.py --scenario safe-change
+    uv run --python 3.13 python examples/inventory_preflight_validation.py --scenario breaking-change
+"""
+
+from __future__ import annotations
+
+import argparse
+from pathlib import Path
+
+import polars as pl
+
+from [ank_nte](../ank_nte) import Topology
+from preflight_validation import (
+    BREAKING_CHANGE,
+    SAFE_CHANGE,
+    apply_scenario,
+    evaluate_candidate,
+)
+
+
+REPO_ROOT = Path(__file__).resolve().parents[1]
+DEFAULT_NODES = REPO_ROOT / "examples" / "inventory_nodes.csv"
+DEFAULT_EDGES = REPO_ROOT / "examples" / "inventory_edges.csv"
+NODE_REQUIRED_COLUMNS = {"id", "type", "layer"}
+EDGE_REQUIRED_COLUMNS = {"src", "dst"}
+PREFERRED_METADATA_COLUMNS = ["pop", "role", "hostname"]
+
+
+def require_columns(frame: pl.DataFrame, required: set[str], path: Path) -> None:
+    missing = sorted(required - set(frame.columns))
+    if missing:
+        raise ValueError(f"{path} is missing required columns: {', '.join(missing)}")
+
+
+def load_inventory(nodes_path: Path, edges_path: Path) -> Topology:
+    """Load a simple node/edge CSV export into NTE using batch Python APIs."""
+    nodes = pl.read_csv(nodes_path)
+    edges = pl.read_csv(edges_path)
+    require_columns(nodes, NODE_REQUIRED_COLUMNS, nodes_path)
+    require_columns(edges, EDGE_REQUIRED_COLUMNS, edges_path)
+
+    topology = Topology()
+    node_ids = [int(value) for value in nodes["id"].to_list()]
+    node_types = [str(value) for value in nodes["type"].to_list()]
+    node_layers = [str(value) for value in nodes["layer"].to_list()]
+    topology.add_nodes_with_metadata(node_ids, node_types, node_layers)
+
+    metadata_columns = [
+        column for column in PREFERRED_METADATA_COLUMNS if column in nodes.columns
+    ]
+    metadata_columns.extend(
+        column
+        for column in nodes.columns
+        if column not in NODE_REQUIRED_COLUMNS and column not in metadata_columns
+    )
+    for node_type in sorted(set(node_types)):
+        typed_nodes = nodes.filter(pl.col("type") == node_type)
+        typed_frame = pl.DataFrame(
+            {"id": typed_nodes["id"].cast(pl.UInt32)}
+            | {
+                f"data_{column}": typed_nodes[column]
+                for column in metadata_columns
+            }
+        )
+        topology.set_dataframe(node_type, typed_frame)
+
+    if edges.height > 0:
+        topology.add_edges(
+            [int(value) for value in edges["src"].to_list()],
+            [int(value) for value in edges["dst"].to_list()],
+        )
+
+    return topology
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="Load CSV inventory into NTE and run pre-flight validation.",
+    )
+    parser.add_argument("--nodes", type=Path, default=DEFAULT_NODES)
+    parser.add_argument("--edges", type=Path, default=DEFAULT_EDGES)
+    parser.add_argument(
+        "--scenario",
+        choices=[SAFE_CHANGE, BREAKING_CHANGE],
+        default=SAFE_CHANGE,
+    )
+    return parser.parse_args()
+
+
+def main() -> int:
+    args = parse_args()
+    candidate = load_inventory(args.nodes, args.edges)
+    baseline = candidate.snapshot()
+
+    apply_scenario(candidate, args.scenario)
+    impact = evaluate_candidate(baseline=baseline, candidate=candidate)
+
+    report = impact.report()
+    print(f"Scenario: {args.scenario}")
+    for check in report.checks:
+        print(f"  {check}")
+    print(f"Overall: {'PASS' if report.passed else 'FAIL'}")
+    return 0 if report.passed else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+
+```
 
 ### policies.yaml
 
@@ -59,6 +167,192 @@ policies:
     severity: "WARNING"
     expr: "size(layers) > 0"
     message: "Topology should define at least one layer"
+
+```
+
+### preflight_validation.py
+
+```python
+"""Golden-path NTE pre-flight validation demo.
+
+Uses the ``ChangeImpact`` helper from ``src.preflight`` to assert
+topology invariants before and after a proposed change.
+
+Run from the repo root:
+
+    uv run --python 3.13 python examples/preflight_validation.py --scenario safe-change
+    uv run --python 3.13 python examples/preflight_validation.py --scenario breaking-change
+"""
+
+from __future__ import annotations
+
+import argparse
+
+import polars as pl
+
+from [ank_nte](../ank_nte) import QuerySpec, Topology
+from src.preflight import ChangeImpact
+
+
+SAFE_CHANGE = "safe-change"
+BREAKING_CHANGE = "breaking-change"
+
+
+def build_baseline_topology() -> Topology:
+    """Create a small baseline topology with property-backed router metadata."""
+    topology = Topology()
+    topology.add_nodes_with_metadata(
+        [1, 2, 3],
+        ["Router", "Router", "Switch"],
+        ["base", "base", "base"],
+    )
+    topology.add_edges([1, 3], [3, 2])
+
+    topology.set_dataframe(
+        "Router",
+        pl.DataFrame(
+            {
+                "id": pl.Series([1, 2], dtype=pl.UInt32),
+                "data_pop": ["SYD", "MEL"],
+                "data_role": ["core", "edge"],
+                "data_hostname": ["core-syd-1", "edge-mel-1"],
+            }
+        ),
+    )
+    topology.set_dataframe(
+        "Switch",
+        pl.DataFrame(
+            {
+                "id": pl.Series([3], dtype=pl.UInt32),
+                "data_pop": ["SYD"],
+                "data_role": ["access"],
+                "data_hostname": ["access-syd-1"],
+            }
+        ),
+    )
+    return topology
+
+
+def append_router_row(
+    topology: Topology,
+    *,
+    node_id: int,
+    pop: str,
+    role: str,
+    hostname: str,
+) -> None:
+    """Keep the Router dataframe aligned with a newly added demo node."""
+    router_df = topology.get_dataframe("Router")
+    new_row = pl.DataFrame(
+        {
+            "id": pl.Series([node_id], dtype=pl.UInt32),
+            "data_pop": [pop],
+            "data_role": [role],
+            "data_hostname": [hostname],
+        }
+    )
+    if router_df is None:
+        topology.set_dataframe("Router", new_row)
+        return
+
+    topology.set_dataframe("Router", pl.concat([router_df, new_row], how="vertical"))
+
+
+def remove_router_row(topology: Topology, *, node_id: int) -> None:
+    """Keep the Router dataframe aligned with a removed demo node."""
+    router_df = topology.get_dataframe("Router")
+    if router_df is None:
+        return
+
+    topology.set_dataframe("Router", router_df.filter(pl.col("id") != node_id))
+
+
+def apply_scenario(candidate: Topology, scenario: str) -> None:
+    """Apply a proposed change inside an isolated transaction."""
+    if scenario == SAFE_CHANGE:
+        with candidate.transaction() as txn:
+            txn.add_nodes_with_metadata([4], ["Router"], ["base"])
+            txn.add_edge(2, 4)
+        append_router_row(
+            candidate,
+            node_id=4,
+            pop="BNE",
+            role="edge",
+            hostname="edge-bne-1",
+        )
+        return
+
+    if scenario == BREAKING_CHANGE:
+        with candidate.transaction() as txn:
+            txn.remove_nodes([1])
+        remove_router_row(candidate, node_id=1)
+        return
+
+    raise ValueError(f"unknown scenario: {scenario}")
+
+
+def evaluate_candidate(
+    *,
+    baseline: Topology,
+    candidate: Topology,
+) -> ChangeImpact:
+    """Run a small pack of invariants against the candidate topology."""
+    impact = ChangeImpact(baseline=baseline, candidate=candidate)
+
+    impact.assert_count_stable(
+        "at least one Router remains in SYD",
+        QuerySpec(type_filter=["Router"], field_filters={"pop": "SYD"}),
+        min_count=1,
+    )
+    impact.assert_no_protected_removals(
+        "no baseline Router nodes were removed",
+        QuerySpec(type_filter=["Router"]),
+    )
+    impact.assert_count_stable(
+        "candidate topology still has at least two Router nodes",
+        QuerySpec(type_filter=["Router"]),
+        min_count=2,
+    )
+    impact.assert_connectivity_preserved(
+        "all baseline nodes remain reachable",
+        node_ids=list(baseline.get_nodes()),
+    )
+
+    return impact
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="Run a self-contained NTE pre-flight validation demo.",
+    )
+    parser.add_argument(
+        "--scenario",
+        choices=[SAFE_CHANGE, BREAKING_CHANGE],
+        default=SAFE_CHANGE,
+        help="Which proposed change to simulate.",
+    )
+    return parser.parse_args()
+
+
+def main() -> int:
+    args = parse_args()
+
+    candidate = build_baseline_topology()
+    baseline = candidate.snapshot()
+
+    apply_scenario(candidate, args.scenario)
+    impact = evaluate_candidate(baseline=baseline, candidate=candidate)
+
+    report = impact.report()
+    print(f"Scenario: {args.scenario}")
+    for check in report.checks:
+        print(f"  {check}")
+    print(f"Overall: {'PASS' if report.passed else 'FAIL'}")
+    return 0 if report.passed else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
 
 ```
 
@@ -429,293 +723,35 @@ if __name__ == "__main__":
 ### test_advanced_fuzzing.py
 
 ```python
-import pytest
-import [ank_nte](../ank_nte)
-import polars as pl
-from datetime import datetime, timezone
-import json
+"""Retired speculative Python fuzzing around non-contract query/property paths.
 
-def test_type_coercion_polars_boundary():
-    """
-    Test how the engine handles property updates that silently force Polars
-    to upcast column schemas, potentially breaking query predicates.
-    """
-    topo = [ank_nte](../ank_nte).Topology()
-    topo.add_nodes_with_metadata([1, 2, 3], ["Device"]*3, ["layer"]*3)
-    
-    # Node 1 gets an integer
-    topo.update_node_properties(1, {"capacity": 10})
-    # Node 2 gets a float (Forces upcast of the 'capacity' column to Float64)
-    topo.update_node_properties(2, {"capacity": 10.5})
-    # Node 3 gets a string (Forces upcast of the 'capacity' column to String/Utf8)
-    topo.update_node_properties(3, {"capacity": "10G"})
-    
-    # Now query numerically. Does the engine crash because '10G' isn't an int,
-    # or does it gracefully filter it out?
-    try:
-        res = topo.query("MATCH (n:Device) WHERE n.capacity > 5 RETURN n")
-        # Should ideally just return Node 1 and Node 2, ignoring the string
-        assert len(res.matches) >= 0 
-    except Exception:
-        pass
+These tests mixed unsupported string-query assumptions, broad exception
+swallowing, and extreme scenarios that were not stable enough for CI.
 
-def test_temporal_timezone_stripping():
-    """
-    Test how the PyO3 boundary handles complex Python datetime objects,
-    specifically tz-aware vs tz-naive, which often panic strict Rust serializers.
-    """
-    topo = [ank_nte](../ank_nte).Topology()
-    topo.add_nodes_with_metadata([1, 2], ["Event"]*2, ["audit"]*2)
-    
-    # Timezone Aware
-    tz_aware = datetime(2026, 3, 1, 12, 0, tzinfo=timezone.utc)
-    # Timezone Naive
-    tz_naive = datetime(2026, 3, 1, 12, 0)
-    
-    try:
-        topo.update_node_properties(1, {"timestamp": tz_aware})
-        topo.update_node_properties(2, {"timestamp": tz_naive})
-        
-        # Test if the engine can query across the boundary safely
-        topo.query("MATCH (n:Event) RETURN n")
-    except Exception:
-        # Rejection of datetime objects in favor of ISO8601 strings is also acceptable
-        pass
+The remaining Python layer should stay thin and deterministic. Public-API
+boundary coverage now lives in tests/python/test_adversarial_guardrails.py,
+while deeper adversarial invariants belong in Rust crate tests.
+"""
 
-def test_duckdb_sql_injection_on_fallback():
-    """
-    If the engine falls back to a SQL backend (like DuckDB/Ladybug) for complex filters,
-    ensure malicious SQL strings injected via JSON don't escape the query planner context.
-    """
-    topo = [ank_nte](../ank_nte).Topology()
-    topo.add_nodes_with_metadata([1], ["Router"], ["core"])
-    
-    # Inject standard SQLi payloads into a node property
-    evil_payloads = [
-        "1; DROP TABLE nodes; --",
-        "' OR '1'='1",
-        "admin'--",
-    ]
-    
-    for payload in evil_payloads:
-        topo.update_node_properties(1, {"name": payload})
-        
-    # Attempt to query it back using a wildcard or specific match
-    try:
-        query = f"MATCH (n:Router) WHERE n.name = '{evil_payloads[1]}' RETURN n"
-        res = topo.query(query)
-        # Should just treat it as a literal string match
-        assert len(res.matches) == 1
-    except Exception:
-        pass
-
-def test_extreme_json_nesting_in_return():
-    """
-    Test returning a node that contains an absurdly deeply nested JSON object.
-    Ensures the Rust -> Python serialization (yielding the result) doesn't overflow.
-    """
-    topo = [ank_nte](../ank_nte).Topology()
-    topo.add_nodes_with_metadata([1], ["Router"], ["core"])
-    
-    # Build a 500-level deep dictionary
-    deep_dict = "bottom"
-    for _ in range(500):
-        deep_dict = {"layer": deep_dict}
-        
-    try:
-        topo.update_node_properties(1, {"config": deep_dict})
-        
-        # Querying the node means the engine has to serialize this 500-deep 
-        # Rust struct back into a Python dictionary.
-        res = topo.query("MATCH (n:Router) RETURN n")
-        assert len(res.matches) == 1
-    except Exception:
-        # Hitting a recursion limit during serialization is a safe fail
-        pass
-
-def test_query_timeout_circuit_breaker():
-    """
-    Test if the engine respects execution timeout bounds when handed a query 
-    that mathematically requires exponential time (e.g. searching all paths in a mesh).
-    """
-    topo = [ank_nte](../ank_nte).Topology()
-    
-    # 20 node full mesh (every node connects to every node)
-    nodes = list(range(20))
-    topo.add_nodes_with_metadata(nodes, ["Router"]*20, ["core"]*20)
-    for src in nodes:
-        for dst in nodes:
-            if src != dst:
-                try:
-                    topo.add_edge(src, dst)
-                except Exception:
-                    pass
-                    
-    # "Find EVERY POSSIBLE PATH between A and B". In a 20 node mesh, 
-    # the number of paths is O(N!). This query will never finish in our lifetime.
-    query = "MATCH p = (a {id: 0})-[*]->(b {id: 19}) RETURN p"
-    
-    # We execute it on a background thread and assert it yields or crashes safely 
-    # instead of locking the OS.
-    # Note: In a real test, you'd use pytest-timeout or pass a timeout arg.
-    try:
-        # Assuming the query planner has an internal tick counter or max_paths cap
-        res = topo.query(query)
-        # Should either be severely truncated or raise a TimeoutError
-        assert getattr(res, 'truncated', False) is True or len(res.matches) < 1000000
-    except Exception:
-        pass
 ```
 
 ### test_adversarial_threats.py
 
 ```python
-import pytest
-import [ank_nte](../ank_nte)
-import zlib
-import threading
-import time
+"""Retired speculative Python adversarial tests.
 
-def test_adversarial_compression_bomb():
-    """
-    Test against a Decompression DoS (Zip Bomb) attack.
-    If the engine accepts compressed payloads or auto-decompresses network data,
-    an attacker can send a 10KB payload that expands to 10GB in RAM.
-    """
-    topo = [ank_nte](../ank_nte).Topology()
-    topo.add_nodes_with_metadata([1], ["Router"], ["core"])
-    
-    # Generate 1GB of highly compressible zeros
-    raw_data = b"0" * (1024 * 1024 * 1024)
-    compressed_bomb = zlib.compress(raw_data)
-    
-    # In a real engine, if this is ingested via an API that auto-inflates, 
-    # it must hit a hard buffer limit. Here we inject the compressed bytes 
-    # to ensure the storage layer safely stores it as opaque bytes or string 
-    # without automatically expanding it and causing an OOM.
-    try:
-        topo.update_node_properties(1, {"payload": compressed_bomb})
-        res = topo.query("MATCH (n:Router) RETURN n")
-        assert len(res.matches) == 1
-    except Exception:
-        # Rejection of massive raw bytes is a valid defense
-        pass
+These cases were broad "don't crash" probes with unrealistic payload sizes,
+string-query assumptions that are not part of the stable Python contract, and
+large `except Exception: pass` blocks that made failures non-actionable.
 
-def test_adversarial_hash_collision_dos():
-    """
-    Test against a HashDoS attack.
-    An attacker crafts thousands of specific dictionary keys that mathematically 
-    hash to the exact same bucket in the Rust HashMap (SipHash/AHash).
-    This forces O(1) lookups to degrade to O(N), locking the CPU at .
-    """
-    topo = [ank_nte](../ank_nte).Topology()
-    topo.add_nodes_with_metadata([1], ["Router"], ["core"])
-    
-    # Note: Modern Rust uses randomized SipHash/AHash to prevent deterministic HashDoS.
-    # However, we simulate the attack by generating 100,000 weird keys.
-    # If the hash algorithm is weak, this update will take minutes instead of milliseconds.
-    start_time = time.time()
-    
-    evil_payload = {f"k_{i}_{hash(str(i))}": i for i in range(100000)}
-    
-    try:
-        topo.update_node_properties(1, evil_payload)
-    except Exception:
-        pass
-        
-    duration = time.time() - start_time
-    
-    # If the hash table degraded to O(N) collisions, this would take exponentially longer.
-    # We assert it completes in under 2 seconds.
-    assert duration < 2.0, f"HashDoS Vulnerability: Update took {duration} seconds!"
+Deterministic Python boundary coverage now lives in:
+- tests/python/test_adversarial_guardrails.py
 
-def test_adversarial_polyglot_injection():
-    """
-    Test a polyglot payload designed to execute code regardless of the context.
-    This string is simultaneously valid XSS, SQL Injection, Bash injection, and Cypher injection.
-    """
-    topo = [ank_nte](../ank_nte).Topology()
-    topo.add_nodes_with_metadata([1], ["Router"], ["core"])
-    
-    # The ultimate polyglot string
-    polyglot = "1; DROP TABLE nodes; /* <script>alert(1)</script> */ $(rm -rf /) MATCH (n) DETACH DELETE n //"
-    
-    try:
-        # Inject it
-        topo.update_node_properties(1, {"name": polyglot})
-        
-        # Query it. If the engine uses unsafe string concatenation anywhere (in logs, 
-        # in the planner, or in a SQL fallback), this will trigger it.
-        res = topo.query(f"MATCH (n) WHERE n.name = '{polyglot}' RETURN n")
-        
-        assert len(res.matches) == 1
-    except Exception:
-        # A syntax error from refusing to parse the unescaped garbage is perfectly safe
-        pass
+Core adversarial and persistence invariants now live closer to the engine in:
+- nte-query/tests/adversarial_guardrails.rs
+- nte-topology/tests/adversarial_guardrails.rs
+"""
 
-def test_adversarial_toctou_race_condition():
-    """
-    Test Time-of-Check to Time-of-Use (TOCTOU) vulnerability.
-    An attacker attempts to mutate a node exactly in the microsecond between
-    when the query planner validates a property and when it executes the action.
-    """
-    topo = [ank_nte](../ank_nte).Topology()
-    topo.add_nodes_with_metadata([1], ["Vault"], ["secure"])
-    topo.update_node_properties(1, {"access": "DENIED"})
-    
-    # We simulate an engine query that takes a long time
-    def slow_query():
-        try:
-            # The attacker hopes that by the time this query returns,
-            # they have flipped the access flag to GRANTED.
-            topo.query("MATCH (n:Vault) WHERE n.access = 'DENIED' RETURN n")
-        except Exception:
-            pass
-            
-    t1 = threading.Thread(target=slow_query)
-    t1.start()
-    
-    # The attacker thread instantly tries to mutate the property during the read
-    try:
-        topo.update_node_properties(1, {"access": "GRANTED"})
-    except Exception:
-        pass
-        
-    t1.join()
-    # The Rust RwLock must ensure that the read transaction sees a perfectly 
-    # isolated snapshot, and the write transaction is completely blocked until 
-    # the read finishes (or vice versa), guaranteeing absolute ACID isolation.
-    assert True
-
-def test_adversarial_type_juggling_authentication():
-    """
-    Test Type Juggling (common in PHP/Node architectures).
-    If a policy engine checks `if n.auth_level == 1`, an attacker might pass 
-    `true`, `"1"`, or `[1]` to bypass the strict equality check.
-    """
-    topo = [ank_nte](../ank_nte).Topology()
-    topo.add_nodes_with_metadata([1], ["User"], ["identity"])
-    
-    # The system expects an integer 1 for admin
-    topo.update_node_properties(1, {"auth_level": 0}) 
-    
-    # Attacker tries to bypass by finding the node using coerced types
-    # Engine MUST enforce strict type equality for security properties.
-    queries = [
-        "MATCH (n:User) WHERE n.auth_level = '0' RETURN n",
-        "MATCH (n:User) WHERE n.auth_level = false RETURN n",
-        "MATCH (n:User) WHERE n.auth_level = [] RETURN n",
-    ]
-    
-    for q in queries:
-        try:
-            res = topo.query(q)
-            # The engine should not magically coerce 0 to false or '0'.
-            # It must strictly evaluate to 0 matches.
-            assert len(res.matches) == 0
-        except Exception:
-            # Query parser rejecting the type mismatch is also safe
-            pass
 ```
 
 ### test_concurrency_and_schema.py
@@ -992,176 +1028,6 @@ def test_query_plan_combinatorial_explosion():
     assert duration < 1.0, f"Query Planner took exponential time: {duration}s"
 ```
 
-### test_explain_visual.py
-
-```python
-import sys
-import os
-import subprocess
-
-def test_explain_visual():
-    query = "EXPLAIN VISUAL MATCH (n:Router)-[e:link]->(m:Switch) RETURN n.id"
-    # Testing logic would go here. For now we just check it doesn't crash
-
-```
-
-### test_fuzzing.py
-
-```python
-import pytest
-import [ank_nte](../ank_nte)
-import random
-import string
-import gc
-import sys
-
-def test_fuzz_garbage_collection_cycles():
-    """
-    Force Python's garbage collector to run aggressively while
-    spinning up and dropping massive graph topologies.
-    Ensures PyO3 doesn't leak memory or trigger double-free panics.
-    """
-    for _ in range(50):
-        topo = [ank_nte](../ank_nte).Topology()
-        nodes = list(range(1000))
-        topo.add_nodes_with_metadata(nodes, ["Node"] * 1000, ["layer"] * 1000)
-        # Drop the object explicitly
-        del topo
-        # Force a full GC sweep
-        gc.collect()
-        
-    # If Rust panicked on a double-free, this test would abort the process
-    assert True
-
-def test_fuzz_randomized_topology_mutation():
-    """
-    Perform a stochastic series of additions, deletions, and updates.
-    This simulates real-world "chaos" where a user might accidentally
-    delete a node that was just added, or add an edge to a deleted node.
-    """
-    topo = [ank_nte](../ank_nte).Topology()
-    active_nodes = set()
-    
-    # 500 chaotic operations
-    for _ in range(500):
-        op = random.choice(["add_node", "remove_node", "add_edge", "update_prop"])
-        
-        if op == "add_node":
-            node_id = random.randint(1, 1000)
-            if node_id not in active_nodes:
-                topo.add_nodes_with_metadata([node_id], ["Chaos"], ["fuzz"])
-                active_nodes.add(node_id)
-                
-        elif op == "remove_node":
-            if active_nodes:
-                node_id = random.choice(list(active_nodes))
-                # Fuzzing the API boundary, we don't care if it fails gracefully
-                try:
-                    # Depending on API, removing 1 node
-                    # The mock doesn't have remove_node so we just catch the AttributeError
-                    topo.remove_nodes([node_id])
-                except Exception:
-                    pass
-                active_nodes.remove(node_id)
-                
-        elif op == "add_edge":
-            if len(active_nodes) >= 2:
-                src, dst = random.sample(list(active_nodes), 2)
-                try:
-                    topo.add_edge(src, dst)
-                except Exception:
-                    pass
-                    
-        elif op == "update_prop":
-            if active_nodes:
-                node_id = random.choice(list(active_nodes))
-                random_key = ''.join(random.choices(string.ascii_letters, k=10))
-                random_val = random.random()
-                try:
-                    topo.update_node_properties(node_id, {random_key: random_val})
-                except Exception:
-                    pass
-                    
-    # The process must still be alive and queryable at the end
-    assert isinstance(topo, [ank_nte](../ank_nte).Topology)
-
-def test_fuzz_unicode_and_emoji_property_injection():
-    """
-    Stress-test the UTF-8 boundaries between Python (which uses diverse string encodings)
-    and Rust (which strictly enforces UTF-8).
-    """
-    topo = [ank_nte](../ank_nte).Topology()
-    topo.add_nodes_with_metadata([1], ["Router"], ["core"])
-    
-    adversarial_strings = [
-        "こんにちは", # Japanese
-        "مرحبا", # Chinese/Arabic mixed
-        "🔥🚀👨‍👩‍👧‍👦", # ZWJ Emoji sequences
-        "A\u0308", # Combining characters
-        "\x00\x01\x02", # Control characters
-        "\uD800", # Unpaired surrogates (often crash JSON parsers)
-        "a" * 10000 + "🔥", # Massive string ending in multi-byte
-    ]
-    
-    for payload in adversarial_strings:
-        try:
-            # We wrap in try/except because PyO3 might raise a ValueError on invalid unicode,
-            # which is completely safe. We just want to ensure it doesn't cause a Rust Panic.
-            topo.update_node_properties(1, {"payload": payload})
-        except Exception:
-            pass
-
-def test_fuzz_deep_query_nesting():
-    """
-    Build structurally valid but absurdly complex query shapes 
-    to exhaust the query planner's permutations logic.
-    """
-    query = "MATCH "
-    
-    # Generate a chain of 50 node segments
-    # (a)-[e1]->(b)-[e2]->(c)...
-    nodes = [f"(n{i}:T)" for i in range(50)]
-    edges = [f"-[e{i}:E]->" for i in range(49)]
-    
-    chain = nodes[0]
-    for i in range(49):
-        chain += edges[i] + nodes[i+1]
-        
-    query += chain + " RETURN n0"
-    
-    topo = [ank_nte](../ank_nte).Topology()
-    try:
-        # If the engine uses recursive AST walking, this might blow the C stack.
-        # It should ideally throw a recursion depth limit error safely.
-        topo.query(query)
-    except Exception:
-        pass
-
-def test_fuzz_memory_exhaustion_circuit_breakers():
-    """
-    Attempt to deliberately trick the engine into allocating a massive vector
-    by passing max integer sizes to the reservation algorithms.
-    """
-    topo = [ank_nte](../ank_nte).Topology()
-    
-    # Try to add 100 million nodes in one batch
-    # This should be caught by an internal circuit breaker (e.g. PyErr or MemoryError),
-    # rather than triggering a low-level OS OOM kill on the entire Python process.
-    try:
-        # Create a generator rather than a list to avoid Python OOMing first
-        nodes = (i for i in range(100000000))
-        types = ("T" for _ in range(100000000))
-        layers = ("L" for _ in range(100000000))
-        topo.add_nodes_with_metadata(list(nodes), list(types), list(layers))
-    except Exception:
-        # Rejection via MemoryError or ValueError is correct
-        pass
-        
-    # Process must still be alive
-    assert True
-
-```
-
 ---
 
 ## Usage
@@ -1234,170 +1100,16 @@ flowchart TD
 
 ---
 
-## What This Is
-
-NTE (Network Topology Engine) is a Rust-based graph topology engine with Python bindings via PyO3, used as the backend for [ank_pydantic](../ank_pydantic). It provides a 14-crate Cargo workspace built on petgraph StableDiGraph with pluggable datastores (Polars, DuckDB, Lite). This project covers two milestones: first hardening the existing engine for production reliability, then evaluating LadybugDB as a potential backend replacement.
-
----
-
-## Core Value
-
-The engine must be correct and observable — mutations never silently corrupt state, errors always surface meaningful information, and operations are traceable through logging.
-
----
-
 ## Tech Stack
 
-- Rust 2021 workspace with feature-flagged backends
-- Graph structure: `petgraph` `StableDiGraph`
-- Datastores: Polars DataFrame store (default), DuckDB backend, Lite in-memory store
-- Python bindings: PyO3 + maturin; `pyo3-log`/logging bridge planned
-- Service mode: Axum HTTP + WebSocket server (`nte-server`) for remote execution
-
----
-
-## Roadmap Direction
-
-**Milestone 1: Engine Hardening** focuses on user-facing correctness and debuggability:
-
-- Logging and traceability throughout Rust and Python boundaries
-- Domain-specific Python exceptions (replace generic error returns)
-- Dual-write safety: explicit error propagation and rollback/compensation for failed updates
-- GIL release for O(N) operations (`py.allow_threads`) to unblock Python workloads
-- CI/CD so the engine can be updated without breaking downstream consumers
-
-**Milestone 2: LadybugDB Evaluation** is the architectural fork:
-
-- Evaluate whether a graph database backend improves diff/snapshots/temporal queries
-- Build a `TopologyBackend` implementation and benchmark at meaningful scales
-- Decide the backend path before committing to topology diff, snapshots, or a wire protocol
-
----
-
-## Requirements
-
-
-
----
-
-## # Validated
-
-- ✓ Graph topology with petgraph StableDiGraph (nodes, edges, layers) — existing
-- ✓ PyO3 Python bindings for topology operations — existing
-- ✓ Pluggable datastore backends (Polars, DuckDB, Lite) — existing
-- ✓ Query engine with QuerySpec flat filters (type, layer, id, field) — existing
-- ✓ Event sourcing for mutation tracking — existing
-- ✓ JSON export with layer filtering — existing
-- ✓ Force-directed layout via fjadra — existing
-- ✓ Topology archive save/load (ZIP + NDJSON) — existing
-- ✓ Standalone Axum HTTP/WebSocket server (nte-server) — existing
-- ✓ Edge type correctness (Inter, Intra, Intranode) — existing
-
----
-
-## # Active
-
-**Milestone 1: Engine Hardening**
-- [ ] Logging throughout the engine (`log` + `pyo3-log` bridge)
-- [ ] Domain-specific Python exceptions replacing all generic errors
-- [x] Dual-write safety (error propagation, rollback on failure)
-- [ ] GIL release for O(N) PyO3 methods (`py.allow_threads`)
-- [ ] CI/CD pipeline (GitHub Actions, Clippy, fmt, tests)
-- [ ] One-way dependency: [ank_pydantic](../ank_pydantic) depends on NTE, never reverse
-- [ ] Internal/external boolean flag on nodes and edges
-
-**Milestone 2: LadybugDB Evaluation**
-- [ ] Schema design spike (generic schema with existing benchmarks)
-- [ ] Port/interface modelling assessment
-- [ ] `TopologyBackend` trait implementation for LadybugBackend
-- [ ] Benchmark at target scales (1k, 5k, 10k nodes)
-- [ ] Query translation: `compile_to_cypher()` for QuerySpec flat filters
-- [ ] Pattern [compilation](../compilation): PatternNode chain to Cypher MATCH clauses
-- [ ] Concurrent read/write testing under server workloads
-- [ ] Evaluation summary with recommendation
-
----
-
-## # Out of Scope
-
-- Topology diff (`nte-diff`) — blocked on backend decision (Milestone 2)
-- Snapshots & temporal queries — blocked on backend decision
-- Binary wire protocol (`nte-wire`) — blocked on backend decision
-- Full query engine pattern matching — depends on backend choice; current stub returns empty results by design until backend is decided
-- Monte Carlo integration — standalone, not part of these milestones
-- Export formats (YAML, GraphML, NetworkX) — nice-to-have, not priority
-- Visualisation library (D3/React frontend) — deferred until after hardening
-
----
-
-## Context
-
-- NTE is consumed by [ank_pydantic](../ank_pydantic) as its backend engine (sibling repo `../[ank_pydantic](../ank_pydantic)/`)
-- The dual-write architecture (petgraph + DataFrameStore) is fully protected by a RAII `DualWriteGuard`  which automatically rolls back graph mutations if DataFrame operations fail.
-- No CI/CD pipeline exists — all testing is manual
-- LadybugDB (formerly using KuzuDB) has a standalone benchmark crate (`ladybug_backend/`) but does NOT implement `TopologyBackend` trait
-- The backend evaluation is the biggest architectural decision: it shapes diff, snapshots, and wire protocol implementation
-- British English throughout; "vis" not "viz"
+- **Language:** Rust (Core), Python (SDK), Starlark (Policy).
+- **Storage:** Petgraph (Graph), Polars (Relational), JSONL (WAL).
+- **Interface:** PyO3 (Python), Axum/gRPC (Server), Mermaid (Visual).
 
 ---
 
 ## Constraints
 
-- **Tech stack**: Rust 2021 + PyO3 0.26 + Python 3.13+ (fixed)
-- **Backwards compatibility**: Python API must remain stable — changes are additive, not breaking
-- **Build system**: maturin + uv (fixed)
-- **Naming**: Use "LadybugDB" for the graph database backend, not "KuzuDB" (deprecated upstream name)
-
----
-
-## Key Decisions
-
-| Decision | Rationale | Outcome |
-|----------|-----------|---------|
-| Harden before evaluate | Fix correctness/observability issues that affect users today, independent of backend choice | — Pending |
-| Two-milestone structure | Hardening is prerequisite — reliable engine needed to properly benchmark LadybugDB | — Pending |
-| LadybugDB not KuzuDB naming | Upstream rebrand; use current name throughout | ✓ Good |
-
----
-
-## Current Milestone: v1.0 Engine Hardening
-
-**Goal:** Make NTE production-ready with correct error handling, observable logging, automated CI/CD, and Python-level parallelism.
-
-**Target features:**
-- CI/CD pipeline (GitHub Actions, multi-platform wheels, automated testing)
-- Dual-write rollback mechanism (graph ↔ DataFrameStore consistency)
-- Structured logging with tracing (Python-Rust bridge)
-- GIL release for O(N) PyO3 methods
-- Domain-specific Python exceptions
-- Type stubs (.pyi) for Python consumers
-- Property-based testing for graph invariants
-- LICENSE file
-
----
-
-## Ecosystem Context
-
-This project is part of a seven-tool network automation ecosystem. NTE provides the high-performance graph engine — the foundation that [ank-pydantic](../ank-pydantic) builds on.
-
-**Role:** Rust graph engine with petgraph, Polars DataFrames, query engine, and pluggable datastores. Consumed by [ank-pydantic](../ank-pydantic) as a dependency; potentially usable by other tools ([netvis](../netvis), [netflowsim](../netflowsim)) for zero-conversion topology loading.
-
-**Key integration points:**
-- Primary consumer: [ank-pydantic](../ank-pydantic) (Python ↔ Rust FFI via PyO3)
-- Bidirectional ID mapping: external IDs (user-facing) ↔ internal petgraph NodeIndex
-- Event sourcing: ring-buffer EventStore for audit/replay (future: live topology bus)
-- Pluggable datastore: Polars (default), DuckDB, Lite backends via feature flags
-
-**Critical note:** The dual-write architecture (petgraph + DataFrameStore) was completely hardened with transaction isolation and automatic rollback handling in , and . State divergence is impossible.
-
-**Architecture documents:**
-- [Ecosystem Architecture Overview](../../automationarch/README.md) — full ecosystem design, data flow, workflows
-- [Ecosystem Critical Review](../../automationarch/REVIEW.md) — maturity assessment, integration gaps, strategic priorities
-
-*Last updated: 2026-02-15 after milestone v1.0 started*
-
----
-
-## Current Status
-
-2026-03-08 — Committed starlark_engine refactor, fixed workspace warnings, wired nte-policy into nte-server, synced ROADMAP.md.
+- **Zero-Blocking Write Plane:** Core mutations must not block on subscriber I/O.
+- **ACID-Lite Durability:** Every mutation must be journaled with integrity checks.
+- **Columnar Efficiency:** Favor vectorized Polars operations over row-wise Rust loops.

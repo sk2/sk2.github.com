@@ -1,14 +1,14 @@
 ---
 layout: default
 title: Simon Knight — Engineer
-description: Telecommunications and software engineer building tools for network simulation, graph topology engines, and multi-agent coordination systems.
+description: Telecommunications and software engineer working at the boundary between network engineering and signal processing — protocol simulators, graph topology engines, spatial rendering, and bistatic signal reflection.
 ---
 
 # Simon Knight
 
-Telecommunications and software engineer based in Adelaide, South Australia. I build tools for modeling, simulating, and coordinating complex systems — turning architectural intent into working infrastructure.
+Telecommunications and software engineer in Adelaide, South Australia. I build tools at the boundary between network engineering and signal processing: deterministic protocol simulators, graph topology engines, large-scale spatial rendering, and bistatic signal reflection.
 
-My focus is structural clarity at scale: deterministic protocol simulators, graph topology engines, dense-data rendering, and multi-agent coordination systems. Each project starts from research — my PhD work on automated network configuration — and ships as working software.
+PhD in computer science (University of South Australia, 2017) on the automated configuration of large networks. The same compiler-and-graph approach shows up across most of the projects here.
 
 **[Browse all projects](projects)**
 
@@ -33,11 +33,6 @@ My focus is structural clarity at scale: deterministic protocol simulators, grap
   <p class="card-description">Matrix Profile algorithms (STOMP, SCAMP, SCRIMP++) in native Rust. Parameter-free motif and anomaly discovery in time series, with SIMD kernels and a Polars dataframe plugin.</p>
 </div>
 
-<div class="project-card">
-  <h3 class="card-title"><a href="/projects/multi-agent">Multi-Agent Assistant</a></h3>
-  <div class="badges-row card-badges"><span class="stack-badge">Python</span></div>
-  <p class="card-description">Security-first multi-agent system coordinating containerized agents through a NATS message broker. Each agent runs in isolation with scoped credentials — no shared state, no direct agent-to-agent calls.</p>
-</div>
 </div>
 
 ## Background

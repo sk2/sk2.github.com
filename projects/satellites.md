@@ -7,7 +7,7 @@ description: "Terminal-based satellite tracker that displays real-time positions
 # Satellites
 
 <div class="badges-row">
-  <span class="status-badge status-active">Recently Updated</span>
+  <span class="status-badge status-active">Last Active: 2026-03-09</span>
   <span class="stack-badge">Rust</span>
 </div>
 

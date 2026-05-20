@@ -7,8 +7,8 @@ description: "Network Configuration Framework is a Rust CLI that compiles declar
 # Network Configuration Framework
 
 <div class="badges-row">
-  <span class="status-badge status-active">Active</span>
-  <span class="stack-badge">Rust</span>
+  <span class="status-badge status-active">Last Active: 2026-03-24</span>
+  <span class="stack-badge">Rust</span> <span class="stack-badge">Polars</span>
 </div>
 
 ---
@@ -16,10 +16,10 @@ description: "Network Configuration Framework is a Rust CLI that compiles declar
 ## Contents
 
 - [Concept](#concept)
-- [Technical Reports](#technical-reports)
 - [Code Samples](#code-samples)
 - [Usage](#usage)
 - [Architecture](#architecture)
+- [Current Status](#current-status)
 
 ## Concept
 
@@ -28,12 +28,6 @@ Network Configuration Framework is a Rust CLI that compiles declarative YAML blu
 The core problem is determinism. Hand-written network configs drift between devices, between sites, between engineers. The Network Configuration Framework treats configuration as a [compilation](../compilation) target: a blueprint declares intent (protocol layers, IP pools, policy constraints), and the compiler produces auditable, diffable output files suitable for CI/CD pipelines.
 
 Blueprints are composed from importable fragments. A site blueprint imports protocol definitions (OSPFv3, BFD, VRRP) as separate YAML files, each declaring layer dependencies. The compiler resolves the import graph, orders layers by their `requires:` declarations, and executes primitives in sequence.
-
----
-
-## Technical Reports
-
-- [Download Research Paper: netcfg-paper.pdf](/assets/docs/ank-netcfg-netcfg-paper.pdf)
 
 ---
 
@@ -2568,43 +2562,13 @@ Error reporting uses `miette` for source-snippet diagnostics: blueprint validati
 
 ## What This Is
 
-An implementation of the **Multi-Abstraction Layer Topology (MALT)**, built as an enterprise Rust compiler for deterministic network configuration generation. `NetCfg` treats configuration as a [compilation](../compilation) problem rather than a string templating exercise, translating high-level **Intent-to-Blueprint** architectural intent into target-specific configurations via AST lowering.
-
-The `netcfg` binary orchestrates: blueprint parsing → topology transformation → DeviceIR generation → AST lowering (TSDM) → template rendering → traceable config file emission.
-
----
-
-## Current Milestone: v3.0 Policy Verification, QoS & IPv6
-
-**Goal:** Complete the security policy verification engine, add interface-level zone membership, introduce a full QoS policy DSL (classification, marking, queuing, policing, shaping), and add IPv6 support (NAT64, NPTv6, IPv6 IPAM pool provisioning).
-
-**Target features:**
-- `SecurityModel` IR as the stable contract between DSL and renderers
-- Interface-level zone membership (zones assigned per-interface, not per-device)
-- Policy verification assertions: `no_shadowed_rules`, `zone_pairs_covered`, `zone_policy_denies/permits`
-- Full QoS policy DSL: `build_qos_policy` with traffic classes, DSCP/CoS marking, queuing/scheduling, policing, and shaping
-- QoS vendor templates across all 7 vendors
-- IPv6 IPAM pool provisioning (`provision_ips` with IPv6 prefixes)
-- NAT64 (stateful IPv6-to-IPv4 translation) in `build_nat_policy`
-- NPTv6 (Network Prefix Translation for IPv6) in `build_nat_policy`
-
----
-
-## Previous State (v2.2 shipped 2026-03-09)
-
-The compiler delivers a complete security policy DSL with full vendor rendering:
-- **Protocol Library:** 16 importable YAML fragments with all 7 vendor templates rendering new stanza kinds
-- **Named Groups & Security Zones:** `groups:` section with `$group_name` expansion, `tag_nodes`, typed group variants (`kind: security_zone`), zone auto-tagging across all executor paths
-- **Zone Policy DSL:** `objects:` section for reusable address/service objects, `build_zone_policy` with permit/deny rules, implicit deny-all, stateful inspection; rendered across all 7 vendors
-- **NAT Policy:** `build_nat_policy` with SNAT (interface/pool) and DNAT (port-forward), rendered across all 7 vendors
-- **Policy Assertions:** `ZoneMembership` and `ZonePolicyExists` check types
-- **~22,000 LOC Rust** across netcfg-core and netcfg crates
+A declarative compiler that synthesises a network logic stack using a **Layered Topology** model. `NetCfg` treats network configuration as a [compilation](../compilation) problem, translating high-level architectural intent into deterministic, target-specific configurations. The compiler now includes type-safe enums, real pre-flight validation, and comprehensive test coverage for executor lifecycle and diff engine correctness.
 
 ---
 
 ## Core Value
 
-Single-binary network compiler: design, transform, and generate configs from YAML blueprints without Python.
+Single-binary network compiler: design, transform, and generate configs from declarative design plans without Python.
 
 ---
 
@@ -2614,81 +2578,32 @@ Single-binary network compiler: design, transform, and generate configs from YAM
 
 ---
 
-## # Active (v3.0)
-
-- `SecurityModel` IR as stable renderer contract
-- Interface-level zone membership
-- Policy verification assertions (`no_shadowed_rules`, `zone_pairs_covered`, `zone_policy_denies/permits`)
-- Full QoS policy DSL (`build_qos_policy`) with vendor templates for all 7 vendors
-- IPv6 IPAM pool provisioning (`provision_ips` with IPv6 prefixes)
-- NAT64 and NPTv6 in `build_nat_policy`
-
----
-
-## # Validated (v2.2)
-
-- ✓ Vendor template rendering for `zone_policy_rule` and `nat_rule` stanzas — v2.2
-- ✓ `apply_zone_tags()` in all CLI direct-shadow paths — v2.2
-- ✓ Stateful inspection for zone policy — v2.2
-
----
-
-## # Deferred
-
-- Interface name derivation in `mesh_nodes` (MESH-V2-02)
-- LSP server (`nte-lsp`) integration (LSP-01)
-- GUI/web editor for group and zone declarations
-- Formal zone policy verification via Batfish integration
-
----
-
-## # Validated (v1.0 - v2.1)
-
-- ✓ Mapping DSL to populate stanza-based `DeviceIR` models
-- ✓ Native template rendering via MiniJinja
-- ✓ Strict data lineage
-- ✓ Declarative YAML Graph Blueprints
-- ✓ Stateful diff engine
-- ✓ Single-binary capability
-- ✓ Cross-phase integration
-- ✓ `build_protocol_layer` implemented
-- ✓ `provision_ips` implemented
-- ✓ `mesh_nodes` implemented
-- ✓ CLI `plan` and `generate`
-- ✓ `miette` terminal diagnostics
-- ✓ Protocol fragment library (16 protocols) — v2.1
-- ✓ NetcfgDSL LaTeX syntax highlighting — v2.1
-- ✓ Named groups with `$group_name` expansion — v2.1
-- ✓ `tag_nodes` primitive — v2.1
-- ✓ Security zones (`kind: security_zone`) — v2.1
-- ✓ `build_zone_policy` with objects and permit/deny — v2.1
-- ✓ `build_nat_policy` with SNAT/DNAT — v2.1
-- ✓ Zone membership and policy existence assertions — v2.1
-
----
-
 ## Key Decisions
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| `Topology::from_core()` wrapper bridges `CoreTopology` into Evaluator | Evaluator tightly coupled to Python-wrapper type; wrapping at phase boundary is cleanest | ✓ Good |
-| `NamedTempFile::new_in(parent)` for transactional output | Same-filesystem guarantee enables atomic POSIX rename | ✓ Good |
-| Clap 4 `Args` wrapper struct (`ConfigCommand`) containing `Subcommand` enum | Matches Clap 4 nested subcommand pattern, consistent with `BlueprintCommand` | ✓ Good |
-| `RenderEngine::render_node` per-node API | Clean separation between transformation and configuration generation | ✓ Good |
-| `miette` for diagnostic reporting | Provides out-of-the-box snippet and span highlighting for YAML errors | ✓ Good |
-| Groups as first-class Blueprint section | Zone declarations are group variants — no separate primitive required | ✓ Good |
-| GroupSpec untagged enum | Selector(String) shorthand + Full{} for backward compat | ✓ Good |
-| Zone auto-tagging before primitives | Metadata stamped in runner before primitive loop — primitives query via selectors | ✓ Good |
-| NAT separate from zone policy | Distinct stanza kinds mirror vendor evaluation order (NAT → security policy) | ✓ Good |
-| Objects section for reuse | Named address/service objects resolved to concrete values before stanza emission | ✓ Good |
-| Protocol library YAML-only | No Rust changes needed — `build_protocol_layer` is already protocol-agnostic | ✓ Good |
+| Type-safe enums with `Other(String)` fallback | Reject known-bad values at parse time while preserving unknown protocol extensibility | ✓ Good — catches typos, no false rejections |
+| QoS duplicate detection via struct-level MapAccess | serde_yml merges duplicate keys before field helpers — must intercept at struct level | ✓ Good — only reliable approach |
+| `format!("{}", err)` for error snapshots | Deterministic output without ANSI codes or terminal-dependent miette rendering | ✓ Good — stable across environments |
+| IPAM cross-primitive validation at both CLI and executor paths | Ensures overlap detection whether user runs `netcfg validate` or full execution | ✓ Good — consistent error surfacing |
+| Production hardening after stabilisation | Strict mode was on — fill in the gates it exercises | ✓ Good — v16.2 shipped cleanly |
+| Canonical planning source in `.planning/ROADMAP.md` | Avoid duplicate roadmap drift across ad hoc markdown files | ✓ Good |
 
 ---
 
 ## Constraints
 
-- Rust stable only — no nightly features
+- Rust stable only
 - British English in all documentation
 - GSD workflow for phase-based planning
 
-*Last updated: 2026-03-09 — v3.0 milestone started*
+| Edge-endpoint model over flat scalars | Thesis model derives interfaces from graph endpoints; flat scalars lose data on multi-homed devices | — Pending |
+| .0 | Declarative syntax is large scope; architecture corrections are prerequisite | — Pending |
+
+*Last updated: 2026-03-23 after v17.0 milestone start*
+
+---
+
+## Current Status
+
+2026-03-24 — : 5 call-site tests, pipeline order test, render path content assertion, STZA-01/03/04 satisfied

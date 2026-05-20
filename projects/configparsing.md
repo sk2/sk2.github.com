@@ -7,7 +7,7 @@ description: "Vendor translation layer that decouples network configuration from
 # Brownfield Ingestion
 
 <div class="badges-row">
-  <span class="status-badge status-active">Recently Updated</span>
+  <span class="status-badge status-active">Last Active: 2026-05-05</span>
   <span class="stack-badge">Python</span>
 </div>
 
@@ -16,12 +16,75 @@ description: "Vendor translation layer that decouples network configuration from
 ## Contents
 
 - [Concept](#concept)
+- [Code Samples](#code-samples)
 - [Architecture](#architecture)
 - [Current Status](#current-status)
 
 ## Concept
 
 Vendor translation layer that decouples network configuration from vendor-specific syntax. Uses LLM-powered RAG to extract network-level intent and topology relationships from vendor documentation and CLI configurations, normalizing them into a vendor-neutral topology graph model. The intermediate representation is topology-centric (protocol adjacencies, link roles, VLAN membership) rather than device-centric like YANG, enabling genuine vendor abstraction.
+
+---
+
+## Code Samples
+
+### README.md
+
+```markdown
+# Example configurations (br-hzt0)
+
+Curated, known-good vendor configs used for:
+
+- **Smoke testing the extraction pipeline** — every example here must
+  extract end-to-end without raising exceptions.
+- **Demos and onboarding** — reach for these instead of writing toy
+  configs from scratch.
+- **Regression coverage** — `tests/test_phase2_examples.py` runs the
+  full Phase 2 pipeline against each example to catch regressions
+  in the deterministic vendor parsers.
+
+## Layout
+
+```
+examples/
+├── cisco_ios/
+│   ├── basic.txt              hostname + 3 interfaces
+│   └── ospf_single_area.txt   adds OSPF process in area 0
+├── arista_eos/
+│   ├── basic.txt
+│   └── ospf_single_area.txt
+├── juniper_junos/
+│   ├── basic.txt
+│   └── ospf_single_area.txt
+└── nokia_sros/
+    ├── basic.txt
+    └── ospf_single_area.txt
+```
+
+## CLI
+
+```bash
+# List available examples
+configparsing-phase2 examples list
+
+# Extract a specific example into a temporary run dir
+configparsing-phase2 examples extract cisco_ios/ospf_single_area
+```
+
+The `extract` subcommand prints the resulting `device_id`, vendor,
+confidence, and run directory path so you can inspect the artifacts.
+
+## Adding new scenarios
+
+1. Drop the config under `examples/<vendor>/<scenario>.txt`.
+2. Add a one-line entry to `tests/test_phase2_examples.py` if the
+   scenario warrants its own assertion (otherwise the directory walk
+   in that test will pick it up automatically).
+3. Keep configs minimal — every line in the example should serve the
+   scenario. A 200-line "real" config makes a poor onboarding
+   reference.
+
+```
 
 ---
 
@@ -66,6 +129,8 @@ Extract network-level topology relationships (protocol adjacencies, link roles, 
 
 **Goal:** Become the universal, production-ready vendor translation layer for the network automation ecosystem
 
+**Status:** In progress -  not started (27/30 plans completed)
+
 **Target features:**
 - Broader vendor coverage (Juniper, Nokia, F5, Palo Alto) and protocols (MPLS, SR, SRv6)
 - Higher extraction accuracy with reduced HITL burden
@@ -102,7 +167,13 @@ Extract network-level topology relationships (protocol adjacencies, link roles, 
 ## # Active
 
 **v2.0 (in progress):**
-- (To be defined during requirements gathering)
+- ✓ Plugin-based vendor architecture and version-aware RAG foundation — Phase 5
+- ✓ Juniper JunOS and Nokia SR OS parsing support — Phase 5
+- ✓ Evidence tracing and hallucination detection improvements — Phase 6
+- ✓ RFC-01 schema vendoring, versioned loading, and validation harness — 
+- ✓ RFC-01 OperationalTopology exporter and report output — 
+- ✓ CLI export command with strict/best-effort validation flow — 
+- → Next: `, `configparsing-yhp`, `configparsing-8ws`)
 
 ---
 
@@ -119,6 +190,12 @@ Extract network-level topology relationships (protocol adjacencies, link roles, 
 
 **v1.0 Status (shipped 2026-02-22):** Full pipeline working end-to-end. Proven that LLM-powered extraction with RAG and human-in-the-loop can successfully translate vendor CLI to/from topology IR. System validated with real-world configs. Built with Python 3.12, FastAPI, ChromaDB, LangChain, and LLM APIs (Claude/GPT-4).
 
+**v2.0 Status (in progress):** Multi-vendor foundation, accuracy optimization, and RFC-01 ecosystem export are complete. Remaining work is Phase 8 production hardening and vendor expansion.
+
+**Current runtime caveat:** The vendor plugin registry parses/detects Cisco IOS, Arista EOS, Juniper JunOS, and Nokia SR OS, and registry tests cover all four. The main `Phase2Engine.extract_from_config_text()` CLI/API path is still wired to the legacy Cisco/Arista-only parser/report path, so Juniper/Nokia are plugin-layer capabilities until `configparsing-45w` updates that runtime path.
+
+**Current planning caveat:**  requirement work is tracked by `configparsing-do2`, `configparsing-yhp`, and `configparsing-8ws`.
+
 **Ecosystem Position:** This tool is the **vendor translation layer** in a larger network automation ecosystem ([automationarch](../automationarch)). It consumes vendor documentation and CLI, produces topology IR that feeds into [autonetkit](../autonetkit) for modeling/simulation/visualization. Complementary to (not overlapping with) tools like [autonetkit](../autonetkit)-config (design/[compilation](../compilation)), [netsim](../netsim) (protocol simulation), and [netvis](../netvis) (visualization).
 
 **Key architectural insight:** The intermediate representation is a topology-centric graph model, NOT a device-centric model like YANG. Network-level relationships (OSPF adjacencies, BGP peerings) are genuinely vendor-independent, while device-level configuration varies wildly across vendors. This enables true vendor abstraction.
@@ -132,7 +209,7 @@ Extract network-level topology relationships (protocol adjacencies, link roles, 
 - **Tech stack**: Python 3.12, FastAPI, ChromaDB, LangChain, MinerU — established in Phase 1
 - **LLM costs**: Token usage must be monitored; consider local models for high-volume extraction
 - **Hallucination risk**: LLM outputs must include confidence scores and require validation before use in production
-- **Vendor coverage**: Initial focus on Cisco IOS/IOS-XE and Arista EOS (most common enterprise platforms)
+- **Vendor coverage**: Cisco IOS/IOS-XE and Arista EOS are wired through the main Engine wiring. Future expansion targets F5 and Palo Alto.
 
 ---
 
@@ -149,10 +226,10 @@ Extract network-level topology relationships (protocol adjacencies, link roles, 
 | Confidence + evidence citation | Every extraction needs confidence score and doc/config evidence | ✓ Good — enables intelligent routing to HITL |
 | Ecosystem integration focus | Translation layer only, not orchestration/intent/deployment | ✓ Good — clear boundaries with [automationarch](../automationarch) tools |
 
-*Last updated: 2026-02-22 after v1.0 completion and v2.0 milestone initialization*
+*Last updated: 2026-04-12 after reality check against code and tests*
 
 ---
 
 ## Current Status
 
-2026-03-05 — Completed 07-01-PLAN.md
+2026-05-05 - Verified vks/45w/do2/yhp closure against code; resynced docs with bead state.

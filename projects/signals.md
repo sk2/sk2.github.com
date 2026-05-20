@@ -7,8 +7,8 @@ description: "Automated signal census system that transforms raw radio spectrum 
 # Spectrum Analysis
 
 <div class="badges-row">
-  <span class="status-badge status-active">Recently Updated</span>
-  <span class="stack-badge">Python</span>
+  <span class="status-badge status-active">Last Active: 2026-03-10</span>
+  <span class="stack-badge">Rust</span> <span class="stack-badge">Python</span>
 </div>
 
 ---
@@ -16,7 +16,6 @@ description: "Automated signal census system that transforms raw radio spectrum 
 ## Contents
 
 - [Concept](#concept)
-- [Technical Reports](#technical-reports)
 - [Visuals](#visuals)
 - [Architecture](#architecture)
 - [Features](#features)
@@ -30,12 +29,6 @@ description: "Automated signal census system that transforms raw radio spectrum 
 ## Concept
 
 Automated signal census system that transforms raw radio spectrum data into classified, searchable signal inventories. Combines SDR acquisition, ML classification, and vector search to detect, identify, and catalog signals across monitored bands.
-
----
-
-## Technical Reports
-
-- [Download Research Paper: spectra-usermanual.pdf](/assets/docs/signals-spectra-usermanual.pdf)
 
 ---
 

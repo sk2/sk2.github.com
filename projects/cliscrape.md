@@ -7,11 +7,17 @@ description: "Parsing engine for network device CLI output. Transforms semi-stru
 # CLI Parser
 
 <div class="badges-row">
-  <span class="status-badge status-active">Active</span>
+  <span class="status-badge status-active">Last Active: 2026-05-02</span>
   <span class="stack-badge">Rust</span>
 </div>
 
 ---
+
+## Contents
+
+- [Concept](#concept)
+- [Features](#features)
+- [Current Status](#current-status)
 
 ## Concept
 
@@ -40,13 +46,13 @@ Parsing engine for network device CLI output. Transforms semi-structured text (s
 
 ## # Core Value
 
-Enable rapid, reliable extraction of network state. The engine is built for speed and correctness, ensuring that automation pipelines can process device data with sub-millisecond latency and high structural accuracy.
+Enable rapid, reliable extraction of network state. The engine is built for predictable parsing, structured diagnostics, and policy-aware validation; release performance claims should be tied to current benchmark output.
 
 ---
 
 ## Use Cases
 
-- **Real-time Monitoring**: Parse `show` commands in high-frequency polling cycles for telemetry and health checks.
+- **High-Frequency Monitoring**: Parse `show` commands in polling cycles for telemetry and health checks.
 - **Inventory Discovery**: Automatically extract device details, interface states, and hardware versions for asset management.
 - **Pre-deployment Validation**: Verify the current state of a network before pushing configuration changes to ensure safety.
 - **Automated Troubleshooting**: Rapidly analyze complex outputs like routing tables or BGP summaries during incident response.
@@ -59,4 +65,10 @@ The engine is built on a custom regex-based state machine implemented in Rust. I
 
 - **Stack**: Rust, `regex` crate for optimized matching, `ratatui` for the TUI debugger.
 - **Parallelism**: Thread-safe design allowing for concurrent parsing of multiple device outputs across all available CPU cores.
-- **Validation**: Strict schema enforcement ensuring that parsed output always matches the expected data structure.
+- **Validation**: Required fields, coverage thresholds, and field constraints can warn or fail depending on parse options.
+
+---
+
+## Current Status
+
+2026-05-02 — closed Universal Ledger epic. 189 tests across 18 binaries enforce the schema contract end-to-end.

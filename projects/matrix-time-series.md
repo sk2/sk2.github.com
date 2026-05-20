@@ -1,13 +1,13 @@
 ---
 layout: default
 section: data-analytics
-description: "Matrix Profile algorithms (STOMP, SCAMP, SCRIMP++) in native Rust for parameter-free motif and anomaly discovery in time series."
+description: "The matrix profile is a single transform that exposes a time series' repeated patterns and its anomalies."
 ---
 
 # matrix-profile-rs
 
 <div class="badges-row">
-  <span class="status-badge status-active">Recently Updated</span>
+  <span class="status-badge status-active">Last Active: 2026-04-30</span>
   <span class="stack-badge">Rust</span> <span class="stack-badge">Polars</span>
 </div>
 
@@ -87,11 +87,24 @@ result = df.select(pl.col("vibration").mp().stomp(m=20))
 
 ## Current Status
 
-v1.0 shipped 2026-02-22 (the algorithms, SIMD, tiling, and Polars integration).
-v1.1 is in progress, adding streaming support: incremental updates as new
-samples arrive, a sliding-window mode for rolling profiles, and pattern-detection
-callbacks. Source: [github.com/sk2/matrix-time-series](https://github.com/sk2/matrix-time-series).
+**Implementation status:** Feature work complete through 
+**Current focus:** documentation/release reconciliation, not missing streaming functionality
+**Release posture:** v1.0 shipped; v2.0-level streaming and multi-stream features are implemented in repo
+
+
+*Last updated: 2026-04-09 after  completion and documentation reconciliation*
 
 ---
 
-[← Back to Data Analytics](../data-analytics)
+## Quick Facts
+
+| | |
+|---|---|
+| **Status** | Last Active: 2026-04-30 |
+| **Stack** | Rust, Polars |
+
+---
+
+## Current Status
+
+** 2026-04-30 — Published v2.0.0 release (commits and tags pushed to main)

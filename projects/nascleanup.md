@@ -7,7 +7,7 @@ description: "Rust CLI for managing large-scale Synology NAS file systems."
 # NAS Cleanup & Intelligence
 
 <div class="badges-row">
-  <span class="status-badge status-active">Recently Updated</span>
+  <span class="status-badge status-active">Last Active: 2026-03-03</span>
   <span class="stack-badge">Rust</span>
 </div>
 
@@ -69,4 +69,4 @@ Develop a high-performance Rust application to manage large-scale Synology NAS f
 
 ## Current Status
 
-2026-03-03 - Completed 10-01-PLAN.md (Doctor Diagnostics)
+2026-03-03 - Completed 10-01-PLAN.md

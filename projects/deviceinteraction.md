@@ -60,6 +60,9 @@ tests:
 ```yaml
 # Example Testbed for Device Interaction Framework
 # This testbed demonstrates a mix of Mock and real SSH devices.
+# For pilot environments, replace the inline password below with
+# `${DI_STORE:example-lab.default.password}` after running:
+# `di credentials set example-lab.default --username admin --password-file ~/.secrets/example-lab-password`
 
 testbed:
   name: example-lab

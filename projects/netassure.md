@@ -7,17 +7,11 @@ description: "Graph Neural Network (GNN) based network analytics module that ext
 # Network Analysis Engine
 
 <div class="badges-row">
-  <span class="status-badge status-active">Recently Updated</span>
-  <span class="stack-badge">Rust</span>
+  <span class="status-badge status-active">Active</span>
+  <span class="stack-badge">Rust</span> <span class="stack-badge">TypeScript</span>
 </div>
 
 ---
-
-## Contents
-
-- [Concept](#concept)
-- [Code Samples](#code-samples)
-- [Current Status](#current-status)
 
 ## Concept
 
@@ -34,43 +28,51 @@ Built on an existing Rust+Python analysis toolkit that includes formal verificat
 ```markdown
 # NetAssure Examples
 
-This directory contains example topologies, event streams, and scripts to help you get started with the NetAssure analysis engine.
+This directory contains sample topology snapshots, event streams, multi-modal
+contexts, and a small REST API client.
 
-## Topologies & Events
+## Files
 
-- `topology-snapshot.json`: A basic 4-node topology snapshot illustrating the RFC-01 schema.
-- `clos-fabric.json`: A 2-tier leaf-spine data center fabric with AS numbers and role metadata.
-- `bgp-leak-topology.json`: A topology specifically designed to simulate BGP route leak scenarios.
-- `temporal-events.json`: A stream of temporal edge events for TGN (Temporal Graph Network) inference.
-- `v2.1-test-topology.json`: A large-scale test topology used for benchmarking graph algorithms.
+- `topology-snapshot.json`: small RFC-01 `Snapshot` message for static CLI checks.
+- `clos-fabric.json`: two-tier leaf-spine fabric with role metadata.
+- `bgp-leak-topology.json`: topology for route-leak-style cascade experiments.
+- `temporal-events.json`: temporal edge events for TGN inference.
+- `multimodal-context.json`: input context for multi-modal anomaly scoring.
+- `v2.1-test-topology.json`: larger topology used for graph algorithm benchmarks.
+- `target-hubs-scenario.json`: scenario configuration for targeted cascade runs.
+- `query_api.py`: REST API example covering status, alert/anomaly listing, and feedback.
 
-## Scripts
-
-- `query_api.py`: A Python script demonstrating how to interact with the NetAssure REST API. Covers fetching status, filtering alerts/anomalies, and submitting operator feedback.
-
-## Running the Examples
-
-### 1. Start the NetAssure Daemon
-You can run the ingestion system in "dry-run" mode using one of the example topologies:
+## Static CLI Examples
 
 ```bash
-# In one terminal, start the ingestor (simulating a live stream)
-netassure ingest --ws ws://localhost:9000 --dry-run
+netassure verify examples/topology-snapshot.json
+netassure analyze examples/topology-snapshot.json
+netassure cascade examples/topology-snapshot.json --scenario random-failure-pct --params '{"node_failure_pct": 10}' --json
+netassure predict-temporal examples/topology-snapshot.json examples/temporal-events.json --model models/tgn_model.pt --json
+netassure predict-multimodal examples/multimodal-context.json --explain --json
 ```
 
-### 2. Query via CLI
-Once the system is running, you can use the CLI to query alerts:
+Model-backed commands require the corresponding model files and Python dependencies.
+
+## Live API Example
+
+Start NetAssure against a real or test NTE WebSocket endpoint:
 
 ```bash
-netassure alerts --api http://localhost:8080 --status active
+netassure ingest --ws ws://localhost:9000 --api-addr 127.0.0.1:8080
 ```
 
-### 3. Query via Python
-Ensure you have the `requests` library installed:
+Then query the REST API:
 
 ```bash
-pip install requests
 python3 examples/query_api.py
+```
+
+Dry-run mode is for validating a live WebSocket stream without forwarding events into
+the full analysis pipeline:
+
+```bash
+netassure ingest --ws ws://localhost:9000 --dry-run --duration-secs 60
 ```
 
 ```
@@ -182,13 +184,19 @@ if __name__ == "__main__":
 
 ## What This Is
 
-A GNN-based real-time network analytics platform built in Rust+Python. Subscribes to NTE topology updates via WebSocket, runs GNN models for anomaly detection and traffic prediction, and exposes results through CLI, REST API, WebSocket streaming, and event queue interfaces. Includes formal verification (Z3), graph algorithms, and failure cascade modeling.
+NetAssure is a Rust/Python network analytics platform. It ingests NTE topology
+updates, keeps a live graph model, runs deterministic graph and verification
+analysis, supports cascade/what-if simulation, and exposes operator workflows
+through a Rust CLI, REST API, optional WebSocket streaming, PyO3 bindings, and
+Python ML/agent tools.
 
 ---
 
 ## Core Value
 
-Enable exploration and practical application of GNN techniques on real network topology data, producing actionable insights that improve network reliability and security.
+Enable practical GNN-assisted network operations while keeping hard guarantees
+in deterministic Rust engines: verification results constrain what may be true,
+and ML/agent outputs rank what is likely worth investigating.
 
 ---
 
@@ -200,99 +208,63 @@ Enable exploration and practical application of GNN techniques on real network t
 
 ## # Validated
 
-<!-- Shipped and confirmed valuable. -->
-
-- ✓ Network topology analysis with formal verification (Z3 SMT solver) — v1.0
-- ✓ Graph algorithms (centrality, community detection, cascade modeling) — v2.0
-- ✓ Python bindings via PyO3 for ML/analysis integration — v1.0
-- ✓ CLI interface for topology operations — v1.0
-- ✓ Rust-based performance-critical operations with petgraph — v1.0
-- ✓ Subscribe to NTE topology updates via WebSocket — v2.3
-- ✓ GNN-based anomaly detection on network topology — v2.2
-- ✓ Alert system with configurable triggers (anomaly, topology changes, performance) — v2.3
-- ✓ REST API for on-demand analytics queries — v2.3
-- ✓ Rust library API for embedded analytics — v2.3
-- ✓ WebSocket streaming interface for real-time analytics results — v2.2
-- ✓ Event queue integration for publishing analytics to message brokers — v2.2
-- ✓ Near real-time processing (1-5s latency target) — v2.3
+- [x] NTE topology snapshots and deltas via WebSocket ingestion.
+- [x] Shared RFC-01 topology model with tolerant unknown-delta handling.
+- [x] Formal verification for reachability, loops, isolation, and equivalence.
+- [x] Graph analytics for centrality, robustness, path diversity, spectral clustering,
+  motif census, diff/playback, layout, routing, trends, capacity, design suggestions,
+  and intent optimization.
+- [x] Cascade simulation, what-if failure analysis, fragility heatmaps, and temporal
+  degradation simulation.
+- [x] REST API for topology, analytics, verification, cascade, alerts, predictions,
+  remediation, and metrics.
+- [x] SQLite-backed alert/anomaly/blueprint persistence.
+- [x] CLI for static topology workflows and live API interaction.
+- [x] PyO3 bindings for Python integration.
+- [x] Python ML and operator scaffolds for anomaly scoring, TGN/fusion training,
+  [multi-agent](../multi-agent) chat, and remediation RL experimentation.
 
 ---
 
 ## # Active
 
-<!-- Current scope. Building toward these. -->
-
-- [ ] Cross-network topology comparison and diff analysis
-- [ ] Historical trend tracking and pattern evolution
-- [ ] Predictive capacity planning from temporal models
-- [ ] Advanced graph algorithms (spectral clustering, motif detection)
-- [ ] What-if analysis (link/node failure simulation without full cascade)
-
----
-
-## Current Milestone: v2.4 Richer Analysis
-
-**Goal:** Expand NetAssure's analytical depth with topology diffing, historical trends, advanced graph algorithms, capacity planning, and what-if simulation.
-
-**Target features:**
-- Topology snapshot diffing and comparison
-- Time-windowed trend tracking for graph metrics
-- Spectral clustering and network motif detection
-- Temporal model-driven capacity predictions
-- Lightweight what-if failure simulation
-
----
-
-## # Out of Scope
-
-- Visualization/UI layer — Other tools consume NetAssure analytics for visualization
-- NTE topology engine implementation — NetAssure consumes from existing NTE ([ank_nte](../ank_nte))
-- Historical data storage/replay — v2.4 adds bounded trend windows, not full replay
-- Production deployment infrastructure (Docker, K8s) — working prototype scope
+- [ ] Finish RL remediation integration: decide whether Rust should call a separate
+  Python service, a subprocess CLI, or a native policy artifact instead of embedding
+  Python directly.
+- [ ] Add end-to-end verification for the Multi-Agent NOC -> remediation -> blueprint
+  workflow.
+- [ ] Decide whether the simplified OSPF routing model is sufficient or needs explicit
+  convergence-loop integration in shadow topology verification.
+- [ ] Add a real visualization frontend or document NetViz as an external consumer only.
+- [ ] Tighten model-backed workflows with explicit fixtures/model-loading smoke tests.
 
 ---
 
 ## Context
 
-**Current State (v2.3 shipped):**
-Rust+Python network analysis platform with ~15k LOC Rust across 6 crates, ~3k LOC Python ML layer. Full end-to-end pipeline: NTE WebSocket ingestion → topology event normalization → GNN inference → anomaly detection → alert generation → CLI/REST/WS delivery.
+**Current state (reality check 2026-04-12):** the workspace builds with
+`cargo check --workspace`. The main gap is not the Rust analytics surface, but proof
+and integration depth around optional ML/agent workflows and visualization.
 
-**Tech Stack:**
-- Rust: petgraph, axum, tokio, tch-rs, rustworkx-core, PyO3
-- Python: PyTorch, PyTorch Geometric, custom TGN C++ extension
-- External: NTE ([ank_nte](../ank_nte)) WebSocket topology streaming
+**Tech stack:**
 
-**Integration Point:**
-NetAssure subscribes to NTE's WebSocket interface to receive real-time topology updates, runs GNN models on the graph data, and exposes analytics through multiple interfaces.
-
----
-
-## Constraints
-
-- **Technology**: Rust-based to align with NTE ecosystem
-- **Integration**: Must consume topology via NTE WebSocket (external system)
-- **Latency**: Near real-time processing target (1-5 seconds)
-- **Architecture**: Analytics module only — no visualization, relies on external tools
+- Rust: petgraph, axum, tokio, tch-rs, rustworkx-core, rusqlite, PyO3.
+- Python: PyTorch/PyTorch Geometric, Gymnasium, stable-baselines3, LangGraph/LangChain.
+- External systems: NTE WebSocket stream, optional NATS, optional OpenAI API, optional
+  `[netsim](../netsim)` high-fidelity simulator.
 
 ---
 
 ## Key Decisions
 
-| Decision | Rationale | Outcome |
-|----------|-----------|---------|
-| Use NTE WebSocket for topology ingestion | NTE already provides real-time streaming; avoid duplicating infrastructure | ✓ Good — v2.3 |
-| Multiple output interfaces (WS/REST/API/Events) | Flexibility for different consumption patterns | ✓ Good — v2.3 |
-| GNN over traditional ML | Network topology is naturally graph-structured | ✓ Good — v2.2 |
-| TGN with custom C++ memory extension | Maintain temporal state across TorchScript inference | ✓ Good — v2.2 |
-| `broadcast::Sender<AnalyticsEvent>` for multi-consumer | Decouples inference pipeline from downstream consumers | ✓ Good — v2.2 |
-| Tolerant delta decoding (Unknown variant) | Avoid ingest crashes on NTE protocol evolution | ✓ Good — v2.3 |
-| Ring buffers for alert/anomaly history | Bounded memory, simple shared state for API queries | ✓ Good — v2.3 |
-| rustworkx-core for centrality | Already optimized with rayon; manual impl would regress | ✓ Good — v2.3 |
+| Decision | Rationale | Current Outcome |
+|---|---|---|
+| Use NTE WebSocket for topology ingestion | Avoid duplicating topology discovery | Implemented |
+| Keep deterministic analysis in Rust | Performance and clearer failure modes | Implemented |
+| Use Python for ML/agent workflows | Ecosystem maturity | Implemented, optional dependencies required |
+| Store alerts/anomalies/blueprints in SQLite | Durable API history and restart behavior | Implemented |
+| Treat ML outputs as hypotheses | Avoid presenting predictions as proofs | Reflected in report/docs |
+| Use tolerant delta decoding | Avoid ingest crashes on NTE protocol evolution | Implemented |
+| Do not ship placeholder frontend as NetViz | Prevent docs from overstating UI status | Current docs mark visualization as missing |
 
-*Last updated: 2026-03-08 after v2.4 milestone start*
-
----
-
-## Current Status
-
-2026-03-11 —  plans, 4 files)
+*Last updated: 2026-04-12 after reality check and docs refresh*

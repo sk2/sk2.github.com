@@ -16,7 +16,6 @@ description: "Rust-based network topology generator with Python bindings. Takes 
 ## Contents
 
 - [Concept](#concept)
-- [Technical Reports](#technical-reports)
 - [Code Samples](#code-samples)
 - [Usage](#usage)
 
@@ -27,12 +26,6 @@ Rust-based network topology generator with Python bindings. Takes a declarative 
 Consolidates topology generation logic that was previously scattered across AutoNetKit, the [Network Simulator](/projects/netsim), and the [Network Visualization Engine](/projects/netvis) into a single library. Network engineers can generate data center fabrics, WAN backbones, enterprise hierarchies, and random graph models without implementing the algorithms from scratch.
 
 Three interfaces with parity guarantees: CLI for quick generation, Python API for workflow integration, config files for repeatable setups.
-
----
-
-## Technical Reports
-
-- [Download Research Paper: topogen-usermanual.pdf](/assets/docs/topogen-usermanual.pdf)
 
 ---
 

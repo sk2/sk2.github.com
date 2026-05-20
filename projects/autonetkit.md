@@ -7,7 +7,7 @@ description: "A compiler-based framework for automated network provisioning."
 # Configuration Generation (AutoNetkit)
 
 <div class="badges-row">
-  <span class="status-badge status-active">Recently Updated</span>
+  <span class="status-badge status-active">Last Active: 2026-03-01</span>
   <span class="stack-badge">Python</span> <span class="stack-badge">Polars</span>
 </div>
 

@@ -81,7 +81,7 @@ Rust TUI application for real-time heart rate variability monitoring. Connects t
 
 <span class="status-badge status-active">Active</span> · <span class="stack-badge">Python</span> · [Full Details →](projects/healthypi)
 
-Modular health monitoring ecosystem that translates raw biometric data from HealthyPi hardware into structured metrics. Swift collectors on Apple devices capture HealthKit data, publish to a NATS broker, and Python agents run analysis pipelines — coordinated by the [multi-agent orchestrator](/projects/multi-agent).
+Modular health monitoring ecosystem that translates raw biometric data from HealthyPi hardware into structured metrics. Swift collectors on Apple devices capture HealthKit data, publish to a NATS broker, and Python agents run analysis pipelines over the resulting stream.
 
 ---
 

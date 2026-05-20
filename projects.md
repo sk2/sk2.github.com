@@ -14,11 +14,11 @@ Focused on network engineering, autonomous systems, and signal processing.
 ## Recent Activity
 
 <ul class="recent-activity-list">
-<li><strong>2026-03-11</strong>: <a href="projects/netassure">Network Analysis Engine</a> — <em>plans, 4 files)</em></li>
-<li><strong>2026-03-11</strong>: <a href="projects/psytrance">Overtone</a> — <em>Completed  (Module-Level Rustdocs).</em></li>
-<li><strong>2026-03-10</strong>: <a href="projects/signals">Spectrum Analysis</a> — <em>Completed  (3D Propagation Bounce Visualization).</em></li>
-<li><strong>2026-03-09</strong>: <a href="projects/matrix-time-series">matrix-profile-rs</a> — <em>Completed 15-01-PLAN.md: MultiStreamingState core + Join distance kernels + Batch Join STOMP</em></li>
-<li><strong>2026-03-09</strong>: <a href="projects/rf-signal-analysis">Signal Reflection - KrakenSDR Multi-Beam System</a> — <em>Completed 40-04-PLAN.md</em></li>
+<li><strong>2026-05-05</strong>: <a href="projects/configparsing">Brownfield Ingestion</a> — <em>2026-05-05 - Verified vks/45w/do2/yhp closure against code; resynced docs with bead state.</em></li>
+<li><strong>2026-05-02</strong>: <a href="projects/cliscrape">CLI Parser</a> — <em>closed Universal Ledger epic. 189 tests across 18 binaries enforce the schema contract end-to-end.</em></li>
+<li><strong>2026-04-30</strong>: <a href="projects/matrix-time-series">matrix-profile-rs</a> — <em>Published v2.0.0 release (commits and tags pushed to main)</em></li>
+<li><strong>2026-04-12</strong>: <a href="projects/netsequence">netsequence</a> — <em>2026-04-12 - Reality-check docs, report status, and `br` gap epic updated</em></li>
+<li><strong>2026-04-11</strong>: <a href="projects/automationarch">Network Automation Ecosystem - Overall Architecture Definition</a> — <em>Agentic Translation Layer shipped; UUID Registry and Pessimistic Locking live.</em></li>
 </ul>
 
 ---
@@ -28,19 +28,19 @@ Focused on network engineering, autonomous systems, and signal processing.
 <div class="project-grid">
 <div class="project-card" data-search="brownfield ingestion vendor translation layer that decouples network configuration from vendor-specific syntax. uses llm-powered rag to extract network-level intent and topology relationships from vendor documentation and cli configurations, normalizing them into a vendor-neutral topology graph model. the intermediate representation is topology-centric (protocol adjacencies, link roles, vlan membership) rather than device-centric like yang, enabling genuine vendor abstraction. python configparsing">
   <h3 class="card-title"><a href="projects/configparsing">Brownfield Ingestion</a></h3>
-  <div class="badges-row card-badges"><span class="status-badge status-active">Recently Updated</span> <span class="stack-badge">Python</span></div>
+  <div class="badges-row card-badges"><span class="status-badge status-active">Last Active: 2026-05-05</span> <span class="stack-badge">Python</span></div>
   <p class="card-description">Vendor translation layer that decouples network configuration from vendor-specific syntax. Uses LLM-powered RAG to extract network-level intent and topology relationships from vendor documentation and CLI configurations, normalizing them into a vendor-neutral topology graph model. The intermediate representation is topology-centric (protocol adjacencies, link roles, VLAN membership) rather than device-centric like YANG, enabling genuine vendor abstraction.</p>
 </div>
 
 <div class="project-card" data-search="cli parser parsing engine for network device cli output. transforms semi-structured text (show commands, routing tables, bgp summaries) into structured data (json/yaml) using an optimized rust state machine. provides full compatibility with the industry-standard ntc-templates library while offering 10–50x faster execution than python-based alternatives like textfsm. rust cliscrape">
   <h3 class="card-title"><a href="projects/cliscrape">CLI Parser</a></h3>
-  <div class="badges-row card-badges"><span class="status-badge status-active">Active</span> <span class="stack-badge">Rust</span></div>
+  <div class="badges-row card-badges"><span class="status-badge status-active">Last Active: 2026-05-02</span> <span class="stack-badge">Rust</span></div>
   <p class="card-description">Parsing engine for network device CLI output. Transforms semi-structured text (show commands, routing tables, BGP summaries) into structured data (JSON/YAML) using an optimized Rust state machine. Provides full compatibility with the industry-standard ntc-templates library while offering 10–50x faster execution than Python-based alternatives like TextFSM.</p>
 </div>
 
 <div class="project-card" data-search="configuration generation (autonetkit) a compiler-based framework for automated network provisioning. autonetkit transforms high-level network designs into validated device configurations across heterogeneous hardware and protocol environments. traditional network configuration is manual and vendor-specific. python polars autonetkit">
   <h3 class="card-title"><a href="projects/autonetkit">Configuration Generation (AutoNetkit)</a></h3>
-  <div class="badges-row card-badges"><span class="status-badge status-active">Recently Updated</span> <span class="stack-badge">Python</span><span class="stack-badge">Polars</span></div>
+  <div class="badges-row card-badges"><span class="status-badge status-active">Last Active: 2026-03-01</span> <span class="stack-badge">Python</span><span class="stack-badge">Polars</span></div>
   <p class="card-description">A compiler-based framework for automated network provisioning. AutoNetkit transforms high-level network designs into validated device configurations across heterogeneous hardware and protocol environments. Traditional network configuration is manual and vendor-specific.</p>
 </div>
 
@@ -50,15 +50,15 @@ Focused on network engineering, autonomous systems, and signal processing.
   <p class="card-description">A Rust library and CLI for network device interaction and automated testing. Provides the essential PyATS capabilities — testbed management, CLI output parsing, and state verification — without the complexity. Connects to devices (real, simulated, or mocked), executes commands, parses structured output, and verifies correctness with the type safety of compiled Rust.</p>
 </div>
 
-<div class="project-card" data-search="network analysis engine graph neural network (gnn) based network analytics module that extends topology analysis with real-time learning and prediction. subscribes to the network topology engine's websocket stream for live topology updates, runs gnn models on graph data, and exposes analytics through multiple interfaces (websocket streaming, rest api, rust library, event queue). built on an existing rust+python analysis toolkit that includes formal verification (z3 smt solver), graph algorithms (centrality, community detection, cascade modeling), and python bindings via pyo3. rust netassure">
+<div class="project-card" data-search="network analysis engine graph neural network (gnn) based network analytics module that extends topology analysis with real-time learning and prediction. subscribes to the network topology engine's websocket stream for live topology updates, runs gnn models on graph data, and exposes analytics through multiple interfaces (websocket streaming, rest api, rust library, event queue). built on an existing rust+python analysis toolkit that includes formal verification (z3 smt solver), graph algorithms (centrality, community detection, cascade modeling), and python bindings via pyo3. rust typescript netassure">
   <h3 class="card-title"><a href="projects/netassure">Network Analysis Engine</a></h3>
-  <div class="badges-row card-badges"><span class="status-badge status-active">Recently Updated</span> <span class="stack-badge">Rust</span></div>
+  <div class="badges-row card-badges"><span class="status-badge status-active">Active</span> <span class="stack-badge">Rust</span><span class="stack-badge">TypeScript</span></div>
   <p class="card-description">Graph Neural Network (GNN) based network analytics module that extends topology analysis with real-time learning and prediction. Subscribes to the Network Topology Engine's WebSocket stream for live topology updates, runs GNN models on graph data, and exposes analytics through multiple interfaces (WebSocket streaming, REST API, Rust library, event queue). Built on an existing Rust+Python analysis toolkit that includes formal verification (Z3 SMT solver), graph algorithms (centrality, community detection, cascade modeling), and Python bindings via PyO3.</p>
 </div>
 
-<div class="project-card" data-search="network automation ecosystem - overall architecture definition this project defines the architecture of the network automation ecosystem: how its tools connect, what data flows between them, and where the system is headed. the ecosystem comprises nine repositories that form a composable toolchain. each tool handles one concern -- topology generation, simulation, configuration parsing, visualization, analysis -- and communicates through pinned contract schemas (rfc-01, rfc-02).  automationarch">
+<div class="project-card" data-search="network automation ecosystem - overall architecture definition this project defines the architecture of the network automation ecosystem: how its tools connect, what data flows between them, and where the system is headed. the ecosystem comprises nine repositories that form a composable toolchain. each tool handles one concern -- topology generation, simulation, configuration parsing, visualization, analysis -- and communicates through pinned contract schemas (rfc-01, rfc-02). python typescript automationarch">
   <h3 class="card-title"><a href="projects/automationarch">Network Automation Ecosystem - Overall Architecture Definition</a></h3>
-  <div class="badges-row card-badges"><span class="status-badge status-active">Recently Updated</span> </div>
+  <div class="badges-row card-badges"><span class="status-badge status-active">Last Active: 2026-04-11</span> <span class="stack-badge">Python</span><span class="stack-badge">TypeScript</span></div>
   <p class="card-description">This project defines the architecture of the Network Automation Ecosystem: how its tools connect, what data flows between them, and where the system is headed. The ecosystem comprises nine repositories that form a composable toolchain. Each tool handles one concern -- topology generation, simulation, configuration parsing, visualization, analysis -- and communicates through pinned contract schemas (RFC-01, RFC-02).</p>
 </div>
 
@@ -72,9 +72,9 @@ Focused on network engineering, autonomous systems, and signal processing.
 └──────────────────────────────────────────────────────────────────┘
 ```
 
-the workflow follows a linear pipeline: generate or model a topology, run a simulation against it, visualize the results, and export device configurations. python typescript ank-workbench">
+the workflow follows a linear pipeline: generate or model a topology, run a simulation against it, visualize the results, and export device configurations. python ank-workbench">
   <h3 class="card-title"><a href="projects/ank-workbench">Network Automation Workbench</a></h3>
-  <div class="badges-row card-badges"><span class="status-badge status-active">Active</span> <span class="stack-badge">Python</span><span class="stack-badge">TypeScript</span></div>
+  <div class="badges-row card-badges"><span class="status-badge status-active">Last Active: 2026-04-06</span> <span class="stack-badge">Python</span></div>
   <p class="card-description">Orchestration platform that integrates the ANK ecosystem tools — [Topology Generator](/projects/topogen), [Network Modeling & Configuration Library](/projects/ank-pydantic), [Network Simulator](/projects/netsim), [Network Visualization Engine](/projects/netvis) — into a single web interface. Engineers define topologies, generate configurations, run simulations, and inspect results without switching between CLI tools. ```
 ┌──────────────────────────────────────────────────────────────────┐
 │                  Network Automation Workbench                    │
@@ -88,47 +88,47 @@ the workflow follows a linear pipeline: generate or model a topology, run a simu
 The workflow follows a linear pipeline: generate or model a topology, run a simulation against it, visualize the results, and export device configurations.</p>
 </div>
 
-<div class="project-card" data-search="network configuration framework network configuration framework is a rust cli that compiles declarative yaml blueprints into vendor-neutral configuration artifacts. a single binary orchestrates the full pipeline: blueprint parsing, topology transformation, deviceir generation, template rendering, and traceable config file emission. the core problem is determinism. rust ank-netcfg">
+<div class="project-card" data-search="network configuration framework network configuration framework is a rust cli that compiles declarative yaml blueprints into vendor-neutral configuration artifacts. a single binary orchestrates the full pipeline: blueprint parsing, topology transformation, deviceir generation, template rendering, and traceable config file emission. the core problem is determinism. rust polars ank-netcfg">
   <h3 class="card-title"><a href="projects/ank-netcfg">Network Configuration Framework</a></h3>
-  <div class="badges-row card-badges"><span class="status-badge status-active">Active</span> <span class="stack-badge">Rust</span></div>
+  <div class="badges-row card-badges"><span class="status-badge status-active">Last Active: 2026-03-24</span> <span class="stack-badge">Rust</span><span class="stack-badge">Polars</span></div>
   <p class="card-description">Network Configuration Framework is a Rust CLI that compiles declarative YAML blueprints into vendor-neutral configuration artifacts. A single binary orchestrates the full pipeline: blueprint parsing, topology transformation, DeviceIR generation, template rendering, and traceable config file emission. The core problem is determinism.</p>
 </div>
 
 <div class="project-card" data-search="network modeling & configuration library the network modeling & configuration library represents network topologies as typed python objects backed by a rust graph engine. you define nodes, edges, and layers using pydantic models. the library stores them in the [network topology engine](/projects/ank-nte) and exposes a composable query api that builds lazy evaluation plans in python and executes them in rust. python polars ank-pydantic">
   <h3 class="card-title"><a href="projects/ank-pydantic">Network Modeling & Configuration Library</a></h3>
-  <div class="badges-row card-badges"><span class="status-badge status-active">Recently Updated</span> <span class="stack-badge">Python</span><span class="stack-badge">Polars</span></div>
+  <div class="badges-row card-badges"><span class="status-badge status-active">Last Active: 2026-03-01</span> <span class="stack-badge">Python</span><span class="stack-badge">Polars</span></div>
   <p class="card-description">The Network Modeling & Configuration Library represents network topologies as typed Python objects backed by a Rust graph engine. You define nodes, edges, and layers using Pydantic models. The library stores them in the [Network Topology Engine](/projects/ank-nte) and exposes a composable query API that builds lazy evaluation plans in Python and executes them in Rust.</p>
 </div>
 
 <div class="project-card" data-search="network simulator deterministic tick-based network protocol simulator validating configurations before production deployment. it provides protocol-level fidelity with same-topology-same-results guarantees, allowing engineers to verify control-plane behavior without the overhead of full vm emulation. unlike packet-level simulators that focus on bit-level accuracy, this engine focuses on **protocol convergence and state validation**. rust netsim">
   <h3 class="card-title"><a href="projects/netsim">Network Simulator</a></h3>
-  <div class="badges-row card-badges"><span class="status-badge status-active">Recently Updated</span> <span class="stack-badge">Rust</span></div>
+  <div class="badges-row card-badges"><span class="status-badge status-active">Last Active: 2026-03-26</span> <span class="stack-badge">Rust</span></div>
   <p class="card-description">Deterministic tick-based network protocol simulator validating configurations before production deployment. It provides protocol-level fidelity with same-topology-same-results guarantees, allowing engineers to verify control-plane behavior without the overhead of full VM emulation. Unlike packet-level simulators that focus on bit-level accuracy, this engine focuses on **protocol convergence and state validation**.</p>
 </div>
 
-<div class="project-card" data-search="network topology engine rust-based graph topology engine with python bindings via pyo3. takes network topologies — nodes, edges, layers, metadata — and stores them in a dual-write architecture: structural graph (petgraph stabledigraph) plus columnar attribute store (polars dataframes). mutations update both atomically; if either write fails, the transaction rolls back. rust python typescript polars ank-nte">
+<div class="project-card" data-search="network topology engine rust-based graph topology engine with python bindings via pyo3. takes network topologies — nodes, edges, layers, metadata — and stores them in a dual-write architecture: structural graph (petgraph stabledigraph) plus columnar attribute store (polars dataframes). mutations update both atomically; if either write fails, the transaction rolls back. rust python polars ank-nte">
   <h3 class="card-title"><a href="projects/ank-nte">Network Topology Engine</a></h3>
-  <div class="badges-row card-badges"><span class="status-badge status-active">Recently Updated</span> <span class="stack-badge">Rust</span><span class="stack-badge">Python</span><span class="stack-badge">TypeScript</span><span class="stack-badge">Polars</span></div>
+  <div class="badges-row card-badges"><span class="status-badge status-active">Active</span> <span class="stack-badge">Rust</span><span class="stack-badge">Python</span><span class="stack-badge">Polars</span></div>
   <p class="card-description">Rust-based graph topology engine with Python bindings via PyO3. Takes network topologies — nodes, edges, layers, metadata — and stores them in a dual-write architecture: structural graph (petgraph StableDiGraph) plus columnar attribute store (Polars DataFrames). Mutations update both atomically; if either write fails, the transaction rolls back.</p>
 </div>
 
 <div class="project-card" data-search="network visualization engine rust-based network topology layout and visualization engine. takes multi-layer network topologies (via petgraph) and renders them using layout algorithms that minimize edge crossings, bundle related connections, and respect hierarchical or geographic structure. outputs svg, pdf, and png with interactive browser embedding via wasm. rust python typescript netvis">
   <h3 class="card-title"><a href="projects/netvis">Network Visualization Engine</a></h3>
-  <div class="badges-row card-badges"><span class="status-badge status-active">Last Active: 2026-02-24</span> <span class="stack-badge">Rust</span><span class="stack-badge">Python</span><span class="stack-badge">TypeScript</span></div>
+  <div class="badges-row card-badges"><span class="status-badge status-active">Last Active: 2026-03-30</span> <span class="stack-badge">Rust</span><span class="stack-badge">Python</span><span class="stack-badge">TypeScript</span></div>
   <img src="../images/hero-diagram.svg" class="project-thumbnail" alt="Network Visualization Engine diagram" />
   <p class="card-description">Rust-based network topology layout and visualization engine. Takes multi-layer network topologies (via petgraph) and renders them using layout algorithms that minimize edge crossings, bundle related connections, and respect hierarchical or geographic structure. Outputs SVG, PDF, and PNG with interactive browser embedding via WASM.</p>
 </div>
 
-<div class="project-card" data-search="orchestrator (device interaction runner) orchestration engine for coordinating device interactions across real and testbed networks. executes runs with retries, timeouts, bounded concurrency, and durable artifacts (logs, results, snapshots). uses [device interaction framework](../deviceinteraction) as a library for transports, parsing, and test primitives — the orchestrator owns run coordination, persistence, and event streaming. python orchestrator">
-  <h3 class="card-title"><a href="projects/orchestrator">Orchestrator (Device Interaction Runner)</a></h3>
-  <div class="badges-row card-badges"><span class="status-badge status-active">Recently Updated</span> <span class="stack-badge">Python</span></div>
-  <p class="card-description">Orchestration engine for coordinating device interactions across real and testbed networks. Executes runs with retries, timeouts, bounded concurrency, and durable artifacts (logs, results, snapshots). Uses [Device Interaction Framework](../deviceinteraction) as a library for transports, parsing, and test primitives — the orchestrator owns run coordination, persistence, and event streaming.</p>
-</div>
-
 <div class="project-card" data-search="performance simulator network flow simulator uses analytic queuing models and monte carlo simulation to evaluate network performance without packet-level discrete event simulation. given a topology and traffic demands, it pushes billions of flow iterations through queuing models in seconds, identifying congestion bottlenecks probabilistically and projecting capacity headroom across carrier-scale networks (100k+ nodes). the core tradeoff: sacrifice per-packet fidelity for orders-of-magnitude speed improvement. rust netflowsim">
   <h3 class="card-title"><a href="projects/netflowsim">Performance Simulator</a></h3>
-  <div class="badges-row card-badges"><span class="status-badge status-active">Recently Updated</span> <span class="stack-badge">Rust</span></div>
+  <div class="badges-row card-badges"><span class="status-badge status-active">Active</span> <span class="stack-badge">Rust</span></div>
   <p class="card-description">Network Flow Simulator uses analytic queuing models and Monte Carlo simulation to evaluate network performance without packet-level discrete event simulation. Given a topology and traffic demands, it pushes billions of flow iterations through queuing models in seconds, identifying congestion bottlenecks probabilistically and projecting capacity headroom across carrier-scale networks (100k+ nodes). The core tradeoff: sacrifice per-packet fidelity for orders-of-magnitude speed improvement.</p>
+</div>
+
+<div class="project-card" data-search="project reference orchestration engine for coordinating device interactions across real and testbed networks. executes runs with retries, timeouts, bounded concurrency, and durable artifacts (logs, results, snapshots). uses [device interaction framework](../deviceinteraction) as a library for transports, parsing, and test primitives — the orchestrator owns run coordination, persistence, and event streaming. python orchestrator">
+  <h3 class="card-title"><a href="projects/orchestrator">Project Reference</a></h3>
+  <div class="badges-row card-badges"><span class="status-badge status-active">Active</span> <span class="stack-badge">Python</span></div>
+  <p class="card-description">Orchestration engine for coordinating device interactions across real and testbed networks. Executes runs with retries, timeouts, bounded concurrency, and durable artifacts (logs, results, snapshots). Uses [Device Interaction Framework](../deviceinteraction) as a library for transports, parsing, and test primitives — the orchestrator owns run coordination, persistence, and event streaming.</p>
 </div>
 
 <div class="project-card" data-search="topology generator rust-based network topology generator with python bindings. takes a declarative yaml config describing the desired topology type, scale, and parameters, and produces a validated network graph with realistic structure — proper tier hierarchies, vendor-specific interface naming, geographic placement, and bandwidth profiles. consolidates topology generation logic that was previously scattered across autonetkit, the [network simulator](/projects/netsim), and the [network visualization engine](/projects/netvis) into a single library. rust python topogen">
@@ -150,7 +150,7 @@ The workflow follows a linear pipeline: generate or model a topology, run a simu
 
 <div class="project-card" data-search="signal reflection - krakensdr multi-beam system distributed multi-beam signal reflection analysis system built on krakensdr hardware. a raspberry pi handles data acquisition and streams iq data over udp; a mac or linux workstation runs compute-intensive dsp. all four surveillance channels process in parallel with independent range-doppler visualization, per-beam configuration, and real-time performance monitoring. rust python rf-signal-analysis">
   <h3 class="card-title"><a href="projects/rf-signal-analysis">Signal Reflection - KrakenSDR Multi-Beam System</a></h3>
-  <div class="badges-row card-badges"><span class="status-badge status-active">Recently Updated</span> <span class="stack-badge">Rust</span><span class="stack-badge">Python</span></div>
+  <div class="badges-row card-badges"><span class="status-badge status-active">Last Active: 2026-03-09</span> <span class="stack-badge">Rust</span><span class="stack-badge">Python</span></div>
   <p class="card-description">Distributed multi-beam signal reflection analysis system built on KrakenSDR hardware. A Raspberry Pi handles data acquisition and streams IQ data over UDP; a Mac or Linux workstation runs compute-intensive DSP. All four surveillance channels process in parallel with independent Range-Doppler visualization, per-beam configuration, and real-time performance monitoring.</p>
 </div>
 
@@ -160,9 +160,9 @@ The workflow follows a linear pipeline: generate or model a topology, run a simu
   <p class="card-description">Audio processing system using Raspberry Pi and microphone arrays for spatial sound analysis. Captures multi-channel audio from USB/HAT arrays (ReSpeaker, Matrix), computes Time of Arrival (ToA) for sound localization, and applies beamforming for directional isolation. Classifies sources — vehicles (engine sounds), aircraft, wildlife (birds) — and streams processed audio or metadata to a remote desktop for analysis.</p>
 </div>
 
-<div class="project-card" data-search="spectrum analysis automated signal census system that transforms raw radio spectrum data into classified, searchable signal inventories. combines sdr acquisition, ml classification, and vector search to detect, identify, and catalog signals across monitored bands. python signals">
+<div class="project-card" data-search="spectrum analysis automated signal census system that transforms raw radio spectrum data into classified, searchable signal inventories. combines sdr acquisition, ml classification, and vector search to detect, identify, and catalog signals across monitored bands. rust python signals">
   <h3 class="card-title"><a href="projects/signals">Spectrum Analysis</a></h3>
-  <div class="badges-row card-badges"><span class="status-badge status-active">Recently Updated</span> <span class="stack-badge">Python</span></div>
+  <div class="badges-row card-badges"><span class="status-badge status-active">Last Active: 2026-03-10</span> <span class="stack-badge">Rust</span><span class="stack-badge">Python</span></div>
   <img src="../images/search_topk_example.png" class="project-thumbnail" alt="Spectrum Analysis diagram" />
   <p class="card-description">Automated signal census system that transforms raw radio spectrum data into classified, searchable signal inventories. Combines SDR acquisition, ML classification, and vector search to detect, identify, and catalog signals across monitored bands.</p>
 </div>
@@ -207,16 +207,10 @@ The workflow follows a linear pipeline: generate or model a topology, run a simu
   <p class="card-description">Autonomous solar eclipse photography controller for Raspberry Pi. Coordinates a camera (via gphoto2) and equatorial mount (ZWO AM5 / Benro Polaris via INDI) to capture a complete eclipse sequence from first contact (C1) to fourth contact (C4) without manual intervention. The system handles solar guiding, exposure ramping, and error recovery so the photographer can watch the eclipse while the hardware secures the data.</p>
 </div>
 
-<div class="project-card" data-search="eclipsestack alignment tool for solar eclipse hdr composites. takes hundreds of raw frames captured during totality and produces sub-pixel-aligned output ready for hdr stacking in pixinsight. addresses tracker drift by combining solar disk detection (computer vision) with temporal drift modeling from exif timestamps — the constant drift rate fills alignment gaps between confident frames. rust eclipsestack">
-  <h3 class="card-title"><a href="projects/eclipsestack">EclipseStack</a></h3>
-  <div class="badges-row card-badges"><span class="status-badge status-active">Active</span> <span class="stack-badge">Rust</span></div>
+<div class="project-card" data-search="eclipsestack: expertise-led solar alignment alignment tool for solar eclipse hdr composites. takes hundreds of raw frames captured during totality and produces sub-pixel-aligned output ready for hdr stacking in pixinsight. addresses tracker drift by combining solar disk detection (computer vision) with temporal drift modeling from exif timestamps — the constant drift rate fills alignment gaps between confident frames. rust typescript eclipsestack">
+  <h3 class="card-title"><a href="projects/eclipsestack">EclipseStack: Expertise-Led Solar Alignment</a></h3>
+  <div class="badges-row card-badges"><span class="status-badge status-active">Active</span> <span class="stack-badge">Rust</span><span class="stack-badge">TypeScript</span></div>
   <p class="card-description">Alignment tool for solar eclipse HDR composites. Takes hundreds of RAW frames captured during totality and produces sub-pixel-aligned output ready for HDR stacking in PixInsight. Addresses tracker drift by combining solar disk detection (computer vision) with temporal drift modeling from EXIF timestamps — the constant drift rate fills alignment gaps between confident frames.</p>
-</div>
-
-<div class="project-card" data-search="openastro core rust library providing shared astronomical logic, hardware drivers, and protocol implementations for the openastro ecosystem. keeps coordinate math, imaging intelligence, and device behavior consistent across downstream applications (openastro node, photo tour). pure rust stack — no c toolchain required, testable without hardware. rust open-astro-core">
-  <h3 class="card-title"><a href="projects/open-astro-core">OpenAstro Core</a></h3>
-  <div class="badges-row card-badges"><span class="status-badge status-active">Active</span> <span class="stack-badge">Rust</span></div>
-  <p class="card-description">Rust library providing shared astronomical logic, hardware drivers, and protocol implementations for the OpenAstro ecosystem. Keeps coordinate math, imaging intelligence, and device behavior consistent across downstream applications (OpenAstro Node, Photo Tour). Pure Rust stack — no C toolchain required, testable without hardware.</p>
 </div>
 
 <div class="project-card" data-search="openastro node headless, autonomous astrophotography controller for low-power linux devices (raspberry pi, jetson). manages camera and mount hardware, executes imaging sequences, and ensures rig safety through a "goodnight" protocol for unattended overnight sessions. uses openastro core for coordinate math, imaging intelligence, and device drivers. rust typescript open-astro-node">
@@ -227,7 +221,7 @@ The workflow follows a linear pipeline: generate or model a topology, run a simu
 
 <div class="project-card" data-search="satellites terminal-based satellite tracker that displays real-time positions on a world map, predicts passes over the user's location, and shows transmission frequencies. built with rust and ratatui, using the sgp4 orbital propagation algorithm to compute positions from two-line element (tle) data. a single binary with no gui dependencies — aimed at amateur radio operators and space enthusiasts. rust satellites">
   <h3 class="card-title"><a href="projects/satellites">Satellites</a></h3>
-  <div class="badges-row card-badges"><span class="status-badge status-active">Recently Updated</span> <span class="stack-badge">Rust</span></div>
+  <div class="badges-row card-badges"><span class="status-badge status-active">Last Active: 2026-03-09</span> <span class="stack-badge">Rust</span></div>
   <p class="card-description">Terminal-based satellite tracker that displays real-time positions on a world map, predicts passes over the user's location, and shows transmission frequencies. Built with Rust and ratatui, using the SGP4 orbital propagation algorithm to compute positions from Two-Line Element (TLE) data. A single binary with no GUI dependencies — aimed at amateur radio operators and space enthusiasts.</p>
 </div>
 
@@ -255,14 +249,8 @@ The workflow follows a linear pipeline: generate or model a topology, run a simu
 <div class="project-grid">
 <div class="project-card" data-search="cycle agent native swiftui training application for ipad and apple tv that bridges a wahoo kickr core smart trainer with ai-driven workout logic. the app communicates with the trainer over bluetooth (ftms protocol) for real-time resistance control and telemetry, while a nats message bridge connects to an external agent for dynamic workout decisions. a scenekit-rendered infinite terrain visualization runs at 60fps on apple tv, with heart rate relay from apple watch completing the sensor loop.  cycle">
   <h3 class="card-title"><a href="projects/cycle">Cycle Agent</a></h3>
-  <div class="badges-row card-badges"><span class="status-badge status-active">Last Active: 2026-02-21</span> </div>
+  <div class="badges-row card-badges"><span class="status-badge status-active">Last Active: 2026-03-16</span> </div>
   <p class="card-description">Native SwiftUI training application for iPad and Apple TV that bridges a Wahoo KICKR Core smart trainer with AI-driven workout logic. The app communicates with the trainer over Bluetooth (FTMS protocol) for real-time resistance control and telemetry, while a NATS message bridge connects to an external agent for dynamic workout decisions. A SceneKit-rendered infinite terrain visualization runs at 60fps on Apple TV, with heart rate relay from Apple Watch completing the sensor loop.</p>
-</div>
-
-<div class="project-card" data-search="secure multi-agent personal assistant a security-first multi-agent system that coordinates specialized containerized agents through a nats message broker. each agent runs in isolation with minimal privileges — separate containers, scoped credentials, no direct agent-to-agent communication. the orchestrator uses cloud llm reasoning (gpt-4/claude) while agents remain lightweight and deterministic. python multi-agent">
-  <h3 class="card-title"><a href="projects/multi-agent">Secure Multi-Agent Personal Assistant</a></h3>
-  <div class="badges-row card-badges"><span class="status-badge status-active">Last Active: 2026-02-21</span> <span class="stack-badge">Python</span></div>
-  <p class="card-description">A security-first multi-agent system that coordinates specialized containerized agents through a NATS message broker. Each agent runs in isolation with minimal privileges — separate containers, scoped credentials, no direct agent-to-agent communication. The orchestrator uses cloud LLM reasoning (GPT-4/Claude) while agents remain lightweight and deterministic.</p>
 </div>
 
 </div>
@@ -270,9 +258,25 @@ The workflow follows a linear pipeline: generate or model a topology, run a simu
 ## Data & Utilities
 
 <div class="project-grid">
+<div class="project-card" data-search="dataraster (data-raster) dataraster turns massive spatial datasets into density maps, raster tiles, and
+analysis outputs. it is built for the point where browser-side svg, notebook
+scripts, and hand-rolled python pipelines stop scaling — a compiled backend for
+dense point, line, and polygon rendering. the shortest framing, for anyone who knows datashader: dataraster is a
+deployment-friendly backend for the same class of dense spatial rendering, with
+a tile server, python bindings, and diagnostics built around it. rust polars datavis">
+  <h3 class="card-title"><a href="projects/datavis">DataRaster (data-raster)</a></h3>
+  <div class="badges-row card-badges"><span class="status-badge status-active">Last Active: 2026-03-22</span> <span class="stack-badge">Rust</span><span class="stack-badge">Polars</span></div>
+  <p class="card-description">DataRaster turns massive spatial datasets into density maps, raster tiles, and
+analysis outputs. It is built for the point where browser-side SVG, notebook
+scripts, and hand-rolled Python pipelines stop scaling — a compiled backend for
+dense point, line, and polygon rendering. The shortest framing, for anyone who knows Datashader: DataRaster is a
+deployment-friendly backend for the same class of dense spatial rendering, with
+a tile server, Python bindings, and diagnostics built around it.</p>
+</div>
+
 <div class="project-card" data-search="nas cleanup & intelligence rust cli for managing large-scale synology nas file systems. performs duplicate detection (bit-for-bit and fuzzy), astrophotography file optimization (asiair workflow cleanup), conventional raw/sidecar management, and intelligent organization. designed for docker or native execution on dsm to minimize network latency during scanning. rust nascleanup">
   <h3 class="card-title"><a href="projects/nascleanup">NAS Cleanup & Intelligence</a></h3>
-  <div class="badges-row card-badges"><span class="status-badge status-active">Recently Updated</span> <span class="stack-badge">Rust</span></div>
+  <div class="badges-row card-badges"><span class="status-badge status-active">Last Active: 2026-03-03</span> <span class="stack-badge">Rust</span></div>
   <p class="card-description">Rust CLI for managing large-scale Synology NAS file systems. Performs duplicate detection (bit-for-bit and fuzzy), astrophotography file optimization (ASIair workflow cleanup), conventional RAW/sidecar management, and intelligent organization. Designed for Docker or native execution on DSM to minimize network latency during scanning.</p>
 </div>
 
@@ -282,10 +286,20 @@ The workflow follows a linear pipeline: generate or model a topology, run a simu
   <p class="card-description">Python CLI that reads directly from the OmniFocus 4 SQLite database on macOS, bypassing AppleScript and Omni Automation layers. Provides near-instant retrieval of projects, inbox items, and tasks in structured, token-efficient formats (JSON/text) for agent consumption. Read-only access by default to prevent database corruption while OmniFocus is active.</p>
 </div>
 
-<div class="project-card" data-search="tileserver polars (rust optimized) dynamic vector tile server for massive geospatial datasets. serves mapbox vector tiles (mvt) from millions of points with sub-second latency, enabling interactive visualization in kepler.gl without pre-rendering static tilesets. python (fastapi) handles the api layer; rust (via pyo3) handles coordinate transformation and mvt encoding; polars provides in-memory filtering and aggregation. rust python polars tileserver">
+<div class="project-card" data-search="tileserver polars (rust optimized) a dynamic vector tile server for massive geospatial datasets. it serves mapbox
+vector tiles (mvt) from millions of points with sub-second latency, enabling
+interactive visualisation in kepler.gl and maplibre without pre-rendering a
+static tile set. python (fastapi) handles the http layer; rust (via pyo3) does
+coordinate projection and protobuf encoding; polars holds the data and runs the
+spatial filters. rust python polars tileserver">
   <h3 class="card-title"><a href="projects/tileserver">Tileserver Polars (Rust Optimized)</a></h3>
   <div class="badges-row card-badges"><span class="status-badge status-active">Active</span> <span class="stack-badge">Rust</span><span class="stack-badge">Python</span><span class="stack-badge">Polars</span></div>
-  <p class="card-description">Dynamic vector tile server for massive geospatial datasets. Serves Mapbox Vector Tiles (MVT) from millions of points with sub-second latency, enabling interactive visualization in Kepler.gl without pre-rendering static tilesets. Python (FastAPI) handles the API layer; Rust (via PyO3) handles coordinate transformation and MVT encoding; Polars provides in-memory filtering and aggregation.</p>
+  <p class="card-description">A dynamic vector tile server for massive geospatial datasets. It serves Mapbox
+Vector Tiles (MVT) from millions of points with sub-second latency, enabling
+interactive visualisation in Kepler.gl and MapLibre without pre-rendering a
+static tile set. Python (FastAPI) handles the HTTP layer; Rust (via PyO3) does
+coordinate projection and Protobuf encoding; Polars holds the data and runs the
+spatial filters.</p>
 </div>
 
 <div class="project-card" data-search="weather (bom access pipeline) data engineering pipeline that fetches, processes, and serves weather model data from the australian bureau of meteorology. targets access (australian community climate and earth-system simulator) model outputs, bypassing bom's ftp delivery and binary formats (grib2/netcdf) to provide a queryable interface for localized weather forecasts. initial geographic focus on south australia. python polars weather">
@@ -294,10 +308,18 @@ The workflow follows a linear pipeline: generate or model a topology, run a simu
   <p class="card-description">Data engineering pipeline that fetches, processes, and serves weather model data from the Australian Bureau of Meteorology. Targets ACCESS (Australian Community Climate and Earth-System Simulator) model outputs, bypassing BOM's FTP delivery and binary formats (GRIB2/NetCDF) to provide a queryable interface for localized weather forecasts. Initial geographic focus on South Australia.</p>
 </div>
 
-<div class="project-card" data-search="matrix-profile-rs matrix profile algorithms (stomp, scrimp++, scamp) in native rust for motif discovery and anomaly detection in time series data. achieves 2.5x speedup via simd (avx2/neon), handles datasets exceeding ram through memory-budgeted tiling, and integrates with polars as a native dataframe operation. 8,700 lines of rust. rust polars matrix-time-series">
+<div class="project-card" data-search="matrix-profile-rs the matrix profile is a single transform that exposes a time series' repeated
+patterns and its anomalies. it annotates every subsequence with the distance to
+its nearest match elsewhere in the series: low values mark **motifs** (a shape
+that recurs), high values mark **discords** (a shape unlike any other). it
+needs no training, no labelled data, and no domain-specific parameters. rust polars matrix-time-series">
   <h3 class="card-title"><a href="projects/matrix-time-series">matrix-profile-rs</a></h3>
-  <div class="badges-row card-badges"><span class="status-badge status-active">Recently Updated</span> <span class="stack-badge">Rust</span><span class="stack-badge">Polars</span></div>
-  <p class="card-description">Matrix Profile algorithms (STOMP, SCRIMP++, SCAMP) in native Rust for motif discovery and anomaly detection in time series data. Achieves 2.5x speedup via SIMD (AVX2/NEON), handles datasets exceeding RAM through memory-budgeted tiling, and integrates with Polars as a native DataFrame operation. 8,700 lines of Rust.</p>
+  <div class="badges-row card-badges"><span class="status-badge status-active">Last Active: 2026-04-30</span> <span class="stack-badge">Rust</span><span class="stack-badge">Polars</span></div>
+  <p class="card-description">The matrix profile is a single transform that exposes a time series' repeated
+patterns and its anomalies. It annotates every subsequence with the distance to
+its nearest match elsewhere in the series: low values mark **motifs** (a shape
+that recurs), high values mark **discords** (a shape unlike any other). It
+needs no training, no labelled data, and no domain-specific parameters.</p>
 </div>
 
 </div>
@@ -307,7 +329,7 @@ The workflow follows a linear pipeline: generate or model a topology, run a simu
 <div class="project-grid">
 <div class="project-card" data-search="overtone generative psytrance synthesis engine with real-time tui controls. creates complete tracks driven by a multi-level energy model (macro, meso, micro), with live playback, step editing, and wav export. procedural synthesis generates kick, bass, hihat, and clap patterns; an effects chain (sidechain compression, delay, reverb, hpf, limiter) and humanization (velocity jitter, micro-timing) produce output that sounds like a produced track rather than a sequencer demo. rust psytrance">
   <h3 class="card-title"><a href="projects/psytrance">Overtone</a></h3>
-  <div class="badges-row card-badges"><span class="status-badge status-active">Recently Updated</span> <span class="stack-badge">Rust</span></div>
+  <div class="badges-row card-badges"><span class="status-badge status-active">Active</span> <span class="stack-badge">Rust</span></div>
   <p class="card-description">Generative psytrance synthesis engine with real-time TUI controls. Creates complete tracks driven by a multi-level energy model (macro, meso, micro), with live playback, step editing, and WAV export. Procedural synthesis generates kick, bass, hihat, and clap patterns; an effects chain (sidechain compression, delay, reverb, HPF, limiter) and humanization (velocity jitter, micro-timing) produce output that sounds like a produced track rather than a sequencer demo.</p>
 </div>
 
@@ -322,10 +344,40 @@ The workflow follows a linear pipeline: generate or model a topology, run a simu
 ## Experimental
 
 <div class="project-grid">
+<div class="project-card" data-search="asana: real-time yoga pose analysis with rust a desktop and mobile application that uses a webcam or phone camera to provide real-time yoga pose estimation, alignment correction, biomechanical analysis, and intelligent sequence building. the system spans seven architectural layers: perception, intelligence, knowledge, feedback, longitudinal analytics, platform ecosystem, and creative frontiers. targets individual practitioners, instructors, and students. rust yoga">
+  <h3 class="card-title"><a href="projects/yoga">Asana: Real-Time Yoga Pose Analysis with Rust</a></h3>
+  <div class="badges-row card-badges"><span class="status-badge status-active">Last Active: 2026-03-16</span> <span class="stack-badge">Rust</span></div>
+  <p class="card-description">A desktop and mobile application that uses a webcam or phone camera to provide real-time yoga pose estimation, alignment correction, biomechanical analysis, and intelligent sequence building. The system spans seven architectural layers: perception, intelligence, knowledge, feedback, longitudinal analytics, platform ecosystem, and creative frontiers. Targets individual practitioners, instructors, and students.</p>
+</div>
+
+<div class="project-card" data-search="high-fidelity photometric synthesis suite a phd-led, professional-grade photometric synthesis engine for timelapse photography. it transforms raw sequences into cinematic video through a rigorous 16-bit linear pipeline, utilizing pchip temporal ramping, wide-gamut (rec.2020) color management, and stochastic dithering. it goes beyond simple "deflickering" to provide deep photometric insights, radial vignette normalization, and temporal "hallucination" for corrupt frame continuity. rust timelapse">
+  <h3 class="card-title"><a href="projects/timelapse">High-Fidelity Photometric Synthesis Suite</a></h3>
+  <div class="badges-row card-badges"><span class="status-badge status-active">Last Active: 2026-03-30</span> <span class="stack-badge">Rust</span></div>
+  <p class="card-description">A PhD-led, professional-grade photometric synthesis engine for timelapse photography. It transforms RAW sequences into cinematic video through a rigorous 16-bit linear pipeline, utilizing PCHIP temporal ramping, wide-gamut (Rec.2020) color management, and stochastic dithering. It goes beyond simple "deflickering" to provide deep photometric insights, radial vignette normalization, and temporal "hallucination" for corrupt frame continuity.</p>
+</div>
+
+<div class="project-card" data-search="musicbrain musicbrain is a desktop music-analysis workbench for studying recorded tracks and, in alpha form, live input. the implemented product already goes beyond the original offline-only brief: it includes offline analysis, report and dna export, session persistence, track comparison, an optional demucs cli stem workflow, and a live dashboard path. this file is now the authoritative current-scope document. rust musicanalysis">
+  <h3 class="card-title"><a href="projects/musicanalysis">MusicBrain</a></h3>
+  <div class="badges-row card-badges"><span class="status-badge status-active">Last Active: 2026-04-10</span> <span class="stack-badge">Rust</span></div>
+  <p class="card-description">MusicBrain is a desktop music-analysis workbench for studying recorded tracks and, in alpha form, live input. The implemented product already goes beyond the original offline-only brief: it includes offline analysis, report and DNA export, session persistence, track comparison, an optional Demucs CLI stem workflow, and a live dashboard path. This file is now the authoritative current-scope document.</p>
+</div>
+
 <div class="project-card" data-search="rust tui gtd todo (omnifocus-inspired) keyboard-driven rust tui task manager built around a gtd workflow. stores tasks in a local sqlite database with support for projects, hierarchical tags, and availability-based next-action computation. optimized for rapid inbox processing — single-key field mode for triage, project/tag assignment, and batch operations with sub-second interactions at 10,000+ actions. rust todo">
   <h3 class="card-title"><a href="projects/todo">Rust TUI GTD Todo (OmniFocus-inspired)</a></h3>
   <div class="badges-row card-badges"><span class="status-badge status-active">Last Active: 2026-02-25</span> <span class="stack-badge">Rust</span></div>
   <p class="card-description">Keyboard-driven Rust TUI task manager built around a GTD workflow. Stores tasks in a local SQLite database with support for projects, hierarchical tags, and availability-based next-action computation. Optimized for rapid inbox processing — single-key field mode for triage, project/tag assignment, and batch operations with sub-second interactions at 10,000+ actions.</p>
+</div>
+
+<div class="project-card" data-search="yogaclass: teaching practice companion a desktop tool for yoga teachers to practise teaching their classes and get feedback on delivery. the teacher loads a class sequence, sees 3d animated student figures in the poses, speaks through the class out loud, and the app tracks their delivery via voice recognition — then provides feedback on timing, pacing, cue quality, sequence adherence, and overall flow. it also provides pre-class analysis: intensity arcs, muscle coverage, safety checks, and compositional insights. rust python yogaclass">
+  <h3 class="card-title"><a href="projects/yogaclass">Yogaclass: Teaching Practice Companion</a></h3>
+  <div class="badges-row card-badges"><span class="status-badge status-active">Active</span> <span class="stack-badge">Rust</span><span class="stack-badge">Python</span></div>
+  <p class="card-description">A desktop tool for yoga teachers to practise teaching their classes and get feedback on delivery. The teacher loads a class sequence, sees 3D animated student figures in the poses, speaks through the class out loud, and the app tracks their delivery via voice recognition — then provides feedback on timing, pacing, cue quality, sequence adherence, and overall flow. It also provides pre-class analysis: intensity arcs, muscle coverage, safety checks, and compositional insights.</p>
+</div>
+
+<div class="project-card" data-search="netsequence netsequence is being built into a production-ready change orchestration product for service-provider networks. it sits between structural change generation and operational deployment, turning topology mutations into risk-assessed, dependency-aware, verifiable execution plans with rollback. the product direction is external, not just internal tooling: the goal is to deliver something carrier engineering teams can trust during real maintenance work. rust netsequence">
+  <h3 class="card-title"><a href="projects/netsequence">netsequence</a></h3>
+  <div class="badges-row card-badges"><span class="status-badge status-active">Last Active: 2026-04-12</span> <span class="stack-badge">Rust</span></div>
+  <p class="card-description">netsequence is being built into a production-ready change orchestration product for service-provider networks. It sits between structural change generation and operational deployment, turning topology mutations into risk-assessed, dependency-aware, verifiable execution plans with rollback. The product direction is external, not just internal tooling: the goal is to deliver something carrier engineering teams can trust during real maintenance work.</p>
 </div>
 
 </div>

@@ -4,11 +4,11 @@ section: photography
 description: "Alignment tool for solar eclipse HDR composites. Takes hundreds of RAW frames captured during totality and produces sub-pixel-aligned output ready for HDR…"
 ---
 
-# EclipseStack
+# EclipseStack: Expertise-Led Solar Alignment
 
 <div class="badges-row">
   <span class="status-badge status-active">Active</span>
-  <span class="stack-badge">Rust</span>
+  <span class="stack-badge">Rust</span> <span class="stack-badge">TypeScript</span>
 </div>
 
 ---
@@ -39,31 +39,15 @@ Alignment tool for solar eclipse HDR composites. Takes hundreds of RAW frames ca
 
 ---
 
-## What This Is
-
-EclipseStack is a Rust-powered utility (with a web-based UI) specifically designed to align hundreds of RAW solar eclipse images taken during totality. It addresses the challenge of tracker drift by combining image feature detection (solar disk and flares) with temporal extrapolation based on EXIF data. The goal is to produce a perfectly aligned set of frames ready for HDR stacking in professional tools like PixInsight.
-
----
-
 ## Core Value
 
-Enable high-fidelity HDR solar composites by providing sub-pixel alignment of eclipse frames through a combination of computer vision and temporal drift modeling.
-
----
-
-## Context & Constraints
-
-- **Input:** Hundreds of Sony RAW files (.ARW).
-- **Subject:** Total solar eclipse (totality), centered disk, visible solar flares.
-- **Challenge:** Subtle tracker drift over time; lack of background stars for traditional alignment.
-- **Technology:** Rust (core processing), Web-based UI (potentially via Tauri or a web-tech stack), EXIF data for drift modeling.
-- **Output:** Aligned frames (likely TIFF/FITS) compatible with PixInsight.
+Enable high-fidelity HDR solar composites by providing sub-pixel alignment of totality sequences through a combination of geometric computer vision and temporal drift modeling.
 
 ---
 
 ## Requirements
 
-
+...
 
 ---
 

@@ -137,11 +137,11 @@ CATEGORY_MAP = {
 }
 
 DETAILED_SECTIONS = [
-    "Concept", "Interactive Playground (WASM Mock Demo)", "Technical Reports", "Code Samples", "Visuals", "Usage", 
+    "Concept", "Interactive Playground (WASM Mock Demo)", "Code Samples", "Visuals", "Usage",
     "Architecture", "Features", "Current Status", "Roadmap", "Quick Facts",
 ]
 
-ALWAYS_UPDATE_SECTIONS = {"Technical Reports", "Code Samples", "Visuals", "Current Status", "Roadmap"}
+ALWAYS_UPDATE_SECTIONS = {"Code Samples", "Visuals", "Current Status", "Roadmap"}
 STABLE_SECTIONS = {"Concept", "Interactive Playground (WASM Mock Demo)", "Architecture", "Features", "Quick Facts", "Usage"}
 
 FM_SECTIONS = {"network": "network-automation", "sdr": "signal-processing", "agents": "agentic-systems", "health": "agentic-systems", "data": "data-analytics", "astrophotography": "photography", "photography": "photography", "wellness": "signal-processing", "experimental": "data-analytics"}
@@ -400,43 +400,26 @@ def generate_detailed_page(project: ProjectInfo) -> str:
             if img_lines: project.sections["Visuals"] = "\n\n".join(img_lines[:8])
             elif "Visuals" in project.sections: del project.sections["Visuals"]
     
-    # Projects with commercially sensitive documentation
-    SKIP_DOCS = {"automationarch"}
-
-    if project.docs and project.slug not in SKIP_DOCS:
-        doc_lines = []
-        doc_dir = Path("assets/docs")
-        doc_dir.mkdir(parents=True, exist_ok=True)
-        for doc in project.docs:
-            # Don't double-prefix if filename already starts with the canonical slug
-            if doc.name.startswith(f"{project.slug}-"):
-                dest_name = doc.name
-            else:
-                dest_name = f"{project.slug}-{doc.name}"
-            try: shutil.copy2(doc, doc_dir / dest_name)
-            except: pass
-            
-            label = "Technical Report"
-            if "paper.pdf" in doc.name or doc.parent.name == "paper": label = "Research Paper"
-            elif "usermanual.pdf" in doc.name or doc.parent.name == "usermanual": label = "User Manual"
-            elif "techreport" in doc.name or doc.parent.name == "techreport": label = "Technical Report"
-            
-            doc_lines.append(f"- [Download {label}: {doc.name}](/assets/docs/{dest_name})")
-        project.sections["Technical Reports"] = "\n".join(doc_lines)
-    
     dest_path = Path("projects") / f"{project.slug}.md"
     existing_sections: Dict[str, str] = {}
+    existing_extra_fm = ""
     if dest_path.exists():
-        existing_sections = extract_sections(dest_path.read_text())
+        existing_text = dest_path.read_text()
+        existing_sections = extract_sections(existing_text)
         for sec in STABLE_SECTIONS:
             if sec in existing_sections and sec not in ALWAYS_UPDATE_SECTIONS and sec not in PROJECT_CONTENT_OVERRIDES.get(project.slug, {}):
                 project.sections[sec] = existing_sections[sec]
+        fm_match = re.match(r"^---\n(.*?)\n---", existing_text, re.DOTALL)
+        if fm_match:
+            for line in fm_match.group(1).splitlines():
+                if line.startswith(("sitemap:", "permalink:")):
+                    existing_extra_fm += f"\n{line}"
 
     # Generate frontmatter after stable sections are merged so description
     # can draw from the preserved Concept text.
     desc = extract_description(project.sections)
     fm_desc = f"\ndescription: \"{desc}\"" if desc else ""
-    fm = f"---\nlayout: default{fm_section}{fm_desc}\n---\n\n"
+    fm = f"---\nlayout: default{fm_section}{fm_desc}{existing_extra_fm}\n---\n\n"
 
     # When a page already exists, only allow known sections or sections already
     # present on the page.  This prevents PROJECT.md extras from re-bloating
@@ -614,6 +597,9 @@ def generate_reports_page(projects: list[ProjectInfo]) -> str:
     lines.append("\n[← Back to Projects](projects)")
     return "\n".join(lines)
 
+IGNORE_DIR_PATTERNS = ("_corrupted", "-corrupted", "_nmb1", "-nmb1", ".broken", ".bak", ".old")
+HIDDEN_FROM_LISTINGS = {"multi-agent"}
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--scan-dirs", nargs="+", default=["~/dev"])
@@ -624,14 +610,17 @@ def main():
     projects = []
     for p in existing:
         for pd in sorted(p.iterdir()):
-            if pd.is_dir() and not pd.name.startswith("."):
-                info = parse_project_metadata(pd)
-                if info: projects.append(info)
+            if not pd.is_dir() or pd.name.startswith("."):
+                continue
+            if any(pat in pd.name for pat in IGNORE_DIR_PATTERNS):
+                continue
+            info = parse_project_metadata(pd)
+            if info: projects.append(info)
     projects_dir = Path("projects")
     projects_dir.mkdir(exist_ok=True)
     for p in projects: (projects_dir / f"{p.slug}.md").write_text(generate_detailed_page(p))
-    Path("projects.md").write_text(generate_projects_index(projects))
-    Path("reports.md").write_text(generate_reports_page(projects))
-    print("Sync complete.")
+    listed = [p for p in projects if p.slug not in HIDDEN_FROM_LISTINGS]
+    Path("projects.md").write_text(generate_projects_index(listed))
+    print(f"Sync complete. {len(projects)} pages generated, {len(listed)} listed.")
 
 if __name__ == "__main__": main()

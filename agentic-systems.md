@@ -41,20 +41,6 @@ Each agent subscribes to the NATS topics matching its domain. The orchestrator b
 
 ## Systems
 
-### Multi-Agent Personal Assistant
-
-<span class="status-badge status-active">Recently Updated</span> · <span class="stack-badge">Python</span> · [Full Details →](projects/multi-agent)
-
-Security-first multi-agent system coordinating specialized containerized agents through a NATS message broker. Each agent runs in isolation with scoped credentials — separate containers, no shared state. The orchestrator uses cloud LLM reasoning while agents remain lightweight and deterministic.
-
-**Domains covered:**
-- **Health**: Monitor and analyze biometric data from [HealthyPi](/projects/healthypi) and Apple HealthKit
-- **Home**: Control environment via HomeKit integration
-- **Monitoring**: Verify system integrity, backup status, and infrastructure health
-- **Analysis**: Process and summarize information from multiple sources
-
----
-
 ### Training Assistant
 
 <span class="status-badge status-active">Recently Updated</span> · <span class="stack-badge">Swift</span> · [Full Details →](projects/cycle)

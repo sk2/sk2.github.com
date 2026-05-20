@@ -2,6 +2,7 @@
 layout: default
 section: agentic-systems
 description: "A security-first multi-agent system that coordinates specialized containerized agents through a NATS message broker."
+sitemap: false
 ---
 
 # Secure Multi-Agent Personal Assistant

@@ -1,22 +1,14 @@
 ---
 layout: default
 section: data-analytics
-description: "A dynamic Mapbox Vector Tile server for massive geospatial datasets — Polars in-memory, Rust over PyO3 for per-point math, FastAPI on top."
+description: "A dynamic vector tile server for massive geospatial datasets."
 ---
 
-# Tileserver Polars
+# Tileserver Polars (Rust Optimized)
 
 <div class="badges-row">
-  <span class="status-badge status-complete">Superseded</span>
+  <span class="status-badge status-active">Active</span>
   <span class="stack-badge">Rust</span> <span class="stack-badge">Python</span> <span class="stack-badge">Polars</span>
-</div>
-
-<div class="callout">
-<p><strong>Superseded by <a href="/projects/datavis">DataRaster</a>.</strong>
-DataRaster covers the same dense-spatial-rendering problem with a broader
-surface — a tile server, Python and WASM front ends, and a Polars plugin — in
-one ten-crate Rust workspace. This page is kept for context on the original
-approach.</p>
 </div>
 
 ---
@@ -49,15 +41,9 @@ moment.
 
 ---
 
-## Why It Was Superseded
+## Quick Facts
 
-The split-language design — FastAPI on top of a PyO3 extension on top of Polars —
-was load-bearing for the tile-serving use case, but rebuilding around the same
-architecture every time DataRaster needed a different output (static PNG, raster
-tile, WASM render, density layer) was not. DataRaster generalises the engine:
-one Rust core, one render plan, multiple front ends (CLI, server, Python, WASM)
-over the same compute path. The tile-server use case is one mode within it.
-
----
-
-[← Back to Data Analytics](../data-analytics)
+| | |
+|---|---|
+| **Status** | Active |
+| **Stack** | Rust, Python, Polars |

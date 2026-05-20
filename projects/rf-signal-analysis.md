@@ -7,7 +7,7 @@ description: "Distributed multi-beam signal reflection analysis system built on 
 # Signal Reflection - KrakenSDR Multi-Beam System
 
 <div class="badges-row">
-  <span class="status-badge status-active">Recently Updated</span>
+  <span class="status-badge status-active">Last Active: 2026-03-09</span>
   <span class="stack-badge">Rust</span> <span class="stack-badge">Python</span>
 </div>
 
@@ -16,7 +16,6 @@ description: "Distributed multi-beam signal reflection analysis system built on 
 ## Contents
 
 - [Concept](#concept)
-- [Technical Reports](#technical-reports)
 - [Architecture](#architecture)
 - [Features](#features)
 - [Current Status](#current-status)
@@ -24,12 +23,6 @@ description: "Distributed multi-beam signal reflection analysis system built on 
 ## Concept
 
 Distributed multi-beam signal reflection analysis system built on KrakenSDR hardware. A Raspberry Pi handles data acquisition and streams IQ data over UDP; a Mac or Linux workstation runs compute-intensive DSP. All four surveillance channels process in parallel with independent Range-Doppler visualization, per-beam configuration, and real-time performance monitoring.
-
----
-
-## Technical Reports
-
-- [Download Research Paper: passive-radar-usermanual.pdf](/assets/docs/rf-signal-analysis-passive-radar-usermanual.pdf)
 
 ---
 

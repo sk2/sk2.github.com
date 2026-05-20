@@ -7,7 +7,7 @@ description: "The Network Modeling & Configuration Library represents network to
 # Network Modeling & Configuration Library
 
 <div class="badges-row">
-  <span class="status-badge status-active">Recently Updated</span>
+  <span class="status-badge status-active">Last Active: 2026-03-01</span>
   <span class="stack-badge">Python</span> <span class="stack-badge">Polars</span>
 </div>
 
@@ -16,7 +16,6 @@ description: "The Network Modeling & Configuration Library represents network to
 ## Contents
 
 - [Concept](#concept)
-- [Technical Reports](#technical-reports)
 - [Code Samples](#code-samples)
 - [Usage](#usage)
 - [Visuals](#visuals)
@@ -30,12 +29,6 @@ The Network Modeling & Configuration Library represents network topologies as ty
 The core abstraction is a two-stage transformation: Whiteboard (sketch the topology) to Plan (assign protocols and addresses) to Protocol Layers (ISIS, MPLS, EVPN, L3VPN). Each stage produces a typed, queryable topology. Mutations write through to Rust automatically via `__setattr__` interception on Pydantic base models.
 
 The library ships with domain models for common protocol stacks in its `blueprints/` module: ISIS underlay, MPLS transport, EVPN overlay, BGP peering, and hierarchical IP allocation. These are composable building blocks, not monolithic templates.
-
----
-
-## Technical Reports
-
-- [Download Research Paper: ank-usermanual.pdf](/assets/docs/ank-pydantic-ank-usermanual.pdf)
 
 ---
 

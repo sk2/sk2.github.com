@@ -4,10 +4,10 @@ section: network-automation
 description: "Orchestration engine for coordinating device interactions across real and testbed networks."
 ---
 
-# Orchestrator (Device Interaction Runner)
+# Project Reference
 
 <div class="badges-row">
-  <span class="status-badge status-active">Recently Updated</span>
+  <span class="status-badge status-active">Active</span>
   <span class="stack-badge">Python</span>
 </div>
 
@@ -16,15 +16,153 @@ description: "Orchestration engine for coordinating device interactions across r
 ## Contents
 
 - [Concept](#concept)
+- [Code Samples](#code-samples)
 - [Architecture](#architecture)
 - [Features](#features)
-- [Current Status](#current-status)
 
 ## Concept
 
 Orchestration engine for coordinating device interactions across real and testbed networks. Executes runs with retries, timeouts, bounded concurrency, and durable artifacts (logs, results, snapshots). Uses [Device Interaction Framework](../deviceinteraction) as a library for transports, parsing, and test primitives — the orchestrator owns run coordination, persistence, and event streaming.
 
 Inspired by Tower/AWX-style job execution, but purpose-built for reliable, replayable device runs with clean integration boundaries.
+
+---
+
+## Code Samples
+
+### ospf_triangle.yaml
+
+```yaml
+name: ospf-triangle
+description: Three OSPF routers in a triangle with hosts
+
+devices:
+  - name: r1
+    type: router
+    router_id: 1.1.1.1
+    interfaces:
+      - name: eth0
+        ip: 10.0.12.1/24
+        ospf: { area: 0, cost: 10 }
+      - name: eth1
+        ip: 10.0.13.1/24
+        ospf: { area: 0, cost: 10 }
+      - name: eth2
+        ip: 10.0.1.1/24
+        ospf: { area: 0, cost: 1 }
+
+  - name: r2
+    type: router
+    router_id: 2.2.2.2
+    interfaces:
+      - name: eth0
+        ip: 10.0.12.2/24
+        ospf: { area: 0, cost: 10 }
+      - name: eth1
+        ip: 10.0.23.2/24
+        ospf: { area: 0, cost: 10 }
+      - name: eth2
+        ip: 10.0.2.1/24
+        ospf: { area: 0, cost: 1 }
+
+  - name: r3
+    type: router
+    router_id: 3.3.3.3
+    interfaces:
+      - name: eth0
+        ip: 10.0.13.3/24
+        ospf: { area: 0, cost: 10 }
+      - name: eth1
+        ip: 10.0.23.3/24
+        ospf: { area: 0, cost: 10 }
+      - name: eth2
+        ip: 10.0.3.1/24
+        ospf: { area: 0, cost: 1 }
+
+  - name: h1
+    type: host
+    interfaces:
+      - name: eth0
+        ip: 10.0.1.10/24
+        gateway: 10.0.1.1
+
+  - name: h3
+    type: host
+    interfaces:
+      - name: eth0
+        ip: 10.0.3.10/24
+        gateway: 10.0.3.1
+
+links:
+  - endpoints: [r1:eth0, r2:eth0]
+  - endpoints: [r1:eth1, r3:eth0]
+  - endpoints: [r2:eth1, r3:eth1]
+  - endpoints: [r1:eth2, h1:eth0]
+  - endpoints: [r3:eth2, h3:eth0]
+
+script:
+  - at: converged
+    device: r1
+    command: show ip route
+
+  - at: converged + 100
+    device: h1
+    command: ping 10.0.3.10
+
+  - at: converged + 200
+    device: h1
+    command: traceroute 10.0.3.10
+
+```
+
+### scrape_topology.yaml
+
+```yaml
+namespace: reference
+name: scrape_topology
+dsl_version: v1
+steps:
+  - step_id: get_version
+    adapter: [deviceinteraction](../deviceinteraction)
+    inputs:
+      command: show version
+    depends_on: []
+  - step_id: get_interfaces
+    adapter: [deviceinteraction](../deviceinteraction)
+    inputs:
+      command: show interfaces
+    depends_on: []
+  - step_id: get_neighbors
+    adapter: [deviceinteraction](../deviceinteraction)
+    inputs:
+      command: show lldp neighbors
+    depends_on: []
+  - step_id: build_topology
+    adapter: topology_builder
+    inputs: {}
+    depends_on: [get_version, get_interfaces, get_neighbors]
+
+```
+
+### sim_scrape.yaml
+
+```yaml
+namespace: reference
+name: sim_scrape
+dsl_version: v1
+steps:
+  - step_id: get_version
+    adapter: [netsim](../netsim)
+    inputs:
+      command: show version
+    depends_on: []
+  - step_id: get_interfaces
+    adapter: [netsim](../netsim)
+    inputs:
+      command: show interfaces
+    depends_on: []
+
+```
 
 ---
 
@@ -54,91 +192,3 @@ The runner exposes an HTTP API as a headless execution engine. Clients (Network 
 |---|---|
 | **Status** | Recently Updated |
 | **Stack** | Python |
-
----
-
-## What This Is
-
-An orchestration runner for coordinating **device interactions** across real/testbed networks. It executes runs with retries, timeouts, bounded concurrency, and durable artifacts (logs, results, snapshots) that plug into the broader automation ecosystem.
-
-v1 is explicitly **device-focused** and **uses `[deviceinteraction](../deviceinteraction)` as a library** for transports/parsing/test primitives. The orchestrator owns run coordination, persistence, and event streaming.
-
-This is inspired by Tower/AWX-style job execution, but it is purpose-built for our use case: reliable, replayable device runs with clean integration boundaries and a clear path to future expansion (including broader workflow graphs) without making AI a dependency.
-
----
-
-## Core Value
-
-Run the same device workflow reliably across lab/real targets, with deterministic execution semantics and replayable artifacts.
-
----
-
-## Requirements
-
-
-
----
-
-## # Validated
-
-(None yet — ship to validate)
-
----
-
-## # Active
-
-- [ ] Provide an API service that can execute a device run and return status + artifacts
-- [ ] Use `[deviceinteraction](../deviceinteraction)` to execute commands/triggers/verifications against targets and stream structured events
-- [ ] Support core run semantics: bounded concurrency, retries/backoff, timeouts, and cancellation
-
----
-
-## # Out of Scope
-
-- Full Tower/AWX replacement — not the goal; we only need the orchestration engine semantics and our adapters
-- Vendor-specific config generation logic — belongs in modeling/config tooling, not the orchestrator
-
----
-
-## Context
-
-- This project is part of a larger network automation ecosystem (toolchain + workbench + simulators + device interaction).
-- v1 focuses on real/testbed device interaction; simulator integration is a future extension.
-- Must support core orchestration primitives: retries/backoff, timeouts/cancellation, and bounded parallel execution.
-- Runs should be authorable as a small declarative YAML DSL and/or a Python SDK (TBD), but v1 can start with one.
-- Future direction: optionally integrate with an LRM for step selection, retry strategies, and run summarization; engine must remain reliable without AI.
-
----
-
-## Constraints
-
-- **Operator experience**: API service first — headless execution engine with an HTTP API (CLI/UI can come later as clients)
-- **Integration**: Device-first — v1 integrates with `[deviceinteraction](../deviceinteraction)` to talk to devices; other targets come via adapters later
-- **Portability**: Must work on a laptop against a small lab, then scale out via concurrency controls and durable run state
-
----
-
-## Key Decisions
-
-| Decision | Rationale | Outcome |
-|----------|-----------|---------|
-| API-first service | Align with engine role; enables multiple clients (Workbench/CLI/CI) | — Pending |
-| Device-first scope (v1) | Prevent scope creep; ship a useful runner for device interactions | — Pending |
-| Use `[deviceinteraction](../deviceinteraction)` as a library | Avoid duplicating transports/parsers; keep clean ownership boundaries | — Pending |
-| Workflow definitions | Start simple; add YAML and/or Python SDK as needed | — Pending |
-
----
-
-## Future Direction (Explicitly Not v1)
-
-- Global/toolchain orchestration (multi-tool DAGs across [topogen](../topogen)/[autonetkit](../autonetkit)/[netsim](../netsim)/[netvis](../netvis))
-- Simulator-first adapters (e.g. `[network-simulator](../netsim)/`) and environment lifecycle management
-- Scheduling, RBAC, approval gates
-
-*Last updated: 2026-02-22 after initialization*
-
----
-
-## Current Status
-
-2026-03-05 - Completed 02-05-PLAN.md

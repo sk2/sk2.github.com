@@ -7,17 +7,11 @@ description: "Network Flow Simulator uses analytic queuing models and Monte Carl
 # Performance Simulator
 
 <div class="badges-row">
-  <span class="status-badge status-active">Recently Updated</span>
+  <span class="status-badge status-active">Active</span>
   <span class="stack-badge">Rust</span>
 </div>
 
 ---
-
-## Contents
-
-- [Concept](#concept)
-- [Usage](#usage)
-- [Current Status](#current-status)
 
 ## Concept
 
@@ -309,9 +303,3 @@ This project is part of a seven-tool network automation ecosystem. netflowsim pr
 
 
 *Last updated: 2026-03-01 after v2.1 milestone start*
-
----
-
-## Current Status
-
-2026-03-08 —  tests pass)

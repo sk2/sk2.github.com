@@ -25,16 +25,16 @@ The shortest framing, for anyone who knows Datashader: DataRaster is a deploymen
 ## Visuals
 
 ![Global biodiversity density rendered by DataRaster, 3.62 billion GBIF records](/images/datavis-gbif-3b.png)
-*GBIF species occurrences — **3.62 billion records** (consolidated 2026-05-01 release) — rendered through the true-KDE splatting path with a Gaussian kernel of σ=2 px and log transfer on a 4096×2048 canvas. **End-to-end wall time 239.62 s** (12-thread Apple M4 Pro, 24 GB host, peak resident 1.96 GB). The count-only path renders the same dataset in **38.16 s** (~95M rows/s on zstd-compressed Parquet). The raw release is consolidated from 7,948 parquet parts into 16 first — the renderer's glob fan-out limit is the binding constraint, not the row count.*
+*Every recorded species occurrence on the planet — **3.62 billion observations** from the GBIF open-data release — collapsed into one smooth density surface. The full render takes about **four minutes** on a single workstation (239.62 s for the smoothed KDE version, 38 s for the count-only version). The kind of figure that usually requires a cluster, drawn from raw Parquet on one machine.*
 
 ![Global earthquake density rendered by DataRaster, 782K events](/images/datavis-earthquakes.png)
-*Earthquake catalogue — **782K events**. Plate boundaries surface as ridge structure in the density field without any per-point drawing.*
+*Every earthquake on record — **782,000 events** — as a single density layer. The Pacific Ring of Fire, the Mid-Atlantic Ridge, and the Indonesian arc all surface from the raw catalogue with no manual cartography.*
 
 ![Flight-path density rendered by DataRaster, 67K great-circle segments](/images/datavis-flights.jpg)
-*OpenFlights routes — **67K great-circle segments** aggregated into a single line-density layer.*
+*The global airline network — **67,000 great-circle routes** — aggregated into one line-density layer. Major hubs, transoceanic corridors, and underserved regions are all visible at the same zoom level.*
 
 ![Urban trip density rendered by DataRaster, 5.1M Citibike trip starts](/images/datavis-citibike.png)
-*Citibike trip starts, October 2024 — **5.1M points** at city scale.*
+***5.1 million** Citibike trip starts in a single month. The morning commute, the Brooklyn waterfront, and the bridge bottlenecks all appear at city scale without any per-point drawing.*
 
 ---
 

@@ -15,13 +15,21 @@ section: signal-processing
 ## Contents
 
 - [Concept](#concept)
+- [Visuals](#visuals)
 - [Architecture](#architecture)
 - [Capabilities](#capabilities)
 - [Status](#status)
 
 ## Concept
 
-Distributed spectrum monitoring system built on Raspberry Pi edge nodes and a Mac mini core. Multiple SDR receivers (Airspy, RTL-SDR, KrakenSDR) stream IQ data to a central orchestrator that runs ML classification, signal census tracking, and real-time waterfall visualization. The system autonomously sweeps bands, identifies signal modulations, and maintains a historical database of spectrum activity.
+Distributed spectrum monitoring system across edge nodes and a central host. Multiple SDR receivers (Airspy, RTL-SDR, KrakenSDR) stream IQ data to an orchestrator that runs ML classification, signal census tracking, and real-time waterfall visualization. The system autonomously sweeps bands, identifies signal modulations, and maintains a historical database of spectrum activity.
+
+---
+
+## Visuals
+
+![Spectra waterfall display](/images/spectra-waterfall-screenshot.png)
+*Real-time waterfall view: frequency horizontal, time scrolling vertically, magnitude on a perceptual colormap. The visualiser runs over a remote rtl_tcp stream so it doesn't need to be co-located with the SDR hardware.*
 
 ---
 

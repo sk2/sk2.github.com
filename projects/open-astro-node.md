@@ -1,7 +1,8 @@
 ---
 layout: default
 section: photography
-description: "Headless, autonomous astrophotography controller for low-power Linux devices (Raspberry Pi, Jetson)."
+description: "OpenAstro Node — a headless astrophotography controller that runs unattended overnight sessions on low-power hardware: guiding, meridian flips, safety, and a 'Goodnight' shutdown protocol."
+hand_written: true
 ---
 
 # OpenAstro Node
@@ -15,46 +16,35 @@ description: "Headless, autonomous astrophotography controller for low-power Lin
 
 ## Concept
 
-Headless, autonomous astrophotography controller for low-power Linux devices (Raspberry Pi, Jetson). Manages camera and mount hardware, executes imaging sequences, and ensures rig safety through a "Goodnight" protocol for unattended overnight sessions. Uses OpenAstro Core for coordinate math, imaging intelligence, and device drivers.
+A headless astrophotography controller built to run all night without supervision. Each node drives one camera and one mount, executes the imaging plan, guides through PHD2, handles meridian flips on schedule, and walks the rig through a defined "Goodnight" protocol when the session ends or the weather turns. If two nodes share a mount, they coordinate so only one of them is driving at a time.
+
+OpenAstro Core does the imaging math and the device drivers. The Node sits on top and is responsible for the session: what happens between dark and dawn, including the parts the photographer doesn't want to wake up for.
 
 ---
 
-## Features
+## Architecture
 
-- **Autonomous sessions**: "Goodnight" protocol handles shutdown, meridian flips, and weather safety without intervention
-- **Precision tracking**: PHD2 guiding integration with automated meridian flip management
-- **Multi-rig coordination**: synchronizes multiple nodes sharing a mount
-- **Hardware support**: full INDI and ASCOM Alpaca device control via `open-astro-core`
-- **Web UI**: responsive React interface for remote control
-- **Terminal UI**: local SSH-based power-user interface via `ratatui`
+<div class="mermaid">
+flowchart TD
+    PLAN["Imaging Plan<br/><small>target · framing · sequence</small>"]
+    SESS["Session Controller<br/><small>tonight's run</small>"]
+    GUIDE["PHD2 Guiding<br/><small>tracking corrections</small>"]
+    FLIP["Meridian Flip Manager<br/><small>scheduled · safe</small>"]
+    SAFE["Safety Monitor<br/><small>weather · cloud · dawn</small>"]
+    GN["Goodnight Protocol<br/><small>park · cap · power-down</small>"]
+    UI1["Web UI<br/><small>responsive remote control</small>"]
+    UI2["Terminal UI<br/><small>local SSH operator view</small>"]
+    PLAN --> SESS
+    SESS --> GUIDE
+    SESS --> FLIP
+    SAFE --> SESS
+    SESS --> GN
+    SESS --> UI1
+    SESS --> UI2
+</div>
 
----
-
-## Quick Facts
-
-| | |
-|---|---|
-| **Status** | Active |
-| **Stack** | Rust, TypeScript |
-
----
-
-## Overview
-
-A headless, autonomous astrophotography controller designed for low-power Linux devices (RPi/Jetson). It manages hardware, executes imaging sequences, and ensures rig safety.
-
----
-
-## Key Features
-
-- **Astro Autonomy**: The "Goodnight" protocol for safe, unattended sessions.
-- **Precision Tracking**: Guiding integration (PHD2) and automated meridian flips.
-- **Multi-Rig Sync**: Coordination between multiple nodes on a shared mount.
-- **Hardware Integration**: Full INDI and Alpaca support via `open-astro-core`.
+The two UIs serve different operators on the same controller: the web UI for a phone on the couch, the terminal UI over SSH when the network is the only thing left and you need to know what the rig is currently doing.
 
 ---
 
-## User Interfaces
-
-- **Web UI**: Responsive React interface for remote control.
-- **Terminal UI (TUI)**: Local power-user control over SSH.
+[← Back to Photography & Astrophotography](../photography)

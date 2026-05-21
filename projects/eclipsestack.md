@@ -1,10 +1,11 @@
 ---
 layout: default
 section: photography
-description: "Alignment tool for solar eclipse HDR composites. Takes hundreds of RAW frames captured during totality and produces sub-pixel-aligned output ready for HDR…"
+description: "EclipseStack — sub-pixel alignment of hundreds of eclipse RAW frames for HDR composite stacking, combining solar-disk detection with EXIF-timestamp drift modelling."
+hand_written: true
 ---
 
-# EclipseStack: Expertise-Led Solar Alignment
+# EclipseStack
 
 <div class="badges-row">
   <span class="status-badge status-active">Active</span>
@@ -15,73 +16,35 @@ description: "Alignment tool for solar eclipse HDR composites. Takes hundreds of
 
 ## Concept
 
-Alignment tool for solar eclipse HDR composites. Takes hundreds of RAW frames captured during totality and produces sub-pixel-aligned output ready for HDR stacking in PixInsight. Addresses tracker drift by combining solar disk detection (computer vision) with temporal drift modeling from EXIF timestamps — the constant drift rate fills alignment gaps between confident frames.
+Alignment for hundreds of RAW frames captured during totality, ready to hand to a stacking tool for HDR composite work. The hard part isn't detecting the solar disk in any one frame — it's bridging the frames where the disk is occluded or the contrast is wrong, without losing sub-pixel precision.
+
+The approach combines two signals: confident frames where the solar disk (or the moon's silhouette) is unambiguous, and a temporal-drift model fitted to the camera's EXIF timestamps. The drift model fills in the alignment for the awkward frames, and solar flares act as secondary anchors for sub-pixel and rotational refinement.
 
 ---
 
-## Features
+## Architecture
 
-- Sony RAW (.ARW) file decoding and processing
-- Automatic solar disk and moon silhouette center detection
-- Temporal drift modeling using EXIF timestamps for frame-to-frame extrapolation
-- Solar flare detection as secondary anchors for sub-pixel and rotational alignment
-- Web UI for visualizing drift paths, reviewing alignments, and seeding confident frames
-- Batch export to TIFF/FITS for PixInsight
+<div class="mermaid">
+flowchart TD
+    RAW["RAW Frame Set<br/><small>hundreds of files, full-totality span</small>"]
+    DET["Disk / Crescent Detection<br/><small>solar disk · lunar silhouette</small>"]
+    DRIFT["Temporal Drift Model<br/><small>EXIF timestamp regression</small>"]
+    FLARE["Flare Anchor Detection<br/><small>sub-pixel, rotational</small>"]
+    ALIGN["Sub-Pixel Aligner<br/><small>confident anchors + drift fill</small>"]
+    UI["Web Review UI<br/><small>drift paths · seed confident frames</small>"]
+    OUT["TIFF / FITS Export<br/><small>ready for HDR stacking</small>"]
+    RAW --> DET
+    RAW --> DRIFT
+    RAW --> FLARE
+    DET --> ALIGN
+    DRIFT --> ALIGN
+    FLARE --> ALIGN
+    ALIGN --> UI
+    UI --> OUT
+</div>
 
----
-
-## Quick Facts
-
-| | |
-|---|---|
-| **Status** | Active |
-| **Stack** | Rust |
-
----
-
-## Core Value
-
-Enable high-fidelity HDR solar composites by providing sub-pixel alignment of totality sequences through a combination of geometric computer vision and temporal drift modeling.
-
----
-
-## Requirements
-
-...
+The web UI exists because eclipse data is finicky enough that fully-automatic alignment is the wrong target. The tool's job is to be confident about the easy frames and visibly honest about the hard ones, so a human can seed the gaps.
 
 ---
 
-## # Validated
-
-(None yet — ship to validate)
-
----
-
-## # Active
-
-- [ ] **RAW Processing:** Extract and decode Sony RAW files for processing.
-- [ ] **Disk Detection:** Automatically locate the center of the solar disk/moon silhouette in each frame.
-- [ ] **Temporal Drift Modeling:** Use EXIF timestamps to model and extrapolate tracker drift across frames.
-- [ ] **Feature-Based Alignment:** Identify and use solar flares as secondary anchors for sub-pixel and rotational alignment.
-- [ ] **Interactive UI:** A web-based interface to visualize the drift path, review alignments, and manually "seed" confident frames.
-- [ ] **Batch Export:** Export aligned frames in a format optimized for PixInsight (TIFF/FITS).
-
----
-
-## # Out of Scope
-
-- **HDR Stacking:** The actual stacking/merging logic (deferred to PixInsight).
-- **General Astrophotography:** This tool is specifically optimized for solar eclipse geometry.
-- **ML Alignment (v1):** Machine learning-based feature detection is deferred to v2.
-
----
-
-## Key Decisions
-
-| Decision | Rationale | Outcome |
-|----------|-----------|---------|
-| Rust Language | High performance for image processing and safety. | — Pending |
-| Web UI | Better accessibility and visualization for manual alignment nudging. | — Pending |
-| EXIF-Based Extrapolation | Leverages the constant drift rate to fill gaps between confident frames. | — Pending |
-
-*Last updated: Friday 13 February 2026 after initialization*
+[← Back to Photography & Astrophotography](../photography)
